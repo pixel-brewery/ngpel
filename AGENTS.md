@@ -22,6 +22,11 @@ ngpel is an Nx monorepo of published Angular libraries `@pixel-brewery/ngpel-<na
 - Report unfinished delivery and its concrete blocker. This policy does not authorize
   releases, deployment, visibility changes or protected-history rewrites.
 
+## Issue tracking
+
+- Use the [ngpel GitHub project board](https://github.com/orgs/pixel-brewery/projects/13) as the backlog for confirmed defects and approved follow-up work. File tickets as issues in `pixel-brewery/ngpel` and add each issue to the board explicitly.
+- Check the board and existing open and closed issues for duplicates before filing. Read the board's current status options and verify that each issue appears once with the intended status.
+
 ## Quick reference
 
 | Action                              | Command                                                                    |

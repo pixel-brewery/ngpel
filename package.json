@@ -4,8 +4,15 @@
     "description": "ngpel — shared Angular frontend companion libraries (the frontend sister of Archipel)",
     "keywords": [
         "angular",
+        "typescript",
         "frontend",
         "libraries",
+        "angular-signals",
+        "rxjs",
+        "model-view-presenter",
+        "signal-forms",
+        "routing",
+        "ui-components",
         "monorepo",
         "nx",
         "ngpel"
