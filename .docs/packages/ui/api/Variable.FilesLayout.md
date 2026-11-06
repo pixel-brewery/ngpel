@@ -8,6 +8,7 @@ editUrl: false
 ```ts
 const FilesLayout: {
   Gallery: "gallery";
+  Inline: "inline";
   List: "list";
   Preview: "preview";
 };
@@ -22,5 +23,6 @@ Layouts supported by the generic files container.
 | Name | Type | Default value | Defined in |
 | ------ | ------ | ------ | ------ |
 | <a id="property-gallery"></a> `Gallery` | `"gallery"` | `'gallery'` | [libs/ui/src/components/files/FilesLayout.ts:7](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesLayout.ts#L7) |
-| <a id="property-list"></a> `List` | `"list"` | `'list'` | [libs/ui/src/components/files/FilesLayout.ts:8](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesLayout.ts#L8) |
-| <a id="property-preview"></a> `Preview` | `"preview"` | `'preview'` | [libs/ui/src/components/files/FilesLayout.ts:9](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesLayout.ts#L9) |
+| <a id="property-inline"></a> `Inline` | `"inline"` | `'inline'` | [libs/ui/src/components/files/FilesLayout.ts:8](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesLayout.ts#L8) |
+| <a id="property-list"></a> `List` | `"list"` | `'list'` | [libs/ui/src/components/files/FilesLayout.ts:9](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesLayout.ts#L9) |
+| <a id="property-preview"></a> `Preview` | `"preview"` | `'preview'` | [libs/ui/src/components/files/FilesLayout.ts:10](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesLayout.ts#L10) |

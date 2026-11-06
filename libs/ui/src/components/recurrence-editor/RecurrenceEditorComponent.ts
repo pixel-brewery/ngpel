@@ -1,6 +1,6 @@
 // #region Imports
 
-import { ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, input, signal, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, inject, input, LOCALE_ID, signal, viewChild } from '@angular/core';
 import type { FieldState } from '@angular/forms/signals';
 import {
     ChipComponent,
@@ -31,6 +31,7 @@ import {
     type RecurrenceMonthlyMode,
     type RecurrenceWeekday,
 } from './RecurrenceRule';
+import { nextRecurrenceChoiceDate } from './nextRecurrenceChoiceDate';
 
 // #endregion
 
@@ -152,7 +153,7 @@ const DEFAULT_RECURRENCE_EDITOR_LABELS: IRecurrenceEditorLabels = {
         <div class="grid gap-4 md:grid-cols-2">
             <mosaik-form-field [fieldState]="frequencyField()()">
                 <mosaik-select #frequencyTarget [formField]="frequencyField()" [variant]="'primary'" [label]="resolvedLabels().recurrenceRule">
-                    @for (option of frequencyOptions; track option) {
+                    @for (option of frequencyOptions(); track option) {
                         <mosaik-select-item [value]="option" [label]="frequencyLabel(option)" />
                     }
                 </mosaik-select>
@@ -181,7 +182,7 @@ const DEFAULT_RECURRENCE_EDITOR_LABELS: IRecurrenceEditorLabels = {
                         <mosaik-chip-group [selectionMode]="'multiple'" [wrap]="true">
                             @for (weekday of weekdayOptions; track weekday.value) {
                                 <mosaik-chip
-                                    [label]="weekdayLabel(weekday.value)"
+                                    [label]="previewLabel(weekdayLabel(weekday.value), weekday.value)"
                                     [appearance]="'soft'"
                                     [variant]="'primary'"
                                     [isCheckable]="true"
@@ -229,7 +230,7 @@ const DEFAULT_RECURRENCE_EDITOR_LABELS: IRecurrenceEditorLabels = {
                             <mosaik-chip-group [selectionMode]="'single'" [wrap]="true">
                                 @for (ordinal of weekdayOrdinalOptions; track ordinal.value) {
                                     <mosaik-chip
-                                        [label]="ordinalLabel(ordinal.value)"
+                                        [label]="previewLabel(ordinalLabel(ordinal.value), weekdayField()().value(), ordinal.value)"
                                         [appearance]="'soft'"
                                         [variant]="'primary'"
                                         [isCheckable]="true"
@@ -245,7 +246,7 @@ const DEFAULT_RECURRENCE_EDITOR_LABELS: IRecurrenceEditorLabels = {
                             <mosaik-chip-group [selectionMode]="'single'" [wrap]="true">
                                 @for (weekday of weekdayOptions; track weekday.value) {
                                     <mosaik-chip
-                                        [label]="weekdayLabel(weekday.value)"
+                                        [label]="previewLabel(weekdayLabel(weekday.value), weekday.value, weekdayOrdinalField()().value())"
                                         [appearance]="'soft'"
                                         [variant]="'primary'"
                                         [isCheckable]="true"
@@ -258,45 +259,47 @@ const DEFAULT_RECURRENCE_EDITOR_LABELS: IRecurrenceEditorLabels = {
                         </div>
                     }
                 }
-                <div #endModeTarget class="flex flex-col gap-2 md:col-span-2 surface-input">
-                    <span class="surface-input-text"> {{ resolvedLabels().endModes }} </span>
-                    <mosaik-chip-group [selectionMode]="'single'" [wrap]="true">
-                        @for (mode of endModeOptions; track mode.value) {
-                            <mosaik-chip
-                                [label]="endModeLabel(mode.value)"
-                                [appearance]="'soft'"
+                @if (allowEnd()) {
+                    <div #endModeTarget class="flex flex-col gap-2 md:col-span-2 surface-input">
+                        <span class="surface-input-text"> {{ resolvedLabels().endModes }} </span>
+                        <mosaik-chip-group [selectionMode]="'single'" [wrap]="true">
+                            @for (mode of endModeOptions; track mode.value) {
+                                <mosaik-chip
+                                    [label]="endModeLabel(mode.value)"
+                                    [appearance]="'soft'"
+                                    [variant]="'primary'"
+                                    [isCheckable]="true"
+                                    [value]="mode.value"
+                                    [isChecked]="isRecurrenceEndModeSelected(mode.value)"
+                                    (click)="setRecurrenceEndMode(mode.value)"
+                                />
+                            }
+                        </mosaik-chip-group>
+                    </div>
+                    @if (isRecurrenceEndUntil()) {
+                        <mosaik-form-field [fieldState]="endAtField()()">
+                            <mosaik-datetimebox
+                                #endAtTarget
+                                [formField]="endAtField()"
                                 [variant]="'primary'"
-                                [isCheckable]="true"
-                                [value]="mode.value"
-                                [isChecked]="isRecurrenceEndModeSelected(mode.value)"
-                                (click)="setRecurrenceEndMode(mode.value)"
+                                [label]="resolvedLabels().recurrenceEndAt"
+                                [dropDownPlacement]="'bottom-end'"
                             />
-                        }
-                    </mosaik-chip-group>
-                </div>
-                @if (isRecurrenceEndUntil()) {
-                    <mosaik-form-field [fieldState]="endAtField()()">
-                        <mosaik-datetimebox
-                            #endAtTarget
-                            [formField]="endAtField()"
-                            [variant]="'primary'"
-                            [label]="resolvedLabels().recurrenceEndAt"
-                            [dropDownPlacement]="'bottom-end'"
-                        />
-                    </mosaik-form-field>
-                }
-                @if (isRecurrenceEndCount()) {
-                    <mosaik-form-field [fieldState]="countField()()">
-                        <mosaik-numberbox
-                            #countTarget
-                            [formField]="countField()"
-                            [variant]="'primary'"
-                            [min]="1"
-                            [step]="1"
-                            [decimalPlaces]="0"
-                            [label]="resolvedLabels().count"
-                        />
-                    </mosaik-form-field>
+                        </mosaik-form-field>
+                    }
+                    @if (isRecurrenceEndCount()) {
+                        <mosaik-form-field [fieldState]="countField()()">
+                            <mosaik-numberbox
+                                #countTarget
+                                [formField]="countField()"
+                                [variant]="'primary'"
+                                [min]="1"
+                                [step]="1"
+                                [decimalPlaces]="0"
+                                [label]="resolvedLabels().count"
+                            />
+                        </mosaik-form-field>
+                    }
                 }
             }
         </div>
@@ -322,7 +325,7 @@ const DEFAULT_RECURRENCE_EDITOR_LABELS: IRecurrenceEditorLabels = {
         },
     ],
 })
-export class RecurrenceEditorComponent implements ITourAccessor {
+export class RecurrenceEditorComponent<TNumber extends string | number | null = string, TEnd extends string | Date | null = string> implements ITourAccessor {
     // #region Fields
 
     private readonly _countTarget = viewChild<NumberBoxComponent>('countTarget');
@@ -336,6 +339,7 @@ export class RecurrenceEditorComponent implements ITourAccessor {
     private readonly _ordinalTarget = viewChild<ElementRef<HTMLElement>>('ordinalTarget');
     private readonly _summaryTarget = viewChild<TextBoxComponent>('summaryTarget');
     private readonly _weekdaysTarget = viewChild<ElementRef<HTMLElement>>('weekdaysTarget');
+    private readonly _previewFormat = new Intl.DateTimeFormat(inject(LOCALE_ID), { month: 'short', day: 'numeric' });
 
     // #endregion
 
@@ -349,19 +353,28 @@ export class RecurrenceEditorComponent implements ITourAccessor {
 
     public readonly endModeField = input.required<() => FieldState<RecurrenceEndMode>>();
 
-    public readonly countField = input.required<() => FieldState<string>>();
+    public readonly countField = input.required<() => FieldState<TNumber>>();
 
-    public readonly endAtField = input.required<() => FieldState<string>>();
+    public readonly endAtField = input.required<() => FieldState<TEnd>>();
 
     public readonly monthlyModeField = input.required<() => FieldState<RecurrenceMonthlyMode>>();
 
-    public readonly monthDayField = input.required<() => FieldState<string>>();
+    public readonly monthDayField = input.required<() => FieldState<TNumber>>();
 
     public readonly weekdayOrdinalField = input.required<() => FieldState<string>>();
 
     public readonly weekdayField = input.required<() => FieldState<RecurrenceWeekday>>();
 
     public readonly labels = input<Partial<IRecurrenceEditorLabels>>({});
+
+    /** Allows a one-off occurrence in the frequency options. */
+    public readonly allowNone = input(true);
+
+    /** Shows the controls for limiting the series. */
+    public readonly allowEnd = input(true);
+
+    /** Reference day for the weekday and monthly choice previews. Omit to show the labels alone. */
+    public readonly previewFrom = input<Date | null>(null);
 
     /** Reactive component capabilities available to an external tour mapping. */
     public readonly targets = signal(
@@ -445,7 +458,10 @@ export class RecurrenceEditorComponent implements ITourAccessor {
         ...this.labels(),
     }));
 
-    protected readonly frequencyOptions: ReadonlyArray<RecurrenceFrequency> = ['NONE', 'DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY'];
+    protected readonly frequencyOptions = computed<ReadonlyArray<RecurrenceFrequency>>(() => {
+        const repeating: RecurrenceFrequency[] = ['DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY'];
+        return this.allowNone() ? ['NONE', ...repeating] : repeating;
+    });
 
     protected readonly intervalOptions = RECURRENCE_INTERVAL_OPTIONS;
 
@@ -460,6 +476,11 @@ export class RecurrenceEditorComponent implements ITourAccessor {
     // #endregion
 
     // #region Methods
+
+    protected previewLabel(label: string, weekday: RecurrenceWeekday, ordinal?: string): string {
+        const from = this.previewFrom();
+        return from && Number.isFinite(from.getTime()) ? `${label} · ${this._previewFormat.format(nextRecurrenceChoiceDate(from, weekday, ordinal))}` : label;
+    }
 
     protected frequencyLabel(value: RecurrenceFrequency): string {
         switch (value) {

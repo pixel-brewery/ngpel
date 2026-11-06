@@ -14,6 +14,10 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', () => ({
 }));
 
 interface IVoiceSessionControlsComponentTestApi {
+    requestAssistantStop(): void;
+
+    requestEnd(): void;
+
     toggleAssistantMuted(): void;
 
     toggleMicrophoneMuted(): void;
@@ -28,6 +32,9 @@ describe('VoiceSessionControlsComponent', () => {
         expect(component.assistantMuted()).toBe(false);
         expect(component.assistantSpeaking()).toBe(false);
         expect(component.canPause()).toBe(true);
+        expect(component.canEnd()).toBe(true);
+        expect(component.compact()).toBe(false);
+        expect(component.assistantAudioAvailable()).toBeUndefined();
         expect(component.disabled()).toBe(false);
         expect(component.endBusy()).toBe(false);
         expect(component.microphoneMuted()).toBe(false);
@@ -67,6 +74,37 @@ describe('VoiceSessionControlsComponent', () => {
 
         expect(assistantEmit).toHaveBeenCalledWith(true);
         expect(microphoneEmit).not.toHaveBeenCalled();
+    });
+
+    it('keeps unavailable assistant actions inert even if the assistant is still speaking', () => {
+        // Arrange
+        const component = createComponent();
+        const api = component as unknown as IVoiceSessionControlsComponentTestApi;
+        const stopped = vi.spyOn(component.assistantStopRequested, 'emit');
+        Object.defineProperties(component, {
+            assistantAudioAvailable: { value: signal(false) },
+            assistantSpeaking: { value: signal(true) },
+        });
+
+        // Act
+        api.requestAssistantStop();
+
+        // Assert
+        expect(stopped).not.toHaveBeenCalled();
+    });
+
+    it('emits no end request when the surface does not offer ending', () => {
+        // Arrange
+        const component = createComponent();
+        const api = component as unknown as IVoiceSessionControlsComponentTestApi;
+        const ended = vi.spyOn(component.endRequested, 'emit');
+        Object.defineProperty(component, 'canEnd', { value: signal(false) });
+
+        // Act
+        api.requestEnd();
+
+        // Assert
+        expect(ended).not.toHaveBeenCalled();
     });
 });
 

@@ -6,6 +6,8 @@ export { normalizeCalendarDate } from './date/normalizeCalendarDate';
 export { toCalendarDate } from './date/toCalendarDate';
 export { ENV } from './env/ENV';
 export type { EnvExport } from './env/EnvExport';
+export { EventHub } from './events/EventHub';
+export { provideEventHub } from './events/provideEventHub';
 export { composeProviders } from './features/composeProviders';
 export { composeWithBase } from './features/composeWithBase';
 export { createFeature } from './features/createFeature';

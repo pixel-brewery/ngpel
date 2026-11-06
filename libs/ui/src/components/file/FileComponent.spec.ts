@@ -64,6 +64,7 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', () => ({
     CardComponent: class CardComponent {},
     CardContentComponent: class CardContentComponent {},
     CellComponent: class CellComponent {},
+    ChipComponent: class ChipComponent {},
     DividerComponent: class DividerComponent {},
     DropDownButtonComponent: class DropDownButtonComponent {},
     IconComponent: class IconComponent {},
@@ -95,8 +96,11 @@ interface IMenuHandle {
 interface IFileComponentTestApi {
     readonly actionsTestId: Signal<null | string>;
     readonly availableOpenLabel: Signal<null | string>;
+    readonly chipIcon: Signal<string | undefined>;
+    readonly chipRemoveActionLabel: Signal<string | null>;
     readonly hasActions: Signal<boolean>;
     readonly isBusy: Signal<boolean>;
+    readonly isChip: Signal<boolean>;
     readonly isCompact: Signal<boolean>;
     readonly isList: Signal<boolean>;
     readonly isUnavailable: Signal<boolean>;
@@ -398,6 +402,28 @@ describe('FileComponent', () => {
         expect(emitter).toHaveBeenCalledOnce();
     });
 
+    it('uses a named chip action and still refuses opening an unavailable file', () => {
+        // Arrange
+        const { api, component } = createComponent({
+            fileName: 'schedule.xlsx',
+            openLabel: 'Open',
+            presentation: FilePresentation.Chip,
+            removable: true,
+            removeLabel: 'Remove',
+            state: FileState.Unavailable,
+        });
+        const opened = vi.spyOn(component.openRequested, 'emit');
+
+        // Act
+        api.onOpenRequested();
+
+        // Assert
+        expect(api.isChip()).toBe(true);
+        expect(api.chipIcon()).toBe('M-table');
+        expect(api.chipRemoveActionLabel()).toBe('Remove: schedule.xlsx');
+        expect(opened).not.toHaveBeenCalled();
+    });
+
     it('should ignore removal requests when the action is not removable', () => {
         // arrange
         const { api, component } = createComponent({ removable: false, removeLabel: 'Remove file' });
@@ -601,6 +627,7 @@ describe('FileComponent template', () => {
     it('should anchor the action menu to its own file card and list row', () => {
         // act
         const hostBindings = template.match(/\[ngTemplateOutletContext\]="\{ \$implicit: root \}"/g)?.length ?? 0;
+        const cardOpening = template.match(/<mosaik-card\s+#root[^>]*>/u)?.[0];
 
         // assert
         expect(hostBindings).toBe(2);
@@ -608,9 +635,8 @@ describe('FileComponent template', () => {
         // The card carries no chrome and no inset of its own: the thumbnail surface is the
         // only visible boundary, and the tile content reaches its outer edge.
         expect(template.replace(/\s+/gu, ' ')).toContain('<mosaik-card #root part="root"');
-        expect(template).toContain('[appearance]="\'plain\'"');
+        expect(cardOpening).toContain('[appearance]="\'plain\'"');
         expect(template).toContain('class="relative flex min-w-0 flex-col gap-2 p-0"');
-        expect(template).not.toContain('[appearance]="\'outline\'"');
     });
 
     it('should bind an automation identifier to the card and to every action', () => {

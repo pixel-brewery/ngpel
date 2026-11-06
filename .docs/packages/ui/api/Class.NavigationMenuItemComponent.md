@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: NavigationMenuItemComponent
 
-Defined in: [libs/ui/src/components/navigation/NavigationMenuItemComponent.ts:68](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationMenuItemComponent.ts#L68)
+Defined in: [libs/ui/src/components/navigation/NavigationMenuItemComponent.ts:71](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationMenuItemComponent.ts#L71)
 
 Application navigation item backed by a Mosaik menu item.
 
@@ -32,7 +32,7 @@ new NavigationMenuItemComponent(): NavigationMenuItemComponent;
 readonly compact: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/navigation/NavigationMenuItemComponent.ts:93](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationMenuItemComponent.ts#L93)
+Defined in: [libs/ui/src/components/navigation/NavigationMenuItemComponent.ts:96](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationMenuItemComponent.ts#L96)
 
 Whether the item is displayed without a visual label.
 
@@ -44,7 +44,7 @@ Whether the item is displayed without a visual label.
 readonly item: InputSignal<INavItem>;
 ```
 
-Defined in: [libs/ui/src/components/navigation/NavigationMenuItemComponent.ts:101](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationMenuItemComponent.ts#L101)
+Defined in: [libs/ui/src/components/navigation/NavigationMenuItemComponent.ts:104](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationMenuItemComponent.ts#L104)
 
 Navigation item executed by the underlying navigation directive.
 
@@ -56,7 +56,7 @@ Navigation item executed by the underlying navigation directive.
 readonly label: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/navigation/NavigationMenuItemComponent.ts:109](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationMenuItemComponent.ts#L109)
+Defined in: [libs/ui/src/components/navigation/NavigationMenuItemComponent.ts:112](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationMenuItemComponent.ts#L112)
 
 Already translated visual and accessible label.
 
@@ -68,7 +68,7 @@ Already translated visual and accessible label.
 readonly menuMode: InputSignal<"inline" | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/navigation/NavigationMenuItemComponent.ts:117](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationMenuItemComponent.ts#L117)
+Defined in: [libs/ui/src/components/navigation/NavigationMenuItemComponent.ts:120](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationMenuItemComponent.ts#L120)
 
 Enables Mosaik's inline submenu behavior for expanded parent items.
 
@@ -82,7 +82,7 @@ Enables Mosaik's inline submenu behavior for expanded parent items.
 get elementRef(): ElementRef<HTMLElement>;
 ```
 
-Defined in: [libs/ui/src/components/navigation/NavigationMenuItemComponent.ts:83](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationMenuItemComponent.ts#L83)
+Defined in: [libs/ui/src/components/navigation/NavigationMenuItemComponent.ts:86](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationMenuItemComponent.ts#L86)
 
 Element reference used by contextual hover actions.
 

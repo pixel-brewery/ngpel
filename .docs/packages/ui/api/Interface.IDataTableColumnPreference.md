@@ -7,7 +7,7 @@ editUrl: false
 
 Defined in: [libs/ui/src/directives/data-table-preferences/IDataTableColumnPreference.ts:10](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/data-table-preferences/IDataTableColumnPreference.ts#L10)
 
-Persisted visibility state for one data-table column.
+Persisted visibility and optional width of one data-table column.
 
 ## Properties
 
@@ -32,3 +32,15 @@ readonly key: string;
 Defined in: [libs/ui/src/directives/data-table-preferences/IDataTableColumnPreference.ts:16](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/data-table-preferences/IDataTableColumnPreference.ts#L16)
 
 Stable data-table column key.
+
+***
+
+### width?
+
+```ts
+readonly optional width?: number;
+```
+
+Defined in: [libs/ui/src/directives/data-table-preferences/IDataTableColumnPreference.ts:26](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/data-table-preferences/IDataTableColumnPreference.ts#L26)
+
+Width in CSS pixels after the column was resized.

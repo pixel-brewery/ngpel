@@ -21,6 +21,9 @@ export class DynamicFormComponentIntl {
     private _linkUnavailableLabel: string;
     private _linkCopiedLabel: string;
     private _linkCopyErrorLabel: string;
+    private _integerErrorLabel: string;
+    private _integerRangeErrorLabel: string;
+    private _clearAnswerLabel: string;
 
     // #endregion
 
@@ -38,6 +41,9 @@ export class DynamicFormComponentIntl {
         this._linkUnavailableLabel = 'Link unavailable';
         this._linkCopiedLabel = 'Link copied';
         this._linkCopyErrorLabel = 'Could not copy link';
+        this._integerErrorLabel = 'Enter a whole number';
+        this._integerRangeErrorLabel = 'Enter a whole number within the allowed range';
+        this._clearAnswerLabel = 'Clear answer';
     }
 
     // #endregion
@@ -97,6 +103,21 @@ export class DynamicFormComponentIntl {
      */
     public get linkCopyErrorLabel(): string {
         return this._linkCopyErrorLabel;
+    }
+
+    /** Validation message for a number that is not a whole number. */
+    public get integerErrorLabel(): string {
+        return this._integerErrorLabel;
+    }
+
+    /** Validation message for a whole number outside the field's bounds. */
+    public get integerRangeErrorLabel(): string {
+        return this._integerRangeErrorLabel;
+    }
+
+    /** Accessible label for clearing an optional choice. */
+    public get clearAnswerLabel(): string {
+        return this._clearAnswerLabel;
     }
 
     // #endregion

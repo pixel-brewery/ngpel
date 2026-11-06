@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: IAdvancedFilterGroup
 
-Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:183](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L183)
+Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:186](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L186)
 
 An advanced filter group with nested rules or groups.
 
@@ -17,7 +17,7 @@ An advanced filter group with nested rules or groups.
 readonly children: readonly AdvancedFilterNode[];
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:202](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L202)
+Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:205](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L205)
 
 Nested child nodes.
 
@@ -29,7 +29,7 @@ Nested child nodes.
 readonly condition: FilterConditionValue;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:197](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L197)
+Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:200](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L200)
 
 Logical condition between child nodes.
 
@@ -41,7 +41,7 @@ Logical condition between child nodes.
 readonly id: string;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:192](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L192)
+Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:195](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L195)
 
 Stable node id.
 
@@ -53,6 +53,6 @@ Stable node id.
 readonly kind: "group";
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:187](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L187)
+Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:190](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L190)
 
 Discriminator for group nodes.

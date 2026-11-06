@@ -1,7 +1,7 @@
 // #region Imports
 
 import type { Provider } from '@angular/core';
-import { RichTextBoxElementIntl } from '@pixel-brewery/mosaik-elements-foundation';
+import { RichTextBoxElementIntl } from '@pixel-brewery/mosaik-elements-foundation/components/rich-textbox';
 import type { IntlTranslationMap } from './IntlTranslationMap';
 import { translateIntl } from './translateIntl';
 

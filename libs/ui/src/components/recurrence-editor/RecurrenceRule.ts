@@ -1,5 +1,8 @@
 // #region Imports
 
+import { fromCalendarDate } from '@pixel-brewery/ngpel-core';
+import { recurrenceTime } from './recurrenceTime';
+
 // #endregion
 
 export type RecurrenceEndMode = 'COUNT' | 'NEVER' | 'UNTIL';
@@ -25,6 +28,8 @@ export interface IRecurrenceValue {
     recurrenceMonthlyMode: RecurrenceMonthlyMode;
     recurrenceWeekday: RecurrenceWeekday;
     recurrenceWeekdayOrdinal: string;
+    /** Optional local wall-clock time in HH:mm form. Omit for all-day recurrence. */
+    recurrenceTime?: string;
 }
 
 export interface IParseRecurrenceRuleOptions {
@@ -78,7 +83,11 @@ export const RECURRENCE_DEFAULT_VALUE: IRecurrenceValue = {
     recurrenceWeekdayOrdinal: '1',
 };
 
-export function createRecurrenceRule(value: IRecurrenceValue): null | string {
+/**
+ * Serializes the editable recurrence. Applications that store the end separately can keep the
+ * default behavior. Set `includeUntil` for a self-contained RFC 5545 rule.
+ */
+export function createRecurrenceRule(value: IRecurrenceValue, options: { readonly includeUntil?: boolean } = {}): null | string {
     if (value.recurrenceFrequency === 'NONE') {
         return null;
     }
@@ -103,8 +112,17 @@ export function createRecurrenceRule(value: IRecurrenceValue): null | string {
         }
     }
 
+    const time = recurrenceTime(value.recurrenceTime);
+    if (time) {
+        ruleParts.push(`BYHOUR=${time.hours}`, `BYMINUTE=${time.minutes}`);
+    }
     if (value.recurrenceEndMode === 'COUNT') {
         ruleParts.push(`COUNT=${toPositiveInteger(value.recurrenceCount)}`);
+    } else if (value.recurrenceEndMode === 'UNTIL' && options.includeUntil) {
+        const until = formatUntil(value.recurrenceEndAt);
+        if (until) {
+            ruleParts.push(`UNTIL=${until}`);
+        }
     }
 
     return ruleParts.join(';');
@@ -115,26 +133,39 @@ export function parseRecurrenceRule(value: null | string | undefined, options: I
         return { ...RECURRENCE_DEFAULT_VALUE };
     }
 
-    const frequency = /FREQ=(DAILY|WEEKLY|MONTHLY|YEARLY)/u.exec(value)?.[1] as RecurrenceFrequency | undefined;
-    const interval = /INTERVAL=(\d+)/u.exec(value)?.[1] ?? '1';
-    const byDay = /BYDAY=([^;]+)/u.exec(value)?.[1];
-    const byMonthDay = /BYMONTHDAY=(-?\d+)/u.exec(value)?.[1];
-    const count = /COUNT=(\d+)/u.exec(value)?.[1] ?? RECURRENCE_DEFAULT_VALUE.recurrenceCount;
-    const recurrenceEndMode: RecurrenceEndMode = /COUNT=\d+/u.test(value) ? 'COUNT' : options.recurrenceEndAt ? 'UNTIL' : 'NEVER';
-
-    if (!frequency) {
+    const parts = new Map<string, string>();
+    for (const part of value
+        .trim()
+        .replace(/^RRULE:/iu, '')
+        .split(';')) {
+        const separator = part.indexOf('=');
+        if (separator > 0) {
+            parts.set(part.slice(0, separator).trim().toUpperCase(), part.slice(separator + 1).trim());
+        }
+    }
+    const frequency = parts.get('FREQ');
+    if (frequency !== 'DAILY' && frequency !== 'WEEKLY' && frequency !== 'MONTHLY' && frequency !== 'YEARLY') {
         return { ...RECURRENCE_DEFAULT_VALUE };
     }
+    const byDay = parts.get('BYDAY');
+    const byMonthDay = /^-?\d+/u.exec(parts.get('BYMONTHDAY') ?? '')?.[0];
+    const count = /^\d+$/u.exec(parts.get('COUNT') ?? '')?.[0];
+    const until = parseUntil(parts.get('UNTIL')) ?? options.recurrenceEndAt ?? '';
+    const hour = parts.get('BYHOUR');
+    const minutes = parts.get('BYMINUTE') ?? '0';
+    const time = hour === undefined ? undefined : `${hour.padStart(2, '0')}:${minutes.padStart(2, '0')}`;
+    const base: IRecurrenceValue = {
+        ...RECURRENCE_DEFAULT_VALUE,
+        recurrenceCount: count ?? RECURRENCE_DEFAULT_VALUE.recurrenceCount,
+        recurrenceEndMode: count !== undefined ? 'COUNT' : until ? 'UNTIL' : 'NEVER',
+        recurrenceEndAt: count === undefined ? until : '',
+        recurrenceFrequency: frequency,
+        recurrenceInterval: /^\d+$/u.exec(parts.get('INTERVAL') ?? '')?.[0] ?? RECURRENCE_DEFAULT_VALUE.recurrenceInterval,
+        ...(recurrenceTime(time) ? { recurrenceTime: time } : {}),
+    };
 
     if (frequency === 'WEEKLY' && byDay) {
-        return {
-            ...RECURRENCE_DEFAULT_VALUE,
-            recurrenceByDays: normalizeRecurrenceByDays(byDay).join(','),
-            recurrenceCount: count,
-            recurrenceEndMode,
-            recurrenceFrequency: frequency,
-            recurrenceInterval: interval,
-        };
+        return { ...base, recurrenceByDays: normalizeRecurrenceByDays(byDay).join(',') };
     }
 
     if (frequency === 'MONTHLY' && byDay) {
@@ -142,11 +173,7 @@ export function parseRecurrenceRule(value: null | string | undefined, options: I
 
         if (weekdayMatch) {
             return {
-                ...RECURRENCE_DEFAULT_VALUE,
-                recurrenceCount: count,
-                recurrenceEndMode,
-                recurrenceFrequency: frequency,
-                recurrenceInterval: interval,
+                ...base,
                 recurrenceMonthlyMode: 'WEEKDAY_OF_MONTH',
                 recurrenceWeekday: weekdayMatch[2] as RecurrenceWeekday,
                 recurrenceWeekdayOrdinal: weekdayMatch[1] ?? RECURRENCE_DEFAULT_VALUE.recurrenceWeekdayOrdinal,
@@ -155,13 +182,8 @@ export function parseRecurrenceRule(value: null | string | undefined, options: I
     }
 
     return {
-        ...RECURRENCE_DEFAULT_VALUE,
-        recurrenceCount: count,
-        recurrenceEndMode,
-        recurrenceFrequency: frequency,
-        recurrenceInterval: interval,
+        ...base,
         recurrenceMonthDay: byMonthDay ?? RECURRENCE_DEFAULT_VALUE.recurrenceMonthDay,
-        recurrenceMonthlyMode: frequency === 'MONTHLY' && byMonthDay ? 'DAY_OF_MONTH' : 'DAY_OF_MONTH',
     };
 }
 
@@ -188,4 +210,36 @@ function toMonthDay(value: string): number {
 
 function toWeekdayOrdinal(value: string): string {
     return RECURRENCE_WEEKDAY_ORDINAL_OPTIONS.some((option) => option.value === value) ? value : '1';
+}
+
+function formatUntil(value: string): string | undefined {
+    if (!fromCalendarDate(value)) {
+        return undefined;
+    }
+    if (/^\d{4}-\d{2}-\d{2}$/u.test(value)) {
+        return value.replaceAll('-', '');
+    }
+    const timestamp = Date.parse(value);
+    return Number.isFinite(timestamp)
+        ? new Date(timestamp)
+              .toISOString()
+              .replace(/[-:]/gu, '')
+              .replace(/\.\d{3}Z$/u, 'Z')
+        : undefined;
+}
+
+function parseUntil(value: string | undefined): string | undefined {
+    const match = /^(\d{4})(\d{2})(\d{2})(?:T(\d{2})(\d{2})(\d{2})Z)?$/u.exec(value ?? '');
+    if (!match) {
+        return undefined;
+    }
+    const date = `${match[1]}-${match[2]}-${match[3]}`;
+    if (!fromCalendarDate(date)) {
+        return undefined;
+    }
+    const [, , , , hours, minutes, seconds] = match;
+    if (hours === undefined) {
+        return date;
+    }
+    return recurrenceTime(`${hours}:${minutes}`) && Number(seconds) <= 59 ? `${date}T${hours}:${minutes}:${seconds}Z` : undefined;
 }

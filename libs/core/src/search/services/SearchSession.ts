@@ -1,6 +1,6 @@
 // #region Imports
 
-import { computed, inject, Injectable, signal, type Signal, type WritableSignal } from '@angular/core';
+import { computed, DestroyRef, inject, Injectable, signal, type Signal, type WritableSignal } from '@angular/core';
 import type { ICommandItem } from '../models/ICommandItem';
 import { isCommandItem } from '../models/isCommandItem';
 import type { ISearchResult } from '../models/ISearchResult';
@@ -42,7 +42,7 @@ export class SearchSession {
     private readonly _sections: Signal<ReadonlyArray<ISearchSection>>;
     private readonly _items: Signal<ReadonlyArray<ICommandItem | ISearchResult>>;
     private readonly _activeItemId: Signal<string | null>;
-    private _requestVersion: number;
+    private _request: AbortController | null;
     private _isCommandCatalogLoaded: boolean;
 
     // #endregion
@@ -66,12 +66,14 @@ export class SearchSession {
         this._hasSearched = signal(false);
         this._isLoading = signal(false);
         this._error = signal<unknown>(null);
-        this._requestVersion = 0;
+        this._request = null;
         this._isCommandCatalogLoaded = false;
         this._visibleCommands = computed(() => this.createVisibleCommands());
         this._sections = computed(() => this.createSections());
         this._items = computed(() => this._sections().flatMap((section) => section.items));
         this._activeItemId = computed(() => this.resolveActiveItemId());
+
+        inject(DestroyRef).onDestroy(() => this.cancelPendingQuery());
     }
 
     // #endregion
@@ -176,59 +178,60 @@ export class SearchSession {
 
         this._isCommandCatalogLoaded = true;
         const commands = await this._manager.getCommands(SEARCH_ALL_QUERY);
+        const activeItem = this._items()[this._activeIndex()];
         this._commands.set(this.uniqueCommands(this._rankingStrategy.rank('', commands).filter(isCommandItem)));
-        this.resetActiveIndex();
+        this.resetActiveIndex(activeItem);
     }
 
     /**
-     * Runs a query and publishes its ranked commands and results. Answers of superseded queries are
-     * discarded, so a slow provider cannot overwrite the result of a later keystroke.
+     * Runs a query and publishes ranked results as providers answer, followed by the complete
+     * answer including commands. Superseding a query cancels it and discards its late results.
      *
      * @public
      * @param value The raw query; an empty one returns the session to suggestion mode.
      */
     public async updateQuery(value: string): Promise<void> {
         const query = value.trim();
-        const requestVersion = this.nextRequestVersion();
-
+        this.cancelPendingQuery();
         this._query.set(query);
         this._error.set(null);
+        this.resetResults();
 
         if (query.length === 0) {
-            this._queryCommands.set([]);
-            this._results.set([]);
-            this._hasSearched.set(false);
-            this._isLoading.set(false);
-            this.resetActiveIndex();
-
             return;
         }
 
+        const request = new AbortController();
+        this._request = request;
         this._isLoading.set(true);
 
         try {
-            const items = await this._manager.query(query, this.resultTake());
+            const items = await this._manager.query(query, this.resultTake(), {
+                signal: request.signal,
+                onResults: (results) => {
+                    if (this._request === request) {
+                        this.publishResults(query, results);
+                    }
+                },
+            });
 
-            if (!this.isCurrentRequest(requestVersion)) {
+            if (this._request !== request) {
                 return;
             }
 
-            this._queryCommands.set(this.uniqueCommands(this._rankingStrategy.rank(query, items.filter(isCommandItem)).filter(isCommandItem)));
-            this._results.set(this._rankingStrategy.rank(query, items.filter(isSearchResult)).filter(isSearchResult));
-            this._hasSearched.set(true);
-            this.resetActiveIndex();
+            this.publishResults(query, items.filter(isSearchResult), items.filter(isCommandItem));
         } catch (error: unknown) {
-            if (!this.isCurrentRequest(requestVersion)) {
+            if (this._request !== request) {
                 return;
             }
 
-            this._queryCommands.set([]);
-            this._results.set([]);
+            this.resetResults();
             this._hasSearched.set(true);
             this._error.set(error);
-            this.resetActiveIndex();
+            this.cancelPendingQuery();
         } finally {
-            if (this.isCurrentRequest(requestVersion)) {
+            if (this._request === request) {
+                this._request = null;
                 this._isLoading.set(false);
             }
         }
@@ -258,23 +261,23 @@ export class SearchSession {
      * @param value The text to display.
      */
     public setQueryText(value: string): void {
+        if (value !== this._query()) {
+            this.cancelPendingQuery();
+        }
+
         this._query.set(value);
     }
 
     /**
-     * Clears the query and returns to suggestion mode. A query in flight is discarded.
+     * Clears the query and returns to suggestion mode. A query in flight is cancelled.
      *
      * @public
      */
     public clear(): void {
-        this.nextRequestVersion();
+        this.cancelPendingQuery();
         this._query.set('');
-        this._queryCommands.set([]);
-        this._results.set([]);
-        this._hasSearched.set(false);
-        this._isLoading.set(false);
         this._error.set(null);
-        this.resetActiveIndex();
+        this.resetResults();
     }
 
     /**
@@ -343,6 +346,31 @@ export class SearchSession {
     }
 
     /**
+     * Ranks a result snapshot and retains the selected item if it is still present.
+     */
+    private publishResults(query: string, results: ReadonlyArray<ISearchResult>, commands?: ReadonlyArray<ICommandItem>): void {
+        const activeItem = this._items()[this._activeIndex()];
+        this._results.set(this._rankingStrategy.rank(query, results).filter(isSearchResult));
+
+        if (commands !== undefined) {
+            this._queryCommands.set(this.uniqueCommands(this._rankingStrategy.rank(query, commands).filter(isCommandItem)));
+        }
+
+        this._hasSearched.set(true);
+        this.resetActiveIndex(activeItem);
+    }
+
+    /**
+     * Clears the current answer and resets selection to the first available item.
+     */
+    private resetResults(): void {
+        this._queryCommands.set([]);
+        this._results.set([]);
+        this._hasSearched.set(false);
+        this.resetActiveIndex();
+    }
+
+    /**
      * Merges the catalogue with the commands of the current query and limits them to the configured
      * suggestion count.
      */
@@ -374,13 +402,13 @@ export class SearchSession {
     }
 
     /**
-     * Groups the results by their group, falling back to the producing provider.
+     * Groups the results by translation key, group label or producing provider.
      */
     private createResultSections(): ReadonlyArray<ISearchSection> {
         const groupedResults = new Map<string, Array<ISearchResult>>();
 
         for (const result of this._results()) {
-            const group = result.group ?? result.providerId ?? 'results';
+            const group = result.groupKey ?? result.group ?? result.providerId ?? 'results';
             const existingGroup = groupedResults.get(group);
 
             if (existingGroup === undefined) {
@@ -392,9 +420,17 @@ export class SearchSession {
             existingGroup.push(result);
         }
 
-        return [...groupedResults.entries()].map(([group, results]) => ({
+        const groups = [...groupedResults.entries()];
+
+        if (this._config.resultGroupOrder === 'provider') {
+            const providerOrder = new Map(this._manager.providers.map((provider, index) => [provider.id, index]));
+            const position = (results: ReadonlyArray<ISearchResult>): number => providerOrder.get(results[0]?.providerId ?? '') ?? Number.MAX_SAFE_INTEGER;
+            groups.sort(([, left], [, right]) => position(left) - position(right));
+        }
+
+        return groups.map(([group, results]) => ({
             id: `results:${group}`,
-            label: group,
+            ...(results[0]?.groupKey ? { labelKey: group } : { label: group }),
             layout: this.resolveGroupLayout(results),
             items: results,
         }));
@@ -421,10 +457,14 @@ export class SearchSession {
     }
 
     /**
-     * Selects the first item, or nothing when the surface is empty.
+     * Keeps a previous selection when present, otherwise selects the first available item.
      */
-    private resetActiveIndex(): void {
-        this._activeIndex.set(this._items().length > 0 ? 0 : -1);
+    private resetActiveIndex(activeItem?: ICommandItem | ISearchResult): void {
+        const items = this._items();
+        const retainedIndex =
+            activeItem === undefined ? -1 : items.findIndex((item) => item.id === activeItem.id && isCommandItem(item) === isCommandItem(activeItem));
+        const firstIndex = items.length > 0 ? 0 : -1;
+        this._activeIndex.set(retainedIndex >= 0 ? retainedIndex : firstIndex);
     }
 
     /**
@@ -450,19 +490,13 @@ export class SearchSession {
     }
 
     /**
-     * Starts a new request generation and returns its version.
+     * Invalidates a pending request before aborting its contributors.
      */
-    private nextRequestVersion(): number {
-        this._requestVersion += 1;
-
-        return this._requestVersion;
-    }
-
-    /**
-     * Determines whether a request is still the newest one.
-     */
-    private isCurrentRequest(requestVersion: number): boolean {
-        return requestVersion === this._requestVersion;
+    private cancelPendingQuery(): void {
+        const request = this._request;
+        this._request = null;
+        this._isLoading.set(false);
+        request?.abort();
     }
 
     /**

@@ -35,6 +35,12 @@ export interface ISearchConfig {
     readonly resultTake?: number;
 
     /**
+     * Orders result sections by the registration order of the provider that produced their first
+     * result. The default follows the order in which groups first appear among ranked results.
+     */
+    readonly resultGroupOrder?: 'ranked' | 'provider';
+
+    /**
      * Whether the session emits the command section. When `false`, commands are suppressed even
      * though command features are registered.
      *

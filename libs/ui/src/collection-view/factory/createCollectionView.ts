@@ -252,13 +252,15 @@ class CollectionView<TItem, TView extends string, TCalendarItem = TItem> impleme
         const pathFn = column.pathFn;
         const cellTemplate = column.cellTemplate;
         const headerCellTemplate = column.headerCellTemplate;
+        const footerCellTemplate = column.footerCellTemplate;
         const sortFn = column.sortFn;
 
         return {
             ...column,
             pathFn: typeof pathFn === 'function' ? (item) => pathFn(item as TItem) : pathFn,
             cellTemplate: cellTemplate ? (item, _templateColumn, resolvedValue) => cellTemplate(item as TItem, column, resolvedValue) : undefined,
-            headerCellTemplate: headerCellTemplate ? (templateColumn) => headerCellTemplate(templateColumn as TItem) : undefined,
+            headerCellTemplate: headerCellTemplate ? () => headerCellTemplate(column) : undefined,
+            footerCellTemplate: footerCellTemplate ? () => footerCellTemplate(column) : undefined,
             sortFn: sortFn ? (a, b, dir) => sortFn(a as TItem, b as TItem, dir) : undefined,
         };
     }

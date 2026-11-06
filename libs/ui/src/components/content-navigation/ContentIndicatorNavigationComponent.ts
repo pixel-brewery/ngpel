@@ -33,19 +33,19 @@ import type { IContentNavigationItem } from './IContentNavigationItem';
                     [class.flex-col]="orientation() === 'vertical'"
                     [class.flex-row]="orientation() === 'horizontal'"
                 >
-                    @for (item of items(); track item.id) {
+                    @for (item of items(); track item.id; let index = $index) {
                         <li part="item" class="min-h-0 min-w-0 flex-1">
                             <button
-                                #trigger
                                 part="trigger"
                                 class="h-full w-full cursor-pointer border-0 bg-transparent p-0 focus-visible:outline-2 focus-visible:outline-offset-1"
                                 type="button"
+                                [id]="tooltipTriggerId(index)"
                                 [attr.aria-label]="item.label"
                                 [attr.aria-current]="contentNavigation.activeItemId() === item.id ? 'location' : null"
                                 [attr.test-id]="resolveItemTestId(item)"
                                 (click)="navigate(item.id)"
                             ></button>
-                            <mosaik-tooltip [control]="trigger" [content]="item.label" placement="left" />
+                            <mosaik-tooltip [for]="tooltipTriggerId(index)" [content]="item.label" placement="left" />
                         </li>
                     }
                 </ol>
@@ -65,6 +65,9 @@ import type { IContentNavigationItem } from './IContentNavigationItem';
 })
 export class ContentIndicatorNavigationComponent {
     // #region Fields
+
+    private static _nextId = 0;
+    private readonly _tooltipIdPrefix = `ngp-content-indicator-trigger-${ContentIndicatorNavigationComponent._nextId++}`;
 
     /**
      * Accessible name of the section navigation.
@@ -138,6 +141,11 @@ export class ContentIndicatorNavigationComponent {
      */
     protected navigate(id: string): void {
         this.contentNavigation.navigate(id);
+    }
+
+    /** Returns the ID that pairs a tooltip with its trigger button. */
+    protected tooltipTriggerId(index: number): string {
+        return `${this._tooltipIdPrefix}-${index}`;
     }
 
     /**

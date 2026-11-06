@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: SearchManager
 
-Defined in: [search/services/SearchManager.ts:27](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L27)
+Defined in: [search/services/SearchManager.ts:28](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L28)
 
 Environment-wide owner of the search capability: it holds the registered contributors, the
 surface state every search view binds to, and the querying itself. It is headless — it decides
@@ -21,7 +21,7 @@ Exactly one instance exists per application; the per-surface state lives in `Sea
 new SearchManager(): SearchManager;
 ```
 
-Defined in: [search/services/SearchManager.ts:52](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L52)
+Defined in: [search/services/SearchManager.ts:53](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L53)
 
 Constructs a new instance of the `SearchManager` class and binds the configured hotkey.
 
@@ -39,7 +39,7 @@ Constructs a new instance of the `SearchManager` class and binds the configured 
 get activeProviderIds(): Signal<readonly string[]>;
 ```
 
-Defined in: [search/services/SearchManager.ts:135](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L135)
+Defined in: [search/services/SearchManager.ts:136](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L136)
 
 The selected provider ids. An empty selection means "every accessible, non-exclusive
 provider".
@@ -58,7 +58,7 @@ provider".
 get exclusiveProviderId(): Signal<string | null>;
 ```
 
-Defined in: [search/services/SearchManager.ts:145](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L145)
+Defined in: [search/services/SearchManager.ts:146](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L146)
 
 Id of the exclusive provider that currently replaces the ordinary result set, or `null`.
 
@@ -76,7 +76,7 @@ Id of the exclusive provider that currently replaces the ordinary result set, or
 get focusRequest(): Signal<number>;
 ```
 
-Defined in: [search/services/SearchManager.ts:101](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L101)
+Defined in: [search/services/SearchManager.ts:102](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L102)
 
 Monotonic counter incremented on every `open()`. Surfaces watch it to move the caret into
 their input again even when the surface was already open.
@@ -95,7 +95,7 @@ their input again even when the surface was already open.
 get isFocused(): Signal<boolean>;
 ```
 
-Defined in: [search/services/SearchManager.ts:90](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L90)
+Defined in: [search/services/SearchManager.ts:91](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L91)
 
 Indicates whether the launcher is in its expanded state. The results popup can be closed
 while the launcher stays expanded.
@@ -114,7 +114,7 @@ while the launcher stays expanded.
 get isOpen(): Signal<boolean>;
 ```
 
-Defined in: [search/services/SearchManager.ts:79](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L79)
+Defined in: [search/services/SearchManager.ts:80](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L80)
 
 Indicates whether the result surface should be visible.
 
@@ -132,7 +132,7 @@ Indicates whether the result surface should be visible.
 get isRouteActive(): Signal<boolean>;
 ```
 
-Defined in: [search/services/SearchManager.ts:113](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L113)
+Defined in: [search/services/SearchManager.ts:114](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L114)
 
 Indicates whether a dedicated search route is currently active. The application reports it
 through [SearchManager.setRouteActive](#setrouteactive); the engine only carries the flag so that a
@@ -152,7 +152,7 @@ launcher can step aside for a full-page surface.
 get providers(): readonly ISearchProvider<unknown>[];
 ```
 
-Defined in: [search/services/SearchManager.ts:124](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L124)
+Defined in: [search/services/SearchManager.ts:125](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L125)
 
 All registered providers the current user may access, exclusive ones included. Provider
 filters must skip entries whose `isExclusive` is `true`.
@@ -169,10 +169,11 @@ readonly [`ISearchProvider`](Interface.ISearchProvider)\<`unknown`\>[]
 activateResult(result): Promise<void>;
 ```
 
-Defined in: [search/services/SearchManager.ts:360](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L360)
+Defined in: [search/services/SearchManager.ts:389](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L389)
 
 Hands a selected result back to the provider that owns it. The owner is resolved from the
-`'<providerId>:'` prefix of the result id and, failing that, from its `providerId`.
+longest registered `'<providerId>:'` prefix of the result id and, failing that, from its
+`providerId`.
 
 #### Parameters
 
@@ -184,8 +185,11 @@ Hands a selected result back to the provider that owns it. The owner is resolved
 
 `Promise`\<`void`\>
 
-A promise that settles when the owning provider finished activating, or immediately
-when no provider owns the result.
+A promise that settles when the owning provider finished activating.
+
+#### Throws
+
+The provider is unavailable or reported that it could not open the result.
 
 ***
 
@@ -195,7 +199,7 @@ when no provider owns the result.
 close(): void;
 ```
 
-Defined in: [search/services/SearchManager.ts:192](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L192)
+Defined in: [search/services/SearchManager.ts:193](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L193)
 
 Closes the search surface completely.
 
@@ -211,7 +215,7 @@ Closes the search surface completely.
 closeResults(): void;
 ```
 
-Defined in: [search/services/SearchManager.ts:183](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L183)
+Defined in: [search/services/SearchManager.ts:184](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L184)
 
 Closes the results popup but keeps the launcher expanded.
 
@@ -224,10 +228,10 @@ Closes the results popup but keeps the launcher expanded.
 ### getCommands()
 
 ```ts
-getCommands(query): Promise<readonly ICommandItem[]>;
+getCommands(query, signal?): Promise<readonly ICommandItem[]>;
 ```
 
-Defined in: [search/services/SearchManager.ts:296](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L296)
+Defined in: [search/services/SearchManager.ts:299](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L299)
 
 Queries the static commands and every registered command source. Static commands are matched
 against label, description and keywords; sources match on their own terms.
@@ -237,6 +241,7 @@ against label, description and keywords; sources match on their own terms.
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
 | `query` | `string` | The raw query; [SEARCH\_ALL\_QUERY](Variable.SEARCH_ALL_QUERY) asks for the complete catalogue. |
+| `signal?` | `AbortSignal` | Cancels the request when supplied by the caller. |
 
 #### Returns
 
@@ -256,7 +261,7 @@ The error of the first rejecting command source.
 open(): void;
 ```
 
-Defined in: [search/services/SearchManager.ts:158](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L158)
+Defined in: [search/services/SearchManager.ts:159](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L159)
 
 Opens the search surface and asks it to take the caret.
 
@@ -272,7 +277,7 @@ Opens the search surface and asks it to take the caret.
 openResults(): void;
 ```
 
-Defined in: [search/services/SearchManager.ts:170](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L170)
+Defined in: [search/services/SearchManager.ts:171](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L171)
 
 Re-opens the results popup of an already expanded launcher. Does nothing otherwise, so a
 blurred launcher cannot be re-opened by a late result.
@@ -286,12 +291,16 @@ blurred launcher cannot be re-opened by a late result.
 ### query()
 
 ```ts
-query(query, take?): Promise<readonly (
+query(
+   query,
+   take?,
+   options?
+): Promise<readonly (
   | ICommandItem
 | ISearchResult<unknown>)[]>;
 ```
 
-Defined in: [search/services/SearchManager.ts:281](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L281)
+Defined in: [search/services/SearchManager.ts:283](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L283)
 
 Queries commands and semantic results for one query.
 
@@ -301,6 +310,7 @@ Queries commands and semantic results for one query.
 | ------ | ------ | ------ |
 | `query` | `string` | The raw query; [SEARCH\_ALL\_QUERY](Variable.SEARCH_ALL_QUERY) asks for the complete catalogue. |
 | `take?` | `number` | Maximum number of results requested from each active provider. |
+| `options?` | [`ISearchQueryOptions`](Interface.ISearchQueryOptions) | Optional progressive result delivery and cancellation. |
 
 #### Returns
 
@@ -319,10 +329,14 @@ The first provider error when every active provider failed.
 ### search()
 
 ```ts
-search(query, take?): Promise<readonly ISearchResult<unknown>[]>;
+search(
+   query,
+   take?,
+   options?
+): Promise<readonly ISearchResult<unknown>[]>;
 ```
 
-Defined in: [search/services/SearchManager.ts:318](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L318)
+Defined in: [search/services/SearchManager.ts:330](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L330)
 
 Queries the active semantic providers. A provider that rejects is skipped as long as one
 provider answered, so a single failing backend cannot empty the surface; results are stamped
@@ -334,6 +348,7 @@ with their provider id and deduplicated by result id.
 | ------ | ------ | ------ |
 | `query` | `string` | The raw query; [SEARCH\_ALL\_QUERY](Variable.SEARCH_ALL_QUERY) asks for the complete catalogue. |
 | `take?` | `number` | Maximum number of results requested from each active provider. |
+| `options?` | [`ISearchQueryOptions`](Interface.ISearchQueryOptions) | Optional progressive result delivery and cancellation. |
 
 #### Returns
 
@@ -353,7 +368,7 @@ The first provider error when every active provider failed.
 setExclusiveProvider(providerId): void;
 ```
 
-Defined in: [search/services/SearchManager.ts:256](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L256)
+Defined in: [search/services/SearchManager.ts:257](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L257)
 
 Activates an exclusive provider: while it is set, only that provider is queried and the
 ordinary provider filter is bypassed. Ids that are unknown, inaccessible or not marked
@@ -377,7 +392,7 @@ ordinary provider filter is bypassed. Ids that are unknown, inaccessible or not 
 setRouteActive(active): void;
 ```
 
-Defined in: [search/services/SearchManager.ts:218](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L218)
+Defined in: [search/services/SearchManager.ts:219](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L219)
 
 Reports whether a dedicated search route is active.
 
@@ -399,7 +414,7 @@ Reports whether a dedicated search route is active.
 toggle(): void;
 ```
 
-Defined in: [search/services/SearchManager.ts:202](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L202)
+Defined in: [search/services/SearchManager.ts:203](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L203)
 
 Toggles the search surface.
 
@@ -415,7 +430,7 @@ Toggles the search surface.
 toggleActiveProvider(providerId): void;
 ```
 
-Defined in: [search/services/SearchManager.ts:229](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L229)
+Defined in: [search/services/SearchManager.ts:230](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchManager.ts#L230)
 
 Adds or removes a provider from the filter. Ids that are unknown, inaccessible or exclusive
 are ignored, so a stale filter chip cannot empty the result set.

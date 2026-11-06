@@ -9,4 +9,4 @@ editUrl: false
 const RECURRENCE_END_MODE_OPTIONS: ReadonlyArray<IRecurrenceOption<RecurrenceEndMode>>;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:66](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L66)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:71](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L71)

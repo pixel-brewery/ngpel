@@ -23,21 +23,29 @@ import {
     BadgeComponent,
     ButtonComponent,
     createTourAccessorTarget,
+    ExpanderComponent,
+    ExpanderGroupComponent,
     IconNameDirective,
     IndicatorComponent,
     ListComponent,
     ListItemComponent,
+    PressButtonComponent,
     SegmentComponent,
     SegmentItemComponent,
     type ITourAccessor,
     TOUR_ACCESSOR,
 } from '@pixel-brewery/mosaik-elements-angular';
+import { StopEventPropagationDirective } from '../../directives/stop-event-propagation/StopEventPropagationDirective';
 import { SectionComponent } from '../section/SectionComponent';
 import { SectionContentComponent } from '../section/SectionContentComponent';
 import { SectionHeaderComponent } from '../section/SectionHeaderComponent';
 import { CompoundActionsDirective } from './CompoundActionsDirective';
 import { CompoundEmptyDirective } from './CompoundEmptyDirective';
 import { CompoundItemDirective } from './CompoundItemDirective';
+import { CompoundItemStatusDirective } from './CompoundItemStatusDirective';
+import { CompoundItemSummaryDirective } from './CompoundItemSummaryDirective';
+import { CompoundLayout } from './CompoundLayout';
+import type { CompoundLayoutValue } from './CompoundLayoutValue';
 import { CompoundListHeaderDirective } from './CompoundListHeaderDirective';
 import { CompoundListItemDirective } from './CompoundListItemDirective';
 import { CompoundViewMode } from './CompoundViewMode';
@@ -56,7 +64,7 @@ export const COMPOUND_TOUR_TARGETS = {
 } as const;
 
 /**
- * Renders one item of a collection at a time with generic navigation and creation controls.
+ * Renders a collection with single-item, list or stacked editing and consumer-owned actions.
  *
  * @typeParam T - Collection item type supplied by the consumer.
  * @public
@@ -95,6 +103,52 @@ export const COMPOUND_TOUR_TARGETS = {
                             @if (emptyTemplate(); as template) {
                                 <ng-container [ngTemplateOutlet]="template.templateRef" />
                             }
+                        } @else if (isStacked()) {
+                            <mosaik-expander-group part="items" class="w-full" [attr.test-id]="itemsTestId()" [mode]="'multiple'" [stacking]="'joined'">
+                                @for (context of listItemContexts(); track resolveItemKey(context)) {
+                                    <mosaik-expander
+                                        part="item"
+                                        [attr.test-id]="itemTestId()?.(context.item, context.index)"
+                                        [header]="itemSummaryTemplate() ? undefined : '' + (context.index + 1)"
+                                        [appearance]="'outline'"
+                                        [disabled]="isItemDisabled(context)"
+                                        [isExpanded]="isItemExpanded(context)"
+                                        (expanded)="setItemExpanded(context, true)"
+                                        (collapsed)="setItemExpanded(context, false)"
+                                    >
+                                        @if (itemSummaryTemplate(); as template) {
+                                            <div slot="header" part="item-summary" class="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-0.5">
+                                                <ng-container [ngTemplateOutlet]="template.templateRef" [ngTemplateOutletContext]="context" />
+                                            </div>
+                                        }
+                                        @if (itemStatusTemplate(); as template) {
+                                            <div slot="subHeader" part="item-status" class="flex min-w-0 items-center gap-1.5">
+                                                <ng-container [ngTemplateOutlet]="template.templateRef" [ngTemplateOutletContext]="context" />
+                                            </div>
+                                        }
+                                        @if (canDelete()) {
+                                            <mosaik-press-button
+                                                slot="actions"
+                                                part="item-delete"
+                                                ngpStopEventPropagation
+                                                [attr.test-id]="resolveItemDeleteTestId(context)"
+                                                [attr.aria-label]="deleteLabel()"
+                                                [type]="'button'"
+                                                [iconName]="'delete'"
+                                                [appearance]="'plain'"
+                                                [variant]="'danger'"
+                                                [size]="'small'"
+                                                (pressed)="requestDelete(context)"
+                                            />
+                                        }
+                                        @if (isItemExpanded(context)) {
+                                            <div part="item-content" [attr.data-ngp-compound-active]="context.index === activeIndex() ? '' : null">
+                                                <ng-container [ngTemplateOutlet]="itemTemplate().templateRef" [ngTemplateOutletContext]="context" />
+                                            </div>
+                                        }
+                                    </mosaik-expander>
+                                }
+                            </mosaik-expander-group>
                         } @else if (isListView()) {
                             @if (constrainListToSingleViewHeight()) {
                                 @if (itemContext(); as context) {
@@ -120,7 +174,7 @@ export const COMPOUND_TOUR_TARGETS = {
                     <div part="actions" class="flex items-center justify-between gap-3">
                         <div part="position" class="flex min-w-0 items-center gap-2">
                             @if (itemCount() > 0) {
-                                @if (!isListView()) {
+                                @if (!isListView() && !isStacked()) {
                                     <mosaik-indicator [total]="itemCount()" [selected]="activeIndex()" (indicated)="selectFromIndicator($event)" />
                                 }
                                 <mosaik-badge [label]="positionText()" [appearance]="'soft'" />
@@ -128,7 +182,7 @@ export const COMPOUND_TOUR_TARGETS = {
                         </div>
 
                         <div part="item-actions" class="flex shrink-0 items-center gap-1">
-                            @if (!isListView()) {
+                            @if (!isListView() && !isStacked()) {
                                 <mosaik-button
                                     #previousTarget
                                     [attr.test-id]="previousTestId()"
@@ -149,6 +203,18 @@ export const COMPOUND_TOUR_TARGETS = {
                                     [attr.aria-label]="nextLabel()"
                                     (click)="selectNext()"
                                 />
+                                @if (canDelete() && itemContext(); as context) {
+                                    <mosaik-press-button
+                                        part="item-delete"
+                                        [attr.test-id]="deleteTestId()"
+                                        [attr.aria-label]="deleteLabel()"
+                                        [type]="'button'"
+                                        [iconName]="'delete'"
+                                        [appearance]="'plain'"
+                                        [variant]="'danger'"
+                                        (pressed)="requestDelete(context)"
+                                    />
+                                }
                             }
                             @if (actionsTemplate(); as template) {
                                 <ng-container [ngTemplateOutlet]="template.templateRef" />
@@ -203,6 +269,8 @@ export const COMPOUND_TOUR_TARGETS = {
     imports: [
         BadgeComponent,
         ButtonComponent,
+        ExpanderComponent,
+        ExpanderGroupComponent,
         SectionComponent,
         SectionContentComponent,
         SectionHeaderComponent,
@@ -210,9 +278,11 @@ export const COMPOUND_TOUR_TARGETS = {
         IndicatorComponent,
         ListComponent,
         ListItemComponent,
+        PressButtonComponent,
         SegmentComponent,
         SegmentItemComponent,
         NgTemplateOutlet,
+        StopEventPropagationDirective,
     ],
     providers: [
         {
@@ -248,6 +318,8 @@ export class CompoundComponent<T> implements ITourAccessor, OnInit {
     /** Moves focus into the next item appended through the add action. */
     private _focusAppendedItemAfterGrowth = false;
 
+    private readonly _expandedItemKeys = signal<ReadonlySet<unknown>>(new Set());
+
     private readonly _injector = inject(Injector);
 
     /** Current projected item surface exposed through the signal tour accessor. */
@@ -277,6 +349,10 @@ export class CompoundComponent<T> implements ITourAccessor, OnInit {
     public constructor() {
         effect(() => {
             this.synchronizeSelection(this.items().length);
+
+            if (this.isStacked()) {
+                this.discardRemovedExpansionKeys();
+            }
         });
     }
 
@@ -307,6 +383,9 @@ export class CompoundComponent<T> implements ITourAccessor, OnInit {
      * @readonly
      */
     public readonly items = input.required<ReadonlyArray<T>>();
+
+    /** The collection layout. The default retains the existing single and list views. */
+    public readonly layout = input<CompoundLayoutValue>(CompoundLayout.Paged);
 
     /**
      * Index of the currently displayed item.
@@ -368,6 +447,21 @@ export class CompoundComponent<T> implements ITourAccessor, OnInit {
      * @readonly
      */
     public readonly addTestId = input<string>();
+
+    /** Accessible label of the built-in delete action. */
+    public readonly deleteLabel = input('Delete item');
+
+    /** Test identifier of the single-view delete action. */
+    public readonly deleteTestId = input<string>();
+
+    /** Test identifier of the stacked panel group. */
+    public readonly itemsTestId = input<string>();
+
+    /** Resolves a stable test identifier for a stacked item. */
+    public readonly itemTestId = input<(item: T, index: number) => string | undefined>();
+
+    /** Resolves a stable test identifier for a stacked item's delete action. */
+    public readonly itemDeleteTestId = input<(item: T, index: number) => string | undefined>();
 
     /**
      * Optional stable test identifier for the previous-item action.
@@ -445,6 +539,12 @@ export class CompoundComponent<T> implements ITourAccessor, OnInit {
      * @readonly
      */
     public readonly canAdd = input<boolean>(true);
+
+    /** Enables the built-in delete action for a visible item. */
+    public readonly canDelete = input(false);
+
+    /** Keeps matching stacked panels closed and uneditable. */
+    public readonly itemDisabled = input<(item: T, index: number) => boolean>();
 
     /**
      * Whether the built-in segment for changing the view mode is displayed.
@@ -526,6 +626,9 @@ export class CompoundComponent<T> implements ITourAccessor, OnInit {
      */
     public readonly addRequested = output<void>();
 
+    /** Emits the item the consumer should delete. The consumer owns the mutation. */
+    public readonly deleteRequested = output<ICompoundItemContext<T>>();
+
     /**
      * Reactive component capabilities available to an external tour mapping.
      * No tour identifiers or feature-specific anchors are stored here.
@@ -578,6 +681,12 @@ export class CompoundComponent<T> implements ITourAccessor, OnInit {
      * @readonly
      */
     protected readonly itemTemplate = contentChild.required<CompoundItemDirective<T>>(CompoundItemDirective);
+
+    /** Optional template for each stacked panel heading. */
+    protected readonly itemSummaryTemplate = contentChild<CompoundItemSummaryDirective<T>>(CompoundItemSummaryDirective);
+
+    /** Optional template for the status shown alongside each stacked panel heading. */
+    protected readonly itemStatusTemplate = contentChild<CompoundItemStatusDirective<T>>(CompoundItemStatusDirective);
 
     /**
      * Optional consumer template used to render each item in the list view.
@@ -635,7 +744,10 @@ export class CompoundComponent<T> implements ITourAccessor, OnInit {
      * @protected
      * @readonly
      */
-    protected readonly isListView = computed(() => this.viewMode() === CompoundViewMode.List && this.listItemTemplate() !== undefined);
+    protected readonly isListView = computed(() => !this.isStacked() && this.viewMode() === CompoundViewMode.List && this.listItemTemplate() !== undefined);
+
+    /** Whether items use independently expandable panels. */
+    protected readonly isStacked = computed(() => this.layout() === CompoundLayout.Stacked);
 
     /**
      * Indicates whether the built-in view-mode segment can be rendered.
@@ -645,6 +757,7 @@ export class CompoundComponent<T> implements ITourAccessor, OnInit {
      */
     protected readonly hasViewModeSwitch = computed(
         () =>
+            !this.isStacked() &&
             this.canSwitchViewMode() &&
             this.listItemTemplate() !== undefined &&
             this.listViewLabel().trim().length > 0 &&
@@ -673,7 +786,7 @@ export class CompoundComponent<T> implements ITourAccessor, OnInit {
      * @protected
      * @readonly
      */
-    protected readonly hasPrevious = computed(() => this.itemCount() > 0 && this.activeIndex() > 0);
+    protected readonly hasPrevious = computed(() => !this.isStacked() && this.itemCount() > 0 && this.activeIndex() > 0);
 
     /**
      * Indicates whether forward navigation is available.
@@ -681,7 +794,7 @@ export class CompoundComponent<T> implements ITourAccessor, OnInit {
      * @protected
      * @readonly
      */
-    protected readonly hasNext = computed(() => this.itemCount() > 0 && this.activeIndex() < this.itemCount() - 1);
+    protected readonly hasNext = computed(() => !this.isStacked() && this.itemCount() > 0 && this.activeIndex() < this.itemCount() - 1);
 
     /**
      * Human-readable one-based collection position.
@@ -689,7 +802,11 @@ export class CompoundComponent<T> implements ITourAccessor, OnInit {
      * @protected
      * @readonly
      */
-    protected readonly positionText = computed(() => (this.itemCount() === 0 ? '0 / 0' : `${this.activeIndex() + 1} / ${this.itemCount()}`));
+    protected readonly positionText = computed(() => {
+        const count = this.itemCount();
+
+        return this.isStacked() ? String(count) : `${count === 0 ? 0 : this.activeIndex() + 1} / ${count}`;
+    });
 
     /**
      * Template context for the currently active item.
@@ -836,6 +953,57 @@ export class CompoundComponent<T> implements ITourAccessor, OnInit {
         }
     }
 
+    /** Whether the consumer has disabled editing for this stacked item. */
+    protected isItemDisabled(context: ICompoundItemContext<T>): boolean {
+        return this.itemDisabled()?.(context.item, context.index) ?? false;
+    }
+
+    /** Whether this stacked panel is open. */
+    protected isItemExpanded(context: ICompoundItemContext<T>): boolean {
+        return !this.isItemDisabled(context) && this._expandedItemKeys().has(this.resolveItemKey(context));
+    }
+
+    /** Updates one panel without closing other editors. */
+    protected setItemExpanded(context: ICompoundItemContext<T>, expanded: boolean): void {
+        if (!this.currentItemContext(context) || (expanded && this.isItemDisabled(context))) {
+            return;
+        }
+
+        const key = this.resolveItemKey(context);
+        const current = this._expandedItemKeys();
+
+        if (current.has(key) === expanded) {
+            return;
+        }
+
+        const next = new Set(current);
+
+        if (expanded) {
+            next.add(key);
+            this.selectedIndex.set(context.index);
+        } else {
+            next.delete(key);
+        }
+
+        this._expandedItemKeys.set(next);
+    }
+
+    /** Resolves the optional test identifier for a stacked delete action. */
+    protected resolveItemDeleteTestId(context: ICompoundItemContext<T>): string | undefined {
+        const itemTestId = this.itemTestId()?.(context.item, context.index);
+
+        return this.itemDeleteTestId()?.(context.item, context.index) ?? (itemTestId ? `${itemTestId}-delete` : undefined);
+    }
+
+    /** Emits a delete intent only while the rendered entry is still current. */
+    protected requestDelete(context: ICompoundItemContext<T>): void {
+        const current = this.currentItemContext(context);
+
+        if (this.canDelete() && current) {
+            this.deleteRequested.emit(current);
+        }
+    }
+
     /**
      * Requests a new item from the collection owner.
      *
@@ -864,6 +1032,27 @@ export class CompoundComponent<T> implements ITourAccessor, OnInit {
 
         this.requestAdd();
         return true;
+    }
+
+    private currentItemContext(context: ICompoundItemContext<T>): ICompoundItemContext<T> | undefined {
+        const current = this.listItemContexts()[context.index];
+
+        return current && Object.is(current.item, context.item) ? current : undefined;
+    }
+
+    private discardRemovedExpansionKeys(): void {
+        const expanded = this._expandedItemKeys();
+
+        if (expanded.size === 0) {
+            return;
+        }
+
+        const present = new Set(this.listItemContexts().map((context) => this.resolveItemKey(context)));
+        const next = new Set([...expanded].filter((key) => present.has(key)));
+
+        if (next.size !== expanded.size) {
+            this._expandedItemKeys.set(next);
+        }
     }
 
     /**
@@ -960,7 +1149,13 @@ export class CompoundComponent<T> implements ITourAccessor, OnInit {
         }
 
         if (itemCount !== previousItemCount) {
-            if (shouldOpenAppendedItem) {
+            if (this.isStacked() && (shouldOpenAppendedItem || shouldSelectLastOnGrowth)) {
+                const context = this.listItemContexts()[nextSelectedIndex];
+
+                if (context && !this.isItemDisabled(context)) {
+                    this._expandedItemKeys.set(new Set([this.resolveItemKey(context)]));
+                }
+            } else if (shouldOpenAppendedItem) {
                 this.viewMode.set(CompoundViewMode.Single);
             }
             if (this._focusAppendedItemAfterGrowth && itemCount > previousItemCount) {
@@ -979,7 +1174,8 @@ export class CompoundComponent<T> implements ITourAccessor, OnInit {
     }
 
     private focusAppendedItem(): void {
-        const root = this._activeItemTarget()?.nativeElement;
+        const content = this._activeItemTarget()?.nativeElement;
+        const root = this.isStacked() ? content?.querySelector('[data-ngp-compound-active]') : content;
         if (!root) {
             return;
         }

@@ -26,6 +26,7 @@ editUrl: false
 | [CryptoOperationIdFactory](Class.CryptoOperationIdFactory) | Generates operation IDs using the Web Crypto API with a Math.random fallback. |
 | [DefaultSearchRankingStrategy](Class.DefaultSearchRankingStrategy) | Default ranking: an exact label match wins over a label prefix, a label prefix over a label substring, and both text fields of lower weight (description, keywords) come last. Items that match nowhere keep their contributed order behind the matches, because the sort is stable. |
 | [DefaultUpdateHandlerStrategy](Class.DefaultUpdateHandlerStrategy) | Console-only strategy: reports the lifecycle with the [IUpdateIntl](Interface.IUpdateIntl) texts and never touches the UI. Registered by default when `provideUpdate()` receives no strategy feature. |
+| [EventHub](Class.EventHub) | Publishes typed frontend events within an Angular environment injector. Use `inject<EventHub<IApplicationEvents>>(EventHub)` to apply the application's event map. |
 | [ExternalLinkService](Class.ExternalLinkService) | Default [IExternalLinkOpener](Interface.IExternalLinkOpener) adapter: `window.open(url, '_blank', 'noopener,noreferrer')` on the injected `DOCUMENT`'s window. The call shape is deliberately fixed and the return value ignored — desktop shells intercept exactly this window-open request to hand the URL to the OS browser, and a fallback to in-app navigation would drive such a shell off-app. |
 | [FileDownloadService](Class.FileDownloadService) | Default [IFileDownloader](Interface.IFileDownloader) adapter: a temporary object URL on a detached anchor whose `download` attribute carries the file name, so the browser never derives a suggestion from the object URL. The URL is revoked in a `finally` block, even when the click throws. |
 | [ImageUploadPreparationService](Class.ImageUploadPreparationService) | Prepares a browser-selected image for upload. Files within the byte limit retain their bytes and name. |
@@ -95,6 +96,8 @@ editUrl: false
 | [INotificationMessage](Interface.INotificationMessage) | What a caller hands to [NotificationService.push](Class.NotificationService#push): the raw message, before an id, a timestamp and a resolved lifetime turn it into an [INotification](Interface.INotification). |
 | [INotificationOptions](Interface.INotificationOptions) | The parts of an [INotificationMessage](Interface.INotificationMessage) the typed convenience methods of [NotificationService](Class.NotificationService) do not take positionally. |
 | [INotificationSoundPreviewConfig](Interface.INotificationSoundPreviewConfig) | Sound table of the [NotificationSoundPreviewService](Class.NotificationSoundPreviewService). `withAudioNotificationInterceptor()` applies the interceptor's own table, so a preview always plays what the notification would. |
+| [IOffsetCollectionLimits](Interface.IOffsetCollectionLimits) | Limits on a complete offset collection load. |
+| [IOffsetCollectionPage](Interface.IOffsetCollectionPage) | A page or a combined result from an offset-paginated collection. |
 | [IOperation](Interface.IOperation) | Contract for a queued operation that can apply, commit, and rollback. |
 | [IOperationClock](Interface.IOperationClock) | Abstraction over the system clock, enabling deterministic testing. |
 | [IOperationContext](Interface.IOperationContext) | Runtime context passed to every [IOperation](Interface.IOperation) lifecycle hook. |
@@ -112,6 +115,7 @@ editUrl: false
 | [IReactiveCacheChange](Interface.IReactiveCacheChange) | Describes a single change event emitted by a [ReactiveCacheRegistrar](Class.ReactiveCacheRegistrar). |
 | [ISearchConfig](Interface.ISearchConfig) | Behavioural options of the search engine, published through `SEARCH_CONFIG`. |
 | [ISearchProvider](Interface.ISearchProvider) | Contract for features that contribute semantic search. A provider searches its own domain objects and activates a result when the user selects it. |
+| [ISearchQueryOptions](Interface.ISearchQueryOptions) | Optional observation and cancellation of one search request. |
 | [ISearchResult](Interface.ISearchResult) | A semantic search result produced by a search provider. |
 | [ISearchResultRendererEntry](Interface.ISearchResultRendererEntry) | Registration of a component that renders the rows of one result kind. The surface instantiates it dynamically and owns the input contract it is bound with; the engine only carries the registration. |
 | [ISearchSection](Interface.ISearchSection) | A visual group of the search surface, produced by `SearchSession`. Sections are the rendering unit; flattening them in order yields the keyboard navigation order. |
@@ -258,6 +262,7 @@ editUrl: false
 | [isProblemDetail](Function.isProblemDetail) | Determines whether a response body is an RFC 9457 problem detail. A body qualifies when the response was declared as `application/problem+json` (header detection) or when the body carries a `title` together with a numeric `status` or a textual `detail` (body detection). Both detection paths are treated alike so header-only and body-only producers behave the same. |
 | [isSearchResult](Function.isSearchResult) | Narrows a search surface item to a semantic search result. Commands are rejected first, so the two guards partition the item union exactly. |
 | [jsonCodec](Function.jsonCodec) | Creates a codec that persists structured JSON only after runtime validation. Validation is mandatory because storage is mutable outside the application and persisted data must not be trusted as a TypeScript type assertion. |
+| [loadCompleteOffsetCollection](Function.loadCompleteOffsetCollection) | Loads offset pages sequentially and emits their combined items and the latest reported total. |
 | [localStorageSignal](Function.localStorageSignal) | Creates a storage-backed signal without exposing an injectable storage service to feature code. Must be called in an injection context (a field initializer or constructor). Co-located with the [LocalStorageSignal](TypeAlias.LocalStorageSignal) type because a separate `localStorageSignal.ts` would collide with `LocalStorageSignal.ts` on case-insensitive file systems. |
 | [mapServiceWorkerEvent](Function.mapServiceWorkerEvent) | Translates a `SwUpdate` event into the source-agnostic [IUpdateEvent](TypeAlias.IUpdateEvent) vocabulary. |
 | [matchResult](Function.matchResult) | Operator which takes a stream of [IApiResult](TypeAlias.IApiResult) and applies the matching handler for the success or failure branch. |
@@ -271,6 +276,7 @@ editUrl: false
 | [provideAudioRecorder](Function.provideAudioRecorder) | Registers the [AudioRecorder](Class.AudioRecorder) together with the features contributed to it. Without a transcriber feature the recorder still records; only `transcribe()` stays unavailable. |
 | [provideBrowser](Function.provideBrowser) | Composes the browser capability ports. Only the capabilities contributed by the given features are registered — `provideBrowser()` without features registers nothing. |
 | [provideBrowserStorage](Function.provideBrowserStorage) | Composes the browser storage seam. Without features `BROWSER_STORAGE` keeps its root default (the window's `localStorage`); `withStorage(...)` substitutes another implementation. Two storage features in one call raise the kernel's feature-conflict error. |
+| [provideEventHub](Function.provideEventHub) | Installs a hub in the current environment injector. |
 | [provideMediaUrls](Function.provideMediaUrls) | Configures media URL resolution: registers a [MediaUrlResolver](Class.MediaUrlResolver) scoped to the composition root together with the origin contributed by the given features. |
 | [provideNotification](Function.provideNotification) | Root environment provider of the notification pipeline: registers [NotificationService](Class.NotificationService) and composes the sinks the passed features contribute. Composed without a feature the service still works — messages are materialized and kept in the history, they just reach no sink. |
 | [provideOperationQueue](Function.provideOperationQueue) | Registers the operation queue with composable features. |
@@ -285,6 +291,7 @@ editUrl: false
 | [toApiFailure](Function.toApiFailure) | Creates a failed API result envelope from a transport-agnostic failure source. When the body is a problem detail it is carried over (missing `title`/`status` members are backfilled from the response); otherwise a synthetic problem is built from the status text and message. |
 | [toApiSuccess](Function.toApiSuccess) | Creates a successful API result envelope. |
 | [toCalendarDate](Function.toCalendarDate) | Formats the local calendar day shown by a date control as `YYYY-MM-DD`. |
+| [unwrapApiResultOrThrow](Function.unwrapApiResultOrThrow) | Emits the data of a successful API result and turns a failure into an [ApiResultError](Class.ApiResultError). |
 | [validateFeatures](Function.validateFeatures) | Validates a set of features: 1) Non-multi kinds may appear at most once. 2) IDs must be unique within the same kind. 3) Optional incompatibility rules must not be violated. |
 | [withApiOrigin](Function.withApiOrigin) | Contributes the API origin root-relative media paths are resolved against. |
 | [withAudioInputDevicePreferenceKey](Function.withAudioInputDevicePreferenceKey) | Overrides the user-preference key the microphone selection is stored under. A product that already persists a microphone keeps its own key here, so the stored value survives the move to this package instead of silently resetting every browser profile. |

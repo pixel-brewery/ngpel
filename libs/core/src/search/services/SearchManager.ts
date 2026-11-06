@@ -5,6 +5,7 @@ import { filter, fromEvent } from 'rxjs';
 import type { ICommandItem } from '../models/ICommandItem';
 import type { ICommandSource } from '../models/ICommandSource';
 import type { ISearchProvider } from '../models/ISearchProvider';
+import type { ISearchQueryOptions } from '../models/ISearchQueryOptions';
 import type { ISearchResult } from '../models/ISearchResult';
 import { SEARCH_ALL_QUERY } from '../models/SEARCH_ALL_QUERY';
 import { SEARCH_COMMAND_SOURCE_TOKEN } from '../provider/SEARCH_COMMAND_SOURCE_TOKEN';
@@ -275,11 +276,12 @@ export class SearchManager {
      * @public
      * @param query The raw query; {@link SEARCH_ALL_QUERY} asks for the complete catalogue.
      * @param take Maximum number of results requested from each active provider.
+     * @param options Optional progressive result delivery and cancellation.
      * @returns The commands followed by the results.
      * @throws The first provider error when every active provider failed.
      */
-    public async query(query: string, take?: number): Promise<ReadonlyArray<ICommandItem | ISearchResult>> {
-        const [commands, results] = await Promise.all([this.getCommands(query), this.search(query, take)]);
+    public async query(query: string, take?: number, options?: ISearchQueryOptions): Promise<ReadonlyArray<ICommandItem | ISearchResult>> {
+        const [commands, results] = await Promise.all([this.getCommands(query, options?.signal), this.search(query, take, options)]);
 
         return [...commands, ...results];
     }
@@ -290,16 +292,25 @@ export class SearchManager {
      *
      * @public
      * @param query The raw query; {@link SEARCH_ALL_QUERY} asks for the complete catalogue.
+     * @param signal Cancels the request when supplied by the caller.
      * @returns The matching commands, static ones first.
      * @throws The error of the first rejecting command source.
      */
-    public async getCommands(query: string): Promise<ReadonlyArray<ICommandItem>> {
+    public async getCommands(query: string, signal?: AbortSignal): Promise<ReadonlyArray<ICommandItem>> {
+        signal?.throwIfAborted();
+
         const trimmedQuery = query.trim();
         const returnAll = trimmedQuery === SEARCH_ALL_QUERY;
         const normalizedQuery = trimmedQuery.toLowerCase();
+        const sourceQuery = returnAll ? '' : trimmedQuery;
 
         const staticMatches = returnAll ? this._staticCommands : this._staticCommands.filter((command) => this.matches(command, normalizedQuery));
-        const sourcedCommands = await Promise.all(this._sources.map((source) => source.getCommands(returnAll ? '' : trimmedQuery)));
+        const requests = this._sources.map(async (source) => {
+            signal?.throwIfAborted();
+
+            return signal === undefined ? source.getCommands(sourceQuery) : source.getCommands(sourceQuery, signal);
+        });
+        const sourcedCommands = await this.awaitAbortable(Promise.all(requests), signal);
 
         return [...staticMatches, ...sourcedCommands.flat()];
     }
@@ -312,22 +323,47 @@ export class SearchManager {
      * @public
      * @param query The raw query; {@link SEARCH_ALL_QUERY} asks for the complete catalogue.
      * @param take Maximum number of results requested from each active provider.
+     * @param options Optional progressive result delivery and cancellation.
      * @returns The deduplicated results in provider order.
      * @throws The first provider error when every active provider failed.
      */
-    public async search(query: string, take?: number): Promise<ReadonlyArray<ISearchResult>> {
+    public async search(query: string, take?: number, options: ISearchQueryOptions = {}): Promise<ReadonlyArray<ISearchResult>> {
+        const { onResults, signal } = options;
+        signal?.throwIfAborted();
+
         const trimmedQuery = query.trim();
         const providerQuery = trimmedQuery === SEARCH_ALL_QUERY ? '' : trimmedQuery;
+        const requests = this.resolveActiveProviders().map(async (provider) => {
+            signal?.throwIfAborted();
 
-        const outcomes = await Promise.allSettled(
-            this.resolveActiveProviders().map(async (provider): Promise<ReadonlyArray<ISearchResult>> => {
-                const results = await provider.search(providerQuery, take);
+            const results = await (signal === undefined ? provider.search(providerQuery, take) : provider.search(providerQuery, take, signal));
+            signal?.throwIfAborted();
 
-                return results.map((result) => ({ ...result, providerId: result.providerId ?? provider.id }));
-            }),
-        );
+            return results.map((result) => ({ ...result, providerId: result.providerId ?? provider.id }));
+        });
+        const settled = Promise.allSettled(requests);
+        const completed: Array<ReadonlyArray<ISearchResult>> = [];
+        const progress =
+            onResults === undefined
+                ? undefined
+                : Promise.all(
+                      requests.map((request, index) =>
+                          request.then(
+                              (results) => {
+                                  if (signal?.aborted === true) {
+                                      return;
+                                  }
 
-        const fulfilled = outcomes.filter((outcome): outcome is PromiseFulfilledResult<ReadonlyArray<ISearchResult>> => outcome.status === 'fulfilled');
+                                  completed[index] = results;
+                                  onResults(this.mergeResults(completed));
+                              },
+                              () => undefined,
+                          ),
+                      ),
+                  );
+        const [outcomes] = await this.awaitAbortable(Promise.all([settled, progress]), signal);
+
+        const fulfilled = outcomes.flatMap((outcome) => (outcome.status === 'fulfilled' ? [outcome.value] : []));
 
         if (fulfilled.length === 0) {
             const rejected = outcomes.find((outcome): outcome is PromiseRejectedResult => outcome.status === 'rejected');
@@ -337,9 +373,46 @@ export class SearchManager {
             }
         }
 
+        return this.mergeResults(fulfilled);
+    }
+
+    /**
+     * Hands a selected result back to the provider that owns it. The owner is resolved from the
+     * longest registered `'<providerId>:'` prefix of the result id and, failing that, from its
+     * `providerId`.
+     *
+     * @public
+     * @param result The selected result.
+     * @returns A promise that settles when the owning provider finished activating.
+     * @throws The provider is unavailable or reported that it could not open the result.
+     */
+    public async activateResult(result: ISearchResult): Promise<void> {
+        let prefixOwner: ISearchProvider | undefined;
+
+        for (const candidate of this._providers) {
+            if (result.id.startsWith(`${candidate.id}:`) && (prefixOwner === undefined || candidate.id.length > prefixOwner.id.length)) {
+                prefixOwner = candidate;
+            }
+        }
+
+        const provider = prefixOwner ?? this._providers.find((candidate) => candidate.id === result.providerId);
+
+        if (provider === undefined || !this.resolveActiveProviders().includes(provider)) {
+            throw new Error('The selected search provider is unavailable.');
+        }
+
+        if ((await provider.activate(result)) === false) {
+            throw new Error('The selected search result could not be opened.');
+        }
+    }
+
+    /**
+     * Keeps the first result per id, using the order of the contributing providers.
+     */
+    private mergeResults(results: ReadonlyArray<ReadonlyArray<ISearchResult>>): ReadonlyArray<ISearchResult> {
         const uniqueResults = new Map<string, ISearchResult>();
 
-        for (const result of fulfilled.flatMap((outcome) => outcome.value)) {
+        for (const result of results.flat()) {
             if (!uniqueResults.has(result.id)) {
                 uniqueResults.set(result.id, result);
             }
@@ -349,24 +422,24 @@ export class SearchManager {
     }
 
     /**
-     * Hands a selected result back to the provider that owns it. The owner is resolved from the
-     * `'<providerId>:'` prefix of the result id and, failing that, from its `providerId`.
-     *
-     * @public
-     * @param result The selected result.
-     * @returns A promise that settles when the owning provider finished activating, or immediately
-     * when no provider owns the result.
+     * Settles promptly on cancellation, even if a contributor ignores the signal.
      */
-    public async activateResult(result: ISearchResult): Promise<void> {
-        const provider =
-            this._providers.find((candidate) => result.id.startsWith(`${candidate.id}:`)) ??
-            this._providers.find((candidate) => candidate.id === result.providerId);
-
-        if (provider === undefined) {
-            return;
+    private awaitAbortable<T>(work: Promise<T>, signal?: AbortSignal): Promise<T> {
+        if (signal === undefined) {
+            return work;
         }
 
-        await provider.activate(result);
+        let onAbort: () => void;
+        const aborted = new Promise<never>((_, reject) => {
+            onAbort = () => reject(signal.reason);
+            signal.addEventListener('abort', onAbort, { once: true });
+
+            if (signal.aborted) {
+                onAbort();
+            }
+        });
+
+        return Promise.race([work, aborted]).finally(() => signal.removeEventListener('abort', onAbort));
     }
 
     /**

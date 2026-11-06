@@ -67,6 +67,10 @@ export class BackTopComponent {
             const resizeObserver = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(scrollHandler);
             scrollable.addEventListener('scroll', scrollHandler, { passive: true });
             resizeObserver?.observe(scrollable);
+            const revealAfter = this.revealAfter();
+            if (revealAfter) {
+                resizeObserver?.observe(revealAfter);
+            }
             for (const child of Array.from(scrollable.children)) {
                 resizeObserver?.observe(child);
             }
@@ -89,6 +93,9 @@ export class BackTopComponent {
      * @readonly
      */
     public readonly offset = input<number>(120);
+
+    /** Shows the control after this element has fully scrolled above the container. */
+    public readonly revealAfter = input<HTMLElement | null>(null);
 
     /** Explicit scroll target when the component is outside the scrolling subtree. */
     public readonly scrollable = input<HTMLElement | null>(null);
@@ -173,8 +180,11 @@ export class BackTopComponent {
             return;
         }
 
-        const offset = currentScrollable.scrollTop;
-        this._visible.set(currentScrollable.scrollHeight > currentScrollable.clientHeight && offset > this.offset());
+        const revealAfter = this.revealAfter();
+        const pastThreshold = revealAfter
+            ? revealAfter.getBoundingClientRect().bottom <= currentScrollable.getBoundingClientRect().top
+            : currentScrollable.scrollTop > this.offset();
+        this._visible.set(currentScrollable.scrollHeight > currentScrollable.clientHeight && pastThreshold);
         this._position.set(this.getPosition(currentScrollable));
     }
 

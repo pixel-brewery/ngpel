@@ -2,6 +2,7 @@ export type { ICommandItem } from './models/ICommandItem';
 export type { ICommandSource } from './models/ICommandSource';
 export { isCommandItem } from './models/isCommandItem';
 export type { ISearchProvider } from './models/ISearchProvider';
+export type { ISearchQueryOptions } from './models/ISearchQueryOptions';
 export type { ISearchResult } from './models/ISearchResult';
 export type { ISearchResultRendererEntry } from './models/ISearchResultRendererEntry';
 export type { ISearchSection } from './models/ISearchSection';

@@ -17,7 +17,7 @@ Internationalization labels for the rail component.
 new RailComponentIntl(): RailComponentIntl;
 ```
 
-Defined in: [libs/ui/src/components/rail/RailComponentIntl.ts:30](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponentIntl.ts#L30)
+Defined in: [libs/ui/src/components/rail/RailComponentIntl.ts:31](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponentIntl.ts#L31)
 
 Constructs a new instance of the `RailComponentIntl` class.
 
@@ -35,7 +35,7 @@ Constructs a new instance of the `RailComponentIntl` class.
 get backLabel(): string;
 ```
 
-Defined in: [libs/ui/src/components/rail/RailComponentIntl.ts:54](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponentIntl.ts#L54)
+Defined in: [libs/ui/src/components/rail/RailComponentIntl.ts:56](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponentIntl.ts#L56)
 
 Label for the back navigation button.
 
@@ -53,10 +53,28 @@ Label for the back navigation button.
 get changes(): Subject<void>;
 ```
 
-Defined in: [libs/ui/src/components/rail/RailComponentIntl.ts:45](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponentIntl.ts#L45)
+Defined in: [libs/ui/src/components/rail/RailComponentIntl.ts:47](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponentIntl.ts#L47)
 
 Emits when any label changes.
 
 ##### Returns
 
 `Subject`\<`void`\>
+
+***
+
+### closeLabel
+
+#### Get Signature
+
+```ts
+get closeLabel(): string;
+```
+
+Defined in: [libs/ui/src/components/rail/RailComponentIntl.ts:61](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponentIntl.ts#L61)
+
+Label for closing the floating rail sheet.
+
+##### Returns
+
+`string`

@@ -3,6 +3,7 @@
 import { type Signal, ɵresolveComponentResources as resolveComponentResources } from '@angular/core';
 import { SIGNAL } from '@angular/core/primitives/signals';
 import { TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { readFile } from 'node:fs/promises';
 import { describe, expect, it, vi } from 'vitest';
 import { ContentIndicatorNavigationComponent } from './ContentIndicatorNavigationComponent';
@@ -45,7 +46,7 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', async () => {
         // #region Fields
 
         public content = '';
-        public control: HTMLElement | null = null;
+        public for = '';
         public placement = 'top';
 
         // #endregion
@@ -66,7 +67,7 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', async () => {
     Component({
         selector: 'mosaik-tooltip',
         template: '',
-        inputs: ['content', 'control', 'placement'],
+        inputs: ['content', 'for', 'placement'],
     })(TestTooltipComponent);
 
     return {
@@ -102,6 +103,8 @@ describe('Content indicator navigation', () => {
         expect(navigateToDetails).toHaveBeenCalledOnce();
         expect(context.activeItemId()).toBe('details');
         expect(detailsTrigger.getAttribute('aria-current')).toBe('location');
+        const detailsTooltip = fixture.debugElement.queryAll(By.css('mosaik-tooltip'))[1]?.componentInstance as { for: string };
+        expect(detailsTooltip.for).toBe(detailsTrigger.id);
     });
 });
 

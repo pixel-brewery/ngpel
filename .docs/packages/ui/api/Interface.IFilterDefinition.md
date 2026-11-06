@@ -11,6 +11,18 @@ Describes a single filter field in the filter bar.
 
 ## Properties
 
+### integer?
+
+```ts
+readonly optional integer?: boolean;
+```
+
+Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:141](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L141)
+
+Restricts a numeric filter to whole numbers.
+
+***
+
 ### key
 
 ```ts
@@ -77,6 +89,6 @@ The type of filter control to render.
 readonly optional visible?: boolean;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:143](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L143)
+Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:146](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L146)
 
 Whether this filter is visible by default. Defaults to `true`.

@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy, Component, input, type InputSignal } from '@an
 // #endregion
 
 /**
- * Presents one prominent widget value with its descriptive label, and optionally a unit.
+ * Presents one prominent widget value with a descriptive label, an optional unit and a hint.
  *
  * The value scales with the width of the widget rather than with a breakpoint, so the same summary
  * reads correctly in a one-column tile and in a six-column one. Set `compact` for a widget that
@@ -37,6 +37,9 @@ import { ChangeDetectionStrategy, Component, input, type InputSignal } from '@an
                         <span class="ngp-widget-summary__unit">{{ resolvedUnit }}</span>
                     }
                 </dd>
+                @if (hint(); as resolvedHint) {
+                    <dd class="ngp-widget-summary__hint">{{ resolvedHint }}</dd>
+                }
             </div>
         </dl>
     `,
@@ -122,6 +125,17 @@ import { ChangeDetectionStrategy, Component, input, type InputSignal } from '@an
             font-weight: 500;
             line-height: 1;
         }
+
+        .ngp-widget-summary__hint {
+            order: 3;
+            max-width: 100%;
+            margin: 0;
+            color: var(--ngp-widget-summary-muted-color, var(--mosaik-scheme-foreground-subtle, currentColor));
+            font-size: 0.75rem;
+            line-height: 1.25;
+            overflow-wrap: anywhere;
+            text-wrap: balance;
+        }
     `,
 })
 export class WidgetSummaryComponent {
@@ -150,6 +164,9 @@ export class WidgetSummaryComponent {
      * @readonly
      */
     public readonly unit: InputSignal<string | undefined> = input<string>();
+
+    /** Optional secondary text below the label, such as a comparison or denominator. */
+    public readonly hint = input<string>();
 
     /**
      * Whether the summary is rendered at the smaller scale used when a widget shows several of

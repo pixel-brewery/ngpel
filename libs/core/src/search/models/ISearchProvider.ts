@@ -52,19 +52,21 @@ export interface ISearchProvider<TData = unknown> {
 
     /**
      * Searches for results matching the query. An empty query asks for the provider's default
-     * result set. Implementations should be fast and cancel stale work internally.
+     * result set. Implementations may use the signal to stop work when the caller cancels.
      *
      * @param query The trimmed query, or an empty string for "return everything you have".
      * @param take Maximum number of results the surface will use, when it declared a limit.
+     * @param signal Cancels the request when supplied by the caller.
      */
-    search(query: string, take?: number): Promise<ReadonlyArray<ISearchResult<TData>>> | ReadonlyArray<ISearchResult<TData>>;
+    search(query: string, take?: number, signal?: AbortSignal): Promise<ReadonlyArray<ISearchResult<TData>>> | ReadonlyArray<ISearchResult<TData>>;
 
     /**
      * Activates a result of this provider, for example by navigating to the entity it describes.
      *
      * @param result The selected result.
+     * @returns `false` when the result could not be opened. A void return counts as success.
      */
-    activate(result: ISearchResult<TData>): Promise<void> | void;
+    activate(result: ISearchResult<TData>): Promise<boolean | void> | boolean | void;
 
     // #endregion
 }

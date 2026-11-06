@@ -27,22 +27,23 @@ Unique identifier of the source, typically the contributing feature (e.g. `'sett
 ### getCommands()
 
 ```ts
-getCommands(query):
+getCommands(query, signal?):
   | readonly ICommandItem[]
 | Promise<readonly ICommandItem[]>;
 ```
 
-Defined in: [search/models/ICommandSource.ts:32](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ICommandSource.ts#L32)
+Defined in: [search/models/ICommandSource.ts:33](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ICommandSource.ts#L33)
 
 Returns the commands matching the given query. An empty query asks for the complete
 catalogue — the palette uses it to fill its suggestion list before the user types.
-Implementations should be fast and cancel stale work internally.
+Implementations may use the signal to stop work when the caller cancels.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
 | `query` | `string` | The trimmed query, or an empty string for "return everything you have". |
+| `signal?` | `AbortSignal` | Cancels the request when supplied by the caller. |
 
 #### Returns
 

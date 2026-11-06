@@ -39,6 +39,8 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', async () => {
     const inputs = [
         'appearance',
         'dropDownPlacement',
+        'decimalPlaces',
+        'step',
         'fieldState',
         'formField',
         'gap',
@@ -57,7 +59,7 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', async () => {
         'value',
         'variant',
     ];
-    const outputs = ['changed', 'checked', 'click'];
+    const outputs = ['changed', 'checked', 'click', 'input', 'cleared', 'connected'];
 
     function createComponent(selector: string): unknown {
         class StubComponent {}

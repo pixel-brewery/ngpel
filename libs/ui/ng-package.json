@@ -6,5 +6,5 @@
     "lib": {
         "entryFile": "src/index.ts"
     },
-    "allowedNonPeerDependencies": ["tslib"]
+    "allowedNonPeerDependencies": ["diff", "tslib"]
 }

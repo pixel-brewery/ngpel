@@ -10,13 +10,16 @@ import { renderPlainMarkdown } from '@pixel-brewery/ngpel-ui/markdown';
 import { NG_STATUS_CLASSES, trimmedMaxLength } from '@pixel-brewery/ngpel-forms';
 import { RoutePath } from '@pixel-brewery/ngpel-router';
 import { filter, firstValueFrom, timeout } from 'rxjs';
+import { ContextMenuFixture } from './ContextMenuFixture';
 import { FixturePresenter } from './FixturePresenter';
+import { NavigationFixture } from './NavigationFixture';
 import { GREETING } from './provideFixture';
+import { SessionFixture } from './SessionFixture';
 
 @Component({
     selector: 'app-root',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [BytesPipe, FormField, InitialsPipe],
+    imports: [BytesPipe, ContextMenuFixture, FormField, InitialsPipe, NavigationFixture, SessionFixture],
     providers: [{ provide: VIEW_PRESENTER, useClass: FixturePresenter }, AudioLevelMonitor],
     template: `
         <h1>ngpel fixture</h1>
@@ -41,6 +44,9 @@ import { GREETING } from './provideFixture';
         <button type="button" [disabled]="!presenter.canUndo()" (click)="presenter.undoCommand.execute()">Undo</button>
         <button type="button" [disabled]="!presenter.canRedo()" (click)="presenter.redoCommand.execute()">Redo</button>
         <p>{{ presenter.model.value().title }}</p>
+        <app-context-menu-fixture />
+        <app-navigation-fixture />
+        <app-session-fixture />
     `,
 })
 export class AppComponent extends View<FixturePresenter> {

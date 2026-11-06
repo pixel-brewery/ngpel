@@ -5,6 +5,7 @@
  */
 export const FilesLayout = {
     Gallery: 'gallery',
+    Inline: 'inline',
     List: 'list',
     Preview: 'preview',
 } as const;

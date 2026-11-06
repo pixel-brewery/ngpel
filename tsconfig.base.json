@@ -39,6 +39,8 @@
             "@pixel-brewery/ngpel-router/navigation": ["libs/router/src/navigation/index.ts"],
             "@pixel-brewery/ngpel-router/shell": ["libs/router/src/shell/index.ts"],
             "@pixel-brewery/ngpel-ui": ["libs/ui/src/index.ts"],
+            "@pixel-brewery/ngpel-ui/context-overlay": ["libs/ui/src/context-overlay/index.ts"],
+            "@pixel-brewery/ngpel-ui/google-maps": ["libs/ui/src/google-maps/index.ts"],
             "@pixel-brewery/ngpel-ui/markdown": ["libs/ui/src/markdown/index.ts"],
             "@pixel-brewery/ngpel-ui/widget": ["libs/ui/src/widget/index.ts"]
         }

@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: IFilterColumnBinding\<T\>
 
-Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:256](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L256)
+Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:259](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L259)
 
 Binds a column key to its filter metadata. Used by [buildFilterDefinitions](Function.buildFilterDefinitions)
 to resolve labels from column definitions and produce [IFilterDefinition](Interface.IFilterDefinition) entries.
@@ -24,7 +24,7 @@ to resolve labels from column definitions and produce [IFilterDefinition](Interf
 readonly columnKey: keyof T & string;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:260](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L260)
+Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:263](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L263)
 
 The column key this binding refers to. Must be a property key of `T`.
 
@@ -36,7 +36,7 @@ The column key this binding refers to. Must be a property key of `T`.
 readonly optional options?: readonly IFilterOption[];
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:275](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L275)
+Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:278](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L278)
 
 Available options when [type](#type) is `'select'` or `'multi-select'`.
 
@@ -48,7 +48,7 @@ Available options when [type](#type) is `'select'` or `'multi-select'`.
 readonly optional placeholder?: string;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:270](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L270)
+Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:273](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L273)
 
 Placeholder text for the filter control. Falls back to the column title.
 
@@ -60,6 +60,6 @@ Placeholder text for the filter control. Falls back to the column title.
 readonly type: FilterTypeValue;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:265](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L265)
+Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:268](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L268)
 
 The filter control type to render for this column.

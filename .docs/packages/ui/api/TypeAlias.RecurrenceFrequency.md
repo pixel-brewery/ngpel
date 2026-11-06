@@ -9,4 +9,4 @@ editUrl: false
 type RecurrenceFrequency = "DAILY" | "MONTHLY" | "NONE" | "WEEKLY" | "YEARLY";
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:7](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L7)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:10](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L10)

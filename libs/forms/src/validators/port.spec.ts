@@ -46,14 +46,11 @@ describe('port', () => {
         expect(errors).toEqual([expect.objectContaining({ kind: 'port', actualValue: '65536' })]);
     });
 
-    it('rejects text that is not a number', () => {
-        // Arrange
-        const value = 'http';
-
+    it.each(['http', '1.5', ' '])('rejects port text without a whole number: %j', (value) => {
         // Act
         const errors = collectFieldErrors(value, (path) => port(path));
 
         // Assert
-        expect(errors).toEqual([expect.objectContaining({ kind: 'port', actualValue: 'http' })]);
+        expect(errors).toEqual([expect.objectContaining({ kind: 'port', actualValue: value })]);
     });
 });

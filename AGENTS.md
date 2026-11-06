@@ -46,7 +46,7 @@ ngpel is an Nx monorepo of published Angular libraries `@pixel-brewery/ngpel-<na
 | 0     | `mvp`    | `.`                                                                                                     |
 | 1     | `forms`  | `.`                                                                                                     |
 | 1     | `router` | `.`, `/navigation`, `/shell`                                                                            |
-| 2     | `ui`     | `.`, `/markdown`, `/widget`                                                                             |
+| 2     | `ui`     | `.`, `/markdown`, `/widget`, `/google-maps`, `/context-overlay`                                         |
 
 ## Invariants
 

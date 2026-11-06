@@ -17,7 +17,7 @@ Behavioural options of the search engine, published through `SEARCH_CONFIG`.
 readonly optional commandSectionLabelKey?: string;
 ```
 
-Defined in: [search/provider/ISearchConfig.ts:50](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/provider/ISearchConfig.ts#L50)
+Defined in: [search/provider/ISearchConfig.ts:56](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/provider/ISearchConfig.ts#L56)
 
 Translation key emitted as `ISearchSection.labelKey` for the command section. Left empty the
 section carries no label and the surface supplies its own wording; the package deliberately
@@ -71,6 +71,19 @@ Maximum number of command suggestions shown before the semantic results.
 
 ***
 
+### resultGroupOrder?
+
+```ts
+readonly optional resultGroupOrder?: "ranked" | "provider";
+```
+
+Defined in: [search/provider/ISearchConfig.ts:41](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/provider/ISearchConfig.ts#L41)
+
+Orders result sections by the registration order of the provider that produced their first
+result. The default follows the order in which groups first appear among ranked results.
+
+***
+
 ### resultTake?
 
 ```ts
@@ -93,7 +106,7 @@ Maximum number of results requested from each active provider.
 readonly optional showCommands?: boolean;
 ```
 
-Defined in: [search/provider/ISearchConfig.ts:43](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/provider/ISearchConfig.ts#L43)
+Defined in: [search/provider/ISearchConfig.ts:49](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/provider/ISearchConfig.ts#L49)
 
 Whether the session emits the command section. When `false`, commands are suppressed even
 though command features are registered.

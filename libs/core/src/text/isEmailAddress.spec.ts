@@ -4,7 +4,13 @@ import { isEmailAddress } from './isEmailAddress';
 describe('isEmailAddress', () => {
     it('accepts addresses with a qualified domain, sub-addressing and surrounding whitespace', () => {
         // Arrange
-        const candidates = ['person@example.org', 'person+invoices@example.org', '  person@sub.example.co.uk  ', 'user@xn--80ak6aa92e.example'];
+        const candidates = [
+            'person@example.org',
+            'person+invoices@example.org',
+            '  person@sub.example.co.uk  ',
+            'user@xn--80ak6aa92e.example',
+            'person@café.de',
+        ];
 
         // Act
         const results = candidates.map((candidate) => isEmailAddress(candidate));

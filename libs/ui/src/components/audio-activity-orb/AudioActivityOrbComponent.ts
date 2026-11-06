@@ -27,6 +27,8 @@ import type { AudioActivityState } from './AudioActivityState';
             role="img"
             [attr.aria-label]="ariaLabel()"
             [attr.data-state]="state()"
+            [attr.data-compact]="compact() ? '' : null"
+            [attr.data-waveform]="waveformVisible() ? null : 'hidden'"
             [style.--ngp-audio-orb-aurora-opacity]="auroraOpacityStyle()"
             [style.--ngp-audio-orb-aurora-scale]="auroraScaleStyle()"
             [style.--ngp-audio-orb-level]="normalizedActivityLevel()"
@@ -50,7 +52,7 @@ import type { AudioActivityState } from './AudioActivityState';
                         [barRadius]="2"
                         [barWidth]="3"
                         [fadeEdges]="true"
-                        [height]="64"
+                        [height]="compact() ? 16 : 64"
                         [mediaStream]="mediaStream()"
                         [mode]="'static'"
                         [sensitivity]="1.15"
@@ -164,6 +166,47 @@ import type { AudioActivityState } from './AudioActivityState';
             color: var(--ngp-audio-orb-accent);
         }
 
+        .orb[data-waveform='hidden'] .icon-surface {
+            width: 80%;
+        }
+
+        .orb[data-compact] {
+            transform: scale(calc(1 + var(--ngp-audio-orb-level) * 0.1));
+            transition: transform 120ms ease-out;
+        }
+
+        .orb[data-compact] .aurora {
+            inset: -10%;
+            filter: blur(calc(var(--ngp-audio-orb-size) * 0.16));
+        }
+
+        .orb[data-compact] .pulse {
+            inset: calc(7% - 3px);
+            border-width: 2px;
+            box-shadow: none;
+        }
+
+        .orb[data-compact] .surface {
+            width: 86%;
+            height: 86%;
+            padding: 0;
+            gap: calc(var(--ngp-audio-orb-size) * 0.02);
+            box-shadow: 0 calc(var(--ngp-audio-orb-size) * 0.05) calc(var(--ngp-audio-orb-size) * 0.2)
+                color-mix(in srgb, var(--mosaik-scheme-foreground) 14%, transparent);
+        }
+
+        .orb[data-compact]:not([data-waveform='hidden']) .icon-surface {
+            width: 45%;
+        }
+
+        .orb[data-state='completed'] {
+            --ngp-audio-orb-accent: var(--mosaik-color-success-600, #15803d);
+        }
+
+        .orb[data-state='completed'] .aurora {
+            background: radial-gradient(circle at 50% 45%, color-mix(in srgb, var(--ngp-audio-orb-accent) 72%, transparent), transparent 62%);
+        }
+
         .orb[data-state='error'] {
             --ngp-audio-orb-accent: var(--mosaik-color-danger-600, #c62828);
         }
@@ -183,6 +226,22 @@ import type { AudioActivityState } from './AudioActivityState';
 
         .orb[data-state='thinking'] .aurora {
             animation: ngp-audio-orb-rotate 6s linear infinite;
+        }
+
+        .orb[data-compact][data-state='listening'] .pulse,
+        .orb[data-compact][data-state='speaking'] .pulse {
+            animation-name: ngp-audio-orb-ring;
+        }
+
+        @keyframes ngp-audio-orb-ring {
+            0%,
+            100% {
+                opacity: 0.45;
+            }
+
+            50% {
+                opacity: 1;
+            }
         }
 
         @keyframes ngp-audio-orb-pulse {
@@ -212,6 +271,11 @@ import type { AudioActivityState } from './AudioActivityState';
             .aurora,
             .pulse {
                 animation: none !important;
+                transition: none;
+            }
+
+            .orb[data-compact] {
+                transform: none;
                 transition: none;
             }
         }
@@ -244,6 +308,9 @@ export class AudioActivityOrbComponent {
      * @readonly
      */
     public readonly audioError: OutputEmitterRef<Error> = output<Error>();
+
+    /** Scales the orb's effects and waveform to fit a compact surface. */
+    public readonly compact = input(false);
 
     /**
      * Mosaik icon rendered in the center of the orb.
@@ -351,6 +418,7 @@ export class AudioActivityOrbComponent {
                 return this.mediaStream() === null ? 'processing' : 'listening';
             case 'thinking':
                 return 'processing';
+            case 'completed':
             case 'idle':
             default:
                 return 'idle';

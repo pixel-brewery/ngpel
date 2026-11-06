@@ -187,10 +187,16 @@ const NO_VALUE_OPERATORS: ReadonlySet<FilterOperatorValue> = new Set<FilterOpera
                                         @case (filterType.Number) {
                                             <mosaik-form-field [fieldState]="field(filter.key)()">
                                                 <mosaik-numberbox
-                                                    [formField]="field(filter.key)"
+                                                    #standardNumber
+                                                    [value]="numberValue(field(filter.key))"
                                                     [label]="filter.placeholder ?? filter.label"
                                                     [variant]="'primary'"
+                                                    [decimalPlaces]="filter.integer ? 0 : 2"
+                                                    [step]="filter.integer ? 1 : 0.01"
                                                     [isClearable]="true"
+                                                    (input)="onNumberInput(field(filter.key), $event, filter.integer)"
+                                                    (cleared)="onNumberInput(field(filter.key), null, filter.integer)"
+                                                    (connected)="restoreEmptyNumber(standardNumber, field(filter.key))"
                                                 />
                                             </mosaik-form-field>
                                         }
@@ -342,9 +348,30 @@ const NO_VALUE_OPERATORS: ReadonlySet<FilterOperatorValue> = new Set<FilterOpera
                                                                 [fieldState]="advancedField(advancedRuleControlKey(rule, 'value'))()"
                                                             >
                                                                 <mosaik-numberbox
-                                                                    [formField]="advancedField(advancedRuleControlKey(rule, 'value'))"
+                                                                    #advancedNumber
+                                                                    [value]="numberValue(advancedField(advancedRuleControlKey(rule, 'value')))"
                                                                     [label]="intl.valueLabel"
                                                                     [variant]="'primary'"
+                                                                    [decimalPlaces]="selectedFilter.integer ? 0 : 2"
+                                                                    [step]="selectedFilter.integer ? 1 : 0.01"
+                                                                    [isClearable]="true"
+                                                                    (input)="
+                                                                        onNumberInput(
+                                                                            advancedField(advancedRuleControlKey(rule, 'value')),
+                                                                            $event,
+                                                                            selectedFilter.integer
+                                                                        )
+                                                                    "
+                                                                    (cleared)="
+                                                                        onNumberInput(
+                                                                            advancedField(advancedRuleControlKey(rule, 'value')),
+                                                                            null,
+                                                                            selectedFilter.integer
+                                                                        )
+                                                                    "
+                                                                    (connected)="
+                                                                        restoreEmptyNumber(advancedNumber, advancedField(advancedRuleControlKey(rule, 'value')))
+                                                                    "
                                                                 />
                                                             </mosaik-form-field>
                                                         }
@@ -749,6 +776,31 @@ export class FilterBarComponent implements OnChanges, OnInit {
         }
 
         return field;
+    }
+
+    /** Reads a controlled numeric field without treating an empty value as zero. */
+    protected numberValue(field: () => FieldState<unknown>): number | null {
+        const value = field().value();
+        return typeof value === 'number' && Number.isFinite(value) ? value : null;
+    }
+
+    /** Restores an empty display after the initial Mosaik update. */
+    protected restoreEmptyNumber(numberBox: NumberBoxComponent, field: () => FieldState<unknown>): void {
+        const element = numberBox.elementRef.nativeElement;
+        void element.updateComplete.then(() => {
+            queueMicrotask(() => {
+                if (element.isConnected && this.numberValue(field) === null) {
+                    element.value = null;
+                }
+            });
+        });
+    }
+
+    /** Updates the controlled value only for a valid number or explicit clear. */
+    protected onNumberInput(field: () => FieldState<unknown>, value: unknown, integer = false): void {
+        if (value === null || (typeof value === 'number' && Number.isFinite(value) && (!integer || Number.isSafeInteger(value)))) {
+            field().value.set(value);
+        }
     }
 
     /**

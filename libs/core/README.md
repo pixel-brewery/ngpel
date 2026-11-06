@@ -6,6 +6,8 @@ Application foundation: the composition kernel every other package builds on, th
 
 - **Feature composition** — `provide<Feature>(config?, ...with<Option>())` built on `createFeature`, `composeProviders` and `validateFeatures`, which reject duplicate ids, a second non-multi feature of one kind and declared incompatibilities.
 - **Result envelope** — `IApiResult` with RFC 9457 problem details, `isProblemDetail` detecting both the problem media type and a problem-shaped body, and `ApiResultError` for the throwing path.
+- **Event hub** — `provideEventHub` scopes typed events and their listeners to an Angular injector. A configured set of event keys can expose their latest payload through a read-only signal.
+- **RxJS collection and result helpers** — `loadCompleteOffsetCollection` reads all offset pages sequentially with cancellation and configurable page and item limits. `unwrapApiResultOrThrow` exposes successful data or raises `ApiResultError` with its problem details.
 - **State helpers** — `BusyScope` for named busy states, `destroyBag` for teardown, `ENV` and `TOAST_VISIBILITY` as host-supplied contracts.
 - **Cache registrars** — a signal-backed and an RxJS-backed registry with change notifications.
 - **Calendar days** — `toCalendarDate`, `fromCalendarDate` and `normalizeCalendarDate` preserve date-only fields and read older ISO values.
@@ -13,22 +15,23 @@ Application foundation: the composition kernel every other package builds on, th
 - **Audio** — `AudioLevelMonitor` measures a borrowed microphone stream without stopping its tracks; the worklet loader can use a same-origin asset.
 - **Contextual create actions** — `provideQuickCreate` and `withQuickCreateItems` collect feature actions and resolve what is available at the time of lookup or execution.
 - **Operation queue** — `provideOperationQueue` gives Angular applications delayed optimistic operations with rollback, retry, lifecycle events and a stable idempotency key.
+- **Search** — provider results can arrive progressively in registry order. Cancellation discards superseded results, and activation rechecks availability and access.
 - **Concerns as subpaths** — RxJS operators, storage, browser ports, notifications, updates, audio, search and the operation queue, each tree-shakable on its own.
 
 ## Import Options
 
 ```typescript
-// @pixel-brewery/ngpel-core — 35 exports
+// @pixel-brewery/ngpel-core — 37 exports
 import { ApiResultError, BusyScope, BusyScopeService, composeProviders, composeWithBase, createFeature /* … */ } from '@pixel-brewery/ngpel-core';
 
-// @pixel-brewery/ngpel-core/rx — 9 exports
+// @pixel-brewery/ngpel-core/rx — 13 exports
 import {
     guardImplicitCloseAttempts,
     IAttentionRequestRef,
     IMatchHandlers,
-    IPreventableCloseAttempt,
-    IReactiveCacheChange,
-    matchResult /* … */,
+    IOffsetCollectionLimits,
+    IOffsetCollectionPage,
+    IPreventableCloseAttempt /* … */,
 } from '@pixel-brewery/ngpel-core/rx';
 
 // @pixel-brewery/ngpel-core/storage — 35 exports
@@ -81,7 +84,7 @@ import {
     AudioInputDeviceErrorCode /* … */,
 } from '@pixel-brewery/ngpel-core/audio';
 
-// @pixel-brewery/ngpel-core/search — 36 exports
+// @pixel-brewery/ngpel-core/search — 37 exports
 import {
     DefaultSearchRankingStrategy,
     ICommandItem,

@@ -18,3 +18,7 @@ export { NavigationFeatureKinds } from './provider/NavigationFeatureKind';
 export { provideNavigation } from './provider/provideNavigation';
 export { withNavigationGuard } from './provider/withNavigationGuard';
 export { withNavigationItems } from './provider/withNavigationItems';
+export type { IResourceNavigationSource } from './resource-navigation/IResourceNavigationSource';
+export type { IResourceNavigationTarget } from './resource-navigation/IResourceNavigationTarget';
+export { provideResourceNavigationTarget } from './resource-navigation/provideResourceNavigationTarget';
+export { ResourceNavigationRegistry } from './resource-navigation/ResourceNavigationRegistry';

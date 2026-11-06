@@ -11,6 +11,7 @@ import type { ISearchConfig } from '../provider/ISearchConfig';
 import { provideSearch } from '../provider/provideSearch';
 import { SEARCH_PROVIDER_TOKEN } from '../provider/SEARCH_PROVIDER_TOKEN';
 import { withSearchCommands } from '../provider/withSearchCommands';
+import { SearchManager } from './SearchManager';
 import { SearchSession } from './SearchSession';
 
 /** Scriptable command source: returns the scripted commands and records every query it was asked. */
@@ -131,6 +132,7 @@ interface IFakeSearchResultOptions {
     readonly description?: string;
     readonly providerId?: string;
     readonly group?: string;
+    readonly groupKey?: string;
     readonly keywords?: ReadonlyArray<string>;
 }
 
@@ -142,16 +144,21 @@ function fakeSearchResult(id: string, options: IFakeSearchResultOptions = {}): I
         description: options.description,
         providerId: options.providerId,
         group: options.group,
+        groupKey: options.groupKey,
         keywords: options.keywords,
     };
 }
 
 class DeferredSearchProvider implements ISearchProvider {
-    public readonly id: string = 'deferred';
     public readonly label: string = 'Deferred';
+    public readonly signals: Array<AbortSignal | undefined> = [];
     private readonly _pending: Array<(results: ReadonlyArray<ISearchResult>) => void> = [];
 
-    public search(): Promise<ReadonlyArray<ISearchResult>> {
+    public constructor(public readonly id = 'deferred') {}
+
+    public search(_query: string, _take?: number, signal?: AbortSignal): Promise<ReadonlyArray<ISearchResult>> {
+        this.signals.push(signal);
+
         return new Promise<ReadonlyArray<ISearchResult>>((resolve) => {
             this._pending.push(resolve);
         });
@@ -163,6 +170,10 @@ class DeferredSearchProvider implements ISearchProvider {
 
     public answer(callIndex: number, results: ReadonlyArray<ISearchResult>): void {
         this._pending[callIndex]?.(results);
+    }
+
+    public provide(): Provider {
+        return { provide: SEARCH_PROVIDER_TOKEN, useValue: [this], multi: true };
     }
 }
 
@@ -176,6 +187,10 @@ describe('SearchSession', () => {
         // Arrange
         const provider = new RecordingSearchProvider('crm.customers', [fakeSearchResult('crm.customers:42', { label: 'Ada Lovelace' })]);
         const session = createSession({ resultTake: 5 }, [provider.provide()]);
+        const manager = TestBed.inject(SearchManager);
+        manager.open();
+        manager.closeResults();
+        const focusRequest = manager.focusRequest();
 
         // Act
         await session.updateQuery('  ada  ');
@@ -186,6 +201,9 @@ describe('SearchSession', () => {
         expect(session.isLoading()).toBe(false);
         expect(session.items().map((item) => item.id)).toEqual(['crm.customers:42']);
         expect(provider.takes).toEqual([5]);
+        expect(manager.isOpen()).toBe(false);
+        expect(manager.isFocused()).toBe(true);
+        expect(manager.focusRequest()).toBe(focusRequest);
     });
 
     it('keeps every group and every item of the answer', async () => {
@@ -217,6 +235,50 @@ describe('SearchSession', () => {
         expect(session.sections()[0]?.layout).toBe('grid');
     });
 
+    it('groups localized result sections by their stable translation key', async () => {
+        // Arrange
+        const provider = new RecordingSearchProvider('people', [
+            fakeSearchResult('people:1', { group: 'People', groupKey: 'search.people' }),
+            fakeSearchResult('people:2', { group: 'Contacts', groupKey: 'search.people' }),
+        ]);
+        const session = createSession({}, [provider.provide()]);
+
+        // Act
+        await session.updateQuery('query');
+
+        // Assert
+        expect(session.sections()).toEqual([expect.objectContaining({ id: 'results:search.people', labelKey: 'search.people', items: expect.any(Array) })]);
+        expect(session.sections()[0]?.items.map((item) => item.id)).toEqual(['people:1', 'people:2']);
+    });
+
+    it('uses provider registration order for partial and final sections when configured', async () => {
+        // Arrange
+        const first = new DeferredSearchProvider('first');
+        const second = new RecordingSearchProvider('second', [fakeSearchResult('second:1', { label: 'Query' })]);
+        let finishCommands!: () => void;
+        const pendingCommands = new Promise<ReadonlyArray<ICommandItem>>((resolve) => {
+            finishCommands = () => resolve([]);
+        });
+        const commandSource: ICommandSource = { id: 'pending', getCommands: () => pendingCommands };
+        const commands = { provide: SEARCH_COMMAND_SOURCE_TOKEN, useValue: [commandSource], multi: true };
+        const session = createSession({ resultGroupOrder: 'provider' }, [first.provide(), second.provide(), commands]);
+
+        // Act
+        const pending = session.updateQuery('query');
+        await vi.waitFor(() => expect(session.sections().map((section) => section.id)).toEqual(['results:second']));
+        first.answer(0, [fakeSearchResult('first:1', { label: 'Other' }), fakeSearchResult('first:2', { label: 'Query related' })]);
+        await vi.waitFor(() => expect(session.sections().map((section) => section.id)).toEqual(['results:first', 'results:second']));
+        expect(session.isLoading()).toBe(true);
+        expect(session.items().map((item) => item.id)).toEqual(['first:2', 'first:1', 'second:1']);
+        finishCommands();
+        await pending;
+
+        // Assert
+        expect(session.sections().map((section) => section.id)).toEqual(['results:first', 'results:second']);
+        expect(session.items().map((item) => item.id)).toEqual(['first:2', 'first:1', 'second:1']);
+        expect(session.isLoading()).toBe(false);
+    });
+
     it('returns to suggestion mode for an empty query', async () => {
         // Arrange
         const session = createSession({}, [new RecordingSearchProvider('crm.customers', [fakeSearchResult('crm.customers:42')]).provide()]);
@@ -235,6 +297,9 @@ describe('SearchSession', () => {
         // Arrange
         const session = createSession({}, [new RecordingSearchProvider('crm.customers', [fakeSearchResult('crm.customers:42')]).provide()]);
         await session.updateQuery('ada');
+        const manager = TestBed.inject(SearchManager);
+        manager.open();
+        const focusRequest = manager.focusRequest();
 
         // Act
         session.clear();
@@ -243,24 +308,86 @@ describe('SearchSession', () => {
         expect(session.query()).toBe('');
         expect(session.hasSearched()).toBe(false);
         expect(session.sections()).toEqual([]);
+        expect(manager.isOpen()).toBe(true);
+        expect(manager.isFocused()).toBe(true);
+        expect(manager.focusRequest()).toBe(focusRequest);
     });
 
-    it('discards the answer of a superseded query', async () => {
+    it('cancels a superseded query and discards its late answer', async () => {
         // Arrange
         const provider = new DeferredSearchProvider();
-        const session = createSession({}, [{ provide: SEARCH_PROVIDER_TOKEN, useValue: [provider], multi: true }]);
+        const session = createSession({}, [provider.provide()]);
         const staleQuery = session.updateQuery('stale');
-        const currentQuery = session.updateQuery('current');
 
         // Act
+        const currentQuery = session.updateQuery('current');
         provider.answer(1, [fakeSearchResult('current:1', { providerId: 'deferred' })]);
         await currentQuery;
-        provider.answer(0, [fakeSearchResult('stale:1', { providerId: 'deferred' })]);
         await staleQuery;
+        provider.answer(0, [fakeSearchResult('stale:1', { providerId: 'deferred' })]);
+        await new Promise<void>((resolve) => setTimeout(resolve, 0));
 
         // Assert
+        expect(provider.signals[0]?.aborted).toBe(true);
+        expect(provider.signals[1]?.aborted).toBe(false);
         expect(session.query()).toBe('current');
         expect(session.items().map((item) => item.id)).toEqual(['current:1']);
+        expect(session.error()).toBeNull();
+    });
+
+    it('keeps the selected item when a slower provider adds earlier results', async () => {
+        // Arrange
+        const first = new DeferredSearchProvider('first');
+        const second = new RecordingSearchProvider('second', [fakeSearchResult('second:1'), fakeSearchResult('second:2')]);
+        const session = createSession({}, [first.provide(), second.provide()]);
+        const pending = session.updateQuery('query');
+        await vi.waitFor(() => expect(session.items().map((item) => item.id)).toEqual(['second:1', 'second:2']));
+        expect(session.isLoading()).toBe(true);
+        session.moveNext();
+
+        // Act
+        first.answer(0, [fakeSearchResult('first:1')]);
+        await pending;
+
+        // Assert
+        expect(session.activeItemId()).toBe('second:2');
+        expect(session.items().map((item) => item.id)).toEqual(['first:1', 'second:1', 'second:2']);
+        expect(session.isLoading()).toBe(false);
+    });
+
+    it('cancels pending contributors on clear, including command sources', async () => {
+        // Arrange
+        const provider = new DeferredSearchProvider();
+        const getCommands = vi.fn(() => new Promise<ReadonlyArray<ICommandItem>>(() => undefined));
+        const commandSource = { provide: SEARCH_COMMAND_SOURCE_TOKEN, useValue: [{ id: 'commands', getCommands }], multi: true };
+        const session = createSession({}, [provider.provide(), commandSource]);
+        const pending = session.updateQuery('query');
+
+        // Act
+        session.clear();
+        await pending;
+
+        // Assert
+        expect(provider.signals[0]?.aborted).toBe(true);
+        expect(getCommands).toHaveBeenCalledWith('query', provider.signals[0]);
+        expect(session.items()).toEqual([]);
+        expect(session.isLoading()).toBe(false);
+        expect(session.error()).toBeNull();
+    });
+
+    it('cancels a pending query when its surface is destroyed', async () => {
+        // Arrange
+        const provider = new DeferredSearchProvider();
+        const session = createSession({}, [provider.provide()]);
+        const pending = session.updateQuery('query');
+
+        // Act
+        TestBed.resetTestingModule();
+        await pending;
+
+        // Assert
+        expect(provider.signals[0]?.aborted).toBe(true);
+        expect(session.error()).toBeNull();
     });
 
     it('publishes the error of a failed query and empties the results', async () => {

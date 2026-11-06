@@ -79,6 +79,9 @@ export interface IDynamicFormFieldDefinition {
      */
     readonly isReadonly?: boolean;
 
+    /** Whether an optional field offers a clear action. Defaults to true. */
+    readonly isClearable?: boolean;
+
     /**
      * Initial value used when the value map has no matching key.
      *
@@ -88,7 +91,7 @@ export interface IDynamicFormFieldDefinition {
     readonly initialValue?: DynamicFormValue;
 
     /**
-     * Select options or display mappings for the field.
+     * Choice options or display mappings for the field. Multiple-choice options use string values.
      *
      * @public
      * @readonly
@@ -126,6 +129,9 @@ export interface IDynamicFormFieldDefinition {
      * @readonly
      */
     readonly maximum?: number;
+
+    /** Whether a number field accepts only whole values. */
+    readonly integer?: boolean;
 
     /**
      * Increment used by a number renderer.

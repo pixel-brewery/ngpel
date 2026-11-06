@@ -5,6 +5,7 @@ import { TestBed } from '@angular/core/testing';
 import type { LiveAudioWaveformState } from '../live-audio-waveform/LiveAudioWaveformState';
 import { describe, expect, it, vi } from 'vitest';
 import { AudioActivityOrbComponent } from './AudioActivityOrbComponent';
+import type { AudioActivityState } from './AudioActivityState';
 
 // #endregion
 
@@ -25,6 +26,7 @@ describe('AudioActivityOrbComponent', () => {
         const component = createComponent();
 
         expect(component.activityLevel()).toBe(0);
+        expect(component.compact()).toBe(false);
         expect(component.iconName()).toBe('mic');
         expect(component.mediaStream()).toBeNull();
         expect(component.size()).toBe(288);
@@ -59,7 +61,7 @@ describe('AudioActivityOrbComponent', () => {
     it('should map rich activity states to waveform states', () => {
         const component = createComponent();
         const api = component as unknown as IAudioActivityOrbComponentTestApi;
-        const state = signal<'error' | 'idle' | 'listening' | 'paused' | 'speaking' | 'thinking'>('thinking');
+        const state = signal<AudioActivityState>('thinking');
         Object.defineProperty(component, 'state', { value: state });
 
         expect(api.waveformState()).toBe('processing');
@@ -69,6 +71,9 @@ describe('AudioActivityOrbComponent', () => {
 
         state.set('error');
         expect(api.waveformState()).toBe('error');
+
+        state.set('completed');
+        expect(api.waveformState()).toBe('idle');
     });
 });
 

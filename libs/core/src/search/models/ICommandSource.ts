@@ -25,11 +25,12 @@ export interface ICommandSource {
     /**
      * Returns the commands matching the given query. An empty query asks for the complete
      * catalogue — the palette uses it to fill its suggestion list before the user types.
-     * Implementations should be fast and cancel stale work internally.
+     * Implementations may use the signal to stop work when the caller cancels.
      *
      * @param query The trimmed query, or an empty string for "return everything you have".
+     * @param signal Cancels the request when supplied by the caller.
      */
-    getCommands(query: string): Promise<ReadonlyArray<ICommandItem>> | ReadonlyArray<ICommandItem>;
+    getCommands(query: string, signal?: AbortSignal): Promise<ReadonlyArray<ICommandItem>> | ReadonlyArray<ICommandItem>;
 
     // #endregion
 }

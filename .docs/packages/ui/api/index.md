@@ -9,6 +9,13 @@ editUrl: false
 
 | Class | Description |
 | ------ | ------ |
+| [ActionStripComponent](Class.ActionStripComponent) | Hosts one item-anchored action strip whose actions are declared as projected HTML. |
+| [ActionStripContentDirective](Class.ActionStripContentDirective) | Marks the declarative HTML template rendered inside an action strip. |
+| [ActionStripTriggerDirective](Class.ActionStripTriggerDirective) | Shows a declarative action strip while an item is hovered or contains keyboard focus. |
+| [ActivityLogComponent](Class.ActivityLogComponent) | Renders caller-projected entries with paging, load feedback and an optional unread boundary. |
+| [ActivityLogEntryDirective](Class.ActivityLogEntryDirective) | Marks a projected entry template. Bind the controller's entries to infer the item type. |
+| [ActivityTextChangeComponent](Class.ActivityTextChangeComponent) | Renders a word comparison and lets the reader reveal runs of unchanged paragraphs. |
+| [AgreementGateComponent](Class.AgreementGateComponent) | Requests an explicit agreement without owning its content, persistence or protected action. |
 | [AiBeamComponent](Class.AiBeamComponent) | Renders an animated border around arbitrary projected content, the visual language products use to mark that something is being produced by an AI. |
 | [AiBeamDirective](Class.AiBeamDirective) | Structural shorthand that wraps its template in an [AiBeamComponent](Class.AiBeamComponent), so a single element gains an AI beam without an extra wrapper in the template. |
 | [AiDirective](Class.AiDirective) | Marks an element as AI-enhanced and applies the configured presentation to it. |
@@ -16,6 +23,7 @@ editUrl: false
 | [AiRailChoiceComponent](Class.AiRailChoiceComponent) | Declares one headless interaction choice consumed and rendered by an AI rail. |
 | [AiRailComponent](Class.AiRailComponent) | Renders a declaratively configured, inline AI interaction inside a drawer rail. |
 | [AiRailComponentIntl](Class.AiRailComponentIntl) | Internationalization labels for the AI rail component. |
+| [AnchoredPopupDirective](Class.AnchoredPopupDirective) | Coordinates one popup across changing anchors and asynchronous content. |
 | [AppointmentItemComponent](Class.AppointmentItemComponent) | The `AppointmentItemComponent` component. |
 | [AudioActivityOrbComponent](Class.AudioActivityOrbComponent) | Renders the central audio activity surface for listening and speaking experiences. |
 | [AudioSignalQualityIndicatorComponent](Class.AudioSignalQualityIndicatorComponent) | Displays an accessible, business-agnostic audio signal quality state. |
@@ -25,42 +33,61 @@ editUrl: false
 | [BytesPipe](Class.BytesPipe) | Renders a byte count as a human readable size: <code v-pre>{{ file.size &#124; ngpBytes }}</code>. |
 | [CaptchaComponent](Class.CaptchaComponent) | Captcha component rendering a generated question with three answer options. |
 | [CaptchaComponentIntl](Class.CaptchaComponentIntl) | Internationalization labels for the captcha component. |
+| [CardAccordion](Class.CardAccordion) | Coordinates the expansion of cards within one owning view. |
+| [CardComponent](Class.CardComponent) | Preserves Mosaik card slots while allowing its body to collapse. |
+| [CardHeaderComponent](Class.CardHeaderComponent) | Adds the card's expansion control to the Mosaik header suffix. |
+| [CellComponent](Class.CellComponent) | Presents up to four semantic tracks inside an owning list item: title, description, hints and chips. The list item remains responsible for click, focus and selection behavior. Use named projection attributes for rich content and leading/trailing elements. A track can alternatively use its text input; do not supply both forms for the same track. |
+| [ChartTheme](Class.ChartTheme) | Applies one Mosaik-token chart language across chart types and layouts. |
 | [ChunkPipe](Class.ChunkPipe) | Splits a list into rows of a fixed length, which is what a template needs to lay a flat collection out as a grid: `@for (row of items() | ngpChunk: 3; track $index)`. |
+| [CloseDescendantMenusDirective](Class.CloseDescendantMenusDirective) | Closes contextual menus before a collection row executes its primary action. |
 | [CodeEditorComponent](Class.CodeEditorComponent) | A consolidated code editor component built on CodeMirror 6. Follows the Mosaik code-editor pattern with compartment-based extension management. Supports placeholder autocompletion for template variables (e.g. <code v-pre>{{firstName}}</code>). |
 | [CodeEditorComponentIntl](Class.CodeEditorComponentIntl) | Internationalization labels for the code editor component. |
+| [CollapsibleNavigationPanelComponent](Class.CollapsibleNavigationPanelComponent) | A page-level navigation panel with independent scrolling and a compact rail. Both navigation views stay mounted. On narrow viewports the expanded panel overlays adjacent content. |
 | [CollectionExportDrawerComponent](Class.CollectionExportDrawerComponent) | A configurable drawer component for collection data export. Allows the user to select which columns to include and which format to export in before triggering the actual download. |
 | [CollectionExportDrawerComponentIntl](Class.CollectionExportDrawerComponentIntl) | Internationalization labels for the collection export dialog component. |
 | [CollectionExportService](Class.CollectionExportService) | Service that opens a configurable collection export drawer. Feature presenters inject this service and call [open](Class.CollectionExportService#open) instead of wiring the drawer themselves. |
 | [CollectionListComponent](Class.CollectionListComponent) | Renders a collection heading and menus above caller-templated rows in one scrolling region. |
 | [CollectionListEmptyDirective](Class.CollectionListEmptyDirective) | Marks content rendered when a collection list is empty. |
 | [CollectionListItemDirective](Class.CollectionListItemDirective) | Marks the caller-provided row template of a collection list. |
+| [ColorPickerButtonComponent](Class.ColorPickerButtonComponent) | Opens Mosaik's color picker beside a preset palette and emits an opaque RGB hex value. |
 | [ColorSelectorComponent](Class.ColorSelectorComponent) | A reusable color selector component with palette selection and eye dropper support. Implements ControlValueAccessor for Reactive Forms integration. |
 | [ColorSelectorComponentIntl](Class.ColorSelectorComponentIntl) | Internationalization labels for the color selector component. |
 | [CompactTextPipe](Class.CompactTextPipe) | Condenses a markdown block into a single plain-text line for list rows, tooltips and card subtitles: <code v-pre>{{ note.body &#124; ngpCompactText }}</code>. |
 | [CompoundActionsDirective](Class.CompoundActionsDirective) | Marks a consumer-owned action template rendered beside the compound navigation. |
-| [CompoundComponent](Class.CompoundComponent) | Renders one item of a collection at a time with generic navigation and creation controls. |
+| [CompoundComponent](Class.CompoundComponent) | Renders a collection with single-item, list or stacked editing and consumer-owned actions. |
 | [CompoundEmptyDirective](Class.CompoundEmptyDirective) | Marks a consumer-owned template rendered when a compound collection is empty. |
 | [CompoundItemDirective](Class.CompoundItemDirective) | Marks the template used to render the active item of a compound collection. |
+| [CompoundItemStatusDirective](Class.CompoundItemStatusDirective) | Projects status alongside a stacked compound item's heading. |
+| [CompoundItemSummaryDirective](Class.CompoundItemSummaryDirective) | Projects the heading of each stacked compound item. |
 | [CompoundListHeaderDirective](Class.CompoundListHeaderDirective) | Marks an optional consumer-owned header template for the compound list view. |
 | [CompoundListItemDirective](Class.CompoundListItemDirective) | Marks the template used to render each item in the compound list view. |
+| [ConditionGroupComponent](Class.ConditionGroupComponent) | Composes the shared And/Or group toolbar from the advanced list filters with projected domain conditions. The consumer owns its rule model, allowed operations and evaluation; nested groups reuse the common leading line. |
 | [ContentAnchorDirective](Class.ContentAnchorDirective) | Registers a semantic heading or section as an in-page navigation destination. |
 | [ContentFragmentLinkDirective](Class.ContentFragmentLinkDirective) | Builds a same-document fragment link without losing the active application route. |
 | [ContentIndicatorNavigationComponent](Class.ContentIndicatorNavigationComponent) | Renders registered content destinations as a compact Mosaik position indicator. |
 | [ContentNavigationContext](Class.ContentNavigationContext) | Route-scoped registry for stable in-page navigation destinations. |
 | [ContentTableOfContentsComponent](Class.ContentTableOfContentsComponent) | Renders an accessible fragment-link navigation for registered page content. |
-| [DataTablePreferencesDirective](Class.DataTablePreferencesDirective) | Persists user-visible column configuration for a Mosaik data-table. |
+| [ContextMenuComponent](Class.ContextMenuComponent) | Displays caller-provided Mosaik menu actions for the item that opened it. Place one host beside a list or table and connect it using `ngpContextMenuTriggerFor`. |
+| [ContextMenuContentDirective](Class.ContextMenuContentDirective) | Marks the declarative HTML template rendered inside a context menu. |
+| [ContextMenuTriggerDirective](Class.ContextMenuTriggerDirective) | Connects a host to a context menu. Supply a value for explicit triggers, or omit it on a Mosaik data table to read the row value from the event's composed path. |
+| [DataTableLoadingDirective](Class.DataTableLoadingDirective) | Keeps a Mosaik data table in place while replacing its body with five loading rows. |
+| [DataTablePreferencesDirective](Class.DataTablePreferencesDirective) | Persists column visibility and user-selected widths for a Mosaik data-table. |
 | [DayStripComponent](Class.DayStripComponent) | Displays a horizontally scrollable day selector. |
 | [DetailPanelComponent](Class.DetailPanelComponent) | - |
 | [DetailPanelComponentIntl](Class.DetailPanelComponentIntl) | Internationalization labels for the detail panel component. |
 | [DocumentLayoutSymbolComponent](Class.DocumentLayoutSymbolComponent) | Renders a compact, inert representation of a configurable document layout. |
+| [DocumentPreviewIntl](Class.DocumentPreviewIntl) | Generic preview feedback; document names and business context come from the caller. |
+| [DocumentPreviewService](Class.DocumentPreviewService) | Opens a document in its own drawer without navigating or replacing the caller. |
 | [DrawerExteriorPlacementDirective](Class.DrawerExteriorPlacementDirective) | Places contextual drawer content outside the drawer on its leading backdrop edge. |
 | [DynamicFormComponent](Class.DynamicFormComponent) | Renders a versioned UI-owned form definition with Mosaik controls and Signal Forms. |
 | [DynamicSizeVirtualScrollDirective](Class.DynamicSizeVirtualScrollDirective) | Provides dynamic-size virtualization to a CDK viewport. |
 | [DynamicSizeVirtualScrollItemDirective](Class.DynamicSizeVirtualScrollItemDirective) | Marks one rendered item so the dynamic virtual-scroll strategy can measure it by stable key. |
 | [DynamicSizeVirtualScrollStrategy](Class.DynamicSizeVirtualScrollStrategy) | Virtual-scroll strategy for lists whose rendered items have different and changing block sizes. |
 | [EmailLayoutSymbolComponent](Class.EmailLayoutSymbolComponent) | Renders a compact, inert representation of a configurable email layout. |
+| [EntityPickerFieldComponent](Class.EntityPickerFieldComponent) | Presents the label of a selected entity and delegates choosing or clearing it to caller commands. The value of a surrounding form field can remain an identifier independent of the display text. |
+| [ExpandableMultilineDirective](Class.ExpandableMultilineDirective) | - |
 | [EyeDropperDirective](Class.EyeDropperDirective) | - |
-| [FileComponent](Class.FileComponent) | Displays one file as a Mosaik-based list row, gallery tile, or full-width preview. |
+| [FileComponent](Class.FileComponent) | Displays one file as a Mosaik-based list row, gallery tile, full-width preview or inline chip. |
 | [FilePreviewPipe](Class.FilePreviewPipe) | Creates a lifecycle-safe Mosaik thumbnail preview for a browser file. |
 | [FilesComponent](Class.FilesComponent) | Frames a file collection, its semantic layout, and declaratively projected acquisition sources. |
 | [FileSourceComponent](Class.FileSourceComponent) | Declares one headless acquisition source rendered by a parent [FilesComponent](Class.FilesComponent). |
@@ -92,23 +119,39 @@ editUrl: false
 | [InfiniteScrollDirective](Class.InfiniteScrollDirective) | Emits an event when the user scrolls near the end of a container. |
 | [InitialsPipe](Class.InitialsPipe) | Reduces a display name to at most two upper-case initials for avatar fallbacks: <code v-pre>{{ user.displayName &#124; ngpInitials }}</code> renders `AW` for `Andre Wehlert`. |
 | [InputHistoryNavigationDirective](Class.InputHistoryNavigationDirective) | Adds shell-like submitted-value history navigation to `mosaik-chat-prompt-box` elements. |
+| [InputSuggestionsDirective](Class.InputSuggestionsDirective) | Adds whole-field suggestions to an editable input. Selection emits the original option; the caller owns writing the selected value to its form. |
+| [LeadingLineComponent](Class.LeadingLineComponent) | Marks nested content with a narrow vertical line instead of a frame. |
 | [LegalLinksComponent](Class.LegalLinksComponent) | Renders trusted website-level legal navigation without accepting HTML content. |
 | [LiveAudioWaveformComponent](Class.LiveAudioWaveformComponent) | Renders a reusable live audio spectrum without taking ownership of its media stream. |
 | [LogoComponent](Class.LogoComponent) | The `logo` component. |
 | [LookupPipe](Class.LookupPipe) | Resolves a key through a lookup table, which replaces the `@switch` ladders a template grows once a status, a severity or a kind has more than two branches: `[icon]="ticket.status | ngpLookup: statusIcons : 'help'"`. |
 | [MailPipe](Class.MailPipe) | Turns an email address into a `mailto:` link target: `[href]="contact.email | ngpMail"`. |
+| [MapComponent](Class.MapComponent) | Composes Angular Google Maps with lazy SDK loading and deferred native overlays. |
+| [MapContentDirective](Class.MapContentDirective) | Defers Angular map overlays until the SDK and their owning GoogleMap exist. |
+| [MapLoadError](Class.MapLoadError) | Sanitized failure at the browser Maps SDK boundary. |
+| [MapScriptLoader](Class.MapScriptLoader) | Loads only Google's rendering SDK through its supported script entry point. |
 | [MapsPipe](Class.MapsPipe) | Turns an address into a map search link: `[href]="site.address | ngpMaps: site.name"`. |
-| [MarkdownComponent](Class.MarkdownComponent) | Renders markdown content using the `marked` library with a Mosaik-component-based renderer. |
+| [MapViewportDirective](Class.MapViewportDirective) | Applies the server-provided bounds to the native Angular map after initialization. |
+| [MarkdownComponent](Class.MarkdownComponent) | Safely renders the supported Markdown dialect as semantic Angular DOM. |
+| [MarkdownPreviewDirective](Class.MarkdownPreviewDirective) | Supplies the safe Markdown renderer to the Mosaik CodeEditor preview hook. Use it on a CodeEditor version that exposes `previewRenderer`. |
+| [MatchWidthDirective](Class.MatchWidthDirective) | Keeps the host's inline size equal to another element's rendered width. |
+| [MultilineExpansionBoundaryDirective](Class.MultilineExpansionBoundaryDirective) | - |
 | [NavDirective](Class.NavDirective) | Attribute directive to bind a generic INavItem / handle to `<mosaik-menu-item/>`. |
+| [NavigationCollapseToggleComponent](Class.NavigationCollapseToggleComponent) | Switches the application navigation between its labelled and icon-only forms. The shell owns the persisted state and positions the control through its inline and block offsets. |
 | [NavigationComponent](Class.NavigationComponent) | Provides the layout shell for an application navigation surface. |
 | [NavigationMenuComponent](Class.NavigationMenuComponent) | Wraps the Mosaik menu used by an application navigation surface. |
 | [NavigationMenuGroupComponent](Class.NavigationMenuGroupComponent) | Wraps a Mosaik navigation menu group. |
 | [NavigationMenuItemComponent](Class.NavigationMenuItemComponent) | Application navigation item backed by a Mosaik menu item. |
 | [NotAvailablePipe](Class.NotAvailablePipe) | Renders a placeholder instead of an absent value, so a table cell reads as "not filled in" rather than as an empty gap: <code v-pre>{{ contact.phone &#124; ngpNotAvailable }}</code>. |
-| [PageToolbarComponent](Class.PageToolbarComponent) | Hosts a plain Mosaik toolbar between two page-wide separator lines. |
+| [OverlayScrollBoundaryDirective](Class.OverlayScrollBoundaryDirective) | Keeps wheel and touch scrolling inside an overflow region before an overlay's document-level scroll lock can cancel the event. |
+| [PagePathComponent](Class.PagePathComponent) | Declares the path of the enclosing page for the shell's path outlet. |
+| [PagePathOutletComponent](Class.PagePathOutletComponent) | Renders the current page path as a breadcrumb or a compact parent and title. |
+| [PagePathRegistry](Class.PagePathRegistry) | Resolves the latest mounted page path while retaining previous mounted declarations. |
+| [PageToolbarComponent](Class.PageToolbarComponent) | Hosts a Mosaik page toolbar. In compact mode secondary start actions and end actions that overflow appear in a menu. A menu choice activates the original projected control. |
 | [PaperSurfaceComponent](Class.PaperSurfaceComponent) | Responsive paper-like content surface that grows with its projected content. |
 | [PickerCreateActionComponent](Class.PickerCreateActionComponent) | Sticky primary action rendered above an entity picker list. |
 | [PickerLoadingSkeletonComponent](Class.PickerLoadingSkeletonComponent) | Shared layout-preserving loading state for picker result lists. |
+| [PointerIdleDirective](Class.PointerIdleDirective) | Reports pointer inactivity on its host. |
 | [PrimaryLegalActionContext](Class.PrimaryLegalActionContext) | Route-scoped bridge through which routed content can expose one prominent legal action without depending on its surrounding shell. |
 | [PseudoLinkDirective](Class.PseudoLinkDirective) | Removes the user-agent link styling from an anchor element while preserving every link capability: routing, `href`, context menu, middle-click and keyboard activation. Use it when an anchor wraps composed content such as cards, brand marks or table cells; text-only hyperlinks keep the regular anchor styling. |
 | [RailActionComponent](Class.RailActionComponent) | Renders one compact action that either activates independently declared rail content or hosts another action directive when no target is supplied. |
@@ -118,12 +161,15 @@ editUrl: false
 | [RailContentDirective](Class.RailContentDirective) | Registers independently declared content with its nearest generic rail coordinator. |
 | [RailDrawerController](Class.RailDrawerController) | Coordinates an expandable generic rail with its host drawer width. |
 | [RecurrenceEditorComponent](Class.RecurrenceEditorComponent) | Reusable RFC 5545 recurrence editor for Signal Forms. |
+| [RecurrenceEditorService](Class.RecurrenceEditorService) | Opens the recurrence editor in the application's Mosaik drawer. |
+| [RecurrenceSummaryPipe](Class.RecurrenceSummaryPipe) | Renders a localized description of the recurrence in a read-only view. |
 | [SavedFilterDrawerComponent](Class.SavedFilterDrawerComponent) | Drawer used to name and review a saved filter. |
 | [ScrollToErrorDirective](Class.ScrollToErrorDirective) | Defines a generic validation scope and reveals its first visible invalid control. |
 | [ScrollToErrorTriggerDirective](Class.ScrollToErrorTriggerDirective) | Triggers error navigation for a validation scope associated through the same Signal Forms state. |
 | [SectionComponent](Class.SectionComponent) | Groups a section header and its projected content while consumers configure the host as the section boundary. |
 | [SectionContentComponent](Class.SectionContentComponent) | Projects the content that belongs to a section without adding a layout box. |
 | [SectionHeaderComponent](Class.SectionHeaderComponent) | Displays a section heading with its explanatory description. |
+| [SheetAutoOpenDirective](Class.SheetAutoOpenDirective) | Opens a declaratively rendered sheet as soon as its Mosaik element has connected. |
 | [SignalPipe](Class.SignalPipe) | Wraps a template expression in a signal, so a plain value can be handed to an input, a directive or a helper that expects one: `<ngp-chart [series]="rows() | ngpSignal" />`. |
 | [StopEventPropagationDirective](Class.StopEventPropagationDirective) | Stops the propagation of pointer, mouse and keyboard events at the host element, so nested interactive controls (a delete button inside a clickable row, for instance) do not trigger the surrounding handlers. |
 | [TelPipe](Class.TelPipe) | Turns a phone number into a `tel:` link target: `[href]="contact.phone | ngpTel"`. |
@@ -132,7 +178,11 @@ editUrl: false
 | [TicktackPanelComponentIntl](Class.TicktackPanelComponentIntl) | Internationalization labels for the ticktack panel component. |
 | [TruncateStartPipe](Class.TruncateStartPipe) | Shortens text from the front, keeping its end readable: <code v-pre>{{ path &#124; ngpTruncateStart: 30 }}</code>. |
 | [TypewriterDirective](Class.TypewriterDirective) | Types one or more text values into its host, character by character, and optionally rotates through them. |
+| [UrlListComponent](Class.UrlListComponent) | Edits categorized web links with caller-owned Signal Forms state, choices and mutations. |
+| [UserSelectDirective](Class.UserSelectDirective) | Ignores initial and bound-value selections emitted while Mosaik reconciles items. |
 | [ValueMagnitudeDirective](Class.ValueMagnitudeDirective) | Scales a Mosaik text element by the magnitude of a numeric value. |
+| [ViewportClearanceDirective](Class.ViewportClearanceDirective) | Keeps the floating surface clear of the host element, for example an open side panel or a session dock. The host reserves the distance from its leading edge to the given viewport edge while it is visible. |
+| [ViewportClearanceService](Class.ViewportClearanceService) | Collects the screen areas, such as an open side panel or a session dock, that the floating surface keeps clear. Overlapping reservations along one edge do not add up; a floating surface keeps clear of the widest one. A modal full-screen surface opens its own layer: while it is open, only reservations inside it count, because everything beneath it is covered anyway. |
 | [ViewSlotAnchorOutletComponent](Class.ViewSlotAnchorOutletComponent) | Renders active Mosaik view-slot entries with stable DOM anchors. |
 | [ViewSlotAnchorTargetDirective](Class.ViewSlotAnchorTargetDirective) | Scrolls an anchored view-slot item into view when it becomes the active anchor. |
 | [VoiceRecorderDirective](Class.VoiceRecorderDirective) | Connects the Mosaik prompt box voice controls to the audio recorder and transcriber of `ngpel-core`. |
@@ -148,24 +198,34 @@ editUrl: false
 | [WidgetGridToolboxComponent](Class.WidgetGridToolboxComponent) | Renders the available widget selection independently from its owning surface. |
 | [WidgetManager](Class.WidgetManager) | Collects the widgets contributed under the [WIDGET](Variable.WIDGET) multi-token and registers them in the [WidgetRegistry](Class.WidgetRegistry), which stays the only store and the only order. A host may still add or drop widgets afterwards — a widget that only exists for one tenant, or one that a background capability check turns out to allow. |
 | [WidgetRegistry](Class.WidgetRegistry) | The in-memory widget store. It is the single source of order: widgets are published sorted by `order` and then by id, so a dashboard renders the same sequence no matter in which sequence the feature libraries were composed. |
-| [WidgetSummaryComponent](Class.WidgetSummaryComponent) | Presents one prominent widget value with its descriptive label, and optionally a unit. |
+| [WidgetSummaryComponent](Class.WidgetSummaryComponent) | Presents one prominent widget value with a descriptive label, an optional unit and a hint. |
 | [WidgetViewDirective](Class.WidgetViewDirective) | Exposes the logical grid size of the surrounding widget to its own template, so a view can trade detail for space without knowing anything about the grid that placed it. |
 
 ## Interfaces
 
 | Interface | Description |
 | ------ | ------ |
+| [IActionStripContentContext](Interface.IActionStripContentContext) | Template context supplied to declarative action-strip content. |
+| [IActionStripShowRequest](Interface.IActionStripShowRequest) | Information required to show an action strip for one item. |
+| [IActivityLogController](Interface.IActivityLogController) | State and actions of an activity log whose data source is supplied by its host. |
+| [IActivityLogControllerOptions](Interface.IActivityLogControllerOptions) | Data and identity supplied by the host for a paged activity log. |
+| [IActivityLogEntryContext](Interface.IActivityLogEntryContext) | Data provided to the caller's projected activity entry template. |
+| [IActivityLogLabels](Interface.IActivityLogLabels) | Labels the application can override for the shared activity view. |
+| [IActivityLogPage](Interface.IActivityLogPage) | One page of entries, ordered newest first by the caller's data source. |
+| [IActivityTextPart](Interface.IActivityTextPart) | One segment of a changed paragraph. |
 | [IAdvancedFilterGroup](Interface.IAdvancedFilterGroup) | An advanced filter group with nested rules or groups. |
 | [IAdvancedFilterRow](Interface.IAdvancedFilterRow) | Flattened advanced filter node with display metadata. |
 | [IAdvancedFilterRule](Interface.IAdvancedFilterRule) | A single advanced filter rule. |
 | [IAdvancedFilterValues](Interface.IAdvancedFilterValues) | Emitted values for advanced filter mode. |
 | [IAiRailChoiceConfigurationField](Interface.IAiRailChoiceConfigurationField) | One reusable select field shown before a configurable AI rail action executes. |
+| [IAnchoredPopupEvent](Interface.IAnchoredPopupEvent) | Configuration supplied by the consuming view. |
 | [IAuditLogChange](Interface.IAuditLogChange) | Field-level change rendered by the audit log component. |
 | [IAuditLogChangeGroup](Interface.IAuditLogChangeGroup) | Named set of field changes rendered as one audit comparison card. |
 | [ICaptchaChallenge](Interface.ICaptchaChallenge) | Represents a generated captcha challenge. |
 | [ICaptchaInvalidEvent](Interface.ICaptchaInvalidEvent) | Payload emitted when captcha verification fails. |
 | [ICaptchaProps](Interface.ICaptchaProps) | Public captcha component state contract. |
 | [ICaptchaVerifiedEvent](Interface.ICaptchaVerifiedEvent) | Payload emitted when captcha verification succeeds. |
+| [IChartOptions](Interface.IChartOptions) | Chart inputs shared by Mosaik chart consumers. |
 | [ICollectionCalendarView](Interface.ICollectionCalendarView) | Runtime calendar projection for a collection view. |
 | [ICollectionCalendarViewConfig](Interface.ICollectionCalendarViewConfig) | Configuration for the calendar projection of a collection view. |
 | [ICollectionExportColumn](Interface.ICollectionExportColumn) | Export column metadata derived from a collection field. |
@@ -192,11 +252,14 @@ editUrl: false
 | [IContentNavigationItem](Interface.IContentNavigationItem) | Describes a stable in-page destination exposed by a content navigation. |
 | [IContentNavigationViewportState](Interface.IContentNavigationViewportState) | - |
 | [IContextDrawerTarget](Interface.IContextDrawerTarget) | A feature-owned contextual overlay presented through Mosaik drawers. |
-| [IDataTableColumnPreference](Interface.IDataTableColumnPreference) | Persisted visibility state for one data-table column. |
+| [IContextMenuContentContext](Interface.IContextMenuContentContext) | Template context supplied to declarative context-menu content. |
+| [IContextMenuOpenRequest](Interface.IContextMenuOpenRequest) | Describes one request to open a context menu at a viewport position. |
+| [IDataTableColumnPreference](Interface.IDataTableColumnPreference) | Persisted visibility and optional width of one data-table column. |
 | [IDataTablePreferenceState](Interface.IDataTablePreferenceState) | Persisted state for a Mosaik data-table. |
 | [IDateFilterRange](Interface.IDateFilterRange) | Date range resolved from a filter value. |
 | [IDetailPanelChange](Interface.IDetailPanelChange) | - |
 | [IDocumentLayoutSymbolAppearance](Interface.IDocumentLayoutSymbolAppearance) | Presentation-only appearance contract for the compact document-layout symbol. |
+| [IDocumentPreviewRequest](Interface.IDocumentPreviewRequest) | Captures one document and the caller-owned operation that loads its bytes. Authentication, document identity and permission checks remain with the caller. |
 | [IDynamicFormDefinition](Interface.IDynamicFormDefinition) | Versioned, UI-owned definition of a dynamic form. |
 | [IDynamicFormFieldDefinition](Interface.IDynamicFormFieldDefinition) | UI-owned definition of one dynamically rendered form field. |
 | [IDynamicFormFieldLayout](Interface.IDynamicFormFieldLayout) | Responsive semantic layout for a dynamic form field. |
@@ -206,6 +269,7 @@ editUrl: false
 | [IDynamicFormSectionDefinition](Interface.IDynamicFormSectionDefinition) | Visual section containing related dynamic form fields. |
 | [IDynamicFormValidationRule](Interface.IDynamicFormValidationRule) | UI-owned declarative validation rule for a dynamic form field. |
 | [IEmailLayoutSymbolAppearance](Interface.IEmailLayoutSymbolAppearance) | Presentation-only appearance contract for the compact email-layout symbol. |
+| [IExpandableMultilineConfiguration](Interface.IExpandableMultilineConfiguration) | Configuration supplied by the consuming view. |
 | [IEyeDropperColorChange](Interface.IEyeDropperColorChange) | - |
 | [IEyeDropperError](Interface.IEyeDropperError) | - |
 | [IFileItem](Interface.IFileItem) | Framework-independent view model rendered by the generic files container. |
@@ -237,13 +301,18 @@ editUrl: false
 | [IInputHistoryNavigationEvent](Interface.IInputHistoryNavigationEvent) | Describes a value recalled through input history navigation. |
 | [ILegalLink](Interface.ILegalLink) | Describes a trusted website-level legal or company link. |
 | [ILiveFilterPreference](Interface.ILiveFilterPreference) | Stores an active filter so the presenter can restore it before the first list load. |
+| [IMapConfiguration](Interface.IMapConfiguration) | Application-owned browser credentials and localization for Google Maps. |
 | [IMapsAddress](Interface.IMapsAddress) | A postal address as [MapsPipe](Class.MapsPipe) reads it. Every part is optional, because the shape mirrors what an API actually returns rather than what a complete address would hold. |
 | [IMarkdownRendererOptions](Interface.IMarkdownRendererOptions) | Options for the markdown renderer. |
+| [IPagePathLevel](Interface.IPagePathLevel) | One level of a page path. The last level names the current page. |
 | [IParseRecurrenceRuleOptions](Interface.IParseRecurrenceRuleOptions) | - |
+| [IPdfPreviewOptions](Interface.IPdfPreviewOptions) | Host configuration for the optional PDF.js preview. The host owns the matching SDK, worker, viewer styles and any assets it chooses to serve. |
 | [IPrimaryLegalAction](Interface.IPrimaryLegalAction) | One prominent route-scoped legal action rendered by a public shell. |
 | [IRailHost](Interface.IRailHost) | Coordinates declarative rail actions with independently declared rail content. |
 | [IRecurrenceEditorLabels](Interface.IRecurrenceEditorLabels) | - |
+| [IRecurrenceEditorOptions](Interface.IRecurrenceEditorOptions) | Initial value, available options and labels for the recurrence drawer. |
 | [IRecurrenceOption](Interface.IRecurrenceOption) | - |
+| [IRecurrenceSummaryLabels](Interface.IRecurrenceSummaryLabels) | Translated sentence fragments used to describe a recurrence. |
 | [IRecurrenceValue](Interface.IRecurrenceValue) | - |
 | [ISavedFilter](Interface.ISavedFilter) | Named filter definition persisted for one list view. |
 | [ISavedFilterController](Interface.ISavedFilterController) | Controller for persisted named filters. |
@@ -253,9 +322,14 @@ editUrl: false
 | [ISavedFilterDrawerResult](Interface.ISavedFilterDrawerResult) | Drawer result for saving a filter. |
 | [ISavedFilterPreferenceState](Interface.ISavedFilterPreferenceState) | Persisted named filter preference payload. |
 | [ISavedFilterSummaryItem](Interface.ISavedFilterSummaryItem) | Visual summary item for a saved filter definition. |
+| [ITextSuggestionMessages](Interface.ITextSuggestionMessages) | Localized labels used by a whole-field suggestion list. |
+| [ITextSuggestionOption](Interface.ITextSuggestionOption) | A selectable result supplied by an application-owned suggestion source. |
 | [ITicktackPanelChange](Interface.ITicktackPanelChange) | State change emitted by a ticktack panel. |
 | [ITourContribution](Interface.ITourContribution) | Describes a feature-owned set of steps that can be composed into a larger tour. |
 | [ITourContributionStep](Interface.ITourContributionStep) | Describes one feature-owned step before its final tour anchor is namespaced. |
+| [IUrlFormData](Interface.IUrlFormData) | Editable web-link fields shared by feature forms. |
+| [IUrlListLabels](Interface.IUrlListLabels) | Localized labels of a categorized web-link editor. |
+| [IViewportClearanceReservation](Interface.IViewportClearanceReservation) | A live reservation that can be resized and released. |
 | [IVoiceSessionControlLabels](Interface.IVoiceSessionControlLabels) | Localized copy required by the voice-session control surface. |
 | [IWidget](Interface.IWidget) | One dashboard widget, contributed as plain data so any host can render the same registry: its identity and order, its reactive display text, the default placement and resize constraints it asks for, and the lazily loaded components that make up its faces. |
 | [IWidgetData](Interface.IWidgetData) | The data payload attached to one widget instance. A widget shell binds it into the child injector of the rendered view under `WIDGET_DATA`, which is how a view reads what its widget was configured with without the registry knowing the payload's shape. |
@@ -284,6 +358,8 @@ editUrl: false
 
 | Type Alias | Description |
 | ------ | ------ |
+| [ActivityLogState](TypeAlias.ActivityLogState) | Lifecycle of a paged activity request. |
+| [ActivityTextParagraph](TypeAlias.ActivityTextParagraph) | Paragraph from a text comparison. |
 | [AdvancedFilterNode](TypeAlias.AdvancedFilterNode) | Advanced filter tree node. |
 | [AiAttention](TypeAlias.AiAttention) | Optional visual attention treatment for an AI-enhanced element. |
 | [AiBeamPalette](TypeAlias.AiBeamPalette) | Color palette rendered by an AI beam. |
@@ -303,13 +379,16 @@ editUrl: false
 | [AuditLogFieldLabelResolverFn](TypeAlias.AuditLogFieldLabelResolverFn) | Resolves the display label for an audit log field change. |
 | [CaptchaOperator](TypeAlias.CaptchaOperator) | Supported mathematical operations for captcha challenges. |
 | [CaptchaState](TypeAlias.CaptchaState) | Captcha component state. |
+| [ChartLayout](TypeAlias.ChartLayout) | Layout used to apply full chart defaults or a compact sparkline. |
 | [CollectionExportFormat](TypeAlias.CollectionExportFormat) | Supported export document formats. |
 | [CollectionViewKindValue](TypeAlias.CollectionViewKindValue) | Union of all collection-view projection kinds. |
 | [CollectionViewTypeValue](TypeAlias.CollectionViewTypeValue) | Union of all built-in collection view types. |
+| [CompoundLayoutValue](TypeAlias.CompoundLayoutValue) | A supported compound layout. |
 | [CompoundViewModeValue](TypeAlias.CompoundViewModeValue) | Supported view mode value of a compound collection. |
 | [ContentNavigationScrollDirection](TypeAlias.ContentNavigationScrollDirection) | - |
 | [DetailPanelCloseReason](TypeAlias.DetailPanelCloseReason) | - |
 | [DetailPanelHandleVariant](TypeAlias.DetailPanelHandleVariant) | - |
+| [DocumentPreviewMimeType](TypeAlias.DocumentPreviewMimeType) | Media type required from a document loader before its content can be rendered. |
 | [DynamicFormControlTypeValue](TypeAlias.DynamicFormControlTypeValue) | Union of supported dynamic form renderer kinds. |
 | [DynamicFormGridSpan](TypeAlias.DynamicFormGridSpan) | Number of columns occupied in the semantic twelve-column grid. |
 | [DynamicFormGridStart](TypeAlias.DynamicFormGridStart) | One-based start column in the semantic twelve-column grid. |
@@ -328,9 +407,13 @@ editUrl: false
 | [FilterValues](TypeAlias.FilterValues) | Emitted filter values as a key-value record. |
 | [HoverRevealTarget](TypeAlias.HoverRevealTarget) | Union of every value the hover-reveal directive can observe: an Angular `ElementRef`, a raw `HTMLElement`, a component exposing an `elementRef`, or `null` to detach. |
 | [ICollectionTableFieldConfig](TypeAlias.ICollectionTableFieldConfig) | Data-table behavior for a collection field. |
+| [IDocumentPreviewRef](TypeAlias.IDocumentPreviewRef) | Existing Mosaik drawer reference for dismissing or observing a document preview. |
 | [ImageMarkupSymbolValue](TypeAlias.ImageMarkupSymbolValue) | Value accepted as an image markup symbol. |
 | [ImageMarkupToolValue](TypeAlias.ImageMarkupToolValue) | Value accepted as an image markup tool. |
+| [ImmersiveSessionPhase](TypeAlias.ImmersiveSessionPhase) | The caller-controlled preparation, connection, live or completion phase of a session. |
+| [ImmersiveSessionRailState](TypeAlias.ImmersiveSessionRailState) | Visibility and attachment state of an immersive session rail. |
 | [InputHistoryNavigationDirection](TypeAlias.InputHistoryNavigationDirection) | Describes the navigation operation that changed the control value. |
+| [InputSuggestionSource](TypeAlias.InputSuggestionSource) | Supplies options for a normalized whole-field query. The signal is aborted when the query is replaced, the suggestions close, or the owning directive is destroyed. |
 | [IntlLabelKey](TypeAlias.IntlLabelKey) | The string-valued property keys of an internationalization class — the labels an application may translate. |
 | [IntlTranslationMap](TypeAlias.IntlTranslationMap) | Maps the labels of an internationalization class onto the application's own translation keys. Every key must name an existing string property of the class, so a renamed label breaks the build instead of silently falling back to English. |
 | [LiveAudioWaveformMode](TypeAlias.LiveAudioWaveformMode) | Available waveform layout modes. |
@@ -339,6 +422,7 @@ editUrl: false
 | [MapsSearchUrlFactory](TypeAlias.MapsSearchUrlFactory) | Builds the URL of a map search for an already assembled address query. |
 | [MapsValue](TypeAlias.MapsValue) | Everything [MapsPipe](Class.MapsPipe) can turn into a map query: a structured address or a single line of address text. |
 | [MarkdownRenderer](TypeAlias.MarkdownRenderer) | Partial renderer type for `marked`. |
+| [MatchWidthSource](TypeAlias.MatchWidthSource) | Sources supported by [MatchWidthDirective](Class.MatchWidthDirective). |
 | [RecurrenceEndMode](TypeAlias.RecurrenceEndMode) | - |
 | [RecurrenceFrequency](TypeAlias.RecurrenceFrequency) | - |
 | [RecurrenceMonthlyMode](TypeAlias.RecurrenceMonthlyMode) | - |
@@ -350,6 +434,7 @@ editUrl: false
 | [TourContributionText](TypeAlias.TourContributionText) | Text supplied by a feature to a composed tour step. |
 | [TourFeature](TypeAlias.TourFeature) | Composable contribution to the shared tour runtime. |
 | [TourFeatureKind](TypeAlias.TourFeatureKind) | Feature kind supported by the root tour composition. |
+| [ViewportClearanceEdge](TypeAlias.ViewportClearanceEdge) | Viewport edge reserved by a visible surface. |
 | [WidgetFeatureKind](TypeAlias.WidgetFeatureKind) | The kinds of features `provideWidget(...)` accepts. The kind is multi: any number of feature libraries may contribute widgets. |
 
 ## Variables
@@ -362,9 +447,11 @@ editUrl: false
 | [CollectionViewKind](Variable.CollectionViewKind) | Internal projection kinds supported by the collection-view factory. |
 | [CollectionViewType](Variable.CollectionViewType) | Built-in collection view types supported by ngpel. |
 | [COMPOUND\_TOUR\_TARGETS](Variable.COMPOUND_TOUR_TARGETS) | Stable signal-accessor targets exposed by every compound component. |
+| [CompoundLayout](Variable.CompoundLayout) | Layouts available to a compound collection. |
 | [CompoundViewMode](Variable.CompoundViewMode) | View modes supported by a compound collection. |
 | [DEFAULT\_CAPTCHA\_OPERATORS](Variable.DEFAULT_CAPTCHA_OPERATORS) | Default operators used when none specified. |
 | [DEFAULT\_MARKDOWN\_RENDERER](Variable.DEFAULT_MARKDOWN_RENDERER) | Default renderer instance. |
+| [DOCUMENT\_PREVIEW\_MIME\_TYPES](Variable.DOCUMENT_PREVIEW_MIME_TYPES) | Browser-renderable document media types accepted by the shared preview. Active HTML and SVG documents are deliberately excluded. |
 | [DynamicFormControlType](Variable.DynamicFormControlType) | Supported renderer kinds for a dynamic form field. |
 | [DynamicFormValidationRuleKey](Variable.DynamicFormValidationRuleKey) | Supported declarative validation rules for UI-owned dynamic forms. |
 | [FilePresentation](Variable.FilePresentation) | Semantic presentations supported by a file component. |
@@ -377,6 +464,7 @@ editUrl: false
 | [FilterType](Variable.FilterType) | Supported filter field types. |
 | [ImageMarkupSymbol](Variable.ImageMarkupSymbol) | Vector-safe symbols supported by the generic image markup editor. |
 | [ImageMarkupTool](Variable.ImageMarkupTool) | Tools supported by the generic raster image markup editor. |
+| [MAP\_CONFIGURATION](Variable.MAP_CONFIGURATION) | - |
 | [MAPS\_SEARCH\_URL\_FACTORY](Variable.MAPS_SEARCH_URL_FACTORY) | The map service [MapsPipe](Class.MapsPipe) links to. Defaults to the Google Maps search URL; provide a different factory to link to another map provider or to an in-house map view. |
 | [NOT\_AVAILABLE\_TEXT](Variable.NOT_AVAILABLE_TEXT) | The text [NotAvailablePipe](Class.NotAvailablePipe) renders for a missing value. Defaults to the locale-neutral `n/a`; provide a translated string once the application knows its locale. |
 | [RAIL\_HOST](Variable.RAIL_HOST) | Resolves the generic coordinator shared by rail actions and rail content. |
@@ -405,6 +493,7 @@ editUrl: false
 | [byteSize](Function.byteSize) | Formats a byte count as a human readable size. |
 | [collectWidgetZones](Function.collectWidgetZones) | Derives the distinct zones the registered widgets ask for, ordered by the zone order and then by zone id. There is no global zone inventory: a new widget contribution introduces its zone by declaring it, and a zone disappears with the last widget that wanted it. |
 | [colorFromString](Function.colorFromString) | Derives a stable colour from text, so the same tenant, tag or user always shows the same tint without anybody storing a colour for it. |
+| [createActivityLogController](Function.createActivityLogController) | Owns paging and cancellation for one activity view. Create in the host's injection context. |
 | [createAdvancedFilterGroup](Function.createAdvancedFilterGroup) | Creates an advanced filter group. |
 | [createAdvancedFilterRule](Function.createAdvancedFilterRule) | Creates an advanced filter rule. |
 | [createCollectionView](Function.createCollectionView) | Creates a signal-based collection-view model from a declarative configuration. |
@@ -415,7 +504,7 @@ editUrl: false
 | [createMarkdownExtensions](Function.createMarkdownExtensions) | The authored Markdown dialect that `@pixel-brewery/markdowner-core` adds on top of GitHub-flavored Markdown, rendered as Mosaik element compositions: `::: splits`, `::: callout`, `> [!TYPE]`, fenced code, `::: tabs`, `::: steps`, `::: details`, `::: button` and `::: card`. |
 | [createMarkedRenderer](Function.createMarkedRenderer) | Creates a `marked` renderer that outputs Mosaik web component HTML. |
 | [createPlaceholderCompletions](Function.createPlaceholderCompletions) | Creates a CodeMirror `CompletionSource` that suggests <code v-pre>{{placeholder}}</code> tokens. The completions trigger when the user types <code v-pre>{{</code> or when invoked explicitly. |
-| [createRecurrenceRule](Function.createRecurrenceRule) | - |
+| [createRecurrenceRule](Function.createRecurrenceRule) | Serializes the editable recurrence. Applications that store the end separately can keep the default behavior. Set `includeUntil` for a self-contained RFC 5545 rule. |
 | [createSavedFilterController](Function.createSavedFilterController) | Creates a local-storage backed saved filter controller. |
 | [createSavedFilterSummary](Function.createSavedFilterSummary) | Creates display-ready summary rows for standard and advanced filter values. |
 | [createTourContributionAnchorMap](Function.createTourContributionAnchorMap) | Creates the accessor mapping for a contribution within a composed tour. |
@@ -425,6 +514,8 @@ editUrl: false
 | [defineFlowCollectionView](Function.defineFlowCollectionView) | Defines a flow collection view with full type inference. |
 | [defineGalleryCollectionView](Function.defineGalleryCollectionView) | Defines a gallery collection view with full type inference. |
 | [defineTableCollectionView](Function.defineTableCollectionView) | Defines a table collection view with full type inference. |
+| [describeRecurrence](Function.describeRecurrence) | Describes the frequency and end condition for read-only recurrence fields. |
+| [diffActivityText](Function.diffActivityText) | Compares two versions of a long text paragraph by paragraph and, within changed paragraphs, word by word. |
 | [escapeMarkdownAttribute](Function.escapeMarkdownAttribute) | Escapes an untrusted value for one HTML attribute of the generated markup. The ampersand is escaped first so the entities produced by the later replacements are not escaped a second time. Elements that treat their `text` attribute as plain content need exactly this single pass, because the HTML parser decodes the attribute once before the element ever sees it. |
 | [escapeMarkdownText](Function.escapeMarkdownText) | Escapes untrusted Markdown source for a `text` attribute that the receiving element renders as HTML (Mosaik elements put such values on screen through `unsafeHTML`). The HTML parser already consumes one level of escaping while parsing the attribute, so a single pass would hand live markup to the element. Escaping twice makes embedded HTML arrive as the literal characters a reader is supposed to see. |
 | [flattenAdvancedFilterTree](Function.flattenAdvancedFilterTree) | Flattens a filter tree for list-like rendering. |
@@ -455,11 +546,14 @@ editUrl: false
 | [provideCookiesConsentIntl](Function.provideCookiesConsentIntl) | Provides application-specific internationalization labels for the cookies consent component. |
 | [provideDataTableIntl](Function.provideDataTableIntl) | Provides the application's own labels for the Mosaik data table. |
 | [provideDetailPanelComponentIntl](Function.provideDetailPanelComponentIntl) | Provides application-specific internationalization labels for the detail panel component. |
+| [provideDocumentPreviewIntl](Function.provideDocumentPreviewIntl) | Maps the preview labels to application translation keys. Unmapped labels retain their defaults. |
 | [provideFileUploadIntl](Function.provideFileUploadIntl) | Provides application-specific internationalization labels for the file upload component. |
 | [provideFilterBarComponentIntl](Function.provideFilterBarComponentIntl) | Provides application-specific internationalization labels for the filter bar component. |
 | [provideListIntl](Function.provideListIntl) | Provides application-specific internationalization labels for the list component. |
+| [provideMap](Function.provideMap) | Registers application-owned Maps configuration without loading Google's SDK. |
 | [provideMessageBoxIntl](Function.provideMessageBoxIntl) | Provides application-specific internationalization labels for the message box component. |
 | [providePaginatorIntl](Function.providePaginatorIntl) | Provides application-specific internationalization labels for the paginator component. |
+| [providePdfPreview](Function.providePdfPreview) | Enables lazy PDF.js rendering for document previews opened by the host application. |
 | [provideRailComponentIntl](Function.provideRailComponentIntl) | Provides application-specific internationalization labels for the rail component. |
 | [provideRichTextBoxIntl](Function.provideRichTextBoxIntl) | Provides application-specific internationalization labels for the rich text box component. |
 | [provideSchedulerIntl](Function.provideSchedulerIntl) | Provides application-specific internationalization labels for the scheduler component. |
@@ -476,6 +570,7 @@ editUrl: false
 | [resizeWidgetGridItem](Function.resizeWidgetGridItem) | Grows or shrinks one widget by a number of grid cells, clamped to the constraints the widget itself declares. A resize gesture therefore never has to be validated by the pointer code: an over-long drag simply stops at the widget's own maximum. |
 | [resolveDeclarativeTourTargetElements](Function.resolveDeclarativeTourTargetElements) | Collects the first rendered element for every declarative tour target value. |
 | [resolveDynamicFormLayoutClasses](Function.resolveDynamicFormLayoutClasses) | Resolves semantic grid placement into statically discoverable Tailwind classes. |
+| [resolveMosaikSelectionValue](Function.resolveMosaikSelectionValue) | Resolves the string value selected by a Mosaik selector. |
 | [setWidgetGridItemEnabled](Function.setWidgetGridItemEnabled) | Shows or hides one widget while keeping its placement, so bringing it back puts it exactly where the user last had it. |
 | [toPositiveInteger](Function.toPositiveInteger) | - |
 | [toStopEventPropagationEvents](Function.toStopEventPropagationEvents) | Normalises the value bound to `ngpStopEventPropagation` into the shape the directive evaluates. |

@@ -5,9 +5,9 @@ editUrl: false
 ---
 # Class: WidgetSummaryComponent
 
-Defined in: [libs/ui/src/widget/components/WidgetSummaryComponent.ts:127](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetSummaryComponent.ts#L127)
+Defined in: [libs/ui/src/widget/components/WidgetSummaryComponent.ts:141](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetSummaryComponent.ts#L141)
 
-Presents one prominent widget value with its descriptive label, and optionally a unit.
+Presents one prominent widget value with a descriptive label, an optional unit and a hint.
 
 The value scales with the width of the widget rather than with a breakpoint, so the same summary
 reads correctly in a one-column tile and in a six-column one. Set `compact` for a widget that
@@ -42,10 +42,22 @@ new WidgetSummaryComponent(): WidgetSummaryComponent;
 readonly compact: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetSummaryComponent.ts:161](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetSummaryComponent.ts#L161)
+Defined in: [libs/ui/src/widget/components/WidgetSummaryComponent.ts:178](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetSummaryComponent.ts#L178)
 
 Whether the summary is rendered at the smaller scale used when a widget shows several of
 them next to each other.
+
+***
+
+### hint
+
+```ts
+readonly hint: InputSignal<string | undefined>;
+```
+
+Defined in: [libs/ui/src/widget/components/WidgetSummaryComponent.ts:169](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetSummaryComponent.ts#L169)
+
+Optional secondary text below the label, such as a comparison or denominator.
 
 ***
 
@@ -55,7 +67,7 @@ them next to each other.
 readonly label: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetSummaryComponent.ts:136](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetSummaryComponent.ts#L136)
+Defined in: [libs/ui/src/widget/components/WidgetSummaryComponent.ts:150](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetSummaryComponent.ts#L150)
 
 The descriptive label of the value.
 
@@ -67,7 +79,7 @@ The descriptive label of the value.
 readonly unit: InputSignal<string | undefined>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetSummaryComponent.ts:152](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetSummaryComponent.ts#L152)
+Defined in: [libs/ui/src/widget/components/WidgetSummaryComponent.ts:166](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetSummaryComponent.ts#L166)
 
 The unit shown next to the value.
 
@@ -79,6 +91,6 @@ The unit shown next to the value.
 readonly value: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetSummaryComponent.ts:144](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetSummaryComponent.ts#L144)
+Defined in: [libs/ui/src/widget/components/WidgetSummaryComponent.ts:158](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetSummaryComponent.ts#L158)
 
 The value, already formatted for display.

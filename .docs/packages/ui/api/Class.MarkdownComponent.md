@@ -5,26 +5,9 @@ editUrl: false
 ---
 # Class: MarkdownComponent
 
-Defined in: [libs/ui/src/components/markdown/MarkdownComponent.ts:399](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/markdown/MarkdownComponent.ts#L399)
+Defined in: [libs/ui/src/components/markdown/MarkdownComponent.ts:597](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/markdown/MarkdownComponent.ts#L597)
 
-Renders markdown content using the `marked` library with a Mosaik-component-based renderer.
-
-## Remarks
-
-This component uses `ViewEncapsulation.ShadowDom` to encapsulate its styles
-and prevent leaking into the rest of the application. The rendered HTML is
-generated via `marked` and injected via `innerHTML`.
-
-Uses all `@pixel-brewery/markdowner-core` processors:
-- SplitProcessor — side-by-side columns
-- CalloutProcessor — banners with variant
-- BlockquoteProcessor — styled message boxes
-- CodeBlockProcessor — code blocks with language detection
-- TabProcessor — tabbed content
-- StepsProcessor — vertical stepper
-- DetailsProcessor — expandable sections
-- ButtonProcessor — styled buttons
-- CardProcessor — highlighted box cards
+Safely renders the supported Markdown dialect as semantic Angular DOM.
 
 ## Constructors
 
@@ -33,8 +16,6 @@ Uses all `@pixel-brewery/markdowner-core` processors:
 ```ts
 new MarkdownComponent(): MarkdownComponent;
 ```
-
-Defined in: [libs/ui/src/components/markdown/MarkdownComponent.ts:409](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/markdown/MarkdownComponent.ts#L409)
 
 #### Returns
 
@@ -45,57 +26,125 @@ Defined in: [libs/ui/src/components/markdown/MarkdownComponent.ts:409](https://g
 ### breaks
 
 ```ts
-breaks: InputSignal<boolean>;
+readonly breaks: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/markdown/MarkdownComponent.ts:571](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/markdown/MarkdownComponent.ts#L571)
+Defined in: [libs/ui/src/components/markdown/MarkdownComponent.ts:614](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/markdown/MarkdownComponent.ts#L614)
 
-Whether to enable line breaks in the markdown output.
+Whether single line breaks become explicit line breaks.
+
+***
+
+### document
+
+```ts
+protected readonly document: Signal<IMarkdownDocument>;
+```
+
+Defined in: [libs/ui/src/components/markdown/MarkdownComponent.ts:635](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/markdown/MarkdownComponent.ts#L635)
+
+Safe normalized representation of the current Markdown source.
+
+***
+
+### linkResolver
+
+```ts
+readonly linkResolver: InputSignal<((href) => string | null) | null>;
+```
+
+Defined in: [libs/ui/src/components/markdown/MarkdownComponent.ts:632](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/markdown/MarkdownComponent.ts#L632)
+
+Optionally maps safe Markdown destinations to application routes.
+
+***
+
+### mode
+
+```ts
+readonly mode: InputSignal<"inline" | "document">;
+```
+
+Defined in: [libs/ui/src/components/markdown/MarkdownComponent.ts:626](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/markdown/MarkdownComponent.ts#L626)
+
+Selects complete document rendering or inline-only rendering.
+
+***
+
+### preset
+
+```ts
+readonly preset: InputSignal<"article" | "chat" | "compact">;
+```
+
+Defined in: [libs/ui/src/components/markdown/MarkdownComponent.ts:629](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/markdown/MarkdownComponent.ts#L629)
+
+Selects the density and typography preset.
 
 ***
 
 ### renderedHtml
 
 ```ts
-renderedHtml: Signal<string | SafeHtml>;
+readonly renderedHtml: Signal<string>;
 ```
 
-Defined in: [libs/ui/src/components/markdown/MarkdownComponent.ts:594](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/markdown/MarkdownComponent.ts#L594)
+Defined in: [libs/ui/src/components/markdown/MarkdownComponent.ts:623](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/markdown/MarkdownComponent.ts#L623)
 
-The rendered HTML output as a safe HTML binding.
+Standard HTML representation for consumers that need HTML instead of the component DOM.
 
 ***
 
 ### safeMarkdownText
 
 ```ts
-safeMarkdownText: Signal<string>;
+readonly safeMarkdownText: Signal<string>;
 ```
 
-Defined in: [libs/ui/src/components/markdown/MarkdownComponent.ts:585](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/markdown/MarkdownComponent.ts#L585)
+Defined in: [libs/ui/src/components/markdown/MarkdownComponent.ts:620](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/markdown/MarkdownComponent.ts#L620)
 
-Markdown source with raw HTML escaped before Mosaik formats the supported Markdown syntax.
+Escaped source for consumers that need a text-only binding.
 
 ***
 
 ### sanitize
 
 ```ts
-sanitize: InputSignal<boolean>;
+readonly sanitize: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/markdown/MarkdownComponent.ts:578](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/markdown/MarkdownComponent.ts#L578)
+Defined in: [libs/ui/src/components/markdown/MarkdownComponent.ts:617](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/markdown/MarkdownComponent.ts#L617)
 
-Whether to render standard Markdown through Mosaik's safe text formatter.
+Renders only standard Markdown, without custom block extensions.
 
 ***
 
 ### text
 
 ```ts
-text: InputSignal<string>;
+readonly text: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/markdown/MarkdownComponent.ts:564](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/markdown/MarkdownComponent.ts#L564)
+Defined in: [libs/ui/src/components/markdown/MarkdownComponent.ts:611](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/markdown/MarkdownComponent.ts#L611)
 
-The markdown text to render.
+Markdown source to render.
+
+## Methods
+
+### resolveLink()
+
+```ts
+protected resolveLink(href): string | null;
+```
+
+Defined in: [libs/ui/src/components/markdown/MarkdownComponent.ts:637](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/markdown/MarkdownComponent.ts#L637)
+
+#### Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `href` | `string` |
+
+#### Returns
+
+`string` \| `null`

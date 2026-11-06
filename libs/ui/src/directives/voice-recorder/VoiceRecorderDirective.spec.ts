@@ -70,6 +70,8 @@ class AudioRecorderMock {
     public readonly cancel = vi.fn(async (): Promise<void> => {
         this.audioUrl.set(null);
         this.durationMs.set(0);
+        this.isActive.set(false);
+        this.isRecording.set(false);
         this.state.set('idle');
     });
     public readonly durationMs = signal(0);
@@ -153,6 +155,7 @@ class LiveVoiceTranscriberMock {
 describe('VoiceRecorderDirective', () => {
     let audioRecorder: AudioRecorderMock;
     let directive: VoiceRecorderDirective;
+    let enabled: ReturnType<typeof signal<boolean>>;
     let liveVoiceTranscriber: LiveVoiceTranscriberMock;
     let promptBox: PromptBoxMock;
     let tool: VoiceRecorderToolMock;
@@ -162,6 +165,7 @@ describe('VoiceRecorderDirective', () => {
         liveVoiceTranscriber = new LiveVoiceTranscriberMock();
         promptBox = new PromptBoxMock();
         tool = new VoiceRecorderToolMock(promptBox);
+        enabled = signal(true);
 
         TestBed.configureTestingModule({
             providers: [
@@ -193,6 +197,7 @@ describe('VoiceRecorderDirective', () => {
         });
 
         directive = TestBed.inject(VoiceRecorderDirective);
+        Object.defineProperty(directive, 'enabled', { value: enabled });
         TestBed.flushEffects();
     });
 
@@ -219,6 +224,8 @@ describe('VoiceRecorderDirective', () => {
     it('appends the transcription and emits the normal Prompt Box input event', async () => {
         // Arrange
         const inputListener = vi.fn();
+        const received = vi.fn(() => promptBox.value);
+        directive.transcribed.subscribe(received);
         promptBox.value = 'Existing prompt';
         promptBox.addEventListener('input', inputListener);
         await directive.onRecorderStart();
@@ -234,8 +241,48 @@ describe('VoiceRecorderDirective', () => {
         expect(audioRecorder.cancel).toHaveBeenCalledOnce();
         expect(promptBox.value).toBe('Existing prompt dictated text');
         expect(inputListener).toHaveBeenCalledOnce();
+        expect(received).toHaveBeenCalledWith('dictated text');
+        expect(received).toHaveReturnedWith('Existing prompt dictated text');
         expect(promptBox.focused).toBe(true);
         expect(tool.state).toBe('idle');
+    });
+
+    it('does not request microphone access while the owning surface disables capture', async () => {
+        // Arrange
+        enabled.set(false);
+        TestBed.flushEffects();
+
+        // Act
+        await directive.onRecorderStart();
+
+        // Assert
+        expect(audioRecorder.start).not.toHaveBeenCalled();
+        expect(directive.isActive()).toBe(false);
+        expect(tool.disabled).toBe(true);
+    });
+
+    it('does not append or emit a late transcription after cancellation', async () => {
+        // Arrange
+        const received = vi.fn();
+        directive.transcribed.subscribe(received);
+        let finishTranscription!: (text: string) => void;
+        liveVoiceTranscriber.stopSession.mockReturnValueOnce(
+            new Promise<string>((resolve) => {
+                finishTranscription = resolve;
+            }),
+        );
+        await directive.onRecorderStart();
+        const stopping = directive.onRecorderStop();
+        await directive.onRecorderCancel();
+
+        // Act
+        finishTranscription('obsolete transcript');
+        await stopping;
+
+        // Assert
+        expect(received).not.toHaveBeenCalled();
+        expect(promptBox.value).toBe('');
+        expect(audioRecorder.cancel).toHaveBeenCalledOnce();
     });
 
     it('cancels an owned recording without transcribing or changing the prompt', async () => {

@@ -9,4 +9,4 @@ editUrl: false
 const RECURRENCE_MONTHLY_MODE_OPTIONS: ReadonlyArray<IRecurrenceOption<RecurrenceMonthlyMode>>;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:53](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L53)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:58](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L58)

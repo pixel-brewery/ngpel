@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: IParseRecurrenceRuleOptions
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:30](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L30)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:35](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L35)
 
 ## Properties
 
@@ -15,4 +15,4 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:30](http
 readonly optional recurrenceEndAt?: string | null;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:31](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L31)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:36](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L36)

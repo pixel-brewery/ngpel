@@ -3,7 +3,7 @@
 // #endregion
 
 /**
- * Persisted visibility state for one data-table column.
+ * Persisted visibility and optional width of one data-table column.
  *
  * @public
  */
@@ -21,4 +21,7 @@ export interface IDataTableColumnPreference {
      * @public
      */
     readonly hidden: boolean;
+
+    /** Width in CSS pixels after the column was resized. */
+    readonly width?: number;
 }

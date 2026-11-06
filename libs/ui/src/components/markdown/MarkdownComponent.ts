@@ -1,609 +1,646 @@
 // #region Imports
 
-import { ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
-import { DomSanitizer, type SafeHtml } from '@angular/platform-browser';
-import { TextComponent, TypographyDirective } from '@pixel-brewery/mosaik-elements-angular';
-import {
-    BlockquoteProcessor,
-    ButtonProcessor,
-    CalloutProcessor,
-    CardProcessor,
-    CodeBlockProcessor,
-    DetailsProcessor,
-    SplitProcessor,
-    StepsProcessor,
-    TabProcessor,
-    type IBlockquoteToken,
-    type IButtonToken,
-    type ICalloutToken,
-    type ICardToken,
-    type ICodeBlockToken,
-    type IDetailsToken,
-    type ISplitsToken,
-    type IStepsToken,
-    type ITabsToken,
-} from '@pixel-brewery/markdowner-core';
-import { marked, type Tokens } from 'marked';
-import { createMarkedRenderer, type MarkdownRenderer } from './MarkdownRenderer';
+import { NgTemplateOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { escapeMarkdownText, renderPlainMarkdown } from '@pixel-brewery/ngpel-ui/markdown';
+import type { IMarkdownDocument } from './MarkdownDocument';
+import { MarkdownParser } from './MarkdownParser';
 
 // #endregion
 
-/**
- * Renders markdown content using the `marked` library with a Mosaik-component-based renderer.
- *
- * @remarks
- * This component uses `ViewEncapsulation.ShadowDom` to encapsulate its styles
- * and prevent leaking into the rest of the application. The rendered HTML is
- * generated via `marked` and injected via `innerHTML`.
- *
- * Uses all `@pixel-brewery/markdowner-core` processors:
- * - SplitProcessor — side-by-side columns
- * - CalloutProcessor — banners with variant
- * - BlockquoteProcessor — styled message boxes
- * - CodeBlockProcessor — code blocks with language detection
- * - TabProcessor — tabbed content
- * - StepsProcessor — vertical stepper
- * - DetailsProcessor — expandable sections
- * - ButtonProcessor — styled buttons
- * - CardProcessor — highlighted box cards
- *
- * @public
- */
+/** Safely renders the supported Markdown dialect as semantic Angular DOM. */
 @Component({
     selector: 'ngp-markdown',
     template: `
-        @if (sanitize()) {
-            <mosaik-text class="ngp-markdown" [mosaikTypography]="'body1'" [text]="safeMarkdownText()" [formatter]="'markdown'" [wrap]="true" />
+        <ng-template #inline let-nodes>
+            @for (node of nodes; track $index) {
+                @switch (node.type) {
+                    @case ('text') {
+                        <span part="text">{{ node.text }}</span>
+                    }
+                    @case ('strong') {
+                        <strong part="strong"><ng-container [ngTemplateOutlet]="inline" [ngTemplateOutletContext]="{ $implicit: node.children }" /></strong>
+                    }
+                    @case ('emphasis') {
+                        <em part="emphasis"><ng-container [ngTemplateOutlet]="inline" [ngTemplateOutletContext]="{ $implicit: node.children }" /></em>
+                    }
+                    @case ('deletion') {
+                        <del part="deletion"><ng-container [ngTemplateOutlet]="inline" [ngTemplateOutletContext]="{ $implicit: node.children }" /></del>
+                    }
+                    @case ('code') {
+                        <code part="inline-code">{{ node.text }}</code>
+                    }
+                    @case ('break') {
+                        <br part="break" />
+                    }
+                    @case ('link') {
+                        @if (resolveLink(node.href); as destination) {
+                            <a part="link" [href]="destination" [attr.title]="node.title"
+                                ><ng-container [ngTemplateOutlet]="inline" [ngTemplateOutletContext]="{ $implicit: node.children }"
+                            /></a>
+                        } @else {
+                            <span part="text"><ng-container [ngTemplateOutlet]="inline" [ngTemplateOutletContext]="{ $implicit: node.children }" /></span>
+                        }
+                    }
+                    @case ('image') {
+                        <img
+                            part="image"
+                            [src]="node.src"
+                            [alt]="node.alt"
+                            [attr.title]="node.title"
+                            [attr.width]="node.width"
+                            [attr.height]="node.height"
+                            loading="lazy"
+                        />
+                    }
+                }
+            }
+        </ng-template>
+
+        <ng-template #blocks let-nodes>
+            @for (node of nodes; track $index) {
+                @switch (node.type) {
+                    @case ('heading') {
+                        @switch (node.depth) {
+                            @case (1) {
+                                <h1 part="heading heading-1">
+                                    <ng-container [ngTemplateOutlet]="inline" [ngTemplateOutletContext]="{ $implicit: node.children }" />
+                                </h1>
+                            }
+                            @case (2) {
+                                <h2 part="heading heading-2">
+                                    <ng-container [ngTemplateOutlet]="inline" [ngTemplateOutletContext]="{ $implicit: node.children }" />
+                                </h2>
+                            }
+                            @case (3) {
+                                <h3 part="heading heading-3">
+                                    <ng-container [ngTemplateOutlet]="inline" [ngTemplateOutletContext]="{ $implicit: node.children }" />
+                                </h3>
+                            }
+                            @case (4) {
+                                <h4 part="heading heading-4">
+                                    <ng-container [ngTemplateOutlet]="inline" [ngTemplateOutletContext]="{ $implicit: node.children }" />
+                                </h4>
+                            }
+                            @case (5) {
+                                <h5 part="heading heading-5">
+                                    <ng-container [ngTemplateOutlet]="inline" [ngTemplateOutletContext]="{ $implicit: node.children }" />
+                                </h5>
+                            }
+                            @default {
+                                <h6 part="heading heading-6">
+                                    <ng-container [ngTemplateOutlet]="inline" [ngTemplateOutletContext]="{ $implicit: node.children }" />
+                                </h6>
+                            }
+                        }
+                    }
+                    @case ('paragraph') {
+                        <p part="paragraph">
+                            <ng-container [ngTemplateOutlet]="inline" [ngTemplateOutletContext]="{ $implicit: node.children }" />
+                        </p>
+                    }
+                    @case ('thematic-break') {
+                        <hr part="thematic-break" />
+                    }
+                    @case ('code') {
+                        <figure part="code-block">
+                            @if (node.fileName) {
+                                <figcaption part="code-caption">{{ node.fileName }}</figcaption>
+                            }
+                            <pre><code [attr.data-language]="node.language" [attr.data-highlights]="node.highlights">{{ node.text }}</code></pre>
+                        </figure>
+                    }
+                    @case ('blockquote') {
+                        <blockquote part="blockquote" [attr.data-variant]="node.variant">
+                            <ng-container [ngTemplateOutlet]="blocks" [ngTemplateOutletContext]="{ $implicit: node.children }" />
+                        </blockquote>
+                    }
+                    @case ('list') {
+                        @if (node.ordered) {
+                            <ol part="list ordered-list" [attr.start]="node.start === 1 ? null : node.start">
+                                @for (item of node.items; track $index) {
+                                    <li part="list-item">
+                                        @if (item.task) {
+                                            <input part="task-checkbox" type="checkbox" [checked]="item.checked" disabled />
+                                        }
+                                        <ng-container [ngTemplateOutlet]="blocks" [ngTemplateOutletContext]="{ $implicit: item.children }" />
+                                    </li>
+                                }
+                            </ol>
+                        } @else {
+                            <ul part="list unordered-list">
+                                @for (item of node.items; track $index) {
+                                    <li part="list-item">
+                                        @if (item.task) {
+                                            <input part="task-checkbox" type="checkbox" [checked]="item.checked" disabled />
+                                        }
+                                        <ng-container [ngTemplateOutlet]="blocks" [ngTemplateOutletContext]="{ $implicit: item.children }" />
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    }
+                    @case ('table') {
+                        <div part="table-scroller">
+                            <table part="table">
+                                <thead>
+                                    <tr>
+                                        @for (cell of node.header; track $index) {
+                                            <th part="table-header-cell" [style.text-align]="cell.align">
+                                                <ng-container [ngTemplateOutlet]="inline" [ngTemplateOutletContext]="{ $implicit: cell.children }" />
+                                            </th>
+                                        }
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (row of node.rows; track $index) {
+                                        <tr>
+                                            @for (cell of row; track $index) {
+                                                <td part="table-cell" [style.text-align]="cell.align">
+                                                    <ng-container [ngTemplateOutlet]="inline" [ngTemplateOutletContext]="{ $implicit: cell.children }" />
+                                                </td>
+                                            }
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    @case ('callout') {
+                        <aside part="callout" [attr.data-variant]="node.variant">
+                            @if (node.title) {
+                                <strong part="callout-title">{{ node.title }}</strong>
+                            }
+                            <ng-container [ngTemplateOutlet]="blocks" [ngTemplateOutletContext]="{ $implicit: node.children }" />
+                        </aside>
+                    }
+                    @case ('details') {
+                        <details part="details">
+                            <summary part="details-summary">{{ node.title }}</summary>
+                            <div part="details-content">
+                                <ng-container [ngTemplateOutlet]="blocks" [ngTemplateOutletContext]="{ $implicit: node.children }" />
+                            </div>
+                        </details>
+                    }
+                    @case ('card') {
+                        <article part="card" [attr.data-variant]="node.variant">
+                            <header part="card-header">
+                                <h6>{{ node.title }}</h6>
+                                @if (node.subtitle) {
+                                    <p part="card-subtitle">{{ node.subtitle }}</p>
+                                }
+                            </header>
+                            <ng-container [ngTemplateOutlet]="blocks" [ngTemplateOutletContext]="{ $implicit: node.children }" />
+                        </article>
+                    }
+                    @case ('button') {
+                        @if (resolveLink(node.href); as destination) {
+                            <a part="button" [attr.data-variant]="node.variant" [attr.data-appearance]="node.appearance" [href]="destination">{{
+                                node.label
+                            }}</a>
+                        } @else {
+                            <span part="button">{{ node.label }}</span>
+                        }
+                    }
+                    @case ('splits') {
+                        <section part="splits">
+                            @for (item of node.items; track $index) {
+                                <article part="split" [attr.data-variant]="item.variant">
+                                    <h6 part="split-title">
+                                        <ng-container [ngTemplateOutlet]="inline" [ngTemplateOutletContext]="{ $implicit: item.title }" />
+                                    </h6>
+                                    <ng-container [ngTemplateOutlet]="blocks" [ngTemplateOutletContext]="{ $implicit: item.children }" />
+                                </article>
+                            }
+                        </section>
+                    }
+                    @case ('steps') {
+                        <ol part="steps">
+                            @for (item of node.items; track $index) {
+                                <li part="step">
+                                    <strong part="step-title">{{ item.title }}</strong>
+                                    <ng-container [ngTemplateOutlet]="blocks" [ngTemplateOutletContext]="{ $implicit: item.children }" />
+                                </li>
+                            }
+                        </ol>
+                    }
+                    @case ('tabs') {
+                        <section part="tabs">
+                            @for (item of node.items; track $index) {
+                                <details part="tab" [attr.data-variant]="item.variant" [open]="$first">
+                                    <summary part="tab-title">{{ item.title }}</summary>
+                                    <div part="tab-content">
+                                        <ng-container [ngTemplateOutlet]="blocks" [ngTemplateOutletContext]="{ $implicit: item.children }" />
+                                    </div>
+                                </details>
+                            }
+                        </section>
+                    }
+                }
+            }
+        </ng-template>
+
+        @if (mode() === 'inline') {
+            <span part="inline-root"><ng-container [ngTemplateOutlet]="inline" [ngTemplateOutletContext]="{ $implicit: document().inline }" /></span>
         } @else {
-            <div class="ngp-markdown" [innerHTML]="renderedHtml()"></div>
+            <div part="document-root">
+                <ng-container [ngTemplateOutlet]="blocks" [ngTemplateOutletContext]="{ $implicit: document().blocks }" />
+            </div>
         }
     `,
     styles: `
-        /* This component requires custom SCSS because it styles dynamically generated innerHTML from the markdown renderer.
-           Tailwind utility classes cannot be applied to runtime-generated HTML content. */
-
         :host {
-            // ----------------------------------------
-            // CSS Variable Definitions
-            // ----------------------------------------
-
-            // Spacing
-            --markdown-spacing: calc(var(--mosaik-layout-space) * 2);
-            --markdown-gap: var(--markdown-spacing);
-            --markdown-gap-small: calc(var(--markdown-spacing) / 2);
-            --markdown-gap-large: calc(var(--markdown-spacing) * 3);
-            --markdown-padding: var(--markdown-spacing);
-            --markdown-padding-sm: var(--markdown-gap-small);
-            --markdown-padding-md: var(--mosaik-spacing-md);
-            --markdown-padding-lg: var(--mosaik-spacing-lg);
-
-            // Radius and borders
-            --markdown-thickness: var(--mosaik-layout-thickness);
-            --markdown-radius: var(--mosaik-layout-radius);
-
-            // Typography
-            --markdown-font-body: var(--mosaik-typography-body1);
-            --markdown-font-mono: var(--mosaik-font-family);
-            --markdown-font-table: var(--mosaik-typography-body2-font-size);
-
-            --markdown-font-heading-1: var(--mosaik-typography-headline1);
-            --markdown-font-heading-2: var(--mosaik-typography-headline2);
-            --markdown-font-heading-3: var(--mosaik-typography-headline3);
-            --markdown-font-heading-4: var(--mosaik-typography-headline4);
-            --markdown-font-heading-5: var(--mosaik-typography-headline5);
-            --markdown-font-heading-6: var(--mosaik-typography-headline6);
-
-            // Colors
-            --markdown-color-text: var(--mosaik-scheme-foreground);
-            --markdown-color-link: var(--mosaik-color-primary-500);
-            --markdown-color-link-hover: var(--mosaik-color-primary-700);
-            --markdown-color-border: var(--mosaik-color-neutral-300);
-            --markdown-color-divider: var(--mosaik-scheme-middlelight);
-            --markdown-color-blockquote-bg: var(--mosaik-color-neutral-100);
-            --markdown-color-blockquote-border: var(--mosaik-color-primary-300);
-            --markdown-color-code-bg: var(--mosaik-color-neutral-100);
-            --markdown-color-marker: var(--mosaik-scheme-middlelight);
-
-            // ----------------------------------------
-            // Reset
-            // ----------------------------------------
-
-            h1,
-            h2,
-            h3,
-            h4,
-            h5,
-            h6,
-            p,
-            ul,
-            ol,
-            li,
-            blockquote,
-            pre,
-            code,
-            table,
-            th,
-            td,
-            img,
-            iframe {
-                all: unset;
-                display: revert;
-                box-sizing: border-box;
-            }
-
-            ul,
-            ol {
-                list-style-position: inside;
-            }
-
-            table {
-                border-collapse: collapse;
-                width: 100%;
-            }
-
-            th,
-            td {
-                box-sizing: border-box;
-            }
-
-            img {
-                max-width: 100%;
-                height: auto;
-                display: block;
-            }
-
-            // ----------------------------------------
-            // Base Layout
-            // ----------------------------------------
+            --ngp-markdown-color: var(--mosaik-scheme-foreground);
+            --ngp-markdown-muted-color: var(--mosaik-scheme-lowlight);
+            --ngp-markdown-link-color: var(--mosaik-color-primary-600);
+            --ngp-markdown-border-color: var(--mosaik-scheme-highlight);
+            --ngp-markdown-surface-color: var(--mosaik-scheme-background);
+            --ngp-markdown-accent-color: var(--mosaik-color-primary-400);
+            --ngp-markdown-radius: var(--mosaik-layout-radius);
+            --ngp-markdown-block-gap: calc(var(--mosaik-layout-space) * 3);
+            --ngp-markdown-inline-gap: var(--mosaik-layout-space);
+            --ngp-markdown-content-padding: calc(var(--mosaik-layout-space) * 3);
+            --ngp-markdown-body-font: var(--mosaik-typography-body1);
+            --ngp-markdown-heading-1-font: var(--mosaik-typography-headline2);
+            --ngp-markdown-heading-2-font: var(--mosaik-typography-headline3);
+            --ngp-markdown-heading-3-font: var(--mosaik-typography-headline4);
+            --ngp-markdown-heading-4-font: var(--mosaik-typography-headline5);
+            --ngp-markdown-heading-5-font: var(--mosaik-typography-headline6);
+            --ngp-markdown-heading-6-font: var(--mosaik-typography-body1);
 
             display: block;
+            min-width: 0;
+            color: var(--ngp-markdown-color);
+            font: var(--ngp-markdown-body-font);
+            overflow-wrap: anywhere;
+        }
+
+        :host([data-ngp-mode='inline']) {
+            display: inline;
+            width: auto;
+        }
+
+        :host([data-ngp-preset='chat']) {
+            --ngp-markdown-block-gap: calc(var(--mosaik-layout-space) * 2);
+            --ngp-markdown-content-padding: calc(var(--mosaik-layout-space) * 2);
+            --ngp-markdown-heading-1-font: var(--mosaik-typography-headline4);
+            --ngp-markdown-heading-2-font: var(--mosaik-typography-headline5);
+            --ngp-markdown-heading-3-font: var(--mosaik-typography-headline6);
+        }
+
+        :host([data-ngp-preset='compact']) {
+            --ngp-markdown-block-gap: var(--mosaik-layout-space);
+            --ngp-markdown-content-padding: calc(var(--mosaik-layout-space) * 2);
+            --ngp-markdown-body-font: var(--mosaik-typography-body2);
+            --ngp-markdown-heading-1-font: var(--mosaik-typography-headline5);
+            --ngp-markdown-heading-2-font: var(--mosaik-typography-headline6);
+            --ngp-markdown-heading-3-font: var(--mosaik-typography-body1);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        [part='document-root'] {
+            display: grid;
+            min-width: 0;
+            gap: var(--ngp-markdown-block-gap);
+        }
+
+        [part='inline-root'] {
+            white-space: normal;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        figure,
+        blockquote,
+        ul,
+        ol,
+        table {
+            margin: 0;
+        }
+
+        h1 {
+            font: var(--ngp-markdown-heading-1-font);
+        }
+
+        h2 {
+            font: var(--ngp-markdown-heading-2-font);
+        }
+
+        h3 {
+            font: var(--ngp-markdown-heading-3-font);
+        }
+
+        h4 {
+            font: var(--ngp-markdown-heading-4-font);
+        }
+
+        h5 {
+            font: var(--ngp-markdown-heading-5-font);
+        }
+
+        h6 {
+            font: var(--ngp-markdown-heading-6-font);
+            font-weight: var(--mosaik-typography-button-font-weight);
+        }
+
+        strong {
+            font-weight: var(--mosaik-typography-button-font-weight);
+        }
+
+        a {
+            color: var(--ngp-markdown-link-color);
+            text-decoration: underline;
+            text-underline-offset: 0.15em;
+        }
+
+        a:hover {
+            text-decoration-thickness: 0.12em;
+        }
+
+        code,
+        pre {
+            font-family: ui-monospace, 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+        }
+
+        [part='inline-code'] {
+            padding: 0.1em 0.35em;
+            border: var(--mosaik-layout-thickness) solid var(--ngp-markdown-border-color);
+            border-radius: calc(var(--ngp-markdown-radius) / 2);
+            background: var(--ngp-markdown-surface-color);
+            font-size: 0.9em;
+        }
+
+        [part='image'] {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--ngp-markdown-radius);
+        }
+
+        [part='thematic-break'] {
             width: 100%;
-            height: 100%;
-            font: var(--markdown-font-body);
-            color: var(--markdown-color-text);
+            margin: 0;
+            border: 0;
+            border-block-start: var(--mosaik-layout-thickness) solid var(--ngp-markdown-border-color);
+        }
 
-            // ----------------------------------------
-            // Headings
-            // ----------------------------------------
+        [part='code-block'] {
+            min-width: 0;
+            overflow: hidden;
+            border: var(--mosaik-layout-thickness) solid var(--ngp-markdown-border-color);
+            border-radius: var(--ngp-markdown-radius);
+            background: var(--ngp-markdown-surface-color);
+        }
 
-            .heading-1,
-            h1 {
-                font: var(--markdown-font-heading-1);
-            }
-            .heading-2,
-            h2 {
-                font: var(--markdown-font-heading-2);
-            }
-            .heading-3,
-            h3 {
-                font: var(--markdown-font-heading-3);
-            }
-            .heading-4,
-            h4 {
-                font: var(--markdown-font-heading-4);
-            }
-            .heading-5,
-            h5 {
-                font: var(--markdown-font-heading-5);
-            }
-            .heading-6,
-            h6 {
-                font: var(--markdown-font-heading-6);
-            }
+        [part='code-caption'] {
+            padding: var(--mosaik-layout-space) var(--ngp-markdown-content-padding);
+            border-block-end: var(--mosaik-layout-thickness) solid var(--ngp-markdown-border-color);
+            color: var(--ngp-markdown-muted-color);
+            font: var(--mosaik-typography-supporting);
+        }
 
-            .heading ~ .paragraph,
-            .heading ~ .code,
-            .paragraph ~ .code,
-            .code ~ .paragraph,
-            .paragraph ~ .heading {
-                margin-block-start: var(--markdown-gap);
-            }
+        pre {
+            max-width: 100%;
+            padding: var(--ngp-markdown-content-padding);
+            overflow: auto;
+            white-space: pre;
+        }
 
-            // ----------------------------------------
-            // Paragraph
-            // ----------------------------------------
+        [part='blockquote'],
+        [part='callout'] {
+            display: grid;
+            gap: var(--mosaik-layout-space);
+            padding: var(--ngp-markdown-content-padding);
+            border-inline-start: calc(var(--mosaik-layout-thickness) * 4) solid var(--ngp-markdown-accent-color);
+            border-radius: var(--ngp-markdown-radius);
+            background: var(--ngp-markdown-surface-color);
+        }
 
-            .paragraph,
-            p {
-                font: var(--markdown-font-body);
-                margin-block: var(--markdown-gap-small);
-            }
+        [data-variant='info'] {
+            --ngp-markdown-accent-color: var(--mosaik-color-info-500);
+        }
 
-            .strong {
-                font-weight: var(--mosaik-typography-button-font-weight);
-                display: inline;
-            }
+        [data-variant='warning'] {
+            --ngp-markdown-accent-color: var(--mosaik-color-warning-500);
+        }
 
-            .br {
-                display: block;
-                height: calc(var(--mosaik-layout-space) * 2);
-                content: '';
-            }
+        [data-variant='danger'],
+        [data-variant='error'] {
+            --ngp-markdown-accent-color: var(--mosaik-color-danger-500);
+        }
 
-            // ----------------------------------------
-            // Links
-            // ----------------------------------------
+        [data-variant='success'] {
+            --ngp-markdown-accent-color: var(--mosaik-color-success-500);
+        }
 
-            .link,
-            a {
-                color: var(--markdown-color-link);
-                text-decoration: underline;
-                transition: color var(--mosaik-duration-short) ease;
+        ul,
+        ol {
+            display: grid;
+            gap: var(--ngp-markdown-inline-gap);
+            padding-inline-start: calc(var(--ngp-markdown-content-padding) * 1.5);
+        }
 
-                &:hover {
-                    color: var(--markdown-color-link-hover);
-                }
-            }
+        li > p {
+            display: inline;
+        }
 
-            mosaik-anchor {
-                display: inline-block;
-            }
+        [part='task-checkbox'] {
+            margin: 0 var(--mosaik-layout-space) 0 0;
+            accent-color: var(--ngp-markdown-link-color);
+        }
 
-            // ----------------------------------------
-            // Images & Embeds
-            // ----------------------------------------
+        [part='table-scroller'] {
+            max-width: 100%;
+            overflow-x: auto;
+            border: var(--mosaik-layout-thickness) solid var(--ngp-markdown-border-color);
+            border-radius: var(--ngp-markdown-radius);
+        }
 
-            .image,
-            img {
-                display: block;
-                max-width: 100%;
-                margin-block: var(--markdown-gap);
-                border-radius: var(--markdown-radius);
-            }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-            iframe {
-                width: 100%;
-            }
+        th,
+        td {
+            padding: calc(var(--mosaik-layout-space) * 2) var(--ngp-markdown-content-padding);
+            border-block-end: var(--mosaik-layout-thickness) solid var(--ngp-markdown-border-color);
+            vertical-align: top;
+        }
 
-            // ----------------------------------------
-            // Blockquote
-            // ----------------------------------------
+        th {
+            background: var(--ngp-markdown-surface-color);
+            font-weight: var(--mosaik-typography-button-font-weight);
+            text-align: left;
+        }
 
-            .blockquote,
-            div:has(> blockquote) {
-                background-color: var(--markdown-color-blockquote-bg);
-                margin: var(--markdown-gap-small) auto;
-                padding: var(--markdown-padding);
-                border-radius: var(--markdown-radius);
-                border-left: calc(var(--mosaik-layout-thickness) * 4) solid var(--markdown-color-blockquote-border);
-                color: var(--markdown-color-text);
-            }
+        tbody tr:last-child td {
+            border-block-end: 0;
+        }
 
-            blockquote p::before {
-                content: '\\201C';
-            }
+        [part='details'],
+        [part='tab'] {
+            border: var(--mosaik-layout-thickness) solid var(--ngp-markdown-border-color);
+            border-radius: var(--ngp-markdown-radius);
+        }
 
-            blockquote p::after {
-                content: '\\201D';
-            }
+        [part='details-summary'],
+        [part='tab-title'] {
+            padding: calc(var(--mosaik-layout-space) * 2) var(--ngp-markdown-content-padding);
+            cursor: pointer;
+            font-weight: var(--mosaik-typography-button-font-weight);
+        }
 
-            blockquote + p {
-                text-align: right;
-            }
+        [part='details-content'],
+        [part='tab-content'] {
+            display: grid;
+            gap: var(--ngp-markdown-block-gap);
+            padding: 0 var(--ngp-markdown-content-padding) var(--ngp-markdown-content-padding);
+        }
 
-            // ----------------------------------------
-            // Code
-            // ----------------------------------------
+        [part='card'],
+        [part='split'] {
+            display: grid;
+            gap: calc(var(--mosaik-layout-space) * 2);
+            min-width: 0;
+            padding: var(--ngp-markdown-content-padding);
+            border: var(--mosaik-layout-thickness) solid var(--ngp-markdown-border-color);
+            border-radius: var(--ngp-markdown-radius);
+        }
 
-            .code {
-                font-family: var(--markdown-font-mono);
-                background: var(--markdown-color-code-bg);
-                padding: var(--markdown-padding-md);
-                border-radius: var(--markdown-radius);
-                font-size: var(--mosaik-typography-body2-font-size);
-                overflow-x: auto;
-            }
+        [part='card-header'] {
+            display: grid;
+            gap: var(--mosaik-layout-space);
+        }
 
-            .codespan {
-                font-family: var(--markdown-font-mono);
-                background: var(--markdown-color-code-bg);
-                padding: 0.2em 0.4em;
-                border-radius: var(--markdown-radius);
-                font-size: var(--mosaik-typography-body2-font-size);
-                display: inline;
-            }
+        [part='card-subtitle'] {
+            color: var(--ngp-markdown-muted-color);
+        }
 
-            // ----------------------------------------
-            // Divider
-            // ----------------------------------------
+        [part='button'] {
+            display: inline-flex;
+            width: fit-content;
+            padding: calc(var(--mosaik-layout-space) * 2) var(--ngp-markdown-content-padding);
+            border: var(--mosaik-layout-thickness) solid var(--ngp-markdown-link-color);
+            border-radius: var(--ngp-markdown-radius);
+            background: var(--ngp-markdown-link-color);
+            color: var(--mosaik-color-neutral-0);
+            font-weight: var(--mosaik-typography-button-font-weight);
+            text-decoration: none;
+        }
 
-            .divider,
-            mosaik-divider {
-                margin-block: var(--markdown-gap-large);
-            }
+        [part='button'][data-appearance='soft'] {
+            background: var(--ngp-markdown-surface-color);
+            color: var(--ngp-markdown-link-color);
+        }
 
-            .divider {
-                display: flex;
-                justify-content: center;
-                gap: var(--markdown-gap-small);
+        [part='button'][data-appearance='plain'] {
+            border-color: transparent;
+            background: transparent;
+            color: var(--ngp-markdown-link-color);
+        }
 
-                span {
-                    display: inline-block;
-                    border-radius: var(--mosaik-layout-radius);
-                    width: calc(var(--mosaik-layout-thickness) * 3);
-                    height: calc(var(--mosaik-layout-thickness) * 3);
-                    background-color: var(--markdown-color-divider);
-                }
-            }
+        [part='splits'] {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+            gap: var(--ngp-markdown-block-gap);
+        }
 
-            // ----------------------------------------
-            // Checkbox
-            // ----------------------------------------
+        [part='steps'] {
+            list-style: none;
+            counter-reset: markdown-step;
+            padding-inline-start: 0;
+        }
 
-            .checkbox {
-                margin-right: var(--markdown-gap-small);
-                vertical-align: middle;
-            }
+        [part='step'] {
+            counter-increment: markdown-step;
+            position: relative;
+            display: grid;
+            gap: var(--mosaik-layout-space);
+            padding-inline-start: calc(var(--ngp-markdown-content-padding) * 2);
+        }
 
-            // ----------------------------------------
-            // Table
-            // ----------------------------------------
+        [part='step']::before {
+            content: counter(markdown-step);
+            position: absolute;
+            inset-inline-start: 0;
+            display: grid;
+            width: calc(var(--ngp-markdown-content-padding) * 1.4);
+            aspect-ratio: 1;
+            place-items: center;
+            border-radius: 50%;
+            background: var(--ngp-markdown-link-color);
+            color: var(--mosaik-color-neutral-0);
+        }
 
-            .table {
-                width: 100%;
-                border-collapse: collapse;
-                margin-block: var(--markdown-gap);
-                font-size: var(--markdown-font-table);
-            }
-
-            .table-row {
-                border-bottom: var(--mosaik-layout-thickness) solid var(--markdown-color-border);
-            }
-
-            .table-cell {
-                padding: var(--markdown-padding-sm) var(--markdown-padding);
-                text-align: left;
-            }
-
-            // ----------------------------------------
-            // Lists
-            // ----------------------------------------
-
-            ul,
-            ol {
-                padding-left: var(--markdown-padding-lg);
-                margin-block: var(--markdown-gap-small);
-
-                li {
-                    margin-bottom: var(--markdown-gap-small);
-                    line-height: var(--mosaik-typography-body1-line-height);
-                    padding-left: var(--markdown-padding-sm);
-
-                    &::marker {
-                        color: var(--markdown-color-marker);
-                    }
-                }
-
-                ul li {
-                    list-style-type: circle;
-                }
-
-                ol li {
-                    list-style-type: lower-alpha;
-                }
-            }
-
-            ul li {
-                list-style-type: disc;
-            }
-
-            ol li {
-                list-style-type: decimal;
-            }
+        [part='tabs'] {
+            display: grid;
+            gap: var(--mosaik-layout-space);
         }
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.ShadowDom,
-    imports: [TextComponent, TypographyDirective],
+    imports: [NgTemplateOutlet],
+    host: {
+        '[attr.data-ngp-mode]': 'mode()',
+        '[attr.data-ngp-preset]': 'preset()',
+        '[attr.data-ngp-markdown-fallback]': 'document().fallback ? "" : null',
+    },
 })
 export class MarkdownComponent {
     // #region Fields
 
-    private readonly _sanitizer: DomSanitizer = inject(DomSanitizer);
-    private readonly _renderer: MarkdownRenderer;
+    private readonly _parser = new MarkdownParser();
 
     // #endregion
 
     // #region Ctor
 
-    public constructor() {
-        this._renderer = createMarkedRenderer();
-
-        const blockquoteProcessor = new BlockquoteProcessor();
-        const codeBlockProcessor = new CodeBlockProcessor();
-
-        marked.use({
-            renderer: this._renderer,
-            walkTokens: (token): void => {
-                blockquoteProcessor.walkTokens(token);
-                codeBlockProcessor.walkTokens(token);
-            },
-            extensions: [
-                {
-                    ...new SplitProcessor().extension,
-                    renderer(
-                        this: {
-                            parser: {
-                                parse(tokens: Tokens.Generic[]): string;
-                                parseInline(tokens: Tokens.Generic[]): string;
-                            };
-                        },
-                        _token: Tokens.Generic,
-                    ): string {
-                        const token = _token as ISplitsToken;
-
-                        return `
-                        <mosaik-stack orientation="horizontal" gap="small">
-                            ${token.splits
-                                .map(
-                                    (split) => `
-                            <mosaik-box fit="both" inset="all" highlighted="true" cornered="true">
-                                <h6>${this.parser.parseInline(split.title)}</h6>
-                                ${this.parser.parse(split.tokens ?? [])}
-                            </mosaik-box>
-                            `,
-                                )
-                                .join('')}
-                        </mosaik-stack>
-                        `.trim();
-                    },
-                },
-                {
-                    ...new CalloutProcessor().extension,
-                    renderer(this: { parser: { parse(tokens: Tokens.Generic[]): string } }, _token: Tokens.Generic): string {
-                        const token = _token as ICalloutToken;
-
-                        return `
-                        <mosaik-banner appearance="soft" variant="${token.variant}" header="${token.title}">
-                            <div slot="subHeader">${this.parser.parse(token.tokens ?? [])}</div>
-                        </mosaik-banner>
-                        `.trim();
-                    },
-                },
-                {
-                    ...new BlockquoteProcessor().extension,
-                    renderer: (_token): string => {
-                        const token = _token as IBlockquoteToken;
-                        const variant = token.variant ?? 'neutral';
-                        const header = variant !== 'neutral' ? variant.charAt(0).toUpperCase() + variant.slice(1) : '';
-                        const content = token.content ?? token.text ?? '';
-
-                        return `<mosaik-message appearance="soft" variant="${variant}"${header ? ` header="${header}"` : ''}><mosaik-text slot="content" formatter="markdown" text="${content}" wrap="true"></mosaik-text></mosaik-message>`;
-                    },
-                },
-                {
-                    ...new CodeBlockProcessor().extension,
-                    renderer: (_token): string => {
-                        const token = _token as ICodeBlockToken;
-                        const lang = token.meta?.lang ?? token.lang ?? '';
-
-                        if (lang === 'mermaid') {
-                            return `<div class="code diagram mermaid">${token.text}</div>`;
-                        }
-
-                        return `<mosaik-code-editor class="code" text="${token.text}" language="${lang}" theme="boysandgirls" copyable></mosaik-code-editor>`;
-                    },
-                },
-                {
-                    ...new TabProcessor().extension,
-                    renderer(this: { parser: { parse(tokens: Tokens.Generic[]): string } }, _token: Tokens.Generic): string {
-                        const token = _token as ITabsToken;
-
-                        return `
-                        <mosaik-tab appearance="soft">
-                            ${token.tabs
-                                .map(
-                                    (tab) => `
-                            <mosaik-tab-item label="${tab.title}" variant="${tab.variant}" id="${tab.id}">
-                                ${this.parser.parse(tab.tokens ?? [])}
-                            </mosaik-tab-item>
-                            `,
-                                )
-                                .join('')}
-                        </mosaik-tab>
-                        `.trim();
-                    },
-                },
-                {
-                    ...new StepsProcessor().extension,
-                    renderer(this: { parser: { parse(tokens: Tokens.Generic[]): string } }, _token: Tokens.Generic): string {
-                        const token = _token as IStepsToken;
-
-                        return `
-                        <mosaik-stepper orientation="vertical">
-                            ${token.steps
-                                .map(
-                                    (step) => `
-                            <mosaik-stepper-item header="${step.title}" state="completed" id="${step.id}">
-                                ${this.parser.parse(step.tokens ?? [])}
-                            </mosaik-stepper-item>
-                            `,
-                                )
-                                .join('')}
-                        </mosaik-stepper>
-                        `.trim();
-                    },
-                },
-                {
-                    ...new DetailsProcessor().extension,
-                    renderer(this: { parser: { parse(tokens: Tokens.Generic[]): string } }, _token: Tokens.Generic): string {
-                        const token = _token as IDetailsToken;
-
-                        return `<mosaik-expander header="${token.title}" appearance="soft">${this.parser.parse(token.tokens ?? [])}</mosaik-expander>`;
-                    },
-                },
-                {
-                    ...new ButtonProcessor().extension,
-                    renderer: (_token): string => {
-                        const token = _token as IButtonToken;
-
-                        return `<mosaik-button label="${token.label}" href="${token.href}" variant="${token.variant}" appearance="${token.appearance}"></mosaik-button>`;
-                    },
-                },
-                {
-                    ...new CardProcessor().extension,
-                    renderer(this: { parser: { parse(tokens: Tokens.Generic[]): string } }, _token: Tokens.Generic): string {
-                        const token = _token as ICardToken;
-
-                        return `<mosaik-box fit="auto" inset="all" highlighted="true" cornered="true"><h6>${token.header}</h6>${token.subHeader ? `<small>${token.subHeader}</small>` : ''}${this.parser.parse(token.tokens ?? [])}</mosaik-box>`;
-                    },
-                },
-            ],
-        });
-    }
-
     // #endregion
 
     // #region Properties
 
-    /**
-     * The markdown text to render.
-     *
-     * @public
-     */
-    public text = input<string>('');
+    /** Markdown source to render. */
+    public readonly text = input<string>('');
 
-    /**
-     * Whether to enable line breaks in the markdown output.
-     *
-     * @public
-     */
-    public breaks = input<boolean>(false);
+    /** Whether single line breaks become explicit line breaks. */
+    public readonly breaks = input<boolean>(false);
 
-    /**
-     * Whether to render standard Markdown through Mosaik's safe text formatter.
-     *
-     * @public
-     */
-    public sanitize = input<boolean>(false);
+    /** Renders only standard Markdown, without custom block extensions. */
+    public readonly sanitize = input(false);
 
-    /**
-     * Markdown source with raw HTML escaped before Mosaik formats the supported Markdown syntax.
-     *
-     * @public
-     */
-    public safeMarkdownText = computed<string>(() =>
-        this.text().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'),
-    );
+    /** Escaped source for consumers that need a text-only binding. */
+    public readonly safeMarkdownText = computed(() => escapeMarkdownText(this.text()));
 
-    /**
-     * The rendered HTML output as a safe HTML binding.
-     *
-     * @public
-     */
-    public renderedHtml = computed<SafeHtml | string>(() => {
-        const text = this.text();
-        if (!text) {
-            return '';
-        }
+    /** Standard HTML representation for consumers that need HTML instead of the component DOM. */
+    public readonly renderedHtml = computed(() => renderPlainMarkdown(this.text(), this.breaks()));
 
-        const rawHtml = marked(text, {
-            breaks: this.breaks(),
-            gfm: true,
-        }) as string;
+    /** Selects complete document rendering or inline-only rendering. */
+    public readonly mode = input<'document' | 'inline'>('document');
 
-        return this._sanitizer.bypassSecurityTrustHtml(rawHtml);
-    });
+    /** Selects the density and typography preset. */
+    public readonly preset = input<'article' | 'chat' | 'compact'>('article');
+
+    /** Optionally maps safe Markdown destinations to application routes. */
+    public readonly linkResolver = input<((href: string) => string | null) | null>(null);
+
+    /** Safe normalized representation of the current Markdown source. */
+    protected readonly document = computed<IMarkdownDocument>(() => this._parser.parse(this.text(), this.breaks(), this.sanitize()));
+
+    protected resolveLink(href: string): string | null {
+        return this.linkResolver()?.(href) ?? (this.linkResolver() ? null : href);
+    }
+
+    // #endregion
+
+    // #region Methods
 
     // #endregion
 }

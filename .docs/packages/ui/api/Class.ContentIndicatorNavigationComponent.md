@@ -29,7 +29,7 @@ new ContentIndicatorNavigationComponent(): ContentIndicatorNavigationComponent;
 protected readonly activeIndex: Signal<number>;
 ```
 
-Defined in: [libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts:115](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts#L115)
+Defined in: [libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts:118](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts#L118)
 
 Zero-based indicator position of the destination represented by the viewport.
 
@@ -41,7 +41,7 @@ Zero-based indicator position of the destination represented by the viewport.
 protected readonly contentNavigation: ContentNavigationContext;
 ```
 
-Defined in: [libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts:99](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts#L99)
+Defined in: [libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts:102](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts#L102)
 
 Content navigation state shared with the registered destinations.
 
@@ -53,7 +53,7 @@ Content navigation state shared with the registered destinations.
 protected readonly items: Signal<readonly IContentNavigationItem[]>;
 ```
 
-Defined in: [libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts:107](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts#L107)
+Defined in: [libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts:110](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts#L110)
 
 Registered destinations in their deterministic display order.
 
@@ -65,7 +65,7 @@ Registered destinations in their deterministic display order.
 readonly itemTestIdPrefix: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts:91](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts#L91)
+Defined in: [libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts:94](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts#L94)
 
 Optional domain-specific prefix for interactive destination test identifiers.
 
@@ -77,7 +77,7 @@ Optional domain-specific prefix for interactive destination test identifiers.
 readonly label: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts:75](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts#L75)
+Defined in: [libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts:78](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts#L78)
 
 Accessible name of the section navigation.
 
@@ -89,7 +89,7 @@ Accessible name of the section navigation.
 readonly orientation: InputSignal<"horizontal" | "vertical">;
 ```
 
-Defined in: [libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts:83](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts#L83)
+Defined in: [libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts:86](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts#L86)
 
 Direction in which registered destinations are displayed.
 
@@ -101,7 +101,7 @@ Direction in which registered destinations are displayed.
 protected navigate(id): void;
 ```
 
-Defined in: [libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts:139](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts#L139)
+Defined in: [libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts:142](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts#L142)
 
 Navigates to a registered destination through its owning anchor.
 
@@ -123,7 +123,7 @@ Navigates to a registered destination through its owning anchor.
 protected resolveItemTestId(item): string | null;
 ```
 
-Defined in: [libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts:150](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts#L150)
+Defined in: [libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts:158](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts#L158)
 
 Resolves a consumer-owned automation identifier for one destination.
 
@@ -138,3 +138,25 @@ Resolves a consumer-owned automation identifier for one destination.
 `string` \| `null`
 
 Stable test identifier or `null` when no prefix was supplied.
+
+***
+
+### tooltipTriggerId()
+
+```ts
+protected tooltipTriggerId(index): string;
+```
+
+Defined in: [libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts:147](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/content-navigation/ContentIndicatorNavigationComponent.ts#L147)
+
+Returns the ID that pairs a tooltip with its trigger button.
+
+#### Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `index` | `number` |
+
+#### Returns
+
+`string`

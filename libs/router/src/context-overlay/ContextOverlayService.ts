@@ -3,7 +3,21 @@
 import { Location } from '@angular/common';
 import { DestroyRef, ErrorHandler, inject, Injectable } from '@angular/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationSkipped, NavigationStart, Router } from '@angular/router';
-import { defaultIfEmpty, defer, EMPTY, finalize, firstValueFrom, from, fromEvent, type Observable, Subject, type Subscription, take, takeUntil } from 'rxjs';
+import {
+    defaultIfEmpty,
+    defer,
+    EMPTY,
+    finalize,
+    firstValueFrom,
+    from,
+    fromEvent,
+    map,
+    type Observable,
+    Subject,
+    type Subscription,
+    take,
+    takeUntil,
+} from 'rxjs';
 import { CONTEXT_OVERLAY_OPTIONS } from './CONTEXT_OVERLAY_OPTIONS';
 import { CONTEXT_OVERLAY_TARGETS } from './CONTEXT_OVERLAY_TARGETS';
 import type { ContextOverlayLoader } from './ContextOverlayLoader';
@@ -107,6 +121,11 @@ export class ContextOverlayService {
 
     // #region Properties
 
+    /** Emits the address of each overlay closed by its surface, for callers that only need to refresh related data. */
+    public get closed(): Observable<IContextOverlayState> {
+        return this.closedOutcome.pipe(map(({ state }) => state));
+    }
+
     /** Emits interactive close outcomes. URL-driven closes and disposal are silent. */
     public get closedOutcome(): Observable<IContextOverlayOutcome> {
         return this._closedOutcome.asObservable();
@@ -115,6 +134,15 @@ export class ContextOverlayService {
     // #endregion
 
     // #region Methods
+
+    /**
+     * Checks whether a feature registered an overlay key, regardless of access to a particular address.
+     * @param key Semantic target key.
+     * @returns Whether the key belongs to the overlay registry.
+     */
+    public hasTarget(key: string): boolean {
+        return this._registry.resolve(key) !== undefined;
+    }
 
     /**
      * Opens a registered overlay above the current page and appends one browser history entry.

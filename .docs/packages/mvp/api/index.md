@@ -12,6 +12,7 @@ editUrl: false
 | [CommandDirective](Class.CommandDirective) | Binds commands to the events of the host element. |
 | [SignalSubject](Class.SignalSubject) | Holds its latest value as an Angular signal and synchronously notifies subscribers. |
 | [View](Class.View) | Base class for the View half of the Model-View-Presenter triad. Components extend it and provide their concrete presenter through [VIEW\_PRESENTER](Variable.VIEW_PRESENTER), usually with `provideViewPresenter()`. |
+| [ViewItemActionRegistry](Class.ViewItemActionRegistry) | Resolves the actions contributed by enabled frontend features. |
 | [ViewMentionRegistry](Class.ViewMentionRegistry) | Tracks active presenter contributions and selects mentions for the current Angular route. |
 | [ViewPresenter](Class.ViewPresenter) | Signal-based presentation state owned by a [View](Class.View). |
 
@@ -32,6 +33,10 @@ editUrl: false
 | [ITrackable](Interface.ITrackable) | Commands and gates of a presenter whose model has undo and redo history. |
 | [ITrackableSignal](Interface.ITrackableSignal) | A writable signal with a bounded history and undo/redo operations. |
 | [IView](Interface.IView) | Contract of the View half of the Model-View-Presenter triad: it exposes exactly one presenter to its template and owns that presenter's lifecycle. |
+| [IViewItemAction](Interface.IViewItemAction) | A feature-owned action for an item supplied by the current view. |
+| [IViewItemActionable](Interface.IViewItemActionable) | Presenter-facing contract for registered contextual item actions. |
+| [IViewItemActionChoice](Interface.IViewItemActionChoice) | One dynamically supplied choice of a contextual item action. |
+| [IViewItemActionSelection](Interface.IViewItemActionSelection) | Identifies the current view item and its selected contextual action. |
 | [IViewMentionOption](Interface.IViewMentionOption) | One identity-bearing resource currently offered by an active view. |
 | [IViewMentionSource](Interface.IViewMentionSource) | Supplies an active view's loaded resources without fetching new suggestion data. |
 | [IViewPresenter](Interface.IViewPresenter) | Lifecycle and loading contract every presenter of the Model-View-Presenter triad fulfils. A [View](Class.View) drives `initialize()` and `dispose()`; the signals let the template react without knowing which concrete presenter is bound. |
@@ -62,6 +67,7 @@ editUrl: false
 | Variable | Description |
 | ------ | ------ |
 | [DEFAULT\_PAGE\_SIZE](Variable.DEFAULT_PAGE_SIZE) | Number of items a [Pageable](Function.Pageable) presenter requests per page unless the composition overrides it. |
+| [VIEW\_ITEM\_ACTIONS](Variable.VIEW_ITEM_ACTIONS) | Multi-provider token for independent, feature-owned contextual item actions. |
 | [VIEW\_PRESENTER](Variable.VIEW_PRESENTER) | Token a [View](Class.View) resolves its presenter through. Views provide the concrete presenter in component-level DI, typically via [provideViewPresenter](Function.provideViewPresenter). |
 
 ## Functions
@@ -86,4 +92,5 @@ editUrl: false
 | [trackableSignal](Function.trackableSignal) | Tracks writes to an existing signal or a new signal created from an initial value. |
 | [useController](Function.useController) | Creates a controller instance and binds it automatically to the current component instance lifecycle. |
 | [usePresenterController](Function.usePresenterController) | Creates a presenter controller and binds it to the lifetime of the presenter that creates it. |
+| [ViewItemActionable](Function.ViewItemActionable) | Adds only generic, registry-backed item actions to a mentionable presenter. |
 | [withUndoRedo](Function.withUndoRedo) | Creates a tracked model and connects its history to the presenter's commands and gates. |

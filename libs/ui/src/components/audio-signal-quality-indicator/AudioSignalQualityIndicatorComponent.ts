@@ -1,9 +1,20 @@
 // #region Imports
 
-import { ChangeDetectionStrategy, Component, computed, input, type InputSignal, type Signal } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, input, PLATFORM_ID, signal, type InputSignal, type Signal } from '@angular/core';
 import type { AudioSignalQuality } from './AudioSignalQuality';
 
 // #endregion
+
+interface IQualitySample {
+    readonly at: number;
+    readonly description: string | null;
+    readonly label: string;
+    readonly quality: AudioSignalQuality;
+}
+
+const SAMPLE_INTERVAL_MS = 100;
+const MAXIMUM_SETTLE_TIME_MS = 30_000;
 
 /**
  * Displays an accessible, business-agnostic audio signal quality state.
@@ -15,7 +26,7 @@ import type { AudioSignalQuality } from './AudioSignalQuality';
     selector: 'ngp-audio-signal-quality-indicator',
     imports: [],
     template: `
-        <div part="root" class="indicator" role="status" aria-live="polite" aria-atomic="true" [attr.data-quality]="quality()">
+        <div part="root" class="indicator" role="status" aria-live="polite" aria-atomic="true" [attr.data-quality]="displayedQuality()">
             @if (showMeter()) {
                 <span part="meter" class="meter" aria-hidden="true">
                     @for (bar of bars; track bar) {
@@ -25,9 +36,9 @@ import type { AudioSignalQuality } from './AudioSignalQuality';
             }
 
             <span part="copy" class="copy">
-                <span part="label" class="label">{{ label() }}</span>
-                @if (description()) {
-                    <span part="description" class="description">{{ description() }}</span>
+                <span part="label" class="label">{{ displayedLabel() }}</span>
+                @if (displayedDescription(); as description) {
+                    <span part="description" class="description">{{ description }}</span>
                 }
             </span>
         </div>
@@ -154,6 +165,8 @@ import type { AudioSignalQuality } from './AudioSignalQuality';
 export class AudioSignalQualityIndicatorComponent {
     // #region Fields
 
+    private readonly _settled = signal<IQualitySample | null>(null);
+
     /**
      * Stable bar identifiers used by the signal-strength meter.
      *
@@ -161,6 +174,33 @@ export class AudioSignalQualityIndicatorComponent {
      * @readonly
      */
     protected readonly bars: ReadonlyArray<number> = [1, 2, 3, 4];
+
+    // #endregion
+
+    // #region Ctor
+
+    /** Starts bounded sampling when the caller opts into a settled display. */
+    public constructor() {
+        if (isPlatformBrowser(inject(PLATFORM_ID))) {
+            effect((onCleanup) => {
+                const duration = this.settleTime();
+                this._settled.set(null);
+
+                if (!Number.isFinite(duration) || duration <= 0) {
+                    return;
+                }
+
+                const windowMs = Math.min(MAXIMUM_SETTLE_TIME_MS, Math.max(SAMPLE_INTERVAL_MS, duration));
+                const samples: IQualitySample[] = [];
+                let lastRefresh = -Infinity;
+                const timer = globalThis.setInterval(() => {
+                    lastRefresh = this.sampleQuality(samples, windowMs, lastRefresh);
+                }, SAMPLE_INTERVAL_MS);
+
+                onCleanup(() => globalThis.clearInterval(timer));
+            });
+        }
+    }
 
     // #endregion
 
@@ -173,6 +213,9 @@ export class AudioSignalQualityIndicatorComponent {
      * @readonly
      */
     public readonly description: InputSignal<null | string> = input<null | string>(null);
+
+    /** Whether to display the description alongside the quality label. */
+    public readonly descriptionVisible = input(true);
 
     /**
      * Human-readable, localized label for the current quality state.
@@ -190,6 +233,9 @@ export class AudioSignalQualityIndicatorComponent {
      */
     public readonly quality: InputSignal<AudioSignalQuality> = input<AudioSignalQuality>('unknown');
 
+    /** Sampling window in milliseconds, capped at 30 seconds. Zero displays values immediately. */
+    public readonly settleTime = input(0);
+
     /**
      * Indicates whether the four-bar signal meter is rendered.
      *
@@ -198,6 +244,14 @@ export class AudioSignalQualityIndicatorComponent {
      */
     public readonly showMeter: InputSignal<boolean> = input<boolean>(true);
 
+    protected readonly displayedQuality = computed(() => this._settled()?.quality ?? this.quality());
+    protected readonly displayedLabel = computed(() => this._settled()?.label ?? this.label());
+    protected readonly displayedDescription = computed(() => {
+        const settled = this._settled();
+
+        return this.descriptionVisible() ? (settled ? settled.description : this.description()) : null;
+    });
+
     /**
      * Number of active meter bars derived from the current quality.
      *
@@ -205,7 +259,7 @@ export class AudioSignalQualityIndicatorComponent {
      * @readonly
      */
     protected readonly activeBarCount: Signal<number> = computed(() => {
-        switch (this.quality()) {
+        switch (this.displayedQuality()) {
             case 'clipping':
             case 'good':
                 return 4;
@@ -219,6 +273,49 @@ export class AudioSignalQualityIndicatorComponent {
                 return 0;
         }
     });
+
+    // #endregion
+
+    // #region Methods
+
+    private sampleQuality(samples: IQualitySample[], windowMs: number, lastRefresh: number): number {
+        const now = Date.now();
+        const capacity = Math.ceil(windowMs / SAMPLE_INTERVAL_MS);
+
+        while (samples.length >= capacity || (samples[0] && samples[0].at <= now - windowMs)) {
+            samples.shift();
+        }
+
+        samples.push({ at: now, description: this.description(), label: this.label(), quality: this.quality() });
+
+        if (now >= lastRefresh && now - lastRefresh < windowMs / 2) {
+            return lastRefresh;
+        }
+
+        const counts = new Map<AudioSignalQuality, number>();
+        for (const sample of samples) {
+            counts.set(sample.quality, (counts.get(sample.quality) ?? 0) + 1);
+        }
+
+        let dominant = this._settled()?.quality;
+        let highest = dominant === undefined ? 0 : (counts.get(dominant) ?? 0);
+        for (const [quality, count] of counts) {
+            if (count > highest) {
+                dominant = quality;
+                highest = count;
+            }
+        }
+
+        for (let index = samples.length - 1; index >= 0; index--) {
+            const sample = samples[index];
+            if (sample && sample.quality === dominant) {
+                this._settled.set(sample);
+                break;
+            }
+        }
+
+        return now;
+    }
 
     // #endregion
 }

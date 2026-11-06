@@ -38,7 +38,7 @@ Constructs a new instance of the `SearchSession` class.
 get activeItemId(): Signal<string | null>;
 ```
 
-Defined in: [search/services/SearchSession.ts:117](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L117)
+Defined in: [search/services/SearchSession.ts:119](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L119)
 
 Id of the active item, or `null` while nothing is selectable.
 
@@ -56,7 +56,7 @@ Id of the active item, or `null` while nothing is selectable.
 get delay(): number;
 ```
 
-Defined in: [search/services/SearchSession.ts:158](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L158)
+Defined in: [search/services/SearchSession.ts:160](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L160)
 
 The configured input debounce in milliseconds.
 
@@ -74,7 +74,7 @@ The configured input debounce in milliseconds.
 get error(): Signal<unknown>;
 ```
 
-Defined in: [search/services/SearchSession.ts:148](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L148)
+Defined in: [search/services/SearchSession.ts:150](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L150)
 
 The error of the last query, or `null` when it succeeded.
 
@@ -92,7 +92,7 @@ The error of the last query, or `null` when it succeeded.
 get hasSearched(): Signal<boolean>;
 ```
 
-Defined in: [search/services/SearchSession.ts:128](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L128)
+Defined in: [search/services/SearchSession.ts:130](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L130)
 
 Indicates whether a non-empty query has been answered. Surfaces use it to tell "no results"
 from "nothing typed yet".
@@ -111,7 +111,7 @@ from "nothing typed yet".
 get isLoading(): Signal<boolean>;
 ```
 
-Defined in: [search/services/SearchSession.ts:138](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L138)
+Defined in: [search/services/SearchSession.ts:140](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L140)
 
 Indicates whether a query is in flight.
 
@@ -131,7 +131,7 @@ get items(): Signal<readonly (
 | ISearchResult<unknown>)[]>;
 ```
 
-Defined in: [search/services/SearchSession.ts:107](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L107)
+Defined in: [search/services/SearchSession.ts:109](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L109)
 
 The selectable items of all sections in display order — the keyboard navigation order.
 
@@ -151,7 +151,7 @@ The selectable items of all sections in display order — the keyboard navigatio
 get query(): Signal<string>;
 ```
 
-Defined in: [search/services/SearchSession.ts:87](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L87)
+Defined in: [search/services/SearchSession.ts:89](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L89)
 
 The current, trimmed query.
 
@@ -169,7 +169,7 @@ The current, trimmed query.
 get sections(): Signal<readonly ISearchSection[]>;
 ```
 
-Defined in: [search/services/SearchSession.ts:97](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L97)
+Defined in: [search/services/SearchSession.ts:99](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L99)
 
 The sections to render, commands first and one section per result group.
 
@@ -185,9 +185,9 @@ The sections to render, commands first and one section per result group.
 clear(): void;
 ```
 
-Defined in: [search/services/SearchSession.ts:269](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L269)
+Defined in: [search/services/SearchSession.ts:276](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L276)
 
-Clears the query and returns to suggestion mode. A query in flight is discarded.
+Clears the query and returns to suggestion mode. A query in flight is cancelled.
 
 #### Returns
 
@@ -201,7 +201,7 @@ Clears the query and returns to suggestion mode. A query in flight is discarded.
 initialize(): Promise<void>;
 ```
 
-Defined in: [search/services/SearchSession.ts:172](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L172)
+Defined in: [search/services/SearchSession.ts:174](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L174)
 
 Loads the command catalogue shown before the user types. Repeated calls are ignored, so a
 surface may call it on every open.
@@ -218,7 +218,7 @@ surface may call it on every open.
 moveNext(): void;
 ```
 
-Defined in: [search/services/SearchSession.ts:285](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L285)
+Defined in: [search/services/SearchSession.ts:288](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L288)
 
 Moves the selection to the next item and wraps around at the end.
 
@@ -234,7 +234,7 @@ Moves the selection to the next item and wraps around at the end.
 movePrevious(): void;
 ```
 
-Defined in: [search/services/SearchSession.ts:302](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L302)
+Defined in: [search/services/SearchSession.ts:305](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L305)
 
 Moves the selection to the previous item and wraps around at the start.
 
@@ -250,7 +250,7 @@ Moves the selection to the previous item and wraps around at the start.
 refreshResults(): Promise<void>;
 ```
 
-Defined in: [search/services/SearchSession.ts:243](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L243)
+Defined in: [search/services/SearchSession.ts:246](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L246)
 
 Re-runs the current query, for example after the provider filter changed. Does nothing while
 the session is in suggestion mode.
@@ -267,7 +267,7 @@ the session is in suggestion mode.
 select(item): Promise<void>;
 ```
 
-Defined in: [search/services/SearchSession.ts:335](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L335)
+Defined in: [search/services/SearchSession.ts:338](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L338)
 
 Selects an explicit item: commands execute, results are handed to their provider.
 
@@ -289,7 +289,7 @@ Selects an explicit item: commands execute, results are handed to their provider
 selectActive(): Promise<void>;
 ```
 
-Defined in: [search/services/SearchSession.ts:319](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L319)
+Defined in: [search/services/SearchSession.ts:322](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L322)
 
 Selects the active item, if there is one.
 
@@ -305,7 +305,7 @@ Selects the active item, if there is one.
 setQueryText(value): void;
 ```
 
-Defined in: [search/services/SearchSession.ts:260](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L260)
+Defined in: [search/services/SearchSession.ts:263](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L263)
 
 Shows a query text without searching for it. Surfaces use it while an exclusive provider owns
 the input, where the query is submitted explicitly instead of on every keystroke.
@@ -328,10 +328,10 @@ the input, where the query is submitted explicitly instead of on every keystroke
 updateQuery(value): Promise<void>;
 ```
 
-Defined in: [search/services/SearchSession.ts:190](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L190)
+Defined in: [search/services/SearchSession.ts:193](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/services/SearchSession.ts#L193)
 
-Runs a query and publishes its ranked commands and results. Answers of superseded queries are
-discarded, so a slow provider cannot overwrite the result of a later keystroke.
+Runs a query and publishes ranked results as providers answer, followed by the complete
+answer including commands. Superseding a query cancels it and discards its late results.
 
 #### Parameters
 

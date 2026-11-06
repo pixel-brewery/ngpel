@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: FilesComponent
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:274](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L274)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:291](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L291)
 
 Frames a file collection, its semantic layout, and declaratively projected acquisition sources.
 
@@ -29,7 +29,7 @@ new FilesComponent(): FilesComponent;
 readonly actionsLabel: InputSignal<string | null>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:326](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L326)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:349](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L349)
 
 Accessible label of each file's contextual action menu.
 
@@ -41,7 +41,7 @@ Accessible label of each file's contextual action menu.
 protected readonly activeDropSource: Signal<FileSourceComponent | null>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:413](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L413)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:438](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L438)
 
 The drop source currently able to accept a drop, or null for the non-interactive frame.
 
@@ -53,7 +53,7 @@ The drop source currently able to accept a drop, or null for the non-interactive
 readonly description: InputSignal<string | null>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:293](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L293)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:310](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L310)
 
 Optional explanation rendered below the label.
 
@@ -65,7 +65,7 @@ Optional explanation rendered below the label.
 readonly disabled: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:302](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L302)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:319](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L319)
 
 Whether the complete control rejects interactions.
 
@@ -77,7 +77,7 @@ Whether the complete control rejects interactions.
 protected readonly dropSource: Signal<FileSourceComponent | null>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:406](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L406)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:431](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L431)
 
 The only picker source eligible for drop routing, or null for ambiguous configuration.
 
@@ -89,7 +89,7 @@ The only picker source eligible for drop routing, or null for ambiguous configur
 readonly emptyIconName: InputSignal<string | null>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:299](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L299)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:316](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L316)
 
 Optional icon overriding the empty representation's source-derived icon.
 
@@ -101,7 +101,7 @@ Optional icon overriding the empty representation's source-derived icon.
 readonly emptyMessage: InputSignal<string | null>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:296](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L296)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:313](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L313)
 
 Optional text rendered when the collection is empty.
 
@@ -113,7 +113,7 @@ Optional text rendered when the collection is empty.
 protected readonly filePresentation: Signal<FilePresentationValue>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:371](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L371)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:394](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L394)
 
 Presentation derived from the container layout.
 
@@ -125,7 +125,7 @@ Presentation derived from the container layout.
 readonly files: InputSignal<readonly IFileItem[]>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:284](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L284)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:301](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L301)
 
 Files rendered inside the container.
 
@@ -137,7 +137,7 @@ Files rendered inside the container.
 readonly fileSizeUnitLabel: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:311](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L311)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:328](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L328)
 
 Unit label appended to rounded file sizes in kilobytes.
 
@@ -156,7 +156,7 @@ protected readonly fileStates: {
 } = FileState;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:368](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L368)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:391](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L391)
 
 File-state constants exposed to the template.
 
@@ -204,7 +204,7 @@ readonly Unavailable: "unavailable" = 'unavailable';
 readonly label: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:290](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L290)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:307](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L307)
 
 User-facing label framing the complete control.
 
@@ -216,7 +216,7 @@ User-facing label framing the complete control.
 readonly layout: InputSignal<FilesLayoutValue>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:287](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L287)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:304](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L304)
 
 Visual arrangement used for file items; defaults to the tile gallery.
 
@@ -227,12 +227,13 @@ Visual arrangement used for file items; defaults to the tile gallery.
 ```ts
 protected readonly layouts: {
   Gallery: "gallery";
+  Inline: "inline";
   List: "list";
   Preview: "preview";
 } = FilesLayout;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:362](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L362)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:385](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L385)
 
 Layout constants exposed to the template.
 
@@ -240,6 +241,12 @@ Layout constants exposed to the template.
 
 ```ts
 readonly Gallery: "gallery" = 'gallery';
+```
+
+#### Inline
+
+```ts
+readonly Inline: "inline" = 'inline';
 ```
 
 #### List
@@ -262,9 +269,21 @@ readonly Preview: "preview" = 'preview';
 readonly maxTextLines: InputSignal<number | null>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:347](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L347)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:370](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L370)
 
 Maximum number of copy lines shown per file.
+
+***
+
+### openDescription
+
+```ts
+readonly openDescription: InputSignal<string | null>;
+```
+
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:334](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L334)
+
+Optional supporting text for each file's open action.
 
 ***
 
@@ -274,7 +293,7 @@ Maximum number of copy lines shown per file.
 readonly openIconName: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:317](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L317)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:337](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L337)
 
 Icon used by each open action.
 
@@ -286,7 +305,7 @@ Icon used by each open action.
 readonly openLabel: InputSignal<string | null>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:314](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L314)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:331](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L331)
 
 Accessible label enabling each file's open action.
 
@@ -298,7 +317,7 @@ Accessible label enabling each file's open action.
 readonly openRequested: OutputEmitterRef<string | number>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:350](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L350)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:373](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L373)
 
 Emits the stable identifier of a file requested for opening.
 
@@ -310,7 +329,7 @@ Emits the stable identifier of a file requested for opening.
 readonly previewFit: InputSignal<ImageFit>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:338](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L338)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:361](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L361)
 
 Image and video fit used by preview layout.
 
@@ -322,7 +341,7 @@ Image and video fit used by preview layout.
 readonly previewRatio: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:341](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L341)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:364](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L364)
 
 Aspect ratio used by preview layout.
 
@@ -334,9 +353,21 @@ Aspect ratio used by preview layout.
 readonly removable: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:320](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L320)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:340](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L340)
 
 Whether each file may expose a removal action.
+
+***
+
+### removeDescription
+
+```ts
+readonly removeDescription: InputSignal<string | null>;
+```
+
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:346](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L346)
+
+Optional supporting text for each file's remove action.
 
 ***
 
@@ -346,7 +377,7 @@ Whether each file may expose a removal action.
 readonly removeLabel: InputSignal<string | null>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:323](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L323)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:343](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L343)
 
 Accessible label for each removal action.
 
@@ -358,7 +389,7 @@ Accessible label for each removal action.
 readonly removeRequested: OutputEmitterRef<string | number>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:353](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L353)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:376](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L376)
 
 Emits the stable identifier of a file requested for removal.
 
@@ -370,7 +401,7 @@ Emits the stable identifier of a file requested for removal.
 readonly removeVariant: InputSignal<Variant>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:332](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L332)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:355](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L355)
 
 Visual variant used by each removal action.
 
@@ -382,7 +413,7 @@ Visual variant used by each removal action.
 protected readonly renderedFiles: Signal<readonly IRenderedFileItem[]>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:383](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L383)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:408](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L408)
 
 Files enriched with stable previews, display descriptions, and automation ids.
 
@@ -394,7 +425,7 @@ Files enriched with stable previews, display descriptions, and automation ids.
 protected readonly resolvedEmptyIconName: Signal<string>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:395](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L395)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:420](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L420)
 
 Empty-state icon derived from an explicit override or one unambiguous source.
 
@@ -406,7 +437,7 @@ Empty-state icon derived from an explicit override or one unambiguous source.
 protected readonly resolvedPreviewRatio: Signal<string>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:420](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L420)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:445](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L445)
 
 Non-empty aspect ratio used by preview layout and its empty placeholder.
 
@@ -418,7 +449,7 @@ Non-empty aspect ratio used by preview layout and its empty placeholder.
 readonly retryLabel: InputSignal<string | null>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:335](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L335)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:358](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L358)
 
 Accessible label enabling retry actions for retry-state files.
 
@@ -430,7 +461,7 @@ Accessible label enabling retry actions for retry-state files.
 readonly retryRequested: OutputEmitterRef<string | number>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:356](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L356)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:379](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L379)
 
 Emits the stable identifier of a file requested for retry.
 
@@ -442,7 +473,7 @@ Emits the stable identifier of a file requested for retry.
 readonly separateListItems: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:308](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L308)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:325](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L325)
 
 Whether list items are separated visually.
 
@@ -454,7 +485,7 @@ Whether list items are separated visually.
 readonly showFileSize: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:305](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L305)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:322](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L322)
 
 Whether file sizes are rendered when no item description is supplied.
 
@@ -466,7 +497,7 @@ Whether file sizes are rendered when no item description is supplied.
 protected readonly sources: Signal<readonly FileSourceComponent[]>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:359](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L359)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:382](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L382)
 
 Declaratively supplied headless acquisition sources.
 
@@ -481,7 +512,7 @@ protected readonly sourceTypes: {
 } = FileSourceType;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:365](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L365)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:388](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L388)
 
 Source-type constants exposed to the template.
 
@@ -505,7 +536,7 @@ readonly Picker: "picker" = 'picker';
 readonly testIdPrefix: InputSignal<string | null>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:329](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L329)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:352](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L352)
 
 Prefix of the per-file automation identifiers; disables them when empty.
 
@@ -517,7 +548,7 @@ Prefix of the per-file automation identifiers; disables them when empty.
 readonly variant: InputSignal<Variant>;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:344](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L344)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:367](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L367)
 
 Visual variant used by the framing drop zone.
 
@@ -529,7 +560,7 @@ Visual variant used by the framing drop zone.
 protected onDropZoneData(event): void;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:427](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L427)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:452](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L452)
 
 Routes dropped files only when exactly one picker source owns drop acquisition.
 
@@ -551,7 +582,7 @@ Routes dropped files only when exactly one picker source owns drop acquisition.
 protected onFilesPicked(source, event): void;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:438](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L438)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:463](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L463)
 
 Routes files selected by one rendered picker source.
 
@@ -574,7 +605,7 @@ Routes files selected by one rendered picker source.
 protected pickerAccept(source): string[];
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:448](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L448)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:473](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L473)
 
 Returns a mutable Mosaik-compatible copy of one source's accepted patterns.
 
@@ -596,7 +627,7 @@ Returns a mutable Mosaik-compatible copy of one source's accepted patterns.
 protected requestOpen(file): void;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:453](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L453)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:478](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L478)
 
 Emits a stable open request for an interactive available file.
 
@@ -618,7 +649,7 @@ Emits a stable open request for an interactive available file.
 protected requestRemoval(file): void;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:460](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L460)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:485](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L485)
 
 Emits a stable removal request for an interactive file.
 
@@ -640,7 +671,7 @@ Emits a stable removal request for an interactive file.
 protected requestRetry(file): void;
 ```
 
-Defined in: [libs/ui/src/components/files/FilesComponent.ts:467](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L467)
+Defined in: [libs/ui/src/components/files/FilesComponent.ts:492](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L492)
 
 Emits a stable retry request for an interactive retry-state file.
 

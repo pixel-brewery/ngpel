@@ -6,9 +6,10 @@ Route path construction and URL-backed signals, the navigation item registry wit
 
 - **Route paths** — `RoutePath` builds and parses paths without pulling the router, so unauthenticated route files stay light.
 - **URL state** — `routeParamSignal` and `queryParamSignal` back a signal with the URL, using the codecs from `ngpel-core/storage`.
-- **Context overlays** — `provideContextOverlayRouting` coordinates a bounded URL stack with lazy targets, browser history and typed close outcomes.
+- **Context overlays** — `provideContextOverlayRouting` coordinates lazy targets and browser history on application-selected paths. The URL uses `overlay`, `overlayId` and `overlayContext`, with numeric suffixes for further layers. Inject `ContextOverlayUrl` to build a shareable link with `add` or a return link with `remove`. `ContextOverlayService.closed` emits the address after an interactive close, and `closedOutcome` includes the result.
 - **Titles and journal** — a route-data title strategy with an injected text resolver, plus a navigator that records where the user came from.
 - **Navigation registry** — items, guards and a handle scheme (`route:`, `ext:`, `cmd:`) with a dispatcher whose window access is a port.
+- **Resource links** — features register canonical URLs for named resources with `provideResourceNavigationTarget`. Use `ResourceNavigationRegistry` from `/navigation` to resolve a target key or a source alias and build links to pages or drawers.
 - **Shell** — a side-navigation controller driven by media queries and persisted through the storage port, and a presentation routes factory.
 
 ## Import Options
@@ -24,14 +25,14 @@ import {
     IContextOverlayRef /* … */,
 } from '@pixel-brewery/ngpel-router';
 
-// @pixel-brewery/ngpel-router/navigation — 20 exports
+// @pixel-brewery/ngpel-router/navigation — 24 exports
 import {
     INavHandleHandler,
     INavigationGuard,
     INavItem,
     IParsedHandle,
-    IWithNavigationGuardOptions,
-    IWithNavigationItemsOptions /* … */,
+    IResourceNavigationSource,
+    IResourceNavigationTarget /* … */,
 } from '@pixel-brewery/ngpel-router/navigation';
 
 // @pixel-brewery/ngpel-router/shell — 6 exports
@@ -52,7 +53,7 @@ import {
 | `@angular/common`           | `>=22.0.0 <23.0.0` |
 | `@angular/core`             | `>=22.0.0 <23.0.0` |
 | `@angular/router`           | `>=22.0.0 <23.0.0` |
-| `@pixel-brewery/ngpel-core` | `0.0.2`            |
+| `@pixel-brewery/ngpel-core` | `0.0.3`            |
 | `rxjs`                      | `>=7.8.0 <8.0.0`   |
 
 ## Quick Start

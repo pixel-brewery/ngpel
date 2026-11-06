@@ -11,6 +11,8 @@ export const DynamicFormControlType = {
     Multiline: 'multiline',
     Number: 'number',
     Select: 'select',
+    Radio: 'radio',
+    MultipleChoice: 'multiple-choice',
     Boolean: 'boolean',
     Date: 'date',
     Link: 'link',

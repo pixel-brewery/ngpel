@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: IFilterBarConfig
 
-Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:241](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L241)
+Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:244](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L244)
 
 Configuration for the FilterBarComponent.
 
@@ -17,6 +17,6 @@ Configuration for the FilterBarComponent.
 readonly filters: readonly IFilterDefinition[];
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:245](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L245)
+Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:248](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L248)
 
 The filter definitions to render.

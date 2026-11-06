@@ -1,6 +1,6 @@
 {
     "name": "@pixel-brewery/ngpel-ui",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "The presentation layer: every component, directive and pipe the products share — AI surfaces, media and file components, the collection view, the guided tour and the dashboard widget grid — plus a safe markdown pipeline. Mosaik and CodeMirror are optional peers.",
     "keywords": [
         "angular",
@@ -30,6 +30,7 @@
         "registry": "https://npm.pkg.github.com"
     },
     "dependencies": {
+        "diff": "9.0.0",
         "tslib": "2.8.1"
     },
     "peerDependencies": {
@@ -37,6 +38,7 @@
         "@angular/common": ">=22.0.0 <23.0.0",
         "@angular/core": ">=22.0.0 <23.0.0",
         "@angular/forms": ">=22.0.0 <23.0.0",
+        "@angular/google-maps": ">=22.0.0 <23.0.0",
         "@angular/platform-browser": ">=22.0.0 <23.0.0",
         "@angular/router": ">=22.0.0 <23.0.0",
         "@codemirror/autocomplete": ">=6.0.0",
@@ -47,18 +49,23 @@
         "@codemirror/search": ">=6.0.0",
         "@codemirror/state": ">=6.0.0",
         "@codemirror/view": ">=6.0.0",
+        "@googlemaps/markerclusterer": ">=2.6.2 <3",
         "@lezer/highlight": ">=1.2.0",
         "@pixel-brewery/markdowner-core": ">=0.1.96",
-        "@pixel-brewery/mosaik-elements-angular": ">=0.1.99",
-        "@pixel-brewery/mosaik-elements-foundation": ">=0.1.99",
-        "@pixel-brewery/ngpel-core": "0.0.2",
-        "@pixel-brewery/ngpel-mvp": "0.0.2",
-        "@pixel-brewery/ngpel-router": "0.0.2",
+        "@pixel-brewery/mosaik-elements-angular": ">=0.1.188",
+        "@pixel-brewery/mosaik-elements-foundation": ">=0.1.188",
+        "@pixel-brewery/ngpel-core": "0.0.3",
+        "@pixel-brewery/ngpel-mvp": "0.0.3",
+        "@pixel-brewery/ngpel-router": "0.0.3",
+        "apexcharts": ">=5.0.0",
         "marked": ">=18.0.0",
         "rxjs": ">=7.8.0 <8.0.0"
     },
     "peerDependenciesMeta": {
         "@angular/cdk": {
+            "optional": true
+        },
+        "@angular/google-maps": {
             "optional": true
         },
         "@codemirror/autocomplete": {
@@ -85,6 +92,9 @@
         "@codemirror/view": {
             "optional": true
         },
+        "@googlemaps/markerclusterer": {
+            "optional": true
+        },
         "@lezer/highlight": {
             "optional": true
         },
@@ -92,6 +102,9 @@
             "optional": true
         },
         "@pixel-brewery/mosaik-elements-foundation": {
+            "optional": true
+        },
+        "apexcharts": {
             "optional": true
         }
     },

@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: RailComponent
 
-Defined in: [libs/ui/src/components/rail/RailComponent.ts:77](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponent.ts#L77)
+Defined in: [libs/ui/src/components/rail/RailComponent.ts:116](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponent.ts#L116)
 
 Coordinates a compact action list with one independently declared drawer rail at a time.
 
@@ -22,7 +22,7 @@ Coordinates a compact action list with one independently declared drawer rail at
 new RailComponent(): RailComponent;
 ```
 
-Defined in: [libs/ui/src/components/rail/RailComponent.ts:106](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponent.ts#L106)
+Defined in: [libs/ui/src/components/rail/RailComponent.ts:147](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponent.ts#L147)
 
 Constructs a rail coordinator and restores its drawer when the local rail is destroyed.
 
@@ -38,7 +38,7 @@ Constructs a rail coordinator and restores its drawer when the local rail is des
 readonly activeContentKey: Signal<string | null>;
 ```
 
-Defined in: [libs/ui/src/components/rail/RailComponent.ts:136](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponent.ts#L136)
+Defined in: [libs/ui/src/components/rail/RailComponent.ts:221](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponent.ts#L221)
 
 Key of the independently declared content currently visible in the rail.
 
@@ -54,7 +54,7 @@ Key of the independently declared content currently visible in the rail.
 readonly backLabel: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/rail/RailComponent.ts:120](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponent.ts#L120)
+Defined in: [libs/ui/src/components/rail/RailComponent.ts:193](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponent.ts#L193)
 
 Accessible label and tooltip of the generic return action.
 
@@ -66,9 +66,33 @@ Accessible label and tooltip of the generic return action.
 readonly backTestId: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/rail/RailComponent.ts:128](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponent.ts#L128)
+Defined in: [libs/ui/src/components/rail/RailComponent.ts:201](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponent.ts#L201)
 
 Stable automation contract for the generic return action.
+
+***
+
+### closeLabel
+
+```ts
+readonly closeLabel: InputSignal<string>;
+```
+
+Defined in: [libs/ui/src/components/rail/RailComponent.ts:210](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponent.ts#L210)
+
+Accessible label of the sheet's close action.
+
+***
+
+### closeTestId
+
+```ts
+readonly closeTestId: InputSignal<string>;
+```
+
+Defined in: [libs/ui/src/components/rail/RailComponent.ts:213](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponent.ts#L213)
+
+Optional automation identifier for the sheet's close action.
 
 ***
 
@@ -78,9 +102,37 @@ Stable automation contract for the generic return action.
 protected readonly contents: QueryList<RailContentDirective>;
 ```
 
-Defined in: [libs/ui/src/components/rail/RailComponent.ts:145](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponent.ts#L145)
+Defined in: [libs/ui/src/components/rail/RailComponent.ts:230](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponent.ts#L230)
 
 Rail contents registered below this local coordinator.
+
+***
+
+### floating
+
+```ts
+readonly floating: InputSignal<boolean>;
+```
+
+Defined in: [libs/ui/src/components/rail/RailComponent.ts:204](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponent.ts#L204)
+
+Presents activated content in a sheet, leaving the host drawer width intact.
+
+***
+
+### isFloating
+
+```ts
+readonly isFloating: Signal<boolean>;
+```
+
+Defined in: [libs/ui/src/components/rail/RailComponent.ts:207](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponent.ts#L207)
+
+Current presentation mode, available to participating rail actions.
+
+#### Implementation of
+
+[`IRailHost`](Interface.IRailHost).[`isFloating`](Interface.IRailHost#isfloating)
 
 ## Accessors
 
@@ -92,7 +144,7 @@ Rail contents registered below this local coordinator.
 get protected backCommand(): Command<void>;
 ```
 
-Defined in: [libs/ui/src/components/rail/RailComponent.ts:153](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponent.ts#L153)
+Defined in: [libs/ui/src/components/rail/RailComponent.ts:238](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponent.ts#L238)
 
 Command that restores the compact action overview.
 
@@ -108,7 +160,7 @@ Command that restores the compact action overview.
 activateContent(target): void;
 ```
 
-Defined in: [libs/ui/src/components/rail/RailComponent.ts:183](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponent.ts#L183)
+Defined in: [libs/ui/src/components/rail/RailComponent.ts:268](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponent.ts#L268)
 
 Activates registered content and expands the surrounding drawer rail.
 
@@ -134,7 +186,7 @@ Activates registered content and expands the surrounding drawer rail.
 hasContent(target): boolean;
 ```
 
-Defined in: [libs/ui/src/components/rail/RailComponent.ts:199](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponent.ts#L199)
+Defined in: [libs/ui/src/components/rail/RailComponent.ts:286](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponent.ts#L286)
 
 Indicates whether content is currently registered for a key.
 
@@ -162,7 +214,7 @@ Whether matching content exists.
 ngAfterContentInit(): void;
 ```
 
-Defined in: [libs/ui/src/components/rail/RailComponent.ts:166](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponent.ts#L166)
+Defined in: [libs/ui/src/components/rail/RailComponent.ts:251](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponent.ts#L251)
 
 Keeps the coordinator consistent when conditionally declared rail content disappears.
 
@@ -175,3 +227,17 @@ Keeps the coordinator consistent when conditionally declared rail content disapp
 ```ts
 AfterContentInit.ngAfterContentInit
 ```
+
+***
+
+### onSheetClosed()
+
+```ts
+protected onSheetClosed(): void;
+```
+
+Defined in: [libs/ui/src/components/rail/RailComponent.ts:291](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponent.ts#L291)
+
+#### Returns
+
+`void`

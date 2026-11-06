@@ -95,6 +95,12 @@ export class AiRailChoiceComponent {
     /** Label of the configurable choice submit action. */
     public readonly configurationSubmitLabel: InputSignal<string> = input('Run');
 
+    /** Pair of configuration fields whose values the user can exchange. */
+    public readonly configurationSwapFields = input<readonly [string, string] | null>(null);
+
+    /** Accessible label for the exchange action. */
+    public readonly configurationSwapLabel = input('Swap values');
+
     /**
      * Feature-owned operation executed by the rail.
      *

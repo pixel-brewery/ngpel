@@ -1,39 +1,65 @@
 // #region Imports
 
 import { CdkTrapFocus } from '@angular/cdk/a11y';
-import { ChangeDetectionStrategy, Component, computed, input, type InputSignal, type Signal } from '@angular/core';
+import {
+    afterNextRender,
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    DOCUMENT,
+    effect,
+    ElementRef,
+    inject,
+    Injector,
+    input,
+    type InputSignal,
+    output,
+    type Signal,
+    untracked,
+    viewChild,
+} from '@angular/core';
+import { BackdropComponent } from '@pixel-brewery/mosaik-elements-angular';
+import { PointerIdleDirective } from '../../directives/pointer-idle/PointerIdleDirective';
+import type { ImmersiveSessionPhase } from './ImmersiveSessionPhase';
+import type { ImmersiveSessionRailState } from './ImmersiveSessionRailState';
 
 // #endregion
 
 /**
  * Provides a responsive, business-agnostic shell for immersive sessions.
  *
- * The component owns layout and optional modal focus semantics. Overlay
- * lifecycle, session state and all projected actions remain the responsibility
- * of the consumer.
+ * The component owns layout, phase presentation, rail attachment and modal focus. The consumer
+ * controls session state, dismissal and all projected actions.
  *
  * @public
  */
 @Component({
     selector: 'ngp-immersive-session-shell',
-    imports: [CdkTrapFocus],
+    imports: [BackdropComponent, CdkTrapFocus, PointerIdleDirective],
     template: `
         <section
             part="root"
             class="shell"
-            [attr.aria-modal]="modal() ? 'true' : null"
+            ngpPointerIdle
+            #idle="ngpPointerIdle"
+            [ngpPointerIdleDisabled]="!idleDetectionEnabled()"
+            [ngpPointerIdleHold]="idleHoldSelector"
+            [attr.data-ngp-phase]="phase()"
+            [attr.data-ngp-idle]="idleDetectionEnabled() && idle.isIdle() ? '' : null"
+            [attr.aria-modal]="modal() && !overlayOpen() ? 'true' : null"
             [attr.aria-label]="ariaLabel()"
-            [attr.role]="modal() ? 'dialog' : 'region'"
-            [class.shell--rail-open]="railOpen()"
-            [cdkTrapFocus]="modal()"
+            [attr.role]="modal() && !overlayOpen() ? 'dialog' : 'region'"
+            [attr.data-rail]="effectiveRailState()"
+            [class.shell--rail-open]="railVisible()"
+            [cdkTrapFocus]="modal() && !overlayOpen()"
             [cdkTrapFocusAutoCapture]="modal()"
             [style.--ngp-immersive-session-rail-width]="railWidthStyle()"
         >
-            <div part="notification" class="notification">
+            <div part="notification" class="notification" [attr.inert]="overlayOpen() ? '' : null">
                 <ng-content select="[ngpImmersiveSessionNotification]" />
             </div>
 
-            <header part="header" class="header">
+            <header part="header" class="header" [attr.inert]="overlayOpen() ? '' : null">
                 <div part="header-content" class="header__content">
                     <ng-content select="[ngpImmersiveSessionHeader]" />
                 </div>
@@ -42,21 +68,47 @@ import { ChangeDetectionStrategy, Component, computed, input, type InputSignal, 
                 </div>
             </header>
 
-            <div part="body" class="body">
-                <main part="stage" class="stage">
-                    <ng-content select="[ngpImmersiveSessionStage]" />
+            <div part="body" class="body" [attr.inert]="overlayOpen() ? '' : null">
+                <main #stage part="stage" class="stage" tabindex="-1">
+                    <div part="preflight" class="phase-content" [hidden]="!preflightVisible()" [attr.inert]="preflightVisible() ? null : ''">
+                        <ng-content select="[ngpImmersiveSessionPreflight]" />
+                    </div>
+                    <div part="live" class="phase-content" [hidden]="preflightVisible()" [attr.inert]="preflightVisible() ? '' : null">
+                        <ng-content select="[ngpImmersiveSessionStage]" />
+                    </div>
+                    <div part="rail-handle" class="rail-handle" [hidden]="railVisible() || phase() !== 'live'">
+                        <ng-content select="[ngpImmersiveSessionRailHandle]" />
+                    </div>
                 </main>
 
-                @if (railOpen()) {
-                    <aside part="rail" class="rail" [attr.aria-label]="railAriaLabel()">
+                @if (railAttached()) {
+                    <aside part="rail" class="rail" [attr.aria-label]="railAriaLabel()" [hidden]="!railVisible()" [attr.inert]="railVisible() ? null : ''">
                         <ng-content select="[ngpImmersiveSessionRail]" />
                     </aside>
                 }
             </div>
 
-            <footer part="footer" class="footer">
+            <footer part="footer" class="footer" [attr.inert]="overlayOpen() ? '' : null">
                 <ng-content select="[ngpImmersiveSessionFooter]" />
             </footer>
+
+            @if (overlayOpen()) {
+                <mosaik-backdrop part="backdrop" class="backdrop" (click)="requestOverlayDismissal($event)" />
+                <div
+                    part="overlay"
+                    class="overlay"
+                    role="dialog"
+                    [attr.aria-modal]="modal() ? 'true' : null"
+                    [attr.aria-label]="overlayAriaLabel() ?? ariaLabel()"
+                    cdkTrapFocus
+                    [cdkTrapFocusAutoCapture]="true"
+                    (keydown.escape)="requestOverlayDismissal($event)"
+                >
+                    <div part="overlay-content" class="overlay-content" tabindex="-1" cdkFocusInitial>
+                        <ng-content select="[ngpImmersiveSessionOverlay]" />
+                    </div>
+                </div>
+            }
         </section>
     `,
     styles: `
@@ -76,6 +128,7 @@ import { ChangeDetectionStrategy, Component, computed, input, type InputSignal, 
         .shell {
             --ngp-immersive-session-rail-width: 384px;
 
+            position: relative;
             display: grid;
             grid-template-rows: auto auto minmax(0, 1fr) auto;
             width: 100%;
@@ -131,6 +184,7 @@ import { ChangeDetectionStrategy, Component, computed, input, type InputSignal, 
         }
 
         .stage {
+            position: relative;
             display: grid;
             min-width: 0;
             min-height: 0;
@@ -138,6 +192,27 @@ import { ChangeDetectionStrategy, Component, computed, input, type InputSignal, 
             place-items: center;
             padding: clamp(1rem, 4vw, 3rem);
             overscroll-behavior: contain;
+        }
+
+        .phase-content {
+            display: contents;
+        }
+
+        .phase-content[hidden] {
+            display: none;
+        }
+
+        .rail-handle {
+            position: absolute;
+            inset-block-start: 50%;
+            inset-inline-end: 0;
+            transform: translateY(-50%);
+        }
+
+        .rail-handle:empty,
+        .rail-handle[hidden],
+        .rail[hidden] {
+            display: none;
         }
 
         .rail {
@@ -160,6 +235,55 @@ import { ChangeDetectionStrategy, Component, computed, input, type InputSignal, 
             border-top: 1px solid color-mix(in srgb, var(--mosaik-scheme-foreground) 10%, transparent);
             background: color-mix(in srgb, var(--mosaik-scheme-background) 90%, transparent);
             backdrop-filter: blur(18px);
+        }
+
+        .header,
+        .rail-handle,
+        .footer {
+            transition: opacity var(--mosaik-duration-medium) ease;
+        }
+
+        [data-ngp-idle] .header:not(:focus-within),
+        [data-ngp-idle] .rail-handle:not(:focus-within) {
+            opacity: 0.4;
+        }
+
+        [data-ngp-idle] .footer:not(:focus-within) {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .header,
+            .rail-handle,
+            .footer {
+                transition: none;
+            }
+        }
+
+        .backdrop,
+        .overlay {
+            position: absolute;
+            inset: 0;
+        }
+
+        .backdrop {
+            z-index: 4;
+        }
+
+        .overlay {
+            z-index: 5;
+            display: grid;
+            padding: 1rem;
+            place-items: center;
+            pointer-events: none;
+        }
+
+        .overlay-content {
+            max-inline-size: 100%;
+            max-block-size: 100%;
+            overflow: auto;
+            pointer-events: auto;
         }
 
         @media (width < 64rem) {
@@ -202,6 +326,26 @@ import { ChangeDetectionStrategy, Component, computed, input, type InputSignal, 
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImmersiveSessionShellComponent {
+    // #region Fields
+
+    private readonly _document = inject(DOCUMENT);
+    private readonly _injector = inject(Injector);
+    private readonly _stage = viewChild<ElementRef<HTMLElement>>('stage');
+    private _focusBeforeOverlay: HTMLElement | null = null;
+    private _showingPreflight: boolean | undefined;
+
+    // #endregion
+
+    // #region Ctor
+
+    /** Maintains focus when a phase or modal overlay changes which content is reachable. */
+    public constructor() {
+        effect(() => this.synchronizeOverlayFocus(this.overlayOpen()));
+        effect(() => this.synchronizePhaseFocus(this.preflightVisible()));
+    }
+
+    // #endregion
+
     // #region Properties
 
     /**
@@ -211,6 +355,12 @@ export class ImmersiveSessionShellComponent {
      * @readonly
      */
     public readonly ariaLabel: InputSignal<string> = input.required<string>();
+
+    /** Shows the preparation slot during preflight and the stage during connection, live and completion. */
+    public readonly phase = input<ImmersiveSessionPhase>('live');
+
+    /** Allows shell controls to fade during inactivity in the live phase on hover-capable devices. */
+    public readonly idleEnabled = input(false);
 
     /** Enables modal semantics, automatic focus capture, trapping and focus restoration. */
     public readonly modal: InputSignal<boolean> = input<boolean>(false);
@@ -222,6 +372,9 @@ export class ImmersiveSessionShellComponent {
      * @readonly
      */
     public readonly railOpen: InputSignal<boolean> = input<boolean>(true);
+
+    /** Explicit rail state. When supplied, the rail retains its content while closed. */
+    public readonly railState = input<ImmersiveSessionRailState>();
 
     /**
      * Optional accessible name for the contextual rail.
@@ -239,6 +392,22 @@ export class ImmersiveSessionShellComponent {
      */
     public readonly railWidth: InputSignal<number | string> = input<number | string>(384);
 
+    /** Controls the projected overlay and makes the underlying shell inert while open. */
+    public readonly overlayOpen = input(false);
+
+    /** Accessible overlay name. Defaults to the shell's accessible name. */
+    public readonly overlayAriaLabel = input<string | null>(null);
+
+    /** Requests dismissal after Escape or a backdrop click. */
+    public readonly overlayDismissed = output<void>();
+
+    protected readonly effectiveRailState = computed(() => this.railState() ?? (this.railOpen() ? 'pinned' : 'closed'));
+    protected readonly railVisible = computed(() => this.phase() === 'live' && this.effectiveRailState() !== 'closed');
+    protected readonly railAttached = computed(() => this.railState() !== undefined || this.railOpen());
+    protected readonly preflightVisible = computed(() => this.phase() === 'preflight');
+    protected readonly idleDetectionEnabled = computed(() => this.idleEnabled() && this.phase() === 'live' && !this.overlayOpen());
+    protected readonly idleHoldSelector = "[part='header'], [part='footer'], [part='rail'], [part='rail-handle']";
+
     /**
      * CSS width derived from the public rail-width input.
      *
@@ -250,6 +419,66 @@ export class ImmersiveSessionShellComponent {
     // #endregion
 
     // #region Methods
+
+    protected requestOverlayDismissal(event?: Event): void {
+        if (this.overlayOpen()) {
+            event?.preventDefault();
+            event?.stopPropagation();
+            this.overlayDismissed.emit();
+        }
+    }
+
+    private synchronizeOverlayFocus(open: boolean): void {
+        if (open) {
+            let element = this._document.activeElement;
+
+            while (element?.shadowRoot?.activeElement) {
+                element = element.shadowRoot.activeElement;
+            }
+
+            this._focusBeforeOverlay = element instanceof HTMLElement ? element : null;
+            return;
+        }
+
+        const previous = this._focusBeforeOverlay;
+        this._focusBeforeOverlay = null;
+
+        if (previous) {
+            afterNextRender(
+                () => {
+                    if (!this.overlayOpen() && previous.isConnected && !previous.closest('[inert]')) {
+                        previous.focus({ preventScroll: true });
+                    }
+                },
+                { injector: this._injector },
+            );
+        }
+    }
+
+    private synchronizePhaseFocus(preflight: boolean): void {
+        const previous = this._showingPreflight;
+        this._showingPreflight = preflight;
+        if (previous === undefined || previous === preflight) {
+            return;
+        }
+
+        const stage = untracked(this._stage)?.nativeElement;
+        const focused = this._document.activeElement;
+        const hiding = stage?.querySelector(previous ? '[part="preflight"]' : '[part="live"]');
+        if (!stage || !hiding?.contains(focused)) {
+            return;
+        }
+
+        afterNextRender(
+            () => {
+                const active = this._document.activeElement;
+                if (preflight === this.preflightVisible() && !this.overlayOpen() && (active === focused || active === this._document.body)) {
+                    stage.focus({ preventScroll: true });
+                }
+            },
+            { injector: this._injector },
+        );
+    }
 
     /**
      * Converts a numeric or textual dimension into a safe CSS size.

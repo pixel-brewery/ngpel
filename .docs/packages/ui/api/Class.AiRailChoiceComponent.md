@@ -29,7 +29,7 @@ new AiRailChoiceComponent(): AiRailChoiceComponent;
 readonly configurationExecuteCommand: InputSignal<Command<Readonly<Record<string, string>>> | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailChoiceComponent.ts:107](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailChoiceComponent.ts#L107)
+Defined in: [libs/ui/src/components/ai-rail/AiRailChoiceComponent.ts:113](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailChoiceComponent.ts#L113)
 
 Feature-owned operation executed with the selected configuration values.
 
@@ -59,6 +59,30 @@ Label of the configurable choice submit action.
 
 ***
 
+### configurationSwapFields
+
+```ts
+readonly configurationSwapFields: InputSignal<readonly [string, string] | null>;
+```
+
+Defined in: [libs/ui/src/components/ai-rail/AiRailChoiceComponent.ts:99](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailChoiceComponent.ts#L99)
+
+Pair of configuration fields whose values the user can exchange.
+
+***
+
+### configurationSwapLabel
+
+```ts
+readonly configurationSwapLabel: InputSignal<string>;
+```
+
+Defined in: [libs/ui/src/components/ai-rail/AiRailChoiceComponent.ts:102](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailChoiceComponent.ts#L102)
+
+Accessible label for the exchange action.
+
+***
+
 ### description
 
 ```ts
@@ -77,7 +101,7 @@ Supporting choice description.
 readonly executeCommand: InputSignal<Command<string> | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailChoiceComponent.ts:104](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailChoiceComponent.ts#L104)
+Defined in: [libs/ui/src/components/ai-rail/AiRailChoiceComponent.ts:110](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailChoiceComponent.ts#L110)
 
 Feature-owned operation executed by the rail.
 

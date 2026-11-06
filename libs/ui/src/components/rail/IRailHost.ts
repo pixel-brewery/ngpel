@@ -18,6 +18,9 @@ export interface IRailHost {
      */
     readonly activeContentKey: Signal<string | null>;
 
+    /** Whether the current layout presents rail content in a floating sheet. */
+    readonly isFloating?: Signal<boolean>;
+
     /**
      * Activates the rail content registered for the supplied key.
      *

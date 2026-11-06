@@ -137,6 +137,9 @@ export interface IFilterDefinition {
      */
     readonly options?: ReadonlyArray<IFilterOption>;
 
+    /** Restricts a numeric filter to whole numbers. */
+    readonly integer?: boolean;
+
     /**
      * Whether this filter is visible by default. Defaults to `true`.
      */

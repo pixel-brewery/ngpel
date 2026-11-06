@@ -53,6 +53,11 @@ export interface ISearchResult<TData = unknown> {
     readonly group?: string;
 
     /**
+     * Translation key for the result section. Results with the same key share a section.
+     */
+    readonly groupKey?: string;
+
+    /**
      * Optional synonyms that make the result findable under wording it does not display.
      */
     readonly keywords?: ReadonlyArray<string>;

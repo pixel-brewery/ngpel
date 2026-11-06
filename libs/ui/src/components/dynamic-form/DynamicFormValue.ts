@@ -3,4 +3,4 @@
  *
  * @public
  */
-export type DynamicFormValue = string | number | boolean | Date | null;
+export type DynamicFormValue = string | number | boolean | string[] | Date | null;

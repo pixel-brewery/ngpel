@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: IAdvancedFilterRule
 
-Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:151](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L151)
+Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:154](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L154)
 
 A single advanced filter rule.
 
@@ -17,7 +17,7 @@ A single advanced filter rule.
 readonly fieldKey: string;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:165](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L165)
+Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:168](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L168)
 
 Filter field key.
 
@@ -29,7 +29,7 @@ Filter field key.
 readonly id: string;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:160](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L160)
+Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:163](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L163)
 
 Stable node id.
 
@@ -41,7 +41,7 @@ Stable node id.
 readonly kind: "rule";
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:155](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L155)
+Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:158](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L158)
 
 Discriminator for rule nodes.
 
@@ -53,7 +53,7 @@ Discriminator for rule nodes.
 readonly operator: FilterOperatorValue;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:170](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L170)
+Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:173](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L173)
 
 Rule operator.
 
@@ -65,6 +65,6 @@ Rule operator.
 readonly optional value?: unknown;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:175](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L175)
+Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:178](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L178)
 
 Optional rule value.

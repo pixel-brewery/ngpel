@@ -12,6 +12,8 @@ export default defineConfig(() => ({
             { find: '@pixel-brewery/ngpel-core/browser', replacement: path.resolve(import.meta.dirname, '../core/src/browser/index.ts') },
             { find: '@pixel-brewery/ngpel-router/shell', replacement: path.resolve(import.meta.dirname, '../router/src/shell/index.ts') },
             { find: '@pixel-brewery/ngpel-ui/markdown', replacement: path.resolve(import.meta.dirname, './src/markdown/index.ts') },
+            { find: '@pixel-brewery/ngpel-ui/context-overlay', replacement: path.resolve(import.meta.dirname, './src/context-overlay/index.ts') },
+            { find: '@pixel-brewery/ngpel-ui/google-maps', replacement: path.resolve(import.meta.dirname, './src/google-maps/index.ts') },
             { find: '@pixel-brewery/ngpel-core/update', replacement: path.resolve(import.meta.dirname, '../core/src/update/index.ts') },
             { find: '@pixel-brewery/ngpel-core/search', replacement: path.resolve(import.meta.dirname, '../core/src/search/index.ts') },
             { find: '@pixel-brewery/ngpel-core/audio', replacement: path.resolve(import.meta.dirname, '../core/src/audio/index.ts') },

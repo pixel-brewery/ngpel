@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: IRecurrenceOption\<TValue\>
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:13](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L13)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:16](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L16)
 
 ## Type Parameters
 
@@ -21,4 +21,4 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:13](http
 readonly value: TValue;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:14](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L14)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:17](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L17)

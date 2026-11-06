@@ -17,6 +17,7 @@ export class RailComponentIntl {
 
     private readonly _changes: Subject<void>;
     private _backLabel: string;
+    private _closeLabel: string;
 
     // #endregion
 
@@ -30,6 +31,7 @@ export class RailComponentIntl {
     public constructor() {
         this._changes = new Subject();
         this._backLabel = 'Back';
+        this._closeLabel = 'Close';
     }
 
     // #endregion
@@ -53,6 +55,11 @@ export class RailComponentIntl {
      */
     public get backLabel(): string {
         return this._backLabel;
+    }
+
+    /** Label for closing the floating rail sheet. */
+    public get closeLabel(): string {
+        return this._closeLabel;
     }
 
     // #endregion

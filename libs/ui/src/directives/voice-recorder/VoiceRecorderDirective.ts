@@ -1,6 +1,19 @@
 // #region Imports
 
-import { DestroyRef, Directive, ElementRef, Signal, computed, effect, inject, output, signal, type OutputEmitterRef, type WritableSignal } from '@angular/core';
+import {
+    DestroyRef,
+    Directive,
+    ElementRef,
+    Signal,
+    computed,
+    effect,
+    inject,
+    input,
+    output,
+    signal,
+    type OutputEmitterRef,
+    type WritableSignal,
+} from '@angular/core';
 import {
     AudioInputDevicePreferenceService,
     AudioRecorder,
@@ -65,8 +78,11 @@ export class VoiceRecorderDirective {
     private readonly _isRecording: Signal<boolean> = computed(() => this._ownsRecording() && this._audioRecorder.isRecording());
     private readonly _isTranscribing: WritableSignal<boolean> = signal(false);
     private readonly _ownsRecording: WritableSignal<boolean> = signal(false);
+    private readonly _isActive = computed(() => this._ownsRecording() && (this._audioRecorder.isActive() || this._isTranscribing()));
+    private readonly _isAcquiring = computed(() => this._ownsRecording() && this._audioRecorder.state() === 'acquiring');
     private readonly _voiceTranscriber: IVoiceTranscriber | null = inject(VOICE_TRANSCRIBER, { optional: true });
 
+    private _generation = 0;
     private _isDestroyed = false;
 
     // #endregion
@@ -91,11 +107,7 @@ export class VoiceRecorderDirective {
 
         this._destroyRef.onDestroy(() => {
             this._isDestroyed = true;
-
-            if (this._ownsRecording()) {
-                this.liveVoiceTranscriber()?.cancelSession();
-                void this._audioRecorder.cancel();
-            }
+            void this.cancelRecording();
         });
     }
 
@@ -112,6 +124,27 @@ export class VoiceRecorderDirective {
     public get isRecording(): Signal<boolean> {
         return this._isRecording;
     }
+
+    /** Whether this tool is acquiring, recording, or transcribing its own audio. */
+    public get isActive(): Signal<boolean> {
+        return this._isActive;
+    }
+
+    /** Whether this tool is waiting for access to the microphone. */
+    public get isAcquiring(): Signal<boolean> {
+        return this._isAcquiring;
+    }
+
+    /** Whether this tool is converting a stopped recording to text. */
+    public get isTranscribing(): Signal<boolean> {
+        return this._isTranscribing.asReadonly();
+    }
+
+    /** Allows the owning surface to prevent new microphone captures. */
+    public readonly enabled = input(true, { alias: 'ngpVoiceRecorderEnabled' });
+
+    /** Emits the completed transcript after updating the surrounding prompt box when present. */
+    public readonly transcribed = output<string>({ alias: 'ngpVoiceRecorderTranscribed' });
 
     /**
      * Emits recorder or transcription failures for application-level feedback.
@@ -210,13 +243,32 @@ export class VoiceRecorderDirective {
             return;
         }
 
+        const generation = ++this._generation;
+
         try {
             this.liveVoiceTranscriber()?.cancelSession();
+        } catch (error: unknown) {
+            if (this.isCurrent(generation)) {
+                this.failed.emit(error);
+            }
+        } finally {
+            await this.releaseRecording(generation);
+        }
+    }
+
+    private isCurrent(generation: number): boolean {
+        return !this._isDestroyed && this._ownsRecording() && this._generation === generation;
+    }
+
+    private async releaseRecording(generation: number): Promise<void> {
+        try {
             await this._audioRecorder.cancel();
         } catch (error: unknown) {
-            this.failed.emit(error);
+            if (this.isCurrent(generation)) {
+                this.failed.emit(error);
+            }
         } finally {
-            if (!this._isDestroyed) {
+            if (this._generation === generation) {
                 this._isTranscribing.set(false);
                 this._ownsRecording.set(false);
             }
@@ -267,32 +319,31 @@ export class VoiceRecorderDirective {
     }
 
     private async startRecording(): Promise<void> {
-        if (this._isDestroyed || this._isTranscribing() || this._audioRecorder.isActive()) {
+        if (this._isDestroyed || !this.enabled() || this._ownsRecording() || this._audioRecorder.isActive()) {
             return;
         }
 
+        const generation = ++this._generation;
         this._ownsRecording.set(true);
 
         try {
             await this._audioRecorder.start({
                 audioDeviceId: this._audioInputDevicePreferenceService.preference()?.deviceId ?? null,
             });
+            if (!this.isCurrent(generation)) {
+                return;
+            }
+
             const audioTrack = this._audioRecorder.mediaStream()?.getAudioTracks()[0];
 
             await this.liveVoiceTranscriber()?.startSession(audioTrack);
         } catch (error: unknown) {
-            this.failed.emit(error);
+            if (this.isCurrent(generation)) {
+                this.failed.emit(error);
 
-            this.liveVoiceTranscriber()?.cancelSession();
-
-            try {
-                await this._audioRecorder.cancel();
-            } catch (cleanupError: unknown) {
-                this.failed.emit(cleanupError);
-            }
-
-            if (!this._isDestroyed) {
-                this._ownsRecording.set(false);
+                if (this.isCurrent(generation)) {
+                    await this.cancelRecording();
+                }
             }
         }
     }
@@ -302,34 +353,33 @@ export class VoiceRecorderDirective {
             return;
         }
 
+        const generation = this._generation;
         this._isTranscribing.set(true);
-        const liveTranscriber = this.liveVoiceTranscriber();
-        const liveTranscript = liveTranscriber?.stopSession() ?? null;
 
         try {
-            const recording = await this._audioRecorder.stop();
+            const liveTranscript = this.liveVoiceTranscriber()?.stopSession() ?? null;
+            const [recording, liveText] = await Promise.all([this._audioRecorder.stop(), liveTranscript]);
 
-            if ((!recording?.blob && !liveTranscript) || this._isDestroyed) {
+            if ((!recording?.blob && !liveTranscript) || !this.isCurrent(generation)) {
                 return;
             }
 
-            const transcript = (liveTranscript ? await liveTranscript : await this._audioRecorder.transcribe()).trim();
+            const transcript = (liveText ?? (await this._audioRecorder.transcribe())).trim();
 
-            if (transcript && !this._isDestroyed) {
+            if (transcript && this.isCurrent(generation)) {
                 this.appendTranscript(transcript);
+
+                if (this.isCurrent(generation)) {
+                    this.transcribed.emit(transcript);
+                }
             }
         } catch (error: unknown) {
-            this.failed.emit(error);
-        } finally {
-            try {
-                await this._audioRecorder.cancel();
-            } catch (error: unknown) {
+            if (this.isCurrent(generation)) {
                 this.failed.emit(error);
             }
-
-            if (!this._isDestroyed) {
-                this._isTranscribing.set(false);
-                this._ownsRecording.set(false);
+        } finally {
+            if (this.isCurrent(generation)) {
+                await this.releaseRecording(generation);
             }
         }
     }
@@ -347,7 +397,7 @@ export class VoiceRecorderDirective {
         tool.elapsedTime = ownsRecording ? elapsedTime : 0;
         tool.objectUrl = ownsRecording ? objectUrl : null;
         tool.canPause = true;
-        tool.disabled = isTranscribing || (!ownsRecording && this._audioRecorder.isActive()) || recorderState === 'disposed';
+        tool.disabled = isTranscribing || (!ownsRecording && (!this.enabled() || this._audioRecorder.isActive())) || recorderState === 'disposed';
     }
 
     // #endregion

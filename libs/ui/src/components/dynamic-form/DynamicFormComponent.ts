@@ -17,10 +17,11 @@ import {
     type SimpleChanges,
     type WritableSignal,
 } from '@angular/core';
-import { emailError, form, maxLengthError, required, validate, type FieldState, type FieldTree } from '@angular/forms/signals';
+import { emailError, form, maxLengthError, required, requiredError, validate, type FieldState, type FieldTree } from '@angular/forms/signals';
 import {
     AnchorComponent,
     ButtonComponent,
+    CheckBoxGroupComponent,
     CheckboxComponent,
     DateBoxComponent,
     LocaleDirective,
@@ -30,6 +31,8 @@ import {
     IconNameDirective,
     NumberBoxComponent,
     PasswordBoxComponent,
+    RadioComponent,
+    RadioGroupComponent,
     SelectComponent,
     SelectItemComponent,
     TextBoxComponent,
@@ -189,9 +192,10 @@ function schemaPathOf<TPath>(schema: Readonly<Record<string, TPath>>, key: strin
                                                 [required]="isRequired(fieldDefinition)"
                                                 [readonly]="isFieldReadonly(fieldDefinition)"
                                                 [isClearable]="isFieldClearable(fieldDefinition)"
-                                                [min]="fieldDefinition.minimum"
-                                                [max]="fieldDefinition.maximum"
-                                                [step]="fieldDefinition.step"
+                                                [min]="fieldDefinition.integer ? undefined : fieldDefinition.minimum"
+                                                [max]="fieldDefinition.integer ? undefined : fieldDefinition.maximum"
+                                                [step]="fieldDefinition.integer ? 1 : fieldDefinition.step"
+                                                [decimalPlaces]="fieldDefinition.integer ? 15 : undefined"
                                                 [variant]="'primary'"
                                             />
                                         </mosaik-form-field>
@@ -217,6 +221,65 @@ function schemaPathOf<TPath>(schema: Readonly<Record<string, TPath>>, key: strin
                                                     />
                                                 }
                                             </mosaik-select>
+                                        </mosaik-form-field>
+                                    }
+                                    @case (controlType.Radio) {
+                                        <mosaik-form-field [fieldState]="field(fieldDefinition.key)()">
+                                            <div class="flex items-center justify-between gap-2">
+                                                <span part="choice-label">{{ fieldDefinition.label }}</span>
+                                                @if (isFieldClearable(fieldDefinition)) {
+                                                    <mosaik-button
+                                                        part="clear-answer"
+                                                        [attr.aria-label]="clearAnswerLabel"
+                                                        [appearance]="'plain'"
+                                                        [iconName]="'dismiss'"
+                                                        [size]="'small'"
+                                                        [type]="'button'"
+                                                        [disabled]="field(fieldDefinition.key)().value() === null"
+                                                        (click)="clearAnswer(fieldDefinition)"
+                                                    />
+                                                }
+                                            </div>
+                                            <mosaik-radio-group
+                                                part="control"
+                                                [attr.aria-label]="fieldDefinition.label"
+                                                [formField]="field(fieldDefinition.key)"
+                                                [required]="isRequired(fieldDefinition)"
+                                                [disabled]="isFieldReadonly(fieldDefinition)"
+                                                [orientation]="'horizontal'"
+                                                [variant]="'primary'"
+                                            >
+                                                @for (option of fieldDefinition.options ?? []; track option.value) {
+                                                    <mosaik-radio
+                                                        part="option"
+                                                        [label]="option.label"
+                                                        [value]="option.value"
+                                                        [disabled]="option.disabled ?? false"
+                                                    />
+                                                }
+                                            </mosaik-radio-group>
+                                        </mosaik-form-field>
+                                    }
+                                    @case (controlType.MultipleChoice) {
+                                        <mosaik-form-field [fieldState]="field(fieldDefinition.key)()">
+                                            <span part="choice-label">{{ fieldDefinition.label }}</span>
+                                            <mosaik-checkbox-group
+                                                part="control"
+                                                [attr.aria-label]="fieldDefinition.label"
+                                                [formField]="field(fieldDefinition.key)"
+                                                [required]="isRequired(fieldDefinition)"
+                                                [disabled]="isFieldReadonly(fieldDefinition)"
+                                                [variant]="'primary'"
+                                            >
+                                                @for (option of fieldDefinition.options ?? []; track option.value) {
+                                                    <mosaik-checkbox
+                                                        part="option"
+                                                        [label]="option.label"
+                                                        [value]="option.value"
+                                                        [disabled]="option.disabled ?? false"
+                                                    />
+                                                }
+                                            </mosaik-checkbox-group>
                                         </mosaik-form-field>
                                     }
                                     @case (controlType.Boolean) {
@@ -317,6 +380,7 @@ function schemaPathOf<TPath>(schema: Readonly<Record<string, TPath>>, key: strin
     imports: [
         AnchorComponent,
         ButtonComponent,
+        CheckBoxGroupComponent,
         CheckboxComponent,
         DateBoxComponent,
         LocaleDirective,
@@ -326,6 +390,8 @@ function schemaPathOf<TPath>(schema: Readonly<Record<string, TPath>>, key: strin
         IconNameDirective,
         NumberBoxComponent,
         PasswordBoxComponent,
+        RadioComponent,
+        RadioGroupComponent,
         SelectComponent,
         SelectItemComponent,
         TextBoxComponent,
@@ -338,6 +404,9 @@ function schemaPathOf<TPath>(schema: Readonly<Record<string, TPath>>, key: strin
             linkUnavailableLabel: 'loc.dynamicForm.link.unavailable',
             linkCopiedLabel: 'loc.dynamicForm.link.copied',
             linkCopyErrorLabel: 'loc.dynamicForm.link.copyError',
+            integerErrorLabel: 'loc.dynamicForm.number.integerError',
+            integerRangeErrorLabel: 'loc.dynamicForm.number.integerRangeError',
+            clearAnswerLabel: 'loc.dynamicForm.choice.clear',
         }),
     ],
 })
@@ -430,6 +499,11 @@ export class DynamicFormComponent implements OnChanges {
      */
     protected readonly controlType = DynamicFormControlType;
 
+    /** Accessible text of the optional radio clear button. */
+    protected get clearAnswerLabel(): string {
+        return this._intl.clearAnswerLabel;
+    }
+
     // #endregion
 
     // #region Methods
@@ -510,7 +584,22 @@ export class DynamicFormComponent implements OnChanges {
      * @protected
      */
     protected isFieldClearable(field: IDynamicFormFieldDefinition): boolean {
-        return !this.isRequired(field) && !this.isFieldReadonly(field);
+        return field.isClearable !== false && !this.isRequired(field) && !this.isFieldReadonly(field);
+    }
+
+    /** Clears the selected answer and updates the field's interaction state. */
+    protected clearAnswer(field: IDynamicFormFieldDefinition): void {
+        if (!this.isFieldClearable(field)) {
+            return;
+        }
+
+        const state = this.field(field.key)();
+
+        if (state.value() !== null) {
+            state.value.set(null);
+            state.markAsDirty();
+            state.markAsTouched();
+        }
     }
 
     /**
@@ -753,7 +842,24 @@ export class DynamicFormComponent implements OnChanges {
                         const maxLengthRule = this.findValidationRule(field, DynamicFormValidationRuleKey.MaxLength);
 
                         if (field.required === true || requiredRule) {
-                            required(schemaPathOf(schema, field.key), requiredRule?.message ? { message: requiredRule.message } : undefined);
+                            const path = schemaPathOf(schema, field.key);
+                            const options = requiredRule?.message ? { message: requiredRule.message } : undefined;
+
+                            if (
+                                field.controlType === DynamicFormControlType.Radio ||
+                                field.controlType === DynamicFormControlType.Select ||
+                                field.controlType === DynamicFormControlType.MultipleChoice
+                            ) {
+                                validate(path, ({ value }) => {
+                                    const choice = value();
+
+                                    return choice === null || choice === undefined || choice === '' || (Array.isArray(choice) && choice.length === 0)
+                                        ? requiredError(options)
+                                        : null;
+                                });
+                            } else {
+                                required(path, options);
+                            }
                         }
 
                         if (field.controlType === DynamicFormControlType.Email || emailRule) {
@@ -767,6 +873,24 @@ export class DynamicFormComponent implements OnChanges {
                                 return typeof value === 'string' && isEmailAddress(value)
                                     ? null
                                     : emailError(emailRule?.message ? { message: emailRule.message } : undefined);
+                            });
+                        }
+
+                        if (field.controlType === DynamicFormControlType.Number && field.integer) {
+                            validate(schemaPathOf(schema, field.key), ({ value }) => {
+                                const number = value();
+
+                                if (number === null || number === '') {
+                                    return null;
+                                }
+
+                                if (typeof number !== 'number' || !Number.isInteger(number)) {
+                                    return { kind: 'integer', message: this._intl.integerErrorLabel };
+                                }
+
+                                return (field.minimum !== undefined && number < field.minimum) || (field.maximum !== undefined && number > field.maximum)
+                                    ? { kind: 'integerRange', message: this._intl.integerRangeErrorLabel }
+                                    : null;
                             });
                         }
 
@@ -831,6 +955,10 @@ export class DynamicFormComponent implements OnChanges {
 
         if (field.minimum !== undefined && field.maximum !== undefined && field.minimum > field.maximum) {
             throw new RangeError(`Dynamic form field '${field.key}' has an invalid numeric range.`);
+        }
+
+        if (field.controlType === DynamicFormControlType.MultipleChoice && field.options?.some((option) => typeof option.value !== 'string')) {
+            throw new Error(`Dynamic form field '${field.key}' requires string values for its multiple-choice options.`);
         }
 
         this.assertValidDateRange(field);

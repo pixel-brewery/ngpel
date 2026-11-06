@@ -110,36 +110,48 @@ interface IRenderedFileItem {
             }
         </ng-template>
 
+        <ng-template #compactFiles>
+            @for (item of renderedFiles(); track item.file.id) {
+                <ngp-file
+                    part="file"
+                    class="min-w-0 max-w-full"
+                    [presentation]="filePresentation()"
+                    [fileName]="item.file.fileName"
+                    [description]="item.description"
+                    [preview]="item.preview"
+                    [state]="item.file.state ?? fileStates.Normal"
+                    [progress]="item.file.progress ?? 0"
+                    [stateLabel]="item.file.stateLabel ?? null"
+                    [disabled]="disabled() || !!item.file.disabled"
+                    [openLabel]="openLabel()"
+                    [openDescription]="openDescription()"
+                    [openIconName]="openIconName()"
+                    [removable]="removable()"
+                    [removeLabel]="removeLabel()"
+                    [removeDescription]="removeDescription()"
+                    [actionsLabel]="actionsLabel()"
+                    [removeVariant]="removeVariant()"
+                    [retryLabel]="retryLabel()"
+                    [testId]="item.testId"
+                    [maxTextLines]="maxTextLines()"
+                    (openRequested)="requestOpen(item.file)"
+                    (removeRequested)="requestRemoval(item.file)"
+                    (retryRequested)="requestRetry(item.file)"
+                />
+            }
+        </ng-template>
+
         <ng-template #filesContent>
             @if (renderedFiles().length > 0) {
                 @switch (layout()) {
                     @case (layouts.Gallery) {
                         <div part="gallery" class="grid grid-cols-[repeat(auto-fill,minmax(min(100%,12rem),1fr))] items-stretch gap-3">
-                            @for (item of renderedFiles(); track item.file.id) {
-                                <ngp-file
-                                    part="file"
-                                    [presentation]="filePresentation()"
-                                    [fileName]="item.file.fileName"
-                                    [description]="item.description"
-                                    [preview]="item.preview"
-                                    [state]="item.file.state ?? fileStates.Normal"
-                                    [progress]="item.file.progress ?? 0"
-                                    [stateLabel]="item.file.stateLabel ?? null"
-                                    [disabled]="disabled() || !!item.file.disabled"
-                                    [openLabel]="openLabel()"
-                                    [openIconName]="openIconName()"
-                                    [removable]="removable()"
-                                    [removeLabel]="removeLabel()"
-                                    [actionsLabel]="actionsLabel()"
-                                    [removeVariant]="removeVariant()"
-                                    [retryLabel]="retryLabel()"
-                                    [testId]="item.testId"
-                                    [maxTextLines]="maxTextLines()"
-                                    (openRequested)="requestOpen(item.file)"
-                                    (removeRequested)="requestRemoval(item.file)"
-                                    (retryRequested)="requestRetry(item.file)"
-                                />
-                            }
+                            <ng-container [ngTemplateOutlet]="compactFiles" />
+                        </div>
+                    }
+                    @case (layouts.Inline) {
+                        <div part="inline" class="flex min-w-0 flex-wrap items-center gap-2">
+                            <ng-container [ngTemplateOutlet]="compactFiles" />
                         </div>
                     }
                     @case (layouts.Preview) {
@@ -159,9 +171,11 @@ interface IRenderedFileItem {
                                     [stateLabel]="item.file.stateLabel ?? null"
                                     [disabled]="disabled() || !!item.file.disabled"
                                     [openLabel]="openLabel()"
+                                    [openDescription]="openDescription()"
                                     [openIconName]="openIconName()"
                                     [removable]="removable()"
                                     [removeLabel]="removeLabel()"
+                                    [removeDescription]="removeDescription()"
                                     [actionsLabel]="actionsLabel()"
                                     [removeVariant]="removeVariant()"
                                     [retryLabel]="retryLabel()"
@@ -189,9 +203,11 @@ interface IRenderedFileItem {
                                         [stateLabel]="item.file.stateLabel ?? null"
                                         [disabled]="disabled() || !!item.file.disabled"
                                         [openLabel]="openLabel()"
+                                        [openDescription]="openDescription()"
                                         [openIconName]="openIconName()"
                                         [removable]="removable()"
                                         [removeLabel]="removeLabel()"
+                                        [removeDescription]="removeDescription()"
                                         [actionsLabel]="actionsLabel()"
                                         [removeVariant]="removeVariant()"
                                         [retryLabel]="retryLabel()"
@@ -213,7 +229,8 @@ interface IRenderedFileItem {
                 <div
                     part="empty"
                     class="flex w-full items-center justify-center"
-                    [class.min-h-24]="layout() !== layouts.Preview"
+                    [class.min-h-24]="layout() !== layouts.Preview && layout() !== layouts.Inline"
+                    [class.min-h-12]="layout() === layouts.Inline"
                     [style.aspect-ratio]="layout() === layouts.Preview ? resolvedPreviewRatio() : null"
                 >
                     <mosaik-empty-state part="empty-state" [iconSize]="'small'" [iconName]="resolvedEmptyIconName()" [header]="emptyMessage() ?? label()">
@@ -313,6 +330,9 @@ export class FilesComponent {
     /** Accessible label enabling each file's open action. */
     public readonly openLabel: InputSignal<null | string> = input<null | string>(null);
 
+    /** Optional supporting text for each file's open action. */
+    public readonly openDescription = input<string | null>(null);
+
     /** Icon used by each open action. */
     public readonly openIconName: InputSignal<string> = input<string>('open');
 
@@ -321,6 +341,9 @@ export class FilesComponent {
 
     /** Accessible label for each removal action. */
     public readonly removeLabel: InputSignal<null | string> = input<null | string>(null);
+
+    /** Optional supporting text for each file's remove action. */
+    public readonly removeDescription = input<string | null>(null);
 
     /** Accessible label of each file's contextual action menu. */
     public readonly actionsLabel: InputSignal<null | string> = input<null | string>(null);
@@ -372,6 +395,8 @@ export class FilesComponent {
         switch (this.layout()) {
             case FilesLayout.Gallery:
                 return FilePresentation.Tile;
+            case FilesLayout.Inline:
+                return FilePresentation.Chip;
             case FilesLayout.Preview:
                 return FilePresentation.Preview;
             default:

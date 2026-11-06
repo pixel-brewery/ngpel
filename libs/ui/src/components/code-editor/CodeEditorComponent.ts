@@ -20,7 +20,6 @@ import {
 import { type ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DomSanitizer, type SafeHtml } from '@angular/platform-browser';
 import { ButtonComponent, IconNameDirective, TextComponent } from '@pixel-brewery/mosaik-elements-angular';
-// @ts-expect-error — FORM_STATUS_HOST is exported at runtime but not in the type declarations
 import { FORM_STATUS_HOST } from '@pixel-brewery/mosaik-elements-angular';
 import { CodeEditorComponentIntl, provideCodeEditorComponentIntl } from './CodeEditorComponentIntl';
 import { autocompletion, closeBrackets, closeBracketsKeymap, completionKeymap, type CompletionSource } from '@codemirror/autocomplete';

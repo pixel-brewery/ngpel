@@ -3,4 +3,4 @@
  *
  * @public
  */
-export type AudioActivityState = 'error' | 'idle' | 'listening' | 'paused' | 'speaking' | 'thinking';
+export type AudioActivityState = 'completed' | 'error' | 'idle' | 'listening' | 'paused' | 'speaking' | 'thinking';

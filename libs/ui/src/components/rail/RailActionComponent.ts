@@ -25,6 +25,7 @@ import { RAIL_HOST } from './RailHostToken';
             } @else {
                 <mosaik-toggle-button
                     [attr.aria-label]="label()"
+                    [label]="_railHost.isFloating?.() ? floatingLabel() : ''"
                     [mosaikTooltip]="label()"
                     [iconName]="icon()"
                     [variant]="variant()"
@@ -45,7 +46,7 @@ import { RAIL_HOST } from './RailHostToken';
 export class RailActionComponent {
     // #region Fields
 
-    private readonly _railHost = inject(RAIL_HOST);
+    protected readonly _railHost = inject(RAIL_HOST);
     private readonly _activateCommand: Command<void> = command(
         () => {
             const target = this.target();
@@ -82,6 +83,9 @@ export class RailActionComponent {
      * @readonly
      */
     public readonly label: InputSignal<string> = input.required<string>();
+
+    /** Short visual label used when the action floats. */
+    public readonly floatingLabel = input('');
 
     /**
      * Mosaik icon rendered by the compact action.

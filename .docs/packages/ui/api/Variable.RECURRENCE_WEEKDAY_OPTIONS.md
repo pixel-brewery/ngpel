@@ -9,4 +9,4 @@ editUrl: false
 const RECURRENCE_WEEKDAY_OPTIONS: ReadonlyArray<IRecurrenceOption<RecurrenceWeekday>>;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:43](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L43)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:48](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L48)

@@ -61,16 +61,27 @@ export interface IImageRemovedEvent {
             <mosaik-avatar [src]="value() | ngpMediaUrl" [size]="size()" [appearance]="appearance()" [iconName]="iconName()" />
             <div class="flex flex-row gap-1">
                 <mosaik-file-picker [accept]="accept()" [disabled]="isInteractionDisabled()" (filesPicked)="onFilesPicked($any($event))">
-                    <mosaik-button [appearance]="'solid'" [size]="'small'" [iconName]="'edit'" [disabled]="isInteractionDisabled()" />
+                    <mosaik-button
+                        [appearance]="'solid'"
+                        [size]="'small'"
+                        [iconName]="'edit'"
+                        [disabled]="isInteractionDisabled()"
+                        [attr.aria-label]="editLabel()"
+                        [attr.title]="editLabel()"
+                    />
                 </mosaik-file-picker>
-                <mosaik-press-button
-                    [appearance]="'solid'"
-                    [size]="'small'"
-                    [iconName]="'delete'"
-                    [variant]="'danger'"
-                    [disabled]="isRemoveDisabled()"
-                    (pressed)="onRemove()"
-                />
+                @if (removable()) {
+                    <mosaik-press-button
+                        [appearance]="'solid'"
+                        [size]="'small'"
+                        [iconName]="'delete'"
+                        [variant]="'danger'"
+                        [disabled]="isRemoveDisabled()"
+                        [attr.aria-label]="removeLabel()"
+                        [attr.title]="removeLabel()"
+                        (pressed)="onRemove()"
+                    />
+                }
             </div>
         </div>
     `,
@@ -177,6 +188,15 @@ export class ImageEditorComponent implements ControlValueAccessor {
      */
     public readonly readonly = input(false);
 
+    /** Whether the caller allows removing the current image. */
+    public readonly removable = input(true);
+
+    /** Localized accessible label and tooltip of the edit action. */
+    public readonly editLabel = input<string | null>(null);
+
+    /** Localized accessible label and tooltip of the remove action. */
+    public readonly removeLabel = input<string | null>(null);
+
     /**
      * The icon to display when no image is set.
      *
@@ -252,7 +272,7 @@ export class ImageEditorComponent implements ControlValueAccessor {
      * @protected
      * @readonly
      */
-    protected readonly isRemoveDisabled = computed(() => this.isInteractionDisabled() || !this.value());
+    protected readonly isRemoveDisabled = computed(() => !this.removable() || this.isInteractionDisabled() || !this.value());
 
     // #endregion
 
@@ -285,7 +305,7 @@ export class ImageEditorComponent implements ControlValueAccessor {
      * @protected
      */
     protected onRemove(): void {
-        if (this.isInteractionDisabled() || !this.value()) {
+        if (this.isRemoveDisabled()) {
             return;
         }
 

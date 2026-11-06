@@ -76,6 +76,8 @@ describe('ContextOverlayService', () => {
         await vi.waitFor(() => expect(task.mounts).toHaveLength(1));
         const outcome = vi.fn();
         service.closedOutcome.subscribe(outcome);
+        const closedAddress = vi.fn();
+        service.closed.subscribe(closedAddress);
         const firstTask = task.mounts[0]!;
         location.back();
         await vi.waitFor(() => expect(firstTask.close).toHaveBeenCalledOnce());
@@ -89,6 +91,7 @@ describe('ContextOverlayService', () => {
         expect(report.mounts[0]!.close).not.toHaveBeenCalled();
         expect(location.path(true)).toBe('/app/report?team=1&team=2&overlay=report.detail&overlayId=42&overlay.1=task.detail&overlayId.1=5#chart');
         expect(outcome).not.toHaveBeenCalled();
+        expect(closedAddress).not.toHaveBeenCalled();
     });
 
     it('appends overlays and replaces only the top URL state on an interactive close', async () => {
@@ -99,17 +102,84 @@ describe('ContextOverlayService', () => {
         expect(service.open('report.detail', '42')).toBe(true);
         expect(service.open('task.edit', '5')).toBe(true);
         await vi.waitFor(() => expect(task.mounts).toHaveLength(1));
+        const historyState = { selectedRow: 42 };
+        location.replaceState(location.path(true), '', historyState);
         const outcome = vi.fn();
         service.closedOutcome.subscribe(outcome);
+        const closedAddress = vi.fn();
+        service.closed.subscribe(closedAddress);
 
         // Act
         task.mounts[0]!.result.next('saved');
 
         // Assert
         expect(location.path(true)).toBe('/app/report?filter=active&overlay=report.detail&overlayId=42#chart');
+        expect(location.getState()).toEqual(historyState);
         expect(report.mounts[0]!.close).not.toHaveBeenCalled();
         expect(task.target.onClosed).toHaveBeenCalledWith('saved', { key: 'task.edit', id: '5' });
         expect(outcome).toHaveBeenCalledWith({ state: { key: 'task.edit', id: '5' }, result: 'saved' });
+        expect(closedAddress).toHaveBeenCalledExactlyOnceWith({ key: 'task.edit', id: '5' });
+    });
+
+    it('opens a resource URL over the current page using its top overlay address', async () => {
+        // Arrange
+        const task = fixtureTarget('task.detail');
+        const { harness, location, service } = await createHost('/app/report?filter=active#chart', task.target);
+        const page = harness.routeDebugElement?.componentInstance;
+        const link = '/app/tasks?overlay=task.list&overlay.1=task.detail&overlayId.1=5&overlayContext.1=team%3A7#other';
+
+        // Act
+        const accepted = service.openFromUrl(link);
+
+        // Assert
+        expect(accepted).toBe(true);
+        await vi.waitFor(() => expect(task.mounts).toHaveLength(1));
+        expect(task.mounts[0]!.state).toEqual({ key: 'task.detail', id: '5', context: 'team:7' });
+        expect(location.path(true)).toBe('/app/report?filter=active&overlay=task.detail&overlayId=5&overlayContext=team%3A7#chart');
+        expect(harness.routeDebugElement?.componentInstance).toBe(page);
+    });
+
+    it('replaces the top overlay without pushing history or remounting its background', async () => {
+        // Arrange
+        const report = fixtureTarget('report.detail');
+        const task = fixtureTarget('task.detail');
+        const { location, service } = await createHost('/app/report?overlay=report.detail&overlayId=42', report.target, task.target);
+        expect(service.open('task.detail', '5')).toBe(true);
+        await vi.waitFor(() => expect(task.mounts).toHaveLength(1));
+        const go = vi.spyOn(location, 'go');
+        const closed = vi.fn();
+        service.closed.subscribe(closed);
+
+        // Act
+        const accepted = service.replaceTop('task.detail', '7');
+
+        // Assert
+        expect(accepted).toBe(true);
+        await vi.waitFor(() => expect(task.mounts).toHaveLength(2));
+        expect(task.mounts[0]!.close).toHaveBeenCalledOnce();
+        expect(task.mounts[1]!.state.id).toBe('7');
+        expect(report.mounts).toHaveLength(1);
+        expect(report.mounts[0]!.close).not.toHaveBeenCalled();
+        expect(location.path()).toBe('/app/report?overlay=report.detail&overlayId=42&overlay.1=task.detail&overlayId.1=7');
+        expect(go).not.toHaveBeenCalled();
+        expect(closed).not.toHaveBeenCalled();
+    });
+
+    it('closes a drawer on page navigation without restoring its old background URL', async () => {
+        // Arrange
+        const report = fixtureTarget('report.detail');
+        const { harness, location, service } = await createHost('/app/report?overlay=report.detail&overlayId=42', report.target);
+        await vi.waitFor(() => expect(report.mounts).toHaveLength(1));
+        const closed = vi.fn();
+        service.closed.subscribe(closed);
+
+        // Act
+        await harness.navigateByUrl('/sign-in');
+
+        // Assert
+        await vi.waitFor(() => expect(report.mounts[0]!.close).toHaveBeenCalledOnce());
+        expect(location.path()).toBe('/sign-in');
+        expect(closed).not.toHaveBeenCalled();
     });
 
     it('promotes a create overlay in place and keeps transient data on its own layer', async () => {
@@ -138,7 +208,7 @@ describe('ContextOverlayService', () => {
     it('rejects a denied deep link before preparing its target', async () => {
         // Arrange
         const prepare = vi.fn<() => ContextOverlayLoader<string>>();
-        const { invalid } = await createHost('/app/report?overlay=report.detail&overlayId=42', {
+        const { invalid, service } = await createHost('/app/report?overlay=report.detail&overlayId=42', {
             key: 'report.detail',
             canOpen: () => false,
             prepare,
@@ -146,7 +216,29 @@ describe('ContextOverlayService', () => {
 
         // Assert
         await vi.waitFor(() => expect(invalid).toHaveBeenCalledOnce());
+        expect(service.hasTarget('report.detail')).toBe(true);
+        expect(service.hasTarget('report.unknown')).toBe(false);
         expect(prepare).not.toHaveBeenCalled();
+    });
+
+    it('leaves the current URL intact when a target rejects a programmatic address', async () => {
+        // Arrange
+        const background = '/app/report?filter=active#chart';
+        const { invalid, location, service } = await createHost(background, {
+            key: 'task.detail',
+            canOpen: () => true,
+            prepare: () => {
+                throw new Error('The related resource is unavailable.');
+            },
+        });
+
+        // Act
+        const accepted = service.open('task.detail', '5', 'team:7');
+
+        // Assert
+        expect(accepted).toBe(false);
+        expect(location.path(true)).toBe(background);
+        expect(invalid).not.toHaveBeenCalled();
     });
 
     it('opens the current overlay while a superseded lazy loader is still pending', async () => {

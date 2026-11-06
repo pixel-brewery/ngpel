@@ -1,6 +1,6 @@
 // #region Imports
 
-import { ChangeDetectionStrategy, Component, input, output, type InputSignal, type OutputEmitterRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, output, type InputSignal, type OutputEmitterRef } from '@angular/core';
 import { ButtonComponent, IconNameDirective, PressButtonComponent } from '@pixel-brewery/mosaik-elements-angular';
 import type { IVoiceSessionControlLabels } from './IVoiceSessionControlLabels';
 
@@ -19,7 +19,7 @@ import type { IVoiceSessionControlLabels } from './IVoiceSessionControlLabels';
     selector: 'ngp-voice-session-controls',
     imports: [ButtonComponent, IconNameDirective, PressButtonComponent],
     template: `
-        <div part="root" class="controls" role="toolbar" [attr.aria-label]="labels().toolbar">
+        <div part="root" class="controls" role="toolbar" [attr.aria-label]="labels().toolbar" [class.controls--compact]="compact()">
             <div part="primary-actions" class="action-group">
                 <mosaik-button
                     data-action="microphone"
@@ -29,7 +29,7 @@ import type { IVoiceSessionControlLabels } from './IVoiceSessionControlLabels';
                     [attr.title]="microphoneMuted() ? labels().microphoneUnmute : labels().microphoneMute"
                     [disabled]="disabled()"
                     [iconName]="'mic'"
-                    [size]="'large'"
+                    [size]="actionSize()"
                     [variant]="microphoneMuted() ? 'danger' : 'tertiary'"
                     (click)="toggleMicrophoneMuted()"
                 />
@@ -43,23 +43,23 @@ import type { IVoiceSessionControlLabels } from './IVoiceSessionControlLabels';
                         [attr.title]="paused() ? labels().resume : labels().pause"
                         [disabled]="disabled()"
                         [iconName]="paused() ? 'play' : 'pause'"
-                        [size]="'large'"
+                        [size]="actionSize()"
                         [variant]="paused() ? 'warning' : 'tertiary'"
                         (click)="togglePaused()"
                     />
                 }
                 @if (showAssistantControl()) {
-                    @if (assistantSpeaking()) {
+                    @if (assistantSpeaking() || assistantAudioAvailable() !== undefined) {
                         <mosaik-button
                             data-action="assistant-stop"
                             [appearance]="'soft'"
                             [attr.aria-label]="labels().assistantStop"
                             [attr.title]="labels().assistantStop"
-                            [disabled]="disabled()"
+                            [disabled]="assistantActionsDisabled() || !assistantSpeaking()"
                             [iconName]="'dismiss'"
-                            [size]="'large'"
+                            [size]="actionSize()"
                             [variant]="'warning'"
-                            (click)="assistantStopRequested.emit()"
+                            (click)="requestAssistantStop()"
                         />
                     }
 
@@ -69,32 +69,39 @@ import type { IVoiceSessionControlLabels } from './IVoiceSessionControlLabels';
                         [attr.aria-label]="assistantMuted() ? labels().assistantUnmute : labels().assistantMute"
                         [attr.aria-pressed]="assistantMuted()"
                         [attr.title]="assistantMuted() ? labels().assistantUnmute : labels().assistantMute"
-                        [disabled]="disabled()"
+                        [disabled]="assistantActionsDisabled()"
                         [iconName]="assistantMuted() ? 'speakerOff' : 'speaker'"
-                        [size]="'large'"
+                        [size]="actionSize()"
                         [variant]="assistantMuted() ? 'danger' : 'tertiary'"
                         (click)="toggleAssistantMuted()"
                     />
                 }
             </div>
 
-            <span part="separator" class="separator" aria-hidden="true"></span>
+            <div part="secondary-actions" class="action-group secondary-actions">
+                <ng-content select="[ngpVoiceSessionControlsSecondary]" />
+            </div>
 
-            <mosaik-press-button
-                data-action="end"
-                [attr.test-id]="'voice-session-end'"
-                part="end-action"
-                class="end-action"
-                [appearance]="'solid'"
-                [attr.aria-label]="labels().end"
-                [disabled]="disabled() || endBusy()"
-                [iconName]="'dismiss'"
-                [isBusy]="endBusy()"
-                [label]="labels().end"
-                [size]="'large'"
-                [variant]="'danger'"
-                (pressed)="endRequested.emit()"
-            />
+            @if (canEnd()) {
+                <span part="separator" class="separator" aria-hidden="true"></span>
+
+                <mosaik-press-button
+                    data-action="end"
+                    [attr.test-id]="'voice-session-end'"
+                    part="end-action"
+                    class="end-action"
+                    [appearance]="'solid'"
+                    [attr.aria-label]="labels().end"
+                    [attr.title]="labels().end"
+                    [disabled]="disabled() || endBusy()"
+                    [iconName]="'dismiss'"
+                    [isBusy]="endBusy()"
+                    [label]="compact() ? '' : labels().end"
+                    [size]="actionSize()"
+                    [variant]="'danger'"
+                    (pressed)="requestEnd()"
+                />
+            }
         </div>
     `,
     styles: `
@@ -127,6 +134,15 @@ import type { IVoiceSessionControlLabels } from './IVoiceSessionControlLabels';
             align-items: center;
             justify-content: center;
             gap: 0.25rem;
+        }
+
+        .controls--compact {
+            gap: 0.375rem;
+            padding: 0.375rem;
+        }
+
+        .secondary-actions:empty {
+            display: none;
         }
 
         .separator {
@@ -173,6 +189,12 @@ export class VoiceSessionControlsComponent {
     // #region Properties
 
     /**
+     * Whether assistant audio actions are available. Providing a value keeps the stop control
+     * mounted between utterances. When omitted, the stop control appears only while speaking.
+     */
+    public readonly assistantAudioAvailable = input<boolean>();
+
+    /**
      * Indicates whether assistant audio output is currently muted.
      *
      * @public
@@ -211,6 +233,12 @@ export class VoiceSessionControlsComponent {
      * @readonly
      */
     public readonly canPause: InputSignal<boolean> = input<boolean>(true);
+
+    /** Whether the toolbar offers an end-session action. */
+    public readonly canEnd = input(true);
+
+    /** Uses compact action sizes and displays the end action as an accessible icon button. */
+    public readonly compact = input(false);
 
     /**
      * Disables every control except while an end request is already busy.
@@ -284,6 +312,9 @@ export class VoiceSessionControlsComponent {
      */
     public readonly showAssistantControl: InputSignal<boolean> = input<boolean>(true);
 
+    protected readonly actionSize = computed(() => (this.compact() ? 'small' : 'large'));
+    protected readonly assistantActionsDisabled = computed(() => this.disabled() || this.assistantAudioAvailable() === false);
+
     // #endregion
 
     // #region Methods
@@ -294,7 +325,9 @@ export class VoiceSessionControlsComponent {
      * @protected
      */
     protected toggleAssistantMuted(): void {
-        this.assistantMutedChange.emit(!this.assistantMuted());
+        if (this.showAssistantControl() && !this.assistantActionsDisabled()) {
+            this.assistantMutedChange.emit(!this.assistantMuted());
+        }
     }
 
     /**
@@ -313,6 +346,18 @@ export class VoiceSessionControlsComponent {
      */
     protected togglePaused(): void {
         this.pausedChange.emit(!this.paused());
+    }
+
+    protected requestAssistantStop(): void {
+        if (this.showAssistantControl() && !this.assistantActionsDisabled() && this.assistantSpeaking()) {
+            this.assistantStopRequested.emit();
+        }
+    }
+
+    protected requestEnd(): void {
+        if (this.canEnd() && !this.disabled() && !this.endBusy()) {
+            this.endRequested.emit();
+        }
     }
 
     // #endregion

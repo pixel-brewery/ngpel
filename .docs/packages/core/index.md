@@ -14,14 +14,14 @@ Application foundation: the composition kernel every other package builds on, th
 
 | Entry point                                 | Public symbols | Peer dependencies                                  |
 | ------------------------------------------- | -------------- | -------------------------------------------------- |
-| `@pixel-brewery/ngpel-core`                 | 35             | `@angular/core`                                    |
-| `@pixel-brewery/ngpel-core/rx`              | 9              | `@angular/core`, `rxjs`                            |
+| `@pixel-brewery/ngpel-core`                 | 37             | `@angular/core`                                    |
+| `@pixel-brewery/ngpel-core/rx`              | 13             | `@angular/core`, `rxjs`                            |
 | `@pixel-brewery/ngpel-core/storage`         | 35             | `@angular/core`                                    |
 | `@pixel-brewery/ngpel-core/browser`         | 26             | `@angular/core`                                    |
 | `@pixel-brewery/ngpel-core/notification`    | 29             | `@angular/core`, `rxjs`                            |
 | `@pixel-brewery/ngpel-core/update`          | 31             | `@angular/core`, `@angular/service-worker`, `rxjs` |
 | `@pixel-brewery/ngpel-core/audio`           | 50             | `@angular/core`, `rxjs`                            |
-| `@pixel-brewery/ngpel-core/search`          | 36             | `@angular/core`, `rxjs`                            |
+| `@pixel-brewery/ngpel-core/search`          | 37             | `@angular/core`, `rxjs`                            |
 | `@pixel-brewery/ngpel-core/operation-queue` | 31             | `@angular/core`, `rxjs`                            |
 
 Every entry point is tree-shakable on its own: importing one never pulls the code of another.

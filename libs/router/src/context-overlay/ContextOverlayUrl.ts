@@ -84,6 +84,30 @@ export class ContextOverlayUrl {
     }
 
     /**
+     * Builds a link that adds a target above the current page and its existing overlays.
+     * @param value In-scope application URL.
+     * @param key Registered target key.
+     * @param id Detail identifier. Omit it to address a create surface.
+     * @param context Optional addressable context for the target.
+     * @returns The URL with the additional overlay.
+     * @throws Error when the URL or target address is invalid.
+     */
+    public add(value: string, key: string, id?: string, context?: string): string {
+        return this.writeStack(value, [...this.requireStack(value), { key, id, context }]);
+    }
+
+    /**
+     * Builds a link to the state beneath the top overlay.
+     * @param value Application-relative URL.
+     * @returns The URL without the top overlay, or the original URL if it has no active stack.
+     * @throws Error when the URL or its overlay parameters are malformed.
+     */
+    public remove(value: string): string {
+        const stack = this.requireStack(value);
+        return stack.length === 0 ? value : this.writeStack(value, stack.slice(0, -1));
+    }
+
+    /**
      * Replaces the overlay parameters while preserving the path, unrelated query parameters and
      * fragment, including their original encoding and order.
      *
@@ -132,6 +156,14 @@ export class ContextOverlayUrl {
         } catch {
             return null;
         }
+    }
+
+    private requireStack(value: string): ReadonlyArray<IContextOverlayState> {
+        const stack = this.parseStack(value);
+        if (stack === 'invalid') {
+            throw new Error('Invalid contextual overlay URL.');
+        }
+        return stack;
     }
 
     private isValid(key: string, id?: string, context?: string): boolean {

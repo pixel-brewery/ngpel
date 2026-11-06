@@ -23,7 +23,7 @@ A semantic search result produced by a search provider.
 readonly optional data?: ReadonlyDeep<TData>;
 ```
 
-Defined in: [search/models/ISearchResult.ts:64](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ISearchResult.ts#L64)
+Defined in: [search/models/ISearchResult.ts:69](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ISearchResult.ts#L69)
 
 Optional payload handed back to the owning provider on activation. It is deeply readonly:
 the result travels through ranking, grouping and rendering, and none of those may mutate it.
@@ -51,6 +51,18 @@ readonly optional group?: string;
 Defined in: [search/models/ISearchResult.ts:53](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ISearchResult.ts#L53)
 
 Optional group heading. Results without a group are grouped by their provider id.
+
+***
+
+### groupKey?
+
+```ts
+readonly optional groupKey?: string;
+```
+
+Defined in: [search/models/ISearchResult.ts:58](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ISearchResult.ts#L58)
+
+Translation key for the result section. Results with the same key share a section.
 
 ***
 
@@ -87,7 +99,7 @@ are collapsed to the first occurrence.
 readonly optional keywords?: readonly string[];
 ```
 
-Defined in: [search/models/ISearchResult.ts:58](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ISearchResult.ts#L58)
+Defined in: [search/models/ISearchResult.ts:63](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ISearchResult.ts#L63)
 
 Optional synonyms that make the result findable under wording it does not display.
 

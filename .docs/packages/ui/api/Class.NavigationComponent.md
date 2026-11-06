@@ -32,7 +32,7 @@ new NavigationComponent(): NavigationComponent;
 readonly ariaLabel: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/navigation/NavigationComponent.ts:75](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationComponent.ts#L75)
+Defined in: [libs/ui/src/components/navigation/NavigationComponent.ts:78](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationComponent.ts#L78)
 
 Accessible name for the primary navigation region.
 
@@ -44,6 +44,18 @@ Accessible name for the primary navigation region.
 readonly compact: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/navigation/NavigationComponent.ts:83](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationComponent.ts#L83)
+Defined in: [libs/ui/src/components/navigation/NavigationComponent.ts:86](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationComponent.ts#L86)
 
 Whether the navigation is displayed as an icon-only rail.
+
+***
+
+### elementRef
+
+```ts
+readonly elementRef: ElementRef<HTMLElement>;
+```
+
+Defined in: [libs/ui/src/components/navigation/NavigationComponent.ts:70](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationComponent.ts#L70)
+
+Host element used by a collapse toggle positioned alongside this navigation.

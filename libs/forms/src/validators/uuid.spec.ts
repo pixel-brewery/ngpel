@@ -24,15 +24,12 @@ describe('uuid', () => {
         expect(errors).toEqual([]);
     });
 
-    it('rejects the nil UUID because its version nibble is zero', () => {
-        // Arrange
-        const value = '00000000-0000-0000-0000-000000000000';
-
+    it.each(['00000000-0000-0000-0000-000000000000', 'ffffffff-ffff-ffff-ffff-ffffffffffff'])('rejects the reserved UUID %s', (value) => {
         // Act
         const errors = collectFieldErrors(value, (path) => uuid(path));
 
         // Assert
-        expect(errors).toEqual([expect.objectContaining({ kind: 'uuid', actualValue: '00000000-0000-0000-0000-000000000000' })]);
+        expect(errors).toEqual([expect.objectContaining({ kind: 'uuid', actualValue: value })]);
     });
 
     it('rejects text that is not a UUID', () => {

@@ -7,3 +7,7 @@ export type { IMatchHandlers } from './operators/IMatchHandlers';
 export type { IPreventableCloseAttempt } from './operators/IPreventableCloseAttempt';
 export { matchResult } from './operators/matchResult';
 export { onceOn } from './operators/onceOn';
+export { unwrapApiResultOrThrow } from './operators/unwrapApiResultOrThrow';
+export type { IOffsetCollectionLimits } from './pagination/IOffsetCollectionLimits';
+export type { IOffsetCollectionPage } from './pagination/IOffsetCollectionPage';
+export { loadCompleteOffsetCollection } from './pagination/loadCompleteOffsetCollection';

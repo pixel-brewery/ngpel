@@ -8,6 +8,7 @@ import {
     CardComponent,
     CardContentComponent,
     CellComponent,
+    ChipComponent,
     DividerComponent,
     DropDownButtonComponent,
     IconComponent,
@@ -38,7 +39,7 @@ import type { FileStateValue } from './FileStateValue';
 const TILE_TEXT_LINE_LIMIT = 2;
 
 /**
- * Displays one file as a Mosaik-based list row, gallery tile, or full-width preview.
+ * Displays one file as a Mosaik-based list row, gallery tile, full-width preview or inline chip.
  *
  * @public
  */
@@ -50,6 +51,7 @@ const TILE_TEXT_LINE_LIMIT = 2;
         CardComponent,
         CardContentComponent,
         CellComponent,
+        ChipComponent,
         DividerComponent,
         DropDownButtonComponent,
         HoverRevealForDirective,
@@ -163,6 +165,7 @@ const TILE_TEXT_LINE_LIMIT = 2;
                     [class.shrink-0]="isList()"
                     [attr.slot]="isList() ? 'start' : null"
                     [attr.aria-label]="label"
+                    [attr.aria-description]="openDescription()"
                     [attr.title]="label"
                     [attr.test-id]="previewTestId()"
                     [disabled]="disabled()"
@@ -253,7 +256,11 @@ const TILE_TEXT_LINE_LIMIT = 2;
                                 [appearance]="'plain'"
                                 [attr.test-id]="openTestId()"
                                 (activated)="onOpenActivated(actionsMenu)"
-                            />
+                            >
+                                @if (openDescription(); as description) {
+                                    <mosaik-text slot="subLabel" [text]="description" [wrap]="true" />
+                                }
+                            </mosaik-menu-item>
                         }
                         @if (removable() && resolvedRemoveLabel(); as label) {
                             @if (availableOpenLabel()) {
@@ -267,14 +274,94 @@ const TILE_TEXT_LINE_LIMIT = 2;
                                 [variant]="removeVariant()"
                                 [attr.test-id]="removeTestId()"
                                 (activated)="onRemoveActivated(actionsMenu)"
-                            />
+                            >
+                                @if (removeDescription(); as description) {
+                                    <mosaik-text slot="subLabel" [text]="description" [wrap]="true" />
+                                }
+                            </mosaik-menu-item>
                         }
                     </mosaik-menu>
                 </mosaik-dropdown-button>
             }
         </ng-template>
 
-        @if (isList()) {
+        @if (isChip()) {
+            <mosaik-chip
+                part="root"
+                class="max-w-full"
+                [label]="fileName()"
+                [icon]="chipIcon()"
+                [size]="'small'"
+                [appearance]="'outline'"
+                [disabled]="disabled()"
+                [closeable]="removable() && resolvedRemoveLabel() !== null"
+                [attr.test-id]="resolvedTestId()"
+            >
+                <div slot="label" class="flex min-w-0 items-center gap-1">
+                    @if (previewActionLabel(); as label) {
+                        <mosaik-button
+                            part="open-action"
+                            class="min-w-0"
+                            [label]="fileName()"
+                            [type]="'button'"
+                            [appearance]="'plain'"
+                            [size]="'small'"
+                            [disabled]="disabled()"
+                            [attr.aria-label]="label"
+                            [attr.aria-description]="openDescription()"
+                            [attr.title]="label"
+                            [attr.test-id]="openTestId()"
+                            (click)="onOpenRequested()"
+                        />
+                    } @else {
+                        <mosaik-text [text]="fileName()" [truncate]="true" [disabled]="disabled()" />
+                    }
+                    @if (isBusy()) {
+                        <mosaik-progress-ring
+                            part="progress"
+                            role="status"
+                            [attr.aria-label]="resolvedStateLabel()"
+                            [min]="0"
+                            [max]="1"
+                            [value]="resolvedProgress()"
+                            [isIndeterminate]="state() === fileState.Loading"
+                            [radius]="'6px'"
+                            [thickness]="'2px'"
+                        />
+                    } @else if (state() !== fileState.Normal) {
+                        <mosaik-text role="status" [text]="resolvedStateLabel()" [variant]="statusVariant()" [disabled]="disabled()" />
+                    }
+                    @if (state() === fileState.Retry && resolvedRetryLabel(); as label) {
+                        <mosaik-button
+                            part="retry-button"
+                            [label]="label"
+                            [type]="'button'"
+                            [appearance]="'plain'"
+                            [size]="'small'"
+                            [disabled]="disabled()"
+                            (click)="onRetryRequested()"
+                        />
+                    }
+                </div>
+                @if (removable() && resolvedRemoveLabel(); as label) {
+                    <mosaik-button
+                        slot="close"
+                        part="remove-action"
+                        [type]="'button'"
+                        [iconName]="'dismiss'"
+                        [appearance]="'plain'"
+                        [size]="'small'"
+                        [variant]="removeVariant()"
+                        [disabled]="disabled()"
+                        [attr.aria-label]="chipRemoveActionLabel()"
+                        [attr.aria-description]="removeDescription()"
+                        [attr.title]="label"
+                        [attr.test-id]="removeTestId()"
+                        (click)="onRemoveRequested()"
+                    />
+                }
+            </mosaik-chip>
+        } @else if (isList()) {
             <mosaik-cell #root part="root" class="w-full" [disabled]="disabled()" [attr.test-id]="resolvedTestId()">
                 <ng-container [ngTemplateOutlet]="previewSurface" />
                 <div part="cell-copy" slot="label" class="min-w-0">
@@ -469,6 +556,9 @@ export class FileComponent {
      */
     public readonly openLabel: InputSignal<null | string> = input<null | string>(null);
 
+    /** Optional supporting text for the open action. */
+    public readonly openDescription = input<string | null>(null);
+
     /**
      * Mosaik icon used by the optional open action.
      *
@@ -492,6 +582,9 @@ export class FileComponent {
      * @readonly
      */
     public readonly removeLabel: InputSignal<null | string> = input<null | string>(null);
+
+    /** Optional supporting text for the remove action. */
+    public readonly removeDescription = input<string | null>(null);
 
     /**
      * Accessible label of the contextual action menu; falls back to the file name.
@@ -564,6 +657,9 @@ export class FileComponent {
      * @readonly
      */
     protected readonly isList: Signal<boolean> = computed(() => this.presentation() === FilePresentation.List);
+
+    protected readonly isChip = computed(() => this.presentation() === FilePresentation.Chip);
+    protected readonly chipIcon = computed(() => this.resolveFamilyIconData());
 
     /**
      * Indicates whether the component renders its full-width preview presentation.
@@ -751,6 +847,12 @@ export class FileComponent {
      * @readonly
      */
     protected readonly resolvedRemoveLabel: Signal<null | string> = computed(() => this.removeLabel()?.trim() || null);
+
+    protected readonly chipRemoveActionLabel = computed(() => {
+        const label = this.resolvedRemoveLabel();
+
+        return label ? `${label}: ${this.fileName()}` : null;
+    });
 
     /**
      * Indicates whether at least one contextual action is currently offered.

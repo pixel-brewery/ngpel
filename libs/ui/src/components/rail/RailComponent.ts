@@ -1,5 +1,6 @@
 // #region Imports
 
+import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
@@ -7,17 +8,29 @@ import {
     ContentChildren,
     computed,
     DestroyRef,
+    effect,
+    ErrorHandler,
     forwardRef,
     inject,
     input,
     QueryList,
     signal,
+    untracked,
+    viewChild,
     type InputSignal,
     type Signal,
     type WritableSignal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { DRAWER_REF, IconNameDirective, type IDrawerRef, ToggleButtonComponent, TooltipDirective } from '@pixel-brewery/mosaik-elements-angular';
+import {
+    DRAWER_REF,
+    IconNameDirective,
+    type IDrawerRef,
+    SheetComponent,
+    SheetContentComponent,
+    ToggleButtonComponent,
+    TooltipDirective,
+} from '@pixel-brewery/mosaik-elements-angular';
 import { CommandDirective } from '@pixel-brewery/ngpel-mvp';
 import { command, type Command } from '@pixel-brewery/ngpel-mvp';
 import { RailComponentIntl, provideRailComponentIntl } from './RailComponentIntl';
@@ -35,19 +48,44 @@ import { RAIL_HOST } from './RailHostToken';
  */
 @Component({
     selector: 'ngp-rail',
-    imports: [CommandDirective, IconNameDirective, ToggleButtonComponent, TooltipDirective],
+    imports: [CommandDirective, IconNameDirective, NgTemplateOutlet, SheetComponent, SheetContentComponent, ToggleButtonComponent, TooltipDirective],
     template: `
-        <div [class.hidden]="activeContentKey() !== null">
+        <div part="actions" [class.hidden]="!isFloating() && activeContentKey() !== null">
             <ng-content select="ngp-rail-actions" />
         </div>
-        <div [class.hidden]="activeContentKey() === null">
+        @if (isFloating()) {
+            @if (activeContentKey() !== null) {
+                <mosaik-sheet
+                    part="sheet"
+                    [width]="'100%'"
+                    [height]="'90dvh'"
+                    [snaps]="['90dvh']"
+                    [dragMode]="'handle'"
+                    [isModal]="true"
+                    [hasBackdrop]="true"
+                    [closeable]="true"
+                    [pressEscapeToClose]="true"
+                    [clickOutsideToClose]="true"
+                    (closed)="onSheetClosed()"
+                >
+                    <mosaik-sheet-content>
+                        <ng-container [ngTemplateOutlet]="content" />
+                    </mosaik-sheet-content>
+                </mosaik-sheet>
+            }
+        } @else {
+            <div [class.hidden]="activeContentKey() === null">
+                <ng-container [ngTemplateOutlet]="content" />
+            </div>
+        }
+        <ng-template #content>
             <div class="flex h-full min-h-0 w-full flex-row gap-4">
                 <div class="flex shrink-0 flex-col gap-2">
                     <mosaik-toggle-button
-                        [attr.test-id]="backTestId() || null"
-                        [attr.aria-label]="backLabel()"
-                        [mosaikTooltip]="backLabel()"
-                        [iconName]="'arrowLeft'"
+                        [attr.test-id]="(isFloating() ? closeTestId() : backTestId()) || null"
+                        [attr.aria-label]="isFloating() ? closeLabel() : backLabel()"
+                        [mosaikTooltip]="isFloating() ? closeLabel() : backLabel()"
+                        [iconName]="isFloating() ? 'close' : 'arrow-left'"
                         [appearance]="'plain'"
                         [variant]="'neutral'"
                         [size]="'small'"
@@ -58,7 +96,7 @@ import { RAIL_HOST } from './RailHostToken';
                     <ng-content select="[ngpRailContent]" />
                 </div>
             </div>
-        </div>
+        </ng-template>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
@@ -71,6 +109,7 @@ import { RAIL_HOST } from './RailHostToken';
         },
         provideRailComponentIntl({
             backLabel: 'loc.rail.backLabel',
+            closeLabel: 'loc.rail.closeLabel',
         }),
     ],
 })
@@ -78,6 +117,7 @@ export class RailComponent implements AfterContentInit, IRailHost {
     // #region Fields
 
     private readonly _destroyRef: DestroyRef = inject(DestroyRef);
+    private readonly _errorHandler = inject(ErrorHandler);
     private readonly _intl: RailComponentIntl = inject(RailComponentIntl, { optional: true }) ?? new RailComponentIntl();
     private readonly _drawerRef: IDrawerRef | null = inject(DRAWER_REF, { optional: true }) as IDrawerRef | null;
     private readonly _drawerController: RailDrawerController | null = this._drawerRef
@@ -88,9 +128,10 @@ export class RailComponent implements AfterContentInit, IRailHost {
           })
         : null;
     private readonly _activeContentKey: WritableSignal<string | null> = signal<string | null>(null);
+    private readonly _sheet = viewChild(SheetComponent);
     private readonly _contentRegistrationVersion: WritableSignal<number> = signal(0);
     private readonly _backCommand: Command<void> = command(
-        () => this.closeContent(),
+        () => this.requestClose(),
         computed(() => this._activeContentKey() !== null),
     );
 
@@ -104,6 +145,38 @@ export class RailComponent implements AfterContentInit, IRailHost {
      * @public
      */
     public constructor() {
+        let wasFloating = this.isFloating();
+        effect(() => {
+            const floating = this.isFloating();
+            if (floating !== wasFloating) {
+                wasFloating = floating;
+                untracked(() => this.closeContent());
+            }
+        });
+        effect((onCleanup) => {
+            const sheet = this._sheet();
+            if (!sheet) {
+                return;
+            }
+            let current = true;
+            onCleanup(() => {
+                current = false;
+            });
+            const element = sheet.elementRef.nativeElement;
+            void Promise.resolve(element.updateComplete)
+                .then(() => {
+                    if (current && element.isConnected) {
+                        return sheet.invoke('open');
+                    }
+                    return undefined;
+                })
+                .catch((error: unknown) => {
+                    if (current) {
+                        this.closeContent();
+                        this._errorHandler.handleError(error);
+                    }
+                });
+        });
         this._destroyRef.onDestroy(() => this._drawerController?.close());
     }
 
@@ -126,6 +199,18 @@ export class RailComponent implements AfterContentInit, IRailHost {
      * @readonly
      */
     public readonly backTestId: InputSignal<string> = input('');
+
+    /** Presents activated content in a sheet, leaving the host drawer width intact. */
+    public readonly floating = input(false);
+
+    /** Current presentation mode, available to participating rail actions. */
+    public readonly isFloating: Signal<boolean> = this.floating;
+
+    /** Accessible label of the sheet's close action. */
+    public readonly closeLabel = input(this._intl.closeLabel);
+
+    /** Optional automation identifier for the sheet's close action. */
+    public readonly closeTestId = input('');
 
     /**
      * Key of the independently declared content currently visible in the rail.
@@ -186,7 +271,9 @@ export class RailComponent implements AfterContentInit, IRailHost {
         }
 
         this._activeContentKey.set(target);
-        this._drawerController?.open();
+        if (!this.isFloating()) {
+            this._drawerController?.open();
+        }
     }
 
     /**
@@ -199,6 +286,19 @@ export class RailComponent implements AfterContentInit, IRailHost {
     public hasContent(target: string): boolean {
         this._contentRegistrationVersion();
         return this.contents?.some((content) => content.contentKey === target) ?? false;
+    }
+
+    protected onSheetClosed(): void {
+        this.closeContent();
+    }
+
+    private requestClose(): void {
+        const sheet = this._sheet();
+        if (!sheet) {
+            this.closeContent();
+            return;
+        }
+        void Promise.resolve(sheet.invoke('close')).catch((error: unknown) => this._errorHandler.handleError(error));
     }
 
     private closeContent(): void {

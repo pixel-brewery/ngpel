@@ -1,6 +1,6 @@
 // #region Imports
 
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { TranslateService } from '@pixel-brewery/mosaik-elements-angular';
@@ -19,7 +19,7 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', async () => {
     angular.Component({
         selector: 'mosaik-toggle-button',
         template: '<ng-content />',
-        inputs: ['appearance', 'command', 'size', 'variant'],
+        inputs: ['appearance', 'ngpCommand', 'size', 'variant'],
     })(ToggleButtonStub);
 
     class IconNameStub {}
@@ -28,12 +28,34 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', async () => {
     class TooltipStub {}
     angular.Directive({ selector: '[mosaikTooltip]', inputs: ['mosaikTooltip'] })(TooltipStub);
 
+    class SheetStub {
+        public readonly elementRef = angular.inject(angular.ElementRef<HTMLElement>);
+        public readonly closed = new angular.EventEmitter<void>();
+
+        public invoke(action: 'open' | 'close'): void {
+            if (action === 'close') {
+                this.closed.emit();
+            }
+        }
+    }
+    angular.Component({
+        selector: 'mosaik-sheet',
+        template: '<ng-content />',
+        inputs: ['width', 'height', 'snaps', 'dragMode', 'isModal', 'hasBackdrop', 'closeable', 'pressEscapeToClose', 'clickOutsideToClose'],
+        outputs: ['closed'],
+    })(SheetStub);
+
+    class SheetContentStub {}
+    angular.Component({ selector: 'mosaik-sheet-content', template: '<ng-content />' })(SheetContentStub);
+
     return {
         DialogService: class DialogService {},
         DRAWER_REF: new angular.InjectionToken('DRAWER_REF'),
         GlobalDomRef: class GlobalDomRef {},
         IconNameDirective: IconNameStub,
         provideGlobalDom: () => [],
+        SheetComponent: SheetStub,
+        SheetContentComponent: SheetContentStub,
         ToastService: class ToastService {},
         ToggleButtonComponent: ToggleButtonStub,
         TooltipDirective: TooltipStub,
@@ -56,6 +78,7 @@ describe('RailComponent', () => {
     let rail: RailComponent;
     let host: HTMLElement;
     let detectChanges: () => void;
+    let floating: ReturnType<typeof signal<boolean>>;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -64,6 +87,9 @@ describe('RailComponent', () => {
         });
 
         const fixture = TestBed.createComponent(RailHostComponent);
+        const instance = fixture.debugElement.query(By.directive(RailComponent)).componentInstance as RailComponent;
+        floating = signal(false);
+        Object.assign(instance, { floating, isFloating: floating });
         fixture.detectChanges();
         detectChanges = () => fixture.detectChanges();
         host = fixture.nativeElement as HTMLElement;
@@ -114,5 +140,23 @@ describe('RailComponent', () => {
 
         // Assert
         expect(rail.activeContentKey()).toBeNull();
+    });
+
+    it('uses a sheet in floating mode and clears the active content on close', () => {
+        // Arrange
+        floating.set(true);
+        detectChanges();
+        rail.activateContent('ai');
+        detectChanges();
+        const sheet = host.querySelector('mosaik-sheet');
+        expect(sheet?.querySelector('[test-id="ai-content"]')).not.toBeNull();
+
+        // Act
+        sheet?.dispatchEvent(new Event('closed'));
+        detectChanges();
+
+        // Assert
+        expect(rail.activeContentKey()).toBeNull();
+        expect(host.querySelector('mosaik-sheet')).toBeNull();
     });
 });

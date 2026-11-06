@@ -52,10 +52,13 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', () => ({
     BadgeComponent: class BadgeComponent {},
     ButtonComponent: class ButtonComponent {},
     createTourAccessorTarget: vi.fn(() => ({})),
+    ExpanderComponent: class ExpanderComponent {},
+    ExpanderGroupComponent: class ExpanderGroupComponent {},
     IconNameDirective: class IconNameDirective {},
     IndicatorComponent: class IndicatorComponent {},
     ListComponent: class ListComponent {},
     ListItemComponent: class ListItemComponent {},
+    PressButtonComponent: class PressButtonComponent {},
     SegmentComponent: class SegmentComponent {},
     SegmentItemComponent: class SegmentItemComponent {},
     TextComponent: class TextComponent {},
@@ -87,6 +90,10 @@ interface ICompoundComponentTestApi {
     readonly hasViewModeSwitch: Signal<boolean>;
     readonly hasNext: Signal<boolean>;
     readonly hasPrevious: Signal<boolean>;
+    readonly isStacked: WritableSignal<boolean>;
+    readonly itemDisabled: WritableSignal<((item: string, index: number) => boolean) | undefined>;
+    readonly canDelete: WritableSignal<boolean>;
+    readonly listItemContexts: Signal<ReadonlyArray<ICompoundItemTestContext>>;
     readonly addRequested: { emit(): void };
     _hasObservedNonEmptyCollection: boolean;
     _previousItemCount: number;
@@ -121,6 +128,12 @@ interface ICompoundComponentTestApi {
     selectViewMode(viewMode: CompoundViewModeValue): void;
 
     synchronizeSelection(itemCount: number): void;
+
+    isItemExpanded(context: ICompoundItemTestContext): boolean;
+
+    setItemExpanded(context: ICompoundItemTestContext, expanded: boolean): void;
+
+    requestDelete(context: ICompoundItemTestContext): void;
 }
 
 describe('CompoundComponent', () => {
@@ -403,6 +416,100 @@ describe('CompoundComponent', () => {
         // assert
         expect(api.selectedIndex()).toBe(2);
     });
+
+    it('projects summary and status into independently expandable Mosaik panels', () => {
+        // act
+        const template = inlineTemplateOf('CompoundComponent.ts');
+
+        // assert
+        expect(template).toContain('<mosaik-expander-group');
+        expect(template).toContain('[mode]="\'multiple\'"');
+        expect(template).toContain('slot="header" part="item-summary"');
+        expect(template).toContain('slot="subHeader" part="item-status"');
+        expect(template).toContain('(pressed)="requestDelete(context)"');
+    });
+
+    it('keeps an open panel open when the user expands a second panel', () => {
+        // arrange
+        const { api } = createComponentApi(['First', 'Second']);
+        const first = api.listItemContexts()[0] as ICompoundItemTestContext;
+        const second = api.listItemContexts()[1] as ICompoundItemTestContext;
+        api.isStacked.set(true);
+        api.setItemExpanded(first, true);
+
+        // act
+        api.setItemExpanded(second, true);
+
+        // assert
+        expect(api.isItemExpanded(first)).toBe(true);
+        expect(api.isItemExpanded(second)).toBe(true);
+        expect(api.selectedIndex()).toBe(1);
+    });
+
+    it('retains a keyed open panel when items are reordered', () => {
+        // arrange
+        const { api, items } = createComponentApi(['First', 'Second']);
+        api.isStacked.set(true);
+        api.itemKey.set((item) => item);
+        api.setItemExpanded(api.listItemContexts()[0] as ICompoundItemTestContext, true);
+
+        // act
+        items.set(['Second', 'First']);
+
+        // assert
+        expect(api.isItemExpanded(api.listItemContexts()[0] as ICompoundItemTestContext)).toBe(false);
+        expect(api.isItemExpanded(api.listItemContexts()[1] as ICompoundItemTestContext)).toBe(true);
+    });
+
+    it('opens only the appended stacked item and keeps the list/single mode selection', () => {
+        // arrange
+        const { api, items } = createComponentApi(['First', 'Second']);
+        api.isStacked.set(true);
+        api.viewMode.set(CompoundViewMode.List);
+        api.setItemExpanded(api.listItemContexts()[0] as ICompoundItemTestContext, true);
+        api.requestAdd();
+        items.set(['First', 'Second', 'Third']);
+
+        // act
+        api.synchronizeSelection(items().length);
+
+        // assert
+        expect(
+            api
+                .listItemContexts()
+                .filter((context) => api.isItemExpanded(context))
+                .map((context) => context.item),
+        ).toEqual(['Third']);
+        expect(api.viewMode()).toBe(CompoundViewMode.List);
+    });
+
+    it('emits the current item as a delete intent without changing the collection', () => {
+        // arrange
+        const { api, deleteRequested, items } = createComponentApi(['First', 'Second']);
+        api.canDelete.set(true);
+        const context = api.listItemContexts()[1] as ICompoundItemTestContext;
+
+        // act
+        api.requestDelete(context);
+
+        // assert
+        expect(deleteRequested).toHaveBeenCalledExactlyOnceWith(context);
+        expect(items()).toEqual(['First', 'Second']);
+    });
+
+    it('ignores a delayed delete intent after the item at that position has changed', () => {
+        // arrange
+        const { api, deleteRequested, items } = createComponentApi(['First']);
+        api.canDelete.set(true);
+        const context = api.listItemContexts()[0] as ICompoundItemTestContext;
+        items.set(['Replacement']);
+
+        // act
+        api.requestDelete(context);
+
+        // assert
+        expect(deleteRequested).not.toHaveBeenCalled();
+    });
 });
 
 function createComponentApi(
@@ -412,12 +519,14 @@ function createComponentApi(
 ): {
     readonly api: ICompoundComponentTestApi;
     readonly addRequested: ReturnType<typeof vi.fn>;
+    readonly deleteRequested: ReturnType<typeof vi.fn>;
     readonly items: WritableSignal<ReadonlyArray<string>>;
 } {
     const items = signal(initialItems);
     const selectedIndex = signal(0);
     const viewMode = signal<CompoundViewModeValue>(CompoundViewMode.Single);
     const addRequested = vi.fn();
+    const deleteRequested = vi.fn();
     const api = Object.create(CompoundComponent.prototype) as ICompoundComponentTestApi;
 
     Object.assign(api, {
@@ -426,6 +535,9 @@ function createComponentApi(
         viewMode,
         initialViewMode: signal<CompoundViewModeValue | undefined>(undefined),
         canAdd: signal(canAdd),
+        canDelete: signal(false),
+        isStacked: signal(false),
+        itemDisabled: signal<((item: string, index: number) => boolean) | undefined>(undefined),
         canOpenItemsFromList: signal(true),
         itemKey: signal<((item: string, index: number) => unknown) | undefined>(undefined),
         listItemDisabled: signal<((item: string, index: number) => boolean) | undefined>(undefined),
@@ -444,10 +556,13 @@ function createComponentApi(
         hasNext: computed(() => items().length > 0 && selectedIndex() < items().length - 1),
         hasPrevious: computed(() => items().length > 0 && selectedIndex() > 0),
         addRequested: { emit: addRequested },
+        deleteRequested: { emit: deleteRequested },
+        listItemContexts: computed(() => items().map((item, index, collection) => ({ $implicit: item, item, index, count: collection.length }))),
+        _expandedItemKeys: signal<ReadonlySet<unknown>>(new Set()),
         _hasObservedNonEmptyCollection: initialItems.length > 0,
         _previousItemCount: items().length,
         _selectLastAfterCollectionGrowth: false,
     });
 
-    return { api, addRequested, items };
+    return { api, addRequested, deleteRequested, items };
 }

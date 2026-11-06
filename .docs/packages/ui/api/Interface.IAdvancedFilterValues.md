@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: IAdvancedFilterValues
 
-Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:217](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L217)
+Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:220](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L220)
 
 Emitted values for advanced filter mode.
 
@@ -27,7 +27,7 @@ Emitted values for advanced filter mode.
 readonly mode: "advanced";
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:221](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L221)
+Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:224](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L224)
 
 Discriminator for advanced filter values.
 
@@ -39,6 +39,6 @@ Discriminator for advanced filter values.
 readonly root: IAdvancedFilterGroup;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:226](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L226)
+Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:229](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L229)
 
 Root condition group.

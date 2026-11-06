@@ -76,10 +76,10 @@ Layout of the result section owned by this provider. Defaults to `'list'`.
 ### activate()
 
 ```ts
-activate(result): void | Promise<void>;
+activate(result): boolean | void | Promise<boolean | void>;
 ```
 
-Defined in: [search/models/ISearchProvider.ts:67](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ISearchProvider.ts#L67)
+Defined in: [search/models/ISearchProvider.ts:69](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ISearchProvider.ts#L69)
 
 Activates a result of this provider, for example by navigating to the entity it describes.
 
@@ -91,7 +91,9 @@ Activates a result of this provider, for example by navigating to the entity it 
 
 #### Returns
 
-`void` \| `Promise`\<`void`\>
+`boolean` \| `void` \| `Promise`\<`boolean` \| `void`\>
+
+`false` when the result could not be opened. A void return counts as success.
 
 ***
 
@@ -115,15 +117,19 @@ always accessible. Returning `false` hides it and excludes it from every query.
 ### search()
 
 ```ts
-search(query, take?):
+search(
+   query,
+   take?,
+   signal?
+):
   | readonly ISearchResult<TData>[]
 | Promise<readonly ISearchResult<TData>[]>;
 ```
 
-Defined in: [search/models/ISearchProvider.ts:60](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ISearchProvider.ts#L60)
+Defined in: [search/models/ISearchProvider.ts:61](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ISearchProvider.ts#L61)
 
 Searches for results matching the query. An empty query asks for the provider's default
-result set. Implementations should be fast and cancel stale work internally.
+result set. Implementations may use the signal to stop work when the caller cancels.
 
 #### Parameters
 
@@ -131,6 +137,7 @@ result set. Implementations should be fast and cancel stale work internally.
 | ------ | ------ | ------ |
 | `query` | `string` | The trimmed query, or an empty string for "return everything you have". |
 | `take?` | `number` | Maximum number of results the surface will use, when it declared a limit. |
+| `signal?` | `AbortSignal` | Cancels the request when supplied by the caller. |
 
 #### Returns
 

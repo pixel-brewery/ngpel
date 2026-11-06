@@ -31,9 +31,9 @@ describe('WidgetSummaryComponent', () => {
         TestBed.resetTestingModule();
     });
 
-    it('renders the value, its unit and the label of the summary', () => {
+    it('renders the value, its unit, its label and an optional hint', () => {
         // Arrange
-        const fixture = createFixture({ label: 'Open tickets', value: '42', unit: 'today', compact: false });
+        const fixture = createFixture({ label: 'Open tickets', value: '42', unit: 'today', hint: 'Out of 70', compact: false });
 
         // Act
         fixture.detectChanges();
@@ -43,9 +43,10 @@ describe('WidgetSummaryComponent', () => {
         expect(host.querySelector('.ngp-widget-summary__number')?.textContent?.trim()).toBe('42');
         expect(host.querySelector('.ngp-widget-summary__unit')?.textContent?.trim()).toBe('today');
         expect(host.querySelector('.ngp-widget-summary__label')?.textContent?.trim()).toBe('Open tickets');
+        expect(host.querySelector('dd.ngp-widget-summary__hint')?.textContent?.trim()).toBe('Out of 70');
     });
 
-    it('omits the unit element for a summary without a unit', () => {
+    it('omits the unit and hint elements when those values are absent', () => {
         // Arrange
         const fixture = createFixture({ label: 'Open tickets', value: '42', unit: undefined, compact: false });
 
@@ -53,7 +54,7 @@ describe('WidgetSummaryComponent', () => {
         fixture.detectChanges();
 
         // Assert
-        expect((fixture.nativeElement as HTMLElement).querySelector('.ngp-widget-summary__unit')).toBeNull();
+        expect((fixture.nativeElement as HTMLElement).querySelector('.ngp-widget-summary__unit, .ngp-widget-summary__hint')).toBeNull();
     });
 
     it('marks the host compact so the smaller scale applies', () => {
@@ -83,6 +84,7 @@ function createFixture(inputs: {
     readonly label: string;
     readonly value: string;
     readonly unit: string | undefined;
+    readonly hint?: string;
     readonly compact: boolean;
 }): ComponentFixture<WidgetSummaryComponent> {
     TestBed.configureTestingModule({ imports: [WidgetSummaryComponent] });
@@ -92,6 +94,7 @@ function createFixture(inputs: {
         label: signal(inputs.label),
         value: signal(inputs.value),
         unit: signal(inputs.unit),
+        hint: signal(inputs.hint),
         compact: signal(inputs.compact),
     });
 

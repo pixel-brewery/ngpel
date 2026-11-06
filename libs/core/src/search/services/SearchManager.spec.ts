@@ -1,6 +1,6 @@
 import { DOCUMENT, type Provider } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { ICommandItem } from '../models/ICommandItem';
 import type { ISearchResult } from '../models/ISearchResult';
 import type { ISearchProvider } from '../models/ISearchProvider';
@@ -136,6 +136,64 @@ describe('SearchManager', () => {
             { ...fakeSearchResult('second:2'), providerId: 'second' },
         ]);
         expect(second.takes).toEqual([10]);
+    });
+
+    it('publishes fast results early and merges later snapshots in registration order', async () => {
+        // Arrange
+        const shared = fakeSearchResult('shared:1');
+        const earlyResult = fakeSearchResult('second:1');
+        let answerFirst!: (results: ReadonlyArray<ISearchResult>) => void;
+        const firstAnswer = new Promise<ReadonlyArray<ISearchResult>>((resolve) => {
+            answerFirst = resolve;
+        });
+        const first = new RecordingSearchProvider('first');
+        vi.spyOn(first, 'search').mockReturnValue(firstAnswer);
+        const second = new RecordingSearchProvider('second', [shared, earlyResult]);
+        const manager = createManager([first, second]);
+        const onResults = vi.fn();
+
+        // Act
+        const search = manager.search('query', undefined, { onResults });
+        await vi.waitFor(() =>
+            expect(onResults).toHaveBeenCalledWith([
+                { ...shared, providerId: 'second' },
+                { ...earlyResult, providerId: 'second' },
+            ]),
+        );
+        answerFirst([shared]);
+        const finalResults = await search;
+
+        // Assert
+        expect(finalResults).toEqual([
+            { ...shared, providerId: 'first' },
+            { ...earlyResult, providerId: 'second' },
+        ]);
+        expect(onResults).toHaveBeenCalledTimes(2);
+        expect(onResults).toHaveBeenLastCalledWith(finalResults);
+    });
+
+    it('aborts promptly and ignores a legacy provider answer that arrives later', async () => {
+        // Arrange
+        const provider = new RecordingSearchProvider('legacy');
+        let answer!: (results: ReadonlyArray<ISearchResult>) => void;
+        const pendingAnswer = new Promise<ReadonlyArray<ISearchResult>>((resolve) => {
+            answer = resolve;
+        });
+        const searchProvider = vi.spyOn(provider, 'search').mockReturnValue(pendingAnswer);
+        const manager = createManager([provider]);
+        const controller = new AbortController();
+        const onResults = vi.fn();
+        const search = manager.search('query', 5, { onResults, signal: controller.signal });
+
+        // Act
+        controller.abort();
+
+        // Assert
+        await expect(search).rejects.toMatchObject({ name: 'AbortError' });
+        expect(searchProvider).toHaveBeenCalledWith('query', 5, controller.signal);
+        answer([fakeSearchResult('legacy:1')]);
+        await new Promise<void>((resolve) => setTimeout(resolve, 0));
+        expect(onResults).not.toHaveBeenCalled();
     });
 
     it('keeps the results of the providers that answered when another one fails', async () => {
@@ -284,16 +342,81 @@ describe('SearchManager', () => {
         expect(owner.activations).toEqual([result]);
     });
 
-    it('drops the activation of a result no registered provider owns', async () => {
+    it('rejects activation of a result no registered provider owns', async () => {
         // Arrange
         const owner = new RecordingSearchProvider('crm.customers');
         const manager = createManager([owner]);
 
         // Act
-        await manager.activateResult(fakeSearchResult('unknown:42', { providerId: 'unknown' }));
+        const activation = manager.activateResult(fakeSearchResult('unknown:42', { providerId: 'unknown' }));
 
         // Assert
+        await expect(activation).rejects.toThrow('The selected search provider is unavailable.');
         expect(owner.activations).toEqual([]);
+    });
+
+    it('rechecks access when the user selects an earlier result', async () => {
+        // Arrange
+        const result = fakeSearchResult('crm.customers:42');
+        const owner = new RecordingSearchProvider('crm.customers', [result]);
+        const canAccess = vi.spyOn(owner, 'canAccess');
+        const manager = createManager([owner]);
+        await manager.search('query');
+        canAccess.mockReturnValue(false);
+
+        // Act
+        const activation = manager.activateResult(result);
+
+        // Assert
+        await expect(activation).rejects.toThrow('The selected search provider is unavailable.');
+        expect(owner.activations).toEqual([]);
+    });
+
+    it('rejects a filtered owner even if a shorter prefix and the declared provider are active', async () => {
+        // Arrange
+        const publicProvider = new RecordingSearchProvider('library');
+        const privateProvider = new RecordingSearchProvider('library:private');
+        const manager = createManager([publicProvider, privateProvider]);
+        const result = fakeSearchResult('library:private:42', { providerId: 'library' });
+        manager.toggleActiveProvider('library');
+
+        // Act
+        const activation = manager.activateResult(result);
+
+        // Assert
+        await expect(activation).rejects.toThrow('The selected search provider is unavailable.');
+        expect(publicProvider.activations).toEqual([]);
+        expect(privateProvider.activations).toEqual([]);
+    });
+
+    it('rejects activation when the provider explicitly could not open the result', async () => {
+        // Arrange
+        const owner = new RecordingSearchProvider('crm.customers');
+        const activate = vi.spyOn(owner, 'activate').mockImplementation(async () => false);
+        const manager = createManager([owner]);
+        const result = fakeSearchResult('crm.customers:42');
+
+        // Act
+        const activation = manager.activateResult(result);
+
+        // Assert
+        await expect(activation).rejects.toThrow('The selected search result could not be opened.');
+        expect(activate).toHaveBeenCalledWith(result);
+    });
+
+    it('propagates an activation rejection from the owning provider', async () => {
+        // Arrange
+        const failure = new Error('Navigation failed');
+        const owner = new RecordingSearchProvider('crm.customers');
+        vi.spyOn(owner, 'activate').mockRejectedValue(failure);
+        const manager = createManager([owner]);
+        const result = fakeSearchResult('crm.customers:42');
+
+        // Act
+        const activation = manager.activateResult(result);
+
+        // Assert
+        await expect(activation).rejects.toBe(failure);
     });
 
     it('opens the surface and raises the focus request', () => {

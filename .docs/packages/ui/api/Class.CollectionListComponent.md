@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: CollectionListComponent\<T\>
 
-Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:88](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L88)
+Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:177](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L177)
 
 Renders a collection heading and menus above caller-templated rows in one scrolling region.
 
@@ -29,13 +29,39 @@ new CollectionListComponent<T>(): CollectionListComponent<T>;
 
 ## Properties
 
+### contextMenu
+
+```ts
+readonly contextMenu: InputSignal<
+  | ContextMenuComponent<T>
+| undefined>;
+```
+
+Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:250](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L250)
+
+Adds an actions button and right-click handling to each managed row.
+
+***
+
+### contextMenuLabel
+
+```ts
+readonly contextMenuLabel: InputSignal<string>;
+```
+
+Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:253](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L253)
+
+Label for each visible context-menu trigger.
+
+***
+
 ### emptyTemplate
 
 ```ts
 protected readonly emptyTemplate: Signal<TemplateRef<unknown> | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:178](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L178)
+Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:286](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L286)
 
 Caller-provided empty-state template.
 
@@ -47,7 +73,7 @@ Caller-provided empty-state template.
 readonly heading: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:119](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L119)
+Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:209](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L209)
 
 Summary heading displayed above the collection.
 
@@ -59,7 +85,7 @@ Summary heading displayed above the collection.
 readonly headingIcon: InputSignal<string | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:127](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L127)
+Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:217](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L217)
 
 Optional resolved Mosaik icon data displayed before the heading.
 
@@ -71,9 +97,33 @@ Optional resolved Mosaik icon data displayed before the heading.
 readonly headingIconVariant: InputSignal<Variant>;
 ```
 
-Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:135](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L135)
+Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:225](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L225)
 
 Visual variant of the optional heading icon.
+
+***
+
+### isLoading
+
+```ts
+readonly isLoading: InputSignal<boolean>;
+```
+
+Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:244](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L244)
+
+Replaces rows with loading placeholders and marks the list as busy.
+
+***
+
+### itemActivated
+
+```ts
+readonly itemActivated: OutputEmitterRef<T>;
+```
+
+Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:256](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L256)
+
+Emits the item activated in managed-row mode.
 
 ***
 
@@ -83,7 +133,7 @@ Visual variant of the optional heading icon.
 readonly itemKey: InputSignal<(item) => string | number>;
 ```
 
-Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:111](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L111)
+Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:201](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L201)
 
 Resolves the stable key used to track each item.
 
@@ -95,7 +145,7 @@ Resolves the stable key used to track each item.
 readonly items: InputSignal<readonly T[]>;
 ```
 
-Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:103](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L103)
+Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:193](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L193)
 
 Ordered collection items.
 
@@ -109,7 +159,7 @@ protected readonly itemTemplate: Signal<
 | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:167](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L167)
+Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:275](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L275)
 
 Caller-provided row template.
 
@@ -121,9 +171,21 @@ Caller-provided row template.
 readonly listLabel: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:151](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L151)
+Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:241](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L241)
 
 Accessible name of the scrolling result list.
+
+***
+
+### managedRows
+
+```ts
+protected readonly managedRows: Signal<boolean>;
+```
+
+Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:259](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L259)
+
+Supplying a context menu opts into the managed Mosaik row contract.
 
 ***
 
@@ -133,7 +195,7 @@ Accessible name of the scrolling result list.
 readonly menuOptionActivated: OutputEmitterRef<ICollectionListMenuSelection>;
 ```
 
-Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:159](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L159)
+Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:267](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L267)
 
 Emits the menu and option identifiers activated by the user.
 
@@ -145,9 +207,31 @@ Emits the menu and option identifiers activated by the user.
 readonly menus: InputSignal<readonly ICollectionListMenu[]>;
 ```
 
-Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:143](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L143)
+Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:233](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L233)
 
 Menus displayed beside the collection heading.
+
+***
+
+### placeholders
+
+```ts
+protected readonly placeholders: number[];
+```
+
+Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:179](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L179)
+
+***
+
+### useManagedRows
+
+```ts
+readonly useManagedRows: InputSignal<boolean>;
+```
+
+Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:247](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L247)
+
+Gives each item a Mosaik row. Project its contents rather than a list item when enabled.
 
 ## Methods
 
@@ -161,7 +245,7 @@ protected onMenuOptionActivated(
 ): void;
 ```
 
-Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:192](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L192)
+Defined in: [libs/ui/src/components/collection-list/CollectionListComponent.ts:300](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/CollectionListComponent.ts#L300)
 
 Emits one menu selection and closes its dropdown.
 

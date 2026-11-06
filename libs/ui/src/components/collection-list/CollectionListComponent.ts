@@ -4,6 +4,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
+    computed,
     contentChild,
     input,
     output,
@@ -12,8 +13,20 @@ import {
     type OutputEmitterRef,
     type Signal,
 } from '@angular/core';
-import { DropDownButtonComponent, IconComponent, MenuComponent, MenuItemComponent } from '@pixel-brewery/mosaik-elements-angular';
+import {
+    ButtonComponent,
+    DividerComponent,
+    DropDownButtonComponent,
+    IconComponent,
+    ListComponent,
+    ListItemComponent,
+    MenuComponent,
+    MenuItemComponent,
+    SkeletonComponent,
+} from '@pixel-brewery/mosaik-elements-angular';
 import type { Variant } from '@pixel-brewery/mosaik-elements-foundation';
+import type { ContextMenuComponent } from '../context-menu/ContextMenuComponent';
+import { ContextMenuTriggerDirective } from '../context-menu/ContextMenuTriggerDirective';
 import { CollectionListEmptyDirective } from './CollectionListEmptyDirective';
 import { CollectionListItemDirective } from './CollectionListItemDirective';
 import type { ICollectionListItemContext } from './ICollectionListItemContext';
@@ -30,8 +43,38 @@ import type { ICollectionListMenuSelection } from './ICollectionListMenuSelectio
  */
 @Component({
     selector: 'ngp-collection-list',
-    host: { class: 'flex min-h-0 w-full flex-1 flex-col', role: 'region' },
-    imports: [DropDownButtonComponent, IconComponent, MenuComponent, MenuItemComponent, NgTemplateOutlet],
+    host: { class: 'flex min-h-0 w-full flex-1 flex-col', role: 'region', '[attr.aria-busy]': 'isLoading() || null' },
+    imports: [
+        ButtonComponent,
+        ContextMenuTriggerDirective,
+        DividerComponent,
+        DropDownButtonComponent,
+        IconComponent,
+        ListComponent,
+        ListItemComponent,
+        MenuComponent,
+        MenuItemComponent,
+        NgTemplateOutlet,
+        SkeletonComponent,
+    ],
+    styles: `
+        .ngp-collection-row {
+            display: flex;
+            align-items: center;
+            gap: var(--mosaik-layout-space);
+            min-width: 0;
+            width: 100%;
+        }
+        .ngp-collection-row-body {
+            flex: 1;
+            min-width: 0;
+        }
+        mosaik-list {
+            flex: 1;
+            min-height: 0;
+            overflow: auto;
+        }
+    `,
     template: `
         <div
             part="header"
@@ -71,7 +114,52 @@ import type { ICollectionListMenuSelection } from './ICollectionListMenuSelectio
             }
         </div>
         <ng-content />
-        @if (itemTemplate(); as rowTemplate) {
+        @if (isLoading() || managedRows()) {
+            <mosaik-list [attr.aria-label]="listLabel()">
+                @if (isLoading()) {
+                    @for (placeholder of placeholders; track placeholder; let last = $last) {
+                        <mosaik-list-item part="placeholder" [disabled]="true" aria-hidden="true">
+                            <mosaik-skeleton width="65%" height="1rem" [shimmer]="true" />
+                        </mosaik-list-item>
+                        @if (!last) {
+                            <mosaik-divider />
+                        }
+                    }
+                } @else if (items().length === 0 && emptyTemplate(); as empty) {
+                    <div slot="empty"><ng-container [ngTemplateOutlet]="empty" /></div>
+                } @else if (itemTemplate(); as rowTemplate) {
+                    @for (item of items(); track itemKey()(item); let last = $last) {
+                        <mosaik-list-item
+                            part="item"
+                            [value]="item"
+                            [attr.data-ngp-collection-item]="itemKey()(item)"
+                            [ngpContextMenuTriggerFor]="contextMenu()"
+                            [ngpContextMenuValue]="item"
+                            (click)="itemActivated.emit(item)"
+                        >
+                            <div class="ngp-collection-row">
+                                <div class="ngp-collection-row-body">
+                                    <ng-container *ngTemplateOutlet="rowTemplate; context: { $implicit: item, index: $index }" />
+                                </div>
+                                @if (contextMenu(); as context) {
+                                    <mosaik-button
+                                        part="actions"
+                                        appearance="plain"
+                                        [label]="contextMenuLabel()"
+                                        [ngpContextMenuTriggerFor]="context"
+                                        [ngpContextMenuValue]="item"
+                                        [ngpContextMenuOpenOnClick]="true"
+                                    />
+                                }
+                            </div>
+                        </mosaik-list-item>
+                        @if (!last) {
+                            <mosaik-divider />
+                        }
+                    }
+                }
+            </mosaik-list>
+        } @else if (itemTemplate(); as rowTemplate) {
             @if (items().length || !emptyTemplate()) {
                 <ul part="list" class="m-0 min-h-0 flex-1 list-none overflow-x-hidden overflow-y-auto overscroll-contain p-0" [attr.aria-label]="listLabel()">
                     @for (item of items(); track itemKey()(item)) {
@@ -82,11 +170,13 @@ import type { ICollectionListMenuSelection } from './ICollectionListMenuSelectio
                 <ng-container *ngTemplateOutlet="emptyTemplate() ?? null" />
             }
         }
+        <ng-content select="[slot=footer]" />
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CollectionListComponent<T> {
     // #region Fields
+    protected readonly placeholders = [0, 1, 2, 3, 4];
     // #endregion
 
     // #region Ctor
@@ -149,6 +239,24 @@ export class CollectionListComponent<T> {
      * @readonly
      */
     public readonly listLabel: InputSignal<string> = input.required<string>();
+
+    /** Replaces rows with loading placeholders and marks the list as busy. */
+    public readonly isLoading = input(false);
+
+    /** Gives each item a Mosaik row. Project its contents rather than a list item when enabled. */
+    public readonly useManagedRows = input(false);
+
+    /** Adds an actions button and right-click handling to each managed row. */
+    public readonly contextMenu = input<ContextMenuComponent<T>>();
+
+    /** Label for each visible context-menu trigger. */
+    public readonly contextMenuLabel = input('Item actions');
+
+    /** Emits the item activated in managed-row mode. */
+    public readonly itemActivated = output<T>();
+
+    /** Supplying a context menu opts into the managed Mosaik row contract. */
+    protected readonly managedRows = computed(() => this.useManagedRows() || this.contextMenu() !== undefined);
 
     /**
      * Emits the menu and option identifiers activated by the user.

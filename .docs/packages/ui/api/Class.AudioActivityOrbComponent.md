@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: AudioActivityOrbComponent
 
-Defined in: [libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts:221](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts#L221)
+Defined in: [libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts:285](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts#L285)
 
 Renders the central audio activity surface for listening and speaking experiences.
 
@@ -32,7 +32,7 @@ new AudioActivityOrbComponent(): AudioActivityOrbComponent;
 readonly activityLevel: InputSignal<number>;
 ```
 
-Defined in: [libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts:230](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts#L230)
+Defined in: [libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts:294](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts#L294)
 
 Normalized audio activity from zero to one.
 
@@ -44,7 +44,7 @@ Normalized audio activity from zero to one.
 readonly ariaLabel: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts:238](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts#L238)
+Defined in: [libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts:302](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts#L302)
 
 Accessible description of the currently visualized activity.
 
@@ -56,7 +56,7 @@ Accessible description of the currently visualized activity.
 readonly audioError: OutputEmitterRef<Error>;
 ```
 
-Defined in: [libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts:246](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts#L246)
+Defined in: [libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts:310](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts#L310)
 
 Emits Web Audio or Canvas errors raised by the embedded waveform.
 
@@ -68,7 +68,7 @@ Emits Web Audio or Canvas errors raised by the embedded waveform.
 protected readonly auroraOpacityStyle: Signal<string>;
 ```
 
-Defined in: [libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts:294](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts#L294)
+Defined in: [libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts:361](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts#L361)
 
 Opacity used by the audio-reactive aurora.
 
@@ -80,9 +80,21 @@ Opacity used by the audio-reactive aurora.
 protected readonly auroraScaleStyle: Signal<string>;
 ```
 
-Defined in: [libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts:306](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts#L306)
+Defined in: [libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts:373](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts#L373)
 
 Scale used by the audio-reactive aurora.
+
+***
+
+### compact
+
+```ts
+readonly compact: InputSignal<boolean>;
+```
+
+Defined in: [libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts:313](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts#L313)
+
+Scales the orb's effects and waveform to fit a compact surface.
 
 ***
 
@@ -92,7 +104,7 @@ Scale used by the audio-reactive aurora.
 readonly iconName: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts:254](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts#L254)
+Defined in: [libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts:321](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts#L321)
 
 Mosaik icon rendered in the center of the orb.
 
@@ -104,7 +116,7 @@ Mosaik icon rendered in the center of the orb.
 readonly mediaStream: InputSignal<MediaStream | null>;
 ```
 
-Defined in: [libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts:262](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts#L262)
+Defined in: [libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts:329](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts#L329)
 
 Externally owned stream visualized by the embedded waveform.
 
@@ -116,7 +128,7 @@ Externally owned stream visualized by the embedded waveform.
 protected readonly normalizedActivityLevel: Signal<number>;
 ```
 
-Defined in: [libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts:318](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts#L318)
+Defined in: [libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts:385](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts#L385)
 
 Activity level restricted to the supported visual range.
 
@@ -128,7 +140,7 @@ Activity level restricted to the supported visual range.
 readonly size: InputSignal<string | number>;
 ```
 
-Defined in: [libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts:270](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts#L270)
+Defined in: [libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts:337](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts#L337)
 
 Diameter of the complete orb. Numeric values are interpreted as CSS pixels.
 
@@ -140,7 +152,7 @@ Diameter of the complete orb. Numeric values are interpreted as CSS pixels.
 protected readonly sizeStyle: Signal<string>;
 ```
 
-Defined in: [libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts:330](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts#L330)
+Defined in: [libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts:397](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts#L397)
 
 CSS size applied to the component root.
 
@@ -152,7 +164,7 @@ CSS size applied to the component root.
 readonly state: InputSignal<AudioActivityState>;
 ```
 
-Defined in: [libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts:278](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts#L278)
+Defined in: [libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts:345](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts#L345)
 
 Current visual activity state.
 
@@ -164,7 +176,7 @@ Current visual activity state.
 protected readonly waveformState: Signal<LiveAudioWaveformState>;
 ```
 
-Defined in: [libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts:342](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts#L342)
+Defined in: [libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts:409](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts#L409)
 
 Waveform state derived from the richer orb activity state.
 
@@ -176,6 +188,6 @@ Waveform state derived from the richer orb activity state.
 readonly waveformVisible: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts:286](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts#L286)
+Defined in: [libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts:353](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audio-activity-orb/AudioActivityOrbComponent.ts#L353)
 
 Indicates whether the embedded waveform is rendered.

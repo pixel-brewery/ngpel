@@ -1,6 +1,6 @@
 // #region Imports
 
-import { ChangeDetectionStrategy, Component, input, type InputSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, inject, input, type InputSignal } from '@angular/core';
 
 // #endregion
 
@@ -65,6 +65,9 @@ import { ChangeDetectionStrategy, Component, input, type InputSignal } from '@an
 })
 export class NavigationComponent {
     // #region Properties
+
+    /** Host element used by a collapse toggle positioned alongside this navigation. */
+    public readonly elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
     /**
      * Accessible name for the primary navigation region.

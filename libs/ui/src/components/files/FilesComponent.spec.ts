@@ -11,6 +11,7 @@ import { FilePresentation } from '../file/FilePresentation';
 import { FileState } from '../file/FileState';
 import { FilesComponent } from './FilesComponent';
 import { FilesLayout } from './FilesLayout';
+import type { FilesLayoutValue } from './FilesLayoutValue';
 
 // #endregion
 
@@ -58,6 +59,7 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', () => ({
     CardComponent: class CardComponent {},
     CardContentComponent: class CardContentComponent {},
     CellComponent: class CellComponent {},
+    ChipComponent: class ChipComponent {},
     DividerComponent: class DividerComponent {},
     DropDownButtonComponent: class DropDownButtonComponent {},
     DropZoneComponent: class DropZoneComponent {},
@@ -113,6 +115,7 @@ describe('FilesComponent', () => {
     it.each([
         [FilesLayout.List, FilePresentation.List],
         [FilesLayout.Gallery, FilePresentation.Tile],
+        [FilesLayout.Inline, FilePresentation.Chip],
         [FilesLayout.Preview, FilePresentation.Preview],
     ] as const)('should map %s layout to %s file presentation', (layout, presentation) => {
         // arrange
@@ -361,7 +364,7 @@ function createComponent(
             readonly fileName: string;
             readonly sizeInBytes?: number;
         }>;
-        layout: 'gallery' | 'list' | 'preview';
+        layout: FilesLayoutValue;
         openLabel: null | string;
         showFileSize: boolean;
         sources: ReadonlyArray<FileSourceComponent>;

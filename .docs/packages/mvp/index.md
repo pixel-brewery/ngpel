@@ -14,7 +14,7 @@ The Model-View-Presenter pattern as a package: a presenter base class, behaviors
 
 | Entry point                | Public symbols | Peer dependencies                          |
 | -------------------------- | -------------- | ------------------------------------------ |
-| `@pixel-brewery/ngpel-mvp` | 58             | `@angular/core`, `@angular/common`, `rxjs` |
+| `@pixel-brewery/ngpel-mvp` | 65             | `@angular/core`, `@angular/common`, `rxjs` |
 
 Every entry point is tree-shakable on its own: importing one never pulls the code of another.
 

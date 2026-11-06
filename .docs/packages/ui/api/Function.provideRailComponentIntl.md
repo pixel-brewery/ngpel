@@ -9,7 +9,7 @@ editUrl: false
 function provideRailComponentIntl(translations): Provider;
 ```
 
-Defined in: [libs/ui/src/components/rail/RailComponentIntl.ts:71](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponentIntl.ts#L71)
+Defined in: [libs/ui/src/components/rail/RailComponentIntl.ts:78](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailComponentIntl.ts#L78)
 
 Provides application-specific internationalization labels
 for the rail component.

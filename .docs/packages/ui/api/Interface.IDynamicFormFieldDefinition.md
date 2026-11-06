@@ -41,7 +41,7 @@ Optional supporting description.
 readonly optional emptyValueLabel?: string;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts:160](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts#L160)
+Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts:166](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts#L166)
 
 Label shown for a missing readonly value.
 
@@ -53,9 +53,33 @@ Label shown for a missing readonly value.
 readonly optional initialValue?: DynamicFormValue;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts:88](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts#L88)
+Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts:91](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts#L91)
 
 Initial value used when the value map has no matching key.
+
+***
+
+### integer?
+
+```ts
+readonly optional integer?: boolean;
+```
+
+Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts:134](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts#L134)
+
+Whether a number field accepts only whole values.
+
+***
+
+### isClearable?
+
+```ts
+readonly optional isClearable?: boolean;
+```
+
+Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts:83](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts#L83)
+
+Whether an optional field offers a clear action. Defaults to true.
 
 ***
 
@@ -101,7 +125,7 @@ Human-readable field label.
 readonly optional layout?: IDynamicFormFieldLayout;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts:104](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts#L104)
+Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts:107](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts#L107)
 
 Responsive twelve-column placement.
 
@@ -113,7 +137,7 @@ Responsive twelve-column placement.
 readonly optional link?: IDynamicFormLinkConfiguration;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts:168](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts#L168)
+Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts:174](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts#L174)
 
 Labels used by a read-only link renderer.
 
@@ -125,7 +149,7 @@ Labels used by a read-only link renderer.
 readonly optional maximum?: number;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts:128](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts#L128)
+Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts:131](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts#L131)
 
 Maximum accepted number.
 
@@ -137,7 +161,7 @@ Maximum accepted number.
 readonly optional maximumDate?: string | Date;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts:152](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts#L152)
+Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts:158](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts#L158)
 
 Latest accepted date.
 
@@ -149,7 +173,7 @@ Latest accepted date.
 readonly optional minimum?: number;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts:120](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts#L120)
+Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts:123](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts#L123)
 
 Minimum accepted number.
 
@@ -161,7 +185,7 @@ Minimum accepted number.
 readonly optional minimumDate?: string | Date;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts:144](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts#L144)
+Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts:150](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts#L150)
 
 Earliest accepted date.
 
@@ -173,7 +197,7 @@ Earliest accepted date.
 readonly optional multilineRows?: number;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts:112](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts#L112)
+Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts:115](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts#L115)
 
 Initial row count for a multiline textbox.
 
@@ -185,9 +209,9 @@ Initial row count for a multiline textbox.
 readonly optional options?: readonly IDynamicFormOption[];
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts:96](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts#L96)
+Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts:99](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts#L99)
 
-Select options or display mappings for the field.
+Choice options or display mappings for the field. Multiple-choice options use string values.
 
 ***
 
@@ -221,7 +245,7 @@ Whether a non-empty value is required.
 readonly optional step?: number;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts:136](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts#L136)
+Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts:142](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormFieldDefinition.ts#L142)
 
 Increment used by a number renderer.
 

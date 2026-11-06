@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: CodeEditorComponent
 
-Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:448](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L448)
+Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:447](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L447)
 
 A consolidated code editor component built on CodeMirror 6.
 Follows the Mosaik code-editor pattern with compartment-based extension management.
@@ -24,7 +24,7 @@ Supports placeholder autocompletion for template variables (e.g. <code v-pre>{{f
 new CodeEditorComponent(): CodeEditorComponent;
 ```
 
-Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:474](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L474)
+Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:473](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L473)
 
 #### Returns
 
@@ -38,7 +38,7 @@ Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:474](http
 protected readonly _intl: CodeEditorComponentIntl;
 ```
 
-Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:451](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L451)
+Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:450](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L450)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:451](http
 readonly canPreview: Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:561](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L561)
+Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:560](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L560)
 
 Whether a rendered preview is available for the active language.
 
@@ -60,7 +60,7 @@ Whether a rendered preview is available for the active language.
 readonly initialized: OutputEmitterRef<EditorView>;
 ```
 
-Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:611](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L611)
+Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:610](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L610)
 
 Emits the `EditorView` instance once the editor is initialized.
 
@@ -72,7 +72,7 @@ Emits the `EditorView` instance once the editor is initialized.
 readonly isMaximized: Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:577](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L577)
+Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:576](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L576)
 
 Whether the editor is expanded over the drawer content area.
 
@@ -84,7 +84,7 @@ Whether the editor is expanded over the drawer content area.
 readonly isOverlayOpen: Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:593](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L593)
+Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:592](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L592)
 
 Whether any drawer-sized overlay mode is active.
 
@@ -96,7 +96,7 @@ Whether any drawer-sized overlay mode is active.
 readonly isPreviewOpen: Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:585](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L585)
+Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:584](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L584)
 
 Whether the rendered preview overlay is open.
 
@@ -108,7 +108,7 @@ Whether the rendered preview overlay is open.
 readonly language: InputSignal<"text" | "html" | "markdown">;
 ```
 
-Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:536](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L536)
+Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:535](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L535)
 
 The language mode for syntax highlighting.
 Supports HTML, Markdown and plain text.
@@ -121,7 +121,7 @@ Supports HTML, Markdown and plain text.
 readonly placeholders: InputSignal<readonly string[]>;
 ```
 
-Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:553](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L553)
+Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:552](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L552)
 
 List of placeholder names available for autocompletion.
 These will be offered as <code v-pre>{{placeholderName}}</code> completions.
@@ -134,7 +134,7 @@ These will be offered as <code v-pre>{{placeholderName}}</code> completions.
 readonly previewDocument: Signal<SafeHtml>;
 ```
 
-Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:601](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L601)
+Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:600](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L600)
 
 Current editor document rendered inside the preview iframe.
 
@@ -146,7 +146,7 @@ Current editor document rendered inside the preview iframe.
 readonly previewTitle: Signal<string>;
 ```
 
-Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:569](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L569)
+Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:568](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L568)
 
 Accessible title for the active preview mode.
 
@@ -158,7 +158,7 @@ Accessible title for the active preview mode.
 readonly readonly: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:527](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L527)
+Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:526](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L526)
 
 Whether the editor is read-only.
 
@@ -170,7 +170,7 @@ Whether the editor is read-only.
 readonly tooltipPosition: InputSignal<"fixed" | "absolute">;
 ```
 
-Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:544](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L544)
+Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:543](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L543)
 
 Tooltip positioning strategy.
 
@@ -182,7 +182,7 @@ Tooltip positioning strategy.
 focus(): void;
 ```
 
-Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:666](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L666)
+Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:665](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L665)
 
 Focuses the editor.
 
@@ -198,7 +198,7 @@ Focuses the editor.
 ngOnDestroy(): void;
 ```
 
-Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:617](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L617)
+Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:616](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L616)
 
 A callback method that performs custom clean-up, invoked immediately
 before a directive, pipe, or service instance is destroyed.
@@ -221,7 +221,7 @@ OnDestroy.ngOnDestroy
 protected onClosePreviewButtonClick(): void;
 ```
 
-Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:715](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L715)
+Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:714](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L714)
 
 Closes the rendered preview overlay.
 
@@ -237,7 +237,7 @@ Closes the rendered preview overlay.
 protected onMaximizeButtonClick(): void;
 ```
 
-Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:675](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L675)
+Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:674](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L674)
 
 Toggles the drawer-sized editor mode.
 
@@ -253,7 +253,7 @@ Toggles the drawer-sized editor mode.
 protected onPreviewButtonClick(): void;
 ```
 
-Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:693](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L693)
+Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:692](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L692)
 
 Opens or closes the rendered preview overlay.
 
@@ -269,7 +269,7 @@ Opens or closes the rendered preview overlay.
 registerOnChange(fn): void;
 ```
 
-Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:645](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L645)
+Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:644](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L644)
 
 #### Parameters
 
@@ -327,7 +327,7 @@ ControlValueAccessor.registerOnChange
 registerOnTouched(fn): void;
 ```
 
-Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:649](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L649)
+Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:648](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L648)
 
 #### Parameters
 
@@ -383,7 +383,7 @@ ControlValueAccessor.registerOnTouched
 setDisabledState(isDisabled): void;
 ```
 
-Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:653](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L653)
+Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:652](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L652)
 
 #### Parameters
 
@@ -425,7 +425,7 @@ ControlValueAccessor.setDisabledState
 writeValue(value): void;
 ```
 
-Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:622](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L622)
+Defined in: [libs/ui/src/components/code-editor/CodeEditorComponent.ts:621](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/code-editor/CodeEditorComponent.ts#L621)
 
 #### Parameters
 

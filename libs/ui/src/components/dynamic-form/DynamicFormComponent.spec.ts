@@ -22,6 +22,7 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', async () => {
     const inputs = [
         'autocomplete',
         'appearance',
+        'decimalPlaces',
         'disabled',
         'dropDownPlacement',
         'fieldState',
@@ -38,6 +39,7 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', async () => {
         'minDate',
         'multiline',
         'multilineRows',
+        'orientation',
         'placeholder',
         'readonly',
         'rel',
@@ -80,6 +82,7 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', async () => {
     return {
         AnchorComponent: createComponent('mosaik-anchor'),
         ButtonComponent: createComponent('mosaik-button'),
+        CheckBoxGroupComponent: createComponent('mosaik-checkbox-group'),
         CheckboxComponent: createComponent('mosaik-checkbox'),
         DateBoxComponent: createComponent('mosaik-datebox'),
         FormFieldComponent: createComponent('mosaik-form-field'),
@@ -89,6 +92,8 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', async () => {
         LocaleDirective: createDirective('[locale]'),
         NumberBoxComponent: createComponent('mosaik-numberbox'),
         PasswordBoxComponent: createComponent('mosaik-passwordbox'),
+        RadioComponent: createComponent('mosaik-radio'),
+        RadioGroupComponent: createComponent('mosaik-radio-group'),
         SelectComponent: createComponent('mosaik-select'),
         SelectItemComponent: createComponent('mosaik-select-item'),
         TextBoxComponent: createComponent('mosaik-textbox'),
@@ -269,6 +274,125 @@ describe('DynamicFormComponent', () => {
             retained: 'future-value',
             status: 'OPEN',
         });
+    });
+
+    it('renders Mosaik choices and accepts false and zero as required scalar answers', async () => {
+        // arrange
+        const fixture = await createFixture();
+        setDefinition(
+            fixture.componentInstance,
+            createFieldsDefinition([
+                {
+                    key: 'radio',
+                    label: 'Radio',
+                    controlType: DynamicFormControlType.Radio,
+                    required: true,
+                    initialValue: false,
+                    options: [{ label: 'No', value: false }],
+                },
+                {
+                    key: 'select',
+                    label: 'Select',
+                    controlType: DynamicFormControlType.Select,
+                    required: true,
+                    initialValue: 0,
+                    options: [{ label: 'Zero', value: 0 }],
+                },
+                {
+                    key: 'multiple',
+                    label: 'Multiple',
+                    controlType: DynamicFormControlType.MultipleChoice,
+                    initialValue: ['one'],
+                    options: [{ label: 'One', value: 'one' }],
+                },
+            ]),
+        );
+
+        // act
+        fixture.detectChanges();
+
+        // assert
+        expect(fixture.nativeElement.querySelector('mosaik-radio-group mosaik-radio')).not.toBeNull();
+        expect(fixture.nativeElement.querySelector('mosaik-checkbox-group mosaik-checkbox')).not.toBeNull();
+        expect(fixture.componentInstance.valid()).toBe(true);
+        expect(fixture.componentInstance.value()).toMatchObject({ radio: false, select: 0, multiple: ['one'] });
+    });
+
+    it('validates a required multiple choice after its initially empty answer changes', async () => {
+        // arrange
+        const fixture = await createFixture();
+        setDefinition(
+            fixture.componentInstance,
+            createFieldsDefinition([
+                {
+                    key: 'multiple',
+                    label: 'Multiple',
+                    controlType: DynamicFormControlType.MultipleChoice,
+                    required: true,
+                    initialValue: [],
+                    options: [{ label: 'One', value: 'one' }],
+                },
+            ]),
+        );
+        const state = (fixture.componentInstance as unknown as IDynamicFormComponentTestApi).field('multiple')();
+        const initialErrors = state.errors();
+
+        // act
+        state.value.set(['one']);
+
+        // assert
+        expect(initialErrors).toEqual([expect.objectContaining({ kind: 'required' })]);
+        expect(state.errors()).toEqual([]);
+    });
+
+    it('clears an optional radio answer and preserves choices declared non-clearable', async () => {
+        // arrange
+        const fixture = await createFixture();
+        const options = [{ label: 'One', value: 'one' }];
+        setDefinition(
+            fixture.componentInstance,
+            createFieldsDefinition([
+                { key: 'clearable', label: 'Clearable', controlType: DynamicFormControlType.Radio, initialValue: 'one', options },
+                { key: 'fixed', label: 'Fixed', controlType: DynamicFormControlType.Radio, initialValue: 'one', isClearable: false, options },
+            ]),
+        );
+        fixture.detectChanges();
+        const clear = fixture.debugElement.query(By.css('[test-id="dynamic-form-field-clearable"] [part="clear-answer"]'));
+
+        // act
+        clear.triggerEventHandler('click', new Event('click'));
+
+        // assert
+        const state = (fixture.componentInstance as unknown as IDynamicFormComponentTestApi).field('clearable')();
+        expect(state.touched()).toBe(true);
+        expect(state.dirty()).toBe(true);
+        expect(fixture.componentInstance.value()).toMatchObject({ clearable: null, fixed: 'one' });
+        expect(fixture.nativeElement.querySelector('[test-id="dynamic-form-field-fixed"] [part="clear-answer"]')).toBeNull();
+    });
+
+    it.each([
+        { value: null, errorKind: undefined },
+        { value: 2, errorKind: undefined },
+        { value: 5, errorKind: undefined },
+        { value: 2.5, errorKind: 'integer' },
+        { value: 1, errorKind: 'integerRange' },
+        { value: 6, errorKind: 'integerRange' },
+    ])('validates integer field value $value against the declared bounds', async ({ value, errorKind }) => {
+        // arrange
+        const fixture = await createFixture();
+        setDefinition(
+            fixture.componentInstance,
+            createFieldsDefinition([
+                { key: 'amount', label: 'Amount', controlType: DynamicFormControlType.Number, integer: true, minimum: 2, maximum: 5, initialValue: value },
+            ]),
+        );
+        const state = (fixture.componentInstance as unknown as IDynamicFormComponentTestApi).field('amount')();
+
+        // act
+        const errors = state.errors();
+
+        // assert
+        expect(errors.map((error) => error.kind)).toEqual(errorKind ? [errorKind] : []);
     });
 
     it('should expose a validation error for invalid email values', async () => {
@@ -519,6 +643,10 @@ function setDefinition(component: DynamicFormComponent, definition: IDynamicForm
 function setRequiredInput<TValue>(input: InputSignal<TValue>, value: TValue): void {
     const node = input[SIGNAL];
     node.applyValueToInputSignal(node, value);
+}
+
+function createFieldsDefinition(fields: ReadonlyArray<IDynamicFormFieldDefinition>): IDynamicFormDefinition {
+    return { key: 'test-form', version: 1, sections: [{ key: 'main', fields }] };
 }
 
 function createDefinition(): IDynamicFormDefinition {

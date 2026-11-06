@@ -137,6 +137,15 @@ import { mapAiRailSelectionChangedEvent } from './mapAiRailSelectionChangedEvent
                                                 <mosaik-select-item [value]="option.value" [label]="option.label" />
                                             }
                                         </mosaik-select>
+                                        @if (choice.configurationSwapFields()?.[0] === field.key) {
+                                            <mosaik-button
+                                                appearance="plain"
+                                                iconName="arrowSync"
+                                                [label]="choice.configurationSwapLabel()"
+                                                [disabled]="!swapConfigurationCommand.canExecute()"
+                                                [ngpCommand]="{ click: swapConfigurationCommand }"
+                                            />
+                                        }
                                     }
                                 </div>
                                 <mosaik-button
@@ -560,6 +569,17 @@ export class AiRailComponent {
         }),
     );
 
+    /** Exchanges compatible values without changing the other configuration fields. */
+    protected readonly swapConfigurationCommand: Command<void> = command(
+        () => {
+            const swapped = this.swappedValues();
+            if (swapped) {
+                this._configurationValues.set(swapped);
+            }
+        },
+        computed(() => this.swappedValues() !== null),
+    );
+
     /**
      * Returns to the declarative choice list.
      *
@@ -642,6 +662,41 @@ export class AiRailComponent {
         this._requestPending.set(true);
         this._section.set(AiRailSection.BUSY);
         executeCommand.execute(this._configurationValues());
+    }
+
+    private swappedValues(): Readonly<Record<string, string>> | null {
+        const choice = this._activeChoice();
+        const pair = choice?.configurationSwapFields();
+        if (
+            !choice ||
+            !pair ||
+            pair[0] === pair[1] ||
+            this.loading() ||
+            this._requestPending() ||
+            this._section() !== AiRailSection.CONFIGURATION ||
+            !choice.configurationExecuteCommand()?.canExecute()
+        ) {
+            return null;
+        }
+        const fields = choice.configurationFields();
+        const left = fields.find((field) => field.key === pair[0]);
+        const right = fields.find((field) => field.key === pair[1]);
+        const values = this._configurationValues();
+        const leftValue = values[pair[0]];
+        const rightValue = values[pair[1]];
+        if (
+            !left ||
+            !right ||
+            left.disabled ||
+            right.disabled ||
+            leftValue === undefined ||
+            rightValue === undefined ||
+            leftValue === rightValue ||
+            ![left, right].every((field) => [leftValue, rightValue].every((value) => field.options.some((option) => option.value === value)))
+        ) {
+            return null;
+        }
+        return { ...values, [left.key]: rightValue, [right.key]: leftValue };
     }
 
     private showChoices(): void {

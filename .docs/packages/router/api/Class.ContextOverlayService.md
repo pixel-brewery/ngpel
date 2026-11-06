@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: ContextOverlayService
 
-Defined in: [context-overlay/ContextOverlayService.ts:45](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/context-overlay/ContextOverlayService.ts#L45)
+Defined in: [context-overlay/ContextOverlayService.ts:59](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/context-overlay/ContextOverlayService.ts#L59)
 
 Synchronizes a stack of contextual surfaces with the current browser URL. Register it once with
 `provideContextOverlayRouting()` at application composition.
@@ -18,7 +18,7 @@ Synchronizes a stack of contextual surfaces with the current browser URL. Regist
 new ContextOverlayService(): ContextOverlayService;
 ```
 
-Defined in: [context-overlay/ContextOverlayService.ts:70](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/context-overlay/ContextOverlayService.ts#L70)
+Defined in: [context-overlay/ContextOverlayService.ts:84](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/context-overlay/ContextOverlayService.ts#L84)
 
 Starts synchronization and binds the mounted surfaces to the environment injector.
 
@@ -28,6 +28,24 @@ Starts synchronization and binds the mounted surfaces to the environment injecto
 
 ## Accessors
 
+### closed
+
+#### Get Signature
+
+```ts
+get closed(): Observable<IContextOverlayState>;
+```
+
+Defined in: [context-overlay/ContextOverlayService.ts:125](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/context-overlay/ContextOverlayService.ts#L125)
+
+Emits the address of each overlay closed by its surface, for callers that only need to refresh related data.
+
+##### Returns
+
+`Observable`\<[`IContextOverlayState`](Interface.IContextOverlayState)\>
+
+***
+
 ### closedOutcome
 
 #### Get Signature
@@ -36,7 +54,7 @@ Starts synchronization and binds the mounted surfaces to the environment injecto
 get closedOutcome(): Observable<IContextOverlayOutcome>;
 ```
 
-Defined in: [context-overlay/ContextOverlayService.ts:111](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/context-overlay/ContextOverlayService.ts#L111)
+Defined in: [context-overlay/ContextOverlayService.ts:130](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/context-overlay/ContextOverlayService.ts#L130)
 
 Emits interactive close outcomes. URL-driven closes and disposal are silent.
 
@@ -46,13 +64,37 @@ Emits interactive close outcomes. URL-driven closes and disposal are silent.
 
 ## Methods
 
+### hasTarget()
+
+```ts
+hasTarget(key): boolean;
+```
+
+Defined in: [context-overlay/ContextOverlayService.ts:143](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/context-overlay/ContextOverlayService.ts#L143)
+
+Checks whether a feature registered an overlay key, regardless of access to a particular address.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `key` | `string` | Semantic target key. |
+
+#### Returns
+
+`boolean`
+
+Whether the key belongs to the overlay registry.
+
+***
+
 ### identifyCreated()
 
 ```ts
 identifyCreated(key, id): boolean;
 ```
 
-Defined in: [context-overlay/ContextOverlayService.ts:164](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/context-overlay/ContextOverlayService.ts#L164)
+Defined in: [context-overlay/ContextOverlayService.ts:192](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/context-overlay/ContextOverlayService.ts#L192)
 
 Promotes the mounted top create surface to a persisted identity without remounting it.
 
@@ -82,7 +124,7 @@ open(
 ): boolean;
 ```
 
-Defined in: [context-overlay/ContextOverlayService.ts:128](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/context-overlay/ContextOverlayService.ts#L128)
+Defined in: [context-overlay/ContextOverlayService.ts:156](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/context-overlay/ContextOverlayService.ts#L156)
 
 Opens a registered overlay above the current page and appends one browser history entry.
 
@@ -109,7 +151,7 @@ Whether the address was accepted.
 openFromUrl(url): boolean;
 ```
 
-Defined in: [context-overlay/ContextOverlayService.ts:138](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/context-overlay/ContextOverlayService.ts#L138)
+Defined in: [context-overlay/ContextOverlayService.ts:166](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/context-overlay/ContextOverlayService.ts#L166)
 
 Opens the top address of an in-scope resource URL over the current page.
 
@@ -137,7 +179,7 @@ replaceTop(
 ): boolean;
 ```
 
-Defined in: [context-overlay/ContextOverlayService.ts:153](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/context-overlay/ContextOverlayService.ts#L153)
+Defined in: [context-overlay/ContextOverlayService.ts:181](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/context-overlay/ContextOverlayService.ts#L181)
 
 Switches the top overlay within the current browser history entry.
 

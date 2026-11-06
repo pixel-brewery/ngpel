@@ -43,7 +43,7 @@ const output = readdirSync(join(FIXTURE, 'dist/browser'))
     .map((file) => readFileSync(join(FIXTURE, 'dist/browser', file), 'utf8'))
     .join('\n');
 const mustContain = ['ngpel core is wired', 'application/problem+json', 'Image preparation failed', 'Queue label'];
-const mustNotContain = ['ApiResultError', 'matchResult', 'SearchManager', 'AudioRecorder'];
+const mustNotContain = ['ApiResultError', 'matchResult', 'SearchManager', 'AudioRecorder', 'maps.googleapis.com/maps/api/js'];
 const failures = [
     ...mustContain.filter((needle) => !output.includes(needle)).map((needle) => `expected bundle to contain "${needle}"`),
     ...mustNotContain.filter((needle) => output.includes(needle)).map((needle) => `expected "${needle}" to be tree-shaken away`),

@@ -25,16 +25,19 @@ import { NavDirective } from '../../directives/nav/NavDirective';
                 [attr.test-id]="item().key"
                 [ngpNav]="item()"
                 [label]="compact() ? '' : label()"
+                [attr.aria-label]="label()"
                 [menuMode]="menuMode()"
                 [mosaikTooltip]="compact() ? label() : ''"
                 [mosaikTooltipDisabled]="!compact()"
                 [mosaikTooltipPlacement]="'right'"
                 [iconName]="item().icon"
             >
+                <span slot="end" class="flex min-w-0 items-center" [class.hidden]="compact()">
+                    <ng-content select="[ngpNavigationItemEnd]" />
+                </span>
                 @if (compact()) {
                     <span slot="label" class="sr-only">{{ label() }}</span>
                 } @else {
-                    <ng-content select="[ngpNavigationItemEnd]" />
                     <ng-content />
                 }
             </mosaik-menu-item>

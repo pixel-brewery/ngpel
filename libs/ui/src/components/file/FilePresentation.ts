@@ -4,6 +4,7 @@
  * @public
  */
 export const FilePresentation = {
+    Chip: 'chip',
     List: 'list',
     Preview: 'preview',
     Tile: 'tile',
