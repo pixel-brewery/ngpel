@@ -1,0 +1,25 @@
+{
+    "schemaVersion": 1,
+    "language": "en",
+    "project": {
+        "name": "ngpel",
+        "slug": "ngpel",
+        "website": "https://pixel-brewery.github.io/ngpel/",
+        "repository": "https://github.com/pixel-brewery/ngpel"
+    },
+    "description": "ngpel gives Angular applications a shared foundation for presentation, navigation, forms and user interfaces. Five modular packages let each application adopt the capabilities it needs.",
+    "image": {
+        "file": "project-card.webp",
+        "format": "webp",
+        "width": 960,
+        "height": 540,
+        "alt": "ngpel beside a ceramic browser window linked to navigation, form and component tiles."
+    },
+    "artwork": {
+        "kind": "illustration",
+        "generator": "Built-in Imagegen",
+        "generatedOn": "2026-11-06",
+        "prompt": "Use case: ads-marketing\nAsset: ngpel portfolio project card and GitHub README artwork, 16:9 landscape, intended for a 960 × 540 WebP.\nInput image: Archipel's project card, a sister project. Use only as a reference for art direction, visual quality, white studio lighting, composition and typography. The new card has its own subject. Do not reuse Archipel's wordmark or island-cluster logo.\nComposition: exact black lowercase word “ngpel” on the left third in a confident, bold geometric sans serif, with generous breathing room. The single word is the entire text, spelled n-g-p-e-l. Keep it large and legible in a thumbnail. On the right two thirds, a compact sculptural still life of frontend building blocks: an ivory ceramic browser-window slab, a fine translucent glass layer, a coral widget tile, a teal raised form tile with a check, and a thin branching navigation connector joining the objects. A few geometric details imply reusable Angular libraries, MVP composition, form validation and routing. Make this a beautifully crafted physical metaphor with distinct silhouettes, not a working UI or diagram.\nStyle: shallow elevated camera angle, softly rounded matte ceramic and frosted glass, turquoise and warm coral accents, warm white seamless studio background, very soft grounded shadows. Restrained, crisp and editorial. Keep all text and objects fully visible with 7% safe margins. No subtitles, letters beyond “ngpel”, logos, stock illustrations, watermarks, dark gradients, people, or illegible interface microtext.\n\nRefinement:\nUse case: precise-object-edit\nImage 1 is the approved composition for the 16:9 ngpel portfolio card. Make exactly one change: remove the red shield and the raised letter A from the big ceramic browser window; replace that object with a plain coral rounded-square ceramic tile whose relief is four small ivory squares in a 2×2 grid, a simple abstract widget symbol. There must be no framework logo and no extra lettering. Keep the rest of the scene, crop, scale, three browser dots, warm white studio setting, palette and grounded shadows as shown. Preserve the exact black lowercase word “ngpel” at left; this is the only text."
+    },
+    "blogDescription": "ngpel is the Angular companion to Archipel. It puts recurring frontend patterns into five reusable libraries: runtime services, Model-View-Presenter, Signal Forms, routing and UI. Applications compose only the providers and entry points they need."
+}

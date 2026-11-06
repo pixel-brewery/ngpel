@@ -1,0 +1,11 @@
+# Add files here to ignore them from prettier formatting
+/dist
+**/dist
+/coverage
+/.nx/cache
+/.nx/workspace-data
+.angular
+.docs/packages/*/api
+.generated
+yarn.lock
+CHANGELOG.md

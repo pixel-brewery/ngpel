@@ -1,0 +1,122 @@
+{
+    "$schema": "./node_modules/nx/schemas/nx-schema.json",
+    "tui": {
+        "enabled": false
+    },
+    "neverConnectToCloud": true,
+    "namedInputs": {
+        "default": ["{projectRoot}/**/*", "sharedGlobals"],
+        "production": [
+            "default",
+            "!{projectRoot}/eslint.config.mjs",
+            "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+            "!{projectRoot}/tsconfig.spec.json",
+            "!{projectRoot}/vitest.config.mts",
+            "!{projectRoot}/src/test-setup.[jt]s",
+            "!{projectRoot}/README.md",
+            "!{projectRoot}/CHANGELOG.md"
+        ],
+        "sharedGlobals": ["{workspaceRoot}/tsconfig.base.json"]
+    },
+    "plugins": [
+        {
+            "plugin": "@nx/eslint/plugin",
+            "options": {
+                "targetName": "lint"
+            }
+        },
+        {
+            "plugin": "@nx/vitest",
+            "exclude": ["vitest.config.mjs"],
+            "options": {
+                "testTargetName": "test",
+                "testMode": "run"
+            }
+        }
+    ],
+    "targetDefaults": {
+        "@nx/angular:package": {
+            "cache": true,
+            "dependsOn": ["^build"],
+            "inputs": ["production", "^production"],
+            "outputs": ["{projectRoot}/dist"]
+        },
+        "@nx/eslint:lint": {
+            "cache": true,
+            "inputs": ["default", "{workspaceRoot}/eslint.config.mjs"]
+        },
+        "typecheck": {
+            "cache": true,
+            "inputs": ["default", "^production"]
+        },
+        "nx-plugins:generate-package-docs": {
+            "cache": true,
+            "inputs": [
+                "{projectRoot}/src/**/*.ts",
+                "{projectRoot}/*/ng-package.json",
+                "{workspaceRoot}/tsconfig.base.json",
+                "{workspaceRoot}/infra/nx-plugins/src/executors/generate-package-docs/**/*",
+                "{workspaceRoot}/infra/nx-plugins/src/utils/markdown-processing.ts",
+                "^production"
+            ],
+            "outputs": ["{workspaceRoot}/.docs/packages/{projectName}/api"]
+        },
+        "nx-release-publish": {
+            "executor": "@nx/js:release-publish",
+            "dependsOn": ["build"],
+            "options": {
+                "packageRoot": "{projectRoot}/dist",
+                "registry": "https://npm.pkg.github.com",
+                "access": "public"
+            }
+        },
+        "test": {
+            "cache": true,
+            "inputs": ["default", "^production"]
+        },
+        "build": {
+            "cache": true,
+            "dependsOn": ["^build"],
+            "inputs": ["production", "^production", "{workspaceRoot}/LICENSE", "{workspaceRoot}/tools/postbuild-package.mjs"],
+            "outputs": ["{projectRoot}/dist"]
+        }
+    },
+    "release": {
+        "groups": {
+            "ngpel": {
+                "projects": ["libs/*"],
+                "projectsRelationship": "fixed",
+                "releaseTag": {
+                    "pattern": "v{version}"
+                }
+            }
+        },
+        "version": {
+            "currentVersionResolver": "git-tag",
+            "preserveLocalDependencyProtocols": false
+        },
+        "changelog": {
+            "projectChangelogs": true
+        },
+        "git": {
+            "commit": false,
+            "tag": false,
+            "push": false
+        }
+    },
+    "generators": {
+        "@nx/angular:component": {
+            "type": "component"
+        },
+        "@nx/angular:directive": {
+            "type": "directive"
+        },
+        "@nx/angular:service": {
+            "type": "service"
+        },
+        "@nx/angular:pipe": {
+            "typeSeparator": "."
+        }
+    },
+    "analytics": false
+}

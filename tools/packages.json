@@ -1,0 +1,126 @@
+{
+    "$comment": "Single source of truth for the ngpel package map. Consumed by tools/scaffold-packages.mjs. The cut follows the Angular paradigm: few packages, and a secondary entry point only where it buys a caller something \u2014 an entry point that a consumer would never import on its own belongs in the package's main entry point. ngpel publishes no test doubles: there is deliberately no ./testing entry point, applications supply their own.",
+    "scope": "@pixel-brewery",
+    "prefix": "ngpel-",
+    "peerRanges": {
+        "@angular/core": ">=22.0.0 <23.0.0",
+        "@angular/common": ">=22.0.0 <23.0.0",
+        "@angular/forms": ">=22.0.0 <23.0.0",
+        "@angular/router": ">=22.0.0 <23.0.0",
+        "@angular/platform-browser": ">=22.0.0 <23.0.0",
+        "@angular/service-worker": ">=22.0.0 <23.0.0",
+        "rxjs": ">=7.8.0 <8.0.0",
+        "marked": ">=18.0.0",
+        "@pixel-brewery/markdowner-core": ">=0.1.96",
+        "@pixel-brewery/mosaik-elements-angular": ">=0.1.99",
+        "@pixel-brewery/mosaik-elements-foundation": ">=0.1.99",
+        "@angular/cdk": ">=22.0.0 <23.0.0",
+        "@codemirror/autocomplete": ">=6.0.0",
+        "@codemirror/commands": ">=6.0.0",
+        "@codemirror/lang-html": ">=6.0.0",
+        "@codemirror/lang-markdown": ">=6.0.0",
+        "@codemirror/language": ">=6.0.0",
+        "@codemirror/search": ">=6.0.0",
+        "@codemirror/state": ">=6.0.0",
+        "@codemirror/view": ">=6.0.0",
+        "@lezer/highlight": ">=1.2.0"
+    },
+    "optionalPeers": ["@angular/service-worker"],
+    "packages": [
+        {
+            "name": "core",
+            "layer": 0,
+            "category": "Foundation",
+            "featured": true,
+            "description": "Application foundation: the provide<Feature>(...with<Option>()) composition kernel, the RFC 9457 result envelope and the cross-cutting runtime services every product re-solves.",
+            "keywords": ["core", "composition", "signals", "problem-detail"],
+            "dependsOn": [],
+            "entryPoints": {
+                ".": ["@angular/core"],
+                "rx": ["@angular/core", "rxjs"],
+                "storage": ["@angular/core"],
+                "browser": ["@angular/core"],
+                "notification": ["@angular/core", "rxjs"],
+                "update": ["@angular/core", "@angular/service-worker", "rxjs"],
+                "audio": ["@angular/core", "rxjs"],
+                "search": ["@angular/core", "rxjs"]
+            }
+        },
+        {
+            "name": "mvp",
+            "layer": 0,
+            "category": "Presentation",
+            "featured": true,
+            "description": "The Model-View-Presenter pattern as a package: the ViewPresenter base class, composable presenter behaviors, the View host and the command and ref primitives they are built from.",
+            "keywords": ["mvp", "presenter", "view", "command", "controller", "signals"],
+            "dependsOn": [],
+            "entryPoints": {
+                ".": ["@angular/core", "@angular/common", "rxjs"]
+            }
+        },
+        {
+            "name": "ui",
+            "layer": 2,
+            "category": "UI",
+            "featured": true,
+            "description": "The presentation layer: every component, directive and pipe the products share \u2014 AI surfaces, media and file components, the collection view, the guided tour and the dashboard widget grid \u2014 plus a safe markdown pipeline. Mosaik and CodeMirror are optional peers.",
+            "keywords": ["ui", "components", "directives", "pipes", "markdown", "widget", "ai", "collection-view"],
+            "dependsOn": ["core", "mvp", "router"],
+            "entryPoints": {
+                ".": [
+                    "@angular/core",
+                    "@angular/common",
+                    "@angular/forms",
+                    "@angular/router",
+                    "@angular/cdk",
+                    "@angular/platform-browser",
+                    "@pixel-brewery/mosaik-elements-angular",
+                    "@pixel-brewery/mosaik-elements-foundation",
+                    "@codemirror/autocomplete",
+                    "@codemirror/commands",
+                    "@codemirror/lang-html",
+                    "@codemirror/lang-markdown",
+                    "@codemirror/language",
+                    "@codemirror/search",
+                    "@codemirror/state",
+                    "@codemirror/view",
+                    "@lezer/highlight"
+                ],
+                "markdown": ["marked", "@pixel-brewery/markdowner-core"],
+                "widget": [
+                    "@angular/core",
+                    "@angular/common",
+                    "@angular/cdk",
+                    "rxjs",
+                    "@pixel-brewery/mosaik-elements-angular",
+                    "@pixel-brewery/mosaik-elements-foundation"
+                ]
+            },
+            "inlineStyleLanguage": "scss"
+        },
+        {
+            "name": "forms",
+            "layer": 1,
+            "category": "Presentation",
+            "description": "Signal Forms validators, async validator helpers, the shared status-class map and the password-strength service.",
+            "keywords": ["forms", "validators", "signal-forms", "password-strength"],
+            "dependsOn": ["core"],
+            "entryPoints": {
+                ".": ["@angular/core", "@angular/forms"]
+            }
+        },
+        {
+            "name": "router",
+            "layer": 1,
+            "category": "Platform Services",
+            "description": "Route path construction, URL-backed signals and the title strategy, plus the navigation item registry and the responsive application shell controller.",
+            "keywords": ["router", "routing", "navigation", "shell"],
+            "dependsOn": ["core"],
+            "entryPoints": {
+                ".": ["@angular/core", "@angular/router", "rxjs", "@angular/common"],
+                "navigation": ["@angular/core", "@angular/router", "rxjs"],
+                "shell": ["@angular/core", "@angular/router"]
+            }
+        }
+    ]
+}

@@ -1,0 +1,65 @@
+{
+    "name": "@pixel-brewery/ngpel-ui",
+    "version": "0.0.2",
+    "description": "The presentation layer: every component, directive and pipe the products share — AI surfaces, media and file components, the collection view, the guided tour and the dashboard widget grid — plus a safe markdown pipeline. Mosaik and CodeMirror are optional peers.",
+    "keywords": [
+        "angular",
+        "ngpel",
+        "ui",
+        "components",
+        "directives",
+        "pipes",
+        "markdown",
+        "widget",
+        "ai",
+        "collection-view"
+    ],
+    "license": "MIT",
+    "author": "Pixel Brewery (https://github.com/pixel-brewery)",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/pixel-brewery/ngpel",
+        "directory": "libs/ui"
+    },
+    "engines": {
+        "node": ">=22"
+    },
+    "sideEffects": false,
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://npm.pkg.github.com"
+    },
+    "dependencies": {
+        "tslib": "2.8.1"
+    },
+    "peerDependencies": {
+        "@angular/cdk": ">=22.0.0 <23.0.0",
+        "@angular/common": ">=22.0.0 <23.0.0",
+        "@angular/core": ">=22.0.0 <23.0.0",
+        "@angular/forms": ">=22.0.0 <23.0.0",
+        "@angular/platform-browser": ">=22.0.0 <23.0.0",
+        "@angular/router": ">=22.0.0 <23.0.0",
+        "@codemirror/autocomplete": ">=6.0.0",
+        "@codemirror/commands": ">=6.0.0",
+        "@codemirror/lang-html": ">=6.0.0",
+        "@codemirror/lang-markdown": ">=6.0.0",
+        "@codemirror/language": ">=6.0.0",
+        "@codemirror/search": ">=6.0.0",
+        "@codemirror/state": ">=6.0.0",
+        "@codemirror/view": ">=6.0.0",
+        "@lezer/highlight": ">=1.2.0",
+        "@pixel-brewery/markdowner-core": ">=0.1.96",
+        "@pixel-brewery/mosaik-elements-angular": ">=0.1.99",
+        "@pixel-brewery/mosaik-elements-foundation": ">=0.1.99",
+        "@pixel-brewery/ngpel-core": "0.0.2",
+        "@pixel-brewery/ngpel-mvp": "0.0.2",
+        "@pixel-brewery/ngpel-router": "0.0.2",
+        "marked": ">=18.0.0",
+        "rxjs": ">=7.8.0 <8.0.0"
+    },
+    "ngpel": {
+        "category": "UI",
+        "layer": 2,
+        "featured": true
+    }
+}

@@ -1,0 +1,66 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+**/dist/
+.angular/
+.cache/
+.tscache/
+tmp/
+temp/
+out-tsc/
+coverage/
+*.tgz
+*.log
+
+# Nx
+.nx/cache
+.nx/workspace-data
+.nx/polygraph
+.nx/migrate-runs
+
+# Yarn
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.yarn/install-state.gz
+
+# Docs
+**/.vitepress/cache/
+**/.vitepress/dist/
+.generated/
+.docs/public/api/api-index.json
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.crt
+*.p12
+*.pfx
+secrets/
+credentials/
+
+# Editors & OS
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db
+
+# Test artifacts
+test-output/
+vitest.config.*.timestamp*
+vite.config.*.timestamp*
+
+# Agent tooling
+.claude/worktrees
+.claude/settings.local.json

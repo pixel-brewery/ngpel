@@ -1,0 +1,43 @@
+{
+    "name": "@pixel-brewery/ngpel-mvp",
+    "version": "0.0.2",
+    "description": "The Model-View-Presenter pattern as a package: the ViewPresenter base class, composable presenter behaviors, the View host and the command and ref primitives they are built from.",
+    "keywords": [
+        "angular",
+        "ngpel",
+        "mvp",
+        "presenter",
+        "view",
+        "command",
+        "controller",
+        "signals"
+    ],
+    "license": "MIT",
+    "author": "Pixel Brewery (https://github.com/pixel-brewery)",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/pixel-brewery/ngpel",
+        "directory": "libs/mvp"
+    },
+    "engines": {
+        "node": ">=22"
+    },
+    "sideEffects": false,
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://npm.pkg.github.com"
+    },
+    "dependencies": {
+        "tslib": "2.8.1"
+    },
+    "peerDependencies": {
+        "@angular/common": ">=22.0.0 <23.0.0",
+        "@angular/core": ">=22.0.0 <23.0.0",
+        "rxjs": ">=7.8.0 <8.0.0"
+    },
+    "ngpel": {
+        "category": "Presentation",
+        "layer": 0,
+        "featured": true
+    }
+}

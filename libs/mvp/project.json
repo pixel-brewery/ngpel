@@ -1,0 +1,38 @@
+{
+    "name": "mvp",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/mvp/src",
+    "prefix": "ngp",
+    "projectType": "library",
+    "tags": ["lib", "layer:0"],
+    "implicitDependencies": [],
+    "targets": {
+        "build-ng": {
+            "executor": "@nx/angular:package",
+            "outputs": ["{projectRoot}/dist"],
+            "options": {
+                "project": "libs/mvp/ng-package.json",
+                "tsConfig": "libs/mvp/tsconfig.lib.json"
+            }
+        },
+        "build": {
+            "executor": "nx:run-commands",
+            "dependsOn": ["^build", "build-ng"],
+            "outputs": ["{projectRoot}/dist"],
+            "options": {
+                "command": "node tools/postbuild-package.mjs libs/mvp",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "typecheck": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "tsc -p libs/mvp/tsconfig.spec.json --noEmit",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "docs": {
+            "executor": "nx-plugins:generate-package-docs"
+        }
+    }
+}

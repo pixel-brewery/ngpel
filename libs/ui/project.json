@@ -1,0 +1,38 @@
+{
+    "name": "ui",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/ui/src",
+    "prefix": "ngp",
+    "projectType": "library",
+    "tags": ["lib", "layer:2"],
+    "implicitDependencies": ["core", "mvp", "router"],
+    "targets": {
+        "build-ng": {
+            "executor": "@nx/angular:package",
+            "outputs": ["{projectRoot}/dist"],
+            "options": {
+                "project": "libs/ui/ng-package.json",
+                "tsConfig": "libs/ui/tsconfig.lib.json"
+            }
+        },
+        "build": {
+            "executor": "nx:run-commands",
+            "dependsOn": ["^build", "build-ng"],
+            "outputs": ["{projectRoot}/dist"],
+            "options": {
+                "command": "node tools/postbuild-package.mjs libs/ui",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "typecheck": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "tsc -p libs/ui/tsconfig.spec.json --noEmit",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "docs": {
+            "executor": "nx-plugins:generate-package-docs"
+        }
+    }
+}

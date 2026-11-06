@@ -1,0 +1,77 @@
+{
+    "name": "docs",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "apps/frontend/docs",
+    "projectType": "application",
+    "tags": ["docs", "app", "type:app"],
+    "targets": {
+        "generate-api-overview": {
+            "executor": "nx-plugins:generate-api-overview",
+            "dependsOn": [
+                {
+                    "projects": "dependencies",
+                    "target": "docs"
+                }
+            ],
+            "inputs": ["{workspaceRoot}/.docs/packages/*/api/**/*"],
+            "outputs": ["{workspaceRoot}/.docs/public/api/api-index.json"],
+            "options": {
+                "packagePrefix": ""
+            },
+            "cache": true
+        },
+        "dev": {
+            "executor": "nx:run-commands",
+            "dependsOn": [
+                "generate-api-overview",
+                {
+                    "projects": "dependencies",
+                    "target": "docs"
+                }
+            ],
+            "options": {
+                "command": "npx vitepress dev apps/frontend/docs",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "build": {
+            "executor": "nx:run-commands",
+            "dependsOn": [
+                "generate-api-overview",
+                {
+                    "projects": "dependencies",
+                    "target": "docs"
+                }
+            ],
+            "options": {
+                "command": "npx vitepress build apps/frontend/docs",
+                "cwd": "{workspaceRoot}"
+            },
+            "outputs": ["{workspaceRoot}/apps/frontend/docs/.vitepress/dist"]
+        },
+        "preview": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "npx vitepress preview",
+                "cwd": "{workspaceRoot}/apps/frontend/docs"
+            }
+        },
+        "docs-build-llm": {
+            "executor": "nx-plugins:build-llm-artifacts",
+            "dependsOn": [
+                {
+                    "projects": "dependencies",
+                    "target": "docs"
+                }
+            ],
+            "inputs": ["{workspaceRoot}/.docs/**/*"],
+            "outputs": ["{workspaceRoot}/.generated/llm"],
+            "options": {
+                "projectTitle": "ngpel",
+                "projectDescription": "Documentation index for the ngpel Angular frontend companion libraries monorepo."
+            },
+            "cache": true
+        }
+    },
+    "implicitDependencies": ["core", "mvp", "ui", "forms", "router"]
+}

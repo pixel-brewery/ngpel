@@ -1,0 +1,46 @@
+{
+    "name": "@pixel-brewery/ngpel-core",
+    "version": "0.0.2",
+    "description": "Application foundation: the provide<Feature>(...with<Option>()) composition kernel, the RFC 9457 result envelope and the cross-cutting runtime services every product re-solves.",
+    "keywords": [
+        "angular",
+        "ngpel",
+        "core",
+        "composition",
+        "signals",
+        "problem-detail"
+    ],
+    "license": "MIT",
+    "author": "Pixel Brewery (https://github.com/pixel-brewery)",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/pixel-brewery/ngpel",
+        "directory": "libs/core"
+    },
+    "engines": {
+        "node": ">=22"
+    },
+    "sideEffects": false,
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://npm.pkg.github.com"
+    },
+    "dependencies": {
+        "tslib": "2.8.1"
+    },
+    "peerDependencies": {
+        "@angular/core": ">=22.0.0 <23.0.0",
+        "@angular/service-worker": ">=22.0.0 <23.0.0",
+        "rxjs": ">=7.8.0 <8.0.0"
+    },
+    "peerDependenciesMeta": {
+        "@angular/service-worker": {
+            "optional": true
+        }
+    },
+    "ngpel": {
+        "category": "Foundation",
+        "layer": 0,
+        "featured": true
+    }
+}

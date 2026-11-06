@@ -1,0 +1,8 @@
+:host {
+    display: block;
+    pointer-events: none;
+}
+
+:host.active {
+    pointer-events: auto;
+}

@@ -1,0 +1,38 @@
+{
+    "name": "router",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/router/src",
+    "prefix": "ngp",
+    "projectType": "library",
+    "tags": ["lib", "layer:1"],
+    "implicitDependencies": ["core"],
+    "targets": {
+        "build-ng": {
+            "executor": "@nx/angular:package",
+            "outputs": ["{projectRoot}/dist"],
+            "options": {
+                "project": "libs/router/ng-package.json",
+                "tsConfig": "libs/router/tsconfig.lib.json"
+            }
+        },
+        "build": {
+            "executor": "nx:run-commands",
+            "dependsOn": ["^build", "build-ng"],
+            "outputs": ["{projectRoot}/dist"],
+            "options": {
+                "command": "node tools/postbuild-package.mjs libs/router",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "typecheck": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "tsc -p libs/router/tsconfig.spec.json --noEmit",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "docs": {
+            "executor": "nx-plugins:generate-package-docs"
+        }
+    }
+}

@@ -1,0 +1,73 @@
+:host {
+    .light {
+        --logo-color: #bf1818;
+        --text-color: #1d1d1b;
+    }
+
+    .dark {
+        --logo-color: #f0f0f0;
+        --text-color: #f0f0f0;
+    }
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    height: 40px;
+
+    [part='main'] {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: center;
+        gap: var(--mosaik-layout-space);
+
+        .symbol {
+            width: 32px;
+            height: 32px;
+
+            .path {
+                fill: var(--logo-color);
+            }
+        }
+
+        .logo-and-text-vertical {
+            > path,
+            path:nth-last-of-type(-n + 3) {
+                fill: var(--logo-color);
+            }
+
+            path {
+                fill: var(--text-color);
+            }
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 56px;
+        }
+
+        .logo-and-text-horizontal {
+            > path,
+            path:nth-last-of-type(-n + 3) {
+                fill: var(--logo-color);
+            }
+
+            path {
+                fill: var(--text-color);
+            }
+
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 154px;
+        }
+    }
+
+    .tag {
+        color: var(--mosaik-scheme-middlelight);
+    }
+}

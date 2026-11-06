@@ -1,0 +1,23 @@
+{
+    "extends": "./tsconfig.base.json",
+    "compileOnSave": false,
+    "files": [],
+    "references": [
+        {
+            "path": "./libs/core"
+        },
+        {
+            "path": "./libs/mvp"
+        },
+        {
+            "path": "./libs/ui"
+        },
+        {
+            "path": "./libs/forms"
+        },
+        {
+            "path": "./libs/router"
+        }
+    ],
+    "exclude": ["node_modules", "tmp"]
+}

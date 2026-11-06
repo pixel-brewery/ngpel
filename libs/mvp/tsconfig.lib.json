@@ -1,0 +1,20 @@
+{
+    "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+        "outDir": "./dist",
+        "declaration": true,
+        "declarationMap": false,
+        "inlineSources": true,
+        "types": [],
+        "lib": ["ES2022", "DOM", "DOM.Iterable"]
+    },
+    "angularCompilerOptions": {
+        "compilationMode": "partial",
+        "enableI18nLegacyMessageIdFormat": false,
+        "strictInjectionParameters": true,
+        "strictInputAccessModifiers": true,
+        "strictTemplates": true
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": ["**/*.spec.ts", "**/*.test.ts", "src/test-setup.ts", "dist"]
+}

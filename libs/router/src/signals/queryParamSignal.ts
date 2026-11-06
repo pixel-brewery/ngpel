@@ -1,0 +1,63 @@
+// #region Imports
+
+import { assertInInjectionContext, computed, inject } from '@angular/core';
+import { ActivatedRoute, type Params, Router } from '@angular/router';
+import { copyQueryParams } from './copyQueryParams';
+import type { IQueryParamSignalOptions } from './IQueryParamSignalOptions';
+import { injectParamMapSignal } from './injectParamMapSignal';
+import type { UrlParamCodec } from './UrlParamCodec';
+import type { UrlParamSignal } from './UrlParamSignal';
+
+// #endregion
+
+/**
+ * Creates a bidirectional signal for one optional query parameter. Must be called in an injection
+ * context. Writing preserves every unrelated query parameter, including repeated ones.
+ *
+ * @public
+ * @typeParam T The typed application value.
+ * @param parameterName The query parameter name.
+ * @param codec The codec converting between the raw parameter and the typed value.
+ * @param options The history behavior and fragment handling.
+ * @returns The URL-backed signal.
+ *
+ * @example
+ * ```typescript
+ * // /newsletters?status=draft
+ * private readonly _status = queryParamSignal('status', fromNullable(enumCodec(['draft', 'published'])));
+ * ```
+ */
+export function queryParamSignal<T>(parameterName: string, codec: UrlParamCodec<T>, options: IQueryParamSignalOptions = {}): UrlParamSignal<T> {
+    assertInInjectionContext(queryParamSignal);
+
+    const route = inject(ActivatedRoute);
+    const router = inject(Router);
+    const paramMap = injectParamMapSignal('query');
+    const value = computed<T | undefined>((): T | undefined => codec.parse(paramMap().get(parameterName)));
+
+    const set = (nextValue: T | undefined): Promise<boolean> => {
+        const queryParams: Params = copyQueryParams(paramMap());
+        const serializedValue = nextValue === undefined ? null : codec.serialize(nextValue);
+
+        if (serializedValue === null) {
+            delete queryParams[parameterName];
+        } else {
+            queryParams[parameterName] = serializedValue;
+        }
+
+        const targetUrl = router.createUrlTree([], {
+            relativeTo: route,
+            queryParams,
+            queryParamsHandling: 'replace',
+            preserveFragment: options.preserveFragment ?? true,
+        });
+
+        return router.navigateByUrl(targetUrl, { replaceUrl: options.replaceUrl ?? false });
+    };
+
+    return Object.assign(value, {
+        set,
+        update: (updater: (currentValue: T | undefined) => T | undefined): Promise<boolean> => set(updater(value())),
+        clear: (): Promise<boolean> => set(undefined),
+    });
+}

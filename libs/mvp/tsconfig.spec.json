@@ -1,0 +1,15 @@
+{
+    "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+        "outDir": "../../dist/out-tsc/libs/mvp",
+        "types": ["vitest/globals", "vitest/importMeta", "vite/client", "node"],
+        "lib": ["ES2022", "DOM", "DOM.Iterable"]
+    },
+    "angularCompilerOptions": {
+        "strictInjectionParameters": true,
+        "strictInputAccessModifiers": true,
+        "strictTemplates": true
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": ["dist"]
+}

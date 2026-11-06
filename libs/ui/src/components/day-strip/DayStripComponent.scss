@@ -1,0 +1,28 @@
+@use '@pixel-brewery/mosaik-themes/scss' as themes;
+
+:host {
+    @include themes.joy-style();
+
+    display: block;
+
+    [part='item'] {
+        transition:
+            background-color 0.2s ease,
+            color 0.2s ease;
+        cursor: pointer;
+        min-height: 3rem;
+    }
+
+    [part='item']:hover {
+        background-color: var(--mosaik-scheme-surface-subtle);
+    }
+
+    [part='item'].selected {
+        background-color: var(--mosaik-color-primary-500);
+        color: var(--mosaik-color-on-primary);
+    }
+
+    [part='item'].today:not(.selected) {
+        color: var(--mosaik-color-primary-500);
+    }
+}

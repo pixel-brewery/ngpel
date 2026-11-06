@@ -1,0 +1,12 @@
+{
+    "name": "nx-plugins",
+    "version": "0.0.1",
+    "private": true,
+    "executors": "./executors.json",
+    "dependencies": {
+        "@nx/devkit": "^23.1.2",
+        "gray-matter": "4.0.3",
+        "typedoc": "0.28.20",
+        "typedoc-plugin-markdown": "4.13.0"
+    }
+}
