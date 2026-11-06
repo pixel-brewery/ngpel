@@ -9,6 +9,8 @@ editUrl: false
 
 | Class | Description |
 | ------ | ------ |
+| [ContextOverlayService](Class.ContextOverlayService) | Synchronizes a stack of contextual surfaces with the current browser URL. Register it once with `provideContextOverlayRouting()` at application composition. |
+| [ContextOverlayUrl](Class.ContextOverlayUrl) | Reads and writes an ordered overlay stack in a relative application URL. The first layer uses `overlay`, `overlayId`, and `overlayContext`. Further layers use suffixes `.1` through `.7`. |
 | [NavigationHandleDispatcher](Class.NavigationHandleDispatcher) | Executes [NavHandle](TypeAlias.NavHandle) actions. `route:` goes through the Angular router and `ext:` through the [NAVIGATION\_WINDOW](Variable.NAVIGATION_WINDOW) port; every other scheme — `cmd:` in particular — is delegated to an [INavHandleHandler](Interface.INavHandleHandler) registered under `NAV_HANDLE_HANDLER`, which keeps the command stack out of this package's dependencies. |
 | [NavigationManager](Class.NavigationManager) | The signal-based navigation registry: it collects every contributed [INavItem](Interface.INavItem), runs the registered [INavigationGuard](Interface.INavigationGuard)s over them, indexes the result by key, region and parent, and exposes it as signals so hosts re-render on their own. |
 | [Navigator](Class.Navigator) | A task-oriented facade over `Router` and `Location`: navigate by URL, by view type or by route definition, step through the in-application [NavigatorJournal](Class.NavigatorJournal) with a fall back to the browser history, and ask what is currently active. It also keeps the previous URL, which the router itself does not expose. |
@@ -20,6 +22,11 @@ editUrl: false
 
 | Interface | Description |
 | ------ | ------ |
+| [IContextOverlayOutcome](Interface.IContextOverlayOutcome) | Interactive close across the heterogeneous registry of overlay targets. |
+| [IContextOverlayRef](Interface.IContextOverlayRef) | A mounted surface owned by a contextual overlay target. |
+| [IContextOverlayRoutingOptions](Interface.IContextOverlayRoutingOptions) | Application policies for contextual overlay routing. |
+| [IContextOverlayState](Interface.IContextOverlayState) | Address of one contextual overlay. Omitting the identifier selects the target's create mode. |
+| [IContextOverlayTarget](Interface.IContextOverlayTarget) | A feature-owned target addressable above the current page. |
 | [INavHandleHandler](Interface.INavHandleHandler) | Executes the handles of one [NavHandleScheme](TypeAlias.NavHandleScheme). The dispatcher handles `route:` and `ext:` itself; `cmd:` has no built-in handler because the command stack is not a dependency of this package — a product binds its own handler under `NAV_HANDLE_HANDLER`. A registered handler also replaces a built-in scheme, which is how a shell can intercept `route:` navigation. |
 | [INavigationGuard](Interface.INavigationGuard) | Decides which navigation items a user may see. Returning the item — possibly a modified copy, for example with filtered children — allows it; returning `null` removes it entirely. Guards run in registration order and each guard receives the previous guard's result, so they compose. |
 | [INavigatorJournalEntry](Interface.INavigatorJournalEntry) | One recorded entry of the [NavigatorJournal](Class.NavigatorJournal). |
@@ -42,6 +49,7 @@ editUrl: false
 
 | Type Alias | Description |
 | ------ | ------ |
+| [ContextOverlayLoader](TypeAlias.ContextOverlayLoader) | Loads a surface and its data without mounting it. The returned function is called only if the target is still current and authorized. |
 | [NavHandle](TypeAlias.NavHandle) | A navigation handle: what activating a navigation item does, encoded as `<scheme>:<value>`. Keeping the action in a string instead of a callback is what lets navigation items be plain, serializable data that any host can render. |
 | [NavHandleScheme](TypeAlias.NavHandleScheme) | The schemes a [NavHandle](TypeAlias.NavHandle) can carry: `route` for in-application router navigation, `cmd` for a named command and `ext` for an external URL. |
 | [NavigationFeatureKind](TypeAlias.NavigationFeatureKind) | The kinds of features `provideNavigation(...)` accepts. Both kinds are multi: any number of feature libraries may contribute items, and any number of policies may guard them. |
@@ -68,10 +76,12 @@ editUrl: false
 | [createSideNavigationController](Function.createSideNavigationController) | Creates the responsive shell state — navigation sidebar, compact rail, right rail panel and its split position — with the persistence and the viewport rules every application shell re-solves. Must be called in an injection context, so the controller can read the router, the activated route and the browser storage without the caller wiring them up. |
 | [parseHandle](Function.parseHandle) | Parses a [NavHandle](TypeAlias.NavHandle) into its scheme, value and query parameters. The scheme ends at the **first** colon, so values that contain further colons — an `https://` URL, a namespaced command id — survive intact. |
 | [presentationRoutes](Function.presentationRoutes) | Wraps the feature routes of an application in one guarded shell route. It exists so the shell mount point, its guards and its default child are declared once instead of being copied into every product's route file — the shell component itself stays in the product. |
+| [provideContextOverlayRouting](Function.provideContextOverlayRouting) | Registers contextual URL synchronization at the application composition root. |
+| [provideContextOverlayTarget](Function.provideContextOverlayTarget) | Registers a feature target without coupling the application's shell to its lazy surface. |
 | [provideNavigation](Function.provideNavigation) | Composes the navigation registry: the [NavigationManager](Class.NavigationManager) and the [NavigationHandleDispatcher](Class.NavigationHandleDispatcher), plus every contributed item and guard. Nothing else is pulled in — `route:` and `ext:` handles work out of the box, and `cmd:` handles are enabled by binding an `INavHandleHandler` under `NAV_HANDLE_HANDLER`. |
 | [provideNavigator](Function.provideNavigator) | Registers [Navigator](Class.Navigator) and its [NavigatorJournal](Class.NavigatorJournal). Both are environment-scoped, so the journal spans the whole application while its subscriptions end with the injector. |
 | [provideRouteDataTitleStrategy](Function.provideRouteDataTitleStrategy) | Registers [RouteDataTitleStrategy](Class.RouteDataTitleStrategy) as the application's `TitleStrategy`. Translation of the title segments stays a separate seam: bind `ROUTE_TITLE_TEXT_RESOLVER` when route data holds translation keys. |
-| [queryParamSignal](Function.queryParamSignal) | Creates a bidirectional signal for one optional query parameter. Must be called in an injection context. Writing preserves every unrelated query parameter, including repeated ones. |
+| [queryParamSignal](Function.queryParamSignal) | Creates a bidirectional signal for one optional query parameter. Must be called in an injection context. Writing preserves unrelated parameters from the current browser URL, including repeated ones and changes made through `Location` outside a router navigation. |
 | [routeParamSignal](Function.routeParamSignal) | Creates a bidirectional signal for a parameter declared in the route path. Must be called in an injection context. Reading follows the activated URL; writing navigates to the URL tree the `toUrlTree` policy returns. |
 | [withNavigationGuard](Function.withNavigationGuard) | Contributes a navigation guard. Guards decide which items a user may see; which capabilities that means stays a product policy. |
 | [withNavigationItems](Function.withNavigationItems) | Contributes navigation items. A feature library exports one such contribution; the composition root passes it to `provideNavigation(...)` and decides its `order` there. |

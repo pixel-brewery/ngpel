@@ -191,6 +191,7 @@ editUrl: false
 | [ICompoundItemContext](Interface.ICompoundItemContext) | Context exposed to a compound item's dynamic template. |
 | [IContentNavigationItem](Interface.IContentNavigationItem) | Describes a stable in-page destination exposed by a content navigation. |
 | [IContentNavigationViewportState](Interface.IContentNavigationViewportState) | - |
+| [IContextDrawerTarget](Interface.IContextDrawerTarget) | A feature-owned contextual overlay presented through Mosaik drawers. |
 | [IDataTableColumnPreference](Interface.IDataTableColumnPreference) | Persisted visibility state for one data-table column. |
 | [IDataTablePreferenceState](Interface.IDataTablePreferenceState) | Persisted state for a Mosaik data-table. |
 | [IDateFilterRange](Interface.IDateFilterRange) | Date range resolved from a filter value. |
@@ -211,7 +212,7 @@ editUrl: false
 | [IFilterBarConfig](Interface.IFilterBarConfig) | Configuration for the FilterBarComponent. |
 | [IFilterColumnBinding](Interface.IFilterColumnBinding) | Binds a column key to its filter metadata. Used by [buildFilterDefinitions](Function.buildFilterDefinitions) to resolve labels from column definitions and produce [IFilterDefinition](Interface.IFilterDefinition) entries. |
 | [IFilterController](Interface.IFilterController) | Controller for list filter visibility, application and saved filters. |
-| [IFilterControllerConfig](Interface.IFilterControllerConfig) | Configuration for [createFilterController](Function.createFilterController). |
+| [IFilterControllerConfig](Interface.IFilterControllerConfig) | Configuration for `createFilterController()`. |
 | [IFilterDefinition](Interface.IFilterDefinition) | Describes a single filter field in the filter bar. |
 | [IFilterOption](Interface.IFilterOption) | Option for select-type filters. |
 | [IFloatingHostPosition](Interface.IFloatingHostPosition) | Position and size configuration for the floating host. |
@@ -235,6 +236,7 @@ editUrl: false
 | [IImageRemovedEvent](Interface.IImageRemovedEvent) | Event emitted when the image is removed. |
 | [IInputHistoryNavigationEvent](Interface.IInputHistoryNavigationEvent) | Describes a value recalled through input history navigation. |
 | [ILegalLink](Interface.ILegalLink) | Describes a trusted website-level legal or company link. |
+| [ILiveFilterPreference](Interface.ILiveFilterPreference) | Stores an active filter so the presenter can restore it before the first list load. |
 | [IMapsAddress](Interface.IMapsAddress) | A postal address as [MapsPipe](Class.MapsPipe) reads it. Every part is optional, because the shape mirrors what an API actually returns rather than what a complete address would hold. |
 | [IMarkdownRendererOptions](Interface.IMarkdownRendererOptions) | Options for the markdown renderer. |
 | [IParseRecurrenceRuleOptions](Interface.IParseRecurrenceRuleOptions) | - |
@@ -449,6 +451,7 @@ editUrl: false
 | [provideCollectionExportDrawerComponentIntl](Function.provideCollectionExportDrawerComponentIntl) | Provides application-specific internationalization labels for the collection export drawer component. |
 | [provideColorSelectorComponentIntl](Function.provideColorSelectorComponentIntl) | Provides application-specific internationalization labels for the color selector component. |
 | [provideComboIntl](Function.provideComboIntl) | Provides application-specific internationalization labels for the combo component. |
+| [provideContextDrawerTarget](Function.provideContextDrawerTarget) | Registers a contextual target using the application's existing Mosaik drawer provider. The router owns URL-driven closing, while Mosaik retains the shell's presentation defaults. |
 | [provideCookiesConsentIntl](Function.provideCookiesConsentIntl) | Provides application-specific internationalization labels for the cookies consent component. |
 | [provideDataTableIntl](Function.provideDataTableIntl) | Provides the application's own labels for the Mosaik data table. |
 | [provideDetailPanelComponentIntl](Function.provideDetailPanelComponentIntl) | Provides application-specific internationalization labels for the detail panel component. |

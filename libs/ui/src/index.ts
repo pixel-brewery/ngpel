@@ -190,7 +190,8 @@ export { createFilterController } from './components/filter-bar/saved-filters/cr
 export { createSavedFilterController } from './components/filter-bar/saved-filters/createSavedFilterController';
 export { createSavedFilterSummary } from './components/filter-bar/saved-filters/createSavedFilterSummary';
 export type { IFilterController } from './components/filter-bar/saved-filters/IFilterController';
-export type { IFilterControllerConfig } from './components/filter-bar/saved-filters/createFilterController';
+export type { IFilterControllerConfig } from './components/filter-bar/saved-filters/IFilterControllerConfig';
+export type { ILiveFilterPreference } from './components/filter-bar/saved-filters/ILiveFilterPreference';
 export type { ISavedFilter } from './components/filter-bar/saved-filters/ISavedFilter';
 export type { ISavedFilterController } from './components/filter-bar/saved-filters/ISavedFilterController';
 export type { ISavedFilterControllerConfig } from './components/filter-bar/saved-filters/createSavedFilterController';
@@ -305,6 +306,8 @@ export type { IVoiceSessionControlLabels } from './components/voice-session-cont
 export { VoiceSessionControlsComponent } from './components/voice-session-controls/VoiceSessionControlsComponent';
 export { WeekPanelComponent } from './components/week-panel/WeekPanelComponent';
 export { WeekStripComponent } from './components/week-strip/WeekStripComponent';
+export type { IContextDrawerTarget } from './context-overlay/IContextDrawerTarget';
+export { provideContextDrawerTarget } from './context-overlay/provideContextDrawerTarget';
 export type { AiAttention } from './directives/ai/AiAttention';
 export { AiDirective } from './directives/ai/AiDirective';
 export { DataTablePreferencesDirective } from './directives/data-table-preferences/DataTablePreferencesDirective';

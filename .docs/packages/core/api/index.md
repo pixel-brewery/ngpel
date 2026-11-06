@@ -13,6 +13,8 @@ editUrl: false
 | [AudioInputDeviceError](Class.AudioInputDeviceError) | Typed browser audio-input failure with a stable recovery category. The original browser failure is preserved as the error `cause`. |
 | [AudioInputDevicePreferenceService](Class.AudioInputDevicePreferenceService) | Persists the verified microphone selection for the current browser profile. |
 | [AudioInputDeviceService](Class.AudioInputDeviceService) | Discovers browser microphones and owns one short-lived, non-recording voice test. |
+| [AudioLevelMonitor](Class.AudioLevelMonitor) | Measures a borrowed stream in sample-aligned mono windows at 24 kHz. Provide a separate monitor for each independent capture. Only the analysis graph is owned by the monitor. |
+| [AudioLevelWorkletModuleLoader](Class.AudioLevelWorkletModuleLoader) | DI token and strategy for registering the level processor in one Web Audio context. By default the browser loads a temporary blob URL. Hosts can provide a loader for a static [AUDIO\_LEVEL\_WORKLET\_SOURCE](Variable.AUDIO_LEVEL_WORKLET_SOURCE) asset under their content security policy. |
 | [AudioNotificationInterceptor](Class.AudioNotificationInterceptor) | Plays a sound for a raised notification through the [AudioPlayer](Class.AudioPlayer). Playback is started but never awaited, so a browser that refuses to play unprompted audio slows nothing down: the rejection is reported on the configured diagnostic channel and the notification keeps travelling through the remaining interceptors. |
 | [AudioPlayer](Class.AudioPlayer) | Plays seekable audio and externally owned live media streams through one audio element. |
 | [AudioRecorder](Class.AudioRecorder) | Owns one microphone and emits bounded, ordered audio chunks while recording remains active. |
@@ -21,25 +23,35 @@ editUrl: false
 | [BusyScopeService](Class.BusyScopeService) | Factory service for per-component [BusyScope](Class.BusyScope) instances with strict typing. |
 | [ClipboardService](Class.ClipboardService) | Default [IClipboard](Interface.IClipboard) adapter over the asynchronous Clipboard API. The platform is reached through the injected `DOCUMENT` only, so the adapter stays free of module globals, can be faked in a `TestBed` and does nothing outside a browser window. |
 | [ConsoleNotificationInterceptor](Class.ConsoleNotificationInterceptor) | Writes every raised notification to a diagnostic channel, mapping the severity onto the matching console level. Compose it with `withConsoleNotificationInterceptor()` to keep a record of what a session was told in environments that have no visible notification surface. |
+| [CryptoOperationIdFactory](Class.CryptoOperationIdFactory) | Generates operation IDs using the Web Crypto API with a Math.random fallback. |
 | [DefaultSearchRankingStrategy](Class.DefaultSearchRankingStrategy) | Default ranking: an exact label match wins over a label prefix, a label prefix over a label substring, and both text fields of lower weight (description, keywords) come last. Items that match nowhere keep their contributed order behind the matches, because the sort is stable. |
 | [DefaultUpdateHandlerStrategy](Class.DefaultUpdateHandlerStrategy) | Console-only strategy: reports the lifecycle with the [IUpdateIntl](Interface.IUpdateIntl) texts and never touches the UI. Registered by default when `provideUpdate()` receives no strategy feature. |
 | [ExternalLinkService](Class.ExternalLinkService) | Default [IExternalLinkOpener](Interface.IExternalLinkOpener) adapter: `window.open(url, '_blank', 'noopener,noreferrer')` on the injected `DOCUMENT`'s window. The call shape is deliberately fixed and the return value ignored — desktop shells intercept exactly this window-open request to hand the URL to the OS browser, and a fallback to in-app navigation would drive such a shell off-app. |
 | [FileDownloadService](Class.FileDownloadService) | Default [IFileDownloader](Interface.IFileDownloader) adapter: a temporary object URL on a detached anchor whose `download` attribute carries the file name, so the browser never derives a suggestion from the object URL. The URL is revoked in a `finally` block, even when the click throws. |
+| [ImageUploadPreparationService](Class.ImageUploadPreparationService) | Prepares a browser-selected image for upload. Files within the byte limit retain their bytes and name. |
 | [JsonUserPreferenceCodec](Class.JsonUserPreferenceCodec) | JSON preference codec with caller-provided runtime validation. The value is stored as-is; the adapter performs the JSON round trip. |
+| [KeepOptimisticOnFailurePolicy](Class.KeepOptimisticOnFailurePolicy) | Failure policy that intentionally does nothing. The operation remains in its optimistic state after a failure. |
 | [LocalStorageUnavailableError](Class.LocalStorageUnavailableError) | Error raised when a storage operation cannot be performed because browser storage is unavailable: outside a browser (server-side rendering), when the window denies the storage accessor, or when the host bound `BROWSER_STORAGE` to `null` on purpose. |
 | [LocalVoiceTranscriber](Class.LocalVoiceTranscriber) | Browser-based [ILiveVoiceTranscriber](Interface.ILiveVoiceTranscriber) over the Web Speech API. |
 | [MediaUrlPipe](Class.MediaUrlPipe) | Resolves backend-owned media paths for template bindings: `[src]="user.avatarUrl | ngpMediaUrl"`. |
 | [MediaUrlResolver](Class.MediaUrlResolver) | Resolves backend-owned relative media paths against the configured API origin. Available in the root injector without configuration (pass-through), and re-registered by `provideMediaUrls(...)` so a route-level composition gets its own scoped instance. |
+| [NoOperationMergePolicy](Class.NoOperationMergePolicy) | Merge policy that never merges operations. Every enqueued operation creates a new entry. |
 | [NotificationInterceptor](Class.NotificationInterceptor) | Base class for a notification sink. It owns the configuration handshake so a subclass only has to answer [NotificationInterceptor.push](Class.NotificationInterceptor#push): the composing `with*` factory calls [NotificationInterceptor.configure](Class.NotificationInterceptor#configure) once, and the options are readable from [NotificationInterceptor.config](Class.NotificationInterceptor#config) afterwards. |
 | [NotificationService](Class.NotificationService) | Raises notifications and fans them out to every composed [INotificationInterceptor](Interface.INotificationInterceptor). |
 | [NotificationSoundPreviewService](Class.NotificationSoundPreviewService) | Plays a notification sound on demand without raising a notification, so a settings screen can let a user hear what they are about to switch on. It ignores the sound preferences by design — a preview of a silenced severity has to be audible. |
 | [NotificationSoundSettingsService](Class.NotificationSoundSettingsService) | Holds the user's notification sound preferences for the running session and answers the gate the [AudioNotificationInterceptor](Class.AudioNotificationInterceptor) consults before it plays anything. |
+| [OperationLifecycle](Class.OperationLifecycle) | Reactive stream of operation lifecycle events. |
+| [OperationQueue](Class.OperationQueue) | Central operation queue managing enqueue, scheduling, commit, and rollback lifecycle. |
+| [QuickCreateManager](Class.QuickCreateManager) | Resolves and executes contextual create actions registered by feature modules. |
 | [ReactiveCacheRegistrar](Class.ReactiveCacheRegistrar) | An in-memory key/value registry with observable change notification. Subclass it to build product registries whose consumers react through RxJS streams. |
+| [ReplacePendingByMergeKeyPolicy](Class.ReplacePendingByMergeKeyPolicy) | Merge policy that replaces the first pending entry sharing the same [IOperation.mergeKey](Interface.IOperation#mergekey). |
+| [RollbackOnFailurePolicy](Class.RollbackOnFailurePolicy) | Failure policy that rolls back the failed operation via OperationExecutor.rollback. |
 | [SearchManager](Class.SearchManager) | Environment-wide owner of the search capability: it holds the registered contributors, the surface state every search view binds to, and the querying itself. It is headless — it decides *that* the surface should be open, never *how* it looks. |
 | [SearchRankingStrategy](Class.SearchRankingStrategy) | Strategy that orders the items of a search surface. It is used as the DI token of the ranking implementation; `provideSearch()` binds it to `DefaultSearchRankingStrategy` and applications override it by providing their own subclass after the composition root. |
 | [SearchSession](Class.SearchSession) | View-independent state of one search surface: the query, the ranked sections, the active item and the loading and error flags. It is deliberately not provided by `provideSearch()` — every surface lists it in its own providers, so a launcher and a full-page surface keep separate state while sharing the one [SearchManager](Class.SearchManager). |
 | [ServiceWorkerUpdateSource](Class.ServiceWorkerUpdateSource) | [IUpdateSource](Interface.IUpdateSource) adapter over the Angular service worker: maps `versionUpdates` and `unrecoverable` onto [IUpdateEvent](TypeAlias.IUpdateEvent), derives the [IUpdateStatus](Interface.IUpdateStatus) from that stream and from the outcome of `checkForUpdate()`, and delegates activation to `activateUpdate()`. Requires `provideServiceWorker()` in the application; reports `disabled` when the service worker is not enabled (for example in development builds). |
 | [SignalCacheRegistrar](Class.SignalCacheRegistrar) | An in-memory key/value registry with signal-based change notification. Subclass it to build product registries (navigation items, commands, widgets) that templates can observe. |
+| [SystemOperationClock](Class.SystemOperationClock) | Clock implementation delegating to Date.now. |
 | [TextToSpeechService](Class.TextToSpeechService) | Reads text aloud through the Web Speech API. |
 | [UpdateHandlerStrategyBase](Class.UpdateHandlerStrategyBase) | No-op base for [IUpdateHandlerStrategy](Interface.IUpdateHandlerStrategy) implementations: override only the events a strategy cares about. |
 | [UpdateManager](Class.UpdateManager) | Drives the update lifecycle: listens to the [IUpdateSource](Interface.IUpdateSource), fans every event out to all registered strategies and exposes check/activate operations that wait for application stability. Created by `provideUpdate()`; inject it to trigger manual checks or to read the status. |
@@ -55,6 +67,8 @@ editUrl: false
 | [IAttentionRequestRef](Interface.IAttentionRequestRef) | Structural contract of a UI surface (drawer, dialog) that exposes implicit close attempts and can request the user's attention. Typed structurally so any UI kit's surface ref satisfies it. |
 | [IAudioInputDevice](Interface.IAudioInputDevice) | Stable, serializable projection of a browser audio-input device. |
 | [IAudioInputDevicePreference](Interface.IAudioInputDevicePreference) | Locally persisted, successfully tested audio-input selection. |
+| [IAudioLevelMeasurement](Interface.IAudioLevelMeasurement) | One measured window of the mono audio input. |
+| [IAudioLevelMonitorOptions](Interface.IAudioLevelMonitorOptions) | Options for monitoring a borrowed audio stream. |
 | [IAudioNotificationInterceptorConfig](Interface.IAudioNotificationInterceptorConfig) | Options of the [AudioNotificationInterceptor](Class.AudioNotificationInterceptor). The sound table is the only required part: this package ships no audio assets, so the composing application names its own files. |
 | [IAudioPlayOptions](Interface.IAudioPlayOptions) | Per-call playback options. Every option is optional and keeps the player's current setting when omitted, so a caller can start a sound without restating the whole configuration. |
 | [IAudioRecorderChunk](Interface.IAudioRecorderChunk) | One ordered audio fragment emitted while recording is still active. |
@@ -70,6 +84,7 @@ editUrl: false
 | [IFeatureIncompatibilityRule](Interface.IFeatureIncompatibilityRule) | Describes an incompatibility rule between features. If `isViolated()` returns true, composition must fail fast with `message`. |
 | [IFeatureOptions](Interface.IFeatureOptions) | Options controlling a feature's composition behavior. |
 | [IFileDownloader](Interface.IFileDownloader) | Port for saving in-memory content under an explicit, caller-supplied file name. |
+| [IImageUploadPreparationOptions](Interface.IImageUploadPreparationOptions) | Bounds an upload and sets the dimensions used when the image needs re-encoding. |
 | [ILiveVoiceTranscriber](Interface.ILiveVoiceTranscriber) | Extends a voice transcriber with a manually controlled live recognition session. |
 | [ILocalStorageSignalOptions](Interface.ILocalStorageSignalOptions) | Configures one storage-backed signal. |
 | [ILocalVoiceTranscriberOptions](Interface.ILocalVoiceTranscriberOptions) | Configuration of the browser-based [LocalVoiceTranscriber](Class.LocalVoiceTranscriber). |
@@ -80,8 +95,20 @@ editUrl: false
 | [INotificationMessage](Interface.INotificationMessage) | What a caller hands to [NotificationService.push](Class.NotificationService#push): the raw message, before an id, a timestamp and a resolved lifetime turn it into an [INotification](Interface.INotification). |
 | [INotificationOptions](Interface.INotificationOptions) | The parts of an [INotificationMessage](Interface.INotificationMessage) the typed convenience methods of [NotificationService](Class.NotificationService) do not take positionally. |
 | [INotificationSoundPreviewConfig](Interface.INotificationSoundPreviewConfig) | Sound table of the [NotificationSoundPreviewService](Class.NotificationSoundPreviewService). `withAudioNotificationInterceptor()` applies the interceptor's own table, so a preview always plays what the notification would. |
+| [IOperation](Interface.IOperation) | Contract for a queued operation that can apply, commit, and rollback. |
+| [IOperationClock](Interface.IOperationClock) | Abstraction over the system clock, enabling deterministic testing. |
+| [IOperationContext](Interface.IOperationContext) | Runtime context passed to every [IOperation](Interface.IOperation) lifecycle hook. |
+| [IOperationDefinition](Interface.IOperationDefinition) | Simplified operation definition. Only [IOperationDefinition.commit](Interface.IOperationDefinition#commit) is required; all other fields are optional and filled with sensible defaults by the [operation](Function.operation) factory. |
+| [IOperationEntry](Interface.IOperationEntry) | Internal representation of a queued operation with its lifecycle state. |
+| [IOperationFailurePolicy](Interface.IOperationFailurePolicy) | Policy invoked when OperationExecutor.commit throws. |
+| [IOperationIdFactory](Interface.IOperationIdFactory) | Strategy for generating unique operation entry identifiers. |
+| [IOperationMergePolicy](Interface.IOperationMergePolicy) | Policy responsible for finding a merge target when a new operation is enqueued. |
+| [IOperationPolicy](Interface.IOperationPolicy) | Base contract for all operation policies. |
+| [IOperationQueueOptions](Interface.IOperationQueueOptions) | Configuration options for the operation queue. |
 | [IPreventableCloseAttempt](Interface.IPreventableCloseAttempt) | Close attempt contract for implicit interactions (backdrop click, Escape) that can be cancelled. |
 | [IProblemDetail](Interface.IProblemDetail) | RFC 9457 Problem Detail for HTTP APIs. |
+| [IQuickCreateItem](Interface.IQuickCreateItem) | Represents a single contextual create action registered by a feature module. |
+| [IQuickCreateItemSource](Interface.IQuickCreateItemSource) | Interface for dynamic quick-create item sources (injectable classes). |
 | [IReactiveCacheChange](Interface.IReactiveCacheChange) | Describes a single change event emitted by a [ReactiveCacheRegistrar](Class.ReactiveCacheRegistrar). |
 | [ISearchConfig](Interface.ISearchConfig) | Behavioural options of the search engine, published through `SEARCH_CONFIG`. |
 | [ISearchProvider](Interface.ISearchProvider) | Contract for features that contribute semantic search. A provider searches its own domain objects and activates a result when the user selects it. |
@@ -108,6 +135,7 @@ editUrl: false
 | [IUserPreferenceStorage](Interface.IUserPreferenceStorage) | Storage port for user-scoped preferences. Adapters decide where preferences live (Web Storage, an Electron bridge, an in-memory map); consumers only see typed reads and writes. |
 | [IValueCodec](Interface.IValueCodec) | Converts between a serialized representation and a typed application value. |
 | [IVoiceTranscriber](Interface.IVoiceTranscriber) | Port for converting recorded voice audio to text. Implementations decide where recognition happens — in the browser, on a device, or behind an API of the product's own choosing. |
+| [IWithQuickCreateItemsOptions](Interface.IWithQuickCreateItemsOptions) | Options for contributing contextual create actions. |
 | [IWithSearchCommandsOptions](Interface.IWithSearchCommandsOptions) | Options for contributing palette commands through `withSearchCommands()`. |
 | [IWithSearchProvidersOptions](Interface.IWithSearchProvidersOptions) | Options for contributing semantic search providers through `withSearchProviders()`. |
 | [IWithSearchRenderersOptions](Interface.IWithSearchRenderersOptions) | Options for contributing result renderers through `withSearchRenderers()`. |
@@ -122,6 +150,7 @@ editUrl: false
 | [AudioInputPermissionState](TypeAlias.AudioInputPermissionState) | Browser permission state for microphone access. `unknown` is the state before the browser was asked, `unsupported` the state of a runtime without media APIs. |
 | [AudioInputSignalQuality](TypeAlias.AudioInputSignalQuality) | Normalized quality of the currently sampled microphone signal, derived from its RMS level and its peak amplitude. |
 | [AudioInputTestState](TypeAlias.AudioInputTestState) | Lifecycle of the non-recording microphone voice test. |
+| [AudioLevelMonitorState](TypeAlias.AudioLevelMonitorState) | Lifecycle of a single audio level monitor. |
 | [AudioRecorderErrorCode](TypeAlias.AudioRecorderErrorCode) | Stable failure categories of the browser audio recorder. They exist so a user interface can decide on recovery — ask for permission again, offer another device, fall back to typing — without parsing browser messages. |
 | [AudioRecorderState](TypeAlias.AudioRecorderState) | Lifecycle states of a browser audio recording session. `stopping` is entered while the browser still delivers its final chunk, and `disposed` is terminal. |
 | [AudioRecordingRetention](TypeAlias.AudioRecordingRetention) | Controls whether emitted chunks are also retained for a final in-memory recording. `none` keeps a long session memory-free for callers that persist or upload every chunk themselves. |
@@ -133,6 +162,7 @@ editUrl: false
 | [EnvExport](TypeAlias.EnvExport) | The shape of environment variables exposed to the application through the [ENV](Variable.ENV) token: a flat, string-valued record such as the one produced by a build-time `.env` export. |
 | [FeatureKind](TypeAlias.FeatureKind) | Represents a branded string for feature kinds to prevent accidental mixing of arbitrary strings. |
 | [IApiResult](TypeAlias.IApiResult) | Discriminated union type for API responses. Narrow through the `success` discriminator. |
+| [IOperationInput](TypeAlias.IOperationInput) | Flexible input for [OperationQueue.enqueue](Class.OperationQueue#enqueue). Accepts either a full [IOperation](Interface.IOperation) or a simplified [IOperationDefinition](Interface.IOperationDefinition). |
 | [IUpdateEvent](TypeAlias.IUpdateEvent) | Discriminated union of every event an [IUpdateSource](Interface.IUpdateSource) can emit. It replaces the `@angular/service-worker` event classes in the strategy contract, so the primary entry point has no service-worker dependency and any platform can implement the port. |
 | [IUserPreferenceCodec](TypeAlias.IUserPreferenceCodec) | A codec over the JSON payload of a user preference. The storage adapter owns the JSON serialization, so the codec sees the parsed payload as `unknown` and must validate it. |
 | [LocalStorageCodec](TypeAlias.LocalStorageCodec) | A codec over the string representation of Web Storage (`localStorage`/`sessionStorage`). Every built-in codec of this package (`stringCodec`, `booleanCodec`, `jsonCodec`, ...) has this shape; `fromNullable` lifts it to `string | null` for URL parameters. |
@@ -145,6 +175,10 @@ editUrl: false
 | [NotificationSoundSettings](TypeAlias.NotificationSoundSettings) | Whether a notification sound is wanted, per severity a user can silence. |
 | [NotificationText](TypeAlias.NotificationText) | Text of a notification. A plain string is the simple case; a signal lets a translated or otherwise reactive caption keep updating after the notification was raised, which matters for a notification history that outlives a language switch. |
 | [NotificationType](TypeAlias.NotificationType) | Union of the [NotificationType](Variable.NotificationType) values. |
+| [OperationLifecycleEvent](TypeAlias.OperationLifecycleEvent) | Discriminated union of all lifecycle events emitted by the operation queue. |
+| [OperationPolicyKind](TypeAlias.OperationPolicyKind) | Discriminator for policy categories. |
+| [OperationQueueFeatureKind](TypeAlias.OperationQueueFeatureKind) | Discriminated union of feature kinds supported by the operation queue. |
+| [OperationStatus](TypeAlias.OperationStatus) | Union of all possible lifecycle states for an [IOperationEntry](Interface.IOperationEntry). |
 | [ReactiveCacheChangedReason](TypeAlias.ReactiveCacheChangedReason) | Union of the [ReactiveCacheChangedReason](Variable.ReactiveCacheChangedReason) values. |
 | [ReadonlyDeep](TypeAlias.ReadonlyDeep) | Recursively marks `T` and everything reachable from it as `readonly`. Dates, regular expressions and functions keep their identity instead of being mapped structurally. |
 | [SearchFeatureKind](TypeAlias.SearchFeatureKind) | The kind vocabulary of the search composition root. All three kinds are multi: any number of features may contribute commands, providers and renderers. |
@@ -159,6 +193,7 @@ editUrl: false
 | Variable | Description |
 | ------ | ------ |
 | [AUDIO\_INPUT\_DEVICE\_PREFERENCE\_KEY](Variable.AUDIO_INPUT_DEVICE_PREFERENCE_KEY) | Injection token carrying the user-preference key the [AudioInputDevicePreferenceService](Class.AudioInputDevicePreferenceService) stores its selection under. It defaults to a neutral, versioned key; a product that already persists a microphone under its own key keeps that key by composing `provideAudioInputDevices(withAudioInputDevicePreferenceKey('acme.audio.input-device.v1'))` instead of migrating the stored value. |
+| [AUDIO\_LEVEL\_WORKLET\_SOURCE](Variable.AUDIO_LEVEL_WORKLET_SOURCE) | JavaScript source for the level monitor's AudioWorklet module. A host with a restrictive content security policy can write this string to a same-origin asset and load it with its own `AudioLevelWorkletModuleLoader`. |
 | [AudioFeatureKinds](Variable.AudioFeatureKinds) | The branded kind vocabulary of the audio entry point. Products that ship their own recognition strategy create features with these kinds, so the kernel still rejects a second transcriber. |
 | [AudioInputDeviceFeatureKinds](Variable.AudioInputDeviceFeatureKinds) | The branded kind vocabulary of the audio-input device composition. |
 | [BROWSER\_STORAGE](Variable.BROWSER_STORAGE) | The single storage seam of ngpel. Defaults to the `localStorage` of the injected `DOCUMENT`'s window (SSR-safe: `null` when there is no window or the accessor throws). Hosts that need a different backing store (Electron, Capacitor, tests) bind it through `provideBrowserStorage(withStorage(...))`; `localStorageSignal` and the user-preference adapter of `withLocalStorage()` both resolve through it. |
@@ -179,6 +214,7 @@ editUrl: false
 | [NOTIFICATION\_INTERCEPTORS](Variable.NOTIFICATION_INTERCEPTORS) | Multi-provider token of the sinks [NotificationService](Class.NotificationService) fans every raised notification out to. Each `with*NotificationInterceptor()` feature contributes one configured interceptor. |
 | [NotificationKinds](Variable.NotificationKinds) | Branded feature kinds accepted by `provideNotification()`. |
 | [NotificationType](Variable.NotificationType) | Severity of a notification. `None` is the neutral grade a message without an explicit type receives, so every interceptor has to answer for it; it is deliberately the empty string, which keeps a missing severity falsy for consumers that only care whether one was stated. |
+| [OperationQueueFeatureKinds](Variable.OperationQueueFeatureKinds) | Branded feature kind constants for the operation queue. |
 | [positiveIntegerCodec](Variable.positiveIntegerCodec) | Persists positive identifiers and one-based pagination values as safe integers (`1`, `2`, ...). |
 | [PROBLEM\_DETAIL\_MEDIA\_TYPE](Variable.PROBLEM_DETAIL_MEDIA_TYPE) | The media type under which RFC 9457 problem details are served (`application/problem+json`). Mirrors the backend constant published by Archipel's `ProblemDetailResponse.MEDIA_TYPE`. |
 | [ReactiveCacheChangedReason](Variable.ReactiveCacheChangedReason) | The reason a [ReactiveCacheRegistrar](Class.ReactiveCacheRegistrar) reported a change. |
@@ -213,6 +249,7 @@ editUrl: false
 | [destroyBag](Function.destroyBag) | Creates a new destroy bag tied to a `DestroyRef`. Co-located with the [DestroyBag](TypeAlias.DestroyBag) type because a separate `destroyBag.ts` would collide with `DestroyBag.ts` on case-insensitive file systems. |
 | [enumCodec](Function.enumCodec) | Creates a codec that restricts a persisted string to a compile-time union of allowed values. |
 | [featureKind](Function.featureKind) | Brands a plain string literal as a [FeatureKind](TypeAlias.FeatureKind). Co-located with the type because a separate `featureKind.ts` would collide with `FeatureKind.ts` on case-insensitive file systems. |
+| [fromCalendarDate](Function.fromCalendarDate) | Creates the local date shown by a date control for a stored calendar day. |
 | [fromNullable](Function.fromNullable) | Lifts a codec so that it also accepts `null` as an absent serialized value. This lets the same validators that back Web Storage (`string`) serve URL parameters (`string | null`) without a second codec set. |
 | [guardImplicitCloseAttempts](Function.guardImplicitCloseAttempts) | Prevents implicit close attempts while the supplied predicate reports unsaved state, requesting attention for the surface instead. |
 | [isCommandItem](Function.isCommandItem) | Narrows a search surface item to an executable command. A command is recognised by its `execute()` method, which no search result carries. |
@@ -224,8 +261,10 @@ editUrl: false
 | [localStorageSignal](Function.localStorageSignal) | Creates a storage-backed signal without exposing an injectable storage service to feature code. Must be called in an injection context (a field initializer or constructor). Co-located with the [LocalStorageSignal](TypeAlias.LocalStorageSignal) type because a separate `localStorageSignal.ts` would collide with `LocalStorageSignal.ts` on case-insensitive file systems. |
 | [mapServiceWorkerEvent](Function.mapServiceWorkerEvent) | Translates a `SwUpdate` event into the source-agnostic [IUpdateEvent](TypeAlias.IUpdateEvent) vocabulary. |
 | [matchResult](Function.matchResult) | Operator which takes a stream of [IApiResult](TypeAlias.IApiResult) and applies the matching handler for the success or failure branch. |
+| [normalizeCalendarDate](Function.normalizeCalendarDate) | Normalizes a date-only value or legacy calendar date-time to `YYYY-MM-DD`. |
 | [notificationDurationToMilliseconds](Function.notificationDurationToMilliseconds) | Resolves a symbolic [NotificationDuration](TypeAlias.NotificationDuration) to its lifetime in milliseconds. The mapping is total: everything that is not `'long'` resolves to the short lifetime, so a value that survived an untyped boundary can never produce a notification without a lifetime. |
 | [onceOn](Function.onceOn) | Subscribes once to a source, forwarding its values until completion, error or cancellation. |
+| [operation](Function.operation) | Creates a full [IOperation](Interface.IOperation) from a simplified [IOperationDefinition](Interface.IOperationDefinition). |
 | [play](Function.play) | Plays one sound through the [AudioPlayer](Class.AudioPlayer) of the current injector. Intended for the short notification sounds that would otherwise make every caller inject the player itself; it must run inside an injection context, so a component reaches it from a field initializer or through `runInInjectionContext`. |
 | [provideAudioInputDevices](Function.provideAudioInputDevices) | Registers the microphone discovery and voice-test services together with the persisted selection. Persistence goes through the user-preference port of `@pixel-brewery/ngpel-core/storage`, so an application that stores a microphone also composes `provideUserPreferences(...)`; without it, injecting the preference service fails loudly instead of dropping writes. |
 | [provideAudioPlayer](Function.provideAudioPlayer) | Registers the [AudioPlayer](Class.AudioPlayer) for the composition root it is added to. The player is bound to that injector's lifetime, so a route-level composition releases its element when the route is left instead of keeping one element alive for the whole application. |
@@ -234,6 +273,8 @@ editUrl: false
 | [provideBrowserStorage](Function.provideBrowserStorage) | Composes the browser storage seam. Without features `BROWSER_STORAGE` keeps its root default (the window's `localStorage`); `withStorage(...)` substitutes another implementation. Two storage features in one call raise the kernel's feature-conflict error. |
 | [provideMediaUrls](Function.provideMediaUrls) | Configures media URL resolution: registers a [MediaUrlResolver](Class.MediaUrlResolver) scoped to the composition root together with the origin contributed by the given features. |
 | [provideNotification](Function.provideNotification) | Root environment provider of the notification pipeline: registers [NotificationService](Class.NotificationService) and composes the sinks the passed features contribute. Composed without a feature the service still works — messages are materialized and kept in the history, they just reach no sink. |
+| [provideOperationQueue](Function.provideOperationQueue) | Registers the operation queue with composable features. |
+| [provideQuickCreate](Function.provideQuickCreate) | Provides the manager for feature-owned contextual create actions. |
 | [provideSearch](Function.provideSearch) | Composition root of the search capability. It publishes the configuration, registers the [SearchManager](Class.SearchManager) together with the default ranking, and composes the commands, providers and renderers contributed by features. The manager is created eagerly so that a configured hotkey is bound before the first surface exists. |
 | [provideTextToSpeech](Function.provideTextToSpeech) | Registers the [TextToSpeechService](Class.TextToSpeechService) for the composition root it is added to. Speech is bound to that injector's lifetime, so leaving a route that reads text aloud silences it. |
 | [provideUpdate](Function.provideUpdate) | Root environment provider of the update lifecycle: composes the source and strategy features, creates the [UpdateManager](Class.UpdateManager) eagerly and disposes it with the environment injector. Without a strategy feature the console-only default is registered; a source feature is mandatory and missing one fails fast when the manager is created. |
@@ -243,17 +284,24 @@ editUrl: false
 | [resolveMediaUrl](Function.resolveMediaUrl) | Resolves a root-relative backend media path against an API origin while preserving browser-local and absolute URLs. Only single-leading-slash paths are prefixed: absolute (`https://`), protocol-relative (`//cdn`), `data:` and `blob:` URLs and empty values pass through unchanged, and an empty origin keeps the path relative (local proxies). |
 | [toApiFailure](Function.toApiFailure) | Creates a failed API result envelope from a transport-agnostic failure source. When the body is a problem detail it is carried over (missing `title`/`status` members are backfilled from the response); otherwise a synthetic problem is built from the status text and message. |
 | [toApiSuccess](Function.toApiSuccess) | Creates a successful API result envelope. |
+| [toCalendarDate](Function.toCalendarDate) | Formats the local calendar day shown by a date control as `YYYY-MM-DD`. |
 | [validateFeatures](Function.validateFeatures) | Validates a set of features: 1) Non-multi kinds may appear at most once. 2) IDs must be unique within the same kind. 3) Optional incompatibility rules must not be violated. |
 | [withApiOrigin](Function.withApiOrigin) | Contributes the API origin root-relative media paths are resolved against. |
 | [withAudioInputDevicePreferenceKey](Function.withAudioInputDevicePreferenceKey) | Overrides the user-preference key the microphone selection is stored under. A product that already persists a microphone keeps its own key here, so the stored value survives the move to this package instead of silently resetting every browser profile. |
 | [withAudioNotificationInterceptor](Function.withAudioNotificationInterceptor) | Adds the [AudioNotificationInterceptor](Class.AudioNotificationInterceptor) to `provideNotification()`, so every raised notification also plays the sound its severity is mapped to. |
 | [withClipboard](Function.withClipboard) | Registers the [CLIPBOARD](Variable.CLIPBOARD) port. |
+| [withClock](Function.withClock) | Registers a custom clock for the operation queue (non-multi). |
 | [withConsoleNotificationInterceptor](Function.withConsoleNotificationInterceptor) | Adds the [ConsoleNotificationInterceptor](Class.ConsoleNotificationInterceptor) to `provideNotification()`, so every raised notification is also written to a diagnostic channel. The interceptor is configured while it is constructed, which makes it behave the same whether it is reached through the pipeline or injected directly, and it is disposed with the injector it was composed into. |
 | [withDefaultUpdateStrategy](Function.withDefaultUpdateStrategy) | Registers the console-only [DefaultUpdateHandlerStrategy](Class.DefaultUpdateHandlerStrategy). Applied automatically when `provideUpdate()` receives no strategy feature at all. |
 | [withExternalLinks](Function.withExternalLinks) | Registers the [EXTERNAL\_LINK\_OPENER](Variable.EXTERNAL_LINK_OPENER) port. |
+| [withFailurePolicy](Function.withFailurePolicy) | Registers a failure policy for the operation queue (non-multi). |
 | [withFileDownload](Function.withFileDownload) | Registers the [FILE\_DOWNLOADER](Variable.FILE_DOWNLOADER) port. |
+| [withIdFactory](Function.withIdFactory) | Registers a custom ID factory for the operation queue (non-multi). |
+| [withLifecycleEvents](Function.withLifecycleEvents) | Feature that enables lifecycle event emission on the operation queue. |
 | [withLocalStorage](Function.withLocalStorage) | Stores preferences in the storage bound to `BROWSER_STORAGE` — the window's `localStorage` by default, or whatever the host substituted through `provideBrowserStorage(withStorage(...))`. The adapter is only reachable through this call, so the token itself stays adapter-free. |
 | [withLocalTranscriber](Function.withLocalTranscriber) | Registers the browser-based [LocalVoiceTranscriber](Class.LocalVoiceTranscriber) under [VOICE\_TRANSCRIBER](Variable.VOICE_TRANSCRIBER). It also satisfies the live-session contract, so a recorder user interface can dictate while recording. |
+| [withMergePolicy](Function.withMergePolicy) | Registers a merge policy for the operation queue (non-multi). |
+| [withQuickCreateItems](Function.withQuickCreateItems) | Declaratively contributes quick-create items and/or dynamic sources. |
 | [withSearchCommands](Function.withSearchCommands) | Declaratively contributes palette commands to `provideSearch()`. The feature is multi-capable: every contributing feature composes one `withSearchCommands()` call. |
 | [withSearchProviders](Function.withSearchProviders) | Declaratively contributes semantic search providers to `provideSearch()`. The feature is multi-capable: every contributing feature composes one `withSearchProviders()` call. |
 | [withSearchRenderers](Function.withSearchRenderers) | Declaratively contributes result renderer components to `provideSearch()`. The feature is multi-capable: every contributing feature composes one `withSearchRenderers()` call. |

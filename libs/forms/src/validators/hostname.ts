@@ -29,7 +29,7 @@ export function hostname<TPathKind extends PathKind = PathKind.Root>(
     validate(path, (context) => {
         const value = context.value();
 
-        if (!shouldApplySignalValidator(config, context) || value.length === 0 || HOSTNAME_PATTERN.test(value)) {
+        if (!shouldApplySignalValidator(config, context) || (typeof value === 'string' && (value === '' || HOSTNAME_PATTERN.test(value)))) {
             return null;
         }
 

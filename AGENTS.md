@@ -40,13 +40,13 @@ ngpel is an Nx monorepo of published Angular libraries `@pixel-brewery/ngpel-<na
 
 ## Packages
 
-| Layer | Package  | Entry points                                                                        |
-| ----- | -------- | ----------------------------------------------------------------------------------- |
-| 0     | `core`   | `.`, `/rx`, `/storage`, `/browser`, `/notification`, `/update`, `/audio`, `/search` |
-| 0     | `mvp`    | `.`                                                                                 |
-| 1     | `forms`  | `.`                                                                                 |
-| 1     | `router` | `.`, `/navigation`, `/shell`                                                        |
-| 2     | `ui`     | `.`, `/markdown`, `/widget`                                                         |
+| Layer | Package  | Entry points                                                                                            |
+| ----- | -------- | ------------------------------------------------------------------------------------------------------- |
+| 0     | `core`   | `.`, `/rx`, `/storage`, `/browser`, `/notification`, `/update`, `/audio`, `/search`, `/operation-queue` |
+| 0     | `mvp`    | `.`                                                                                                     |
+| 1     | `forms`  | `.`                                                                                                     |
+| 1     | `router` | `.`, `/navigation`, `/shell`                                                                            |
+| 2     | `ui`     | `.`, `/markdown`, `/widget`                                                                             |
 
 ## Invariants
 

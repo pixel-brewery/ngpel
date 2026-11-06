@@ -1,0 +1,7 @@
+@import '@angular/cdk/overlay-prebuilt.css';
+
+body {
+    color: var(--mosaik-scheme-foreground);
+    background: var(--mosaik-scheme-background);
+    font-family: var(--mosaik-font-family, system-ui);
+}

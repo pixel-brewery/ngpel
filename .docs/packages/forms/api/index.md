@@ -41,6 +41,7 @@ editUrl: false
 | [ISafeIntegerValidationError](Interface.ISafeIntegerValidationError) | Validation error emitted for a number that is not a safe integer. |
 | [ISafeScaledIntegerValidationError](Interface.ISafeScaledIntegerValidationError) | Validation error emitted when a number leaves JavaScript's safe-integer range once multiplied by its scale factor. |
 | [ISingleLineValidationError](Interface.ISingleLineValidationError) | Validation error emitted when text contains control characters or Unicode line or paragraph separators. |
+| [ITrimmedMaxLengthValidationError](Interface.ITrimmedMaxLengthValidationError) | Validation error emitted when trimmed text exceeds its maximum length. The kind matches Angular's built-in `maxLength` error. |
 | [ITrimmedMinLengthValidationError](Interface.ITrimmedMinLengthValidationError) | Validation error emitted when trimmed text is shorter than its minimum length. The kind aliases Angular's built-in `minLength` error so existing error slots match. |
 | [IUuidValidationError](Interface.IUuidValidationError) | Validation error emitted for a string that is not a canonical RFC 9562 UUID. |
 | [IValidDateValidationError](Interface.IValidDateValidationError) | Validation error emitted for a value that is not a `Date` with a valid timestamp. |
@@ -92,6 +93,7 @@ editUrl: false
 | [safeScaledInteger](Function.safeScaledInteger) | Requires a present numeric value to remain a safe integer after multiplication by a fixed scale factor (for example `100` for amounts stored in cents). Decimal precision is validated separately by `maxDecimalPlaces`; `null` passes so the validator composes with `required`. |
 | [shouldApplySignalValidator](Function.shouldApplySignalValidator) | Determines whether a validator applies to the current field state by evaluating the optional `when` condition of its configuration. Validators without a condition always apply. |
 | [singleLine](Function.singleLine) | Validates that optional text can be represented on one line: control characters and Unicode line or paragraph separators are rejected. Empty strings pass so the validator composes with `required`. |
+| [trimmedMaxLength](Function.trimmedMaxLength) | Checks the maximum length of a string after trimming surrounding whitespace. Use `nonBlank` alongside it when the field also requires a value. |
 | [trimmedMinLength](Function.trimmedMinLength) | Validates the minimum length of a string after removing surrounding whitespace. Empty strings pass so the validator composes with `required`; the error kind is `minLength` so it fills the same error slot as Angular's built-in validator. |
 | [useAsyncValidator](Function.useAsyncValidator) | Registers an asynchronous Signal Forms validator that checks a field through a resource factory (typically an HTTP lookup) and maps the result to validation errors. Rejections report no error unless `onError` is configured. |
 | [useAsyncValidatorWithDebounce](Function.useAsyncValidatorWithDebounce) | Registers an asynchronous Signal Forms validator and, when a duration or debouncer is configured, debounces the validated path first so the resource is not created on every keystroke. |

@@ -13,6 +13,8 @@ interface IWebAudioController {
     audioContextConstructor: unknown;
     close: ReturnType<typeof vi.fn>;
     failure: Error | null;
+    resume: ReturnType<typeof vi.fn<() => Promise<void>>>;
+    state: AudioContextState;
 }
 
 const AUDIO_INPUT_DEVICE = {
@@ -42,6 +44,8 @@ function createWebAudio(): IWebAudioController {
         audioContextConstructor: null,
         close: vi.fn().mockResolvedValue(undefined),
         failure: null,
+        resume: vi.fn<() => Promise<void>>().mockResolvedValue(undefined),
+        state: 'running',
     };
     const analyser = {
         fftSize: 2_048,
@@ -57,9 +61,9 @@ function createWebAudio(): IWebAudioController {
     const source = { connect: vi.fn(), disconnect: vi.fn() } as unknown as MediaStreamAudioSourceNode;
 
     class FakeAudioContext {
-        public readonly state = 'running';
+        public readonly state = controller.state;
         public readonly close = controller.close;
-        public readonly resume = vi.fn().mockResolvedValue(undefined);
+        public readonly resume = controller.resume;
 
         public createAnalyser(): AnalyserNode {
             return analyser;
@@ -73,6 +77,24 @@ function createWebAudio(): IWebAudioController {
     controller.audioContextConstructor = FakeAudioContext;
 
     return controller;
+}
+
+function delayResume(webAudio: IWebAudioController): { readonly started: Promise<void>; readonly finish: () => void } {
+    let finish!: () => void;
+    const pending = new Promise<void>((resolve) => {
+        finish = resolve;
+    });
+    const started = new Promise<void>((resolve) => {
+        webAudio.resume.mockImplementationOnce(() => {
+            resolve();
+
+            return pending;
+        });
+    });
+
+    webAudio.state = 'suspended';
+
+    return { started, finish };
 }
 
 function createService(view: unknown): AudioInputDeviceService {
@@ -215,6 +237,76 @@ describe('AudioInputDeviceService', () => {
         expect(testStream.stopTrack).toHaveBeenCalledOnce();
         expect(service.mediaStream()).toBeNull();
         expect(service.testState()).toBe('passed');
+    });
+
+    it('does not restart sampling when a stopped test finishes resuming its audio context', async () => {
+        // Arrange
+        const testStream = createMediaStream();
+        const delayedResume = delayResume(webAudio);
+        getUserMedia.mockResolvedValue(testStream.stream);
+        const timerCount = vi.getTimerCount();
+        const starting = service.startTest('microphone-1');
+        await delayedResume.started;
+        service.stopTest();
+
+        // Act
+        delayedResume.finish();
+        await starting;
+
+        // Assert
+        expect(service.testState()).toBe('idle');
+        expect(service.mediaStream()).toBeNull();
+        expect(webAudio.close).toHaveBeenCalledOnce();
+        expect(testStream.stopTrack).toHaveBeenCalledOnce();
+        expect(vi.getTimerCount()).toBe(timerCount);
+    });
+
+    it('keeps the newer device test when the previous audio context resumes late', async () => {
+        // Arrange
+        const previousStream = createMediaStream();
+        const currentStream = createMediaStream();
+        const delayedResume = delayResume(webAudio);
+        getUserMedia.mockResolvedValueOnce(previousStream.stream).mockResolvedValueOnce(currentStream.stream);
+        const previousStart = service.startTest('microphone-1');
+        await delayedResume.started;
+        await service.startTest('microphone-2');
+        await vi.advanceTimersByTimeAsync(200);
+        const timerCount = vi.getTimerCount();
+
+        // Act
+        delayedResume.finish();
+        await previousStart;
+
+        // Assert
+        expect(service.activeDeviceId()).toBe('microphone-2');
+        expect(service.mediaStream()).toBe(currentStream.stream);
+        expect(service.testState()).toBe('passed');
+        expect(previousStream.stopTrack).toHaveBeenCalledOnce();
+        expect(currentStream.stopTrack).not.toHaveBeenCalled();
+        expect(webAudio.close).toHaveBeenCalledOnce();
+        expect(vi.getTimerCount()).toBe(timerCount);
+    });
+
+    it('does not install a sampling timer when the injector was destroyed during resume', async () => {
+        // Arrange
+        const testStream = createMediaStream();
+        const delayedResume = delayResume(webAudio);
+        getUserMedia.mockResolvedValue(testStream.stream);
+        const timerCount = vi.getTimerCount();
+        const starting = service.startTest('microphone-1');
+        await delayedResume.started;
+        TestBed.resetTestingModule();
+
+        // Act
+        delayedResume.finish();
+        await starting;
+
+        // Assert
+        expect(service.testState()).toBe('idle');
+        expect(service.mediaStream()).toBeNull();
+        expect(webAudio.close).toHaveBeenCalledOnce();
+        expect(testStream.stopTrack).toHaveBeenCalledOnce();
+        expect(vi.getTimerCount()).toBe(timerCount);
     });
 
     it('refuses a test without a selected device', async () => {

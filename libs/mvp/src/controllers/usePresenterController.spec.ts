@@ -1,6 +1,6 @@
 // #region Imports
 
-import { EnvironmentInjector, Injectable } from '@angular/core';
+import { Component, EnvironmentInjector, inject, Injectable, InjectionToken } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
 import { ViewPresenter } from '../presenters/ViewPresenter';
@@ -9,6 +9,8 @@ import type { IPresenterControllerHostRef } from './IPresenterControllerHostRef'
 import { usePresenterController } from './usePresenterController';
 import type { IViewPresenter } from '../presenters/IViewPresenter';
 import type { PresenterControllerFactory } from './PresenterControllerFactory';
+import { provideViewPresenter } from '../presenters/provideViewPresenter';
+import { View } from '../views/View';
 
 // #endregion
 
@@ -39,6 +41,29 @@ class SpecificViewPresenter extends ViewPresenter {
 class SpecificController implements IPresenterController<SpecificViewPresenter> {
     public constructor(public readonly host: IPresenterControllerHostRef<SpecificViewPresenter>) {}
 }
+
+const SCOPED_CONTEXT = new InjectionToken<string>('SCOPED_CONTEXT');
+
+@Injectable()
+class ScopedViewPresenter extends ViewPresenter {
+    public readonly controller = usePresenterController((host) => ({
+        host,
+        constructorContext: inject(SCOPED_CONTEXT),
+        hostContext: host.injector.get(SCOPED_CONTEXT),
+        presenterDisconnected: (): void => {
+            this.disconnections += 1;
+        },
+    }));
+
+    public disconnections = 0;
+}
+
+@Component({
+    selector: 'ngp-scoped-presenter-view',
+    template: '',
+    providers: [provideViewPresenter(ScopedViewPresenter), { provide: SCOPED_CONTEXT, useValue: 'scoped' }],
+})
+class ScopedPresenterView extends View<ScopedViewPresenter> {}
 
 describe('usePresenterController', () => {
     it('connects the controller to the presenter that created it', () => {
@@ -129,5 +154,31 @@ describe('usePresenterController', () => {
 
         // Assert
         expect(presenter.controller.connections).toEqual(['connected', 'disconnected']);
+    });
+
+    it('resolves collaborators from the actual View presenter scope', () => {
+        // Arrange
+        TestBed.configureTestingModule({ imports: [ScopedPresenterView] });
+
+        // Act
+        const fixture = TestBed.createComponent(ScopedPresenterView);
+
+        // Assert
+        expect(fixture.componentInstance.presenter.controller).toMatchObject({ constructorContext: 'scoped', hostContext: 'scoped' });
+    });
+
+    it('disconnects only controllers of the View that was destroyed', () => {
+        // Arrange
+        TestBed.configureTestingModule({ imports: [ScopedPresenterView] });
+        const first = TestBed.createComponent(ScopedPresenterView);
+        const firstPresenter = first.componentInstance.presenter;
+        const secondPresenter = TestBed.createComponent(ScopedPresenterView).componentInstance.presenter;
+
+        // Act
+        first.destroy();
+
+        // Assert
+        expect(firstPresenter.disconnections).toBe(1);
+        expect(secondPresenter.disconnections).toBe(0);
     });
 });

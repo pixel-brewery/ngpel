@@ -5,6 +5,7 @@ Signal Forms validators, the async validator helpers, the status-class map all t
 ## Features
 
 - **Validators** — IBAN with a mod-97 check and a country-length table, BIC, email, hostname, HTTP and HTTPS URLs, UUID, hex colour, country, currency and language-region codes, ports, safe integers, decimal places, dates and cross-field comparisons.
+- **Dynamic and trimmed values** — `allowedValue` accepts a static list or a resolver that reads other fields or signals; `trimmedMinLength` and `trimmedMaxLength` ignore surrounding whitespace.
 - **Typed errors** — every validator ships its own `I*ValidationError` shape, so a template can react to the specific failure rather than a boolean.
 - **Async helpers** — `useAsyncValidator` and its debounced variant, both honouring the shared `when` option.
 - **Status classes** — `NG_STATUS_CLASSES` wires `provideSignalFormsConfig` in one line.
@@ -13,7 +14,7 @@ Signal Forms validators, the async validator helpers, the status-class map all t
 ## Import Options
 
 ```typescript
-// @pixel-brewery/ngpel-forms — 67 exports
+// @pixel-brewery/ngpel-forms — 69 exports
 import { allowedValue, bic, calendarDateNotBefore, CalendarDateReference, countryCode, currencyCode /* … */ } from '@pixel-brewery/ngpel-forms';
 ```
 
@@ -23,7 +24,7 @@ import { allowedValue, bic, calendarDateNotBefore, CalendarDateReference, countr
 | --------------------------- | ------------------ |
 | `@angular/core`             | `>=22.0.0 <23.0.0` |
 | `@angular/forms`            | `>=22.0.0 <23.0.0` |
-| `@pixel-brewery/ngpel-core` | `0.0.1`            |
+| `@pixel-brewery/ngpel-core` | `0.0.2`            |
 
 ## Quick Start
 

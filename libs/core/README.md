@@ -8,12 +8,17 @@ Application foundation: the composition kernel every other package builds on, th
 - **Result envelope** — `IApiResult` with RFC 9457 problem details, `isProblemDetail` detecting both the problem media type and a problem-shaped body, and `ApiResultError` for the throwing path.
 - **State helpers** — `BusyScope` for named busy states, `destroyBag` for teardown, `ENV` and `TOAST_VISIBILITY` as host-supplied contracts.
 - **Cache registrars** — a signal-backed and an RxJS-backed registry with change notifications.
-- **Concerns as subpaths** — RxJS operators, storage, browser ports, notifications, updates, audio and search, each tree-shakable on its own.
+- **Calendar days** — `toCalendarDate`, `fromCalendarDate` and `normalizeCalendarDate` preserve date-only fields and read older ISO values.
+- **Image uploads** — `ImageUploadPreparationService` preserves files within the byte limit and resizes and encodes larger images in the browser.
+- **Audio** — `AudioLevelMonitor` measures a borrowed microphone stream without stopping its tracks; the worklet loader can use a same-origin asset.
+- **Contextual create actions** — `provideQuickCreate` and `withQuickCreateItems` collect feature actions and resolve what is available at the time of lookup or execution.
+- **Operation queue** — `provideOperationQueue` gives Angular applications delayed optimistic operations with rollback, retry, lifecycle events and a stable idempotency key.
+- **Concerns as subpaths** — RxJS operators, storage, browser ports, notifications, updates, audio, search and the operation queue, each tree-shakable on its own.
 
 ## Import Options
 
 ```typescript
-// @pixel-brewery/ngpel-core — 32 exports
+// @pixel-brewery/ngpel-core — 35 exports
 import { ApiResultError, BusyScope, BusyScopeService, composeProviders, composeWithBase, createFeature /* … */ } from '@pixel-brewery/ngpel-core';
 
 // @pixel-brewery/ngpel-core/rx — 9 exports
@@ -36,7 +41,7 @@ import {
     enumCodec /* … */,
 } from '@pixel-brewery/ngpel-core/storage';
 
-// @pixel-brewery/ngpel-core/browser — 24 exports
+// @pixel-brewery/ngpel-core/browser — 26 exports
 import {
     BrowserFeatureKind,
     BrowserFeatureKinds,
@@ -66,25 +71,35 @@ import {
     IUpdateIntl /* … */,
 } from '@pixel-brewery/ngpel-core/update';
 
-// @pixel-brewery/ngpel-core/audio — 44 exports
+// @pixel-brewery/ngpel-core/audio — 50 exports
 import {
     AUDIO_INPUT_DEVICE_PREFERENCE_KEY,
+    AUDIO_LEVEL_WORKLET_SOURCE,
     AudioFeatureKind,
     AudioFeatureKinds,
     AudioInputDeviceError,
-    AudioInputDeviceErrorCode,
-    AudioInputDeviceFeatureKind /* … */,
+    AudioInputDeviceErrorCode /* … */,
 } from '@pixel-brewery/ngpel-core/audio';
 
-// @pixel-brewery/ngpel-core/search — 30 exports
+// @pixel-brewery/ngpel-core/search — 36 exports
 import {
     DefaultSearchRankingStrategy,
     ICommandItem,
     ICommandSource,
-    isCommandItem,
-    ISearchConfig,
-    ISearchProvider /* … */,
+    IQuickCreateItem,
+    IQuickCreateItemSource,
+    isCommandItem /* … */,
 } from '@pixel-brewery/ngpel-core/search';
+
+// @pixel-brewery/ngpel-core/operation-queue — 31 exports
+import {
+    CryptoOperationIdFactory,
+    IOperation,
+    IOperationClock,
+    IOperationContext,
+    IOperationDefinition,
+    IOperationEntry /* … */,
+} from '@pixel-brewery/ngpel-core/operation-queue';
 ```
 
 ## Peer Dependencies

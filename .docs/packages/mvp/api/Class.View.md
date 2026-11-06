@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Abstract Class: View\<TPresenter\>
 
-Defined in: [views/View.ts:29](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/views/View.ts#L29)
+Defined in: [views/View.ts:30](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/views/View.ts#L30)
 
 Base class for the View half of the Model-View-Presenter triad. Components extend it and provide
 their concrete presenter through [VIEW\_PRESENTER](Variable.VIEW_PRESENTER), usually with `provideViewPresenter()`.
@@ -56,7 +56,7 @@ new View<TPresenter>(): View<TPresenter>;
 get presenter(): TPresenter;
 ```
 
-Defined in: [views/View.ts:44](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/views/View.ts#L44)
+Defined in: [views/View.ts:45](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/views/View.ts#L45)
 
 The presenter backing this view.
 
@@ -78,7 +78,7 @@ The presenter backing this view.
 dispose(): void;
 ```
 
-Defined in: [views/View.ts:86](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/views/View.ts#L86)
+Defined in: [views/View.ts:87](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/views/View.ts#L87)
 
 Disposes the backing presenter. Override to run View-side teardown around it.
 
@@ -94,7 +94,7 @@ Disposes the backing presenter. Override to run View-side teardown around it.
 initialize(): void;
 ```
 
-Defined in: [views/View.ts:76](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/views/View.ts#L76)
+Defined in: [views/View.ts:77](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/views/View.ts#L77)
 
 Initializes the backing presenter. Override to run View-side setup around it.
 
@@ -110,7 +110,7 @@ Initializes the backing presenter. Override to run View-side setup around it.
 ngOnDestroy(): void;
 ```
 
-Defined in: [views/View.ts:66](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/views/View.ts#L66)
+Defined in: [views/View.ts:67](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/views/View.ts#L67)
 
 Disposes the presenter when Angular destroys the View.
 
@@ -132,7 +132,7 @@ OnDestroy.ngOnDestroy
 ngOnInit(): void;
 ```
 
-Defined in: [views/View.ts:57](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/views/View.ts#L57)
+Defined in: [views/View.ts:58](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/views/View.ts#L58)
 
 Initializes the presenter when Angular initializes the View.
 

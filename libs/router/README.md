@@ -6,6 +6,7 @@ Route path construction and URL-backed signals, the navigation item registry wit
 
 - **Route paths** — `RoutePath` builds and parses paths without pulling the router, so unauthenticated route files stay light.
 - **URL state** — `routeParamSignal` and `queryParamSignal` back a signal with the URL, using the codecs from `ngpel-core/storage`.
+- **Context overlays** — `provideContextOverlayRouting` coordinates a bounded URL stack with lazy targets, browser history and typed close outcomes.
 - **Titles and journal** — a route-data title strategy with an injected text resolver, plus a navigator that records where the user came from.
 - **Navigation registry** — items, guards and a handle scheme (`route:`, `ext:`, `cmd:`) with a dispatcher whose window access is a port.
 - **Shell** — a side-navigation controller driven by media queries and persisted through the storage port, and a presentation routes factory.
@@ -13,14 +14,14 @@ Route path construction and URL-backed signals, the navigation item registry wit
 ## Import Options
 
 ```typescript
-// @pixel-brewery/ngpel-router — 20 exports
+// @pixel-brewery/ngpel-router — 30 exports
 import {
     connectRouterUrlChanges,
-    INavigatorJournalEntry,
-    IQueryParamSignalOptions,
-    IRouteParamNavigationContext,
-    IRouteParamSignalOptions,
-    IRouteTitleOptions /* … */,
+    ContextOverlayLoader,
+    ContextOverlayService,
+    ContextOverlayUrl,
+    IContextOverlayOutcome,
+    IContextOverlayRef /* … */,
 } from '@pixel-brewery/ngpel-router';
 
 // @pixel-brewery/ngpel-router/navigation — 20 exports
@@ -51,7 +52,7 @@ import {
 | `@angular/common`           | `>=22.0.0 <23.0.0` |
 | `@angular/core`             | `>=22.0.0 <23.0.0` |
 | `@angular/router`           | `>=22.0.0 <23.0.0` |
-| `@pixel-brewery/ngpel-core` | `0.0.1`            |
+| `@pixel-brewery/ngpel-core` | `0.0.2`            |
 | `rxjs`                      | `>=7.8.0 <8.0.0`   |
 
 ## Quick Start

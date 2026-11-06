@@ -207,6 +207,24 @@ Label for the OpenDocument export format.
 
 ***
 
+### recordsLabel
+
+#### Get Signature
+
+```ts
+get recordsLabel(): string;
+```
+
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:181](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L181)
+
+Label shown after the number of records to export.
+
+##### Returns
+
+`string`
+
+***
+
 ### selectAllLabel
 
 #### Get Signature
@@ -267,7 +285,7 @@ Label for the Excel export format.
 getFormatLabel(format): string;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:191](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L191)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:196](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L196)
 
 Resolves the display label for an export format.
 

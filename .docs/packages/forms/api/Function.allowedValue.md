@@ -29,7 +29,7 @@ Requires a value to be part of an allowed set (`Array.prototype.includes` semant
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
 | `path` | `SchemaPath`\<`TValue`, `1`, `TPathKind`\> | Signal Forms schema path to validate. |
-| `allowedValues` | readonly `TValue`[] | Values accepted by the field. |
+| `allowedValues` | \| readonly `TValue`[] \| `LogicFn`\<`TValue`, readonly `TValue`[], `TPathKind`\> | Accepted values or a resolver that reads sibling fields or other signals. |
 | `config?` | [`SignalValidatorConfig`](TypeAlias.SignalValidatorConfig)\<`TValue`, `TPathKind`\> | Optional custom message, error or activation condition. |
 
 ## Returns

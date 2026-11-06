@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: WidgetEditorCanvasComponent
 
-Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:305](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L305)
+Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:306](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L306)
 
 Visual authoring canvas for semantic zones and their widget grid items.
 
@@ -32,7 +32,7 @@ new WidgetEditorCanvasComponent(): WidgetEditorCanvasComponent;
 readonly editable: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:333](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L333)
+Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:334](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L334)
 
 Whether authoring chrome and the snap grid are visible.
 
@@ -44,7 +44,7 @@ Whether authoring chrome and the snap grid are visible.
 readonly itemDropped: OutputEmitterRef<IWidgetGridItemDropRequest>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:339](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L339)
+Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:340](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L340)
 
 Requests one widget move within or across zones.
 
@@ -56,7 +56,7 @@ Requests one widget move within or across zones.
 readonly itemHidden: OutputEmitterRef<IWidgetGridItemDefinition>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:354](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L354)
+Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:358](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L358)
 
 Requests hiding one widget from the canvas.
 
@@ -68,7 +68,7 @@ Requests hiding one widget from the canvas.
 readonly itemMoved: OutputEmitterRef<IWidgetGridItemMoveRequest>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:345](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L345)
+Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:346](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L346)
 
 Requests one accessible relative item move.
 
@@ -80,7 +80,7 @@ Requests one accessible relative item move.
 readonly itemMovedToZone: OutputEmitterRef<IWidgetGridItemMoveRequest>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:348](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L348)
+Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:349](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L349)
 
 Requests a widget move to a neighboring zone.
 
@@ -92,7 +92,7 @@ Requests a widget move to a neighboring zone.
 readonly itemResized: OutputEmitterRef<IWidgetGridItemResizeRequest>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:351](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L351)
+Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:352](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L352)
 
 Requests one absolute snapped widget size.
 
@@ -104,7 +104,7 @@ Requests one absolute snapped widget size.
 readonly itemTemplate: InputSignal<TemplateRef<IWidgetGridItemTemplateContext>>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:327](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L327)
+Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:328](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L328)
 
 Owning feature's concrete widget template.
 
@@ -116,7 +116,7 @@ Owning feature's concrete widget template.
 readonly labels: InputSignal<IWidgetGridLabels>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:330](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L330)
+Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:331](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L331)
 
 Resolved editor labels.
 
@@ -128,9 +128,21 @@ Resolved editor labels.
 readonly layout: InputSignal<IWidgetGridLayout>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:324](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L324)
+Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:325](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L325)
 
 Current persisted layout used for item spans and control availability.
+
+***
+
+### resizeActiveChange
+
+```ts
+readonly resizeActiveChange: OutputEmitterRef<boolean>;
+```
+
+Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:355](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L355)
+
+Emits when a widget starts or ends a pointer resize.
 
 ***
 
@@ -140,7 +152,7 @@ Current persisted layout used for item spans and control availability.
 protected readonly zoneDropListIds: Signal<string[]>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:357](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L357)
+Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:361](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L361)
 
 Connected item drop-list identifiers.
 
@@ -152,7 +164,7 @@ Connected item drop-list identifiers.
 readonly zoneDropped: OutputEmitterRef<IWidgetGridZoneDropRequest>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:336](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L336)
+Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:337](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L337)
 
 Requests one zone reorder.
 
@@ -164,7 +176,7 @@ Requests one zone reorder.
 readonly zoneMoved: OutputEmitterRef<IWidgetGridZoneMoveRequest>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:342](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L342)
+Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:343](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L343)
 
 Requests one accessible relative zone move.
 
@@ -176,7 +188,7 @@ Requests one accessible relative zone move.
 readonly zones: InputSignal<readonly IWidgetEditorCanvasZone[]>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:321](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L321)
+Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:322](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L322)
 
 Ordered zones and enabled items rendered on the canvas.
 
@@ -188,7 +200,7 @@ Ordered zones and enabled items rendered on the canvas.
 protected canMoveItem(widgetId, delta): boolean;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:400](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L400)
+Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:404](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L404)
 
 Whether a widget can move in the requested direction inside its zone.
 
@@ -211,7 +223,7 @@ Whether a widget can move in the requested direction inside its zone.
 protected canMoveItemToZone(widgetId, delta): boolean;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:415](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L415)
+Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:419](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L419)
 
 Whether a widget can move to a neighboring zone.
 
@@ -234,7 +246,7 @@ Whether a widget can move to a neighboring zone.
 protected canMoveZone(zoneId, delta): boolean;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:391](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L391)
+Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:395](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L395)
 
 Whether a zone can move in the requested direction.
 
@@ -259,7 +271,7 @@ protected itemLayout(widgetId):
   | undefined;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:386](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L386)
+Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:390](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L390)
 
 Current persisted item placement.
 
@@ -282,7 +294,7 @@ Current persisted item placement.
 protected onItemDrop(event): void;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:373](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L373)
+Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:377](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L377)
 
 Converts an Angular CDK item drop into a stable request.
 
@@ -304,7 +316,7 @@ Converts an Angular CDK item drop into a stable request.
 protected onZoneDrop(event): void;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:364](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L364)
+Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:368](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L368)
 
 Converts an Angular CDK zone drop into a stable request.
 
@@ -326,7 +338,7 @@ Converts an Angular CDK zone drop into a stable request.
 protected zoneDropListId(zoneId): string;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:430](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L430)
+Defined in: [libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts:434](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetEditorCanvasComponent.ts#L434)
 
 Stable item drop-list id for one zone.
 

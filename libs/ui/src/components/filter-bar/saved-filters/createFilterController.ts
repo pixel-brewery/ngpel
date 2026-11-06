@@ -1,9 +1,11 @@
 // #region Imports
 
-import { signal, type Signal, type WritableSignal } from '@angular/core';
-import { command, type Command, type IPresenterControllerHostRef, type IViewPresenter } from '@pixel-brewery/ngpel-mvp';
+import { inject, signal, type Signal, type WritableSignal } from '@angular/core';
+import { JsonUserPreferenceCodec, USER_PREFERENCE_STORAGE, type IUserPreferenceStorage } from '@pixel-brewery/ngpel-core/storage';
+import { command, type Command, type IPresenterControllerHostRef } from '@pixel-brewery/ngpel-mvp';
 import type { FilterValues } from '../IFilterDefinition';
 import type { IFilterController } from './IFilterController';
+import type { IFilterControllerConfig } from './IFilterControllerConfig';
 import type { ISavedFilter } from './ISavedFilter';
 import type { ISavedFilterController } from './ISavedFilterController';
 import type { ISavedFilterCreateRequest } from './ISavedFilterCreateRequest';
@@ -11,32 +13,11 @@ import { createSavedFilterController } from './createSavedFilterController';
 
 // #endregion
 
-/**
- * Configuration for {@link createFilterController}.
- *
- * @public
- */
-export interface IFilterControllerConfig {
-    /**
-     * Stable preference key used for named saved filters.
-     */
-    readonly savedFilterStorageKey: string;
+type LiveFilterState =
+    { readonly version: 1 | 3; readonly values: FilterValues } | { readonly version: 2; readonly values: FilterValues; readonly isVisible: boolean };
 
-    /**
-     * Active filter values owned by the concrete list presenter.
-     */
-    readonly activeFilters: Signal<FilterValues>;
-
-    /**
-     * Whether a filter is active.
-     */
-    readonly isFilterActive: Signal<boolean>;
-
-    /**
-     * Applies filter values in the concrete list presenter.
-     */
-    readonly applyFilterValues: (values: FilterValues) => void;
-}
+const LIVE_FILTER_VERSION = 3;
+const LIVE_FILTER_CODEC = new JsonUserPreferenceCodec<LiveFilterState>(isLiveFilterState);
 
 /**
  * Internal implementation of the list filter controller.
@@ -48,7 +29,8 @@ class FilterController implements IFilterController {
 
     private readonly _host: IPresenterControllerHostRef;
     private readonly _config: IFilterControllerConfig;
-    private readonly _isFilterVisible: WritableSignal<boolean> = signal(false);
+    private readonly _isFilterVisible: WritableSignal<boolean>;
+    private readonly _storage?: IUserPreferenceStorage;
     private readonly _savedFilterController: ISavedFilterController;
     private readonly _toggleFilterCommand: Command<void>;
     private readonly _closeFilterCommand: Command<void>;
@@ -64,6 +46,11 @@ class FilterController implements IFilterController {
     public constructor(host: IPresenterControllerHostRef, config: IFilterControllerConfig) {
         this._host = host;
         this._config = config;
+        const live = config.livePreference;
+        this._storage = live ? inject(USER_PREFERENCE_STORAGE) : undefined;
+        const previous = live && this._storage?.read(live.storageKey, LIVE_FILTER_CODEC);
+        this._isFilterVisible = signal(Boolean(live?.openWhenActive && previous && Object.keys(previous.values).length > 0));
+
         this._savedFilterController = createSavedFilterController({
             storageKey: config.savedFilterStorageKey,
         });
@@ -73,6 +60,10 @@ class FilterController implements IFilterController {
         this._saveFilterCommand = command((request?: ISavedFilterCreateRequest) => this.onExecuteSaveFilterCommand(request));
         this._deleteFilterCommand = command((id?: string) => this.onExecuteDeleteFilterCommand(id));
         this._applySavedFilterCommand = command((id?: string) => this.onExecuteApplySavedFilterCommand(id));
+
+        if (live && previous) {
+            live.restoreValues(previous.values);
+        }
     }
 
     // #endregion
@@ -156,6 +147,17 @@ class FilterController implements IFilterController {
 
     private onExecuteApplyFilterCommand(values: FilterValues): void {
         this._config.applyFilterValues(values);
+
+        const key = this._config.livePreference?.storageKey;
+        if (key === undefined || !this._storage) {
+            return;
+        }
+
+        if (Object.keys(values).length === 0) {
+            this._storage.remove(key);
+        } else {
+            this._storage.write(key, { version: LIVE_FILTER_VERSION, values }, LIVE_FILTER_CODEC);
+        }
     }
 
     private onExecuteSaveFilterCommand(request?: ISavedFilterCreateRequest): void {
@@ -192,4 +194,16 @@ class FilterController implements IFilterController {
  */
 export function createFilterController(config: IFilterControllerConfig): (host: IPresenterControllerHostRef) => IFilterController {
     return (host: IPresenterControllerHostRef): IFilterController => new FilterController(host, config);
+}
+
+function isLiveFilterState(value: unknown): value is LiveFilterState {
+    if (!isRecord(value) || !isRecord(value['values'])) {
+        return false;
+    }
+
+    return value['version'] === 1 || value['version'] === LIVE_FILTER_VERSION || (value['version'] === 2 && typeof value['isVisible'] === 'boolean');
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+    return typeof value === 'object' && value !== null && !Array.isArray(value);
 }

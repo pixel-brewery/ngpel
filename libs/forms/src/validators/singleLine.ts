@@ -25,7 +25,10 @@ export function singleLine<TPathKind extends PathKind = PathKind.Root>(
     validate(path, (context) => {
         const value = context.value();
 
-        if (!shouldApplySignalValidator(config, context) || value.length === 0 || !INVALID_SINGLE_LINE_CHARACTER_PATTERN.test(value)) {
+        if (
+            !shouldApplySignalValidator(config, context) ||
+            (typeof value === 'string' && (value === '' || !INVALID_SINGLE_LINE_CHARACTER_PATTERN.test(value)))
+        ) {
             return null;
         }
 

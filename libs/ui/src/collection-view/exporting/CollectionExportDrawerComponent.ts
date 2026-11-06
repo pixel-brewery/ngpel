@@ -52,6 +52,9 @@ interface IFormatOption {
 
         <ng-template mosaikDrawerContent>
             <div class="flex min-h-0 flex-col gap-2 px-2 py-2">
+                @if (recordCount() !== null) {
+                    <p class="m-0" data-ngp-export-record-count>{{ recordCount() }} {{ intl.recordsLabel }}</p>
+                }
                 <div class="flex flex-col gap-1">
                     <mosaik-toolbar [appearance]="'plain'">
                         <span></span>
@@ -145,6 +148,7 @@ interface IFormatOption {
             cancelLabel: 'loc.collectionExportDrawer.action.cancel',
             exportLabel: 'loc.collectionExportDrawer.action.export',
             columnsRequiredMessage: 'loc.collectionExportDrawer.validation.columnsRequired',
+            recordsLabel: 'loc.collectionExportDrawer.records',
         }),
     ],
 })
@@ -221,6 +225,12 @@ export class CollectionExportDrawerComponent implements OnDestroy {
      * The total number of available columns.
      */
     public readonly totalCount = computed(() => this._drawerData.columns.length);
+
+    /** The number of matching records supplied by the host, if known. */
+    public readonly recordCount = computed(() => {
+        const count = this._drawerData.recordCount;
+        return count === undefined || !Number.isFinite(count) ? null : Math.max(0, Math.trunc(count));
+    });
 
     /**
      * The selected column keys consumed by the chip group.

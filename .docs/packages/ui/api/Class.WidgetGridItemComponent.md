@@ -77,7 +77,7 @@ Whether the item can move to the preceding zone.
 protected readonly columnSpan: Signal<number>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetGridItemComponent.ts:505](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridItemComponent.ts#L505)
+Defined in: [libs/ui/src/widget/components/WidgetGridItemComponent.ts:508](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridItemComponent.ts#L508)
 
 Logical column span, including an active resize preview.
 
@@ -101,7 +101,7 @@ Whether editing chrome is active.
 readonly hidden: OutputEmitterRef<void>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetGridItemComponent.ts:499](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridItemComponent.ts#L499)
+Defined in: [libs/ui/src/widget/components/WidgetGridItemComponent.ts:502](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridItemComponent.ts#L502)
 
 Requests removal from the visible canvas.
 
@@ -137,7 +137,7 @@ Owning feature's concrete widget template.
 protected readonly itemTemplateContext: Signal<IWidgetGridItemTemplateContext>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetGridItemComponent.ts:514](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridItemComponent.ts#L514)
+Defined in: [libs/ui/src/widget/components/WidgetGridItemComponent.ts:517](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridItemComponent.ts#L517)
 
 Context passed to the feature-owned item template.
 
@@ -173,7 +173,7 @@ Current persisted placement of the item.
 protected readonly mediumColumnSpan: Signal<number>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetGridItemComponent.ts:508](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridItemComponent.ts#L508)
+Defined in: [libs/ui/src/widget/components/WidgetGridItemComponent.ts:511](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridItemComponent.ts#L511)
 
 Column span used by the two-column breakpoint.
 
@@ -203,13 +203,25 @@ Requests a move to a neighboring zone.
 
 ***
 
+### resizeActiveChange
+
+```ts
+readonly resizeActiveChange: OutputEmitterRef<boolean>;
+```
+
+Defined in: [libs/ui/src/widget/components/WidgetGridItemComponent.ts:499](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridItemComponent.ts#L499)
+
+Emits when a pointer resize starts or ends.
+
+***
+
 ### resizeConfiguration
 
 ```ts
 protected readonly resizeConfiguration: Signal<IWidgetGridResizeConfiguration>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetGridItemComponent.ts:523](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridItemComponent.ts#L523)
+Defined in: [libs/ui/src/widget/components/WidgetGridItemComponent.ts:526](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridItemComponent.ts#L526)
 
 Configuration consumed by every directional resize handle.
 
@@ -235,7 +247,7 @@ protected readonly resizePreview: Signal<
 | null>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetGridItemComponent.ts:502](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridItemComponent.ts#L502)
+Defined in: [libs/ui/src/widget/components/WidgetGridItemComponent.ts:505](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridItemComponent.ts#L505)
 
 Current live resize target.
 
@@ -247,7 +259,7 @@ Current live resize target.
 protected readonly rowSpan: Signal<number>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetGridItemComponent.ts:511](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridItemComponent.ts#L511)
+Defined in: [libs/ui/src/widget/components/WidgetGridItemComponent.ts:514](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridItemComponent.ts#L514)
 
 Logical row span, including an active resize preview.
 
@@ -259,7 +271,7 @@ Logical row span, including an active resize preview.
 protected canResize(columnDelta, rowDelta): boolean;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetGridItemComponent.ts:547](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridItemComponent.ts#L547)
+Defined in: [libs/ui/src/widget/components/WidgetGridItemComponent.ts:554](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridItemComponent.ts#L554)
 
 Whether the requested size change stays inside the contribution constraints.
 
@@ -282,7 +294,7 @@ Whether the requested size change stays inside the contribution constraints.
 protected onResized(preview): void;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetGridItemComponent.ts:542](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridItemComponent.ts#L542)
+Defined in: [libs/ui/src/widget/components/WidgetGridItemComponent.ts:549](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridItemComponent.ts#L549)
 
 Forwards a completed resize to the owning grid.
 
@@ -304,7 +316,7 @@ Forwards a completed resize to the owning grid.
 protected onResizePreview(preview): void;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetGridItemComponent.ts:537](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridItemComponent.ts#L537)
+Defined in: [libs/ui/src/widget/components/WidgetGridItemComponent.ts:540](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridItemComponent.ts#L540)
 
 Applies or clears live resize feedback.
 
@@ -326,7 +338,7 @@ Applies or clears live resize feedback.
 protected resizeBy(columnDelta, rowDelta): void;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetGridItemComponent.ts:560](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridItemComponent.ts#L560)
+Defined in: [libs/ui/src/widget/components/WidgetGridItemComponent.ts:567](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridItemComponent.ts#L567)
 
 Emits a keyboard/menu-driven size change as an absolute target.
 

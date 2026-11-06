@@ -46,8 +46,8 @@ The legacy controller context, retained for source and runtime compatibility.
 
 #### Remarks
 
-Historically this property contained the owning injector cast to the presenter type.
-It continues to reference that same injector; it does not expose a presenter instance.
+This compatibility alias holds the surrounding Angular environment injector cast to the
+presenter type. The scoped injector is available through [injector](#injector).
 
 #### Deprecated
 

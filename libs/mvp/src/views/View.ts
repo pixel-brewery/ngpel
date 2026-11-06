@@ -1,6 +1,7 @@
 // #region Imports
 
 import { Directive, inject, type OnDestroy, type OnInit } from '@angular/core';
+import { disposeViewPresenter } from '../presenters/disposeViewPresenter';
 import type { IViewPresenter } from '../presenters/IViewPresenter';
 import { VIEW_PRESENTER } from '../presenters/VIEW_PRESENTER';
 import type { IView } from './IView';
@@ -84,7 +85,7 @@ export abstract class View<TPresenter extends IViewPresenter> implements IView<T
      * @virtual
      */
     public dispose(): void {
-        this._presenter.dispose();
+        disposeViewPresenter(this._presenter);
     }
 
     // #endregion

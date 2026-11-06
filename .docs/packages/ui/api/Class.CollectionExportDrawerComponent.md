@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: CollectionExportDrawerComponent
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:151](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L151)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:155](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L155)
 
 A configurable drawer component for collection data export.
 Allows the user to select which columns to include and which
@@ -35,7 +35,7 @@ new CollectionExportDrawerComponent(): CollectionExportDrawerComponent;
 readonly canDeselectAll: Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:208](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L208)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:212](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L212)
 
 Whether at least one selected column can be deselected.
 
@@ -47,7 +47,7 @@ Whether at least one selected column can be deselected.
 readonly canSelectAll: Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:213](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L213)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:217](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L217)
 
 Whether at least one unselected column can be selected.
 
@@ -59,7 +59,7 @@ Whether at least one unselected column can be selected.
 readonly columns: Signal<readonly ICollectionExportColumn[]>;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:184](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L184)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:188](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L188)
 
 All available columns for selection.
 
@@ -71,9 +71,21 @@ All available columns for selection.
 readonly formatOptions: Signal<readonly IFormatOption[]>;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:189](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L189)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:193](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L193)
 
 Available format options with display labels.
+
+***
+
+### recordCount
+
+```ts
+readonly recordCount: Signal<number | null>;
+```
+
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:230](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L230)
+
+The number of matching records supplied by the host, if known.
 
 ***
 
@@ -83,7 +95,7 @@ Available format options with display labels.
 protected readonly selectedColumnValues: Signal<readonly string[]>;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:228](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L228)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:238](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L238)
 
 The selected column keys consumed by the chip group.
 
@@ -95,7 +107,7 @@ The selected column keys consumed by the chip group.
 readonly selectedCount: Signal<number>;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:218](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L218)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:222](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L222)
 
 The number of selected columns.
 
@@ -107,7 +119,7 @@ The number of selected columns.
 readonly selectedFormat: Signal<CollectionExportFormat>;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:203](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L203)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:207](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L207)
 
 The currently selected format.
 
@@ -119,7 +131,7 @@ The currently selected format.
 readonly totalCount: Signal<number>;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:223](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L223)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:227](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L227)
 
 The total number of available columns.
 
@@ -133,7 +145,7 @@ The total number of available columns.
 get intl(): CollectionExportDrawerComponentIntl;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:177](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L177)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:181](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L181)
 
 Internationalization labels.
 
@@ -149,7 +161,7 @@ Internationalization labels.
 ngOnDestroy(): void;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:239](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L239)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:249](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L249)
 
 Tears down internationalization change subscriptions.
 
@@ -171,7 +183,7 @@ OnDestroy.ngOnDestroy
 protected onCancel(): void;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:313](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L313)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:323](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L323)
 
 Cancels the export and closes the drawer.
 
@@ -187,7 +199,7 @@ Cancels the export and closes the drawer.
 protected onColumnChecked(key): void;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:246](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L246)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:256](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L256)
 
 Adds a checked column to the export selection.
 
@@ -209,7 +221,7 @@ Adds a checked column to the export selection.
 protected onColumnUnchecked(key): void;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:253](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L253)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:263](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L263)
 
 Removes an unchecked column from the export selection.
 
@@ -231,7 +243,7 @@ Removes an unchecked column from the export selection.
 protected onDeselectAll(): void;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:271](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L271)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:281](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L281)
 
 Deselects all columns.
 
@@ -247,7 +259,7 @@ Deselects all columns.
 protected onExport(): void;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:285](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L285)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:295](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L295)
 
 Confirms the export configuration and closes the drawer.
 
@@ -263,7 +275,7 @@ Confirms the export configuration and closes the drawer.
 protected onFormatChange(format): void;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:278](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L278)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:288](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L288)
 
 Updates the selected export format.
 
@@ -285,7 +297,7 @@ Updates the selected export format.
 protected onSelectAll(): void;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:264](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L264)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts:274](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponent.ts#L274)
 
 Selects all available columns.
 

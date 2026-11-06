@@ -6,6 +6,7 @@ export default defineConfig(() => ({
     cacheDir: '../../node_modules/.vite/libs/core',
     resolve: {
         alias: [
+            { find: '@pixel-brewery/ngpel-core/operation-queue', replacement: path.resolve(import.meta.dirname, './src/operation-queue/index.ts') },
             { find: '@pixel-brewery/ngpel-core/notification', replacement: path.resolve(import.meta.dirname, './src/notification/index.ts') },
             { find: '@pixel-brewery/ngpel-core/storage', replacement: path.resolve(import.meta.dirname, './src/storage/index.ts') },
             { find: '@pixel-brewery/ngpel-core/browser', replacement: path.resolve(import.meta.dirname, './src/browser/index.ts') },

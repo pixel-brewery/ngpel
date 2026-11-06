@@ -57,6 +57,44 @@
         "marked": ">=18.0.0",
         "rxjs": ">=7.8.0 <8.0.0"
     },
+    "peerDependenciesMeta": {
+        "@angular/cdk": {
+            "optional": true
+        },
+        "@codemirror/autocomplete": {
+            "optional": true
+        },
+        "@codemirror/commands": {
+            "optional": true
+        },
+        "@codemirror/lang-html": {
+            "optional": true
+        },
+        "@codemirror/lang-markdown": {
+            "optional": true
+        },
+        "@codemirror/language": {
+            "optional": true
+        },
+        "@codemirror/search": {
+            "optional": true
+        },
+        "@codemirror/state": {
+            "optional": true
+        },
+        "@codemirror/view": {
+            "optional": true
+        },
+        "@lezer/highlight": {
+            "optional": true
+        },
+        "@pixel-brewery/mosaik-elements-angular": {
+            "optional": true
+        },
+        "@pixel-brewery/mosaik-elements-foundation": {
+            "optional": true
+        }
+    },
     "ngpel": {
         "category": "UI",
         "layer": 2,

@@ -25,7 +25,7 @@ export function hexColor<TPathKind extends PathKind = PathKind.Root>(
     validate(path, (context) => {
         const value = context.value();
 
-        if (!shouldApplySignalValidator(config, context) || value.length === 0 || HEX_COLOR_PATTERN.test(value.trim())) {
+        if (!shouldApplySignalValidator(config, context) || (typeof value === 'string' && (value === '' || HEX_COLOR_PATTERN.test(value.trim())))) {
             return null;
         }
 

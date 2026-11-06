@@ -9,11 +9,12 @@ editUrl: false
 function createSavedFilterSummary(
    filters,
    values,
-   intl
+   intl,
+   language?
 ): readonly ISavedFilterSummaryItem[];
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/saved-filters/createSavedFilterSummary.ts:40](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/saved-filters/createSavedFilterSummary.ts#L40)
+Defined in: [libs/ui/src/components/filter-bar/saved-filters/createSavedFilterSummary.ts:43](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/saved-filters/createSavedFilterSummary.ts#L43)
 
 Creates display-ready summary rows for standard and advanced filter values.
 
@@ -24,6 +25,7 @@ Creates display-ready summary rows for standard and advanced filter values.
 | `filters` | readonly [`IFilterDefinition`](Interface.IFilterDefinition)[] | Available filter definitions. |
 | `values` | [`FilterValues`](TypeAlias.FilterValues) | Active filter values. |
 | `intl` | [`FilterBarComponentIntl`](Class.FilterBarComponentIntl) | Filter bar labels. |
+| `language?` | `string` | Application language in which a chosen day is shown. |
 
 ## Returns
 

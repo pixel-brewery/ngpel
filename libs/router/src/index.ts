@@ -1,3 +1,13 @@
+export type { ContextOverlayLoader } from './context-overlay/ContextOverlayLoader';
+export { ContextOverlayService } from './context-overlay/ContextOverlayService';
+export { ContextOverlayUrl } from './context-overlay/ContextOverlayUrl';
+export type { IContextOverlayOutcome } from './context-overlay/IContextOverlayOutcome';
+export type { IContextOverlayRef } from './context-overlay/IContextOverlayRef';
+export type { IContextOverlayRoutingOptions } from './context-overlay/IContextOverlayRoutingOptions';
+export type { IContextOverlayState } from './context-overlay/IContextOverlayState';
+export type { IContextOverlayTarget } from './context-overlay/IContextOverlayTarget';
+export { provideContextOverlayRouting } from './context-overlay/provideContextOverlayRouting';
+export { provideContextOverlayTarget } from './context-overlay/provideContextOverlayTarget';
 export type { INavigatorJournalEntry } from './navigator/INavigatorJournalEntry';
 export { Navigator } from './navigator/Navigator';
 export { NavigatorJournal } from './navigator/NavigatorJournal';

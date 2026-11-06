@@ -28,3 +28,9 @@ export { DefaultSearchRankingStrategy } from './services/DefaultSearchRankingStr
 export { SearchManager } from './services/SearchManager';
 export { SearchRankingStrategy } from './services/SearchRankingStrategy';
 export { SearchSession } from './services/SearchSession';
+export type { IQuickCreateItem } from './quick-create/IQuickCreateItem';
+export type { IQuickCreateItemSource } from './quick-create/IQuickCreateItemSource';
+export type { IWithQuickCreateItemsOptions } from './quick-create/IWithQuickCreateItemsOptions';
+export { provideQuickCreate } from './quick-create/provideQuickCreate';
+export { QuickCreateManager } from './quick-create/QuickCreateManager';
+export { withQuickCreateItems } from './quick-create/withQuickCreateItems';

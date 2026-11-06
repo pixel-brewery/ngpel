@@ -17,7 +17,7 @@ Input data for the collection export dialog.
 readonly optional availableFormats?: readonly CollectionExportFormat[];
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/ICollectionExportDrawerData.ts:30](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/ICollectionExportDrawerData.ts#L30)
+Defined in: [libs/ui/src/collection-view/exporting/ICollectionExportDrawerData.ts:33](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/ICollectionExportDrawerData.ts#L33)
 
 Available export formats.
 
@@ -47,7 +47,7 @@ All exportable columns with their metadata.
 readonly optional defaultFormat?: CollectionExportFormat;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/ICollectionExportDrawerData.ts:37](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/ICollectionExportDrawerData.ts#L37)
+Defined in: [libs/ui/src/collection-view/exporting/ICollectionExportDrawerData.ts:40](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/ICollectionExportDrawerData.ts#L40)
 
 The default format to select.
 
@@ -56,3 +56,15 @@ The default format to select.
 ```ts
 'xlsx'
 ```
+
+***
+
+### recordCount?
+
+```ts
+readonly optional recordCount?: number;
+```
+
+Defined in: [libs/ui/src/collection-view/exporting/ICollectionExportDrawerData.ts:26](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/ICollectionExportDrawerData.ts#L26)
+
+Number of records that match the current filter, when known.

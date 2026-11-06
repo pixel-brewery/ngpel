@@ -4,6 +4,7 @@ import { computed, DestroyRef, inject, Injectable, signal, type Signal, type Wri
 import type { AbortRef } from '../refs/AbortRef';
 import type { LoadingRef } from '../refs/LoadingRef';
 import { isObservable, Observable, Subscription } from 'rxjs';
+import { disposeViewPresenter } from './disposeViewPresenter';
 import type { IViewPresenter } from './IViewPresenter';
 
 // #endregion
@@ -37,10 +38,11 @@ export abstract class ViewPresenter implements IViewPresenter {
     private readonly _disposed: WritableSignal<boolean>;
     private readonly _activeOperations: WritableSignal<number>;
     private readonly _isLoading: Signal<boolean>;
-    private readonly _subscriptions: Set<Subscription>;
+    private readonly _subscriptions: Subscription;
     private readonly _abortController: AbortController;
     private readonly _abortRef: AbortRef;
     private readonly _loadingRef: LoadingRef;
+    private _disposing = false;
 
     // #endregion
 
@@ -57,7 +59,7 @@ export abstract class ViewPresenter implements IViewPresenter {
         this._disposed = signal(false);
         this._activeOperations = signal(0);
         this._isLoading = computed(() => this._activeOperations() > 0);
-        this._subscriptions = new Set<Subscription>();
+        this._subscriptions = new Subscription();
         this._abortController = new AbortController();
         this._abortRef = {
             signal: this._abortController.signal,
@@ -72,7 +74,7 @@ export abstract class ViewPresenter implements IViewPresenter {
             leave: (): void => this.setLoading(false),
         };
 
-        destroyRef.onDestroy(() => this.dispose());
+        destroyRef.onDestroy(() => disposeViewPresenter(this));
     }
 
     // #endregion
@@ -155,18 +157,18 @@ export abstract class ViewPresenter implements IViewPresenter {
      * @virtual
      */
     public dispose(): void {
-        if (this._disposed()) {
+        if (this._disposing) {
             return;
         }
 
-        this._abortRef.abort();
+        this._disposing = true;
 
-        for (const subscription of this._subscriptions) {
-            subscription.unsubscribe();
+        try {
+            this._abortRef.abort();
+            this._subscriptions.unsubscribe();
+        } finally {
+            this._disposed.set(true);
         }
-
-        this._subscriptions.clear();
-        this._disposed.set(true);
     }
 
     /**
@@ -184,8 +186,8 @@ export abstract class ViewPresenter implements IViewPresenter {
      *
      * @remarks
      * A `Subscription` counts from the moment it is handed over until it closes or is unsubscribed
-     * and is released on disposal. An `Observable` is wrapped, so it counts per subscriber and only
-     * while that subscriber is attached. A factory is invoked immediately; its `Observable` result
+     * and is released on disposal. An `Observable` is wrapped so every attached subscriber counts
+     * separately and is released on disposal. A factory is invoked immediately; its `Observable` result
      * is wrapped, any other result is adopted as a promise that counts until it settles.
      *
      * @protected
@@ -229,18 +231,11 @@ export abstract class ViewPresenter implements IViewPresenter {
      */
     private trackObservable<T>(operation: Observable<T>): Observable<T> {
         return new Observable<T>((subscriber) => {
-            this.setLoading(true);
+            this.trackSubscription(subscriber);
 
-            const subscription = operation.subscribe({
-                next: (value) => subscriber.next(value),
-                error: (error: unknown) => subscriber.error(error),
-                complete: () => subscriber.complete(),
-            });
-
-            return () => {
-                subscription.unsubscribe();
-                this.setLoading(false);
-            };
+            if (!subscriber.closed) {
+                operation.subscribe(subscriber);
+            }
         });
     }
 
@@ -250,19 +245,8 @@ export abstract class ViewPresenter implements IViewPresenter {
      */
     private trackSubscription(subscription: Subscription): Subscription {
         this.setLoading(true);
+        subscription.add(() => this.setLoading(false));
         this._subscriptions.add(subscription);
-
-        let active = true;
-
-        subscription.add(() => {
-            if (!active) {
-                return;
-            }
-
-            active = false;
-            this._subscriptions.delete(subscription);
-            this.setLoading(false);
-        });
 
         return subscription;
     }

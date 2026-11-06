@@ -349,10 +349,8 @@ export class AudioInputDeviceService {
         this._testState.set('starting');
         this.beginOperation();
 
-        let stream: MediaStream | null = null;
-
         try {
-            stream = await mediaDevices.getUserMedia({
+            const stream = await mediaDevices.getUserMedia({
                 audio: {
                     autoGainControl: true,
                     deviceId: { exact: normalizedDeviceId },
@@ -369,16 +367,17 @@ export class AudioInputDeviceService {
 
             this._mediaStream.set(stream);
             this._permissionState.set('granted');
-            await this.startAnalysis(stream);
+            await this.startAnalysis(stream, generation);
+
+            if (generation !== this._generation) {
+                return;
+            }
+
             this._testState.set('listening');
             this._error.set(null);
             void this.refresh().catch(() => undefined);
         } catch (error: unknown) {
             if (generation !== this._generation) {
-                if (stream) {
-                    this.stopTracks(stream);
-                }
-
                 return;
             }
 
@@ -419,6 +418,7 @@ export class AudioInputDeviceService {
         this.detachDeviceChangeListener();
         this.detachPermissionListener();
         this.releaseTestResources(true);
+        this._testState.set(this._isSupported() ? 'idle' : 'unsupported');
         this._initialized = false;
     }
 
@@ -792,10 +792,11 @@ export class AudioInputDeviceService {
      * Builds the Web Audio graph that grades the test stream.
      *
      * @param stream Acquired test stream.
+     * @param generation Voice test that owns the graph.
      * @returns A promise that resolves once sampling runs.
      * @throws AudioInputDeviceError when the Web Audio API is unavailable or fails.
      */
-    private async startAnalysis(stream: MediaStream): Promise<void> {
+    private async startAnalysis(stream: MediaStream, generation: number): Promise<void> {
         const audioContextConstructor = this.resolveAudioContextConstructor();
 
         if (!audioContextConstructor) {
@@ -821,6 +822,10 @@ export class AudioInputDeviceService {
 
             if (audioContext.state === 'suspended') {
                 await audioContext.resume();
+            }
+
+            if (generation !== this._generation) {
+                return;
             }
 
             this._analysisBuffer = new Float32Array(analyser.fftSize);

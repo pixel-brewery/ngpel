@@ -27,7 +27,7 @@ export function port<TPathKind extends PathKind = PathKind.Root>(
     validate(path, (context) => {
         const value = context.value();
 
-        if (!shouldApplySignalValidator(config, context) || value.length === 0 || isPort(value)) {
+        if (!shouldApplySignalValidator(config, context) || (typeof value === 'string' && (value === '' || isPort(value)))) {
             return null;
         }
 

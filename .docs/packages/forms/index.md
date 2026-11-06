@@ -14,7 +14,7 @@ Signal Forms validators, the async validator helpers, the status-class map all t
 
 | Entry point                  | Public symbols | Peer dependencies                 |
 | ---------------------------- | -------------- | --------------------------------- |
-| `@pixel-brewery/ngpel-forms` | 67             | `@angular/core`, `@angular/forms` |
+| `@pixel-brewery/ngpel-forms` | 69             | `@angular/core`, `@angular/forms` |
 
 Every entry point is tree-shakable on its own: importing one never pulls the code of another.
 

@@ -256,7 +256,7 @@ Current voice-test lifecycle.
 dispose(): void;
 ```
 
-Defined in: [audio/devices/AudioInputDeviceService.ts:417](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/audio/devices/AudioInputDeviceService.ts#L417)
+Defined in: [audio/devices/AudioInputDeviceService.ts:416](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/audio/devices/AudioInputDeviceService.ts#L416)
 
 Releases listeners, streams, timers, and Web Audio nodes.
 
@@ -366,7 +366,7 @@ AudioInputDeviceError when the device is missing, blocked, or cannot be analysed
 stopTest(): void;
 ```
 
-Defined in: [audio/devices/AudioInputDeviceService.ts:403](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/audio/devices/AudioInputDeviceService.ts#L403)
+Defined in: [audio/devices/AudioInputDeviceService.ts:402](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/audio/devices/AudioInputDeviceService.ts#L402)
 
 Stops the owned test stream while preserving a successful test result.
 

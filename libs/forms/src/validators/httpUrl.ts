@@ -25,7 +25,7 @@ export function httpUrl<TPathKind extends PathKind = PathKind.Root>(
     validate(path, (context) => {
         const value = context.value();
 
-        if (!shouldApplySignalValidator(config, context) || value.length === 0 || isHttpUrl(value.trim())) {
+        if (!shouldApplySignalValidator(config, context) || (typeof value === 'string' && (value === '' || isHttpUrl(value.trim())))) {
             return null;
         }
 

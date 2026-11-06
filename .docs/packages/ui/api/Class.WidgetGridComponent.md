@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: WidgetGridComponent
 
-Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:62](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L62)
+Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:63](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L63)
 
 Generic configurable widget grid with local persistence.
 
@@ -17,7 +17,7 @@ Generic configurable widget grid with local persistence.
 new WidgetGridComponent(): WidgetGridComponent;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:78](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L78)
+Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:79](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L79)
 
 Creates and continuously reconciles the grid with its contributed definitions.
 
@@ -33,7 +33,7 @@ Creates and continuously reconciles the grid with its contributed definitions.
 readonly editable: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:110](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L110)
+Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:111](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L111)
 
 Whether zone and widget authoring controls are active.
 
@@ -45,7 +45,7 @@ Whether zone and widget authoring controls are active.
 readonly items: InputSignal<readonly IWidgetGridItemDefinition[]>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:101](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L101)
+Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:102](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L102)
 
 Registry-derived widgets currently available to the user.
 
@@ -57,7 +57,7 @@ Registry-derived widgets currently available to the user.
 protected readonly itemTemplate: Signal<WidgetGridItemTemplate>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:119](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L119)
+Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:123](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L123)
 
 Owning feature template marked with `ngpWidgetGridItem`.
 
@@ -69,7 +69,7 @@ Owning feature template marked with `ngpWidgetGridItem`.
 readonly labels: InputSignal<IWidgetGridLabels>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:107](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L107)
+Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:108](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L108)
 
 Resolved labels for editor and empty states.
 
@@ -81,7 +81,7 @@ Resolved labels for editor and empty states.
 readonly layout: Signal<IWidgetGridLayout>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:116](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L116)
+Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:120](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L120)
 
 Current reconciled layout.
 
@@ -93,7 +93,7 @@ Current reconciled layout.
 readonly layoutChange: OutputEmitterRef<IWidgetGridLayout>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:113](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L113)
+Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:114](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L114)
 
 Emits the restored layout and every subsequent user change.
 
@@ -105,7 +105,7 @@ Emits the restored layout and every subsequent user change.
 readonly persistenceKey: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:104](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L104)
+Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:105](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L105)
 
 Stable local preference key.
 
@@ -117,9 +117,21 @@ Stable local preference key.
 protected readonly renderedZones: Signal<readonly IWidgetEditorCanvasZone[]>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:122](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L122)
+Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:126](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L126)
 
 Zones and enabled items in their persisted order.
+
+***
+
+### resizeActiveChange
+
+```ts
+readonly resizeActiveChange: OutputEmitterRef<boolean>;
+```
+
+Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:117](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L117)
+
+Lets the host suspend conflicting interactions while a widget is being resized.
 
 ***
 
@@ -129,7 +141,7 @@ Zones and enabled items in their persisted order.
 readonly zones: InputSignal<readonly IWidgetGridZoneDefinition[]>;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:98](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L98)
+Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:99](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L99)
 
 Semantic zones supported by the current page.
 
@@ -141,7 +153,7 @@ Semantic zones supported by the current page.
 protected moveItem(request): void;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:176](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L176)
+Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:180](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L180)
 
 Reorders a widget inside its current zone without requiring a drag gesture.
 
@@ -163,7 +175,7 @@ Reorders a widget inside its current zone without requiring a drag gesture.
 protected moveItemToZone(request): void;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:195](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L195)
+Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:199](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L199)
 
 Moves a widget to the preceding or following zone without requiring a drag gesture.
 
@@ -185,7 +197,7 @@ Moves a widget to the preceding or following zone without requiring a drag gestu
 protected moveZone(request): void;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:163](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L163)
+Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:167](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L167)
 
 Moves a zone one position without requiring a drag gesture.
 
@@ -207,7 +219,7 @@ Moves a zone one position without requiring a drag gesture.
 protected onItemDrop(request): void;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:158](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L158)
+Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:162](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L162)
 
 Moves a widget within or across connected Angular CDK drop lists.
 
@@ -229,7 +241,7 @@ Moves a widget within or across connected Angular CDK drop lists.
 protected onZoneDrop(request): void;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:153](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L153)
+Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:157](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L157)
 
 Applies a zone reorder emitted by the editor canvas.
 
@@ -251,7 +263,7 @@ Applies a zone reorder emitted by the editor canvas.
 resetLayout(): void;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:231](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L231)
+Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:235](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L235)
 
 Restores the contributed default layout and removes the local override.
 
@@ -267,7 +279,7 @@ Restores the contributed default layout and removes the local override.
 protected resizeItem(request): void;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:214](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L214)
+Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:218](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L218)
 
 Applies an absolute snapped size emitted by the editor canvas.
 
@@ -289,7 +301,7 @@ Applies an absolute snapped size emitted by the editor canvas.
 toggleItem(item): void;
 ```
 
-Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:226](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L226)
+Defined in: [libs/ui/src/widget/components/WidgetGridComponent.ts:230](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/components/WidgetGridComponent.ts#L230)
 
 Toggles one widget without losing its previous placement.
 

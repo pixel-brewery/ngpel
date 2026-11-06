@@ -25,7 +25,7 @@ export function uuid<TPathKind extends PathKind = PathKind.Root>(
     validate(path, (context) => {
         const value = context.value();
 
-        if (!shouldApplySignalValidator(config, context) || value.length === 0 || UUID_PATTERN.test(value)) {
+        if (!shouldApplySignalValidator(config, context) || (typeof value === 'string' && (value === '' || UUID_PATTERN.test(value)))) {
             return null;
         }
 

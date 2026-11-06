@@ -25,7 +25,7 @@ export function currencyCode<TPathKind extends PathKind = PathKind.Root>(
     validate(path, (context) => {
         const value = context.value();
 
-        if (!shouldApplySignalValidator(config, context) || value.length === 0 || CURRENCY_CODE_PATTERN.test(value)) {
+        if (!shouldApplySignalValidator(config, context) || (typeof value === 'string' && (value === '' || CURRENCY_CODE_PATTERN.test(value)))) {
             return null;
         }
 

@@ -28,6 +28,7 @@
             "@pixel-brewery/ngpel-core/audio": ["libs/core/src/audio/index.ts"],
             "@pixel-brewery/ngpel-core/browser": ["libs/core/src/browser/index.ts"],
             "@pixel-brewery/ngpel-core/notification": ["libs/core/src/notification/index.ts"],
+            "@pixel-brewery/ngpel-core/operation-queue": ["libs/core/src/operation-queue/index.ts"],
             "@pixel-brewery/ngpel-core/rx": ["libs/core/src/rx/index.ts"],
             "@pixel-brewery/ngpel-core/search": ["libs/core/src/search/index.ts"],
             "@pixel-brewery/ngpel-core/storage": ["libs/core/src/storage/index.ts"],

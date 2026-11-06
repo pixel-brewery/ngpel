@@ -177,6 +177,11 @@ export class CollectionExportDrawerComponentIntl {
         return this._columnsRequiredMessage;
     }
 
+    /** Label shown after the number of records to export. */
+    public get recordsLabel(): string {
+        return 'records will be exported';
+    }
+
     // #endregion
 
     // #region Methods

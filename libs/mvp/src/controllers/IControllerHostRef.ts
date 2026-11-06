@@ -1,9 +1,5 @@
 /**
- * Provides a strongly typed reference to the hosting Angular component instance
- * and its host DOM element.
- *
- * This reference represents the explicit and type-safe equivalent of Lit's
- * implicit `this` inside a controller.
+ * Provides the host DOM element and the original Angular environment context to a component controller.
  *
  * @public
  * @template TComponent The concrete component instance type.
@@ -13,9 +9,10 @@ export interface IControllerHostRef<TComponent extends object, TElement extends 
     // #region Properties
 
     /**
-     * The Angular component instance that owns the controller.
+     * Legacy environment injector cast to the component type.
      *
      * @public
+     * @deprecated Resolve scoped collaborators with Angular's `inject()` during construction.
      */
     readonly component: TComponent;
 

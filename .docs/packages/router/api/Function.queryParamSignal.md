@@ -13,10 +13,11 @@ function queryParamSignal<T>(
 ): UrlParamSignal<T>;
 ```
 
-Defined in: [signals/queryParamSignal.ts:30](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/signals/queryParamSignal.ts#L30)
+Defined in: [signals/queryParamSignal.ts:31](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/signals/queryParamSignal.ts#L31)
 
 Creates a bidirectional signal for one optional query parameter. Must be called in an injection
-context. Writing preserves every unrelated query parameter, including repeated ones.
+context. Writing preserves unrelated parameters from the current browser URL, including repeated
+ones and changes made through `Location` outside a router navigation.
 
 ## Type Parameters
 

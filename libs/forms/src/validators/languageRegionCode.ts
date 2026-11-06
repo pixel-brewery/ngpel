@@ -25,7 +25,7 @@ export function languageRegionCode<TPathKind extends PathKind = PathKind.Root>(
     validate(path, (context) => {
         const value = context.value();
 
-        if (!shouldApplySignalValidator(config, context) || value.length === 0 || isLanguageRegionCode(value)) {
+        if (!shouldApplySignalValidator(config, context) || (typeof value === 'string' && (value === '' || isLanguageRegionCode(value)))) {
             return null;
         }
 

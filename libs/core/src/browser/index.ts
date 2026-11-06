@@ -13,6 +13,8 @@ export { provideBrowser } from './features/provideBrowser';
 export { withClipboard } from './features/withClipboard';
 export { withExternalLinks } from './features/withExternalLinks';
 export { withFileDownload } from './features/withFileDownload';
+export type { IImageUploadPreparationOptions } from './media/IImageUploadPreparationOptions';
+export { ImageUploadPreparationService } from './media/ImageUploadPreparationService';
 export type { IMediaUrlOptions } from './media/IMediaUrlOptions';
 export { MEDIA_URL_OPTIONS } from './media/MEDIA_URL_OPTIONS';
 export { MediaUrlFeatureKinds } from './media/MediaUrlFeatureKind';

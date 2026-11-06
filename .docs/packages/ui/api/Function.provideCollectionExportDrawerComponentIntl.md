@@ -9,7 +9,7 @@ editUrl: false
 function provideCollectionExportDrawerComponentIntl(translations): Provider;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:215](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L215)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:220](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L220)
 
 Provides application-specific internationalization labels
 for the collection export drawer component.

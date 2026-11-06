@@ -114,6 +114,31 @@ describe('CommandDirective', () => {
         expect(executions).toEqual([]);
     });
 
+    it('runs only the matching command when a control binds several events', () => {
+        // Arrange
+        bindings.set({ click: command(() => executions.push('click')), closed: save });
+        TestBed.tick();
+
+        // Act
+        element.dispatchEvent(new CustomEvent('closed', { detail: 'confirmed' }));
+
+        // Assert
+        expect(executions).toEqual(['confirmed']);
+    });
+
+    it('removes the DOM listener when its Angular scope is destroyed', () => {
+        // Arrange
+        bindings.set({ click: save });
+        TestBed.tick();
+        TestBed.resetTestingModule();
+
+        // Act
+        element.dispatchEvent(new Event('click'));
+
+        // Assert
+        expect(executions).toEqual([]);
+    });
+
     it('rejects a modifier event it could never receive', () => {
         // Arrange
         bindings.set({ 'keydown.enter': save });

@@ -25,7 +25,7 @@ export function nonBlank<TPathKind extends PathKind = PathKind.Root>(
     validate(path, (context) => {
         const value = context.value();
 
-        if (!shouldApplySignalValidator(config, context) || value.trim().length > 0) {
+        if (!shouldApplySignalValidator(config, context) || (typeof value === 'string' && value.trim().length > 0)) {
             return null;
         }
 

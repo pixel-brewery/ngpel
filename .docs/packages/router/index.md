@@ -14,7 +14,7 @@ Route path construction and URL-backed signals, the navigation item registry wit
 
 | Entry point                              | Public symbols | Peer dependencies                                             |
 | ---------------------------------------- | -------------- | ------------------------------------------------------------- |
-| `@pixel-brewery/ngpel-router`            | 20             | `@angular/core`, `@angular/router`, `rxjs`, `@angular/common` |
+| `@pixel-brewery/ngpel-router`            | 30             | `@angular/core`, `@angular/router`, `rxjs`, `@angular/common` |
 | `@pixel-brewery/ngpel-router/navigation` | 20             | `@angular/core`, `@angular/router`, `rxjs`                    |
 | `@pixel-brewery/ngpel-router/shell`      | 6              | `@angular/core`, `@angular/router`                            |
 

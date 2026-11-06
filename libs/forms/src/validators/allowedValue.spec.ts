@@ -56,4 +56,18 @@ describe('allowedValue', () => {
         // Assert
         expect(errors).toEqual([expect.objectContaining({ kind: 'unknownStatus' })]);
     });
+
+    it('revalidates the current value against an allowed set from another field', () => {
+        // Arrange
+        const model = signal({ current: 'de-DE', available: ['en-GB'] });
+        const field = TestBed.runInInjectionContext(() => form(model, (path) => allowedValue(path.current, (context) => context.valueOf(path.available))));
+        const initialErrors = field.current().errors();
+
+        // Act
+        model.update((value) => ({ ...value, available: ['en-GB', 'de-DE'] }));
+
+        // Assert
+        expect(initialErrors).toEqual([expect.objectContaining({ kind: 'allowedValue', actualValue: 'de-DE', allowedValues: ['en-GB'] })]);
+        expect(field.current().errors()).toEqual([]);
+    });
 });

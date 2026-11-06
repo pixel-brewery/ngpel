@@ -9,7 +9,7 @@ editUrl: false
 function createFilterController(config): (host) => IFilterController;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/saved-filters/createFilterController.ts:193](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/saved-filters/createFilterController.ts#L193)
+Defined in: [libs/ui/src/components/filter-bar/saved-filters/createFilterController.ts:195](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/saved-filters/createFilterController.ts#L195)
 
 Creates the shared controller for list filter interactions.
 

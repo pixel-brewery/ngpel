@@ -53,5 +53,5 @@ export function calendarDateNotBefore<TPathKind extends PathKind = PathKind.Root
 }
 
 function toLocalCalendarDay(value: Date): number {
-    return Date.UTC(value.getFullYear(), value.getMonth(), value.getDate());
+    return value.getFullYear() * 10_000 + (value.getMonth() + 1) * 100 + value.getDate();
 }

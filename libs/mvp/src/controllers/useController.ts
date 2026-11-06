@@ -1,6 +1,6 @@
 // #region Imports
 
-import { DestroyRef, ElementRef, EnvironmentInjector, inject, runInInjectionContext } from '@angular/core';
+import { DestroyRef, ElementRef, EnvironmentInjector, inject } from '@angular/core';
 import type { IControllerHostRef } from './IControllerHostRef';
 import type { IReactiveController } from './IReactiveController';
 
@@ -32,104 +32,13 @@ import type { IReactiveController } from './IReactiveController';
 export function useController<TComponent extends object, TElement extends HTMLElement, TController extends IReactiveController<TComponent, TElement>>(
     controllerType: new (host: IControllerHostRef<TComponent, TElement>) => TController,
 ): TController {
-    // #region Fields
+    const destroyRef = inject(DestroyRef);
+    const controller = new controllerType({
+        component: inject(EnvironmentInjector) as unknown as TComponent,
+        element: inject(ElementRef<TElement>).nativeElement,
+    });
 
-    const environmentInjector: EnvironmentInjector = inject(EnvironmentInjector);
-    const componentKey: TComponent = environmentInjector as unknown as TComponent;
-
-    // #endregion
-
-    // #region Methods
-
-    let internalHost: ControllerHostImpl | undefined = CONTROLLER_HOSTS.get(componentKey);
-
-    if (!internalHost) {
-        internalHost = runInInjectionContext(environmentInjector, (): ControllerHostImpl => {
-            const destroyRef: DestroyRef = inject(DestroyRef);
-            return new ControllerHostImpl(destroyRef);
-        });
-
-        CONTROLLER_HOSTS.set(componentKey, internalHost);
-    }
-
-    const elementRef: ElementRef<TElement> = inject(ElementRef<TElement>);
-    const hostRef: IControllerHostRef<TComponent, TElement> = {
-        component: componentKey,
-        element: elementRef.nativeElement,
-    };
-    const controller: TController = runInInjectionContext(environmentInjector, (): TController => new controllerType(hostRef));
-
-    internalHost.add(controller);
+    destroyRef.onDestroy(() => controller.hostDisconnected?.());
+    controller.hostConnected?.();
     return controller;
-
-    // #endregion
 }
-
-/**
- * Manages controller lifetimes for a single component instance.
- *
- * Exactly one instance exists per component instance.
- * It is created lazily when the first controller is requested.
- *
- * @private
- */
-class ControllerHostImpl {
-    // #region Fields
-
-    private readonly _controllers: Set<IReactiveController>;
-    private readonly _destroyRef: DestroyRef;
-
-    // #endregion
-
-    // #region Ctor
-
-    /**
-     * Constructs a new instance of the {@link ControllerHostImpl} class.
-     *
-     * @param destroyRef The destroy reference bound to the component instance.
-     */
-    public constructor(destroyRef: DestroyRef) {
-        this._controllers = new Set<IReactiveController>();
-        this._destroyRef = destroyRef;
-
-        this._destroyRef.onDestroy((): void => {
-            this.disconnectAll();
-        });
-    }
-
-    // #endregion
-
-    // #region Methods
-
-    /**
-     * Adds a controller and connects it immediately.
-     *
-     * @param controller The controller to register.
-     */
-    public add(controller: IReactiveController): void {
-        this._controllers.add(controller);
-        controller.hostConnected?.();
-    }
-
-    /**
-     * Disconnects all controllers and clears internal state.
-     */
-    private disconnectAll(): void {
-        for (const controller of this._controllers) {
-            controller.hostDisconnected?.();
-        }
-        this._controllers.clear();
-    }
-
-    // #endregion
-}
-
-/**
- * Associates component instances with their internal controller hosts.
- *
- * A {@link WeakMap} is used to ensure component instances can be garbage
- * collected naturally.
- *
- * @private
- */
-const CONTROLLER_HOSTS = new WeakMap<object, ControllerHostImpl>();

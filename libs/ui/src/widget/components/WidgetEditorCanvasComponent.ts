@@ -185,6 +185,7 @@ export interface IWidgetGridItemResizeRequest extends IWidgetGridResizePreview {
                                     (moved)="itemMoved.emit({ widgetId: item.id, delta: $event })"
                                     (movedToZone)="itemMovedToZone.emit({ widgetId: item.id, delta: $event })"
                                     (resized)="itemResized.emit({ widgetId: item.id, columnSpan: $event.columnSpan, rowSpan: $event.rowSpan })"
+                                    (resizeActiveChange)="resizeActiveChange.emit($event)"
                                     (hidden)="itemHidden.emit(item)"
                                 />
                             }
@@ -349,6 +350,9 @@ export class WidgetEditorCanvasComponent {
 
     /** Requests one absolute snapped widget size. */
     public readonly itemResized = output<IWidgetGridItemResizeRequest>();
+
+    /** Emits when a widget starts or ends a pointer resize. */
+    public readonly resizeActiveChange = output<boolean>();
 
     /** Requests hiding one widget from the canvas. */
     public readonly itemHidden = output<IWidgetGridItemDefinition>();

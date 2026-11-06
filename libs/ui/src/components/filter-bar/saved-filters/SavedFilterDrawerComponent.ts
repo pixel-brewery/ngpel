@@ -1,6 +1,6 @@
 // #region Imports
 
-import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, signal, type Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, LOCALE_ID, signal, type Signal } from '@angular/core';
 import { FormField, form, required, type FieldTree } from '@angular/forms/signals';
 import {
     ButtonComponent,
@@ -246,6 +246,7 @@ export class SavedFilterDrawerComponent {
     >;
     private readonly _drawerData: ISavedFilterDrawerData = inject<ISavedFilterDrawerData>(DRAWER_REF_DATA);
     private readonly _intl: FilterBarComponentIntl = inject(FilterBarComponentIntl);
+    private readonly _locale = inject(LOCALE_ID);
     private readonly _toastService: ToastService = inject(ToastService);
     private readonly _toastVisibility: IToastVisibility = inject(TOAST_VISIBILITY);
     private readonly _formValidator: SignalFormValidator = inject(SignalFormValidator);
@@ -313,7 +314,7 @@ export class SavedFilterDrawerComponent {
      * @readonly
      */
     public readonly summaryItems: Signal<ReadonlyArray<ISavedFilterSummaryItem>> = computed(() =>
-        createSavedFilterSummary(this._drawerData.filters, this._drawerData.values, this._intl),
+        createSavedFilterSummary(this._drawerData.filters, this._drawerData.values, this._intl, this._locale),
     );
 
     // #endregion

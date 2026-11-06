@@ -35,14 +35,14 @@ describe('validDate', () => {
         expect(errors).toEqual([expect.objectContaining({ kind: 'validDate', actualValue: value })]);
     });
 
-    it('rejects a date built from an out-of-range timestamp', () => {
+    it('rejects malformed persisted values that are not Date instances', () => {
         // Arrange
-        const value = new Date(Number.NaN);
+        const value = '2024-01-15' as unknown as Date;
 
         // Act
         const errors = collectFieldErrors<Date | null>(value, (path) => validDate(path));
 
         // Assert
-        expect(errors).toEqual([expect.objectContaining({ kind: 'validDate' })]);
+        expect(errors).toEqual([expect.objectContaining({ kind: 'validDate', actualValue: value })]);
     });
 });

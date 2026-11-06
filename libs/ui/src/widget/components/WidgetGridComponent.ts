@@ -49,6 +49,7 @@ import {
             (itemMoved)="moveItem($event)"
             (itemMovedToZone)="moveItemToZone($event)"
             (itemResized)="resizeItem($event)"
+            (resizeActiveChange)="resizeActiveChange.emit($event)"
             (itemHidden)="toggleItem($event)"
         />
     `,
@@ -111,6 +112,9 @@ export class WidgetGridComponent {
 
     /** Emits the restored layout and every subsequent user change. */
     public readonly layoutChange = output<IWidgetGridLayout>();
+
+    /** Lets the host suspend conflicting interactions while a widget is being resized. */
+    public readonly resizeActiveChange = output<boolean>();
 
     /** Current reconciled layout. */
     public readonly layout: Signal<IWidgetGridLayout> = this._layout.asReadonly();

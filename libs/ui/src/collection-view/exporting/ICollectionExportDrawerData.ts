@@ -22,6 +22,9 @@ export interface ICollectionExportDrawerData {
      */
     readonly columns: ReadonlyArray<ICollectionExportColumn>;
 
+    /** Number of records that match the current filter, when known. */
+    readonly recordCount?: number;
+
     /**
      * Available export formats.
      *

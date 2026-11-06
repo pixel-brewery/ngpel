@@ -25,7 +25,7 @@ export function countryCode<TPathKind extends PathKind = PathKind.Root>(
     validate(path, (context) => {
         const value = context.value();
 
-        if (!shouldApplySignalValidator(config, context) || value.length === 0 || COUNTRY_CODE_PATTERN.test(value)) {
+        if (!shouldApplySignalValidator(config, context) || (typeof value === 'string' && (value === '' || COUNTRY_CODE_PATTERN.test(value)))) {
             return null;
         }
 

@@ -5,13 +5,9 @@ editUrl: false
 ---
 # Interface: IControllerHostRef\<TComponent, TElement\>
 
-Defined in: [controllers/IControllerHostRef.ts:12](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/controllers/IControllerHostRef.ts#L12)
+Defined in: [controllers/IControllerHostRef.ts:8](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/controllers/IControllerHostRef.ts#L8)
 
-Provides a strongly typed reference to the hosting Angular component instance
-and its host DOM element.
-
-This reference represents the explicit and type-safe equivalent of Lit's
-implicit `this` inside a controller.
+Provides the host DOM element and the original Angular environment context to a component controller.
 
 ## Type Parameters
 
@@ -22,15 +18,19 @@ implicit `this` inside a controller.
 
 ## Properties
 
-### component
+### ~~component~~
 
 ```ts
 readonly component: TComponent;
 ```
 
-Defined in: [controllers/IControllerHostRef.ts:20](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/controllers/IControllerHostRef.ts#L20)
+Defined in: [controllers/IControllerHostRef.ts:17](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/controllers/IControllerHostRef.ts#L17)
 
-The Angular component instance that owns the controller.
+Legacy environment injector cast to the component type.
+
+#### Deprecated
+
+Resolve scoped collaborators with Angular's `inject()` during construction.
 
 ***
 
@@ -40,6 +40,6 @@ The Angular component instance that owns the controller.
 readonly element: TElement;
 ```
 
-Defined in: [controllers/IControllerHostRef.ts:27](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/controllers/IControllerHostRef.ts#L27)
+Defined in: [controllers/IControllerHostRef.ts:24](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/controllers/IControllerHostRef.ts#L24)
 
 The host DOM element of the component instance.

@@ -11,7 +11,7 @@ editUrl: false
 function usePresenterController<TController>(controllerFactory): TController;
 ```
 
-Defined in: [controllers/usePresenterController.ts:85](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/controllers/usePresenterController.ts#L85)
+Defined in: [controllers/usePresenterController.ts:32](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/controllers/usePresenterController.ts#L32)
 
 Creates a presenter controller and binds it to the lifetime of the presenter that creates it.
 
@@ -53,7 +53,7 @@ export class OrderListViewPresenter extends ViewPresenter {
 function usePresenterController<TPresenter, TController>(controllerFactory): TController;
 ```
 
-Defined in: [controllers/usePresenterController.ts:86](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/controllers/usePresenterController.ts#L86)
+Defined in: [controllers/usePresenterController.ts:33](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/controllers/usePresenterController.ts#L33)
 
 Creates a presenter controller and binds it to the lifetime of the presenter that creates it.
 

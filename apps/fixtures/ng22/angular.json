@@ -16,6 +16,7 @@
                         "outputPath": "dist",
                         "browser": "src/main.ts",
                         "index": "src/index.html",
+                        "styles": ["src/styles.css"],
                         "tsConfig": "tsconfig.app.json",
                         "optimization": true,
                         "outputHashing": "none",

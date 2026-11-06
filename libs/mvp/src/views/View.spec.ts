@@ -10,7 +10,14 @@ import { View } from './View';
 // #endregion
 
 @Injectable()
-class OrderViewPresenter extends ViewPresenter {}
+class OrderViewPresenter extends ViewPresenter {
+    public disposalCount = 0;
+
+    public override dispose(): void {
+        this.disposalCount += 1;
+        super.dispose();
+    }
+}
 
 @Component({
     selector: 'ngp-order-view',
@@ -43,7 +50,7 @@ describe('View', () => {
         expect(fixture.nativeElement.textContent).toContain('true');
     });
 
-    it('disposes its presenter when Angular destroys the View', () => {
+    it('runs presenter teardown once when Angular destroys the View and its injector', () => {
         // Arrange
         const fixture = TestBed.configureTestingModule({ imports: [OrderView] }).createComponent(OrderView);
         fixture.detectChanges();
@@ -54,6 +61,7 @@ describe('View', () => {
 
         // Assert
         expect(presenter.disposed()).toBe(true);
+        expect(presenter.disposalCount).toBe(1);
     });
 
     it('fails to construct when no presenter was provided for the token', () => {

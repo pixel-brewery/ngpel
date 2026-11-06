@@ -26,7 +26,7 @@ export function httpsUrl<TPathKind extends PathKind = PathKind.Root>(
     validate(path, (context) => {
         const value = context.value();
 
-        if (!shouldApplySignalValidator(config, context) || value.length === 0 || HTTPS_URL_PATTERN.test(value)) {
+        if (!shouldApplySignalValidator(config, context) || (typeof value === 'string' && (value === '' || HTTPS_URL_PATTERN.test(value)))) {
             return null;
         }
 

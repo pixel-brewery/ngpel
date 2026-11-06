@@ -495,6 +495,9 @@ export class WidgetGridItemComponent {
     /** Requests a persisted absolute size. */
     public readonly resized = output<IWidgetGridResizePreview>();
 
+    /** Emits when a pointer resize starts or ends. */
+    public readonly resizeActiveChange = output<boolean>();
+
     /** Requests removal from the visible canvas. */
     public readonly hidden = output<void>();
 
@@ -535,7 +538,11 @@ export class WidgetGridItemComponent {
 
     /** Applies or clears live resize feedback. */
     protected onResizePreview(preview: IWidgetGridResizePreview | null): void {
+        const wasResizing = this._resizePreview() !== null;
         this._resizePreview.set(preview);
+        if (wasResizing !== (preview !== null)) {
+            this.resizeActiveChange.emit(preview !== null);
+        }
     }
 
     /** Forwards a completed resize to the owning grid. */

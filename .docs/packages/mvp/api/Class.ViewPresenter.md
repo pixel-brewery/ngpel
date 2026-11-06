@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Abstract Class: ViewPresenter
 
-Defined in: [presenters/ViewPresenter.ts:33](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/presenters/ViewPresenter.ts#L33)
+Defined in: [presenters/ViewPresenter.ts:34](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/presenters/ViewPresenter.ts#L34)
 
 Signal-based presentation state owned by a [View](Class.View).
 
@@ -38,7 +38,7 @@ class OrderViewPresenter extends ViewPresenter {}
 new ViewPresenter(destroyRef?): ViewPresenter;
 ```
 
-Defined in: [presenters/ViewPresenter.ts:55](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/presenters/ViewPresenter.ts#L55)
+Defined in: [presenters/ViewPresenter.ts:57](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/presenters/ViewPresenter.ts#L57)
 
 Constructs a new instance of the `ViewPresenter` class.
 
@@ -62,7 +62,7 @@ Constructs a new instance of the `ViewPresenter` class.
 get protected abortRef(): AbortRef;
 ```
 
-Defined in: [presenters/ViewPresenter.ts:129](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/presenters/ViewPresenter.ts#L129)
+Defined in: [presenters/ViewPresenter.ts:131](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/presenters/ViewPresenter.ts#L131)
 
 Cancellation reference for presenter-owned asynchronous work; aborted on disposal.
 
@@ -80,7 +80,7 @@ Cancellation reference for presenter-owned asynchronous work; aborted on disposa
 get disposed(): Signal<boolean>;
 ```
 
-Defined in: [presenters/ViewPresenter.ts:88](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/presenters/ViewPresenter.ts#L88)
+Defined in: [presenters/ViewPresenter.ts:90](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/presenters/ViewPresenter.ts#L90)
 
 Becomes `true` after `dispose()` was called.
 
@@ -104,7 +104,7 @@ Becomes `true` after `dispose()` was called.
 get initialized(): Signal<boolean>;
 ```
 
-Defined in: [presenters/ViewPresenter.ts:98](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/presenters/ViewPresenter.ts#L98)
+Defined in: [presenters/ViewPresenter.ts:100](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/presenters/ViewPresenter.ts#L100)
 
 Becomes `true` after `initialize()` was called.
 
@@ -128,7 +128,7 @@ Becomes `true` after `initialize()` was called.
 get isLoading(): Signal<boolean>;
 ```
 
-Defined in: [presenters/ViewPresenter.ts:108](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/presenters/ViewPresenter.ts#L108)
+Defined in: [presenters/ViewPresenter.ts:110](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/presenters/ViewPresenter.ts#L110)
 
 Emits `true` while at least one tracked operation is active.
 
@@ -152,7 +152,7 @@ Emits `true` while at least one tracked operation is active.
 get protected loadingRef(): LoadingRef;
 ```
 
-Defined in: [presenters/ViewPresenter.ts:119](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/presenters/ViewPresenter.ts#L119)
+Defined in: [presenters/ViewPresenter.ts:121](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/presenters/ViewPresenter.ts#L121)
 
 Loading reference handed to asynchronous commands so their runtime feeds `isLoading`, as in
 `asyncCommand(() => this.save(), undefined, this.loadingRef)`.
@@ -169,7 +169,7 @@ Loading reference handed to asynchronous commands so their runtime feeds `isLoad
 dispose(): void;
 ```
 
-Defined in: [presenters/ViewPresenter.ts:157](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/presenters/ViewPresenter.ts#L157)
+Defined in: [presenters/ViewPresenter.ts:159](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/presenters/ViewPresenter.ts#L159)
 
 Aborts in-flight work, unsubscribes every tracked subscription and marks the presenter as
 disposed. Repeated calls are ignored.
@@ -190,7 +190,7 @@ disposed. Repeated calls are ignored.
 initialize(): void;
 ```
 
-Defined in: [presenters/ViewPresenter.ts:144](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/presenters/ViewPresenter.ts#L144)
+Defined in: [presenters/ViewPresenter.ts:146](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/presenters/ViewPresenter.ts#L146)
 
 Marks the presenter as initialized. Override to load the data the View binds to and call
 `super.initialize()` first.
@@ -211,7 +211,7 @@ Marks the presenter as initialized. Override to load the data the View binds to 
 protected loading(value): void;
 ```
 
-Defined in: [presenters/ViewPresenter.ts:178](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/presenters/ViewPresenter.ts#L178)
+Defined in: [presenters/ViewPresenter.ts:180](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/presenters/ViewPresenter.ts#L180)
 
 Balances the loading counter for work managed directly by a presenter subclass.
 
@@ -235,7 +235,7 @@ Balances the loading counter for work managed directly by a presenter subclass.
 protected withLoading(operation): Subscription;
 ```
 
-Defined in: [presenters/ViewPresenter.ts:195](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/presenters/ViewPresenter.ts#L195)
+Defined in: [presenters/ViewPresenter.ts:197](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/presenters/ViewPresenter.ts#L197)
 
 Balances the loading state around an operation.
 
@@ -254,8 +254,8 @@ The tracked operation.
 ##### Remarks
 
 A `Subscription` counts from the moment it is handed over until it closes or is unsubscribed
-and is released on disposal. An `Observable` is wrapped, so it counts per subscriber and only
-while that subscriber is attached. A factory is invoked immediately; its `Observable` result
+and is released on disposal. An `Observable` is wrapped so every attached subscriber counts
+separately and is released on disposal. A factory is invoked immediately; its `Observable` result
 is wrapped, any other result is adopted as a promise that counts until it settles.
 
 #### Call Signature
@@ -264,7 +264,7 @@ is wrapped, any other result is adopted as a promise that counts until it settle
 protected withLoading<T>(operation): Observable<T>;
 ```
 
-Defined in: [presenters/ViewPresenter.ts:196](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/presenters/ViewPresenter.ts#L196)
+Defined in: [presenters/ViewPresenter.ts:198](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/presenters/ViewPresenter.ts#L198)
 
 Balances the loading state around an operation.
 
@@ -289,8 +289,8 @@ The tracked operation.
 ##### Remarks
 
 A `Subscription` counts from the moment it is handed over until it closes or is unsubscribed
-and is released on disposal. An `Observable` is wrapped, so it counts per subscriber and only
-while that subscriber is attached. A factory is invoked immediately; its `Observable` result
+and is released on disposal. An `Observable` is wrapped so every attached subscriber counts
+separately and is released on disposal. A factory is invoked immediately; its `Observable` result
 is wrapped, any other result is adopted as a promise that counts until it settles.
 
 #### Call Signature
@@ -299,7 +299,7 @@ is wrapped, any other result is adopted as a promise that counts until it settle
 protected withLoading<T>(operation): Observable<T>;
 ```
 
-Defined in: [presenters/ViewPresenter.ts:197](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/presenters/ViewPresenter.ts#L197)
+Defined in: [presenters/ViewPresenter.ts:199](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/presenters/ViewPresenter.ts#L199)
 
 Balances the loading state around an operation.
 
@@ -324,8 +324,8 @@ The tracked operation.
 ##### Remarks
 
 A `Subscription` counts from the moment it is handed over until it closes or is unsubscribed
-and is released on disposal. An `Observable` is wrapped, so it counts per subscriber and only
-while that subscriber is attached. A factory is invoked immediately; its `Observable` result
+and is released on disposal. An `Observable` is wrapped so every attached subscriber counts
+separately and is released on disposal. A factory is invoked immediately; its `Observable` result
 is wrapped, any other result is adopted as a promise that counts until it settles.
 
 #### Call Signature
@@ -334,7 +334,7 @@ is wrapped, any other result is adopted as a promise that counts until it settle
 protected withLoading<T>(operation): Promise<T>;
 ```
 
-Defined in: [presenters/ViewPresenter.ts:198](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/presenters/ViewPresenter.ts#L198)
+Defined in: [presenters/ViewPresenter.ts:200](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/presenters/ViewPresenter.ts#L200)
 
 Balances the loading state around an operation.
 
@@ -359,6 +359,6 @@ The tracked operation.
 ##### Remarks
 
 A `Subscription` counts from the moment it is handed over until it closes or is unsubscribed
-and is released on disposal. An `Observable` is wrapped, so it counts per subscriber and only
-while that subscriber is attached. A factory is invoked immediately; its `Observable` result
+and is released on disposal. An `Observable` is wrapped so every attached subscriber counts
+separately and is released on disposal. A factory is invoked immediately; its `Observable` result
 is wrapped, any other result is adopted as a promise that counts until it settles.

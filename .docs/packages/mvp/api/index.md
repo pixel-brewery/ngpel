@@ -20,7 +20,7 @@ editUrl: false
 | Interface | Description |
 | ------ | ------ |
 | [ICloseable](Interface.ICloseable) | Contract of the Closeable presenter behavior: the command a View binds to its dismiss affordance, together with the gate that decides whether dismissing is currently allowed. |
-| [IControllerHostRef](Interface.IControllerHostRef) | Provides a strongly typed reference to the hosting Angular component instance and its host DOM element. |
+| [IControllerHostRef](Interface.IControllerHostRef) | Provides the host DOM element and the original Angular environment context to a component controller. |
 | [IHydratable](Interface.IHydratable) | Contract of the Hydratable presenter behavior: the one-time load that has to finish before the View can show anything, kept apart from the ongoing loading state. |
 | [ILockable](Interface.ILockable) | Contract of the Lockable presenter behavior: a nestable interaction lock the View can bind to while a mutation must not be interrupted. |
 | [IMentionable](Interface.IMentionable) | Contract for a presenter that offers its loaded resources as context-aware mentions. |

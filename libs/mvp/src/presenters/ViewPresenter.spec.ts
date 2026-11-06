@@ -42,6 +42,8 @@ function createFakeDestroyScope(): IFakeDestroyScope {
 }
 
 class TestViewPresenter extends ViewPresenter {
+    public disposalCount = 0;
+
     // #region Properties
 
     public get cancellation(): AbortSignal {
@@ -51,6 +53,11 @@ class TestViewPresenter extends ViewPresenter {
     // #endregion
 
     // #region Methods
+
+    public override dispose(): void {
+        this.disposalCount += 1;
+        super.dispose();
+    }
 
     public runSubscription(subscription: Subscription): Subscription {
         return this.withLoading(subscription);
@@ -115,6 +122,7 @@ describe('ViewPresenter', () => {
         // Assert
         expect(presenter.disposed()).toBe(true);
         expect(presenter.cancellation.aborted).toBe(true);
+        expect(presenter.disposalCount).toBe(1);
     });
 
     it('unsubscribes a tracked subscription when it is disposed', () => {
@@ -127,6 +135,36 @@ describe('ViewPresenter', () => {
 
         // Assert
         expect(subscription.closed).toBe(true);
+        expect(presenter.isLoading()).toBe(false);
+    });
+
+    it('skips scope teardown after the presenter was explicitly disposed', () => {
+        // Arrange
+        const scope = createFakeDestroyScope();
+        const presenter = new TestViewPresenter(scope.destroyRef);
+        presenter.dispose();
+
+        // Act
+        scope.destroy();
+
+        // Assert
+        expect(presenter.disposalCount).toBe(1);
+    });
+
+    it('releases pending wrapped Observable subscriptions when the scope is destroyed', () => {
+        // Arrange
+        const scope = createFakeDestroyScope();
+        const presenter = new TestViewPresenter(scope.destroyRef);
+        const tracked = presenter.runStream(new Subject<number>());
+        const first = tracked.subscribe();
+        const second = tracked.subscribe();
+
+        // Act
+        scope.destroy();
+
+        // Assert
+        expect(first.closed).toBe(true);
+        expect(second.closed).toBe(true);
         expect(presenter.isLoading()).toBe(false);
     });
 

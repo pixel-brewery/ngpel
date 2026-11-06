@@ -52,6 +52,7 @@ export type { ISafeIntegerValidationError } from './validators/ISafeIntegerValid
 export type { ISafeScaledIntegerValidationError } from './validators/ISafeScaledIntegerValidationError';
 export type { ISingleLineValidationError } from './validators/ISingleLineValidationError';
 export { isLanguageRegionCode } from './validators/isLanguageRegionCode';
+export type { ITrimmedMaxLengthValidationError } from './validators/ITrimmedMaxLengthValidationError';
 export type { ITrimmedMinLengthValidationError } from './validators/ITrimmedMinLengthValidationError';
 export type { IUuidValidationError } from './validators/IUuidValidationError';
 export type { IValidDateValidationError } from './validators/IValidDateValidationError';
@@ -62,6 +63,7 @@ export { port } from './validators/port';
 export { safeInteger } from './validators/safeInteger';
 export { safeScaledInteger } from './validators/safeScaledInteger';
 export { singleLine } from './validators/singleLine';
+export { trimmedMaxLength } from './validators/trimmedMaxLength';
 export { trimmedMinLength } from './validators/trimmedMinLength';
 export { uuid } from './validators/uuid';
 export { validDate } from './validators/validDate';

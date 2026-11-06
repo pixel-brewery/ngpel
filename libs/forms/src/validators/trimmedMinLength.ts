@@ -27,7 +27,7 @@ export function trimmedMinLength<TPathKind extends PathKind = PathKind.Root>(
     validate(path, (context) => {
         const value = context.value();
 
-        if (!shouldApplySignalValidator(config, context) || value.length === 0 || value.trim().length >= minLength) {
+        if (!shouldApplySignalValidator(config, context) || (typeof value === 'string' && (value === '' || value.trim().length >= minLength))) {
             return null;
         }
 

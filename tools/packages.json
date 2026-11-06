@@ -25,7 +25,21 @@
         "@codemirror/view": ">=6.0.0",
         "@lezer/highlight": ">=1.2.0"
     },
-    "optionalPeers": ["@angular/service-worker"],
+    "optionalPeers": [
+        "@angular/cdk",
+        "@angular/service-worker",
+        "@codemirror/autocomplete",
+        "@codemirror/commands",
+        "@codemirror/lang-html",
+        "@codemirror/lang-markdown",
+        "@codemirror/language",
+        "@codemirror/search",
+        "@codemirror/state",
+        "@codemirror/view",
+        "@lezer/highlight",
+        "@pixel-brewery/mosaik-elements-angular",
+        "@pixel-brewery/mosaik-elements-foundation"
+    ],
     "packages": [
         {
             "name": "core",
@@ -43,7 +57,8 @@
                 "notification": ["@angular/core", "rxjs"],
                 "update": ["@angular/core", "@angular/service-worker", "rxjs"],
                 "audio": ["@angular/core", "rxjs"],
-                "search": ["@angular/core", "rxjs"]
+                "search": ["@angular/core", "rxjs"],
+                "operation-queue": ["@angular/core", "rxjs"]
             }
         },
         {
