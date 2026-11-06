@@ -9,32 +9,36 @@ The five libraries share one Nx release group. Package names and published versi
 the `@pixel-brewery` scope on GitHub Packages. The workspace manifest is private; only the
 library distributions are released.
 
-## Set up the public repository
+## Prepare the private repository
 
 1. Seed a new private `pixel-brewery/ngpel` repository from the reviewed source snapshot.
    Push only its root commit to `main`. Do not import old tags, pull request refs or
    releases. Verify the new repository's refs and CI before enabling public visibility.
 2. In [GitHub Packages](https://github.com/orgs/pixel-brewery/packages), inventory the five
-   `ngpel-*` packages. Connect each existing package to the new repository and grant it
-   Actions **Write** access. Preserve existing versions and download permissions when changing
-   the repository connection. The first release creates packages that are actually absent.
-   Packages outside the current release group keep their existing settings.
-3. Apply the [main ruleset](https://github.com/pixel-brewery/ngpel/blob/main/.github/repository-rules/main-protection.json)
-   and restrict the `release-main` environment to `main` when the GitHub plan supports these
-   settings. The publication workflow uses the repository's scoped `GITHUB_TOKEN`.
-4. For the [documentation site](https://pixel-brewery.github.io/ngpel/), set Pages source to
-   **GitHub Actions**, allow `main` in the `github-pages` environment, set
-   `NGPEL_PAGES_ENABLED=true` as a repository Actions variable and run **Publish documentation**
-   on `main`. After that, pushes to public `main` refresh the site.
-
-GitHub manages npm package visibility separately from repository visibility. In each package's
-settings, check that its visibility is **Public**, including packages created on the first
-release. Public GitHub npm packages still require an authenticated registry client.
+   `ngpel-*` packages. Under **Manage Actions access**, grant `pixel-brewery/ngpel`
+   **Write** on each existing package in the release group. The first release creates the
+   missing packages. The publication workflow uses the repository's scoped `GITHUB_TOKEN`.
+3. Restrict the `release-main` and `github-pages` environments to `main`.
 
 To start the first release when the owner makes the source public, set `NGPEL_LAUNCH_SHA` to
 the exact verified commit after the existing packages have granted Actions write access. The
 `public` event is bound to that commit in the Pixel Brewery repository. Without that variable,
 use the manual release dispatch after the settings are ready.
+
+## Finish the public handover
+
+The repository owner changes the repository visibility to **Public**.
+
+1. Apply the [main ruleset](https://github.com/pixel-brewery/ngpel/blob/main/.github/repository-rules/main-protection.json).
+2. On each existing package's landing page, connect `pixel-brewery/ngpel` as the source
+   repository if it is still unlinked. Preserve existing versions and download permissions.
+3. For the [documentation site](https://pixel-brewery.github.io/ngpel/), set Pages source to
+   **GitHub Actions**, set `NGPEL_PAGES_ENABLED=true` as a repository Actions variable and run
+   **Publish documentation** on `main`. After that, pushes to public `main` refresh the site.
+
+GitHub manages npm package visibility separately from repository visibility. New packages
+default to **Private**. Check that all five packages are **Public** before announcing the
+release. Public GitHub npm packages still require an authenticated registry client.
 
 ## Prepare a release
 
