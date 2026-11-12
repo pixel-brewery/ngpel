@@ -8,7 +8,8 @@ ngpel is an Nx monorepo of published Angular libraries `@pixel-brewery/ngpel-<na
   integration branch, unless the owner requests analysis, a draft or local-only work.
   Inspect protection and workflow effects first; use a `codex/` branch and PR when required,
   and remain responsible through the requested merge. Extra clones or worktrees need a
-  specific request. Releases and package publication remain owner-controlled.
+  specific request. Pushes to public `main` trigger the maintained package-release workflow.
+  Manual release dispatch and publication outside that workflow require owner authorization.
 - Assign one owner for staging, commits and refs. Parallel agents may edit disjoint files
   under that owner's coordination. Inspect and preserve existing unrelated work before
   staging; never silently include another task's changes.

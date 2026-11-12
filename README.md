@@ -129,8 +129,8 @@ yarn docs:dev
 ## Contribute
 
 Read the [repository engineering guide](AGENTS.md) for source conventions and verification. Use
-Conventional Commits and open a pull request. Package publication is a separate maintainer step
-after CI has verified the release revision.
+Conventional Commits and open a pull request. A push or merge to `main` starts the release
+workflow, which verifies and publishes the next coordinated package version.
 
 ## License
 

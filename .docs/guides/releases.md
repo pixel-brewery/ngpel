@@ -20,11 +20,6 @@ library distributions are released.
    missing packages. The publication workflow uses the repository's scoped `GITHUB_TOKEN`.
 3. Restrict the `release-main` and `github-pages` environments to `main`.
 
-To start the first release when the owner makes the source public, set `NGPEL_LAUNCH_SHA` to
-the exact verified commit after the existing packages have granted Actions write access. The
-`public` event is bound to that commit in the Pixel Brewery repository. Without that variable,
-use the manual release dispatch after the settings are ready.
-
 ## Finish the public handover
 
 The repository owner changes the repository visibility to **Public**.
@@ -40,38 +35,29 @@ GitHub manages npm package visibility separately from repository visibility. New
 default to **Private**. Check that all five packages are **Public** before announcing the
 release. Public GitHub npm packages still require an authenticated registry client.
 
-## Prepare a release
+## Continuous package releases
 
-The public source snapshot already prepares `0.0.2` for all five libraries. Before publishing
-it, confirm that version is still unused across the group. Existing `0.0.1` archives remain
-available under their original package names.
+A push to `main`, including a pull request merge, starts **Release ngpel packages** in the public
+`pixel-brewery/ngpel` repository. The workflow prepares the next patch version with Nx, updates the
+internal peer ranges and lockfile, and verifies the versioned sources. An Angular consumer builds
+against the same five tarballs that the workflow later uploads to GitHub Packages.
 
-Once the public repository has a version tag, prepare the next version locally:
+The publisher checks that `main` still points to the triggering commit before pushing the verified
+metadata commit and tag together. It checks each registry version, downloads the published archives
+and compares their bytes with the tested tarballs before creating the GitHub Release.
 
-```sh
-yarn release:dry-run
-yarn release:nx --specifier=patch
-```
+The publication job runs in the main-only `release-main` environment. The repository token can push
+the metadata commit when branch rules permit it. For protected `main`, configure the approved
+release GitHub App using `RELEASE_APP_ID` and the `RELEASE_APP_PRIVATE_KEY` environment secret.
+Package publication continues to use the workflow token.
 
-For a snapshot without a preceding tag, preview the next version with
-`yarn release:first:dry-run`. Version preparation updates the manifests, internal peer ranges,
-lockfile and changelogs without creating a commit, tag or package release. Merge the reviewed
-version through the usual pull request and CI checks.
+## Recover a release
 
-## Publish and verify
+If publication is interrupted, rerun the failed job from the same run while its verified artifact
+is available and `main` still points to the release commit. The publisher reuses matching registry
+uploads and stops if a published version has different bytes.
 
-1. Run **Publish Packages** on public `main` with the prepared version or use
-   `yarn release:patch`, `yarn release:minor` or `yarn release:major` for the corresponding
-   version increment. The workflow checks the successful CI run and current public `main`,
-   then publishes and downloads the same archives for byte comparison.
-2. Set newly created packages to Public and rerun the announcement job if it is waiting for
-   visibility. Install all five packages in a consumer using a classic token
-   with `read:packages` that has no special access to the organization, and check that the
-   documentation site and API reference load.
-3. The workflow creates the GitHub Release and its tag after confirming package visibility.
-   Use `yarn release:verify` for a read-only registry check. `yarn release:publish` is a live
-   maintainer recovery command and requires explicit publication authorization.
-
-If a publish is interrupted, retry the failed job from the same run while the artifacts
-are available and `main` still points to that release. The job reuses matching uploads and
-stops if a registry version has different bytes.
+An owner can dispatch the workflow for a specific increment or exact next version. Use
+`yarn release:first:dry-run` before the first tag or `yarn release:dry-run` afterwards to preview local
+version changes. Use `yarn release:verify` to verify the published versions from an authenticated
+registry client.

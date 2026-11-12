@@ -22,7 +22,7 @@ if (built.length === 0) {
     process.exit(1);
 }
 for (const name of built) {
-    run(`npm pack --silent --pack-destination "${PACKAGES}"`, join(ROOT, 'libs', name, 'dist'));
+    run(`npm pack --silent --offline --ignore-scripts --pack-destination "${PACKAGES}"`, join(ROOT, 'libs', name, 'dist'));
 }
 
 const scopeDir = join(FIXTURE, 'node_modules', '@pixel-brewery');

@@ -1,17 +1,18 @@
 # cspell:ignore ETARGET nullglob pipefail shopt
-name: Publish Packages
+name: Release ngpel packages
 
 on:
-  public:
+  push:
+    branches: [main]
   workflow_dispatch:
     inputs:
       specifier:
-        description: Version increment prepared on main
+        description: Version increment
         type: choice
         default: patch
         options: [patch, minor, major]
       version:
-        description: Exact version already prepared on main, if supplied
+        description: Exact next version, if supplied
         type: string
 
 permissions: {}
@@ -20,22 +21,21 @@ concurrency:
   group: ngpel-publication
   cancel-in-progress: false
 
+env:
+  HUSKY: '0'
+  NX_DAEMON: 'false'
+  NX_PARALLEL: '1'
+
 jobs:
   prepare:
     if: >-
       ${{ github.repository == 'pixel-brewery/ngpel' && github.event.repository.id == 1447827206 &&
-          github.event.repository.private == false && github.ref == 'refs/heads/main' &&
-          (github.event_name != 'public' || github.sha == vars.NGPEL_LAUNCH_SHA) }}
+          github.event.repository.private == false && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 40
     permissions:
-      actions: read
       contents: read
       packages: read
-    outputs:
-      version: ${{ steps.release.outputs.version }}
-    env:
-      HUSKY: '0'
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -45,76 +45,44 @@ jobs:
         with:
           node-version: '22'
           package-manager-cache: false
-      - name: Require a coordinated version and a successful main CI run
-        id: release
+      - name: Require the triggering commit to remain on main
         env:
           GH_TOKEN: ${{ github.token }}
+        run: test "$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)" = "$GITHUB_SHA"
+      - run: corepack enable
+      - name: Install dependencies and prepare the coordinated version
+        env:
+          NODE_AUTH_TOKEN: ${{ github.token }}
           REQUESTED_VERSION: ${{ inputs.version }}
           RELEASE_SPECIFIER: ${{ inputs.specifier || 'patch' }}
         run: |
           set -euo pipefail
-          version=$(node --input-type=module -e '
-            import { workspacePackages } from "./tools/workspace-packages.mjs";
-            const versions = new Set(workspacePackages().map((pkg) => pkg.manifest.version));
-            const [version] = versions;
-            if (versions.size !== 1 || !/^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$/.test(version)) {
-              throw new Error("All packages must use the same stable release version.");
-            }
-            console.log(version);
-          ')
-          previous=$(git tag --merged "$GITHUB_SHA" --list 'v[0-9]*' --sort=-version:refname | sed -n '1p')
-          if [ -n "$REQUESTED_VERSION" ]; then
-            test "$REQUESTED_VERSION" = "$version"
-          elif [ -n "$previous" ] && [ "$previous" != "v$version" ]; then
-            node --input-type=module -e '
-              const [before, after] = process.argv.slice(1);
-              const next = before.slice(1).split(".").map(Number);
-              const index = ["major", "minor", "patch"].indexOf(process.env.RELEASE_SPECIFIER);
-              if (index < 0 || next.length !== 3) throw new Error("Invalid previous tag or increment.");
-              next[index]++;
-              next.fill(0, index + 1);
-              if (next.join(".") !== after) throw new Error("Prepare and merge the requested version on main first.");
-            ' "$previous" "$version"
+          yarn install --immutable
+          args=()
+          if [ -z "$(git tag --merged HEAD --list 'v[0-9]*')" ]; then
+            args+=(--first-release)
           fi
-          if git show-ref --verify --quiet "refs/tags/v$version"; then
-            test "$(git rev-parse "refs/tags/v$version^{commit}")" = "$GITHUB_SHA"
+          specifier=${REQUESTED_VERSION:-$RELEASE_SPECIFIER}
+          if [[ ! "$specifier" =~ ^(patch|minor|major|[0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
+            echo 'Expected patch, minor, major or an exact stable version.' >&2
+            exit 1
           fi
-          gh api --method GET "repos/$GITHUB_REPOSITORY/actions/workflows/ci.yml/runs" \
-            -f branch=main -f event=push -f status=success -f "head_sha=$GITHUB_SHA" \
-            --jq '.total_count' | grep -Eq '^[1-9][0-9]*$'
-          echo "version=$version" >> "$GITHUB_OUTPUT"
-      - run: corepack enable
-      - name: Install dependencies
-        env:
-          NODE_AUTH_TOKEN: ${{ github.token }}
-        run: yarn install --immutable
-      - name: Build packages
-        run: yarn build && yarn verify:esm
-      - name: Pack the coordinated release
-        env:
-          RELEASE_VERSION: ${{ steps.release.outputs.version }}
-        run: |
-          set -euo pipefail
-          mkdir -p "$RUNNER_TEMP/ngpel-release"
-          for manifest in libs/*/package.json; do
-            dist="./${manifest%/package.json}/dist"
-            node -e '
-              const source = require("./" + process.argv[1]);
-              const packed = require(process.argv[2] + "/package.json");
-              if (packed.name !== source.name || !packed.name.startsWith("@pixel-brewery/ngpel-") ||
-                  packed.version !== process.env.RELEASE_VERSION || packed.version !== source.version) {
-                throw new Error("Unexpected name or version in " + process.argv[2]);
-              }
-            ' "$manifest" "$dist"
-            (cd "$dist" && npm pack --offline --ignore-scripts --pack-destination "$RUNNER_TEMP/ngpel-release")
-          done
-          cd "$RUNNER_TEMP/ngpel-release"
-          sha256sum -- *.tgz > SHA256SUMS
+          yarn release:nx "$specifier" "${args[@]}"
+          node tools/render-package-docs.mjs forms router ui
+          yarn prettier --write 'libs/*/README.md' '.docs/packages/*/index.md'
+          yarn install --immutable
+      - name: Verify the versioned source and built packages
+        run: yarn verify:ci
+      - name: Pack and verify the Angular consumer fixture
+        run: yarn nx run fixture-ng22:build
+      - name: Bind the verified packages to the release commit
+        run: node .github/scripts/releaseCandidate.mjs prepare "$RUNNER_TEMP/ngpel-release" "$GITHUB_SHA"
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: ngpel-release-${{ github.run_id }}
           path: ${{ runner.temp }}/ngpel-release/
           if-no-files-found: error
+          overwrite: true
           retention-days: 7
 
   publish:
@@ -123,9 +91,12 @@ jobs:
     timeout-minutes: 15
     environment: release-main
     permissions:
-      contents: read
+      contents: write
       packages: write
     steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: '22'
@@ -136,28 +107,45 @@ jobs:
         with:
           name: ngpel-release-${{ github.run_id }}
           path: ${{ runner.temp }}/ngpel-release
-      - name: Recheck the public repository and release revision
+      - name: Verify the canonical repository, release commit and tarball bytes
+        id: candidate
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           test "$(gh api "repos/$GITHUB_REPOSITORY" --jq 'select(.id == 1447827206) | .visibility')" = public
-          test "$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)" = "$GITHUB_SHA"
-      - name: Publish and verify the built tarballs
+          release=$(node .github/scripts/releaseCandidate.mjs verify "$RUNNER_TEMP/ngpel-release" "$GITHUB_SHA")
+          jq -r 'to_entries[] | "\(.key)=\(.value)"' <<< "$release" >> "$GITHUB_OUTPUT"
+      - name: Create the scoped release token when a release App is configured
+        if: vars.RELEASE_APP_ID != ''
+        id: release-app
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        with:
+          app-id: ${{ vars.RELEASE_APP_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: ${{ github.event.repository.name }}
+          permission-contents: write
+      - name: Check registry versions and publish the verified tarballs
         env:
           NODE_AUTH_TOKEN: ${{ github.token }}
-          RELEASE_VERSION: ${{ needs.prepare.outputs.version }}
+          RELEASE_VERSION: ${{ steps.candidate.outputs.version }}
+          RELEASE_COMMIT: ${{ steps.candidate.outputs.commit }}
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_PUSH_TOKEN: ${{ steps.release-app.outputs.token || github.token }}
         run: |
           set -euo pipefail
           registry=https://npm.pkg.github.com
           cd "$RUNNER_TEMP/ngpel-release"
-          sha256sum -c SHA256SUMS
           shopt -s nullglob
           tarballs=(./*.tgz)
           test "${#tarballs[@]}" -gt 0
           pending=()
           for tarball in "${tarballs[@]}"; do
             package=$(tar -xOf "$tarball" package/package.json | node -p 'JSON.parse(require("node:fs").readFileSync(0)).name')
+            [[ "$package" == @pixel-brewery/ngpel-* ]]
+            test "${tarball#./}" = "pixel-brewery-${package#@pixel-brewery/}-$RELEASE_VERSION.tgz"
+            test "$(tar -xOf "$tarball" package/package.json | jq -r .version)" = "$RELEASE_VERSION"
             integrity="sha512-$(openssl dgst -sha512 -binary "$tarball" | openssl base64 -A)"
             if remote=$(npm view "$package@$RELEASE_VERSION" dist.integrity --registry="$registry" 2>"$RUNNER_TEMP/npm-view.log"); then
               if [ -z "$remote" ]; then
@@ -173,6 +161,18 @@ jobs:
               exit 1
             fi
           done
+          main=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)
+          tag="v$RELEASE_VERSION"
+          remote_tag=$(git -C "$GITHUB_WORKSPACE" ls-remote --tags origin "refs/tags/$tag" | cut -f1)
+          if [ "$main" = "$GITHUB_SHA" ] && [ -z "$remote_tag" ]; then
+            auth=$(printf 'x-access-token:%s' "$RELEASE_PUSH_TOKEN" | base64 -w0)
+            GIT_CONFIG_COUNT=1 GIT_CONFIG_KEY_0=http.https://github.com/.extraheader GIT_CONFIG_VALUE_0="AUTHORIZATION: basic $auth" \
+              git -C "$GITHUB_WORKSPACE" push --atomic origin "$RELEASE_COMMIT:refs/heads/main" "$RELEASE_COMMIT:refs/tags/$tag"
+          else
+            test "$main" = "$RELEASE_COMMIT"
+            test "$remote_tag" = "$RELEASE_COMMIT"
+          fi
+          test "$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)" = "$RELEASE_COMMIT"
           if [ "${pending[0]+present}" = present ]; then
             for tarball in "${pending[@]}"; do
               npm publish "$tarball" --access public --ignore-scripts --registry="$registry"
@@ -186,32 +186,22 @@ jobs:
             cmp "$tarball" "$RUNNER_TEMP/verified-packages/$(basename "$tarball")"
           done
 
-  announce:
-    needs: [prepare, publish]
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    permissions:
-      contents: write
-      packages: read
-    steps:
-      - name: Require public packages before announcing the release
+      - name: Announce the verified release
         env:
           GH_TOKEN: ${{ github.token }}
-          RELEASE_VERSION: ${{ needs.prepare.outputs.version }}
+          RELEASE_COMMIT: ${{ steps.candidate.outputs.commit }}
+          RELEASE_VERSION: ${{ steps.candidate.outputs.version }}
         run: |
           set -euo pipefail
-          test "$(gh api "repos/$GITHUB_REPOSITORY" --jq 'select(.id == 1447827206) | .visibility')" = public
-          test "$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)" = "$GITHUB_SHA"
-          for package in core forms mvp router ui; do
-            if [ "$(gh api "orgs/$GITHUB_REPOSITORY_OWNER/packages/npm/ngpel-$package" --jq .visibility)" != public ]; then
-              echo "Set ngpel-$package to Public in GitHub Packages, then rerun this job." >&2
-              exit 1
-            fi
-          done
           tag="v$RELEASE_VERSION"
-          if git ls-remote --exit-code "https://github.com/$GITHUB_REPOSITORY" "refs/tags/$tag" >/dev/null; then
-            test "$(gh api "repos/$GITHUB_REPOSITORY/commits/$tag" --jq .sha)" = "$GITHUB_SHA"
-          fi
+          test "$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$tag" --jq .object.sha)" = "$RELEASE_COMMIT"
+          for package in core forms mvp router ui; do
+            test "$(gh api "orgs/$GITHUB_REPOSITORY_OWNER/packages/npm/ngpel-$package" --jq .visibility)" = public
+          done
           if ! gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
-            gh release create "$tag" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --generate-notes
+            notes="$RUNNER_TEMP/ngpel-release-notes.md"
+            git show "$RELEASE_COMMIT:CHANGELOG.md" |
+              awk -v version="$RELEASE_VERSION" '$1 == "##" { if (found) exit; if ($2 == version) { found = 1; next } } found { print }' > "$notes"
+            test -s "$notes"
+            gh release create "$tag" --repo "$GITHUB_REPOSITORY" --verify-tag --title "$tag" --notes-file "$notes"
           fi
