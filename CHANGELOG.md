@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.0 (2026-11-12)
+
+- Updates the Angular, Nx and Mosaik toolchain and verifies all five packed libraries in an Angular consumer.
+- Resolves duplicate CodeMirror dependencies and updates the UI tests for jsdom 31.
+- Removes `ChartTheme`, `ChartLayout` and `IChartOptions` from `@pixel-brewery/ngpel-ui`.
+
 ## 0.0.3 (2026-11-06)
 
 - Adds shared search, browser, routing, and UI capabilities for Angular applications.
