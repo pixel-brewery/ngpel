@@ -26,6 +26,8 @@ updates:
         patterns: ['@angular/*', '@angular-devkit/*', '@schematics/angular', angular-eslint]
       nx-updates:
         patterns: ['@nx/*', nx]
+      vitest-updates:
+        patterns: [vitest, '@vitest/*']
 
   - package-ecosystem: github-actions
     directory: /
