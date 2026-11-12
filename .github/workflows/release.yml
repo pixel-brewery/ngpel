@@ -79,6 +79,8 @@ jobs:
           yarn prettier --write 'libs/*/README.md' '.docs/packages/*/index.md'
           yarn install --immutable
       - name: Verify the versioned source and built packages
+        env:
+          NGPEL_TEST_JOBS: '2'
         run: yarn verify:ci
       - name: Pack and verify the Angular consumer fixture
         run: yarn nx run fixture-ng22:build

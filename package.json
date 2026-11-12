@@ -46,7 +46,7 @@
         "agents:check": "node tools/verify-project-guidance.mjs",
         "postinstall": "husky",
         "build": "nx run-many --target=build --projects=tag:lib --parallel=1",
-        "test": "nx run-many --target=test --projects=tag:lib --parallel=1 --maxWorkers=1",
+        "test": "nx run-many --target=test --projects=tag:lib --parallel=${NGPEL_TEST_JOBS:-1} --maxWorkers=1",
         "lint": "nx run-many --target=lint --parallel=1",
         "typecheck": "nx run-many --target=typecheck --projects=tag:lib --parallel=1",
         "docs": "nx run-many --target=docs --projects=tag:lib --parallel=1",
