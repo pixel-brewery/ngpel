@@ -53,7 +53,7 @@ import {
 | `@angular/common`           | `>=22.0.0 <23.0.0` |
 | `@angular/core`             | `>=22.0.0 <23.0.0` |
 | `@angular/router`           | `>=22.0.0 <23.0.0` |
-| `@pixel-brewery/ngpel-core` | `0.0.5`            |
+| `@pixel-brewery/ngpel-core` | `0.0.6`            |
 | `rxjs`                      | `>=7.8.0 <8.0.0`   |
 
 ## Quick Start
