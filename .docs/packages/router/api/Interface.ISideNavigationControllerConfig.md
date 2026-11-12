@@ -15,7 +15,7 @@ Configures [createSideNavigationController](Function.createSideNavigationControl
 ### autoOpenMediaQuery?
 
 ```ts
-readonly optional autoOpenMediaQuery?: string;
+readonly autoOpenMediaQuery?: string;
 ```
 
 Defined in: [shell/ISideNavigationControllerConfig.ts:47](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/shell/ISideNavigationControllerConfig.ts#L47)
@@ -28,7 +28,7 @@ Media query of the viewport wide enough to show the navigation by default. Defau
 ### defaultRailSplitPosition?
 
 ```ts
-readonly optional defaultRailSplitPosition?: number;
+readonly defaultRailSplitPosition?: number;
 ```
 
 Defined in: [shell/ISideNavigationControllerConfig.ts:59](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/shell/ISideNavigationControllerConfig.ts#L59)
@@ -40,7 +40,7 @@ The split position used until the user moves the divider, as a percentage. Defau
 ### hasNavigationDataKey?
 
 ```ts
-readonly optional hasNavigationDataKey?: string;
+readonly hasNavigationDataKey?: string;
 ```
 
 Defined in: [shell/ISideNavigationControllerConfig.ts:54](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/shell/ISideNavigationControllerConfig.ts#L54)
@@ -54,7 +54,7 @@ has navigation.
 ### maxRailSplitPosition?
 
 ```ts
-readonly optional maxRailSplitPosition?: number;
+readonly maxRailSplitPosition?: number;
 ```
 
 Defined in: [shell/ISideNavigationControllerConfig.ts:69](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/shell/ISideNavigationControllerConfig.ts#L69)
@@ -66,7 +66,7 @@ The largest persisted split position, as a percentage. Defaults to `70`.
 ### minRailSplitPosition?
 
 ```ts
-readonly optional minRailSplitPosition?: number;
+readonly minRailSplitPosition?: number;
 ```
 
 Defined in: [shell/ISideNavigationControllerConfig.ts:64](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/shell/ISideNavigationControllerConfig.ts#L64)
@@ -78,7 +78,7 @@ The smallest persisted split position, as a percentage. Defaults to `50`.
 ### mobileMediaQuery?
 
 ```ts
-readonly optional mobileMediaQuery?: string;
+readonly mobileMediaQuery?: string;
 ```
 
 Defined in: [shell/ISideNavigationControllerConfig.ts:41](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/shell/ISideNavigationControllerConfig.ts#L41)
@@ -90,7 +90,7 @@ Media query that identifies the mobile layout. Defaults to `'(max-width: 959.98p
 ### mobileRailStorageKey?
 
 ```ts
-readonly optional mobileRailStorageKey?: string;
+readonly mobileRailStorageKey?: string;
 ```
 
 Defined in: [shell/ISideNavigationControllerConfig.ts:30](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/shell/ISideNavigationControllerConfig.ts#L30)
@@ -103,7 +103,7 @@ a desktop rail. Defaults to `'presentation.isMobileRailOpen'`.
 ### navigationCompactStorageKey?
 
 ```ts
-readonly optional navigationCompactStorageKey?: string;
+readonly navigationCompactStorageKey?: string;
 ```
 
 Defined in: [shell/ISideNavigationControllerConfig.ts:19](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/shell/ISideNavigationControllerConfig.ts#L19)
@@ -116,7 +116,7 @@ Storage key of the compact (icon-only) navigation preference. Defaults to
 ### navigationStorageKey?
 
 ```ts
-readonly optional navigationStorageKey?: string;
+readonly navigationStorageKey?: string;
 ```
 
 Defined in: [shell/ISideNavigationControllerConfig.ts:13](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/shell/ISideNavigationControllerConfig.ts#L13)
@@ -128,7 +128,7 @@ Storage key of the navigation sidebar preference. Defaults to `'presentation.isN
 ### railSplitPositionStorageKey?
 
 ```ts
-readonly optional railSplitPositionStorageKey?: string;
+readonly railSplitPositionStorageKey?: string;
 ```
 
 Defined in: [shell/ISideNavigationControllerConfig.ts:36](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/shell/ISideNavigationControllerConfig.ts#L36)
@@ -141,7 +141,7 @@ Storage key of the desktop rail split position. Defaults to
 ### railStorageKey?
 
 ```ts
-readonly optional railStorageKey?: string;
+readonly railStorageKey?: string;
 ```
 
 Defined in: [shell/ISideNavigationControllerConfig.ts:24](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/shell/ISideNavigationControllerConfig.ts#L24)

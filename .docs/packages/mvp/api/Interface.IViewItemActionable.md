@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: IViewItemActionable
 
-Defined in: item-actions/IViewItemActionable.ts:12
+Defined in: [item-actions/IViewItemActionable.ts:12](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/item-actions/IViewItemActionable.ts#L12)
 
 Presenter-facing contract for registered contextual item actions.
 
@@ -17,7 +17,7 @@ Presenter-facing contract for registered contextual item actions.
 readonly executeViewItemActionCommand: AsyncCommand<IViewItemActionSelection>;
 ```
 
-Defined in: item-actions/IViewItemActionable.ts:15
+Defined in: [item-actions/IViewItemActionable.ts:15](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/item-actions/IViewItemActionable.ts#L15)
 
 ***
 
@@ -27,7 +27,7 @@ Defined in: item-actions/IViewItemActionable.ts:15
 readonly openViewItemActionCommand: Command<string>;
 ```
 
-Defined in: item-actions/IViewItemActionable.ts:14
+Defined in: [item-actions/IViewItemActionable.ts:14](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/item-actions/IViewItemActionable.ts#L14)
 
 ***
 
@@ -37,4 +37,4 @@ Defined in: item-actions/IViewItemActionable.ts:14
 readonly viewItemActions: Signal<readonly IViewItemAction[]>;
 ```
 
-Defined in: item-actions/IViewItemActionable.ts:13
+Defined in: [item-actions/IViewItemActionable.ts:13](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/item-actions/IViewItemActionable.ts#L13)

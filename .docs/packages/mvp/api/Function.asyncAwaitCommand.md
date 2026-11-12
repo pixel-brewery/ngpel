@@ -22,8 +22,8 @@ Creates a result-capturing [AsyncAwaitCommand](TypeAlias.AsyncAwaitCommand). Co-
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `T` | `void` | The parameter type of the command. |
-| `R` | `unknown` | The result type of the handler. |
+| <a id="type-parameter-t"></a> `T` | `void` | The parameter type of the command. |
+| <a id="type-parameter-r"></a> `R` | `unknown` | The result type of the handler. |
 
 ## Parameters
 

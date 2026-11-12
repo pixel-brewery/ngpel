@@ -15,7 +15,7 @@ The parts of an [INotificationMessage](Interface.INotificationMessage) the typed
 ### duration?
 
 ```ts
-readonly optional duration?: NotificationDuration;
+readonly duration?: NotificationDuration;
 ```
 
 Defined in: [notification/models/INotificationOptions.ts:20](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/notification/models/INotificationOptions.ts#L20)
@@ -27,7 +27,7 @@ Symbolic lifetime; defaults to `'short'`.
 ### silent?
 
 ```ts
-readonly optional silent?: boolean;
+readonly silent?: boolean;
 ```
 
 Defined in: [notification/models/INotificationOptions.ts:25](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/notification/models/INotificationOptions.ts#L25)
@@ -39,7 +39,7 @@ When `true` the message reaches the interceptors but is not kept in the history.
 ### subTitle?
 
 ```ts
-readonly optional subTitle?: NotificationText;
+readonly subTitle?: NotificationText;
 ```
 
 Defined in: [notification/models/INotificationOptions.ts:30](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/notification/models/INotificationOptions.ts#L30)

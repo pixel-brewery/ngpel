@@ -42,7 +42,7 @@ Splits `value` into chunks of `size` items; the last chunk holds the remainder.
 
 | Type Parameter |
 | ------ |
-| `TItem` |
+| <a id="type-parameter-titem"></a> `TItem` |
 
 #### Parameters
 
@@ -63,6 +63,4 @@ RangeError When `size` is not a positive integer.
 
 #### Implementation of
 
-```ts
-PipeTransform.transform
-```
+`PipeTransform.transform`

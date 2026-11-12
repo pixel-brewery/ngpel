@@ -18,8 +18,8 @@ The router owns URL-driven closing, while Mosaik retains the shell's presentatio
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `TData` | Data passed to the drawer content. |
-| `TResult` | Result returned by the drawer content. |
+| <a id="type-parameter-tdata"></a> `TData` | Data passed to the drawer content. |
+| <a id="type-parameter-tresult"></a> `TResult` | Result returned by the drawer content. |
 
 ## Parameters
 

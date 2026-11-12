@@ -14,7 +14,7 @@ Options controlling a feature's composition behavior.
 ### multi?
 
 ```ts
-readonly optional multi?: boolean;
+readonly multi?: boolean;
 ```
 
 Defined in: [features/IFeatureOptions.ts:12](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/features/IFeatureOptions.ts#L12)

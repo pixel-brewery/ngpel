@@ -38,7 +38,7 @@ Human-readable navigation label.
 ### level?
 
 ```ts
-readonly optional level?: number;
+readonly level?: number;
 ```
 
 Defined in: [libs/ui/src/components/content-navigation/IContentNavigationItem.ts:29](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/content-navigation/IContentNavigationItem.ts#L29)
@@ -50,7 +50,7 @@ Semantic outline level from one through six.
 ### order?
 
 ```ts
-readonly optional order?: number;
+readonly order?: number;
 ```
 
 Defined in: [libs/ui/src/components/content-navigation/IContentNavigationItem.ts:37](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/content-navigation/IContentNavigationItem.ts#L37)

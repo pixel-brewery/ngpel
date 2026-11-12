@@ -13,7 +13,7 @@ A writable signal with a bounded history and undo/redo operations.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | The signal value type. |
+| <a id="type-parameter-t"></a> `T` | The signal value type. |
 
 ## Properties
 

@@ -18,8 +18,8 @@ success or failure branch.
 
 | Type Parameter | Default type |
 | ------ | ------ |
-| `TData` | - |
-| `TResult` | `void` |
+| <a id="type-parameter-tdata"></a> `TData` | - |
+| <a id="type-parameter-tresult"></a> `TResult` | `void` |
 
 ## Parameters
 

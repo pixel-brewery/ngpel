@@ -17,15 +17,15 @@ Configuration for the table projection of a collection view.
 
 | Type Parameter |
 | ------ |
-| `TItem` |
-| `TView` *extends* `string` |
+| <a id="type-parameter-titem"></a> `TItem` |
+| <a id="type-parameter-tview"></a> `TView` *extends* `string` |
 
 ## Properties
 
 ### additionalColumns?
 
 ```ts
-readonly optional additionalColumns?: readonly IDataTableColumnDefinition<TItem>[];
+readonly additionalColumns?: readonly IDataTableColumnDefinition<TItem>[];
 ```
 
 Defined in: [libs/ui/src/collection-view/views/table/ICollectionTableViewConfig.ts:23](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/views/table/ICollectionTableViewConfig.ts#L23)
@@ -37,7 +37,7 @@ Additional table-only columns, such as actions.
 ### iconName?
 
 ```ts
-readonly optional iconName?: string;
+readonly iconName?: string;
 ```
 
 Defined in: [libs/ui/src/collection-view/core/ICollectionViewDefinition.ts:20](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/core/ICollectionViewDefinition.ts#L20)
@@ -53,7 +53,7 @@ Optional icon name used by feature-specific toggles.
 ### label?
 
 ```ts
-readonly optional label?: string;
+readonly label?: string;
 ```
 
 Defined in: [libs/ui/src/collection-view/core/ICollectionViewDefinition.ts:15](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/core/ICollectionViewDefinition.ts#L15)

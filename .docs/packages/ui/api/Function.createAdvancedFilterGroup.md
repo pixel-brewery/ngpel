@@ -22,8 +22,8 @@ Creates an advanced filter group.
 | Parameter | Type | Default value |
 | ------ | ------ | ------ |
 | `id` | `string` | `undefined` |
-| `condition` | [`FilterConditionValue`](TypeAlias.FilterConditionValue) | `FilterCondition.And` |
-| `children` | readonly [`AdvancedFilterNode`](TypeAlias.AdvancedFilterNode)[] | `[]` |
+| `condition?` | [`FilterConditionValue`](TypeAlias.FilterConditionValue) | `FilterCondition.And` |
+| `children?` | readonly [`AdvancedFilterNode`](TypeAlias.AdvancedFilterNode)[] | `[]` |
 
 ## Returns
 

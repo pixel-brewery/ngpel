@@ -17,7 +17,7 @@ Adds undo and redo commands for a model configured through [withUndoRedo](Functi
 
 | Type Parameter |
 | ------ |
-| `T` *extends* [`PresenterBehaviorBase`](TypeAlias.PresenterBehaviorBase) |
+| <a id="type-parameter-t"></a> `T` *extends* [`PresenterBehaviorBase`](TypeAlias.PresenterBehaviorBase) |
 
 ## Parameters
 

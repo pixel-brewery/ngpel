@@ -44,9 +44,7 @@ Constructs a new instance of the `AudioInputDeviceError` class.
 
 #### Overrides
 
-```ts
-Error.constructor
-```
+`Error.constructor`
 
 ## Accessors
 

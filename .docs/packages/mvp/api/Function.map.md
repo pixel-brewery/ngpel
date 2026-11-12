@@ -17,8 +17,8 @@ Projects the current and subsequent values of a signal subject.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | The source value type. |
-| `R` | The projected value type. |
+| <a id="type-parameter-t"></a> `T` | The source value type. |
+| <a id="type-parameter-r"></a> `R` | The projected value type. |
 
 ## Parameters
 

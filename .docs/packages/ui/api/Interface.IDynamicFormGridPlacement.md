@@ -26,7 +26,7 @@ Number of columns occupied by the field.
 ### start?
 
 ```ts
-readonly optional start?: DynamicFormGridStart;
+readonly start?: DynamicFormGridStart;
 ```
 
 Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormGridPlacement.ts:28](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormGridPlacement.ts#L28)

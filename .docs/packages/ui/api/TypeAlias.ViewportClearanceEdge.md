@@ -9,6 +9,6 @@ editUrl: false
 type ViewportClearanceEdge = "bottom" | "right";
 ```
 
-Defined in: libs/ui/src/viewport-clearance/ViewportClearanceEdge.ts:2
+Defined in: [libs/ui/src/viewport-clearance/ViewportClearanceEdge.ts:2](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/viewport-clearance/ViewportClearanceEdge.ts#L2)
 
 Viewport edge reserved by a visible surface.

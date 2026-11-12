@@ -47,9 +47,7 @@ Emits the first visible logical item index.
 
 #### Implementation of
 
-```ts
-VirtualScrollStrategy.scrolledIndexChange
-```
+`VirtualScrollStrategy.scrolledIndexChange`
 
 ## Methods
 
@@ -75,9 +73,7 @@ Attaches the CDK viewport controlled by this strategy.
 
 #### Implementation of
 
-```ts
-VirtualScrollStrategy.attach
-```
+`VirtualScrollStrategy.attach`
 
 ***
 
@@ -97,9 +93,7 @@ Releases the attached viewport and observed elements.
 
 #### Implementation of
 
-```ts
-VirtualScrollStrategy.detach
-```
+`VirtualScrollStrategy.detach`
 
 ***
 
@@ -119,9 +113,7 @@ Measures and observes the items in the latest rendered range.
 
 #### Implementation of
 
-```ts
-VirtualScrollStrategy.onContentRendered
-```
+`VirtualScrollStrategy.onContentRendered`
 
 ***
 
@@ -141,9 +133,7 @@ Recalculates the rendered range after scrolling.
 
 #### Implementation of
 
-```ts
-VirtualScrollStrategy.onContentScrolled
-```
+`VirtualScrollStrategy.onContentScrolled`
 
 ***
 
@@ -163,9 +153,7 @@ Recalculates the rendered range after a data-length change.
 
 #### Implementation of
 
-```ts
-VirtualScrollStrategy.onDataLengthChanged
-```
+`VirtualScrollStrategy.onDataLengthChanged`
 
 ***
 
@@ -185,9 +173,7 @@ Handles a rendered-content offset change required by the CDK strategy contract.
 
 #### Implementation of
 
-```ts
-VirtualScrollStrategy.onRenderedOffsetChanged
-```
+`VirtualScrollStrategy.onRenderedOffsetChanged`
 
 ***
 
@@ -214,9 +200,7 @@ Scrolls to a logical item using measured and estimated sizes.
 
 #### Implementation of
 
-```ts
-VirtualScrollStrategy.scrollToIndex
-```
+`VirtualScrollStrategy.scrollToIndex`
 
 ***
 

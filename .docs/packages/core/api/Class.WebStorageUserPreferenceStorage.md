@@ -56,7 +56,7 @@ Reads a typed preference from storage.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | The preference value type. |
+| <a id="type-parameter-t"></a> `T` | The preference value type. |
 
 #### Parameters
 
@@ -125,7 +125,7 @@ Writes a typed preference to storage as JSON.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | The preference value type. |
+| <a id="type-parameter-t-1"></a> `T` | The preference value type. |
 
 #### Parameters
 

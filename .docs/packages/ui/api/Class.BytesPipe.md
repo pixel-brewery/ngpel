@@ -54,6 +54,4 @@ The formatted size, or the configured fallback for an unknown size.
 
 #### Implementation of
 
-```ts
-PipeTransform.transform
-```
+`PipeTransform.transform`

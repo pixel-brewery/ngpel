@@ -13,7 +13,7 @@ Template context supplied for one collection-list item.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | Collection item type. |
+| <a id="type-parameter-t"></a> `T` | Collection item type. |
 
 ## Properties
 

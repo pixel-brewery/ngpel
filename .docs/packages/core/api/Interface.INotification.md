@@ -29,7 +29,7 @@ Main text of the notification.
 ### detail?
 
 ```ts
-readonly optional detail?: Signal<string>;
+readonly detail?: Signal<string>;
 ```
 
 Defined in: [notification/models/INotification.ts:47](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/notification/models/INotification.ts#L47)

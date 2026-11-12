@@ -40,7 +40,7 @@ The zone the item starts out in.
 ### description?
 
 ```ts
-readonly optional description?: string;
+readonly description?: string;
 ```
 
 Defined in: [libs/ui/src/widget/layout/IWidgetGridItemDefinition.ts:30](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/layout/IWidgetGridItemDefinition.ts#L30)
@@ -64,7 +64,7 @@ Whether a newly discovered item is visible before the user customizes it.
 ### iconName?
 
 ```ts
-readonly optional iconName?: string;
+readonly iconName?: string;
 ```
 
 Defined in: [libs/ui/src/widget/layout/IWidgetGridItemDefinition.ts:35](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/layout/IWidgetGridItemDefinition.ts#L35)

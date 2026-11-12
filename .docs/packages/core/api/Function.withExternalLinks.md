@@ -17,7 +17,7 @@ Registers the [EXTERNAL\_LINK\_OPENER](Variable.EXTERNAL_LINK_OPENER) port.
 
 | Parameter | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
-| `adapter` | `Type`\<[`IExternalLinkOpener`](Interface.IExternalLinkOpener)\> | `ExternalLinkService` | The adapter class to instantiate; defaults to the `DOCUMENT`-based [ExternalLinkService](Class.ExternalLinkService). |
+| `adapter?` | `Type`\<[`IExternalLinkOpener`](Interface.IExternalLinkOpener)\> | `ExternalLinkService` | The adapter class to instantiate; defaults to the `DOCUMENT`-based [ExternalLinkService](Class.ExternalLinkService). |
 
 ## Returns
 

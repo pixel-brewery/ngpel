@@ -14,7 +14,7 @@ If `isViolated()` returns true, composition must fail fast with `message`.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `TKind` *extends* `string` | Kind union used across your system. |
+| <a id="type-parameter-tkind"></a> `TKind` *extends* `string` | Kind union used across your system. |
 
 ## Properties
 

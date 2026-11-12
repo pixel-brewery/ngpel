@@ -19,4 +19,4 @@ shape; `fromNullable` lifts it to `string | null` for URL parameters.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | The typed application value. |
+| <a id="type-parameter-t"></a> `T` | The typed application value. |

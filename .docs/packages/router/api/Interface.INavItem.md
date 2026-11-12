@@ -17,7 +17,7 @@ command palette, a mobile dock — can render the same registry. An item carries
 ### badge?
 
 ```ts
-readonly optional badge?: string | number;
+readonly badge?: string | number;
 ```
 
 Defined in: [navigation/INavItem.ts:74](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/navigation/INavItem.ts#L74)
@@ -29,7 +29,7 @@ A badge rendered next to the label, for example an unread count.
 ### capabilities?
 
 ```ts
-readonly optional capabilities?: readonly string[];
+readonly capabilities?: readonly string[];
 ```
 
 Defined in: [navigation/INavItem.ts:44](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/navigation/INavItem.ts#L44)
@@ -43,7 +43,7 @@ policy and belongs in an `INavigationGuard`.
 ### children?
 
 ```ts
-readonly optional children?: readonly Omit<INavItem, "parent">[];
+readonly children?: readonly Omit<INavItem, "parent">[];
 ```
 
 Defined in: [navigation/INavItem.ts:54](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/navigation/INavItem.ts#L54)
@@ -55,7 +55,7 @@ The children of the item, declared inline.
 ### data?
 
 ```ts
-readonly optional data?: Readonly<Record<string, unknown>>;
+readonly data?: Readonly<Record<string, unknown>>;
 ```
 
 Defined in: [navigation/INavItem.ts:59](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/navigation/INavItem.ts#L59)
@@ -67,7 +67,7 @@ Free-form data for the host, for example a tooltip or an analytics id.
 ### handle?
 
 ```ts
-readonly optional handle?: NavHandle;
+readonly handle?: NavHandle;
 ```
 
 Defined in: [navigation/INavItem.ts:37](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/navigation/INavItem.ts#L37)
@@ -79,7 +79,7 @@ What activating the item does. An item without a handle is a pure group.
 ### icon?
 
 ```ts
-readonly optional icon?: string;
+readonly icon?: string;
 ```
 
 Defined in: [navigation/INavItem.ts:32](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/navigation/INavItem.ts#L32)
@@ -116,7 +116,7 @@ The label of the item; a plain text or a translation key the host resolves.
 ### order?
 
 ```ts
-readonly optional order?: number;
+readonly order?: number;
 ```
 
 Defined in: [navigation/INavItem.ts:64](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/navigation/INavItem.ts#L64)
@@ -128,7 +128,7 @@ The sort order within its region or parent; ascending, defaults to `0`.
 ### parent?
 
 ```ts
-readonly optional parent?: string | INavItem;
+readonly parent?: string | INavItem;
 ```
 
 Defined in: [navigation/INavItem.ts:49](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/navigation/INavItem.ts#L49)
@@ -140,7 +140,7 @@ The parent of the item, as a key or as the item itself.
 ### region?
 
 ```ts
-readonly optional region?: string;
+readonly region?: string;
 ```
 
 Defined in: [navigation/INavItem.ts:69](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/navigation/INavItem.ts#L69)
@@ -152,7 +152,7 @@ The area of the shell the item belongs to, for example `'main'` or `'profile'`.
 ### variant?
 
 ```ts
-readonly optional variant?: string;
+readonly variant?: string;
 ```
 
 Defined in: [navigation/INavItem.ts:79](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/navigation/INavItem.ts#L79)

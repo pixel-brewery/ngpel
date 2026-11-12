@@ -16,7 +16,7 @@ for the widgets it actually renders.
 ### back?
 
 ```ts
-readonly optional back?: () => Promise<Type<unknown>>;
+readonly back?: () => Promise<Type<unknown>>;
 ```
 
 Defined in: [libs/ui/src/widget/models/IWidgetViews.ts:25](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidgetViews.ts#L25)

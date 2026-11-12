@@ -24,7 +24,7 @@ injection context exists.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `TIntl` *extends* `object` | The internationalization class. |
+| <a id="type-parameter-tintl"></a> `TIntl` *extends* `object` | The internationalization class. |
 
 ## Parameters
 

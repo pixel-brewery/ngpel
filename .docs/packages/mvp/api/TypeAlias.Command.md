@@ -8,7 +8,7 @@ editUrl: false
 ```ts
 type Command<T> = {
   canExecute: Signal<boolean>;
-  execute: void;
+  execute(parameter): void;
 };
 ```
 
@@ -26,7 +26,7 @@ them. Creating a command needs no Angular injection context.
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `T` | `void` | The parameter type passed to [Command.execute](#execute). |
+| <a id="type-parameter-t"></a> `T` | `void` | The parameter type passed to [Command.execute](#execute). |
 
 ## Properties
 

@@ -23,7 +23,7 @@ ones and changes made through `Location` outside a router navigation.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | The typed application value. |
+| <a id="type-parameter-t"></a> `T` | The typed application value. |
 
 ## Parameters
 
@@ -31,7 +31,7 @@ ones and changes made through `Location` outside a router navigation.
 | ------ | ------ | ------ |
 | `parameterName` | `string` | The query parameter name. |
 | `codec` | [`UrlParamCodec`](TypeAlias.UrlParamCodec)\<`T`\> | The codec converting between the raw parameter and the typed value. |
-| `options` | [`IQueryParamSignalOptions`](Interface.IQueryParamSignalOptions) | The history behavior and fragment handling. |
+| `options?` | [`IQueryParamSignalOptions`](Interface.IQueryParamSignalOptions) | The history behavior and fragment handling. |
 
 ## Returns
 

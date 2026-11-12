@@ -26,7 +26,7 @@ Extension members for additional context.
 ### code?
 
 ```ts
-readonly optional code?: string;
+readonly code?: string;
 ```
 
 Defined in: [results/IProblemDetail.ts:41](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/results/IProblemDetail.ts#L41)
@@ -38,7 +38,7 @@ A machine-readable error code identifying the specific domain error.
 ### detail?
 
 ```ts
-readonly optional detail?: string;
+readonly detail?: string;
 ```
 
 Defined in: [results/IProblemDetail.ts:31](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/results/IProblemDetail.ts#L31)
@@ -50,7 +50,7 @@ A human-readable explanation specific to this occurrence of the problem.
 ### instance?
 
 ```ts
-readonly optional instance?: string;
+readonly instance?: string;
 ```
 
 Defined in: [results/IProblemDetail.ts:36](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/results/IProblemDetail.ts#L36)
@@ -86,7 +86,7 @@ A short, human-readable summary of the problem type.
 ### type?
 
 ```ts
-readonly optional type?: string;
+readonly type?: string;
 ```
 
 Defined in: [results/IProblemDetail.ts:16](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/results/IProblemDetail.ts#L16)

@@ -50,6 +50,4 @@ Resolves the documented Mosaik drawer root after both Angular and Lit have rende
 
 #### Implementation of
 
-```ts
-AfterViewInit.ngAfterViewInit
-```
+`AfterViewInit.ngAfterViewInit`

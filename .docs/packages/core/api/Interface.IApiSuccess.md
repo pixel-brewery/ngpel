@@ -13,7 +13,7 @@ Represents a successful API response.
 
 | Type Parameter |
 | ------ |
-| `TData` |
+| <a id="type-parameter-tdata"></a> `TData` |
 
 ## Properties
 

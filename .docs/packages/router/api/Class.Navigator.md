@@ -304,7 +304,7 @@ configuration.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `TView` | The view component type. |
+| <a id="type-parameter-tview"></a> `TView` | The view component type. |
 
 #### Parameters
 
@@ -337,9 +337,7 @@ Releases the location and router subscriptions.
 
 #### Implementation of
 
-```ts
-OnDestroy.ngOnDestroy
-```
+`OnDestroy.ngOnDestroy`
 
 ***
 

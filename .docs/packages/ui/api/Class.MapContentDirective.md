@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: MapContentDirective
 
-Defined in: libs/ui/src/google-maps/MapContentDirective.ts:14
+Defined in: [libs/ui/src/google-maps/MapContentDirective.ts:14](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapContentDirective.ts#L14)
 
 Defers Angular map overlays until the SDK and their owning GoogleMap exist.
 
@@ -31,7 +31,7 @@ readonly template: TemplateRef<{
 }>;
 ```
 
-Defined in: libs/ui/src/google-maps/MapContentDirective.ts:23
+Defined in: [libs/ui/src/google-maps/MapContentDirective.ts:23](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapContentDirective.ts#L23)
 
 Overlay template with the Angular GoogleMap as its implicit context.
 
@@ -43,7 +43,7 @@ Overlay template with the Angular GoogleMap as its implicit context.
 static ngTemplateContextGuard(directive, context): context is { $implicit: GoogleMap };
 ```
 
-Defined in: libs/ui/src/google-maps/MapContentDirective.ts:43
+Defined in: [libs/ui/src/google-maps/MapContentDirective.ts:43](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapContentDirective.ts#L43)
 
 Supplies the typed map context to consuming Angular templates.
 

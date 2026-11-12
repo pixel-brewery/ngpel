@@ -471,7 +471,7 @@ Starts microphone capture and immediately requests periodic encoded chunks.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `options` | [`IAudioRecorderStartOptions`](Interface.IAudioRecorderStartOptions) | Microphone, encoding, chunking, and retention options. |
+| `options?` | [`IAudioRecorderStartOptions`](Interface.IAudioRecorderStartOptions) | Microphone, encoding, chunking, and retention options. |
 
 #### Returns
 

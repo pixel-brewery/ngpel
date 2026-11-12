@@ -45,7 +45,7 @@ Shortens `value` to `maximumLength` characters, prefixing an ellipsis when it wa
 | Parameter | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
 | `value` | `string` \| `null` \| `undefined` | `undefined` | The text to shorten. |
-| `maximumLength` | `number` | `DEFAULT_MAXIMUM_LENGTH` | The maximum number of characters of the result (defaults to 50). |
+| `maximumLength?` | `number` | `DEFAULT_MAXIMUM_LENGTH` | The maximum number of characters of the result (defaults to 50). |
 
 #### Returns
 
@@ -55,6 +55,4 @@ The shortened text, or an empty string when there is no text.
 
 #### Implementation of
 
-```ts
-PipeTransform.transform
-```
+`PipeTransform.transform`

@@ -14,7 +14,7 @@ Optional behavior and presentation overrides for the generic image markup editor
 ### historyLimit?
 
 ```ts
-readonly optional historyLimit?: number;
+readonly historyLimit?: number;
 ```
 
 Defined in: [libs/ui/src/components/image-markup-editor/IImageMarkupEditorConfig.ts:45](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-markup-editor/IImageMarkupEditorConfig.ts#L45)
@@ -26,7 +26,7 @@ Maximum undo history depth.
 ### labels?
 
 ```ts
-readonly optional labels?: Partial<IImageMarkupEditorLabels>;
+readonly labels?: Partial<IImageMarkupEditorLabels>;
 ```
 
 Defined in: [libs/ui/src/components/image-markup-editor/IImageMarkupEditorConfig.ts:21](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-markup-editor/IImageMarkupEditorConfig.ts#L21)
@@ -38,7 +38,7 @@ User-visible text overrides.
 ### maximumSourcePixels?
 
 ```ts
-readonly optional maximumSourcePixels?: number;
+readonly maximumSourcePixels?: number;
 ```
 
 Defined in: [libs/ui/src/components/image-markup-editor/IImageMarkupEditorConfig.ts:37](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-markup-editor/IImageMarkupEditorConfig.ts#L37)
@@ -50,7 +50,7 @@ Maximum accepted source-image pixel count.
 ### outputFileName?
 
 ```ts
-readonly optional outputFileName?: string;
+readonly outputFileName?: string;
 ```
 
 Defined in: [libs/ui/src/components/image-markup-editor/IImageMarkupEditorConfig.ts:29](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-markup-editor/IImageMarkupEditorConfig.ts#L29)

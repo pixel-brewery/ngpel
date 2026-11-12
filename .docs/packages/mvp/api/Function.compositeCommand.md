@@ -18,7 +18,7 @@ would collide with `CompositeCommand.ts` on case-insensitive file systems.
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `T` | `void` | The parameter type passed to every child. |
+| <a id="type-parameter-t"></a> `T` | `void` | The parameter type passed to every child. |
 
 ## Parameters
 

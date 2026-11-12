@@ -26,7 +26,7 @@ Stable rule key interpreted by the UI renderer.
 ### message?
 
 ```ts
-readonly optional message?: string;
+readonly message?: string;
 ```
 
 Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormValidationRule.ts:35](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormValidationRule.ts#L35)
@@ -38,7 +38,7 @@ Optional localized validation message.
 ### value?
 
 ```ts
-readonly optional value?: number;
+readonly value?: number;
 ```
 
 Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormValidationRule.ts:27](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormValidationRule.ts#L27)

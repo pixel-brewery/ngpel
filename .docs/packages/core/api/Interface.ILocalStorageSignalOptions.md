@@ -14,7 +14,7 @@ Configures one storage-backed signal.
 ### eventTarget?
 
 ```ts
-readonly optional eventTarget?: EventTarget | null;
+readonly eventTarget?: EventTarget | null;
 ```
 
 Defined in: [storage/angular/signal/ILocalStorageSignalOptions.ts:27](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/storage/angular/signal/ILocalStorageSignalOptions.ts#L27)
@@ -27,7 +27,7 @@ passing `null` disables cross-document synchronization.
 ### storage?
 
 ```ts
-readonly optional storage?: Storage | null;
+readonly storage?: Storage | null;
 ```
 
 Defined in: [storage/angular/signal/ILocalStorageSignalOptions.ts:21](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/storage/angular/signal/ILocalStorageSignalOptions.ts#L21)
@@ -42,7 +42,7 @@ the policy documented on that error.
 ### syncAcrossTabs?
 
 ```ts
-readonly optional syncAcrossTabs?: boolean;
+readonly syncAcrossTabs?: boolean;
 ```
 
 Defined in: [storage/angular/signal/ILocalStorageSignalOptions.ts:13](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/storage/angular/signal/ILocalStorageSignalOptions.ts#L13)

@@ -17,7 +17,7 @@ Validates that an optional string is a fully qualified hostname per RFC 5321 (si
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `TPathKind` *extends* `PathKind` | `Root` | The kind of the validated path. |
+| <a id="type-parameter-tpathkind"></a> `TPathKind` *extends* `PathKind` | `Root` | The kind of the validated path. |
 
 ## Parameters
 

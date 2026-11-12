@@ -25,7 +25,7 @@ userPath.format('userId', '4711'); // 'users/4711'
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `TPath` *extends* `string` | `string` | The literal path template. |
+| <a id="type-parameter-tpath"></a> `TPath` *extends* `string` | `string` | The literal path template. |
 
 ## Accessors
 
@@ -61,7 +61,7 @@ Creates a route path from a template.
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `TPath` *extends* `string` | `string` | The literal path template. |
+| <a id="type-parameter-tpath-1"></a> `TPath` *extends* `string` | `string` | The literal path template. |
 
 #### Parameters
 
@@ -181,7 +181,7 @@ Appends a child segment to the template.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `TChild` *extends* `string` | The child segment. |
+| <a id="type-parameter-tchild"></a> `TChild` *extends* `string` | The child segment. |
 
 #### Parameters
 
@@ -212,7 +212,7 @@ already declares returns the same path.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `TParam` *extends* `string` | The parameter name. |
+| <a id="type-parameter-tparam"></a> `TParam` *extends* `string` | The parameter name. |
 
 #### Parameters
 

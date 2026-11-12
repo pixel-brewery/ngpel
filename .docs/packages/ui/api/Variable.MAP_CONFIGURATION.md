@@ -9,4 +9,4 @@ editUrl: false
 const MAP_CONFIGURATION: InjectionToken<IMapConfiguration>;
 ```
 
-Defined in: libs/ui/src/google-maps/MapConfigurationToken.ts:8
+Defined in: [libs/ui/src/google-maps/MapConfigurationToken.ts:8](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapConfigurationToken.ts#L8)

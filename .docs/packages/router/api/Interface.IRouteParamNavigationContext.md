@@ -13,7 +13,7 @@ Everything required to build the destination URL for a changed route parameter.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | The typed application value. |
+| <a id="type-parameter-t"></a> `T` | The typed application value. |
 
 ## Properties
 

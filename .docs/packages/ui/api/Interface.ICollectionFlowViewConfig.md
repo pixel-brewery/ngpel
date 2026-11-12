@@ -17,9 +17,9 @@ Configuration for the flow projection of a collection view.
 
 | Type Parameter | Default type |
 | ------ | ------ |
-| `TItem` | - |
-| `TView` *extends* `string` | - |
-| `TColumnKey` *extends* `string` | `string` |
+| <a id="type-parameter-titem"></a> `TItem` | - |
+| <a id="type-parameter-tview"></a> `TView` *extends* `string` | - |
+| <a id="type-parameter-tcolumnkey"></a> `TColumnKey` *extends* `string` | `string` |
 
 ## Properties
 
@@ -75,7 +75,7 @@ Declares all columns that can be shown in the board.
 ### iconName?
 
 ```ts
-readonly optional iconName?: string;
+readonly iconName?: string;
 ```
 
 Defined in: [libs/ui/src/collection-view/core/ICollectionViewDefinition.ts:20](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/core/ICollectionViewDefinition.ts#L20)
@@ -113,7 +113,7 @@ Resolves the stable item key.
 ### itemSubtitle?
 
 ```ts
-readonly optional itemSubtitle?: (item) => string;
+readonly itemSubtitle?: (item) => string;
 ```
 
 Defined in: [libs/ui/src/collection-view/views/flow/ICollectionFlowViewConfig.ts:47](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/views/flow/ICollectionFlowViewConfig.ts#L47)
@@ -157,7 +157,7 @@ Resolves the title shown on a board item.
 ### label?
 
 ```ts
-readonly optional label?: string;
+readonly label?: string;
 ```
 
 Defined in: [libs/ui/src/collection-view/core/ICollectionViewDefinition.ts:15](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/core/ICollectionViewDefinition.ts#L15)

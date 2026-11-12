@@ -19,7 +19,7 @@ trusted as a TypeScript type assertion.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | The structured value type. |
+| <a id="type-parameter-t"></a> `T` | The structured value type. |
 
 ## Parameters
 

@@ -12,7 +12,7 @@ const CompoundLayout: {
 };
 ```
 
-Defined in: libs/ui/src/components/compound/CompoundLayout.ts:2
+Defined in: [libs/ui/src/components/compound/CompoundLayout.ts:2](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundLayout.ts#L2)
 
 Layouts available to a compound collection.
 
@@ -20,5 +20,5 @@ Layouts available to a compound collection.
 
 | Name | Type | Default value | Description | Defined in |
 | ------ | ------ | ------ | ------ | ------ |
-| <a id="property-paged"></a> `Paged` | `"paged"` | `'paged'` | Uses the existing single-item and list views. | libs/ui/src/components/compound/CompoundLayout.ts:4 |
-| <a id="property-stacked"></a> `Stacked` | `"stacked"` | `'stacked'` | Gives each item an independently expandable editor. | libs/ui/src/components/compound/CompoundLayout.ts:7 |
+| <a id="property-paged"></a> `Paged` | `"paged"` | `'paged'` | Uses the existing single-item and list views. | [libs/ui/src/components/compound/CompoundLayout.ts:4](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundLayout.ts#L4) |
+| <a id="property-stacked"></a> `Stacked` | `"stacked"` | `'stacked'` | Gives each item an independently expandable editor. | [libs/ui/src/components/compound/CompoundLayout.ts:7](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundLayout.ts#L7) |

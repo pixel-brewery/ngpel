@@ -23,7 +23,7 @@ injection context. Reading follows the activated URL; writing navigates to the U
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | The typed application value. |
+| <a id="type-parameter-t"></a> `T` | The typed application value. |
 
 ## Parameters
 

@@ -112,8 +112,10 @@ yarn install --immutable
 yarn run verify
 ```
 
-Verification checks contributor guidance, public source, formatting, workflow tooling,
-lint, tests, spelling, generated API docs and the built ESM packages.
+Run `yarn run verify` before committing or pushing. It formats the workspace and checks
+contributor guidance, public source, workflow tooling, lint, tests, spelling, generated API
+docs, the built ESM packages and Angular types. GitHub Actions uses `yarn run verify:ci` to
+validate the committed formatting and run the same checks.
 
 For focused work, use the owning Nx project. The consumer fixture builds an Angular application
 against the packed libraries.

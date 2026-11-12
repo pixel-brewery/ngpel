@@ -57,6 +57,4 @@ The map search URL, or `null` when the address holds nothing.
 
 #### Implementation of
 
-```ts
-PipeTransform.transform
-```
+`PipeTransform.transform`

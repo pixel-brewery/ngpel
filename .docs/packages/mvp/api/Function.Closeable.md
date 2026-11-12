@@ -17,7 +17,7 @@ Adds a close command with its own enable gate to a presenter.
 
 | Type Parameter |
 | ------ |
-| `T` *extends* [`PresenterBehaviorBase`](TypeAlias.PresenterBehaviorBase) |
+| <a id="type-parameter-t"></a> `T` *extends* [`PresenterBehaviorBase`](TypeAlias.PresenterBehaviorBase) |
 
 ## Parameters
 

@@ -25,7 +25,7 @@ literal content.
 new TextOnlyHtmlTokenizer(options?): TextOnlyHtmlTokenizer;
 ```
 
-Defined in: node\_modules/marked/lib/marked.d.ts:352
+Defined in: node\_modules/marked/lib/marked.d.ts:367
 
 #### Parameters
 
@@ -39,9 +39,7 @@ Defined in: node\_modules/marked/lib/marked.d.ts:352
 
 #### Inherited from
 
-```ts
-Tokenizer.constructor
-```
+`Tokenizer.constructor`
 
 ## Methods
 
@@ -63,9 +61,7 @@ Always `undefined`.
 
 #### Overrides
 
-```ts
-Tokenizer.html
-```
+`Tokenizer.html`
 
 ***
 
@@ -87,6 +83,4 @@ Always `undefined`.
 
 #### Overrides
 
-```ts
-Tokenizer.tag
-```
+`Tokenizer.tag`

@@ -17,15 +17,15 @@ Configuration for the gallery projection of a collection view.
 
 | Type Parameter |
 | ------ |
-| `TItem` |
-| `TView` *extends* `string` |
+| <a id="type-parameter-titem"></a> `TItem` |
+| <a id="type-parameter-tview"></a> `TView` *extends* `string` |
 
 ## Properties
 
 ### iconName?
 
 ```ts
-readonly optional iconName?: string;
+readonly iconName?: string;
 ```
 
 Defined in: [libs/ui/src/collection-view/core/ICollectionViewDefinition.ts:20](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/core/ICollectionViewDefinition.ts#L20)
@@ -41,7 +41,7 @@ Optional icon name used by feature-specific toggles.
 ### itemIconName?
 
 ```ts
-readonly optional itemIconName?: (item) => string;
+readonly itemIconName?: (item) => string;
 ```
 
 Defined in: [libs/ui/src/collection-view/views/gallery/ICollectionGalleryViewConfig.ts:37](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/views/gallery/ICollectionGalleryViewConfig.ts#L37)
@@ -63,7 +63,7 @@ Optional icon name for gallery items.
 ### label?
 
 ```ts
-readonly optional label?: string;
+readonly label?: string;
 ```
 
 Defined in: [libs/ui/src/collection-view/core/ICollectionViewDefinition.ts:15](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/core/ICollectionViewDefinition.ts#L15)
@@ -79,7 +79,7 @@ Optional display label used by feature-specific toggles.
 ### metaText?
 
 ```ts
-readonly optional metaText?: (item) => string;
+readonly metaText?: (item) => string;
 ```
 
 Defined in: [libs/ui/src/collection-view/views/gallery/ICollectionGalleryViewConfig.ts:32](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/views/gallery/ICollectionGalleryViewConfig.ts#L32)
@@ -123,7 +123,7 @@ Resolves the primary text for a gallery item.
 ### secondaryText?
 
 ```ts
-readonly optional secondaryText?: (item) => string;
+readonly secondaryText?: (item) => string;
 ```
 
 Defined in: [libs/ui/src/collection-view/views/gallery/ICollectionGalleryViewConfig.ts:27](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/views/gallery/ICollectionGalleryViewConfig.ts#L27)

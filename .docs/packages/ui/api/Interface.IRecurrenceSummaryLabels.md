@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: IRecurrenceSummaryLabels
 
-Defined in: libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts:4
+Defined in: [libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts:4](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts#L4)
 
 Translated sentence fragments used to describe a recurrence.
 
@@ -17,7 +17,7 @@ Translated sentence fragments used to describe a recurrence.
 readonly atTime: (time) => string;
 ```
 
-Defined in: libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts:11
+Defined in: [libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts:11](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts#L11)
 
 #### Parameters
 
@@ -37,7 +37,7 @@ Defined in: libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts
 readonly count: (occurrences) => string;
 ```
 
-Defined in: libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts:13
+Defined in: [libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts:13](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts#L13)
 
 #### Parameters
 
@@ -57,7 +57,7 @@ Defined in: libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts
 readonly every: (frequency, interval) => string;
 ```
 
-Defined in: libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts:7
+Defined in: [libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts:7](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts#L7)
 
 #### Parameters
 
@@ -78,7 +78,7 @@ Defined in: libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts
 readonly never: string;
 ```
 
-Defined in: libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts:6
+Defined in: [libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts:6](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts#L6)
 
 ***
 
@@ -88,7 +88,7 @@ Defined in: libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts
 readonly none: string;
 ```
 
-Defined in: libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts:5
+Defined in: [libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts:5](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts#L5)
 
 ***
 
@@ -98,7 +98,7 @@ Defined in: libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts
 readonly onMonthDay: (day) => string;
 ```
 
-Defined in: libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts:9
+Defined in: [libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts:9](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts#L9)
 
 #### Parameters
 
@@ -118,7 +118,7 @@ Defined in: libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts
 readonly onOrdinalWeekday: (ordinal, weekday) => string;
 ```
 
-Defined in: libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts:10
+Defined in: [libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts:10](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts#L10)
 
 #### Parameters
 
@@ -139,7 +139,7 @@ Defined in: libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts
 readonly onWeekdays: (weekdays) => string;
 ```
 
-Defined in: libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts:8
+Defined in: [libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts:8](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts#L8)
 
 #### Parameters
 
@@ -159,7 +159,7 @@ Defined in: libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts
 readonly until: (date) => string;
 ```
 
-Defined in: libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts:12
+Defined in: [libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts:12](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/IRecurrenceSummaryLabels.ts#L12)
 
 #### Parameters
 

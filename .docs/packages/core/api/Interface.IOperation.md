@@ -13,15 +13,15 @@ Contract for a queued operation that can apply, commit, and rollback.
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `TPayload` | - | The input data required by the operation. |
-| `TResult` | `void` | The result produced by a successful commit. |
+| <a id="type-parameter-tpayload"></a> `TPayload` | - | The input data required by the operation. |
+| <a id="type-parameter-tresult"></a> `TResult` | `void` | The result produced by a successful commit. |
 
 ## Properties
 
 ### delayInMilliseconds?
 
 ```ts
-readonly optional delayInMilliseconds?: number;
+readonly delayInMilliseconds?: number;
 ```
 
 Defined in: [operation-queue/interfaces/IOperation.ts:41](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/operation-queue/interfaces/IOperation.ts#L41)
@@ -45,7 +45,7 @@ Human-readable label shown in the UI countdown.
 ### mergeKey?
 
 ```ts
-readonly optional mergeKey?: string;
+readonly mergeKey?: string;
 ```
 
 Defined in: [operation-queue/interfaces/IOperation.ts:49](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/operation-queue/interfaces/IOperation.ts#L49)
@@ -128,7 +128,7 @@ The result of a successful commit.
 ### onCommitted()?
 
 ```ts
-optional onCommitted(result, context): void;
+onCommitted?(result, context): void;
 ```
 
 Defined in: [operation-queue/interfaces/IOperation.ts:83](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/operation-queue/interfaces/IOperation.ts#L83)
@@ -151,7 +151,7 @@ Optional hook called after a successful commit.
 ### onFailed()?
 
 ```ts
-optional onFailed(error, context): void;
+onFailed?(error, context): void;
 ```
 
 Defined in: [operation-queue/interfaces/IOperation.ts:100](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/operation-queue/interfaces/IOperation.ts#L100)
@@ -174,7 +174,7 @@ Optional hook called when [commit](#commit) throws.
 ### onRejected()?
 
 ```ts
-optional onRejected(context): void;
+onRejected?(context): void;
 ```
 
 Defined in: [operation-queue/interfaces/IOperation.ts:91](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/operation-queue/interfaces/IOperation.ts#L91)

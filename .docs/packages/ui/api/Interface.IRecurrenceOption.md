@@ -11,7 +11,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:16](http
 
 | Type Parameter |
 | ------ |
-| `TValue` *extends* `string` \| `number` |
+| <a id="type-parameter-tvalue"></a> `TValue` *extends* `string` \| `number` |
 
 ## Properties
 

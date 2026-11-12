@@ -17,8 +17,8 @@ Defines a table collection view with full type inference.
 
 | Type Parameter |
 | ------ |
-| `TItem` |
-| `TView` *extends* `string` |
+| <a id="type-parameter-titem"></a> `TItem` |
+| <a id="type-parameter-tview"></a> `TView` *extends* `string` |
 
 ## Parameters
 

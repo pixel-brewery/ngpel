@@ -21,7 +21,7 @@ Convenience to compose a **single** base provider with features.
 
 | Type Parameter |
 | ------ |
-| `TKind` *extends* `string` |
+| <a id="type-parameter-tkind"></a> `TKind` *extends* `string` |
 
 ## Parameters
 
@@ -29,7 +29,7 @@ Convenience to compose a **single** base provider with features.
 | ------ | ------ | ------ | ------ |
 | `base` | `Provider` | `undefined` | Single base provider instance. |
 | `features` | readonly [`IFeature`](Interface.IFeature)\<`TKind`\>[] | `undefined` | Features contributing providers. |
-| `rules` | readonly [`IFeatureIncompatibilityRule`](Interface.IFeatureIncompatibilityRule)\<`TKind`\>[] | `[]` | Optional incompatibility rules. |
+| `rules?` | readonly [`IFeatureIncompatibilityRule`](Interface.IFeatureIncompatibilityRule)\<`TKind`\>[] | `[]` | Optional incompatibility rules. |
 
 ## Returns
 

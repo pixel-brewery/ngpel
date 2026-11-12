@@ -14,7 +14,7 @@ The guards protecting the presentation shell route.
 ### canActivate?
 
 ```ts
-readonly optional canActivate?: (CanActivateFn | DeprecatedGuard)[];
+readonly canActivate?: (CanActivateFn | DeprecatedGuard)[];
 ```
 
 Defined in: [shell/IPresentationRouteGuards.ts:18](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/shell/IPresentationRouteGuards.ts#L18)
@@ -26,7 +26,7 @@ Guards run before the shell is activated, typically an authentication guard.
 ### canMatch?
 
 ```ts
-readonly optional canMatch?: (DeprecatedGuard | CanMatchFn)[];
+readonly canMatch?: (DeprecatedGuard | CanMatchFn)[];
 ```
 
 Defined in: [shell/IPresentationRouteGuards.ts:24](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/shell/IPresentationRouteGuards.ts#L24)

@@ -18,7 +18,7 @@ lifetime is bound to.
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `TPresenter` *extends* [`IViewPresenter`](Interface.IViewPresenter) | [`IViewPresenter`](Interface.IViewPresenter) | The legacy presenter type used by existing controllers. |
+| <a id="type-parameter-tpresenter"></a> `TPresenter` *extends* [`IViewPresenter`](Interface.IViewPresenter) | [`IViewPresenter`](Interface.IViewPresenter) | The legacy presenter type used by existing controllers. |
 
 ## Properties
 

@@ -17,9 +17,9 @@ Creates a signal-based collection-view model from a declarative configuration.
 
 | Type Parameter | Default type |
 | ------ | ------ |
-| `TItem` | - |
-| `TView` *extends* `string` | - |
-| `TCalendarItem` | `TItem` |
+| <a id="type-parameter-titem"></a> `TItem` | - |
+| <a id="type-parameter-tview"></a> `TView` *extends* `string` | - |
+| <a id="type-parameter-tcalendaritem"></a> `TCalendarItem` | `TItem` |
 
 ## Parameters
 

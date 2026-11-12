@@ -23,7 +23,7 @@ Materializes feature-owned contributions as native Mosaik tour steps.
 | ------ | ------ | ------ |
 | `tourId` | `string` | Identifier of the composed tour. |
 | `contributions` | readonly [`ITourContribution`](Interface.ITourContribution)[] | Ordered contributions to materialize. |
-| `defaults` | `Omit`\<`Partial`\<`ITourStep`\>, `"id"` \| `"anchorId"` \| `"title"` \| `"content"`\> | Default native step configuration applied before contribution overrides. |
+| `defaults?` | `Omit`\<`Partial`\<`ITourStep`\>, `"id"` \| `"anchorId"` \| `"title"` \| `"content"`\> | Default native step configuration applied before contribution overrides. |
 
 ## Returns
 

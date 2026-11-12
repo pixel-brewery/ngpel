@@ -22,7 +22,7 @@ The presentation layer: every component, directive and pipe the products share �
 ## Import Options
 
 ```typescript
-// @pixel-brewery/ngpel-ui — 486 exports
+// @pixel-brewery/ngpel-ui — 483 exports
 import {
     ActionStripComponent,
     ActionStripContentDirective,
@@ -93,7 +93,6 @@ import {
 | `@pixel-brewery/ngpel-core`                 | `0.0.3`                         |
 | `@pixel-brewery/ngpel-mvp`                  | `0.0.3`                         |
 | `@pixel-brewery/ngpel-router`               | `0.0.3`                         |
-| `apexcharts`                                | `>=5.0.0` _(optional)_          |
 | `marked`                                    | `>=18.0.0`                      |
 | `rxjs`                                      | `>=7.8.0 <8.0.0`                |
 

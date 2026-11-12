@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: DocumentPreviewService
 
-Defined in: libs/ui/src/components/document-preview/DocumentPreviewService.ts:22
+Defined in: [libs/ui/src/components/document-preview/DocumentPreviewService.ts:22](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/document-preview/DocumentPreviewService.ts#L22)
 
 Opens a document in its own drawer without navigating or replacing the caller.
 
@@ -29,7 +29,7 @@ new DocumentPreviewService(): DocumentPreviewService;
 open(request): IDocumentPreviewRef;
 ```
 
-Defined in: libs/ui/src/components/document-preview/DocumentPreviewService.ts:47
+Defined in: [libs/ui/src/components/document-preview/DocumentPreviewService.ts:47](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/document-preview/DocumentPreviewService.ts#L47)
 
 Captures the document loader and owns it until the nested drawer closes.
 

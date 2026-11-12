@@ -13,7 +13,7 @@ Marks the template used to render each item in the compound list view.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | Collection item type supplied by the consumer. |
+| <a id="type-parameter-t"></a> `T` | Collection item type supplied by the consumer. |
 
 ## Constructors
 
@@ -55,7 +55,7 @@ Describes the template context exposed to Angular template type checking.
 
 | Type Parameter |
 | ------ |
-| `T` |
+| <a id="type-parameter-t-1"></a> `T` |
 
 #### Parameters
 

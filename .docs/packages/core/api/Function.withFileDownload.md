@@ -17,7 +17,7 @@ Registers the [FILE\_DOWNLOADER](Variable.FILE_DOWNLOADER) port.
 
 | Parameter | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
-| `adapter` | `Type`\<[`IFileDownloader`](Interface.IFileDownloader)\> | `FileDownloadService` | The adapter class to instantiate; defaults to the anchor-based [FileDownloadService](Class.FileDownloadService). |
+| `adapter?` | `Type`\<[`IFileDownloader`](Interface.IFileDownloader)\> | `FileDownloadService` | The adapter class to instantiate; defaults to the anchor-based [FileDownloadService](Class.FileDownloadService). |
 
 ## Returns
 

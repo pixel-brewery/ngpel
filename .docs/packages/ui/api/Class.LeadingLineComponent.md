@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: LeadingLineComponent
 
-Defined in: libs/ui/src/components/leading-line/LeadingLineComponent.ts:33
+Defined in: [libs/ui/src/components/leading-line/LeadingLineComponent.ts:33](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/leading-line/LeadingLineComponent.ts#L33)
 
 Marks nested content with a narrow vertical line instead of a frame.
 
@@ -32,7 +32,7 @@ new LeadingLineComponent(): LeadingLineComponent;
 protected readonly color: Signal<string>;
 ```
 
-Defined in: libs/ui/src/components/leading-line/LeadingLineComponent.ts:50
+Defined in: [libs/ui/src/components/leading-line/LeadingLineComponent.ts:50](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/leading-line/LeadingLineComponent.ts#L50)
 
 Color of the line resolved from the nesting level.
 
@@ -44,6 +44,6 @@ Color of the line resolved from the nesting level.
 readonly level: InputSignal<number>;
 ```
 
-Defined in: libs/ui/src/components/leading-line/LeadingLineComponent.ts:42
+Defined in: [libs/ui/src/components/leading-line/LeadingLineComponent.ts:42](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/leading-line/LeadingLineComponent.ts#L42)
 
 Nesting level of the marked content, where the first nested level is `2`.

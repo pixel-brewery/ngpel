@@ -18,7 +18,7 @@ target is still current and authorized.
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `TResult` | `unknown` | The surface's close result. |
+| <a id="type-parameter-tresult"></a> `TResult` | `unknown` | The surface's close result. |
 
 ## Parameters
 

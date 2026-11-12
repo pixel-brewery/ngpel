@@ -42,8 +42,8 @@ Constructs a new instance of the `FocusTargetDirective` class.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `elementRef` | `ElementRef`\<`HTMLElement`\> | The host element whose descendants are focus targets. |
-| `destroyRef` | `DestroyRef` | The destruction lifecycle used to cancel a pending focus. |
+| `elementRef?` | `ElementRef`\<`HTMLElement`\> | The host element whose descendants are focus targets. |
+| `destroyRef?` | `DestroyRef` | The destruction lifecycle used to cancel a pending focus. |
 
 #### Returns
 

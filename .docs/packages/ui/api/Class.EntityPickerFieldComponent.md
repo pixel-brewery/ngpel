@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: EntityPickerFieldComponent
 
-Defined in: libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:63
+Defined in: [libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:63](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts#L63)
 
 Presents the label of a selected entity and delegates choosing or clearing it to caller commands.
 The value of a surrounding form field can remain an identifier independent of the display text.
@@ -30,7 +30,7 @@ new EntityPickerFieldComponent(): EntityPickerFieldComponent;
 protected readonly actionsAvailable: Signal<boolean>;
 ```
 
-Defined in: libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:120
+Defined in: [libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:120](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts#L120)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: libs/ui/src/components/entity-picker-field/EntityPickerFieldComponen
 protected readonly availableClearCommand: Signal<Command<unknown> | undefined>;
 ```
 
-Defined in: libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:121
+Defined in: [libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:121](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts#L121)
 
 ***
 
@@ -50,7 +50,7 @@ Defined in: libs/ui/src/components/entity-picker-field/EntityPickerFieldComponen
 readonly clearable: InputSignal<boolean>;
 ```
 
-Defined in: libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:91
+Defined in: [libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:91](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts#L91)
 
 Allows clearing the current selection.
 
@@ -62,7 +62,7 @@ Allows clearing the current selection.
 readonly clearActionLabel: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:97
+Defined in: [libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:97](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts#L97)
 
 Accessible label required to show the clear action.
 
@@ -74,7 +74,7 @@ Accessible label required to show the clear action.
 readonly clearActionTestId: InputSignal<string | undefined>;
 ```
 
-Defined in: libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:115
+Defined in: [libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:115](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts#L115)
 
 Optional explicit automation identifier for the clear action.
 
@@ -86,7 +86,7 @@ Optional explicit automation identifier for the clear action.
 readonly clearCommand: InputSignal<Command<unknown> | undefined>;
 ```
 
-Defined in: libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:103
+Defined in: [libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:103](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts#L103)
 
 Command that clears the current selection.
 
@@ -98,7 +98,7 @@ Command that clears the current selection.
 readonly commandParameter: InputSignal<unknown>;
 ```
 
-Defined in: libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:109
+Defined in: [libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:109](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts#L109)
 
 Optional parameter passed to either command.
 
@@ -110,7 +110,7 @@ Optional parameter passed to either command.
 readonly disabled: InputSignal<boolean>;
 ```
 
-Defined in: libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:85
+Defined in: [libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:85](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts#L85)
 
 Disables the field and its picker actions.
 
@@ -122,7 +122,7 @@ Disables the field and its picker actions.
 readonly editable: InputSignal<boolean>;
 ```
 
-Defined in: libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:88
+Defined in: [libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:88](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts#L88)
 
 Allows selection changes through the picker actions.
 
@@ -134,7 +134,7 @@ Allows selection changes through the picker actions.
 protected readonly invalid: Signal<boolean>;
 ```
 
-Defined in: libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:124
+Defined in: [libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:124](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts#L124)
 
 ***
 
@@ -144,7 +144,7 @@ Defined in: libs/ui/src/components/entity-picker-field/EntityPickerFieldComponen
 readonly label: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:76
+Defined in: [libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:76](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts#L76)
 
 Visible field label.
 
@@ -156,7 +156,7 @@ Visible field label.
 readonly openActionLabel: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:100
+Defined in: [libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:100](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts#L100)
 
 Accessible label for the picker action.
 
@@ -168,7 +168,7 @@ Accessible label for the picker action.
 readonly openActionTestId: InputSignal<string | undefined>;
 ```
 
-Defined in: libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:118
+Defined in: [libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:118](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts#L118)
 
 Optional explicit automation identifier for the picker action.
 
@@ -180,7 +180,7 @@ Optional explicit automation identifier for the picker action.
 readonly openCommand: InputSignal<Command<unknown>>;
 ```
 
-Defined in: libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:106
+Defined in: [libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:106](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts#L106)
 
 Command that opens the picker.
 
@@ -192,7 +192,7 @@ Command that opens the picker.
 readonly placeholder: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:79
+Defined in: [libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:79](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts#L79)
 
 Hint displayed when the selection has no label.
 
@@ -204,7 +204,7 @@ Hint displayed when the selection has no label.
 readonly required: InputSignal<boolean>;
 ```
 
-Defined in: libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:82
+Defined in: [libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:82](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts#L82)
 
 Whether the selection is required.
 
@@ -216,7 +216,7 @@ Whether the selection is required.
 readonly selected: InputSignal<boolean>;
 ```
 
-Defined in: libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:94
+Defined in: [libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:94](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts#L94)
 
 Indicates whether an entity is selected, independently of its display label.
 
@@ -228,7 +228,7 @@ Indicates whether an entity is selected, independently of its display label.
 readonly testId: InputSignal<string | undefined>;
 ```
 
-Defined in: libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:112
+Defined in: [libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:112](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts#L112)
 
 Automation identifier for the textbox.
 
@@ -240,7 +240,7 @@ Automation identifier for the textbox.
 readonly value: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:73
+Defined in: [libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:73](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts#L73)
 
 Display value of the selected entity.
 
@@ -252,7 +252,7 @@ Display value of the selected entity.
 protected actionTestId(action): string | undefined;
 ```
 
-Defined in: libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:134
+Defined in: [libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts:134](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/entity-picker-field/EntityPickerFieldComponent.ts#L134)
 
 #### Parameters
 

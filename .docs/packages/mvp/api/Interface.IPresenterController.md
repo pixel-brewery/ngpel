@@ -20,7 +20,7 @@ Create one through `usePresenterController`, which binds it to the presenter's l
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `TPresenter` *extends* [`IViewPresenter`](Interface.IViewPresenter) | [`IViewPresenter`](Interface.IViewPresenter) | The legacy presenter type used by the controller host. |
+| <a id="type-parameter-tpresenter"></a> `TPresenter` *extends* [`IViewPresenter`](Interface.IViewPresenter) | [`IViewPresenter`](Interface.IViewPresenter) | The legacy presenter type used by the controller host. |
 
 ## Properties
 
@@ -39,7 +39,7 @@ The presenter that owns the controller.
 ### presenterConnected()?
 
 ```ts
-optional presenterConnected(): void;
+presenterConnected?(): void;
 ```
 
 Defined in: [controllers/IPresenterController.ts:42](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/controllers/IPresenterController.ts#L42)
@@ -56,7 +56,7 @@ context.
 ### presenterDisconnected()?
 
 ```ts
-optional presenterDisconnected(): void;
+presenterDisconnected?(): void;
 ```
 
 Defined in: [controllers/IPresenterController.ts:49](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/controllers/IPresenterController.ts#L49)

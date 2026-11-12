@@ -42,8 +42,8 @@ Opens an image collection and returns its control reference.
 | Parameter | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
 | `images` | readonly [`IImagePreviewImage`](Interface.IImagePreviewImage)[] | `undefined` | Images available in the viewer. |
-| `config` | [`IImagePreviewConfig`](Interface.IImagePreviewConfig) | `{}` | Optional behavior and presentation overrides. |
-| `index` | `number` | `0` | Initially selected image index. |
+| `config?` | [`IImagePreviewConfig`](Interface.IImagePreviewConfig) | `{}` | Optional behavior and presentation overrides. |
+| `index?` | `number` | `0` | Initially selected image index. |
 
 #### Returns
 

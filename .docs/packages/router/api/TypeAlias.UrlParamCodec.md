@@ -20,7 +20,7 @@ codec through `fromNullable(...)` — the router package deliberately ships no c
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | The typed application value. |
+| <a id="type-parameter-t"></a> `T` | The typed application value. |
 
 ## Example
 

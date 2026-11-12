@@ -36,9 +36,7 @@ Creates a new instance of the NoOperationMergePolicy class.
 
 #### Overrides
 
-```ts
-OperationPolicy<'merge'>.constructor
-```
+`OperationPolicy<'merge'>.constructor`
 
 ## Properties
 
@@ -56,9 +54,7 @@ Defined in: [operation-queue/policies/abstracts/OperationPolicyBase.ts:20](https
 
 #### Inherited from
 
-```ts
-OperationPolicy.kind
-```
+`OperationPolicy.kind`
 
 ***
 
@@ -76,9 +72,7 @@ Defined in: [operation-queue/policies/abstracts/OperationPolicyBase.ts:25](https
 
 #### Inherited from
 
-```ts
-OperationPolicy.name
-```
+`OperationPolicy.name`
 
 ***
 
@@ -96,9 +90,7 @@ Defined in: [operation-queue/policies/abstracts/OperationPolicyBase.ts:30](https
 
 #### Inherited from
 
-```ts
-OperationPolicy.priority
-```
+`OperationPolicy.priority`
 
 ## Methods
 

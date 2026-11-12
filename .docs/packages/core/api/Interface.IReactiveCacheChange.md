@@ -13,7 +13,7 @@ Describes a single change event emitted by a [ReactiveCacheRegistrar](Class.Reac
 
 | Type Parameter |
 | ------ |
-| `TValue` |
+| <a id="type-parameter-tvalue"></a> `TValue` |
 
 ## Properties
 

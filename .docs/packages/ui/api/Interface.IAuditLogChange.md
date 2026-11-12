@@ -14,7 +14,7 @@ Field-level change rendered by the audit log component.
 ### after?
 
 ```ts
-readonly optional after?: unknown;
+readonly after?: unknown;
 ```
 
 Defined in: [libs/ui/src/components/audit-log/IAuditLogChange.ts:29](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audit-log/IAuditLogChange.ts#L29)
@@ -26,7 +26,7 @@ Value after the mutation.
 ### before?
 
 ```ts
-readonly optional before?: unknown;
+readonly before?: unknown;
 ```
 
 Defined in: [libs/ui/src/components/audit-log/IAuditLogChange.ts:21](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/audit-log/IAuditLogChange.ts#L21)

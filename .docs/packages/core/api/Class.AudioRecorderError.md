@@ -44,9 +44,7 @@ Constructs a new instance of the `AudioRecorderError` class.
 
 #### Overrides
 
-```ts
-Error.constructor
-```
+`Error.constructor`
 
 ## Accessors
 

@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: ConditionGroupComponent
 
-Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:109
+Defined in: [libs/ui/src/components/condition-group/ConditionGroupComponent.ts:109](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/condition-group/ConditionGroupComponent.ts#L109)
 
 Composes the shared And/Or group toolbar from the advanced list filters with projected domain conditions.
 The consumer owns its rule model, allowed operations and evaluation; nested groups reuse the common leading line.
@@ -30,7 +30,7 @@ new ConditionGroupComponent(): ConditionGroupComponent;
 readonly addGroupLabel: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:122
+Defined in: [libs/ui/src/components/condition-group/ConditionGroupComponent.ts:122](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/condition-group/ConditionGroupComponent.ts#L122)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:12
 readonly addGroupRequested: OutputEmitterRef<void>;
 ```
 
-Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:128
+Defined in: [libs/ui/src/components/condition-group/ConditionGroupComponent.ts:128](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/condition-group/ConditionGroupComponent.ts#L128)
 
 ***
 
@@ -50,7 +50,7 @@ Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:12
 readonly addRuleLabel: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:121
+Defined in: [libs/ui/src/components/condition-group/ConditionGroupComponent.ts:121](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/condition-group/ConditionGroupComponent.ts#L121)
 
 ***
 
@@ -60,7 +60,7 @@ Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:12
 readonly addRuleRequested: OutputEmitterRef<void>;
 ```
 
-Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:127
+Defined in: [libs/ui/src/components/condition-group/ConditionGroupComponent.ts:127](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/condition-group/ConditionGroupComponent.ts#L127)
 
 ***
 
@@ -70,7 +70,7 @@ Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:12
 readonly allowConditionChange: InputSignal<boolean>;
 ```
 
-Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:113
+Defined in: [libs/ui/src/components/condition-group/ConditionGroupComponent.ts:113](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/condition-group/ConditionGroupComponent.ts#L113)
 
 ***
 
@@ -80,7 +80,7 @@ Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:11
 readonly andLabel: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:119
+Defined in: [libs/ui/src/components/condition-group/ConditionGroupComponent.ts:119](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/condition-group/ConditionGroupComponent.ts#L119)
 
 ***
 
@@ -90,7 +90,7 @@ Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:11
 readonly canAddGroup: InputSignal<boolean>;
 ```
 
-Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:116
+Defined in: [libs/ui/src/components/condition-group/ConditionGroupComponent.ts:116](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/condition-group/ConditionGroupComponent.ts#L116)
 
 ***
 
@@ -100,7 +100,7 @@ Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:11
 readonly canAddRule: InputSignal<boolean>;
 ```
 
-Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:115
+Defined in: [libs/ui/src/components/condition-group/ConditionGroupComponent.ts:115](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/condition-group/ConditionGroupComponent.ts#L115)
 
 ***
 
@@ -110,7 +110,7 @@ Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:11
 readonly canRemove: InputSignal<boolean>;
 ```
 
-Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:117
+Defined in: [libs/ui/src/components/condition-group/ConditionGroupComponent.ts:117](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/condition-group/ConditionGroupComponent.ts#L117)
 
 ***
 
@@ -120,7 +120,7 @@ Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:11
 readonly condition: InputSignal<"and" | "or">;
 ```
 
-Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:112
+Defined in: [libs/ui/src/components/condition-group/ConditionGroupComponent.ts:112](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/condition-group/ConditionGroupComponent.ts#L112)
 
 ***
 
@@ -130,7 +130,7 @@ Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:11
 readonly conditionChanged: OutputEmitterRef<"and" | "or">;
 ```
 
-Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:126
+Defined in: [libs/ui/src/components/condition-group/ConditionGroupComponent.ts:126](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/condition-group/ConditionGroupComponent.ts#L126)
 
 ***
 
@@ -140,7 +140,7 @@ Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:12
 readonly disabled: InputSignal<boolean>;
 ```
 
-Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:114
+Defined in: [libs/ui/src/components/condition-group/ConditionGroupComponent.ts:114](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/condition-group/ConditionGroupComponent.ts#L114)
 
 ***
 
@@ -150,7 +150,7 @@ Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:11
 protected readonly level: Signal<number>;
 ```
 
-Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:131
+Defined in: [libs/ui/src/components/condition-group/ConditionGroupComponent.ts:131](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/condition-group/ConditionGroupComponent.ts#L131)
 
 ***
 
@@ -160,7 +160,7 @@ Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:13
 readonly orLabel: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:120
+Defined in: [libs/ui/src/components/condition-group/ConditionGroupComponent.ts:120](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/condition-group/ConditionGroupComponent.ts#L120)
 
 ***
 
@@ -170,7 +170,7 @@ Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:12
 readonly removeLabel: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:123
+Defined in: [libs/ui/src/components/condition-group/ConditionGroupComponent.ts:123](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/condition-group/ConditionGroupComponent.ts#L123)
 
 ***
 
@@ -180,7 +180,7 @@ Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:12
 readonly removeRequested: OutputEmitterRef<void>;
 ```
 
-Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:129
+Defined in: [libs/ui/src/components/condition-group/ConditionGroupComponent.ts:129](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/condition-group/ConditionGroupComponent.ts#L129)
 
 ***
 
@@ -190,7 +190,7 @@ Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:12
 readonly removeVariant: InputSignal<"danger" | "primary">;
 ```
 
-Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:118
+Defined in: [libs/ui/src/components/condition-group/ConditionGroupComponent.ts:118](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/condition-group/ConditionGroupComponent.ts#L118)
 
 ***
 
@@ -200,7 +200,7 @@ Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:11
 readonly testIdPrefix: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:124
+Defined in: [libs/ui/src/components/condition-group/ConditionGroupComponent.ts:124](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/condition-group/ConditionGroupComponent.ts#L124)
 
 ## Methods
 
@@ -210,7 +210,7 @@ Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:12
 protected setCondition(value): void;
 ```
 
-Defined in: libs/ui/src/components/condition-group/ConditionGroupComponent.ts:134
+Defined in: [libs/ui/src/components/condition-group/ConditionGroupComponent.ts:134](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/condition-group/ConditionGroupComponent.ts#L134)
 
 Applies an allowed change without making a fixed domain conjunction editable.
 

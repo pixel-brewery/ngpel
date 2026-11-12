@@ -69,7 +69,7 @@ operation throws or rejects.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | The result of the operation. |
+| <a id="type-parameter-t"></a> `T` | The result of the operation. |
 
 #### Parameters
 

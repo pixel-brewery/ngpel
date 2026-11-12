@@ -13,14 +13,14 @@ Field metadata used as the source for table columns, filters, and exports.
 
 | Type Parameter |
 | ------ |
-| `TItem` |
+| <a id="type-parameter-titem"></a> `TItem` |
 
 ## Properties
 
 ### export?
 
 ```ts
-readonly optional export?:
+readonly export?:
   | false
   | ICollectionExportFieldConfig;
 ```
@@ -34,7 +34,7 @@ Optional export projection. Set enabled=false to exclude the field from exports.
 ### filter?
 
 ```ts
-readonly optional filter?: {
+readonly filter?: {
   options?: readonly IFilterOption[];
   placeholder?: string;
   type: FilterTypeValue;
@@ -48,13 +48,13 @@ Optional filter projection. Omit to exclude the field from filters.
 #### options?
 
 ```ts
-readonly optional options?: readonly IFilterOption[];
+readonly options?: readonly IFilterOption[];
 ```
 
 #### placeholder?
 
 ```ts
-readonly optional placeholder?: string;
+readonly placeholder?: string;
 ```
 
 #### type
@@ -80,7 +80,7 @@ Stable field key.
 ### pathFn?
 
 ```ts
-readonly optional pathFn?: PathFn<TItem>;
+readonly pathFn?: PathFn<TItem>;
 ```
 
 Defined in: [libs/ui/src/collection-view/fields/ICollectionField.ts:30](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/fields/ICollectionField.ts#L30)
@@ -92,7 +92,7 @@ Optional member path or value getter used by table projections.
 ### sortFn?
 
 ```ts
-readonly optional sortFn?: SortCompareFn<TItem>;
+readonly sortFn?: SortCompareFn<TItem>;
 ```
 
 Defined in: [libs/ui/src/collection-view/fields/ICollectionField.ts:35](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/fields/ICollectionField.ts#L35)
@@ -104,7 +104,7 @@ Optional sort callback used by table projections.
 ### table?
 
 ```ts
-readonly optional table?:
+readonly table?:
   | false
 | Partial<Omit<IDataTableColumnDefinition<TItem>, "key" | "title">>;
 ```

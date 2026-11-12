@@ -309,9 +309,7 @@ Registers a callback for value changes.
 
 #### Implementation of
 
-```ts
-ControlValueAccessor.registerOnChange
-```
+`ControlValueAccessor.registerOnChange`
 
 ***
 
@@ -337,9 +335,7 @@ Registers a callback for touch events.
 
 #### Implementation of
 
-```ts
-ControlValueAccessor.registerOnTouched
-```
+`ControlValueAccessor.registerOnTouched`
 
 ***
 
@@ -365,9 +361,7 @@ Sets the disabled state from the form control.
 
 #### Implementation of
 
-```ts
-ControlValueAccessor.setDisabledState
-```
+`ControlValueAccessor.setDisabledState`
 
 ***
 
@@ -393,6 +387,4 @@ Writes a new value from the form model.
 
 #### Implementation of
 
-```ts
-ControlValueAccessor.writeValue
-```
+`ControlValueAccessor.writeValue`

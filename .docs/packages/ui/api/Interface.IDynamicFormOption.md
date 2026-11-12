@@ -14,7 +14,7 @@ Selectable option owned by the frontend dynamic form contract.
 ### disabled?
 
 ```ts
-readonly optional disabled?: boolean;
+readonly disabled?: boolean;
 ```
 
 Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormOption.ts:35](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormOption.ts#L35)

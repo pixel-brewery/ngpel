@@ -13,7 +13,7 @@ Holds its latest value as an Angular signal and synchronously notifies subscribe
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | The emitted value type. |
+| <a id="type-parameter-t"></a> `T` | The emitted value type. |
 
 ## Constructors
 
@@ -111,7 +111,7 @@ Applies signal operators in order.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `R` | The final value type. |
+| <a id="type-parameter-r"></a> `R` | The final value type. |
 
 #### Parameters
 

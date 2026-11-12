@@ -53,9 +53,9 @@ Constructs a new instance of the `HoverRevealForDirective` class.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `elementRef` | `ElementRef`\<`HTMLElement`\> | The host element that is revealed. |
-| `renderer` | `Renderer2` | The renderer used to listen and to apply the visual state. |
-| `destroyRef` | `DestroyRef` | The destruction lifecycle used to release listeners. |
+| `elementRef?` | `ElementRef`\<`HTMLElement`\> | The host element that is revealed. |
+| `renderer?` | `Renderer2` | The renderer used to listen and to apply the visual state. |
+| `destroyRef?` | `DestroyRef` | The destruction lifecycle used to release listeners. |
 
 #### Returns
 
@@ -92,9 +92,7 @@ Binds pointer and focus listeners once the view has been initialised.
 
 #### Implementation of
 
-```ts
-AfterViewInit.ngAfterViewInit
-```
+`AfterViewInit.ngAfterViewInit`
 
 ***
 
@@ -114,6 +112,4 @@ Hides the host element on initialisation.
 
 #### Implementation of
 
-```ts
-OnInit.ngOnInit
-```
+`OnInit.ngOnInit`

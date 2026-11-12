@@ -13,15 +13,15 @@ Handlers applied by [matchResult](Function.matchResult) to the success and failu
 
 | Type Parameter | Default type |
 | ------ | ------ |
-| `TData` | - |
-| `TResult` | `void` |
+| <a id="type-parameter-tdata"></a> `TData` | - |
+| <a id="type-parameter-tresult"></a> `TResult` | `void` |
 
 ## Properties
 
 ### onError?
 
 ```ts
-readonly optional onError?: (result) => TResult;
+readonly onError?: (result) => TResult;
 ```
 
 Defined in: [rx/operators/IMatchHandlers.ts:23](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/rx/operators/IMatchHandlers.ts#L23)
@@ -43,7 +43,7 @@ Invoked for failed results.
 ### onSuccess?
 
 ```ts
-readonly optional onSuccess?: (result) => TResult;
+readonly onSuccess?: (result) => TResult;
 ```
 
 Defined in: [rx/operators/IMatchHandlers.ts:18](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/rx/operators/IMatchHandlers.ts#L18)

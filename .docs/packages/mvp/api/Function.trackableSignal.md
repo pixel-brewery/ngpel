@@ -17,7 +17,7 @@ Tracks writes to an existing signal or a new signal created from an initial valu
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | The signal value type. |
+| <a id="type-parameter-t"></a> `T` | The signal value type. |
 
 ## Parameters
 

@@ -40,9 +40,7 @@ Identifies the kind of error.
 
 #### Overrides
 
-```ts
-ValidationError.kind
-```
+`ValidationError.kind`
 
 ***
 

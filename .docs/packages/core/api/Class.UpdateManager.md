@@ -33,7 +33,7 @@ Constructs a new instance of the `UpdateManager` class.
 | ------ | ------ | ------ |
 | `source` | [`IUpdateSource`](Interface.IUpdateSource) | The platform source to listen to. |
 | `strategies` | readonly [`IUpdateHandlerStrategy`](Interface.IUpdateHandlerStrategy)[] | The strategies every event is dispatched to, in order. |
-| `options` | [`IUpdateManagerOptions`](Interface.IUpdateManagerOptions) | Lifecycle options. |
+| `options?` | [`IUpdateManagerOptions`](Interface.IUpdateManagerOptions) | Lifecycle options. |
 
 #### Returns
 

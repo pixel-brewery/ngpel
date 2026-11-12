@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: DataTableLoadingDirective
 
-Defined in: libs/ui/src/directives/data-table-loading/DataTableLoadingDirective.ts:10
+Defined in: [libs/ui/src/directives/data-table-loading/DataTableLoadingDirective.ts:10](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/data-table-loading/DataTableLoadingDirective.ts#L10)
 
 Keeps a Mosaik data table in place while replacing its body with five loading rows.
 
@@ -17,7 +17,7 @@ Keeps a Mosaik data table in place while replacing its body with five loading ro
 new DataTableLoadingDirective(): DataTableLoadingDirective;
 ```
 
-Defined in: libs/ui/src/directives/data-table-loading/DataTableLoadingDirective.ts:16
+Defined in: [libs/ui/src/directives/data-table-loading/DataTableLoadingDirective.ts:16](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/data-table-loading/DataTableLoadingDirective.ts#L16)
 
 #### Returns
 
@@ -31,4 +31,4 @@ Defined in: libs/ui/src/directives/data-table-loading/DataTableLoadingDirective.
 readonly loading: InputSignal<boolean>;
 ```
 
-Defined in: libs/ui/src/directives/data-table-loading/DataTableLoadingDirective.ts:14
+Defined in: [libs/ui/src/directives/data-table-loading/DataTableLoadingDirective.ts:14](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/data-table-loading/DataTableLoadingDirective.ts#L14)

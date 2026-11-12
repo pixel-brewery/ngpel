@@ -17,8 +17,8 @@ Transforms one signal subject into another.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | The source value type. |
-| `R` | The resulting value type. |
+| <a id="type-parameter-t"></a> `T` | The source value type. |
+| <a id="type-parameter-r"></a> `R` | The resulting value type. |
 
 ## Parameters
 

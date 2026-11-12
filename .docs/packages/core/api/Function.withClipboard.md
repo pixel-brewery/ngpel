@@ -17,7 +17,7 @@ Registers the [CLIPBOARD](Variable.CLIPBOARD) port.
 
 | Parameter | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
-| `adapter` | `Type`\<[`IClipboard`](Interface.IClipboard)\> | `ClipboardService` | The adapter class to instantiate; defaults to the `DOCUMENT`-based [ClipboardService](Class.ClipboardService). |
+| `adapter?` | `Type`\<[`IClipboard`](Interface.IClipboard)\> | `ClipboardService` | The adapter class to instantiate; defaults to the `DOCUMENT`-based [ClipboardService](Class.ClipboardService). |
 
 ## Returns
 

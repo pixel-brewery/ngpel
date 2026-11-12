@@ -14,7 +14,7 @@ Options for contributing palette commands through `withSearchCommands()`.
 ### commands?
 
 ```ts
-readonly optional commands?: readonly ICommandItem[];
+readonly commands?: readonly ICommandItem[];
 ```
 
 Defined in: [search/provider/IWithSearchCommandsOptions.ts:25](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/provider/IWithSearchCommandsOptions.ts#L25)
@@ -38,7 +38,7 @@ Stable unique id of this contribution (unique among all command features).
 ### sources?
 
 ```ts
-readonly optional sources?: readonly Type<ICommandSource>[];
+readonly sources?: readonly Type<ICommandSource>[];
 ```
 
 Defined in: [search/provider/IWithSearchCommandsOptions.ts:32](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/provider/IWithSearchCommandsOptions.ts#L32)

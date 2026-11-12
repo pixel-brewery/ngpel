@@ -18,7 +18,7 @@ Configures a query-parameter signal.
 ### preserveFragment?
 
 ```ts
-readonly optional preserveFragment?: boolean;
+readonly preserveFragment?: boolean;
 ```
 
 Defined in: [signals/IQueryParamSignalOptions.ts:19](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/signals/IQueryParamSignalOptions.ts#L19)
@@ -31,7 +31,7 @@ change is a refinement of the current view and must not drop its scroll anchor.
 ### replaceUrl?
 
 ```ts
-readonly optional replaceUrl?: boolean;
+readonly replaceUrl?: boolean;
 ```
 
 Defined in: [signals/IUrlParamNavigationOptions.ts:12](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/signals/IUrlParamNavigationOptions.ts#L12)

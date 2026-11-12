@@ -53,7 +53,7 @@ editUrl: false
 | [CalendarDateReference](TypeAlias.CalendarDateReference) | Static or context-dependent minimum calendar date accepted by [calendarDateNotBefore](Function.calendarDateNotBefore). `null` disables the bound. |
 | [DateReference](TypeAlias.DateReference) | Static or context-dependent exclusive lower bound accepted by [dateAfter](Function.dateAfter). `null` disables the bound. |
 | [EqualToReference](TypeAlias.EqualToReference) | Static or context-dependent expected value accepted by [equalTo](Function.equalTo). |
-| [PasswordScore](TypeAlias.PasswordScore) | Union of the strength level names: `'Blank' | 'VeryWeak' | 'Weak' | 'Medium' | 'Strong' | 'VeryStrong'`. |
+| [PasswordScore](TypeAlias.PasswordScore) | Union of the strength level names: `'Blank' \| 'VeryWeak' \| 'Weak' \| 'Medium' \| 'Strong' \| 'VeryStrong'`. |
 | [SignalValidatorConfig](TypeAlias.SignalValidatorConfig) | Shared configuration accepted by every ngpel Signal Forms validator: an optional message or a custom error (mutually exclusive) plus an optional activation condition. Messages and errors may be static values or `LogicFn`s evaluated against the field context, which is where a product plugs in its translation service. |
 
 ## Variables

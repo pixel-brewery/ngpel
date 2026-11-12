@@ -86,7 +86,7 @@ Stores a microphone after a successful voice test.
 | ------ | ------ | ------ |
 | `deviceId` | `string` | Browser-scoped device identifier. |
 | `label` | `string` | Last known browser device label. |
-| `testedAt` | `Date` | Timestamp of the successful test. |
+| `testedAt?` | `Date` | Timestamp of the successful test. |
 
 #### Returns
 

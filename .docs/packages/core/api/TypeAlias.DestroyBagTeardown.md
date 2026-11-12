@@ -8,7 +8,7 @@ editUrl: false
 ```ts
 type DestroyBagTeardown =
   | {
-  unsubscribe: void;
+  unsubscribe(): void;
 }
   | (() => void);
 ```

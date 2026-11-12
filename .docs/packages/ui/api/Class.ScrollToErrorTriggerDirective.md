@@ -27,8 +27,8 @@ Constructs a new instance of the `ScrollToErrorTriggerDirective` class.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `registry` | `ScrollToErrorRegistry` | Registry that resolves the associated validation scope. |
-| `injector` | `Injector` | Injector used to schedule post-render work. |
+| `registry?` | `ScrollToErrorRegistry` | Registry that resolves the associated validation scope. |
+| `injector?` | `Injector` | Injector used to schedule post-render work. |
 
 #### Returns
 

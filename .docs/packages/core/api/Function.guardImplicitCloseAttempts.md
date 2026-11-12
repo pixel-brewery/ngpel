@@ -22,7 +22,7 @@ attention for the surface instead.
 
 | Type Parameter |
 | ------ |
-| `TAttempt` *extends* [`IPreventableCloseAttempt`](Interface.IPreventableCloseAttempt) |
+| <a id="type-parameter-tattempt"></a> `TAttempt` *extends* [`IPreventableCloseAttempt`](Interface.IPreventableCloseAttempt) |
 
 ## Parameters
 

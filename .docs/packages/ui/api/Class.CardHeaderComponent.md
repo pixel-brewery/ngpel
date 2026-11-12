@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: CardHeaderComponent
 
-Defined in: libs/ui/src/components/card/CardHeaderComponent.ts:45
+Defined in: [libs/ui/src/components/card/CardHeaderComponent.ts:45](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/card/CardHeaderComponent.ts#L45)
 
 Adds the card's expansion control to the Mosaik header suffix.
 
@@ -29,7 +29,7 @@ new CardHeaderComponent(): CardHeaderComponent;
 readonly card: CardComponent;
 ```
 
-Defined in: libs/ui/src/components/card/CardHeaderComponent.ts:54
+Defined in: [libs/ui/src/components/card/CardHeaderComponent.ts:54](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/card/CardHeaderComponent.ts#L54)
 
 The owning card's expansion state.
 
@@ -41,7 +41,7 @@ The owning card's expansion state.
 readonly subText: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/components/card/CardHeaderComponent.ts:77
+Defined in: [libs/ui/src/components/card/CardHeaderComponent.ts:77](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/card/CardHeaderComponent.ts#L77)
 
 Supporting header text.
 
@@ -53,6 +53,6 @@ Supporting header text.
 readonly text: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/components/card/CardHeaderComponent.ts:69
+Defined in: [libs/ui/src/components/card/CardHeaderComponent.ts:69](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/card/CardHeaderComponent.ts#L69)
 
 Primary header text.

@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: AgreementGateComponent
 
-Defined in: libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:61
+Defined in: [libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:61](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/agreement-gate/AgreementGateComponent.ts#L61)
 
 Requests an explicit agreement without owning its content, persistence or protected action.
 
@@ -29,7 +29,7 @@ new AgreementGateComponent(): AgreementGateComponent;
 readonly accepted: OutputEmitterRef<void>;
 ```
 
-Defined in: libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:71
+Defined in: [libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:71](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/agreement-gate/AgreementGateComponent.ts#L71)
 
 ***
 
@@ -39,7 +39,7 @@ Defined in: libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:71
 readonly actionLabel: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:68
+Defined in: [libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:68](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/agreement-gate/AgreementGateComponent.ts#L68)
 
 ***
 
@@ -49,7 +49,7 @@ Defined in: libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:68
 readonly description: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:65
+Defined in: [libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:65](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/agreement-gate/AgreementGateComponent.ts#L65)
 
 ***
 
@@ -59,7 +59,7 @@ Defined in: libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:65
 readonly errorText: InputSignal<string | null>;
 ```
 
-Defined in: libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:70
+Defined in: [libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:70](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/agreement-gate/AgreementGateComponent.ts#L70)
 
 ***
 
@@ -69,7 +69,7 @@ Defined in: libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:70
 readonly isBusy: InputSignal<boolean>;
 ```
 
-Defined in: libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:69
+Defined in: [libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:69](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/agreement-gate/AgreementGateComponent.ts#L69)
 
 ***
 
@@ -79,7 +79,7 @@ Defined in: libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:69
 readonly linkLabel: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:67
+Defined in: [libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:67](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/agreement-gate/AgreementGateComponent.ts#L67)
 
 ***
 
@@ -89,7 +89,7 @@ Defined in: libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:67
 protected readonly safeUrl: Signal<string | undefined>;
 ```
 
-Defined in: libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:73
+Defined in: [libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:73](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/agreement-gate/AgreementGateComponent.ts#L73)
 
 ***
 
@@ -99,7 +99,7 @@ Defined in: libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:73
 readonly title: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:64
+Defined in: [libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:64](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/agreement-gate/AgreementGateComponent.ts#L64)
 
 ***
 
@@ -109,7 +109,7 @@ Defined in: libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:64
 readonly url: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:66
+Defined in: [libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:66](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/agreement-gate/AgreementGateComponent.ts#L66)
 
 ## Methods
 
@@ -119,7 +119,7 @@ Defined in: libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:66
 requestAcceptance(): void;
 ```
 
-Defined in: libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:95
+Defined in: [libs/ui/src/components/agreement-gate/AgreementGateComponent.ts:95](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/agreement-gate/AgreementGateComponent.ts#L95)
 
 Emits an explicit acceptance request while idle; the host remains responsible for saving it.
 

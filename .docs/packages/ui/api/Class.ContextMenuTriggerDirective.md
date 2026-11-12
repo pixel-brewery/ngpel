@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: ContextMenuTriggerDirective\<T\>
 
-Defined in: libs/ui/src/components/context-menu/ContextMenuTriggerDirective.ts:31
+Defined in: [libs/ui/src/components/context-menu/ContextMenuTriggerDirective.ts:31](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/context-menu/ContextMenuTriggerDirective.ts#L31)
 
 Connects a host to a context menu. Supply a value for explicit triggers, or omit it
 on a Mosaik data table to read the row value from the event's composed path.
@@ -14,7 +14,7 @@ on a Mosaik data table to read the row value from the event's composed path.
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `T` | `unknown` | The item exposed to the menu template. |
+| <a id="type-parameter-t"></a> `T` | `unknown` | The item exposed to the menu template. |
 
 ## Constructors
 
@@ -36,7 +36,7 @@ new ContextMenuTriggerDirective<T>(): ContextMenuTriggerDirective<T>;
 readonly disabled: InputSignal<boolean>;
 ```
 
-Defined in: libs/ui/src/components/context-menu/ContextMenuTriggerDirective.ts:48
+Defined in: [libs/ui/src/components/context-menu/ContextMenuTriggerDirective.ts:48](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/context-menu/ContextMenuTriggerDirective.ts#L48)
 
 Leaves native events alone when the menu is unavailable for this trigger.
 
@@ -50,7 +50,7 @@ readonly menu: InputSignal<
 | undefined>;
 ```
 
-Defined in: libs/ui/src/components/context-menu/ContextMenuTriggerDirective.ts:42
+Defined in: [libs/ui/src/components/context-menu/ContextMenuTriggerDirective.ts:42](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/context-menu/ContextMenuTriggerDirective.ts#L42)
 
 Menu shared by the triggers for a collection.
 
@@ -62,7 +62,7 @@ Menu shared by the triggers for a collection.
 readonly openOnClick: InputSignal<boolean>;
 ```
 
-Defined in: libs/ui/src/components/context-menu/ContextMenuTriggerDirective.ts:51
+Defined in: [libs/ui/src/components/context-menu/ContextMenuTriggerDirective.ts:51](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/context-menu/ContextMenuTriggerDirective.ts#L51)
 
 Enables a normal click on a visible action button.
 
@@ -74,7 +74,7 @@ Enables a normal click on a visible action button.
 readonly value: InputSignal<T | typeof CONTEXT_FROM_EVENT>;
 ```
 
-Defined in: libs/ui/src/components/context-menu/ContextMenuTriggerDirective.ts:45
+Defined in: [libs/ui/src/components/context-menu/ContextMenuTriggerDirective.ts:45](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/context-menu/ContextMenuTriggerDirective.ts#L45)
 
 Optional item value; the default resolves a Mosaik body row from the event path.
 
@@ -86,7 +86,7 @@ Optional item value; the default resolves a Mosaik body row from the event path.
 protected onClick(event): void;
 ```
 
-Defined in: libs/ui/src/components/context-menu/ContextMenuTriggerDirective.ts:61
+Defined in: [libs/ui/src/components/context-menu/ContextMenuTriggerDirective.ts:61](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/context-menu/ContextMenuTriggerDirective.ts#L61)
 
 #### Parameters
 
@@ -106,7 +106,7 @@ Defined in: libs/ui/src/components/context-menu/ContextMenuTriggerDirective.ts:6
 protected onContextMenu(event): void;
 ```
 
-Defined in: libs/ui/src/components/context-menu/ContextMenuTriggerDirective.ts:57
+Defined in: [libs/ui/src/components/context-menu/ContextMenuTriggerDirective.ts:57](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/context-menu/ContextMenuTriggerDirective.ts#L57)
 
 #### Parameters
 
@@ -126,7 +126,7 @@ Defined in: libs/ui/src/components/context-menu/ContextMenuTriggerDirective.ts:5
 protected onKeyDown(event): void;
 ```
 
-Defined in: libs/ui/src/components/context-menu/ContextMenuTriggerDirective.ts:67
+Defined in: [libs/ui/src/components/context-menu/ContextMenuTriggerDirective.ts:67](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/context-menu/ContextMenuTriggerDirective.ts#L67)
 
 #### Parameters
 

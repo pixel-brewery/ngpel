@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: ITextSuggestionMessages
 
-Defined in: libs/ui/src/directives/input-suggestions/ITextSuggestionMessages.ts:2
+Defined in: [libs/ui/src/directives/input-suggestions/ITextSuggestionMessages.ts:2](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/ITextSuggestionMessages.ts#L2)
 
 Localized labels used by a whole-field suggestion list.
 
@@ -17,7 +17,7 @@ Localized labels used by a whole-field suggestion list.
 readonly empty: string;
 ```
 
-Defined in: libs/ui/src/directives/input-suggestions/ITextSuggestionMessages.ts:10
+Defined in: [libs/ui/src/directives/input-suggestions/ITextSuggestionMessages.ts:10](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/ITextSuggestionMessages.ts#L10)
 
 Status shown when the source returns no results.
 
@@ -29,7 +29,7 @@ Status shown when the source returns no results.
 readonly error: string;
 ```
 
-Defined in: libs/ui/src/directives/input-suggestions/ITextSuggestionMessages.ts:13
+Defined in: [libs/ui/src/directives/input-suggestions/ITextSuggestionMessages.ts:13](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/ITextSuggestionMessages.ts#L13)
 
 Status shown when the source fails.
 
@@ -41,7 +41,7 @@ Status shown when the source fails.
 readonly label: string;
 ```
 
-Defined in: libs/ui/src/directives/input-suggestions/ITextSuggestionMessages.ts:4
+Defined in: [libs/ui/src/directives/input-suggestions/ITextSuggestionMessages.ts:4](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/ITextSuggestionMessages.ts#L4)
 
 Accessible name of the listbox.
 
@@ -53,6 +53,6 @@ Accessible name of the listbox.
 readonly loading: string;
 ```
 
-Defined in: libs/ui/src/directives/input-suggestions/ITextSuggestionMessages.ts:7
+Defined in: [libs/ui/src/directives/input-suggestions/ITextSuggestionMessages.ts:7](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/ITextSuggestionMessages.ts#L7)
 
 Status shown during debounce and source lookup.

@@ -20,17 +20,17 @@ debounce applied to the validated path before the validator is registered.
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `TValue` | - | The value type of the validated field. |
-| `TParams` | - | The parameters derived from the field value. |
-| `TResult` | - | The result produced by the resource. |
-| `TPathKind` *extends* `PathKind` | `PathKind.Root` | The kind of the validated path. |
+| <a id="type-parameter-tvalue"></a> `TValue` | - | The value type of the validated field. |
+| <a id="type-parameter-tparams"></a> `TParams` | - | The parameters derived from the field value. |
+| <a id="type-parameter-tresult"></a> `TResult` | - | The result produced by the resource. |
+| <a id="type-parameter-tpathkind"></a> `TPathKind` *extends* `PathKind` | `PathKind.Root` | The kind of the validated path. |
 
 ## Properties
 
 ### config?
 
 ```ts
-readonly optional config?: {
+readonly config?: {
   durationOrDebouncer?: number | Debouncer<TValue, TPathKind>;
 };
 ```
@@ -42,7 +42,7 @@ Debounce configuration; omitted or a falsy duration registers the validator unde
 #### durationOrDebouncer?
 
 ```ts
-readonly optional durationOrDebouncer?: number | Debouncer<TValue, TPathKind>;
+readonly durationOrDebouncer?: number | Debouncer<TValue, TPathKind>;
 ```
 
 ***
@@ -104,7 +104,7 @@ Maps a resolved result to a validation error, a list of errors, or `null` when v
 ### onError?
 
 ```ts
-readonly optional onError?: (error, context) => unknown;
+readonly onError?: (error, context) => unknown;
 ```
 
 Defined in: [async/IAsyncSignalValidatorOptions.ts:35](https://github.com/pixel-brewery/ngpel/blob/main/libs/forms/src/async/IAsyncSignalValidatorOptions.ts#L35)
@@ -175,7 +175,7 @@ Signal Forms schema path to validate.
 ### when?
 
 ```ts
-readonly optional when?: NoInfer<LogicFn<TValue, boolean, TPathKind>>;
+readonly when?: NoInfer<LogicFn<TValue, boolean, TPathKind>>;
 ```
 
 Defined in: [async/IAsyncSignalValidatorOptions.ts:38](https://github.com/pixel-brewery/ngpel/blob/main/libs/forms/src/async/IAsyncSignalValidatorOptions.ts#L38)

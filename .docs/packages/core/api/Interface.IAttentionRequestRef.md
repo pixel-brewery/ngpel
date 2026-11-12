@@ -14,7 +14,7 @@ can request the user's attention. Typed structurally so any UI kit's surface ref
 
 | Type Parameter | Default type |
 | ------ | ------ |
-| `TAttempt` *extends* [`IPreventableCloseAttempt`](Interface.IPreventableCloseAttempt) | [`IPreventableCloseAttempt`](Interface.IPreventableCloseAttempt) |
+| <a id="type-parameter-tattempt"></a> `TAttempt` *extends* [`IPreventableCloseAttempt`](Interface.IPreventableCloseAttempt) | [`IPreventableCloseAttempt`](Interface.IPreventableCloseAttempt) |
 
 ## Properties
 

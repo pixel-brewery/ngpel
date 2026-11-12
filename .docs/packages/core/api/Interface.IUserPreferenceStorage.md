@@ -26,7 +26,7 @@ Reads a typed preference value.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | The preference value type. |
+| <a id="type-parameter-t"></a> `T` | The preference value type. |
 
 #### Parameters
 
@@ -83,7 +83,7 @@ Writes a typed preference value.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | The preference value type. |
+| <a id="type-parameter-t-1"></a> `T` | The preference value type. |
 
 #### Parameters
 

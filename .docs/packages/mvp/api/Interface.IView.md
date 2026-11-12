@@ -14,7 +14,7 @@ its template and owns that presenter's lifecycle.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `TPresenter` *extends* [`IViewPresenter`](Interface.IViewPresenter) | The concrete presenter the View provides. |
+| <a id="type-parameter-tpresenter"></a> `TPresenter` *extends* [`IViewPresenter`](Interface.IViewPresenter) | The concrete presenter the View provides. |
 
 ## Properties
 

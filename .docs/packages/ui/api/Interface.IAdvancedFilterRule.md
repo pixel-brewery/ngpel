@@ -62,7 +62,7 @@ Rule operator.
 ### value?
 
 ```ts
-readonly optional value?: unknown;
+readonly value?: unknown;
 ```
 
 Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:178](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L178)

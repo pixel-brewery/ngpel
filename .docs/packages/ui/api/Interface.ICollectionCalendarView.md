@@ -17,14 +17,14 @@ Runtime calendar projection for a collection view.
 
 | Type Parameter |
 | ------ |
-| `TItem` |
+| <a id="type-parameter-titem"></a> `TItem` |
 
 ## Properties
 
 ### eventAllDay?
 
 ```ts
-readonly optional eventAllDay?: (item) => boolean;
+readonly eventAllDay?: (item) => boolean;
 ```
 
 Defined in: [libs/ui/src/collection-view/views/calendar/ICollectionCalendarViewConfig.ts:58](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/views/calendar/ICollectionCalendarViewConfig.ts#L58)
@@ -43,16 +43,14 @@ Resolves whether the item is an all-day event.
 
 #### Inherited from
 
-```ts
-Omit.eventAllDay
-```
+`Omit.eventAllDay`
 
 ***
 
 ### eventContent?
 
 ```ts
-readonly optional eventContent?: (item) => string | undefined;
+readonly eventContent?: (item) => string | undefined;
 ```
 
 Defined in: [libs/ui/src/collection-view/views/calendar/ICollectionCalendarViewConfig.ts:43](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/views/calendar/ICollectionCalendarViewConfig.ts#L43)
@@ -71,9 +69,7 @@ Resolves optional content for the scheduler event.
 
 #### Inherited from
 
-```ts
-Omit.eventContent
-```
+`Omit.eventContent`
 
 ***
 
@@ -99,9 +95,7 @@ Resolves the end date/time for the scheduler event.
 
 #### Inherited from
 
-```ts
-Omit.eventEnd
-```
+`Omit.eventEnd`
 
 ***
 
@@ -127,9 +121,7 @@ Resolves a unique key for the scheduler event.
 
 #### Inherited from
 
-```ts
-Omit.eventKey
-```
+`Omit.eventKey`
 
 ***
 
@@ -155,16 +147,14 @@ Resolves the start date/time for the scheduler event.
 
 #### Inherited from
 
-```ts
-Omit.eventStart
-```
+`Omit.eventStart`
 
 ***
 
 ### eventStatus?
 
 ```ts
-readonly optional eventStatus?: (item) => string | undefined;
+readonly eventStatus?: (item) => string | undefined;
 ```
 
 Defined in: [libs/ui/src/collection-view/views/calendar/ICollectionCalendarViewConfig.ts:53](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/views/calendar/ICollectionCalendarViewConfig.ts#L53)
@@ -183,9 +173,7 @@ Resolves the event status for the scheduler event.
 
 #### Inherited from
 
-```ts
-Omit.eventStatus
-```
+`Omit.eventStatus`
 
 ***
 
@@ -211,16 +199,14 @@ Resolves the display title for the scheduler event.
 
 #### Inherited from
 
-```ts
-Omit.eventTitle
-```
+`Omit.eventTitle`
 
 ***
 
 ### eventVariant?
 
 ```ts
-readonly optional eventVariant?: (item) => string | undefined;
+readonly eventVariant?: (item) => string | undefined;
 ```
 
 Defined in: [libs/ui/src/collection-view/views/calendar/ICollectionCalendarViewConfig.ts:48](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/views/calendar/ICollectionCalendarViewConfig.ts#L48)
@@ -239,16 +225,14 @@ Resolves the visual variant for the scheduler event.
 
 #### Inherited from
 
-```ts
-Omit.eventVariant
-```
+`Omit.eventVariant`
 
 ***
 
 ### firstDayOfWeek?
 
 ```ts
-readonly optional firstDayOfWeek?: DayOfWeek;
+readonly firstDayOfWeek?: DayOfWeek;
 ```
 
 Defined in: [libs/ui/src/collection-view/views/calendar/ICollectionCalendarViewConfig.ts:83](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/views/calendar/ICollectionCalendarViewConfig.ts#L83)
@@ -264,7 +248,7 @@ First day of the week.
 ### hourEnd?
 
 ```ts
-readonly optional hourEnd?: number;
+readonly hourEnd?: number;
 ```
 
 Defined in: [libs/ui/src/collection-view/views/calendar/ICollectionCalendarViewConfig.ts:73](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/views/calendar/ICollectionCalendarViewConfig.ts#L73)
@@ -280,7 +264,7 @@ Last visible hour in timeGrid view.
 ### hourStart?
 
 ```ts
-readonly optional hourStart?: number;
+readonly hourStart?: number;
 ```
 
 Defined in: [libs/ui/src/collection-view/views/calendar/ICollectionCalendarViewConfig.ts:68](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/views/calendar/ICollectionCalendarViewConfig.ts#L68)
@@ -296,7 +280,7 @@ First visible hour in timeGrid view.
 ### isTodayHighlighted?
 
 ```ts
-readonly optional isTodayHighlighted?: boolean;
+readonly isTodayHighlighted?: boolean;
 ```
 
 Defined in: [libs/ui/src/collection-view/views/calendar/ICollectionCalendarViewConfig.ts:88](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/views/calendar/ICollectionCalendarViewConfig.ts#L88)
@@ -312,7 +296,7 @@ Whether to highlight the current day.
 ### isWeekendHighlighted?
 
 ```ts
-readonly optional isWeekendHighlighted?: boolean;
+readonly isWeekendHighlighted?: boolean;
 ```
 
 Defined in: [libs/ui/src/collection-view/views/calendar/ICollectionCalendarViewConfig.ts:93](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/views/calendar/ICollectionCalendarViewConfig.ts#L93)
@@ -328,7 +312,7 @@ Whether to highlight weekends.
 ### schedulerView?
 
 ```ts
-readonly optional schedulerView?: SchedulerView;
+readonly schedulerView?: SchedulerView;
 ```
 
 Defined in: [libs/ui/src/collection-view/views/calendar/ICollectionCalendarViewConfig.ts:63](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/views/calendar/ICollectionCalendarViewConfig.ts#L63)
@@ -344,7 +328,7 @@ Default scheduler view mode.
 ### stepMinutes?
 
 ```ts
-readonly optional stepMinutes?: number;
+readonly stepMinutes?: number;
 ```
 
 Defined in: [libs/ui/src/collection-view/views/calendar/ICollectionCalendarViewConfig.ts:78](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/views/calendar/ICollectionCalendarViewConfig.ts#L78)
@@ -360,7 +344,7 @@ Time slot step in minutes.
 ### viewIconName?
 
 ```ts
-readonly optional viewIconName?: string;
+readonly viewIconName?: string;
 ```
 
 Defined in: [libs/ui/src/collection-view/views/calendar/ICollectionCalendarView.ts:16](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/views/calendar/ICollectionCalendarView.ts#L16)

@@ -42,7 +42,7 @@ The contributed items.
 ### order?
 
 ```ts
-readonly optional order?: number;
+readonly order?: number;
 ```
 
 Defined in: [navigation/provider/IWithNavigationItemsOptions.ts:32](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/navigation/provider/IWithNavigationItemsOptions.ts#L32)

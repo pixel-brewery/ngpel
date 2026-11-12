@@ -52,6 +52,4 @@ Picks the text colour for `backgroundColor`.
 
 #### Implementation of
 
-```ts
-PipeTransform.transform
-```
+`PipeTransform.transform`

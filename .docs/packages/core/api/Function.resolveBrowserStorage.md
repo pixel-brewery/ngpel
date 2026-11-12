@@ -27,7 +27,7 @@ ambient object that neither a host nor a spec can substitute, and would silently
 | Parameter | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
 | `browserWindow` | \| `Pick`\<`Window`, [`BrowserStorageArea`](TypeAlias.BrowserStorageArea)\> \| `null` | `undefined` | The window to resolve from; `null` marks a non-browser context. |
-| `area` | [`BrowserStorageArea`](TypeAlias.BrowserStorageArea) | `'localStorage'` | The storage area (defaults to `'localStorage'`). |
+| `area?` | [`BrowserStorageArea`](TypeAlias.BrowserStorageArea) | `'localStorage'` | The storage area (defaults to `'localStorage'`). |
 
 ## Returns
 

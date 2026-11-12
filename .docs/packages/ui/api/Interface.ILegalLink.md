@@ -26,7 +26,7 @@ Human-readable link label.
 ### openInNewTab?
 
 ```ts
-readonly optional openInNewTab?: boolean;
+readonly openInNewTab?: boolean;
 ```
 
 Defined in: [libs/ui/src/components/legal-links/ILegalLink.ts:29](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/legal-links/ILegalLink.ts#L29)

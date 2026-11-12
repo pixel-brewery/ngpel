@@ -14,7 +14,7 @@ Construction options of the [UpdateManager](Class.UpdateManager).
 ### checkOnStart?
 
 ```ts
-readonly optional checkOnStart?: boolean;
+readonly checkOnStart?: boolean;
 ```
 
 Defined in: [update/services/IUpdateManagerOptions.ts:20](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/update/services/IUpdateManagerOptions.ts#L20)
@@ -32,7 +32,7 @@ false
 ### isStable?
 
 ```ts
-readonly optional isStable?: Observable<boolean>;
+readonly isStable?: Observable<boolean>;
 ```
 
 Defined in: [update/services/IUpdateManagerOptions.ts:26](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/update/services/IUpdateManagerOptions.ts#L26)

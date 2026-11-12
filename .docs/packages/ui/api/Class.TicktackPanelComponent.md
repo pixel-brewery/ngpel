@@ -140,7 +140,7 @@ Shows the primary surface.
 
 | Parameter | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
-| `reason` | [`TicktackPanelChangeReason`](TypeAlias.TicktackPanelChangeReason) | `'api'` | Trigger for the state change. |
+| `reason?` | [`TicktackPanelChangeReason`](TypeAlias.TicktackPanelChangeReason) | `'api'` | Trigger for the state change. |
 
 #### Returns
 
@@ -162,7 +162,7 @@ Shows the secondary surface.
 
 | Parameter | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
-| `reason` | [`TicktackPanelChangeReason`](TypeAlias.TicktackPanelChangeReason) | `'api'` | Trigger for the state change. |
+| `reason?` | [`TicktackPanelChangeReason`](TypeAlias.TicktackPanelChangeReason) | `'api'` | Trigger for the state change. |
 
 #### Returns
 

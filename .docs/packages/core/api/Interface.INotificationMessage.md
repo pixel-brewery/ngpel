@@ -27,7 +27,7 @@ Main text of the message.
 ### detail?
 
 ```ts
-readonly optional detail?: NotificationText;
+readonly detail?: NotificationText;
 ```
 
 Defined in: [notification/models/INotificationMessage.ts:36](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/notification/models/INotificationMessage.ts#L36)
@@ -39,7 +39,7 @@ Optional diagnostic detail such as a correlation id.
 ### duration?
 
 ```ts
-readonly optional duration?: NotificationDuration;
+readonly duration?: NotificationDuration;
 ```
 
 Defined in: [notification/models/INotificationMessage.ts:51](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/notification/models/INotificationMessage.ts#L51)
@@ -51,7 +51,7 @@ Symbolic lifetime; defaults to `'short'`.
 ### silent?
 
 ```ts
-readonly optional silent?: boolean;
+readonly silent?: boolean;
 ```
 
 Defined in: [notification/models/INotificationMessage.ts:46](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/notification/models/INotificationMessage.ts#L46)
@@ -63,7 +63,7 @@ When `true` the message reaches the interceptors but is not kept in the history.
 ### subTitle?
 
 ```ts
-readonly optional subTitle?: NotificationText;
+readonly subTitle?: NotificationText;
 ```
 
 Defined in: [notification/models/INotificationMessage.ts:26](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/notification/models/INotificationMessage.ts#L26)
@@ -87,7 +87,7 @@ Headline of the message.
 ### type?
 
 ```ts
-readonly optional type?: NotificationType;
+readonly type?: NotificationType;
 ```
 
 Defined in: [notification/models/INotificationMessage.ts:41](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/notification/models/INotificationMessage.ts#L41)

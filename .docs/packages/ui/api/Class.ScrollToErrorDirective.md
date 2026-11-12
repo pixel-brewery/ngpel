@@ -40,11 +40,11 @@ Constructs a new instance of the `ScrollToErrorDirective` class.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `elementRef` | `ElementRef`\<`HTMLElement`\> | Element that scopes invalid-control discovery. |
-| `scrollDispatcher` | `ScrollDispatcher` | Dispatcher used to discover registered CDK scroll containers. |
-| `registry` | `ScrollToErrorRegistry` | Registry used by triggers outside the validation scope. |
-| `injector` | `Injector` | Injector used to schedule post-render work. |
-| `destroyRef` | `DestroyRef` | Lifecycle used to dispose one-shot scroll listeners. |
+| `elementRef?` | `ElementRef`\<`HTMLElement`\> | Element that scopes invalid-control discovery. |
+| `scrollDispatcher?` | `ScrollDispatcher` | Dispatcher used to discover registered CDK scroll containers. |
+| `registry?` | `ScrollToErrorRegistry` | Registry used by triggers outside the validation scope. |
+| `injector?` | `Injector` | Injector used to schedule post-render work. |
+| `destroyRef?` | `DestroyRef` | Lifecycle used to dispose one-shot scroll listeners. |
 
 #### Returns
 
@@ -80,9 +80,7 @@ Removes the validation scope from the cross-DOM trigger registry.
 
 #### Implementation of
 
-```ts
-OnDestroy.ngOnDestroy
-```
+`OnDestroy.ngOnDestroy`
 
 ***
 
@@ -102,9 +100,7 @@ Registers the validation scope after Angular has initialized its required input.
 
 #### Implementation of
 
-```ts
-OnInit.ngOnInit
-```
+`OnInit.ngOnInit`
 
 ***
 
@@ -140,6 +136,4 @@ Reveals and focuses the first visible invalid control in this scope.
 
 #### Implementation of
 
-```ts
-IScrollToErrorTarget.revealFirstInvalidControl
-```
+`IScrollToErrorTarget.revealFirstInvalidControl`

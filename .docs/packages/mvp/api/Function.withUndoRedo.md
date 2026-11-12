@@ -21,7 +21,7 @@ Creates a tracked model and connects its history to the presenter's commands and
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `TModel` | The model value retained in history. |
+| <a id="type-parameter-tmodel"></a> `TModel` | The model value retained in history. |
 
 ## Parameters
 

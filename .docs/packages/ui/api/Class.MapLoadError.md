@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: MapLoadError
 
-Defined in: libs/ui/src/google-maps/MapLoadError.ts:6
+Defined in: [libs/ui/src/google-maps/MapLoadError.ts:6](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapLoadError.ts#L6)
 
 Sanitized failure at the browser Maps SDK boundary.
 
@@ -21,7 +21,7 @@ Sanitized failure at the browser Maps SDK boundary.
 new MapLoadError(reason): MapLoadError;
 ```
 
-Defined in: libs/ui/src/google-maps/MapLoadError.ts:18
+Defined in: [libs/ui/src/google-maps/MapLoadError.ts:18](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapLoadError.ts#L18)
 
 Creates a failure without exposing a provider URL or API key.
 
@@ -37,9 +37,7 @@ Creates a failure without exposing a provider URL or API key.
 
 #### Overrides
 
-```ts
-Error.constructor
-```
+`Error.constructor`
 
 ## Properties
 
@@ -49,6 +47,6 @@ Error.constructor
 readonly reason: "platform" | "configuration" | "load";
 ```
 
-Defined in: libs/ui/src/google-maps/MapLoadError.ts:18
+Defined in: [libs/ui/src/google-maps/MapLoadError.ts:18](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapLoadError.ts#L18)
 
 Configuration, platform, or SDK loading failure.

@@ -9,7 +9,7 @@ editUrl: false
 function createActivityLogController<T>(options): IActivityLogController<T>;
 ```
 
-Defined in: libs/ui/src/components/activity-log/createActivityLogController.ts:20
+Defined in: [libs/ui/src/components/activity-log/createActivityLogController.ts:20](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/createActivityLogController.ts#L20)
 
 Owns paging and cancellation for one activity view. Create in the host's injection context.
 
@@ -17,7 +17,7 @@ Owns paging and cancellation for one activity view. Create in the host's injecti
 
 | Type Parameter |
 | ------ |
-| `T` |
+| <a id="type-parameter-t"></a> `T` |
 
 ## Parameters
 

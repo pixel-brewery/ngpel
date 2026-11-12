@@ -17,7 +17,7 @@ Creates a codec that restricts a persisted string to a compile-time union of all
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` *extends* `string` | The string union. |
+| <a id="type-parameter-t"></a> `T` *extends* `string` | The string union. |
 
 ## Parameters
 

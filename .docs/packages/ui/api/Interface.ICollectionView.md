@@ -13,9 +13,9 @@ Runtime collection-view model exposed by feature presenters.
 
 | Type Parameter | Default type |
 | ------ | ------ |
-| `TItem` | - |
-| `TView` *extends* `string` | - |
-| `TCalendarItem` | `TItem` |
+| <a id="type-parameter-titem"></a> `TItem` | - |
+| <a id="type-parameter-tview"></a> `TView` *extends* `string` | - |
+| <a id="type-parameter-tcalendaritem"></a> `TCalendarItem` | `TItem` |
 
 ## Properties
 
@@ -58,7 +58,7 @@ The view definitions supported by this feature collection.
 ### calendar?
 
 ```ts
-readonly optional calendar?: ICollectionCalendarView<TCalendarItem>;
+readonly calendar?: ICollectionCalendarView<TCalendarItem>;
 ```
 
 Defined in: [libs/ui/src/collection-view/core/ICollectionView.ts:55](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/core/ICollectionView.ts#L55)
@@ -94,7 +94,7 @@ Filter definitions derived from collection fields.
 ### flow?
 
 ```ts
-readonly optional flow?: ICollectionFlowView<TItem, string>;
+readonly flow?: ICollectionFlowView<TItem, string>;
 ```
 
 Defined in: [libs/ui/src/collection-view/core/ICollectionView.ts:70](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/core/ICollectionView.ts#L70)
@@ -106,7 +106,7 @@ Optional flow projection.
 ### gallery?
 
 ```ts
-readonly optional gallery?: ICollectionGalleryView<TItem>;
+readonly gallery?: ICollectionGalleryView<TItem>;
 ```
 
 Defined in: [libs/ui/src/collection-view/core/ICollectionView.ts:65](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/core/ICollectionView.ts#L65)
@@ -130,7 +130,7 @@ Indicates whether at least one filter value is active.
 ### table?
 
 ```ts
-readonly optional table?: ICollectionTableView<TItem>;
+readonly table?: ICollectionTableView<TItem>;
 ```
 
 Defined in: [libs/ui/src/collection-view/core/ICollectionView.ts:60](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/core/ICollectionView.ts#L60)

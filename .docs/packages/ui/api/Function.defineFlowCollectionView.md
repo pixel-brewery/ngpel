@@ -17,9 +17,9 @@ Defines a flow collection view with full type inference.
 
 | Type Parameter | Default type |
 | ------ | ------ |
-| `TItem` | - |
-| `TView` *extends* `string` | - |
-| `TColumnKey` *extends* `string` | `string` |
+| <a id="type-parameter-titem"></a> `TItem` | - |
+| <a id="type-parameter-tview"></a> `TView` *extends* `string` | - |
+| <a id="type-parameter-tcolumnkey"></a> `TColumnKey` *extends* `string` | `string` |
 
 ## Parameters
 

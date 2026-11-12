@@ -22,7 +22,7 @@ sites outside an injection context, such as bootstrap configuration.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | The typed application value. |
+| <a id="type-parameter-t"></a> `T` | The typed application value. |
 
 ## Parameters
 

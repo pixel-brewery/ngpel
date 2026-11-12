@@ -39,9 +39,7 @@ Constructs a new instance of the `ApiResultError` class.
 
 #### Overrides
 
-```ts
-Error.constructor
-```
+`Error.constructor`
 
 ## Accessors
 

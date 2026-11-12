@@ -17,7 +17,7 @@ Creates a successful API result envelope.
 
 | Type Parameter |
 | ------ |
-| `TData` |
+| <a id="type-parameter-tdata"></a> `TData` |
 
 ## Parameters
 

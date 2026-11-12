@@ -17,7 +17,7 @@ Defines a collection field with full type inference.
 
 | Type Parameter |
 | ------ |
-| `TItem` |
+| <a id="type-parameter-titem"></a> `TItem` |
 
 ## Parameters
 

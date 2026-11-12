@@ -16,7 +16,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:131](htt
 | Parameter | Type |
 | ------ | ------ |
 | `value` | `string` \| `null` \| `undefined` |
-| `options` | [`IParseRecurrenceRuleOptions`](Interface.IParseRecurrenceRuleOptions) |
+| `options?` | [`IParseRecurrenceRuleOptions`](Interface.IParseRecurrenceRuleOptions) |
 
 ## Returns
 

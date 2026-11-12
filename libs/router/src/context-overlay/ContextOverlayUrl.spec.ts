@@ -1,3 +1,4 @@
+// cspell:words Fother
 import { describe, expect, it } from 'vitest';
 import { ContextOverlayUrl } from './ContextOverlayUrl';
 

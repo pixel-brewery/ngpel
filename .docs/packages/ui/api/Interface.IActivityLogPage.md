@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: IActivityLogPage\<T\>
 
-Defined in: libs/ui/src/components/activity-log/IActivityLogPage.ts:2
+Defined in: [libs/ui/src/components/activity-log/IActivityLogPage.ts:2](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogPage.ts#L2)
 
 One page of entries, ordered newest first by the caller's data source.
 
@@ -13,7 +13,7 @@ One page of entries, ordered newest first by the caller's data source.
 
 | Type Parameter |
 | ------ |
-| `T` |
+| <a id="type-parameter-t"></a> `T` |
 
 ## Properties
 
@@ -23,7 +23,7 @@ One page of entries, ordered newest first by the caller's data source.
 readonly items: readonly T[];
 ```
 
-Defined in: libs/ui/src/components/activity-log/IActivityLogPage.ts:4
+Defined in: [libs/ui/src/components/activity-log/IActivityLogPage.ts:4](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogPage.ts#L4)
 
 Entries returned for the requested offset.
 
@@ -35,6 +35,6 @@ Entries returned for the requested offset.
 readonly total: number;
 ```
 
-Defined in: libs/ui/src/components/activity-log/IActivityLogPage.ts:6
+Defined in: [libs/ui/src/components/activity-log/IActivityLogPage.ts:6](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogPage.ts#L6)
 
 Total entries for the current scope.

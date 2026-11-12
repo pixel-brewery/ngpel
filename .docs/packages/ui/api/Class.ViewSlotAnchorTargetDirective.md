@@ -41,8 +41,8 @@ Constructs a new instance of the `ViewSlotAnchorTargetDirective` class.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `elementRef` | `ElementRef`\<`HTMLElement`\> | The host element representing the anchor. |
-| `destroyRef` | `DestroyRef` | The destruction lifecycle used to cancel pending work. |
+| `elementRef?` | `ElementRef`\<`HTMLElement`\> | The host element representing the anchor. |
+| `destroyRef?` | `DestroyRef` | The destruction lifecycle used to cancel pending work. |
 
 #### Returns
 

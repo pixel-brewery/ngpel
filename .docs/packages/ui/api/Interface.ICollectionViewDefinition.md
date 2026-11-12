@@ -20,14 +20,14 @@ Describes a view option that can be activated for a collection surface.
 
 | Type Parameter |
 | ------ |
-| `TView` *extends* `string` |
+| <a id="type-parameter-tview"></a> `TView` *extends* `string` |
 
 ## Properties
 
 ### iconName?
 
 ```ts
-readonly optional iconName?: string;
+readonly iconName?: string;
 ```
 
 Defined in: [libs/ui/src/collection-view/core/ICollectionViewDefinition.ts:20](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/core/ICollectionViewDefinition.ts#L20)
@@ -39,7 +39,7 @@ Optional icon name used by feature-specific toggles.
 ### label?
 
 ```ts
-readonly optional label?: string;
+readonly label?: string;
 ```
 
 Defined in: [libs/ui/src/collection-view/core/ICollectionViewDefinition.ts:15](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/core/ICollectionViewDefinition.ts#L15)

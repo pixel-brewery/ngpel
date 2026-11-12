@@ -27,7 +27,7 @@ Without storage the signal follows the unavailable-storage policy documented on
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | The typed application value. |
+| <a id="type-parameter-t"></a> `T` | The typed application value. |
 
 ## Parameters
 
@@ -35,7 +35,7 @@ Without storage the signal follows the unavailable-storage policy documented on
 | ------ | ------ | ------ |
 | `key` | `string` | The storage key. |
 | `codec` | [`IValueCodec`](Interface.IValueCodec)\<`string`, `T`\> | The codec converting between the stored string and the typed value. |
-| `options` | [`ILocalStorageSignalOptions`](Interface.ILocalStorageSignalOptions) | Storage, event source and cross-tab overrides. |
+| `options?` | [`ILocalStorageSignalOptions`](Interface.ILocalStorageSignalOptions) | Storage, event source and cross-tab overrides. |
 
 ## Returns
 

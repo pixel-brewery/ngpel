@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: IPdfPreviewOptions
 
-Defined in: libs/ui/src/components/document-preview/IPdfPreviewOptions.ts:7
+Defined in: [libs/ui/src/components/document-preview/IPdfPreviewOptions.ts:7](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/document-preview/IPdfPreviewOptions.ts#L7)
 
 Host configuration for the optional PDF.js preview. The host owns the matching SDK, worker,
 viewer styles and any assets it chooses to serve.
@@ -15,10 +15,10 @@ viewer styles and any assets it chooses to serve.
 ### cMapUrl?
 
 ```ts
-readonly optional cMapUrl?: string;
+readonly cMapUrl?: string;
 ```
 
-Defined in: libs/ui/src/components/document-preview/IPdfPreviewOptions.ts:21
+Defined in: [libs/ui/src/components/document-preview/IPdfPreviewOptions.ts:21](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/document-preview/IPdfPreviewOptions.ts#L21)
 
 Base URL of the SDK's character maps.
 
@@ -27,10 +27,10 @@ Base URL of the SDK's character maps.
 ### iccUrl?
 
 ```ts
-readonly optional iccUrl?: string;
+readonly iccUrl?: string;
 ```
 
-Defined in: libs/ui/src/components/document-preview/IPdfPreviewOptions.ts:30
+Defined in: [libs/ui/src/components/document-preview/IPdfPreviewOptions.ts:30](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/document-preview/IPdfPreviewOptions.ts#L30)
 
 Base URL of the SDK's ICC color profiles.
 
@@ -39,10 +39,10 @@ Base URL of the SDK's ICC color profiles.
 ### imageResourcesPath?
 
 ```ts
-readonly optional imageResourcesPath?: string;
+readonly imageResourcesPath?: string;
 ```
 
-Defined in: libs/ui/src/components/document-preview/IPdfPreviewOptions.ts:18
+Defined in: [libs/ui/src/components/document-preview/IPdfPreviewOptions.ts:18](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/document-preview/IPdfPreviewOptions.ts#L18)
 
 Base URL of the viewer's annotation image assets.
 
@@ -57,7 +57,7 @@ readonly load: () => Promise<Readonly<{
 }>>;
 ```
 
-Defined in: libs/ui/src/components/document-preview/IPdfPreviewOptions.ts:9
+Defined in: [libs/ui/src/components/document-preview/IPdfPreviewOptions.ts:9](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/document-preview/IPdfPreviewOptions.ts#L9)
 
 Imports the PDF.js API before importing the official viewer module.
 
@@ -73,10 +73,10 @@ Imports the PDF.js API before importing the official viewer module.
 ### locale?
 
 ```ts
-readonly optional locale?: string;
+readonly locale?: string;
 ```
 
-Defined in: libs/ui/src/components/document-preview/IPdfPreviewOptions.ts:15
+Defined in: [libs/ui/src/components/document-preview/IPdfPreviewOptions.ts:15](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/document-preview/IPdfPreviewOptions.ts#L15)
 
 Optional viewer locale. Defaults to the current document language.
 
@@ -85,10 +85,10 @@ Optional viewer locale. Defaults to the current document language.
 ### standardFontDataUrl?
 
 ```ts
-readonly optional standardFontDataUrl?: string;
+readonly standardFontDataUrl?: string;
 ```
 
-Defined in: libs/ui/src/components/document-preview/IPdfPreviewOptions.ts:24
+Defined in: [libs/ui/src/components/document-preview/IPdfPreviewOptions.ts:24](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/document-preview/IPdfPreviewOptions.ts#L24)
 
 Base URL of the SDK's standard fonts.
 
@@ -97,10 +97,10 @@ Base URL of the SDK's standard fonts.
 ### wasmUrl?
 
 ```ts
-readonly optional wasmUrl?: string;
+readonly wasmUrl?: string;
 ```
 
-Defined in: libs/ui/src/components/document-preview/IPdfPreviewOptions.ts:27
+Defined in: [libs/ui/src/components/document-preview/IPdfPreviewOptions.ts:27](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/document-preview/IPdfPreviewOptions.ts#L27)
 
 Base URL of the SDK's WebAssembly assets.
 
@@ -112,6 +112,6 @@ Base URL of the SDK's WebAssembly assets.
 readonly workerSrc: string;
 ```
 
-Defined in: libs/ui/src/components/document-preview/IPdfPreviewOptions.ts:12
+Defined in: [libs/ui/src/components/document-preview/IPdfPreviewOptions.ts:12](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/document-preview/IPdfPreviewOptions.ts#L12)
 
 URL of the matching PDF.js module worker.

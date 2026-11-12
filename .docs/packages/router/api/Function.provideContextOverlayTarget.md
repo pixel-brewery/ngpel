@@ -17,7 +17,7 @@ Registers a feature target without coupling the application's shell to its lazy 
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `TResult` | The result returned by the target's surface. |
+| <a id="type-parameter-tresult"></a> `TResult` | The result returned by the target's surface. |
 
 ## Parameters
 

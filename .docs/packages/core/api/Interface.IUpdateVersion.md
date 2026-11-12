@@ -14,7 +14,7 @@ Identifies one application version inside an update event.
 ### appData?
 
 ```ts
-readonly optional appData?: object;
+readonly appData?: object;
 ```
 
 Defined in: [update/models/IUpdateVersion.ts:19](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/update/models/IUpdateVersion.ts#L19)

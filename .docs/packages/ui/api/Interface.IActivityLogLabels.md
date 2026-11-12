@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: IActivityLogLabels
 
-Defined in: libs/ui/src/components/activity-log/IActivityLogLabels.ts:2
+Defined in: [libs/ui/src/components/activity-log/IActivityLogLabels.ts:2](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogLabels.ts#L2)
 
 Labels the application can override for the shared activity view.
 
@@ -17,7 +17,7 @@ Labels the application can override for the shared activity view.
 readonly empty: string;
 ```
 
-Defined in: libs/ui/src/components/activity-log/IActivityLogLabels.ts:5
+Defined in: [libs/ui/src/components/activity-log/IActivityLogLabels.ts:5](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogLabels.ts#L5)
 
 ***
 
@@ -27,7 +27,7 @@ Defined in: libs/ui/src/components/activity-log/IActivityLogLabels.ts:5
 readonly error: string;
 ```
 
-Defined in: libs/ui/src/components/activity-log/IActivityLogLabels.ts:6
+Defined in: [libs/ui/src/components/activity-log/IActivityLogLabels.ts:6](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogLabels.ts#L6)
 
 ***
 
@@ -37,7 +37,7 @@ Defined in: libs/ui/src/components/activity-log/IActivityLogLabels.ts:6
 readonly heading: string;
 ```
 
-Defined in: libs/ui/src/components/activity-log/IActivityLogLabels.ts:3
+Defined in: [libs/ui/src/components/activity-log/IActivityLogLabels.ts:3](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogLabels.ts#L3)
 
 ***
 
@@ -47,7 +47,7 @@ Defined in: libs/ui/src/components/activity-log/IActivityLogLabels.ts:3
 readonly loading: string;
 ```
 
-Defined in: libs/ui/src/components/activity-log/IActivityLogLabels.ts:4
+Defined in: [libs/ui/src/components/activity-log/IActivityLogLabels.ts:4](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogLabels.ts#L4)
 
 ***
 
@@ -57,7 +57,7 @@ Defined in: libs/ui/src/components/activity-log/IActivityLogLabels.ts:4
 readonly loadMore: string;
 ```
 
-Defined in: libs/ui/src/components/activity-log/IActivityLogLabels.ts:9
+Defined in: [libs/ui/src/components/activity-log/IActivityLogLabels.ts:9](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogLabels.ts#L9)
 
 ***
 
@@ -67,7 +67,7 @@ Defined in: libs/ui/src/components/activity-log/IActivityLogLabels.ts:9
 readonly moreError: string;
 ```
 
-Defined in: libs/ui/src/components/activity-log/IActivityLogLabels.ts:7
+Defined in: [libs/ui/src/components/activity-log/IActivityLogLabels.ts:7](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogLabels.ts#L7)
 
 ***
 
@@ -77,7 +77,7 @@ Defined in: libs/ui/src/components/activity-log/IActivityLogLabels.ts:7
 readonly newChanges: string;
 ```
 
-Defined in: libs/ui/src/components/activity-log/IActivityLogLabels.ts:10
+Defined in: [libs/ui/src/components/activity-log/IActivityLogLabels.ts:10](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogLabels.ts#L10)
 
 ***
 
@@ -87,4 +87,4 @@ Defined in: libs/ui/src/components/activity-log/IActivityLogLabels.ts:10
 readonly retry: string;
 ```
 
-Defined in: libs/ui/src/components/activity-log/IActivityLogLabels.ts:8
+Defined in: [libs/ui/src/components/activity-log/IActivityLogLabels.ts:8](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogLabels.ts#L8)

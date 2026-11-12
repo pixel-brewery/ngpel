@@ -35,14 +35,14 @@ const widget: IWidget = {
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `TData` *extends* [`IWidgetData`](Interface.IWidgetData) | [`IWidgetData`](Interface.IWidgetData) | The shape of the optional payload the widget's views read back. |
+| <a id="type-parameter-tdata"></a> `TData` *extends* [`IWidgetData`](Interface.IWidgetData) | [`IWidgetData`](Interface.IWidgetData) | The shape of the optional payload the widget's views read back. |
 
 ## Properties
 
 ### canActivate?
 
 ```ts
-readonly optional canActivate?: () => boolean;
+readonly canActivate?: () => boolean;
 ```
 
 Defined in: [libs/ui/src/widget/models/IWidget.ts:76](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidget.ts#L76)
@@ -59,7 +59,7 @@ flag. An absent predicate means the widget is always available.
 ### data?
 
 ```ts
-readonly optional data?: TData;
+readonly data?: TData;
 ```
 
 Defined in: [libs/ui/src/widget/models/IWidget.ts:81](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidget.ts#L81)
@@ -109,7 +109,7 @@ never depends on registration timing.
 ### subTitle?
 
 ```ts
-readonly optional subTitle?: Signal<string>;
+readonly subTitle?: Signal<string>;
 ```
 
 Defined in: [libs/ui/src/widget/models/IWidget.ts:60](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidget.ts#L60)

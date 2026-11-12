@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: CompoundItemSummaryDirective\<T\>
 
-Defined in: libs/ui/src/components/compound/CompoundItemSummaryDirective.ts:10
+Defined in: [libs/ui/src/components/compound/CompoundItemSummaryDirective.ts:10](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundItemSummaryDirective.ts#L10)
 
 Projects the heading of each stacked compound item.
 
@@ -13,7 +13,7 @@ Projects the heading of each stacked compound item.
 
 | Type Parameter |
 | ------ |
-| `T` |
+| <a id="type-parameter-t"></a> `T` |
 
 ## Constructors
 
@@ -35,7 +35,7 @@ new CompoundItemSummaryDirective<T>(): CompoundItemSummaryDirective<T>;
 readonly templateRef: TemplateRef<ICompoundItemContext<T>>;
 ```
 
-Defined in: libs/ui/src/components/compound/CompoundItemSummaryDirective.ts:14
+Defined in: [libs/ui/src/components/compound/CompoundItemSummaryDirective.ts:14](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundItemSummaryDirective.ts#L14)
 
 The template rendered with the item's context.
 
@@ -47,7 +47,7 @@ The template rendered with the item's context.
 static ngTemplateContextGuard<T>(directive, context): context is ICompoundItemContext<T>;
 ```
 
-Defined in: libs/ui/src/components/compound/CompoundItemSummaryDirective.ts:21
+Defined in: [libs/ui/src/components/compound/CompoundItemSummaryDirective.ts:21](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundItemSummaryDirective.ts#L21)
 
 Supplies the item context to Angular's template type checker.
 
@@ -55,7 +55,7 @@ Supplies the item context to Angular's template type checker.
 
 | Type Parameter |
 | ------ |
-| `T` |
+| <a id="type-parameter-t-1"></a> `T` |
 
 #### Parameters
 

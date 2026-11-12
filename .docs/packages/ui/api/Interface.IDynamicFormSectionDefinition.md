@@ -14,7 +14,7 @@ Visual section containing related dynamic form fields.
 ### description?
 
 ```ts
-readonly optional description?: string;
+readonly description?: string;
 ```
 
 Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormSectionDefinition.ts:35](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormSectionDefinition.ts#L35)
@@ -50,7 +50,7 @@ Stable section key.
 ### title?
 
 ```ts
-readonly optional title?: string;
+readonly title?: string;
 ```
 
 Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormSectionDefinition.ts:27](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormSectionDefinition.ts#L27)

@@ -15,15 +15,15 @@ all other fields are optional and filled with sensible defaults by the
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `TPayload` | - | The input data required by the operation. |
-| `TResult` | `void` | The result produced by a successful commit. |
+| <a id="type-parameter-tpayload"></a> `TPayload` | - | The input data required by the operation. |
+| <a id="type-parameter-tresult"></a> `TResult` | `void` | The result produced by a successful commit. |
 
 ## Properties
 
 ### delayInMilliseconds?
 
 ```ts
-readonly optional delayInMilliseconds?: number;
+readonly delayInMilliseconds?: number;
 ```
 
 Defined in: [operation-queue/interfaces/IOperationDefinition.ts:43](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/operation-queue/interfaces/IOperationDefinition.ts#L43)
@@ -35,7 +35,7 @@ Optional override for the queue-level default delay in milliseconds.
 ### label?
 
 ```ts
-readonly optional label?: string;
+readonly label?: string;
 ```
 
 Defined in: [operation-queue/interfaces/IOperationDefinition.ts:36](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/operation-queue/interfaces/IOperationDefinition.ts#L36)
@@ -47,7 +47,7 @@ Human-readable label shown in the UI countdown. Defaults to [type](#type).
 ### mergeKey?
 
 ```ts
-readonly optional mergeKey?: string;
+readonly mergeKey?: string;
 ```
 
 Defined in: [operation-queue/interfaces/IOperationDefinition.ts:51](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/operation-queue/interfaces/IOperationDefinition.ts#L51)
@@ -60,7 +60,7 @@ by the active merge policy.
 ### payload?
 
 ```ts
-readonly optional payload?: TPayload;
+readonly payload?: TPayload;
 ```
 
 Defined in: [operation-queue/interfaces/IOperationDefinition.ts:29](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/operation-queue/interfaces/IOperationDefinition.ts#L29)
@@ -72,7 +72,7 @@ Input data passed to [commit](#commit) and [apply](#apply). Defaults to `undefin
 ### type?
 
 ```ts
-readonly optional type?: string;
+readonly type?: string;
 ```
 
 Defined in: [operation-queue/interfaces/IOperationDefinition.ts:22](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/operation-queue/interfaces/IOperationDefinition.ts#L22)
@@ -84,7 +84,7 @@ Discriminator for operation type. Defaults to `"anonymous"`.
 ### apply()?
 
 ```ts
-optional apply(context): void;
+apply?(context): void;
 ```
 
 Defined in: [operation-queue/interfaces/IOperationDefinition.ts:60](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/operation-queue/interfaces/IOperationDefinition.ts#L60)
@@ -131,7 +131,7 @@ The result of a successful commit.
 ### onCommitted()?
 
 ```ts
-optional onCommitted(result, context): void;
+onCommitted?(result, context): void;
 ```
 
 Defined in: [operation-queue/interfaces/IOperationDefinition.ts:87](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/operation-queue/interfaces/IOperationDefinition.ts#L87)
@@ -154,7 +154,7 @@ Optional hook called after a successful commit.
 ### onFailed()?
 
 ```ts
-optional onFailed(error, context): void;
+onFailed?(error, context): void;
 ```
 
 Defined in: [operation-queue/interfaces/IOperationDefinition.ts:104](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/operation-queue/interfaces/IOperationDefinition.ts#L104)
@@ -177,7 +177,7 @@ Optional hook called when [commit](#commit) throws.
 ### onRejected()?
 
 ```ts
-optional onRejected(context): void;
+onRejected?(context): void;
 ```
 
 Defined in: [operation-queue/interfaces/IOperationDefinition.ts:95](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/operation-queue/interfaces/IOperationDefinition.ts#L95)
@@ -199,7 +199,7 @@ Optional hook called after a rollback completes.
 ### rollback()?
 
 ```ts
-optional rollback(context): void;
+rollback?(context): void;
 ```
 
 Defined in: [operation-queue/interfaces/IOperationDefinition.ts:78](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/operation-queue/interfaces/IOperationDefinition.ts#L78)

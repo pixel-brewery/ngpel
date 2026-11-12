@@ -33,7 +33,7 @@ Constructs a new instance of the `ServiceWorkerUpdateSource` class.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `swUpdate` | `SwUpdate` | The service worker update API; injected when omitted. |
+| `swUpdate?` | `SwUpdate` | The service worker update API; injected when omitted. |
 
 #### Returns
 

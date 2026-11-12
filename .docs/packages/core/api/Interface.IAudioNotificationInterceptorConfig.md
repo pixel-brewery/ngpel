@@ -15,7 +15,7 @@ this package ships no audio assets, so the composing application names its own f
 ### defaultSound?
 
 ```ts
-readonly optional defaultSound?: string;
+readonly defaultSound?: string;
 ```
 
 Defined in: [notification/interception/IAudioNotificationInterceptorConfig.ts:22](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/notification/interception/IAudioNotificationInterceptorConfig.ts#L22)
@@ -28,7 +28,7 @@ silent.
 ### isDisabled?
 
 ```ts
-readonly optional isDisabled?: boolean;
+readonly isDisabled?: boolean;
 ```
 
 Defined in: [notification/interception/IAudioNotificationInterceptorConfig.ts:27](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/notification/interception/IAudioNotificationInterceptorConfig.ts#L27)
@@ -40,7 +40,7 @@ When `true` the interceptor stays registered but plays nothing.
 ### isEnabled?
 
 ```ts
-readonly optional isEnabled?: (notification) => boolean;
+readonly isEnabled?: (notification) => boolean;
 ```
 
 Defined in: [notification/interception/IAudioNotificationInterceptorConfig.ts:33](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/notification/interception/IAudioNotificationInterceptorConfig.ts#L33)
@@ -63,7 +63,7 @@ Per-notification gate consulted before a sound is played.
 ### logger?
 
 ```ts
-readonly optional logger?: Pick<Console, "error">;
+readonly logger?: Pick<Console, "error">;
 ```
 
 Defined in: [notification/interception/IAudioNotificationInterceptorConfig.ts:38](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/notification/interception/IAudioNotificationInterceptorConfig.ts#L38)
@@ -75,7 +75,7 @@ Diagnostic channel that receives rejected playback; defaults to the global conso
 ### options?
 
 ```ts
-readonly optional options?: IAudioPlayOptions;
+readonly options?: IAudioPlayOptions;
 ```
 
 Defined in: [notification/interception/IAudioNotificationInterceptorConfig.ts:43](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/notification/interception/IAudioNotificationInterceptorConfig.ts#L43)

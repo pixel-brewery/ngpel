@@ -27,8 +27,8 @@ and `rollback`), it is returned as-is without wrapping.
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `TPayload` | - | The input data required by the operation. |
-| `TResult` | `void` | The result produced by a successful commit. |
+| <a id="type-parameter-tpayload"></a> `TPayload` | - | The input data required by the operation. |
+| <a id="type-parameter-tresult"></a> `TResult` | `void` | The result produced by a successful commit. |
 
 ## Parameters
 

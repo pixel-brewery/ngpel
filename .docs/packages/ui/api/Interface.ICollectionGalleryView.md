@@ -17,14 +17,14 @@ Runtime gallery projection for a collection view.
 
 | Type Parameter |
 | ------ |
-| `TItem` |
+| <a id="type-parameter-titem"></a> `TItem` |
 
 ## Properties
 
 ### itemIconName?
 
 ```ts
-readonly optional itemIconName?: (item) => string;
+readonly itemIconName?: (item) => string;
 ```
 
 Defined in: [libs/ui/src/collection-view/views/gallery/ICollectionGalleryViewConfig.ts:37](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/views/gallery/ICollectionGalleryViewConfig.ts#L37)
@@ -43,16 +43,14 @@ Optional icon name for gallery items.
 
 #### Inherited from
 
-```ts
-Omit.itemIconName
-```
+`Omit.itemIconName`
 
 ***
 
 ### metaText?
 
 ```ts
-readonly optional metaText?: (item) => string;
+readonly metaText?: (item) => string;
 ```
 
 Defined in: [libs/ui/src/collection-view/views/gallery/ICollectionGalleryViewConfig.ts:32](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/views/gallery/ICollectionGalleryViewConfig.ts#L32)
@@ -71,9 +69,7 @@ Resolves the tertiary/meta text for a gallery item.
 
 #### Inherited from
 
-```ts
-Omit.metaText
-```
+`Omit.metaText`
 
 ***
 
@@ -99,16 +95,14 @@ Resolves the primary text for a gallery item.
 
 #### Inherited from
 
-```ts
-Omit.primaryText
-```
+`Omit.primaryText`
 
 ***
 
 ### secondaryText?
 
 ```ts
-readonly optional secondaryText?: (item) => string;
+readonly secondaryText?: (item) => string;
 ```
 
 Defined in: [libs/ui/src/collection-view/views/gallery/ICollectionGalleryViewConfig.ts:27](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/views/gallery/ICollectionGalleryViewConfig.ts#L27)
@@ -127,16 +121,14 @@ Resolves the secondary text for a gallery item.
 
 #### Inherited from
 
-```ts
-Omit.secondaryText
-```
+`Omit.secondaryText`
 
 ***
 
 ### viewIconName?
 
 ```ts
-readonly optional viewIconName?: string;
+readonly viewIconName?: string;
 ```
 
 Defined in: [libs/ui/src/collection-view/views/gallery/ICollectionGalleryView.ts:16](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/views/gallery/ICollectionGalleryView.ts#L16)

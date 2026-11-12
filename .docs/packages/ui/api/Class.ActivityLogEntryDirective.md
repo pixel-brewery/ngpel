@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: ActivityLogEntryDirective\<T\>
 
-Defined in: libs/ui/src/components/activity-log/ActivityLogEntryDirective.ts:6
+Defined in: [libs/ui/src/components/activity-log/ActivityLogEntryDirective.ts:6](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogEntryDirective.ts#L6)
 
 Marks a projected entry template. Bind the controller's entries to infer the item type.
 
@@ -13,7 +13,7 @@ Marks a projected entry template. Bind the controller's entries to infer the ite
 
 | Type Parameter |
 | ------ |
-| `T` |
+| <a id="type-parameter-t"></a> `T` |
 
 ## Constructors
 
@@ -35,7 +35,7 @@ new ActivityLogEntryDirective<T>(): ActivityLogEntryDirective<T>;
 readonly items: InputSignal<readonly T[]>;
 ```
 
-Defined in: libs/ui/src/components/activity-log/ActivityLogEntryDirective.ts:8
+Defined in: [libs/ui/src/components/activity-log/ActivityLogEntryDirective.ts:8](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogEntryDirective.ts#L8)
 
 Entry collection used to infer the projected context.
 
@@ -47,7 +47,7 @@ Entry collection used to infer the projected context.
 readonly template: TemplateRef<IActivityLogEntryContext<T>>;
 ```
 
-Defined in: libs/ui/src/components/activity-log/ActivityLogEntryDirective.ts:10
+Defined in: [libs/ui/src/components/activity-log/ActivityLogEntryDirective.ts:10](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogEntryDirective.ts#L10)
 
 Template rendered for each item.
 
@@ -59,7 +59,7 @@ Template rendered for each item.
 static ngTemplateContextGuard<TItem>(_directive, value): value is IActivityLogEntryContext<TItem>;
 ```
 
-Defined in: libs/ui/src/components/activity-log/ActivityLogEntryDirective.ts:13
+Defined in: [libs/ui/src/components/activity-log/ActivityLogEntryDirective.ts:13](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogEntryDirective.ts#L13)
 
 Supplies the template context type to Angular's compiler.
 
@@ -67,7 +67,7 @@ Supplies the template context type to Angular's compiler.
 
 | Type Parameter |
 | ------ |
-| `TItem` |
+| <a id="type-parameter-titem"></a> `TItem` |
 
 #### Parameters
 

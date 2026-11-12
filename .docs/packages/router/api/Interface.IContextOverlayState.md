@@ -14,7 +14,7 @@ Address of one contextual overlay. Omitting the identifier selects the target's 
 ### context?
 
 ```ts
-readonly optional context?: string;
+readonly context?: string;
 ```
 
 Defined in: [context-overlay/IContextOverlayState.ts:12](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/context-overlay/IContextOverlayState.ts#L12)
@@ -26,7 +26,7 @@ Optional addressable context interpreted by the target.
 ### id?
 
 ```ts
-readonly optional id?: string;
+readonly id?: string;
 ```
 
 Defined in: [context-overlay/IContextOverlayState.ts:10](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/context-overlay/IContextOverlayState.ts#L10)

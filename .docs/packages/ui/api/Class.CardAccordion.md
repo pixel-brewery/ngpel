@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: CardAccordion
 
-Defined in: libs/ui/src/components/card/CardAccordion.ts:13
+Defined in: [libs/ui/src/components/card/CardAccordion.ts:13](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/card/CardAccordion.ts#L13)
 
 Coordinates the expansion of cards within one owning view.
 
@@ -31,7 +31,7 @@ new CardAccordion(): CardAccordion;
 get expandedCard(): Signal<object | null>;
 ```
 
-Defined in: libs/ui/src/components/card/CardAccordion.ts:42
+Defined in: [libs/ui/src/components/card/CardAccordion.ts:42](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/card/CardAccordion.ts#L42)
 
 The currently expanded card, if any.
 
@@ -49,7 +49,7 @@ The currently expanded card, if any.
 get isExpandable(): Signal<boolean>;
 ```
 
-Defined in: libs/ui/src/components/card/CardAccordion.ts:32
+Defined in: [libs/ui/src/components/card/CardAccordion.ts:32](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/card/CardAccordion.ts#L32)
 
 Whether cards in this view can be expanded individually.
 
@@ -65,7 +65,7 @@ Whether cards in this view can be expanded individually.
 release(card): void;
 ```
 
-Defined in: libs/ui/src/components/card/CardAccordion.ts:81
+Defined in: [libs/ui/src/components/card/CardAccordion.ts:81](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/card/CardAccordion.ts#L81)
 
 Clears an active card when it leaves the owning view.
 
@@ -87,7 +87,7 @@ Clears an active card when it leaves the owning view.
 setExpandable(value): void;
 ```
 
-Defined in: libs/ui/src/components/card/CardAccordion.ts:56
+Defined in: [libs/ui/src/components/card/CardAccordion.ts:56](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/card/CardAccordion.ts#L56)
 
 Applies the owning view's responsive expansion mode.
 
@@ -109,7 +109,7 @@ Applies the owning view's responsive expansion mode.
 toggle(card): void;
 ```
 
-Defined in: libs/ui/src/components/card/CardAccordion.ts:71
+Defined in: [libs/ui/src/components/card/CardAccordion.ts:71](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/card/CardAccordion.ts#L71)
 
 Opens one card and closes the previous card, or closes the active card.
 

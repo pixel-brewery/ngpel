@@ -26,7 +26,7 @@ Stable unique id for this feature contribution.
 ### items?
 
 ```ts
-readonly optional items?: readonly IQuickCreateItem[];
+readonly items?: readonly IQuickCreateItem[];
 ```
 
 Defined in: [search/quick-create/IWithQuickCreateItemsOptions.ts:23](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/quick-create/IWithQuickCreateItemsOptions.ts#L23)
@@ -38,7 +38,7 @@ Static quick-create items to contribute.
 ### sources?
 
 ```ts
-readonly optional sources?: readonly Type<IQuickCreateItemSource>[];
+readonly sources?: readonly Type<IQuickCreateItemSource>[];
 ```
 
 Defined in: [search/quick-create/IWithQuickCreateItemsOptions.ts:28](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/quick-create/IWithQuickCreateItemsOptions.ts#L28)

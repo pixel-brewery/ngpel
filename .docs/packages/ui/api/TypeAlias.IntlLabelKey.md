@@ -18,4 +18,4 @@ translate.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `TIntl` | The internationalization class. |
+| <a id="type-parameter-tintl"></a> `TIntl` | The internationalization class. |

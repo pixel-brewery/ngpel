@@ -52,6 +52,4 @@ Up to two upper-case initials, or an empty string when there is no name.
 
 #### Implementation of
 
-```ts
-PipeTransform.transform
-```
+`PipeTransform.transform`

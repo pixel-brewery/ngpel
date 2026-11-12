@@ -13,14 +13,14 @@ A semantic search result produced by a search provider.
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `TData` | `unknown` | Type of the opaque payload the owning provider needs to activate the result. |
+| <a id="type-parameter-tdata"></a> `TData` | `unknown` | Type of the opaque payload the owning provider needs to activate the result. |
 
 ## Properties
 
 ### data?
 
 ```ts
-readonly optional data?: ReadonlyDeep<TData>;
+readonly data?: ReadonlyDeep<TData>;
 ```
 
 Defined in: [search/models/ISearchResult.ts:69](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ISearchResult.ts#L69)
@@ -33,7 +33,7 @@ the result travels through ranking, grouping and rendering, and none of those ma
 ### description?
 
 ```ts
-readonly optional description?: string;
+readonly description?: string;
 ```
 
 Defined in: [search/models/ISearchResult.ts:43](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ISearchResult.ts#L43)
@@ -45,7 +45,7 @@ Optional second line of descriptive text.
 ### group?
 
 ```ts
-readonly optional group?: string;
+readonly group?: string;
 ```
 
 Defined in: [search/models/ISearchResult.ts:53](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ISearchResult.ts#L53)
@@ -57,7 +57,7 @@ Optional group heading. Results without a group are grouped by their provider id
 ### groupKey?
 
 ```ts
-readonly optional groupKey?: string;
+readonly groupKey?: string;
 ```
 
 Defined in: [search/models/ISearchResult.ts:58](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ISearchResult.ts#L58)
@@ -69,7 +69,7 @@ Translation key for the result section. Results with the same key share a sectio
 ### icon?
 
 ```ts
-readonly optional icon?: string;
+readonly icon?: string;
 ```
 
 Defined in: [search/models/ISearchResult.ts:48](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ISearchResult.ts#L48)
@@ -96,7 +96,7 @@ are collapsed to the first occurrence.
 ### keywords?
 
 ```ts
-readonly optional keywords?: readonly string[];
+readonly keywords?: readonly string[];
 ```
 
 Defined in: [search/models/ISearchResult.ts:63](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ISearchResult.ts#L63)
@@ -120,7 +120,7 @@ Primary label text and the strongest ranking signal.
 ### providerId?
 
 ```ts
-readonly optional providerId?: string;
+readonly providerId?: string;
 ```
 
 Defined in: [search/models/ISearchResult.ts:28](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ISearchResult.ts#L28)
@@ -133,7 +133,7 @@ provider left it empty, so consumers can rely on it.
 ### rendererId?
 
 ```ts
-readonly optional rendererId?: string;
+readonly rendererId?: string;
 ```
 
 Defined in: [search/models/ISearchResult.ts:33](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ISearchResult.ts#L33)

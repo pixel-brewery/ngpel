@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: IResourceNavigationTarget
 
-Defined in: navigation/resource-navigation/IResourceNavigationTarget.ts:6
+Defined in: [navigation/resource-navigation/IResourceNavigationTarget.ts:6](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/navigation/resource-navigation/IResourceNavigationTarget.ts#L6)
 
 A feature-owned canonical address for a resource.
 
@@ -14,10 +14,10 @@ A feature-owned canonical address for a resource.
 ### canNavigate?
 
 ```ts
-readonly optional canNavigate?: (resourceId) => boolean;
+readonly canNavigate?: (resourceId) => boolean;
 ```
 
-Defined in: navigation/resource-navigation/IResourceNavigationTarget.ts:19
+Defined in: [navigation/resource-navigation/IResourceNavigationTarget.ts:19](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/navigation/resource-navigation/IResourceNavigationTarget.ts#L19)
 
 Optional application policy evaluated when building a link.
 
@@ -39,7 +39,7 @@ Optional application policy evaluated when building a link.
 readonly createUrl: (resourceId) => string;
 ```
 
-Defined in: navigation/resource-navigation/IResourceNavigationTarget.ts:22
+Defined in: [navigation/resource-navigation/IResourceNavigationTarget.ts:22](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/navigation/resource-navigation/IResourceNavigationTarget.ts#L22)
 
 Creates a root-relative application URL for the resource, including any overlay parameters.
 
@@ -58,13 +58,13 @@ Creates a root-relative application URL for the resource, including any overlay 
 ### sources?
 
 ```ts
-readonly optional sources?: readonly {
+readonly sources?: readonly {
   idField: string;
   key: string;
 }[];
 ```
 
-Defined in: navigation/resource-navigation/IResourceNavigationTarget.ts:11
+Defined in: [navigation/resource-navigation/IResourceNavigationTarget.ts:11](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/navigation/resource-navigation/IResourceNavigationTarget.ts#L11)
 
 Source rows that identify the resource, including rows with a different primary identifier.
 
@@ -76,6 +76,6 @@ Source rows that identify the resource, including rows with a different primary 
 readonly targetKey: string;
 ```
 
-Defined in: navigation/resource-navigation/IResourceNavigationTarget.ts:8
+Defined in: [navigation/resource-navigation/IResourceNavigationTarget.ts:8](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/navigation/resource-navigation/IResourceNavigationTarget.ts#L8)
 
 Semantic key used by other features to locate the resource.

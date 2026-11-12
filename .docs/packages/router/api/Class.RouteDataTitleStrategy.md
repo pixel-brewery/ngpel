@@ -43,9 +43,7 @@ new RouteDataTitleStrategy(): RouteDataTitleStrategy;
 
 #### Inherited from
 
-```ts
-TitleStrategy.constructor
-```
+`TitleStrategy.constructor`
 
 ## Methods
 
@@ -71,6 +69,4 @@ Updates the document title and, when the route declares one, the meta descriptio
 
 #### Overrides
 
-```ts
-TitleStrategy.updateTitle
-```
+`TitleStrategy.updateTitle`

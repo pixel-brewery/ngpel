@@ -19,7 +19,7 @@ Subscribes once to a source, forwarding its values until completion, error or ca
 
 | Type Parameter |
 | ------ |
-| `T` |
+| <a id="type-parameter-t"></a> `T` |
 
 ## Parameters
 

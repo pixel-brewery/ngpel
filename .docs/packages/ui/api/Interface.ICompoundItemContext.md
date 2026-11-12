@@ -13,7 +13,7 @@ Context exposed to a compound item's dynamic template.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | Collection item type supplied by the consumer. |
+| <a id="type-parameter-t"></a> `T` | Collection item type supplied by the consumer. |
 
 ## Properties
 

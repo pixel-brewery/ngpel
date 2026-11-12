@@ -13,7 +13,7 @@ Renders a collection with single-item, list or stacked editing and consumer-owne
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | Collection item type supplied by the consumer. |
+| <a id="type-parameter-t"></a> `T` | Collection item type supplied by the consumer. |
 
 ## Implements
 
@@ -707,9 +707,7 @@ No tour identifiers or feature-specific anchors are stored here.
 
 #### Implementation of
 
-```ts
-ITourAccessor.targets
-```
+`ITourAccessor.targets`
 
 ***
 
@@ -874,9 +872,7 @@ Applies the optional uncontrolled starting mode after Angular initializes the co
 
 #### Implementation of
 
-```ts
-OnInit.ngOnInit
-```
+`OnInit.ngOnInit`
 
 ***
 

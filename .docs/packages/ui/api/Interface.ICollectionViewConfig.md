@@ -13,9 +13,9 @@ Complete collection-view configuration for a feature collection.
 
 | Type Parameter | Default type |
 | ------ | ------ |
-| `TItem` | - |
-| `TView` *extends* `string` | - |
-| `TCalendarItem` | `TItem` |
+| <a id="type-parameter-titem"></a> `TItem` | - |
+| <a id="type-parameter-tview"></a> `TView` *extends* `string` | - |
+| <a id="type-parameter-tcalendaritem"></a> `TCalendarItem` | `TItem` |
 
 ## Properties
 

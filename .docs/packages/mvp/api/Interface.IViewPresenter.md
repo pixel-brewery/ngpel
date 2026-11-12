@@ -13,7 +13,8 @@ knowing which concrete presenter is bound.
 
 ## Extends
 
-- [`InitializableRef`](TypeAlias.InitializableRef).[`DisposableRef`](TypeAlias.DisposableRef)
+- [`InitializableRef`](TypeAlias.InitializableRef)
+- [`DisposableRef`](TypeAlias.DisposableRef)
 
 ## Properties
 

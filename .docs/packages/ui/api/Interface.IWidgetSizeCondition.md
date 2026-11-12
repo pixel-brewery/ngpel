@@ -15,7 +15,7 @@ either an exact span or an inclusive [IWidgetSizeRange](Interface.IWidgetSizeRan
 ### columns?
 
 ```ts
-readonly optional columns?: number | IWidgetSizeRange;
+readonly columns?: number | IWidgetSizeRange;
 ```
 
 Defined in: [libs/ui/src/widget/models/IWidgetSizeCondition.ts:19](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidgetSizeCondition.ts#L19)
@@ -27,7 +27,7 @@ The matching column span, exact or ranged.
 ### rows?
 
 ```ts
-readonly optional rows?: number | IWidgetSizeRange;
+readonly rows?: number | IWidgetSizeRange;
 ```
 
 Defined in: [libs/ui/src/widget/models/IWidgetSizeCondition.ts:24](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidgetSizeCondition.ts#L24)

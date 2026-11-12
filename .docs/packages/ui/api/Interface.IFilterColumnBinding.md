@@ -14,7 +14,7 @@ to resolve labels from column definitions and produce [IFilterDefinition](Interf
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | The entity type whose keys constrain the allowed column keys. |
+| <a id="type-parameter-t"></a> `T` | The entity type whose keys constrain the allowed column keys. |
 
 ## Properties
 
@@ -33,7 +33,7 @@ The column key this binding refers to. Must be a property key of `T`.
 ### options?
 
 ```ts
-readonly optional options?: readonly IFilterOption[];
+readonly options?: readonly IFilterOption[];
 ```
 
 Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:278](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L278)
@@ -45,7 +45,7 @@ Available options when [type](#type) is `'select'` or `'multi-select'`.
 ### placeholder?
 
 ```ts
-readonly optional placeholder?: string;
+readonly placeholder?: string;
 ```
 
 Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:273](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L273)

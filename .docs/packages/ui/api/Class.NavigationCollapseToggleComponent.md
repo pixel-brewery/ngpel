@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: NavigationCollapseToggleComponent
 
-Defined in: libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:67
+Defined in: [libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:67](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts#L67)
 
 Switches the application navigation between its labelled and icon-only forms.
 The shell owns the persisted state and positions the control through its inline and block offsets.
@@ -18,7 +18,7 @@ The shell owns the persisted state and positions the control through its inline 
 new NavigationCollapseToggleComponent(): NavigationCollapseToggleComponent;
 ```
 
-Defined in: libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:80
+Defined in: [libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:80](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts#L80)
 
 Connects the navigation hover group and optional platform shortcut to the toggle lifetime.
 
@@ -34,7 +34,7 @@ Connects the navigation hover group and optional platform shortcut to the toggle
 protected readonly ariaShortcut: Signal<string | null>;
 ```
 
-Defined in: libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:131
+Defined in: [libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:131](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts#L131)
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: libs/ui/src/components/navigation/NavigationCollapseToggleComponent.
 readonly collapsed: InputSignal<boolean>;
 ```
 
-Defined in: libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:114
+Defined in: [libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:114](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts#L114)
 
 Whether the shell currently renders icon-only navigation.
 
@@ -56,7 +56,7 @@ Whether the shell currently renders icon-only navigation.
 readonly collapsedChange: OutputEmitterRef<boolean>;
 ```
 
-Defined in: libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:126
+Defined in: [libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:126](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts#L126)
 
 Requested state. The shell applies and persists it.
 
@@ -68,7 +68,7 @@ Requested state. The shell applies and persists it.
 readonly controlKeyLabel: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:120
+Defined in: [libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:120](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts#L120)
 
 Localized name of Ctrl displayed in the shortcut tooltip.
 
@@ -80,7 +80,7 @@ Localized name of Ctrl displayed in the shortcut tooltip.
 readonly disabled: InputSignal<boolean>;
 ```
 
-Defined in: libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:122
+Defined in: [libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:122](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts#L122)
 
 Whether pointer and keyboard activation are unavailable.
 
@@ -92,7 +92,7 @@ Whether pointer and keyboard activation are unavailable.
 readonly label: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:116
+Defined in: [libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:116](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts#L116)
 
 Accessible name of the current action, supplied by the shell.
 
@@ -104,7 +104,7 @@ Accessible name of the current action, supplied by the shell.
 readonly navigation: InputSignal<IHasElementRef | null>;
 ```
 
-Defined in: libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:112
+Defined in: [libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:112](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts#L112)
 
 Navigation host providing the hover region and accessible controls ID.
 
@@ -116,7 +116,7 @@ Navigation host providing the hover region and accessible controls ID.
 protected readonly navigationId: Signal<string | null>;
 ```
 
-Defined in: libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:130
+Defined in: [libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:130](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts#L130)
 
 ***
 
@@ -126,7 +126,7 @@ Defined in: libs/ui/src/components/navigation/NavigationCollapseToggleComponent.
 readonly revealed: Signal<boolean>;
 ```
 
-Defined in: libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:128
+Defined in: [libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:128](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts#L128)
 
 Whether navigation hover or keyboard focus reveals the toggle.
 
@@ -138,7 +138,7 @@ Whether navigation hover or keyboard focus reveals the toggle.
 readonly shortcutKey: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:118
+Defined in: [libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:118](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts#L118)
 
 Optional key to combine with Ctrl or Command.
 
@@ -150,7 +150,7 @@ Optional key to combine with Ctrl or Command.
 readonly testId: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:124
+Defined in: [libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:124](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts#L124)
 
 Optional automation identifier for the action.
 
@@ -162,7 +162,7 @@ Optional automation identifier for the action.
 protected readonly tooltip: Signal<string>;
 ```
 
-Defined in: libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:135
+Defined in: [libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:135](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts#L135)
 
 ## Methods
 
@@ -172,7 +172,7 @@ Defined in: libs/ui/src/components/navigation/NavigationCollapseToggleComponent.
 protected activate(): void;
 ```
 
-Defined in: libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:147
+Defined in: [libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:147](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts#L147)
 
 #### Returns
 
@@ -186,7 +186,7 @@ Defined in: libs/ui/src/components/navigation/NavigationCollapseToggleComponent.
 protected focusEntered(event): void;
 ```
 
-Defined in: libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:153
+Defined in: [libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:153](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts#L153)
 
 #### Parameters
 
@@ -206,7 +206,7 @@ Defined in: libs/ui/src/components/navigation/NavigationCollapseToggleComponent.
 protected focusLeft(): void;
 ```
 
-Defined in: libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:158
+Defined in: [libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:158](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts#L158)
 
 #### Returns
 
@@ -220,7 +220,7 @@ Defined in: libs/ui/src/components/navigation/NavigationCollapseToggleComponent.
 protected keyboardFocused(): void;
 ```
 
-Defined in: libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:162
+Defined in: [libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts:162](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationCollapseToggleComponent.ts#L162)
 
 #### Returns
 

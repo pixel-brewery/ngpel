@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: IOffsetCollectionPage\<T\>
 
-Defined in: rx/pagination/IOffsetCollectionPage.ts:7
+Defined in: [rx/pagination/IOffsetCollectionPage.ts:7](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/rx/pagination/IOffsetCollectionPage.ts#L7)
 
 A page or a combined result from an offset-paginated collection.
 
@@ -13,7 +13,7 @@ A page or a combined result from an offset-paginated collection.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | The collection item type. |
+| <a id="type-parameter-t"></a> `T` | The collection item type. |
 
 ## Properties
 
@@ -23,7 +23,7 @@ A page or a combined result from an offset-paginated collection.
 readonly items: readonly T[];
 ```
 
-Defined in: rx/pagination/IOffsetCollectionPage.ts:9
+Defined in: [rx/pagination/IOffsetCollectionPage.ts:9](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/rx/pagination/IOffsetCollectionPage.ts#L9)
 
 Items returned by the request.
 
@@ -35,6 +35,6 @@ Items returned by the request.
 readonly total: number;
 ```
 
-Defined in: rx/pagination/IOffsetCollectionPage.ts:12
+Defined in: [rx/pagination/IOffsetCollectionPage.ts:12](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/rx/pagination/IOffsetCollectionPage.ts#L12)
 
 The latest total reported by the collection endpoint.

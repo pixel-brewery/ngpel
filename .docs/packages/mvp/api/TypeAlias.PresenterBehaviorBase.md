@@ -6,7 +6,7 @@ editUrl: false
 # Type Alias: PresenterBehaviorBase
 
 ```ts
-type PresenterBehaviorBase = (...args) => ViewPresenter;
+type PresenterBehaviorBase = abstract new (...args) => ViewPresenter;
 ```
 
 Defined in: [behaviors/PresenterBehaviorBase.ts:18](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/behaviors/PresenterBehaviorBase.ts#L18)

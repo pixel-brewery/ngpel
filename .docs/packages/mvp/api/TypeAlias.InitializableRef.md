@@ -7,7 +7,7 @@ editUrl: false
 
 ```ts
 type InitializableRef = {
-  initialize: void;
+  initialize(): void;
 };
 ```
 

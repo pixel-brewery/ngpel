@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: PointerIdleDirective
 
-Defined in: libs/ui/src/directives/pointer-idle/PointerIdleDirective.ts:43
+Defined in: [libs/ui/src/directives/pointer-idle/PointerIdleDirective.ts:43](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/pointer-idle/PointerIdleDirective.ts#L43)
 
 Reports pointer inactivity on its host.
 
@@ -29,7 +29,7 @@ contains visible keyboard focus. Devices without hover capability are never repo
 new PointerIdleDirective(): PointerIdleDirective;
 ```
 
-Defined in: libs/ui/src/directives/pointer-idle/PointerIdleDirective.ts:63
+Defined in: [libs/ui/src/directives/pointer-idle/PointerIdleDirective.ts:63](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/pointer-idle/PointerIdleDirective.ts#L63)
 
 Observes host activity on hover-capable browsers and follows the disabled state.
 
@@ -45,7 +45,7 @@ Observes host activity on hover-capable browsers and follows the disabled state.
 readonly disabled: InputSignal<boolean>;
 ```
 
-Defined in: libs/ui/src/directives/pointer-idle/PointerIdleDirective.ts:103
+Defined in: [libs/ui/src/directives/pointer-idle/PointerIdleDirective.ts:103](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/pointer-idle/PointerIdleDirective.ts#L103)
 
 Suspends idle detection; the host is reported active while it is disabled.
 
@@ -57,7 +57,7 @@ Suspends idle detection; the host is reported active while it is disabled.
 readonly hold: InputSignal<string | null>;
 ```
 
-Defined in: libs/ui/src/directives/pointer-idle/PointerIdleDirective.ts:111
+Defined in: [libs/ui/src/directives/pointer-idle/PointerIdleDirective.ts:111](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/pointer-idle/PointerIdleDirective.ts#L111)
 
 CSS selector list of regions that keep the host active while hovered or keyboard-focused.
 
@@ -69,7 +69,7 @@ CSS selector list of regions that keep the host active while hovered or keyboard
 readonly timeout: InputSignal<number>;
 ```
 
-Defined in: libs/ui/src/directives/pointer-idle/PointerIdleDirective.ts:95
+Defined in: [libs/ui/src/directives/pointer-idle/PointerIdleDirective.ts:95](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/pointer-idle/PointerIdleDirective.ts#L95)
 
 Inactivity in milliseconds before the host is reported idle.
 
@@ -83,7 +83,7 @@ Inactivity in milliseconds before the host is reported idle.
 get isIdle(): Signal<boolean>;
 ```
 
-Defined in: libs/ui/src/directives/pointer-idle/PointerIdleDirective.ts:119
+Defined in: [libs/ui/src/directives/pointer-idle/PointerIdleDirective.ts:119](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/pointer-idle/PointerIdleDirective.ts#L119)
 
 Indicates whether the host is currently idle.
 

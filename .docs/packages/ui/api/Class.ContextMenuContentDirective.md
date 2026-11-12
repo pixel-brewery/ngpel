@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: ContextMenuContentDirective\<T\>
 
-Defined in: libs/ui/src/components/context-menu/ContextMenuContentDirective.ts:15
+Defined in: [libs/ui/src/components/context-menu/ContextMenuContentDirective.ts:15](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/context-menu/ContextMenuContentDirective.ts#L15)
 
 Marks the declarative HTML template rendered inside a context menu.
 
@@ -13,7 +13,7 @@ Marks the declarative HTML template rendered inside a context menu.
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `T` | `unknown` | Context value resolved by the menu trigger. |
+| <a id="type-parameter-t"></a> `T` | `unknown` | Context value resolved by the menu trigger. |
 
 ## Constructors
 
@@ -35,7 +35,7 @@ new ContextMenuContentDirective<T>(): ContextMenuContentDirective<T>;
 readonly items: InputSignal<"" | readonly T[]>;
 ```
 
-Defined in: libs/ui/src/components/context-menu/ContextMenuContentDirective.ts:28
+Defined in: [libs/ui/src/components/context-menu/ContextMenuContentDirective.ts:28](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/context-menu/ContextMenuContentDirective.ts#L28)
 
 Optionally binds a collection so Angular can infer the type of the implicit item.
 
@@ -47,7 +47,7 @@ Optionally binds a collection so Angular can infer the type of the implicit item
 readonly templateRef: TemplateRef<IContextMenuContentContext<T>>;
 ```
 
-Defined in: libs/ui/src/components/context-menu/ContextMenuContentDirective.ts:21
+Defined in: [libs/ui/src/components/context-menu/ContextMenuContentDirective.ts:21](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/context-menu/ContextMenuContentDirective.ts#L21)
 
 Template rendered with the active item as its implicit value.
 
@@ -59,7 +59,7 @@ Template rendered with the active item as its implicit value.
 static ngTemplateContextGuard<TContext>(directive, context): context is IContextMenuContentContext<TContext>;
 ```
 
-Defined in: libs/ui/src/components/context-menu/ContextMenuContentDirective.ts:44
+Defined in: [libs/ui/src/components/context-menu/ContextMenuContentDirective.ts:44](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/context-menu/ContextMenuContentDirective.ts#L44)
 
 Narrows the Angular template context to the context-menu contract.
 
@@ -67,7 +67,7 @@ Narrows the Angular template context to the context-menu contract.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `TContext` | Context value resolved by the menu trigger. |
+| <a id="type-parameter-tcontext"></a> `TContext` | Context value resolved by the menu trigger. |
 
 #### Parameters
 

@@ -16,7 +16,7 @@ by the application; the library ships no default.
 ### minLength?
 
 ```ts
-readonly optional minLength?: number;
+readonly minLength?: number;
 ```
 
 Defined in: [password-strength/IPasswordStrengthConfig.ts:19](https://github.com/pixel-brewery/ngpel/blob/main/libs/forms/src/password-strength/IPasswordStrengthConfig.ts#L19)

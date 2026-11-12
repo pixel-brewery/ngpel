@@ -141,6 +141,7 @@ describe('ViewSlotAnchorTargetDirective', () => {
         setElementHeight(host, 100);
         outlet.append(precedingAnchor, host);
         scrollContainer.append(outlet);
+        document.body.append(scrollContainer);
         target = signal('legal-content');
         originalScrollIntoView = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'scrollIntoView');
         scrollIntoView = vi.fn();
@@ -155,6 +156,7 @@ describe('ViewSlotAnchorTargetDirective', () => {
 
     afterEach(() => {
         TestBed.resetTestingModule();
+        scrollContainer.remove();
         vi.clearAllTimers();
         vi.useRealTimers();
         vi.restoreAllMocks();

@@ -36,9 +36,7 @@ Creates a new instance of the KeepOptimisticOnFailurePolicy class.
 
 #### Overrides
 
-```ts
-OperationPolicy<'failure'>.constructor
-```
+`OperationPolicy<'failure'>.constructor`
 
 ## Properties
 
@@ -56,9 +54,7 @@ Defined in: [operation-queue/policies/abstracts/OperationPolicyBase.ts:20](https
 
 #### Inherited from
 
-```ts
-OperationPolicy.kind
-```
+`OperationPolicy.kind`
 
 ***
 

@@ -17,14 +17,14 @@ Adds a paging window and a page-change command to a presenter.
 
 | Type Parameter |
 | ------ |
-| `T` *extends* [`PresenterBehaviorBase`](TypeAlias.PresenterBehaviorBase) |
+| <a id="type-parameter-t"></a> `T` *extends* [`PresenterBehaviorBase`](TypeAlias.PresenterBehaviorBase) |
 
 ## Parameters
 
 | Parameter | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
 | `base` | `T` | `undefined` | The class to extend. |
-| `pageSize` | `number` | `DEFAULT_PAGE_SIZE` | Items per page; defaults to [DEFAULT\_PAGE\_SIZE](Variable.DEFAULT_PAGE_SIZE). |
+| `pageSize?` | `number` | `DEFAULT_PAGE_SIZE` | Items per page; defaults to [DEFAULT\_PAGE\_SIZE](Variable.DEFAULT_PAGE_SIZE). |
 
 ## Returns
 

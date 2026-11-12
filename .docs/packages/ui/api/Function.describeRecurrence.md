@@ -16,7 +16,7 @@ function describeRecurrence(
 };
 ```
 
-Defined in: libs/ui/src/components/recurrence-editor/describeRecurrence.ts:29
+Defined in: [libs/ui/src/components/recurrence-editor/describeRecurrence.ts:29](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/describeRecurrence.ts#L29)
 
 Describes the frequency and end condition for read-only recurrence fields.
 
@@ -25,8 +25,8 @@ Describes the frequency and end condition for read-only recurrence fields.
 | Parameter | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
 | `value` | [`IRecurrenceValue`](Interface.IRecurrenceValue) \| `null` \| `undefined` | `undefined` | Recurrence to describe. |
-| `labels` | `Partial`\<[`IRecurrenceSummaryLabels`](Interface.IRecurrenceSummaryLabels)\> | `{}` | Optional application translations for sentence fragments. |
-| `locale` | `string` | `'en'` | Locale for dates, weekdays and time. |
+| `labels?` | `Partial`\<[`IRecurrenceSummaryLabels`](Interface.IRecurrenceSummaryLabels)\> | `{}` | Optional application translations for sentence fragments. |
+| `locale?` | `string` | `'en'` | Locale for dates, weekdays and time. |
 
 ## Returns
 
@@ -41,5 +41,5 @@ The recurrence description and a separate end-condition description.
 
 | Name | Type | Defined in |
 | ------ | ------ | ------ |
-| `detail` | `string` | libs/ui/src/components/recurrence-editor/describeRecurrence.ts:33 |
-| `head` | `string` | libs/ui/src/components/recurrence-editor/describeRecurrence.ts:33 |
+| `detail` | `string` | [libs/ui/src/components/recurrence-editor/describeRecurrence.ts:33](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/describeRecurrence.ts#L33) |
+| `head` | `string` | [libs/ui/src/components/recurrence-editor/describeRecurrence.ts:33](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/describeRecurrence.ts#L33) |

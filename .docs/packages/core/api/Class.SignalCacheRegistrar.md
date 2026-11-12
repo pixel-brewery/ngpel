@@ -14,8 +14,8 @@ product registries (navigation items, commands, widgets) that templates can obse
 
 | Type Parameter |
 | ------ |
-| `TKey` |
-| `TValue` |
+| <a id="type-parameter-tkey"></a> `TKey` |
+| <a id="type-parameter-tvalue"></a> `TValue` |
 
 ## Constructors
 

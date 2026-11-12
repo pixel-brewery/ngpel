@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: RecurrenceSummaryPipe
 
-Defined in: libs/ui/src/components/recurrence-editor/RecurrenceSummaryPipe.ts:8
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceSummaryPipe.ts:8](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceSummaryPipe.ts#L8)
 
 Renders a localized description of the recurrence in a read-only view.
 
@@ -38,7 +38,7 @@ transform(
 ): string;
 ```
 
-Defined in: libs/ui/src/components/recurrence-editor/RecurrenceSummaryPipe.ts:25
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceSummaryPipe.ts:25](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceSummaryPipe.ts#L25)
 
 Formats one part of the recurrence description.
 
@@ -47,7 +47,7 @@ Formats one part of the recurrence description.
 | Parameter | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
 | `value` | [`IRecurrenceValue`](Interface.IRecurrenceValue) \| `null` \| `undefined` | `undefined` | Recurrence to describe. |
-| `part` | `"full"` \| `"detail"` \| `"head"` | `'full'` | Which part of the description to render. |
+| `part?` | `"full"` \| `"detail"` \| `"head"` | `'full'` | Which part of the description to render. |
 | `labels?` | `Partial`\<[`IRecurrenceSummaryLabels`](Interface.IRecurrenceSummaryLabels)\> | `undefined` | Optional application translations. |
 | `locale?` | `string` | `...` | Locale override for calendar display. |
 
@@ -59,6 +59,4 @@ The description text.
 
 #### Implementation of
 
-```ts
-PipeTransform.transform
-```
+`PipeTransform.transform`

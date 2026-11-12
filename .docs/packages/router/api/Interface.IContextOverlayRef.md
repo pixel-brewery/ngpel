@@ -13,7 +13,7 @@ A mounted surface owned by a contextual overlay target.
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `TResult` | `unknown` | The surface's close result. |
+| <a id="type-parameter-tresult"></a> `TResult` | `unknown` | The surface's close result. |
 
 ## Properties
 
@@ -48,7 +48,7 @@ Closes the surface and settles its `closed` stream.
 ### onOpened()?
 
 ```ts
-optional onOpened(): void;
+onOpened?(): void;
 ```
 
 Defined in: [context-overlay/IContextOverlayRef.ts:15](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/context-overlay/IContextOverlayRef.ts#L15)

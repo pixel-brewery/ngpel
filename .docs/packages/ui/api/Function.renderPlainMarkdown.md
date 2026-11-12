@@ -20,7 +20,7 @@ own HTML sanitizer stays active on this path because no custom elements are invo
 | Parameter | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
 | `text` | `string` | `undefined` | The Markdown source. |
-| `breaks` | `boolean` | `false` | Whether single newlines become line breaks. |
+| `breaks?` | `boolean` | `false` | Whether single newlines become line breaks. |
 
 ## Returns
 

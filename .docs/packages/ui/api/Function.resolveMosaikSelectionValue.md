@@ -9,7 +9,7 @@ editUrl: false
 function resolveMosaikSelectionValue(event): string | null;
 ```
 
-Defined in: libs/ui/src/events/resolveMosaikSelectionValue.ts:15
+Defined in: [libs/ui/src/events/resolveMosaikSelectionValue.ts:15](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/events/resolveMosaikSelectionValue.ts#L15)
 
 Resolves the string value selected by a Mosaik selector.
 

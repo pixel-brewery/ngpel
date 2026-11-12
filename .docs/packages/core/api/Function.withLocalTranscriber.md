@@ -19,7 +19,7 @@ recording.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `options` | [`ILocalVoiceTranscriberOptions`](Interface.ILocalVoiceTranscriberOptions) | Recognition language and result options; defaults apply per option. |
+| `options?` | [`ILocalVoiceTranscriberOptions`](Interface.ILocalVoiceTranscriberOptions) | Recognition language and result options; defaults apply per option. |
 
 ## Returns
 

@@ -13,8 +13,8 @@ Provides the host DOM element and the original Angular environment context to a 
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `TComponent` *extends* `object` | - | The concrete component instance type. |
-| `TElement` *extends* `HTMLElement` | `HTMLElement` | The concrete host element type. |
+| <a id="type-parameter-tcomponent"></a> `TComponent` *extends* `object` | - | The concrete component instance type. |
+| <a id="type-parameter-telement"></a> `TElement` *extends* `HTMLElement` | `HTMLElement` | The concrete host element type. |
 
 ## Properties
 

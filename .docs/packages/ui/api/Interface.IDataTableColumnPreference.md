@@ -38,7 +38,7 @@ Stable data-table column key.
 ### width?
 
 ```ts
-readonly optional width?: number;
+readonly width?: number;
 ```
 
 Defined in: [libs/ui/src/directives/data-table-preferences/IDataTableColumnPreference.ts:26](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/data-table-preferences/IDataTableColumnPreference.ts#L26)

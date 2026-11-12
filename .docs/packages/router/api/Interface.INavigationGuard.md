@@ -33,7 +33,7 @@ export class CapabilityNavigationGuard implements INavigationGuard {
 ### stateChanges?
 
 ```ts
-readonly optional stateChanges?: Observable<unknown>;
+readonly stateChanges?: Observable<unknown>;
 ```
 
 Defined in: [navigation/INavigationGuard.ts:39](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/navigation/INavigationGuard.ts#L39)

@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: IActivityLogEntryContext\<T\>
 
-Defined in: libs/ui/src/components/activity-log/IActivityLogEntryContext.ts:2
+Defined in: [libs/ui/src/components/activity-log/IActivityLogEntryContext.ts:2](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogEntryContext.ts#L2)
 
 Data provided to the caller's projected activity entry template.
 
@@ -13,7 +13,7 @@ Data provided to the caller's projected activity entry template.
 
 | Type Parameter |
 | ------ |
-| `T` |
+| <a id="type-parameter-t"></a> `T` |
 
 ## Properties
 
@@ -23,6 +23,6 @@ Data provided to the caller's projected activity entry template.
 readonly $implicit: T;
 ```
 
-Defined in: libs/ui/src/components/activity-log/IActivityLogEntryContext.ts:4
+Defined in: [libs/ui/src/components/activity-log/IActivityLogEntryContext.ts:4](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogEntryContext.ts#L4)
 
 Entry returned by the controller's data source.

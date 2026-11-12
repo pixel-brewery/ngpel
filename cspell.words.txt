@@ -22,7 +22,6 @@ analyse
 analysed
 anmelden
 announceable
-apexcharts
 archipel
 añez
 bearbeiten

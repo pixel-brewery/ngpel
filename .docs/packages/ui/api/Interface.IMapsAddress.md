@@ -15,7 +15,7 @@ what an API actually returns rather than what a complete address would hold.
 ### city?
 
 ```ts
-readonly optional city?: string | null;
+readonly city?: string | null;
 ```
 
 Defined in: [libs/ui/src/pipes/links/IMapsAddress.ts:13](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/pipes/links/IMapsAddress.ts#L13)
@@ -27,7 +27,7 @@ The city.
 ### country?
 
 ```ts
-readonly optional country?: string | null;
+readonly country?: string | null;
 ```
 
 Defined in: [libs/ui/src/pipes/links/IMapsAddress.ts:20](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/pipes/links/IMapsAddress.ts#L20)
@@ -39,7 +39,7 @@ The country.
 ### postalCode?
 
 ```ts
-readonly optional postalCode?: string | null;
+readonly postalCode?: string | null;
 ```
 
 Defined in: [libs/ui/src/pipes/links/IMapsAddress.ts:27](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/pipes/links/IMapsAddress.ts#L27)
@@ -51,7 +51,7 @@ The postal code.
 ### street?
 
 ```ts
-readonly optional street?: string | null;
+readonly street?: string | null;
 ```
 
 Defined in: [libs/ui/src/pipes/links/IMapsAddress.ts:34](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/pipes/links/IMapsAddress.ts#L34)
@@ -63,7 +63,7 @@ The street without its number.
 ### streetNumber?
 
 ```ts
-readonly optional streetNumber?: string | null;
+readonly streetNumber?: string | null;
 ```
 
 Defined in: [libs/ui/src/pipes/links/IMapsAddress.ts:41](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/pipes/links/IMapsAddress.ts#L41)

@@ -38,7 +38,7 @@ Opens an image for rectangular cropping.
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
 | `file` | `File` | Source image file. |
-| `config` | [`IImageCropConfig`](Interface.IImageCropConfig) | Optional behavior and label overrides. |
+| `config?` | [`IImageCropConfig`](Interface.IImageCropConfig) | Optional behavior and label overrides. |
 
 #### Returns
 

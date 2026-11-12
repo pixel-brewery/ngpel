@@ -17,8 +17,8 @@ Creates a codec that persists boolean values with explicit textual representatio
 
 | Parameter | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
-| `trueValue` | `string` | `'true'` | The serialized representation of `true` (defaults to `'true'`). |
-| `falseValue` | `string` | `'false'` | The serialized representation of `false` (defaults to `'false'`). |
+| `trueValue?` | `string` | `'true'` | The serialized representation of `true` (defaults to `'true'`). |
+| `falseValue?` | `string` | `'false'` | The serialized representation of `false` (defaults to `'false'`). |
 
 ## Returns
 
