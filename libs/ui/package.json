@@ -31,7 +31,7 @@
     },
     "dependencies": {
         "diff": "9.0.0",
-        "tslib": "2.8.1"
+        "tslib": "2.9.1"
     },
     "peerDependencies": {
         "@angular/cdk": ">=22.0.0 <23.0.0",
@@ -57,7 +57,6 @@
         "@pixel-brewery/ngpel-core": "0.0.3",
         "@pixel-brewery/ngpel-mvp": "0.0.3",
         "@pixel-brewery/ngpel-router": "0.0.3",
-        "apexcharts": ">=5.0.0",
         "marked": ">=18.0.0",
         "rxjs": ">=7.8.0 <8.0.0"
     },
@@ -102,9 +101,6 @@
             "optional": true
         },
         "@pixel-brewery/mosaik-elements-foundation": {
-            "optional": true
-        },
-        "apexcharts": {
             "optional": true
         }
     },

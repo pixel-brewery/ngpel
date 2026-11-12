@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: CollapsibleNavigationPanelComponent
 
-Defined in: libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts:151
+Defined in: [libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts:151](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts#L151)
 
 A page-level navigation panel with independent scrolling and a compact rail.
 Both navigation views stay mounted. On narrow viewports the expanded panel overlays adjacent content.
@@ -18,7 +18,7 @@ Both navigation views stay mounted. On narrow viewports the expanded panel overl
 new CollapsibleNavigationPanelComponent(): CollapsibleNavigationPanelComponent;
 ```
 
-Defined in: libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts:164
+Defined in: [libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts:164](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts#L164)
 
 Moves focus into an expanded overlay when it was opened from outside the panel.
 
@@ -34,7 +34,7 @@ Moves focus into an expanded overlay when it was opened from outside the panel.
 readonly collapseLabel: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts:183
+Defined in: [libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts:183](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts#L183)
 
 Accessible name of the collapse action.
 
@@ -46,7 +46,7 @@ Accessible name of the collapse action.
 readonly contentId: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts:179
+Defined in: [libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts:179](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts#L179)
 
 ID of the navigation content controlled by the toggle.
 
@@ -58,7 +58,7 @@ ID of the navigation content controlled by the toggle.
 readonly expanded: ModelSignal<boolean>;
 ```
 
-Defined in: libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts:185
+Defined in: [libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts:185](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts#L185)
 
 Whether the navigation is expanded. Can be bound bidirectionally.
 
@@ -70,7 +70,7 @@ Whether the navigation is expanded. Can be bound bidirectionally.
 readonly expandLabel: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts:181
+Defined in: [libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts:181](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts#L181)
 
 Accessible name of the expand action.
 
@@ -82,7 +82,7 @@ Accessible name of the expand action.
 readonly isOverlayOpen: Signal<boolean>;
 ```
 
-Defined in: libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts:189
+Defined in: [libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts:189](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts#L189)
 
 Whether the expanded panel overlays adjacent content. Use this to make that content inert.
 
@@ -94,7 +94,7 @@ Whether the expanded panel overlays adjacent content. Use this to make that cont
 protected readonly isOverlayViewport: Signal<boolean>;
 ```
 
-Defined in: libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts:191
+Defined in: [libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts:191](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts#L191)
 
 ***
 
@@ -104,7 +104,7 @@ Defined in: libs/ui/src/components/navigation/CollapsibleNavigationPanelComponen
 readonly overlay: InputSignal<boolean | null>;
 ```
 
-Defined in: libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts:187
+Defined in: [libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts:187](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts#L187)
 
 Overrides the narrow viewport layout. Leave it unset to follow the application breakpoint.
 
@@ -116,7 +116,7 @@ Overrides the narrow viewport layout. Leave it unset to follow the application b
 readonly title: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts:177
+Defined in: [libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts:177](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts#L177)
 
 Heading and accessible name of the panel.
 
@@ -128,7 +128,7 @@ Heading and accessible name of the panel.
 protected dismiss(event?): void;
 ```
 
-Defined in: libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts:201
+Defined in: [libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts:201](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts#L201)
 
 #### Parameters
 
@@ -148,7 +148,7 @@ Defined in: libs/ui/src/components/navigation/CollapsibleNavigationPanelComponen
 protected toggleExpanded(): void;
 ```
 
-Defined in: libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts:197
+Defined in: [libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts:197](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/CollapsibleNavigationPanelComponent.ts#L197)
 
 #### Returns
 

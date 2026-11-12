@@ -7,8 +7,8 @@ editUrl: false
 
 ```ts
 type LockRef = {
-  enter: void;
-  leave: void;
+  enter(): void;
+  leave(): void;
 };
 ```
 

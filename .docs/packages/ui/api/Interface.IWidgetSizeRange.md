@@ -15,7 +15,7 @@ unconstrained.
 ### max?
 
 ```ts
-readonly optional max?: number;
+readonly max?: number;
 ```
 
 Defined in: [libs/ui/src/widget/models/IWidgetSizeRange.ts:18](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidgetSizeRange.ts#L18)
@@ -27,7 +27,7 @@ The largest matching span, inclusive.
 ### min?
 
 ```ts
-readonly optional min?: number;
+readonly min?: number;
 ```
 
 Defined in: [libs/ui/src/widget/models/IWidgetSizeRange.ts:13](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidgetSizeRange.ts#L13)

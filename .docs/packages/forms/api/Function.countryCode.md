@@ -17,7 +17,7 @@ Validates the shape of an optional ISO 3166-1 alpha-2 country code (two letters,
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `TPathKind` *extends* `PathKind` | `Root` | The kind of the validated path. |
+| <a id="type-parameter-tpathkind"></a> `TPathKind` *extends* `PathKind` | `Root` | The kind of the validated path. |
 
 ## Parameters
 

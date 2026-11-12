@@ -44,7 +44,7 @@ Derives the background colour of `value`.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `value` | \| \{ `toString`: `string`; \} \| `null` \| `undefined` | The value to derive the colour from. |
+| `value` | \| \{ `toString`(): `string`; \} \| `null` \| `undefined` | The value to derive the colour from. |
 
 #### Returns
 
@@ -54,6 +54,4 @@ The colour as a `#rrggbb` string.
 
 #### Implementation of
 
-```ts
-PipeTransform.transform
-```
+`PipeTransform.transform`

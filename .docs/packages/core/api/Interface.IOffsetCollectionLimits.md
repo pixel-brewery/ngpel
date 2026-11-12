@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: IOffsetCollectionLimits
 
-Defined in: rx/pagination/IOffsetCollectionLimits.ts:2
+Defined in: [rx/pagination/IOffsetCollectionLimits.ts:2](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/rx/pagination/IOffsetCollectionLimits.ts#L2)
 
 Limits on a complete offset collection load.
 
@@ -14,10 +14,10 @@ Limits on a complete offset collection load.
 ### maxItems?
 
 ```ts
-readonly optional maxItems?: number;
+readonly maxItems?: number;
 ```
 
-Defined in: rx/pagination/IOffsetCollectionLimits.ts:7
+Defined in: [rx/pagination/IOffsetCollectionLimits.ts:7](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/rx/pagination/IOffsetCollectionLimits.ts#L7)
 
 Maximum number of accumulated items. Defaults to 100,000.
 
@@ -26,9 +26,9 @@ Maximum number of accumulated items. Defaults to 100,000.
 ### maxPages?
 
 ```ts
-readonly optional maxPages?: number;
+readonly maxPages?: number;
 ```
 
-Defined in: rx/pagination/IOffsetCollectionLimits.ts:4
+Defined in: [rx/pagination/IOffsetCollectionLimits.ts:4](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/rx/pagination/IOffsetCollectionLimits.ts#L4)
 
 Maximum number of page requests. Defaults to 1,000.

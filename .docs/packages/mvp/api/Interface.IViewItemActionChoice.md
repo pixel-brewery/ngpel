@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: IViewItemActionChoice
 
-Defined in: item-actions/IViewItemActionChoice.ts:6
+Defined in: [item-actions/IViewItemActionChoice.ts:6](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/item-actions/IViewItemActionChoice.ts#L6)
 
 One dynamically supplied choice of a contextual item action.
 
@@ -14,40 +14,40 @@ One dynamically supplied choice of a contextual item action.
 ### descriptionKey?
 
 ```ts
-readonly optional descriptionKey?: string;
+readonly descriptionKey?: string;
 ```
 
-Defined in: item-actions/IViewItemActionChoice.ts:10
+Defined in: [item-actions/IViewItemActionChoice.ts:10](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/item-actions/IViewItemActionChoice.ts#L10)
 
 ***
 
 ### disabled?
 
 ```ts
-readonly optional disabled?: boolean;
+readonly disabled?: boolean;
 ```
 
-Defined in: item-actions/IViewItemActionChoice.ts:12
+Defined in: [item-actions/IViewItemActionChoice.ts:12](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/item-actions/IViewItemActionChoice.ts#L12)
 
 ***
 
 ### dividerAfter?
 
 ```ts
-readonly optional dividerAfter?: boolean;
+readonly dividerAfter?: boolean;
 ```
 
-Defined in: item-actions/IViewItemActionChoice.ts:13
+Defined in: [item-actions/IViewItemActionChoice.ts:13](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/item-actions/IViewItemActionChoice.ts#L13)
 
 ***
 
 ### iconName?
 
 ```ts
-readonly optional iconName?: string;
+readonly iconName?: string;
 ```
 
-Defined in: item-actions/IViewItemActionChoice.ts:11
+Defined in: [item-actions/IViewItemActionChoice.ts:11](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/item-actions/IViewItemActionChoice.ts#L11)
 
 ***
 
@@ -57,34 +57,34 @@ Defined in: item-actions/IViewItemActionChoice.ts:11
 readonly id: string;
 ```
 
-Defined in: item-actions/IViewItemActionChoice.ts:7
+Defined in: [item-actions/IViewItemActionChoice.ts:7](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/item-actions/IViewItemActionChoice.ts#L7)
 
 ***
 
 ### label?
 
 ```ts
-readonly optional label?: string;
+readonly label?: string;
 ```
 
-Defined in: item-actions/IViewItemActionChoice.ts:8
+Defined in: [item-actions/IViewItemActionChoice.ts:8](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/item-actions/IViewItemActionChoice.ts#L8)
 
 ***
 
 ### labelKey?
 
 ```ts
-readonly optional labelKey?: string;
+readonly labelKey?: string;
 ```
 
-Defined in: item-actions/IViewItemActionChoice.ts:9
+Defined in: [item-actions/IViewItemActionChoice.ts:9](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/item-actions/IViewItemActionChoice.ts#L9)
 
 ***
 
 ### testIdSuffix?
 
 ```ts
-readonly optional testIdSuffix?: string;
+readonly testIdSuffix?: string;
 ```
 
-Defined in: item-actions/IViewItemActionChoice.ts:14
+Defined in: [item-actions/IViewItemActionChoice.ts:14](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/item-actions/IViewItemActionChoice.ts#L14)

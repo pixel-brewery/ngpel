@@ -18,7 +18,7 @@ Base contract for all operation policies.
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `TKind` *extends* [`OperationPolicyKind`](TypeAlias.OperationPolicyKind) | [`OperationPolicyKind`](TypeAlias.OperationPolicyKind) | The policy category this policy belongs to. |
+| <a id="type-parameter-tkind"></a> `TKind` *extends* [`OperationPolicyKind`](TypeAlias.OperationPolicyKind) | [`OperationPolicyKind`](TypeAlias.OperationPolicyKind) | The policy category this policy belongs to. |
 
 ## Properties
 

@@ -51,8 +51,8 @@ Condenses `markdown` into a single plain-text line.
 | Parameter | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
 | `markdown` | `string` \| `null` \| `undefined` | `undefined` | The markdown source. |
-| `fallback` | `string` | `''` | The text to condense when the source holds no line (defaults to an empty string). |
-| `maximumLength` | `number` | `DEFAULT_MAXIMUM_LENGTH` | The maximum number of characters of the result (defaults to 96). |
+| `fallback?` | `string` | `''` | The text to condense when the source holds no line (defaults to an empty string). |
+| `maximumLength?` | `number` | `DEFAULT_MAXIMUM_LENGTH` | The maximum number of characters of the result (defaults to 96). |
 
 #### Returns
 
@@ -62,6 +62,4 @@ The condensed line.
 
 #### Implementation of
 
-```ts
-PipeTransform.transform
-```
+`PipeTransform.transform`

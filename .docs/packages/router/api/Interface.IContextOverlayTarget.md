@@ -13,7 +13,7 @@ A feature-owned target addressable above the current page.
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `TResult` | `unknown` | The close result delivered back to this target. |
+| <a id="type-parameter-tresult"></a> `TResult` | `unknown` | The close result delivered back to this target. |
 
 ## Properties
 
@@ -54,7 +54,7 @@ Unique key written into the URL.
 ### onClosed?
 
 ```ts
-readonly optional onClosed?: (result, state) => void;
+readonly onClosed?: (result, state) => void;
 ```
 
 Defined in: [context-overlay/IContextOverlayTarget.ts:18](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/context-overlay/IContextOverlayTarget.ts#L18)

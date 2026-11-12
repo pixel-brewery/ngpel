@@ -44,9 +44,7 @@ Releases the current browser object URL.
 
 #### Implementation of
 
-```ts
-OnDestroy.ngOnDestroy
-```
+`OnDestroy.ngOnDestroy`
 
 ***
 
@@ -74,6 +72,4 @@ A Mosaik thumbnail preview or the generic document fallback.
 
 #### Implementation of
 
-```ts
-PipeTransform.transform
-```
+`PipeTransform.transform`

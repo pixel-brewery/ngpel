@@ -13,8 +13,8 @@ Reusable RFC 5545 recurrence editor for Signal Forms.
 
 | Type Parameter | Default type |
 | ------ | ------ |
-| `TNumber` *extends* `string` \| `number` \| `null` | `string` |
-| `TEnd` *extends* `string` \| `Date` \| `null` | `string` |
+| <a id="type-parameter-tnumber"></a> `TNumber` *extends* `string` \| `number` \| `null` | `string` |
+| <a id="type-parameter-tend"></a> `TEnd` *extends* `string` \| `Date` \| `null` | `string` |
 
 ## Implements
 
@@ -233,9 +233,7 @@ Reactive component capabilities available to an external tour mapping.
 
 #### Implementation of
 
-```ts
-ITourAccessor.targets
-```
+`ITourAccessor.targets`
 
 ***
 

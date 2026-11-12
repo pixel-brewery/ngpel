@@ -9,7 +9,7 @@ editUrl: false
 function diffActivityText(before, after): readonly ActivityTextParagraph[];
 ```
 
-Defined in: libs/ui/src/components/activity-log/diffActivityText.ts:28
+Defined in: [libs/ui/src/components/activity-log/diffActivityText.ts:28](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/diffActivityText.ts#L28)
 
 Compares two versions of a long text paragraph by paragraph and, within changed paragraphs,
 word by word.

@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: ActionStripContentDirective\<T\>
 
-Defined in: libs/ui/src/components/action-strip/ActionStripContentDirective.ts:15
+Defined in: [libs/ui/src/components/action-strip/ActionStripContentDirective.ts:15](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/action-strip/ActionStripContentDirective.ts#L15)
 
 Marks the declarative HTML template rendered inside an action strip.
 
@@ -13,7 +13,7 @@ Marks the declarative HTML template rendered inside an action strip.
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `T` | `unknown` | Context value resolved by the action-strip trigger. |
+| <a id="type-parameter-t"></a> `T` | `unknown` | Context value resolved by the action-strip trigger. |
 
 ## Constructors
 
@@ -35,7 +35,7 @@ new ActionStripContentDirective<T>(): ActionStripContentDirective<T>;
 readonly templateRef: TemplateRef<IActionStripContentContext<T>>;
 ```
 
-Defined in: libs/ui/src/components/action-strip/ActionStripContentDirective.ts:19
+Defined in: [libs/ui/src/components/action-strip/ActionStripContentDirective.ts:19](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/action-strip/ActionStripContentDirective.ts#L19)
 
 Template rendered with the active item as its implicit value.
 
@@ -47,7 +47,7 @@ Template rendered with the active item as its implicit value.
 static ngTemplateContextGuard<TContext>(directive, context): context is IActionStripContentContext<TContext>;
 ```
 
-Defined in: libs/ui/src/components/action-strip/ActionStripContentDirective.ts:35
+Defined in: [libs/ui/src/components/action-strip/ActionStripContentDirective.ts:35](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/action-strip/ActionStripContentDirective.ts#L35)
 
 Narrows the Angular template context to the action-strip contract.
 
@@ -55,7 +55,7 @@ Narrows the Angular template context to the action-strip contract.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `TContext` | Context value resolved by the trigger. |
+| <a id="type-parameter-tcontext"></a> `TContext` | Context value resolved by the trigger. |
 
 #### Parameters
 

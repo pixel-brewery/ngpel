@@ -17,7 +17,7 @@ Adds a nestable interaction lock around critical presenter operations.
 
 | Type Parameter |
 | ------ |
-| `T` *extends* [`PresenterBehaviorBase`](TypeAlias.PresenterBehaviorBase) |
+| <a id="type-parameter-t"></a> `T` *extends* [`PresenterBehaviorBase`](TypeAlias.PresenterBehaviorBase) |
 
 ## Parameters
 

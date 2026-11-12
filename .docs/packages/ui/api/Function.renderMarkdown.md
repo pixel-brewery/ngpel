@@ -20,7 +20,7 @@ the attribute it lands in and only http(s) targets become links.
 | Parameter | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
 | `text` | `string` | `undefined` | The Markdown source. |
-| `breaks` | `boolean` | `false` | Whether single newlines become line breaks. |
+| `breaks?` | `boolean` | `false` | Whether single newlines become line breaks. |
 
 ## Returns
 

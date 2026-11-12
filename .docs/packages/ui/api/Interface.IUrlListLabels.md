@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: IUrlListLabels
 
-Defined in: libs/ui/src/components/url-list/IUrlListLabels.ts:2
+Defined in: [libs/ui/src/components/url-list/IUrlListLabels.ts:2](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/IUrlListLabels.ts#L2)
 
 Localized labels of a categorized web-link editor.
 
@@ -17,7 +17,7 @@ Localized labels of a categorized web-link editor.
 readonly active: string;
 ```
 
-Defined in: libs/ui/src/components/url-list/IUrlListLabels.ts:9
+Defined in: [libs/ui/src/components/url-list/IUrlListLabels.ts:9](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/IUrlListLabels.ts#L9)
 
 ***
 
@@ -27,7 +27,7 @@ Defined in: libs/ui/src/components/url-list/IUrlListLabels.ts:9
 readonly add: string;
 ```
 
-Defined in: libs/ui/src/components/url-list/IUrlListLabels.ts:10
+Defined in: [libs/ui/src/components/url-list/IUrlListLabels.ts:10](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/IUrlListLabels.ts#L10)
 
 ***
 
@@ -37,7 +37,7 @@ Defined in: libs/ui/src/components/url-list/IUrlListLabels.ts:10
 readonly description: string;
 ```
 
-Defined in: libs/ui/src/components/url-list/IUrlListLabels.ts:4
+Defined in: [libs/ui/src/components/url-list/IUrlListLabels.ts:4](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/IUrlListLabels.ts#L4)
 
 ***
 
@@ -47,7 +47,7 @@ Defined in: libs/ui/src/components/url-list/IUrlListLabels.ts:4
 readonly label: string;
 ```
 
-Defined in: libs/ui/src/components/url-list/IUrlListLabels.ts:6
+Defined in: [libs/ui/src/components/url-list/IUrlListLabels.ts:6](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/IUrlListLabels.ts#L6)
 
 ***
 
@@ -57,7 +57,7 @@ Defined in: libs/ui/src/components/url-list/IUrlListLabels.ts:6
 readonly next: string;
 ```
 
-Defined in: libs/ui/src/components/url-list/IUrlListLabels.ts:13
+Defined in: [libs/ui/src/components/url-list/IUrlListLabels.ts:13](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/IUrlListLabels.ts#L13)
 
 ***
 
@@ -67,7 +67,7 @@ Defined in: libs/ui/src/components/url-list/IUrlListLabels.ts:13
 readonly open: string;
 ```
 
-Defined in: libs/ui/src/components/url-list/IUrlListLabels.ts:14
+Defined in: [libs/ui/src/components/url-list/IUrlListLabels.ts:14](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/IUrlListLabels.ts#L14)
 
 ***
 
@@ -77,7 +77,7 @@ Defined in: libs/ui/src/components/url-list/IUrlListLabels.ts:14
 readonly previous: string;
 ```
 
-Defined in: libs/ui/src/components/url-list/IUrlListLabels.ts:12
+Defined in: [libs/ui/src/components/url-list/IUrlListLabels.ts:12](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/IUrlListLabels.ts#L12)
 
 ***
 
@@ -87,7 +87,7 @@ Defined in: libs/ui/src/components/url-list/IUrlListLabels.ts:12
 readonly primary: string;
 ```
 
-Defined in: libs/ui/src/components/url-list/IUrlListLabels.ts:8
+Defined in: [libs/ui/src/components/url-list/IUrlListLabels.ts:8](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/IUrlListLabels.ts#L8)
 
 ***
 
@@ -97,7 +97,7 @@ Defined in: libs/ui/src/components/url-list/IUrlListLabels.ts:8
 readonly remove: string;
 ```
 
-Defined in: libs/ui/src/components/url-list/IUrlListLabels.ts:11
+Defined in: [libs/ui/src/components/url-list/IUrlListLabels.ts:11](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/IUrlListLabels.ts#L11)
 
 ***
 
@@ -107,7 +107,7 @@ Defined in: libs/ui/src/components/url-list/IUrlListLabels.ts:11
 readonly title: string;
 ```
 
-Defined in: libs/ui/src/components/url-list/IUrlListLabels.ts:3
+Defined in: [libs/ui/src/components/url-list/IUrlListLabels.ts:3](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/IUrlListLabels.ts#L3)
 
 ***
 
@@ -117,7 +117,7 @@ Defined in: libs/ui/src/components/url-list/IUrlListLabels.ts:3
 readonly type: string;
 ```
 
-Defined in: libs/ui/src/components/url-list/IUrlListLabels.ts:5
+Defined in: [libs/ui/src/components/url-list/IUrlListLabels.ts:5](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/IUrlListLabels.ts#L5)
 
 ***
 
@@ -127,4 +127,4 @@ Defined in: libs/ui/src/components/url-list/IUrlListLabels.ts:5
 readonly url: string;
 ```
 
-Defined in: libs/ui/src/components/url-list/IUrlListLabels.ts:7
+Defined in: [libs/ui/src/components/url-list/IUrlListLabels.ts:7](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/IUrlListLabels.ts#L7)

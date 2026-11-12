@@ -92,7 +92,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:28](http
 ### recurrenceTime?
 
 ```ts
-optional recurrenceTime?: string;
+recurrenceTime?: string;
 ```
 
 Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:32](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L32)

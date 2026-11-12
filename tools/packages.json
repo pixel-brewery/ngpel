@@ -12,7 +12,6 @@
         "@angular/platform-browser": ">=22.0.0 <23.0.0",
         "@angular/service-worker": ">=22.0.0 <23.0.0",
         "rxjs": ">=7.8.0 <8.0.0",
-        "apexcharts": ">=5.0.0",
         "marked": ">=18.0.0",
         "@pixel-brewery/markdowner-core": ">=0.1.96",
         "@pixel-brewery/mosaik-elements-angular": ">=0.1.188",
@@ -43,8 +42,7 @@
         "@codemirror/view",
         "@lezer/highlight",
         "@pixel-brewery/mosaik-elements-angular",
-        "@pixel-brewery/mosaik-elements-foundation",
-        "apexcharts"
+        "@pixel-brewery/mosaik-elements-foundation"
     ],
     "packages": [
         {
@@ -105,8 +103,7 @@
                     "@codemirror/search",
                     "@codemirror/state",
                     "@codemirror/view",
-                    "@lezer/highlight",
-                    "apexcharts"
+                    "@lezer/highlight"
                 ],
                 "context-overlay": ["@angular/core", "@pixel-brewery/mosaik-elements-angular"],
                 "markdown": ["marked", "@pixel-brewery/markdowner-core"],

@@ -9,7 +9,7 @@ editUrl: false
 function provideMap(configuration): EnvironmentProviders;
 ```
 
-Defined in: libs/ui/src/google-maps/provideMap.ts:16
+Defined in: [libs/ui/src/google-maps/provideMap.ts:16](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/provideMap.ts#L16)
 
 Registers application-owned Maps configuration without loading Google's SDK.
 

@@ -14,7 +14,7 @@ Represents a single contextual create action registered by a feature module.
 ### description?
 
 ```ts
-readonly optional description?: string;
+readonly description?: string;
 ```
 
 Defined in: [search/quick-create/IQuickCreateItem.ts:25](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/quick-create/IQuickCreateItem.ts#L25)
@@ -50,7 +50,7 @@ Display label supplied by the contributing feature.
 ### navigationItemKey?
 
 ```ts
-readonly optional navigationItemKey?: string;
+readonly navigationItemKey?: string;
 ```
 
 Defined in: [search/quick-create/IQuickCreateItem.ts:15](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/quick-create/IQuickCreateItem.ts#L15)

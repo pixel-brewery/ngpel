@@ -16,7 +16,7 @@ detaches it but never stops its tracks.
 ### label?
 
 ```ts
-readonly optional label?: string | null;
+readonly label?: string | null;
 ```
 
 Defined in: [audio/player/IAudioSource.ts:19](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/audio/player/IAudioSource.ts#L19)

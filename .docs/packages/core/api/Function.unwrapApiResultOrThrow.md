@@ -9,7 +9,7 @@ editUrl: false
 function unwrapApiResultOrThrow<TData>(): OperatorFunction<IApiResult<TData>, TData>;
 ```
 
-Defined in: rx/operators/unwrapApiResultOrThrow.ts:11
+Defined in: [rx/operators/unwrapApiResultOrThrow.ts:11](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/rx/operators/unwrapApiResultOrThrow.ts#L11)
 
 Emits the data of a successful API result and turns a failure into an [ApiResultError](Class.ApiResultError).
 
@@ -17,7 +17,7 @@ Emits the data of a successful API result and turns a failure into an [ApiResult
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `TData` | The successful response data type. |
+| <a id="type-parameter-tdata"></a> `TData` | The successful response data type. |
 
 ## Returns
 

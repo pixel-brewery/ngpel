@@ -18,7 +18,7 @@ Export behavior for a collection field.
 ### autoWidth?
 
 ```ts
-readonly optional autoWidth?: boolean;
+readonly autoWidth?: boolean;
 ```
 
 Defined in: [libs/ui/src/collection-view/exporting/ICollectionExportColumn.ts:25](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/ICollectionExportColumn.ts#L25)
@@ -34,7 +34,7 @@ Auto-size column width based on content.
 ### enabled?
 
 ```ts
-readonly optional enabled?: boolean;
+readonly enabled?: boolean;
 ```
 
 Defined in: [libs/ui/src/collection-view/exporting/ICollectionExportFieldConfig.ts:16](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/ICollectionExportFieldConfig.ts#L16)
@@ -46,7 +46,7 @@ Whether this field participates in exports.
 ### numFmt?
 
 ```ts
-readonly optional numFmt?: string;
+readonly numFmt?: string;
 ```
 
 Defined in: [libs/ui/src/collection-view/exporting/ICollectionExportColumn.ts:35](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/ICollectionExportColumn.ts#L35)
@@ -62,7 +62,7 @@ Number format string.
 ### type?
 
 ```ts
-readonly optional type?: "string" | "number" | "boolean" | "date";
+readonly type?: "string" | "number" | "boolean" | "date";
 ```
 
 Defined in: [libs/ui/src/collection-view/exporting/ICollectionExportColumn.ts:20](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/ICollectionExportColumn.ts#L20)
@@ -78,7 +78,7 @@ Column data type hint.
 ### width?
 
 ```ts
-readonly optional width?: number;
+readonly width?: number;
 ```
 
 Defined in: [libs/ui/src/collection-view/exporting/ICollectionExportColumn.ts:30](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/ICollectionExportColumn.ts#L30)

@@ -18,7 +18,7 @@ collide with `Command.ts` on case-insensitive file systems.
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `T` | `unknown` | The parameter type of the command. |
+| <a id="type-parameter-t"></a> `T` | `unknown` | The parameter type of the command. |
 
 ## Parameters
 

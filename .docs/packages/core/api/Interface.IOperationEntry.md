@@ -13,8 +13,8 @@ Internal representation of a queued operation with its lifecycle state.
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `TPayload` | `unknown` | The input data required by the operation. |
-| `TResult` | `unknown` | The result produced by a successful commit. |
+| <a id="type-parameter-tpayload"></a> `TPayload` | `unknown` | The input data required by the operation. |
+| <a id="type-parameter-tresult"></a> `TResult` | `unknown` | The result produced by a successful commit. |
 
 ## Properties
 
@@ -33,7 +33,7 @@ Timestamp (ms) when the entry should be auto-committed.
 ### committedAt?
 
 ```ts
-readonly optional committedAt?: number;
+readonly committedAt?: number;
 ```
 
 Defined in: [operation-queue/models/IOperationEntry.ts:77](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/operation-queue/models/IOperationEntry.ts#L77)
@@ -81,7 +81,7 @@ When true the entry is hidden from IOperationStateStore.visibleEntries.
 ### error?
 
 ```ts
-readonly optional error?: unknown;
+readonly error?: unknown;
 ```
 
 Defined in: [operation-queue/models/IOperationEntry.ts:98](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/operation-queue/models/IOperationEntry.ts#L98)
@@ -93,7 +93,7 @@ Error captured from a failed [IOperation.commit](Interface.IOperation#commit), i
 ### failedAt?
 
 ```ts
-readonly optional failedAt?: number;
+readonly failedAt?: number;
 ```
 
 Defined in: [operation-queue/models/IOperationEntry.ts:91](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/operation-queue/models/IOperationEntry.ts#L91)
@@ -129,7 +129,7 @@ The operation to execute.
 ### rejectedAt?
 
 ```ts
-readonly optional rejectedAt?: number;
+readonly rejectedAt?: number;
 ```
 
 Defined in: [operation-queue/models/IOperationEntry.ts:84](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/operation-queue/models/IOperationEntry.ts#L84)

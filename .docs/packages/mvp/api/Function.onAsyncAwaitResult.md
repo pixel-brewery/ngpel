@@ -21,7 +21,7 @@ Invokes `handler` whenever `command` produces a new non-`null` result.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `R` | The result type of the command. |
+| <a id="type-parameter-r"></a> `R` | The result type of the command. |
 
 ## Parameters
 

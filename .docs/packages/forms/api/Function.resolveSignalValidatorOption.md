@@ -18,9 +18,9 @@ field context.
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `TValue` | - | The value type of the validated field. |
-| `TOption` | - | The option type once resolved. |
-| `TPathKind` *extends* `PathKind` | `Root` | The kind of the validated path. |
+| <a id="type-parameter-tvalue"></a> `TValue` | - | The value type of the validated field. |
+| <a id="type-parameter-toption"></a> `TOption` | - | The option type once resolved. |
+| <a id="type-parameter-tpathkind"></a> `TPathKind` *extends* `PathKind` | `Root` | The kind of the validated path. |
 
 ## Parameters
 

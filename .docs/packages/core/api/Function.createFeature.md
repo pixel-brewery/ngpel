@@ -22,7 +22,7 @@ Factory to create a typed feature from metadata and static providers.
 
 | Type Parameter |
 | ------ |
-| `TKind` *extends* `string` |
+| <a id="type-parameter-tkind"></a> `TKind` *extends* `string` |
 
 ## Parameters
 
@@ -31,7 +31,7 @@ Factory to create a typed feature from metadata and static providers.
 | `id` | `string` | Stable unique id (within its kind). |
 | `kind` | [`FeatureKind`](TypeAlias.FeatureKind)\<`TKind`\> | Kind discriminator (branded). |
 | `providers` | readonly `Provider`[] | Providers contributed by the feature. |
-| `options` | `Readonly`\<[`IFeatureOptions`](Interface.IFeatureOptions)\> | Composition options (defaults: { multi: false }). |
+| `options?` | `Readonly`\<[`IFeatureOptions`](Interface.IFeatureOptions)\> | Composition options (defaults: { multi: false }). |
 
 ## Returns
 

@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: IActivityTextPart
 
-Defined in: libs/ui/src/components/activity-log/IActivityTextPart.ts:2
+Defined in: [libs/ui/src/components/activity-log/IActivityTextPart.ts:2](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityTextPart.ts#L2)
 
 One segment of a changed paragraph.
 
@@ -17,7 +17,7 @@ One segment of a changed paragraph.
 readonly kind: "same" | "added" | "removed";
 ```
 
-Defined in: libs/ui/src/components/activity-log/IActivityTextPart.ts:3
+Defined in: [libs/ui/src/components/activity-log/IActivityTextPart.ts:3](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityTextPart.ts#L3)
 
 ***
 
@@ -27,4 +27,4 @@ Defined in: libs/ui/src/components/activity-log/IActivityTextPart.ts:3
 readonly text: string;
 ```
 
-Defined in: libs/ui/src/components/activity-log/IActivityTextPart.ts:4
+Defined in: [libs/ui/src/components/activity-log/IActivityTextPart.ts:4](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityTextPart.ts#L4)

@@ -14,7 +14,7 @@ Options for monitoring a borrowed audio stream.
 ### frameDurationMs?
 
 ```ts
-readonly optional frameDurationMs?: number;
+readonly frameDurationMs?: number;
 ```
 
 Defined in: [audio/level/IAudioLevelMonitorOptions.ts:4](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/audio/level/IAudioLevelMonitorOptions.ts#L4)

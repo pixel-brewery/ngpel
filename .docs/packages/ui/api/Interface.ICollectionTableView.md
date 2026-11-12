@@ -13,7 +13,7 @@ Runtime table projection for a collection view.
 
 | Type Parameter |
 | ------ |
-| `TItem` |
+| <a id="type-parameter-titem"></a> `TItem` |
 
 ## Properties
 

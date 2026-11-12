@@ -154,8 +154,8 @@ simplified form. Missing fields are filled with sensible defaults.
 
 | Type Parameter |
 | ------ |
-| `TPayload` |
-| `TResult` |
+| <a id="type-parameter-tpayload"></a> `TPayload` |
+| <a id="type-parameter-tresult"></a> `TResult` |
 
 #### Parameters
 

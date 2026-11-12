@@ -14,7 +14,7 @@ Behavioural options of the search engine, published through `SEARCH_CONFIG`.
 ### commandSectionLabelKey?
 
 ```ts
-readonly optional commandSectionLabelKey?: string;
+readonly commandSectionLabelKey?: string;
 ```
 
 Defined in: [search/provider/ISearchConfig.ts:56](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/provider/ISearchConfig.ts#L56)
@@ -28,7 +28,7 @@ ships no translation keys of its own.
 ### delay?
 
 ```ts
-readonly optional delay?: number;
+readonly delay?: number;
 ```
 
 Defined in: [search/provider/ISearchConfig.ts:21](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/provider/ISearchConfig.ts#L21)
@@ -44,7 +44,7 @@ Debounce delay in milliseconds a surface should apply to its input before queryi
 ### hotkey?
 
 ```ts
-readonly optional hotkey?: string;
+readonly hotkey?: string;
 ```
 
 Defined in: [search/provider/ISearchConfig.ts:14](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/provider/ISearchConfig.ts#L14)
@@ -58,7 +58,7 @@ listener is installed at all.
 ### maxCommandSuggestions?
 
 ```ts
-readonly optional maxCommandSuggestions?: number;
+readonly maxCommandSuggestions?: number;
 ```
 
 Defined in: [search/provider/ISearchConfig.ts:28](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/provider/ISearchConfig.ts#L28)
@@ -74,7 +74,7 @@ Maximum number of command suggestions shown before the semantic results.
 ### resultGroupOrder?
 
 ```ts
-readonly optional resultGroupOrder?: "ranked" | "provider";
+readonly resultGroupOrder?: "ranked" | "provider";
 ```
 
 Defined in: [search/provider/ISearchConfig.ts:41](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/provider/ISearchConfig.ts#L41)
@@ -87,7 +87,7 @@ result. The default follows the order in which groups first appear among ranked 
 ### resultTake?
 
 ```ts
-readonly optional resultTake?: number;
+readonly resultTake?: number;
 ```
 
 Defined in: [search/provider/ISearchConfig.ts:35](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/provider/ISearchConfig.ts#L35)
@@ -103,7 +103,7 @@ Maximum number of results requested from each active provider.
 ### showCommands?
 
 ```ts
-readonly optional showCommands?: boolean;
+readonly showCommands?: boolean;
 ```
 
 Defined in: [search/provider/ISearchConfig.ts:49](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/provider/ISearchConfig.ts#L49)

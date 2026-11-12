@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: IContextMenuOpenRequest\<T\>
 
-Defined in: libs/ui/src/components/context-menu/IContextMenuOpenRequest.ts:7
+Defined in: [libs/ui/src/components/context-menu/IContextMenuOpenRequest.ts:7](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/context-menu/IContextMenuOpenRequest.ts#L7)
 
 Describes one request to open a context menu at a viewport position.
 
@@ -13,7 +13,7 @@ Describes one request to open a context menu at a viewport position.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | Context value associated with the invoking item. |
+| <a id="type-parameter-t"></a> `T` | Context value associated with the invoking item. |
 
 ## Properties
 
@@ -23,7 +23,7 @@ Describes one request to open a context menu at a viewport position.
 readonly clientX: number;
 ```
 
-Defined in: libs/ui/src/components/context-menu/IContextMenuOpenRequest.ts:11
+Defined in: [libs/ui/src/components/context-menu/IContextMenuOpenRequest.ts:11](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/context-menu/IContextMenuOpenRequest.ts#L11)
 
 Horizontal viewport coordinate of the invocation.
 
@@ -35,7 +35,7 @@ Horizontal viewport coordinate of the invocation.
 readonly clientY: number;
 ```
 
-Defined in: libs/ui/src/components/context-menu/IContextMenuOpenRequest.ts:16
+Defined in: [libs/ui/src/components/context-menu/IContextMenuOpenRequest.ts:16](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/context-menu/IContextMenuOpenRequest.ts#L16)
 
 Vertical viewport coordinate of the invocation.
 
@@ -47,7 +47,7 @@ Vertical viewport coordinate of the invocation.
 readonly context: T;
 ```
 
-Defined in: libs/ui/src/components/context-menu/IContextMenuOpenRequest.ts:21
+Defined in: [libs/ui/src/components/context-menu/IContextMenuOpenRequest.ts:21](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/context-menu/IContextMenuOpenRequest.ts#L21)
 
 Item-specific value exposed to the declarative menu template.
 
@@ -59,6 +59,6 @@ Item-specific value exposed to the declarative menu template.
 readonly origin: HTMLElement;
 ```
 
-Defined in: libs/ui/src/components/context-menu/IContextMenuOpenRequest.ts:26
+Defined in: [libs/ui/src/components/context-menu/IContextMenuOpenRequest.ts:26](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/context-menu/IContextMenuOpenRequest.ts#L26)
 
 Element that initiated the menu and receives focus again after keyboard use.

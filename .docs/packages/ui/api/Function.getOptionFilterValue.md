@@ -21,7 +21,7 @@ Resolves an option value when it is part of the allowed backend enum values.
 
 | Type Parameter |
 | ------ |
-| `TValue` *extends* `string` |
+| <a id="type-parameter-tvalue"></a> `TValue` *extends* `string` |
 
 ## Parameters
 

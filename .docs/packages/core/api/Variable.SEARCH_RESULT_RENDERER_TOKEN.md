@@ -6,7 +6,7 @@ editUrl: false
 # Variable: SEARCH\_RESULT\_RENDERER\_TOKEN
 
 ```ts
-const SEARCH_RESULT_RENDERER_TOKEN: InjectionToken<readonly readonly ISearchResultRendererEntry[][]>;
+const SEARCH_RESULT_RENDERER_TOKEN: InjectionToken<readonly (readonly ISearchResultRendererEntry[])[]>;
 ```
 
 Defined in: [search/provider/SEARCH\_RESULT\_RENDERER\_TOKEN.ts:15](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/provider/SEARCH_RESULT_RENDERER_TOKEN.ts#L15)

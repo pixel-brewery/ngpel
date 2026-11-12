@@ -16,7 +16,7 @@ source, and the surface renders them without knowing the feature that owns them.
 ### description?
 
 ```ts
-readonly optional description?: string;
+readonly description?: string;
 ```
 
 Defined in: [search/models/ICommandItem.ts:25](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ICommandItem.ts#L25)
@@ -28,7 +28,7 @@ Optional description shown as help text and matched with a lower weight than the
 ### group?
 
 ```ts
-readonly optional group?: string;
+readonly group?: string;
 ```
 
 Defined in: [search/models/ICommandItem.ts:35](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ICommandItem.ts#L35)
@@ -40,7 +40,7 @@ Optional category heading used for visual grouping.
 ### icon?
 
 ```ts
-readonly optional icon?: string;
+readonly icon?: string;
 ```
 
 Defined in: [search/models/ICommandItem.ts:30](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ICommandItem.ts#L30)
@@ -64,7 +64,7 @@ Stable identifier of the command. Duplicates are collapsed to the first occurren
 ### keywords?
 
 ```ts
-readonly optional keywords?: readonly string[];
+readonly keywords?: readonly string[];
 ```
 
 Defined in: [search/models/ICommandItem.ts:40](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ICommandItem.ts#L40)
@@ -89,7 +89,7 @@ ranking signal.
 ### shortcutHint?
 
 ```ts
-readonly optional shortcutHint?: string;
+readonly shortcutHint?: string;
 ```
 
 Defined in: [search/models/ICommandItem.ts:45](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ICommandItem.ts#L45)

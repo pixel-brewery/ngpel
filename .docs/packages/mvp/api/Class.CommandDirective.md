@@ -41,8 +41,8 @@ Constructs a new instance of the `CommandDirective` class.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `elementRef` | `ElementRef`\<`HTMLElement`\> | The host element the listeners are attached to. |
-| `destroyRef` | `DestroyRef` | The lifetime the listeners are bound to. |
+| `elementRef?` | `ElementRef`\<`HTMLElement`\> | The host element the listeners are attached to. |
+| `destroyRef?` | `DestroyRef` | The lifetime the listeners are bound to. |
 
 #### Returns
 

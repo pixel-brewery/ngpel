@@ -14,7 +14,7 @@ Options of `presentationRoutes(...)`.
 ### data?
 
 ```ts
-readonly optional data?: Data;
+readonly data?: Data;
 ```
 
 Defined in: [shell/IPresentationRoutesOptions.ts:43](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/shell/IPresentationRoutesOptions.ts#L43)
@@ -26,7 +26,7 @@ Static data attached to the shell route.
 ### guards?
 
 ```ts
-readonly optional guards?: IPresentationRouteGuards;
+readonly guards?: IPresentationRouteGuards;
 ```
 
 Defined in: [shell/IPresentationRoutesOptions.ts:38](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/shell/IPresentationRoutesOptions.ts#L38)
@@ -38,7 +38,7 @@ The guards protecting the shell route.
 ### path?
 
 ```ts
-readonly optional path?: string;
+readonly path?: string;
 ```
 
 Defined in: [shell/IPresentationRoutesOptions.ts:27](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/shell/IPresentationRoutesOptions.ts#L27)
@@ -50,7 +50,7 @@ The path segment the shell is mounted at. Defaults to `'main'`.
 ### redirectTo?
 
 ```ts
-readonly optional redirectTo?: string;
+readonly redirectTo?: string;
 ```
 
 Defined in: [shell/IPresentationRoutesOptions.ts:33](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/shell/IPresentationRoutesOptions.ts#L33)

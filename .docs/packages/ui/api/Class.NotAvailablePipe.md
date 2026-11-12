@@ -45,7 +45,7 @@ Renders `value`, or the configured placeholder when it is absent.
 
 | Type Parameter |
 | ------ |
-| `TValue` |
+| <a id="type-parameter-tvalue"></a> `TValue` |
 
 #### Parameters
 
@@ -61,6 +61,4 @@ The string representation of `value`, or the placeholder.
 
 #### Implementation of
 
-```ts
-PipeTransform.transform
-```
+`PipeTransform.transform`

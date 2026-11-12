@@ -171,9 +171,7 @@ Tears down internationalization change subscriptions.
 
 #### Implementation of
 
-```ts
-OnDestroy.ngOnDestroy
-```
+`OnDestroy.ngOnDestroy`
 
 ***
 

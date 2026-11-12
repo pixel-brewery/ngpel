@@ -9,7 +9,7 @@ editUrl: false
 function provideResourceNavigationTarget(target): Provider;
 ```
 
-Defined in: navigation/resource-navigation/provideResourceNavigationTarget.ts:12
+Defined in: [navigation/resource-navigation/provideResourceNavigationTarget.ts:12](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/navigation/resource-navigation/provideResourceNavigationTarget.ts#L12)
 
 Contributes a feature resource link at application composition.
 

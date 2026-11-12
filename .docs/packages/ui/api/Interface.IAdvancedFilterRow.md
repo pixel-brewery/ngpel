@@ -38,7 +38,7 @@ Node to render.
 ### parentId?
 
 ```ts
-readonly optional parentId?: string;
+readonly parentId?: string;
 ```
 
 Defined in: [libs/ui/src/components/filter-bar/filterConditions.ts:24](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/filterConditions.ts#L24)

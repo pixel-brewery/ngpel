@@ -50,7 +50,7 @@ Ordered menu options.
 ### subLabel?
 
 ```ts
-readonly optional subLabel?: string;
+readonly subLabel?: string;
 ```
 
 Defined in: [libs/ui/src/components/collection-list/ICollectionListMenu.ts:43](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/ICollectionListMenu.ts#L43)
@@ -62,7 +62,7 @@ Optional summary of the active option.
 ### testId?
 
 ```ts
-readonly optional testId?: string;
+readonly testId?: string;
 ```
 
 Defined in: [libs/ui/src/components/collection-list/ICollectionListMenu.ts:51](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/ICollectionListMenu.ts#L51)

@@ -13,7 +13,7 @@ A generic, DI-provider contributing feature.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `TKind` *extends* `string` | String literal type restricting the feature kind space (e.g. 'transcriber' | 'telemetry'). |
+| <a id="type-parameter-tkind"></a> `TKind` *extends* `string` | String literal type restricting the feature kind space (e.g. 'transcriber' \| 'telemetry'). |
 
 ## Properties
 

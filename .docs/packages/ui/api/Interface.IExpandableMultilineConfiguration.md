@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: IExpandableMultilineConfiguration
 
-Defined in: libs/ui/src/directives/expandable-multiline/IExpandableMultilineConfiguration.ts:2
+Defined in: [libs/ui/src/directives/expandable-multiline/IExpandableMultilineConfiguration.ts:2](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/expandable-multiline/IExpandableMultilineConfiguration.ts#L2)
 
 Configuration supplied by the consuming view.
 
@@ -14,27 +14,27 @@ Configuration supplied by the consuming view.
 ### actionTestId?
 
 ```ts
-readonly optional actionTestId?: string;
+readonly actionTestId?: string;
 ```
 
-Defined in: libs/ui/src/directives/expandable-multiline/IExpandableMultilineConfiguration.ts:3
+Defined in: [libs/ui/src/directives/expandable-multiline/IExpandableMultilineConfiguration.ts:3](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/expandable-multiline/IExpandableMultilineConfiguration.ts#L3)
 
 ***
 
 ### collapseLabel?
 
 ```ts
-readonly optional collapseLabel?: string;
+readonly collapseLabel?: string;
 ```
 
-Defined in: libs/ui/src/directives/expandable-multiline/IExpandableMultilineConfiguration.ts:4
+Defined in: [libs/ui/src/directives/expandable-multiline/IExpandableMultilineConfiguration.ts:4](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/expandable-multiline/IExpandableMultilineConfiguration.ts#L4)
 
 ***
 
 ### expandLabel?
 
 ```ts
-readonly optional expandLabel?: string;
+readonly expandLabel?: string;
 ```
 
-Defined in: libs/ui/src/directives/expandable-multiline/IExpandableMultilineConfiguration.ts:5
+Defined in: [libs/ui/src/directives/expandable-multiline/IExpandableMultilineConfiguration.ts:5](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/expandable-multiline/IExpandableMultilineConfiguration.ts#L5)

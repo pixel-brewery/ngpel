@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: ActivityTextChangeComponent
 
-Defined in: libs/ui/src/components/activity-log/ActivityTextChangeComponent.ts:73
+Defined in: [libs/ui/src/components/activity-log/ActivityTextChangeComponent.ts:73](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityTextChangeComponent.ts#L73)
 
 Renders a word comparison and lets the reader reveal runs of unchanged paragraphs.
 
@@ -17,7 +17,7 @@ Renders a word comparison and lets the reader reveal runs of unchanged paragraph
 new ActivityTextChangeComponent(): ActivityTextChangeComponent;
 ```
 
-Defined in: libs/ui/src/components/activity-log/ActivityTextChangeComponent.ts:97
+Defined in: [libs/ui/src/components/activity-log/ActivityTextChangeComponent.ts:97](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityTextChangeComponent.ts#L97)
 
 Resets the expanded paragraphs when a different comparison arrives.
 
@@ -33,7 +33,7 @@ Resets the expanded paragraphs when a different comparison arrives.
 protected readonly expanded: WritableSignal<ReadonlySet<number>>;
 ```
 
-Defined in: libs/ui/src/components/activity-log/ActivityTextChangeComponent.ts:80
+Defined in: [libs/ui/src/components/activity-log/ActivityTextChangeComponent.ts:80](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityTextChangeComponent.ts#L80)
 
 ***
 
@@ -43,7 +43,7 @@ Defined in: libs/ui/src/components/activity-log/ActivityTextChangeComponent.ts:8
 protected readonly groups: Signal<ParagraphGroup[]>;
 ```
 
-Defined in: libs/ui/src/components/activity-log/ActivityTextChangeComponent.ts:81
+Defined in: [libs/ui/src/components/activity-log/ActivityTextChangeComponent.ts:81](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityTextChangeComponent.ts#L81)
 
 ***
 
@@ -53,7 +53,7 @@ Defined in: libs/ui/src/components/activity-log/ActivityTextChangeComponent.ts:8
 readonly paragraphs: InputSignal<readonly ActivityTextParagraph[]>;
 ```
 
-Defined in: libs/ui/src/components/activity-log/ActivityTextChangeComponent.ts:75
+Defined in: [libs/ui/src/components/activity-log/ActivityTextChangeComponent.ts:75](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityTextChangeComponent.ts#L75)
 
 Paragraphs produced by `diffActivityText`.
 
@@ -65,7 +65,7 @@ Paragraphs produced by `diffActivityText`.
 readonly unchangedLabel: InputSignal<(count, expanded) => string>;
 ```
 
-Defined in: libs/ui/src/components/activity-log/ActivityTextChangeComponent.ts:78
+Defined in: [libs/ui/src/components/activity-log/ActivityTextChangeComponent.ts:78](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityTextChangeComponent.ts#L78)
 
 Builds the localized toggle label for an unchanged run.
 
@@ -77,7 +77,7 @@ Builds the localized toggle label for an unchanged run.
 protected toggle(index): void;
 ```
 
-Defined in: libs/ui/src/components/activity-log/ActivityTextChangeComponent.ts:104
+Defined in: [libs/ui/src/components/activity-log/ActivityTextChangeComponent.ts:104](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityTextChangeComponent.ts#L104)
 
 #### Parameters
 

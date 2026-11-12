@@ -7,7 +7,7 @@ editUrl: false
 
 ```ts
 type AbortRef = {
-  abort: void;
+  abort(): void;
   signal: AbortSignal;
 };
 ```

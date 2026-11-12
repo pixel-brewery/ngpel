@@ -21,4 +21,4 @@ but that guarantee may not cost the entry point a `type-fest` peer dependency.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | The type to freeze structurally. |
+| <a id="type-parameter-t"></a> `T` | The type to freeze structurally. |

@@ -13,7 +13,7 @@ Describes a single change event emitted by a [SignalCacheRegistrar](Class.Signal
 
 | Type Parameter |
 | ------ |
-| `TValue` |
+| <a id="type-parameter-tvalue"></a> `TValue` |
 
 ## Properties
 

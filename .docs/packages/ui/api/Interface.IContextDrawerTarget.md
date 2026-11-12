@@ -13,8 +13,8 @@ A feature-owned contextual overlay presented through Mosaik drawers.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `TData` | Data passed to the drawer content. |
-| `TResult` | Result returned by the drawer content. |
+| <a id="type-parameter-tdata"></a> `TData` | Data passed to the drawer content. |
+| <a id="type-parameter-tresult"></a> `TResult` | Result returned by the drawer content. |
 
 ## Properties
 
@@ -43,7 +43,7 @@ Application authorization for the requested mode.
 ### createData?
 
 ```ts
-readonly optional createData?: (context?, transient?) => TData;
+readonly createData?: (context?, transient?) => TData;
 ```
 
 Defined in: [libs/ui/src/context-overlay/IContextDrawerTarget.ts:26](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/context-overlay/IContextDrawerTarget.ts#L26)
@@ -124,7 +124,7 @@ Lazy view for the requested mode.
 ### onClosed?
 
 ```ts
-readonly optional onClosed?: (result, state) => void;
+readonly onClosed?: (result, state) => void;
 ```
 
 Defined in: [libs/ui/src/context-overlay/IContextDrawerTarget.ts:30](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/context-overlay/IContextDrawerTarget.ts#L30)
@@ -147,7 +147,7 @@ Observes an interactive close and its typed outcome.
 ### onOpened?
 
 ```ts
-readonly optional onOpened?: (ref, state) => void;
+readonly onOpened?: (ref, state) => void;
 ```
 
 Defined in: [libs/ui/src/context-overlay/IContextDrawerTarget.ts:28](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/context-overlay/IContextDrawerTarget.ts#L28)
@@ -170,7 +170,7 @@ Observes the mounted drawer.
 ### resolveDetailData?
 
 ```ts
-readonly optional resolveDetailData?: (id, context, signal) => Promise<TData>;
+readonly resolveDetailData?: (id, context, signal) => Promise<TData>;
 ```
 
 Defined in: [libs/ui/src/context-overlay/IContextDrawerTarget.ts:24](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/context-overlay/IContextDrawerTarget.ts#L24)
@@ -194,7 +194,7 @@ Loads detail data when opening an address without transient data.
 ### size?
 
 ```ts
-readonly optional size?: Partial<ISizeLike>;
+readonly size?: Partial<ISizeLike>;
 ```
 
 Defined in: [libs/ui/src/context-overlay/IContextDrawerTarget.ts:16](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/context-overlay/IContextDrawerTarget.ts#L16)

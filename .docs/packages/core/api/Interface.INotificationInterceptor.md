@@ -15,7 +15,7 @@ never influence another or the raising caller.
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `TConfig` *extends* `object` | `object` | Shape of the options the composing `with*` factory passes in. |
+| <a id="type-parameter-tconfig"></a> `TConfig` *extends* `object` | `object` | Shape of the options the composing `with*` factory passes in. |
 
 ## Methods
 

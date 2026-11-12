@@ -26,7 +26,7 @@ class OrderView extends View<OrderViewPresenter> {}
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `TPresenter` *extends* [`IViewPresenter`](Interface.IViewPresenter) | The concrete presenter provided by the View. |
+| <a id="type-parameter-tpresenter"></a> `TPresenter` *extends* [`IViewPresenter`](Interface.IViewPresenter) | The concrete presenter provided by the View. |
 
 ## Implements
 
@@ -120,9 +120,7 @@ Disposes the presenter when Angular destroys the View.
 
 #### Implementation of
 
-```ts
-OnDestroy.ngOnDestroy
-```
+`OnDestroy.ngOnDestroy`
 
 ***
 
@@ -142,6 +140,4 @@ Initializes the presenter when Angular initializes the View.
 
 #### Implementation of
 
-```ts
-OnInit.ngOnInit
-```
+`OnInit.ngOnInit`

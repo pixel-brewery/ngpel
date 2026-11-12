@@ -17,8 +17,8 @@ Runtime flow projection for a collection view.
 
 | Type Parameter | Default type |
 | ------ | ------ |
-| `TItem` | - |
-| `TColumnKey` *extends* `string` | `string` |
+| <a id="type-parameter-titem"></a> `TItem` | - |
+| <a id="type-parameter-tcolumnkey"></a> `TColumnKey` *extends* `string` | `string` |
 
 ## Properties
 
@@ -44,9 +44,7 @@ Resolves the column key for an item.
 
 #### Inherited from
 
-```ts
-Omit.columnKey
-```
+`Omit.columnKey`
 
 ***
 
@@ -65,9 +63,7 @@ Declares all columns that can be shown in the board.
 
 #### Inherited from
 
-```ts
-Omit.columns
-```
+`Omit.columns`
 
 ***
 
@@ -115,16 +111,14 @@ Resolves the stable item key.
 
 #### Inherited from
 
-```ts
-Omit.itemKey
-```
+`Omit.itemKey`
 
 ***
 
 ### itemSubtitle?
 
 ```ts
-readonly optional itemSubtitle?: (item) => string;
+readonly itemSubtitle?: (item) => string;
 ```
 
 Defined in: [libs/ui/src/collection-view/views/flow/ICollectionFlowViewConfig.ts:47](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/views/flow/ICollectionFlowViewConfig.ts#L47)
@@ -143,9 +137,7 @@ Resolves the optional subtitle shown on a board item.
 
 #### Inherited from
 
-```ts
-Omit.itemSubtitle
-```
+`Omit.itemSubtitle`
 
 ***
 
@@ -171,9 +163,7 @@ Resolves the title shown on a board item.
 
 #### Inherited from
 
-```ts
-Omit.itemTitle
-```
+`Omit.itemTitle`
 
 ***
 
@@ -202,7 +192,7 @@ Applies and persists a Mosaik column expansion change.
 ### viewIconName?
 
 ```ts
-readonly optional viewIconName?: string;
+readonly viewIconName?: string;
 ```
 
 Defined in: [libs/ui/src/collection-view/views/flow/ICollectionFlowView.ts:19](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/views/flow/ICollectionFlowView.ts#L19)

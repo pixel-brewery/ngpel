@@ -15,7 +15,7 @@ templates immediately after construction.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `TState` *extends* `string` | String union of the allowed state names. |
+| <a id="type-parameter-tstate"></a> `TState` *extends* `string` | String union of the allowed state names. |
 
 ## Constructors
 

@@ -14,7 +14,7 @@ Stores an active filter so the presenter can restore it before the first list lo
 ### openWhenActive?
 
 ```ts
-readonly optional openWhenActive?: boolean;
+readonly openWhenActive?: boolean;
 ```
 
 Defined in: [libs/ui/src/components/filter-bar/saved-filters/ILiveFilterPreference.ts:17](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/saved-filters/ILiveFilterPreference.ts#L17)

@@ -599,9 +599,7 @@ Rebuilds the versioned field tree when its definition changes.
 
 #### Implementation of
 
-```ts
-OnChanges.ngOnChanges
-```
+`OnChanges.ngOnChanges`
 
 ***
 

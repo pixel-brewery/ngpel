@@ -57,9 +57,7 @@ Observes the anchor inside a narrow viewport band to keep the outline in sync wi
 
 #### Implementation of
 
-```ts
-AfterViewInit.ngAfterViewInit
-```
+`AfterViewInit.ngAfterViewInit`
 
 ***
 
@@ -79,9 +77,7 @@ Removes the destination when its routed content is destroyed.
 
 #### Implementation of
 
-```ts
-OnDestroy.ngOnDestroy
-```
+`OnDestroy.ngOnDestroy`
 
 ***
 
@@ -101,6 +97,4 @@ Registers the anchor after Angular has resolved the required input.
 
 #### Implementation of
 
-```ts
-OnInit.ngOnInit
-```
+`OnInit.ngOnInit`

@@ -20,8 +20,8 @@ connected to the hosting component's lifetime.
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `TComponent` *extends* `object` | `object` | The concrete component instance type. |
-| `TElement` *extends* `HTMLElement` | `HTMLElement` | The concrete host element type. |
+| <a id="type-parameter-tcomponent"></a> `TComponent` *extends* `object` | `object` | The concrete component instance type. |
+| <a id="type-parameter-telement"></a> `TElement` *extends* `HTMLElement` | `HTMLElement` | The concrete host element type. |
 
 ## Properties
 
@@ -40,7 +40,7 @@ Provides access to the owning component instance and host element.
 ### hostConnected()?
 
 ```ts
-optional hostConnected(): void;
+hostConnected?(): void;
 ```
 
 Defined in: [controllers/IReactiveController.ts:40](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/controllers/IReactiveController.ts#L40)
@@ -56,7 +56,7 @@ Called once when the controller is connected to the host component.
 ### hostDisconnected()?
 
 ```ts
-optional hostDisconnected(): void;
+hostDisconnected?(): void;
 ```
 
 Defined in: [controllers/IReactiveController.ts:47](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/controllers/IReactiveController.ts#L47)

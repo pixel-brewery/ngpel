@@ -9,7 +9,7 @@ editUrl: false
 const DOCUMENT_PREVIEW_MIME_TYPES: readonly ["application/pdf", "image/png", "image/jpeg", "image/gif", "image/webp"];
 ```
 
-Defined in: libs/ui/src/components/document-preview/DOCUMENT\_PREVIEW\_MIME\_TYPES.ts:7
+Defined in: [libs/ui/src/components/document-preview/DOCUMENT\_PREVIEW\_MIME\_TYPES.ts:7](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/document-preview/DOCUMENT_PREVIEW_MIME_TYPES.ts#L7)
 
 Browser-renderable document media types accepted by the shared preview.
 Active HTML and SVG documents are deliberately excluded.

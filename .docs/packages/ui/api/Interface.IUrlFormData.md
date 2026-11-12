@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: IUrlFormData\<TCategory\>
 
-Defined in: libs/ui/src/components/url-list/IUrlFormData.ts:2
+Defined in: [libs/ui/src/components/url-list/IUrlFormData.ts:2](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/IUrlFormData.ts#L2)
 
 Editable web-link fields shared by feature forms.
 
@@ -13,7 +13,7 @@ Editable web-link fields shared by feature forms.
 
 | Type Parameter | Default type |
 | ------ | ------ |
-| `TCategory` *extends* `string` | `string` |
+| <a id="type-parameter-tcategory"></a> `TCategory` *extends* `string` | `string` |
 
 ## Properties
 
@@ -23,7 +23,7 @@ Editable web-link fields shared by feature forms.
 isActive: boolean;
 ```
 
-Defined in: libs/ui/src/components/url-list/IUrlFormData.ts:7
+Defined in: [libs/ui/src/components/url-list/IUrlFormData.ts:7](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/IUrlFormData.ts#L7)
 
 ***
 
@@ -33,7 +33,7 @@ Defined in: libs/ui/src/components/url-list/IUrlFormData.ts:7
 isPrimary: boolean;
 ```
 
-Defined in: libs/ui/src/components/url-list/IUrlFormData.ts:6
+Defined in: [libs/ui/src/components/url-list/IUrlFormData.ts:6](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/IUrlFormData.ts#L6)
 
 ***
 
@@ -43,7 +43,7 @@ Defined in: libs/ui/src/components/url-list/IUrlFormData.ts:6
 label: string;
 ```
 
-Defined in: libs/ui/src/components/url-list/IUrlFormData.ts:4
+Defined in: [libs/ui/src/components/url-list/IUrlFormData.ts:4](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/IUrlFormData.ts#L4)
 
 ***
 
@@ -53,7 +53,7 @@ Defined in: libs/ui/src/components/url-list/IUrlFormData.ts:4
 type: TCategory;
 ```
 
-Defined in: libs/ui/src/components/url-list/IUrlFormData.ts:3
+Defined in: [libs/ui/src/components/url-list/IUrlFormData.ts:3](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/IUrlFormData.ts#L3)
 
 ***
 
@@ -63,4 +63,4 @@ Defined in: libs/ui/src/components/url-list/IUrlFormData.ts:3
 url: string;
 ```
 
-Defined in: libs/ui/src/components/url-list/IUrlFormData.ts:5
+Defined in: [libs/ui/src/components/url-list/IUrlFormData.ts:5](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/IUrlFormData.ts#L5)

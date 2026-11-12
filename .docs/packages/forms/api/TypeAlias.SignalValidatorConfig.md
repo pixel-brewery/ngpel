@@ -31,8 +31,8 @@ plugs in its translation service.
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `TValue` | - | The value type of the validated field. |
-| `TPathKind` *extends* `PathKind` | `PathKind.Root` | The kind of the validated path (root, child or array item). |
+| <a id="type-parameter-tvalue"></a> `TValue` | - | The value type of the validated field. |
+| <a id="type-parameter-tpathkind"></a> `TPathKind` *extends* `PathKind` | `PathKind.Root` | The kind of the validated path (root, child or array item). |
 
 ## Union Members
 

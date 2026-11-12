@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: IAnchoredPopupEvent
 
-Defined in: libs/ui/src/directives/anchored-popup/IAnchoredPopupEvent.ts:2
+Defined in: [libs/ui/src/directives/anchored-popup/IAnchoredPopupEvent.ts:2](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/anchored-popup/IAnchoredPopupEvent.ts#L2)
 
 Configuration supplied by the consuming view.
 
@@ -17,4 +17,4 @@ Configuration supplied by the consuming view.
 readonly anchor: HTMLElement;
 ```
 
-Defined in: libs/ui/src/directives/anchored-popup/IAnchoredPopupEvent.ts:3
+Defined in: [libs/ui/src/directives/anchored-popup/IAnchoredPopupEvent.ts:3](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/anchored-popup/IAnchoredPopupEvent.ts#L3)

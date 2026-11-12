@@ -14,7 +14,7 @@ Versioned, UI-owned definition of a dynamic form.
 ### description?
 
 ```ts
-readonly optional description?: string;
+readonly description?: string;
 ```
 
 Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormDefinition.ts:43](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormDefinition.ts#L43)
@@ -50,7 +50,7 @@ Ordered visual sections.
 ### title?
 
 ```ts
-readonly optional title?: string;
+readonly title?: string;
 ```
 
 Defined in: [libs/ui/src/components/dynamic-form/IDynamicFormDefinition.ts:35](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/IDynamicFormDefinition.ts#L35)

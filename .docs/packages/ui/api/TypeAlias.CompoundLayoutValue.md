@@ -9,6 +9,6 @@ editUrl: false
 type CompoundLayoutValue = typeof CompoundLayout[keyof typeof CompoundLayout];
 ```
 
-Defined in: libs/ui/src/components/compound/CompoundLayoutValue.ts:8
+Defined in: [libs/ui/src/components/compound/CompoundLayoutValue.ts:8](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundLayoutValue.ts#L8)
 
 A supported compound layout.

@@ -15,7 +15,7 @@ default: no application name is appended unless one is configured.
 ### appName?
 
 ```ts
-readonly optional appName?: string;
+readonly appName?: string;
 ```
 
 Defined in: [title/IRouteTitleOptions.ts:13](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/title/IRouteTitleOptions.ts#L13)
@@ -27,7 +27,7 @@ Appended as the last title segment, for example `'Contoso'`. Defaults to no suff
 ### descriptionDataKey?
 
 ```ts
-readonly optional descriptionDataKey?: string;
+readonly descriptionDataKey?: string;
 ```
 
 Defined in: [title/IRouteTitleOptions.ts:28](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/title/IRouteTitleOptions.ts#L28)
@@ -39,7 +39,7 @@ The route data key carrying the meta description. Defaults to `'description'`.
 ### separator?
 
 ```ts
-readonly optional separator?: string;
+readonly separator?: string;
 ```
 
 Defined in: [title/IRouteTitleOptions.ts:18](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/title/IRouteTitleOptions.ts#L18)
@@ -51,7 +51,7 @@ Joins the title segments. Defaults to `' · '`.
 ### titleDataKey?
 
 ```ts
-readonly optional titleDataKey?: string;
+readonly titleDataKey?: string;
 ```
 
 Defined in: [title/IRouteTitleOptions.ts:23](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/title/IRouteTitleOptions.ts#L23)

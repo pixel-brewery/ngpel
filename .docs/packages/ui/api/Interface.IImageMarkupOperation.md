@@ -26,7 +26,7 @@ CSS color used to render the operation.
 ### fontSize?
 
 ```ts
-readonly optional fontSize?: number;
+readonly fontSize?: number;
 ```
 
 Defined in: [libs/ui/src/components/image-markup-editor/IImageMarkupOperation.ts:71](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-markup-editor/IImageMarkupOperation.ts#L71)
@@ -62,7 +62,7 @@ Stroke width in source-image pixels.
 ### symbol?
 
 ```ts
-readonly optional symbol?: ImageMarkupSymbolValue;
+readonly symbol?: ImageMarkupSymbolValue;
 ```
 
 Defined in: [libs/ui/src/components/image-markup-editor/IImageMarkupOperation.ts:63](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-markup-editor/IImageMarkupOperation.ts#L63)
@@ -74,7 +74,7 @@ Optional symbol for symbol operations.
 ### text?
 
 ```ts
-readonly optional text?: string;
+readonly text?: string;
 ```
 
 Defined in: [libs/ui/src/components/image-markup-editor/IImageMarkupOperation.ts:55](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-markup-editor/IImageMarkupOperation.ts#L55)

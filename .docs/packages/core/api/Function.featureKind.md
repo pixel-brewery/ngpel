@@ -18,7 +18,7 @@ separate `featureKind.ts` would collide with `FeatureKind.ts` on case-insensitiv
 
 | Type Parameter |
 | ------ |
-| `TKind` *extends* `string` |
+| <a id="type-parameter-tkind"></a> `TKind` *extends* `string` |
 
 ## Parameters
 

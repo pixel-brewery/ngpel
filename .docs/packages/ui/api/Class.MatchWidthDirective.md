@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: MatchWidthDirective
 
-Defined in: libs/ui/src/directives/match-width/MatchWidthDirective.ts:24
+Defined in: [libs/ui/src/directives/match-width/MatchWidthDirective.ts:24](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/match-width/MatchWidthDirective.ts#L24)
 
 Keeps the host's inline size equal to another element's rendered width.
 
@@ -25,7 +25,7 @@ changes, so the matching element follows responsive or content-driven updates.
 new MatchWidthDirective(): MatchWidthDirective;
 ```
 
-Defined in: libs/ui/src/directives/match-width/MatchWidthDirective.ts:43
+Defined in: [libs/ui/src/directives/match-width/MatchWidthDirective.ts:43](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/match-width/MatchWidthDirective.ts#L43)
 
 Creates the source-reactive observer lifecycle.
 
@@ -41,7 +41,7 @@ Creates the source-reactive observer lifecycle.
 readonly source: InputSignal<MatchWidthSource>;
 ```
 
-Defined in: libs/ui/src/directives/match-width/MatchWidthDirective.ts:36
+Defined in: [libs/ui/src/directives/match-width/MatchWidthDirective.ts:36](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/match-width/MatchWidthDirective.ts#L36)
 
 Element, element reference, or component whose rendered width should be matched.
 
@@ -53,7 +53,7 @@ Element, element reference, or component whose rendered width should be matched.
 ngAfterViewInit(): void;
 ```
 
-Defined in: libs/ui/src/directives/match-width/MatchWidthDirective.ts:60
+Defined in: [libs/ui/src/directives/match-width/MatchWidthDirective.ts:60](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/match-width/MatchWidthDirective.ts#L60)
 
 Applies the initial width once projected elements have been rendered.
 
@@ -63,6 +63,4 @@ Applies the initial width once projected elements have been rendered.
 
 #### Implementation of
 
-```ts
-AfterViewInit.ngAfterViewInit
-```
+`AfterViewInit.ngAfterViewInit`

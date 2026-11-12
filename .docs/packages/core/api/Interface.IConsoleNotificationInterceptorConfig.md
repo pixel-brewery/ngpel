@@ -14,7 +14,7 @@ Options of the [ConsoleNotificationInterceptor](Class.ConsoleNotificationInterce
 ### isDisabled?
 
 ```ts
-readonly optional isDisabled?: boolean;
+readonly isDisabled?: boolean;
 ```
 
 Defined in: [notification/interception/IConsoleNotificationInterceptorConfig.ts:13](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/notification/interception/IConsoleNotificationInterceptorConfig.ts#L13)
@@ -27,7 +27,7 @@ silence it without changing the composition.
 ### logger?
 
 ```ts
-readonly optional logger?: Pick<Console, "error" | "info" | "log" | "warn">;
+readonly logger?: Pick<Console, "error" | "info" | "log" | "warn">;
 ```
 
 Defined in: [notification/interception/IConsoleNotificationInterceptorConfig.ts:18](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/notification/interception/IConsoleNotificationInterceptorConfig.ts#L18)

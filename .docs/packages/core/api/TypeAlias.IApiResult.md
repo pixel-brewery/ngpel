@@ -19,7 +19,7 @@ Discriminated union type for API responses. Narrow through the `success` discrim
 
 | Type Parameter |
 | ------ |
-| `TData` |
+| <a id="type-parameter-tdata"></a> `TData` |
 
 ## Example
 

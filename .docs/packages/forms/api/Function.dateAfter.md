@@ -22,7 +22,7 @@ instants. Invalid dates are left to `validDate`; `null` values and a `null` boun
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `TPathKind` *extends* `PathKind` | `Root` | The kind of the validated path. |
+| <a id="type-parameter-tpathkind"></a> `TPathKind` *extends* `PathKind` | `Root` | The kind of the validated path. |
 
 ## Parameters
 

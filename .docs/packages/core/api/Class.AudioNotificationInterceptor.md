@@ -35,7 +35,7 @@ Constructs a new instance of the `AudioNotificationInterceptor` class.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `audioPlayer` | [`AudioPlayer`](Class.AudioPlayer) | The player the sounds are played through. |
+| `audioPlayer?` | [`AudioPlayer`](Class.AudioPlayer) | The player the sounds are played through. |
 
 #### Returns
 

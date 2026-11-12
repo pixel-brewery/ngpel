@@ -42,10 +42,7 @@ jobs:
         run: yarn install --immutable
 
       - name: Verify source, tooling, documentation and package output
-        run: yarn run verify
-
-      - name: Typecheck Angular projects
-        run: yarn typecheck
+        run: yarn run verify:ci
 
       - name: Build the Angular consumer fixture
         run: yarn nx run fixture-ng22:build

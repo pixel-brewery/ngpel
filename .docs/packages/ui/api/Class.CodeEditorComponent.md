@@ -209,9 +209,7 @@ before a directive, pipe, or service instance is destroyed.
 
 #### Implementation of
 
-```ts
-OnDestroy.ngOnDestroy
-```
+`OnDestroy.ngOnDestroy`
 
 ***
 
@@ -315,9 +313,7 @@ host: {
 
 #### Implementation of
 
-```ts
-ControlValueAccessor.registerOnChange
-```
+`ControlValueAccessor.registerOnChange`
 
 ***
 
@@ -371,9 +367,7 @@ host: {
 
 #### Implementation of
 
-```ts
-ControlValueAccessor.registerOnTouched
-```
+`ControlValueAccessor.registerOnTouched`
 
 ***
 
@@ -413,9 +407,7 @@ setDisabledState(isDisabled: boolean): void {
 
 #### Implementation of
 
-```ts
-ControlValueAccessor.setDisabledState
-```
+`ControlValueAccessor.setDisabledState`
 
 ***
 
@@ -458,6 +450,4 @@ writeValue(value: any): void {
 
 #### Implementation of
 
-```ts
-ControlValueAccessor.writeValue
-```
+`ControlValueAccessor.writeValue`

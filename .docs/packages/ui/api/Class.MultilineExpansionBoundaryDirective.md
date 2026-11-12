@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: MultilineExpansionBoundaryDirective
 
-Defined in: libs/ui/src/directives/expandable-multiline/MultilineExpansionBoundaryDirective.ts:9
+Defined in: [libs/ui/src/directives/expandable-multiline/MultilineExpansionBoundaryDirective.ts:9](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/expandable-multiline/MultilineExpansionBoundaryDirective.ts#L9)
 
 ## Implements
 
@@ -19,7 +19,7 @@ Defined in: libs/ui/src/directives/expandable-multiline/MultilineExpansionBounda
 new MultilineExpansionBoundaryDirective(): MultilineExpansionBoundaryDirective;
 ```
 
-Defined in: libs/ui/src/directives/expandable-multiline/MultilineExpansionBoundaryDirective.ts:17
+Defined in: [libs/ui/src/directives/expandable-multiline/MultilineExpansionBoundaryDirective.ts:17](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/expandable-multiline/MultilineExpansionBoundaryDirective.ts#L17)
 
 #### Returns
 
@@ -35,7 +35,7 @@ Defined in: libs/ui/src/directives/expandable-multiline/MultilineExpansionBounda
 get element(): HTMLElement;
 ```
 
-Defined in: libs/ui/src/directives/expandable-multiline/MultilineExpansionBoundaryDirective.ts:28
+Defined in: [libs/ui/src/directives/expandable-multiline/MultilineExpansionBoundaryDirective.ts:28](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/expandable-multiline/MultilineExpansionBoundaryDirective.ts#L28)
 
 Element whose visible content box limits expanded multiline fields.
 
@@ -51,7 +51,7 @@ Element whose visible content box limits expanded multiline fields.
 ngOnDestroy(): void;
 ```
 
-Defined in: libs/ui/src/directives/expandable-multiline/MultilineExpansionBoundaryDirective.ts:53
+Defined in: [libs/ui/src/directives/expandable-multiline/MultilineExpansionBoundaryDirective.ts:53](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/expandable-multiline/MultilineExpansionBoundaryDirective.ts#L53)
 
 A callback method that performs custom clean-up, invoked immediately
 before a directive, pipe, or service instance is destroyed.
@@ -62,6 +62,4 @@ before a directive, pipe, or service instance is destroyed.
 
 #### Implementation of
 
-```ts
-OnDestroy.ngOnDestroy
-```
+`OnDestroy.ngOnDestroy`

@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: ExpandableMultilineDirective
 
-Defined in: libs/ui/src/directives/expandable-multiline/ExpandableMultilineDirective.ts:55
+Defined in: [libs/ui/src/directives/expandable-multiline/ExpandableMultilineDirective.ts:55](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/expandable-multiline/ExpandableMultilineDirective.ts#L55)
 
 ## Implements
 
@@ -19,7 +19,7 @@ Defined in: libs/ui/src/directives/expandable-multiline/ExpandableMultilineDirec
 new ExpandableMultilineDirective(): ExpandableMultilineDirective;
 ```
 
-Defined in: libs/ui/src/directives/expandable-multiline/ExpandableMultilineDirective.ts:76
+Defined in: [libs/ui/src/directives/expandable-multiline/ExpandableMultilineDirective.ts:76](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/expandable-multiline/ExpandableMultilineDirective.ts#L76)
 
 #### Returns
 
@@ -33,7 +33,7 @@ Defined in: libs/ui/src/directives/expandable-multiline/ExpandableMultilineDirec
 readonly isExpanded: Signal<boolean>;
 ```
 
-Defined in: libs/ui/src/directives/expandable-multiline/ExpandableMultilineDirective.ts:118
+Defined in: [libs/ui/src/directives/expandable-multiline/ExpandableMultilineDirective.ts:118](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/expandable-multiline/ExpandableMultilineDirective.ts#L118)
 
 Whether the host field currently occupies its expansion boundary.
 
@@ -47,7 +47,7 @@ Whether the host field currently occupies its expansion boundary.
 set configuration(value): void;
 ```
 
-Defined in: libs/ui/src/directives/expandable-multiline/ExpandableMultilineDirective.ts:113
+Defined in: [libs/ui/src/directives/expandable-multiline/ExpandableMultilineDirective.ts:113](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/expandable-multiline/ExpandableMultilineDirective.ts#L113)
 
 ##### Parameters
 
@@ -67,7 +67,7 @@ Defined in: libs/ui/src/directives/expandable-multiline/ExpandableMultilineDirec
 ngAfterViewInit(): void;
 ```
 
-Defined in: libs/ui/src/directives/expandable-multiline/ExpandableMultilineDirective.ts:120
+Defined in: [libs/ui/src/directives/expandable-multiline/ExpandableMultilineDirective.ts:120](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/expandable-multiline/ExpandableMultilineDirective.ts#L120)
 
 A callback method that is invoked immediately after
 Angular has completed initialization of a component's view.
@@ -79,6 +79,4 @@ It is invoked only once when the view is instantiated.
 
 #### Implementation of
 
-```ts
-AfterViewInit.ngAfterViewInit
-```
+`AfterViewInit.ngAfterViewInit`

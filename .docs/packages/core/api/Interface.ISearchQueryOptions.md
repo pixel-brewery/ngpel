@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: ISearchQueryOptions
 
-Defined in: search/models/ISearchQueryOptions.ts:12
+Defined in: [search/models/ISearchQueryOptions.ts:12](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ISearchQueryOptions.ts#L12)
 
 Optional observation and cancellation of one search request.
 
@@ -14,10 +14,10 @@ Optional observation and cancellation of one search request.
 ### onResults?
 
 ```ts
-readonly optional onResults?: (results) => void;
+readonly onResults?: (results) => void;
 ```
 
-Defined in: search/models/ISearchQueryOptions.ts:17
+Defined in: [search/models/ISearchQueryOptions.ts:17](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ISearchQueryOptions.ts#L17)
 
 Receives the deduplicated semantic results of the providers that have answered so far, in
 provider registration order. The search promise still resolves with the final results.
@@ -37,9 +37,9 @@ provider registration order. The search promise still resolves with the final re
 ### signal?
 
 ```ts
-readonly optional signal?: AbortSignal;
+readonly signal?: AbortSignal;
 ```
 
-Defined in: search/models/ISearchQueryOptions.ts:22
+Defined in: [search/models/ISearchQueryOptions.ts:22](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ISearchQueryOptions.ts#L22)
 
 Cancels the request and stops delivery of further results.

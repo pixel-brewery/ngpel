@@ -9,7 +9,7 @@ editUrl: false
 type InputSuggestionSource<TOption> = (query, signal) => Promise<ReadonlyArray<TOption>> | ReadonlyArray<TOption>;
 ```
 
-Defined in: libs/ui/src/directives/input-suggestions/InputSuggestionSource.ts:9
+Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionSource.ts:9](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionSource.ts#L9)
 
 Supplies options for a normalized whole-field query. The signal is aborted when the query is
 replaced, the suggestions close, or the owning directive is destroyed.
@@ -18,7 +18,7 @@ replaced, the suggestions close, or the owning directive is destroyed.
 
 | Type Parameter | Default type |
 | ------ | ------ |
-| `TOption` *extends* [`ITextSuggestionOption`](Interface.ITextSuggestionOption) | [`ITextSuggestionOption`](Interface.ITextSuggestionOption) |
+| <a id="type-parameter-toption"></a> `TOption` *extends* [`ITextSuggestionOption`](Interface.ITextSuggestionOption) | [`ITextSuggestionOption`](Interface.ITextSuggestionOption) |
 
 ## Parameters
 

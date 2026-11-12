@@ -12,7 +12,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:35](http
 ### recurrenceEndAt?
 
 ```ts
-readonly optional recurrenceEndAt?: string | null;
+readonly recurrenceEndAt?: string | null;
 ```
 
 Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:36](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L36)

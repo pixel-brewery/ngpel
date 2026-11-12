@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: ITextSuggestionOption
 
-Defined in: libs/ui/src/directives/input-suggestions/ITextSuggestionOption.ts:2
+Defined in: [libs/ui/src/directives/input-suggestions/ITextSuggestionOption.ts:2](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/ITextSuggestionOption.ts#L2)
 
 A selectable result supplied by an application-owned suggestion source.
 
@@ -14,10 +14,10 @@ A selectable result supplied by an application-owned suggestion source.
 ### description?
 
 ```ts
-readonly optional description?: string;
+readonly description?: string;
 ```
 
-Defined in: libs/ui/src/directives/input-suggestions/ITextSuggestionOption.ts:10
+Defined in: [libs/ui/src/directives/input-suggestions/ITextSuggestionOption.ts:10](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/ITextSuggestionOption.ts#L10)
 
 Optional context displayed below the label.
 
@@ -26,10 +26,10 @@ Optional context displayed below the label.
 ### icon?
 
 ```ts
-readonly optional icon?: string;
+readonly icon?: string;
 ```
 
-Defined in: libs/ui/src/directives/input-suggestions/ITextSuggestionOption.ts:13
+Defined in: [libs/ui/src/directives/input-suggestions/ITextSuggestionOption.ts:13](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/ITextSuggestionOption.ts#L13)
 
 Optional Mosaik icon registry name.
 
@@ -41,7 +41,7 @@ Optional Mosaik icon registry name.
 readonly id: string;
 ```
 
-Defined in: libs/ui/src/directives/input-suggestions/ITextSuggestionOption.ts:4
+Defined in: [libs/ui/src/directives/input-suggestions/ITextSuggestionOption.ts:4](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/ITextSuggestionOption.ts#L4)
 
 Stable, unique identifier of the result.
 
@@ -53,6 +53,6 @@ Stable, unique identifier of the result.
 readonly label: string;
 ```
 
-Defined in: libs/ui/src/directives/input-suggestions/ITextSuggestionOption.ts:7
+Defined in: [libs/ui/src/directives/input-suggestions/ITextSuggestionOption.ts:7](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/ITextSuggestionOption.ts#L7)
 
 Text shown as the primary option label.

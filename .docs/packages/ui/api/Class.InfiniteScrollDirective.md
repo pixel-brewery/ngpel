@@ -146,6 +146,4 @@ Initializes scroll monitoring after Angular processes inputs.
 
 #### Implementation of
 
-```ts
-OnInit.ngOnInit
-```
+`OnInit.ngOnInit`

@@ -161,7 +161,7 @@ Starts monitoring a stream with at least one live audio track.
 | Parameter | Type |
 | ------ | ------ |
 | `stream` | `MediaStream` |
-| `options` | [`IAudioLevelMonitorOptions`](Interface.IAudioLevelMonitorOptions) |
+| `options?` | [`IAudioLevelMonitorOptions`](Interface.IAudioLevelMonitorOptions) |
 
 #### Returns
 

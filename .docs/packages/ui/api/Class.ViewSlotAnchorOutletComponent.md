@@ -13,7 +13,7 @@ Renders active Mosaik view-slot entries with stable DOM anchors.
 
 | Type Parameter | Default type |
 | ------ | ------ |
-| `TSelection` | `unknown` |
+| <a id="type-parameter-tselection"></a> `TSelection` | `unknown` |
 
 ## Constructors
 
@@ -31,8 +31,8 @@ Constructs a new instance of the `ViewSlotAnchorOutletComponent` class.
 
 | Parameter | Type |
 | ------ | ------ |
-| `registry` | `ViewSlotRegistry` |
-| `parentInjector` | `Injector` |
+| `registry?` | `ViewSlotRegistry` |
+| `parentInjector?` | `Injector` |
 
 #### Returns
 

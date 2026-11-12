@@ -49,7 +49,7 @@ Returns `whenTrue` or `whenFalse` depending on `condition`.
 
 | Type Parameter |
 | ------ |
-| `TValue` |
+| <a id="type-parameter-tvalue"></a> `TValue` |
 
 #### Parameters
 
@@ -67,6 +67,4 @@ The chosen value.
 
 #### Implementation of
 
-```ts
-PipeTransform.transform
-```
+`PipeTransform.transform`

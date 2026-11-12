@@ -17,8 +17,8 @@ Applies a sequence of signal operators to a subject.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | The source value type. |
-| `R` | The final value type. |
+| <a id="type-parameter-t"></a> `T` | The source value type. |
+| <a id="type-parameter-r"></a> `R` | The final value type. |
 
 ## Parameters
 

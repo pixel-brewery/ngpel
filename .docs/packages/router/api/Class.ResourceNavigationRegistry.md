@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: ResourceNavigationRegistry
 
-Defined in: navigation/resource-navigation/ResourceNavigationRegistry.ts:18
+Defined in: [navigation/resource-navigation/ResourceNavigationRegistry.ts:18](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/navigation/resource-navigation/ResourceNavigationRegistry.ts#L18)
 
 Resolves feature-owned resource links by semantic target or source.
 
@@ -17,7 +17,7 @@ Resolves feature-owned resource links by semantic target or source.
 new ResourceNavigationRegistry(): ResourceNavigationRegistry;
 ```
 
-Defined in: navigation/resource-navigation/ResourceNavigationRegistry.ts:29
+Defined in: [navigation/resource-navigation/ResourceNavigationRegistry.ts:29](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/navigation/resource-navigation/ResourceNavigationRegistry.ts#L29)
 
 Indexes targets and source aliases contributed at application composition.
 
@@ -35,7 +35,7 @@ resolve(targetKey):
   | undefined;
 ```
 
-Defined in: navigation/resource-navigation/ResourceNavigationRegistry.ts:76
+Defined in: [navigation/resource-navigation/ResourceNavigationRegistry.ts:76](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/navigation/resource-navigation/ResourceNavigationRegistry.ts#L76)
 
 Finds a target by its semantic key.
 
@@ -62,7 +62,7 @@ resolveSource(sourceKey):
   | undefined;
 ```
 
-Defined in: navigation/resource-navigation/ResourceNavigationRegistry.ts:86
+Defined in: [navigation/resource-navigation/ResourceNavigationRegistry.ts:86](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/navigation/resource-navigation/ResourceNavigationRegistry.ts#L86)
 
 Finds the resource destination described by a source row.
 
@@ -87,7 +87,7 @@ The target and identifier field, if registered.
 urlFor(targetKey, resourceId): string;
 ```
 
-Defined in: navigation/resource-navigation/ResourceNavigationRegistry.ts:98
+Defined in: [navigation/resource-navigation/ResourceNavigationRegistry.ts:98](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/navigation/resource-navigation/ResourceNavigationRegistry.ts#L98)
 
 Builds a canonical root-relative address for a registered resource.
 

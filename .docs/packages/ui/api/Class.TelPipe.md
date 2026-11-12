@@ -55,6 +55,4 @@ The `tel:` URL, or `null` when the value is not diallable.
 
 #### Implementation of
 
-```ts
-PipeTransform.transform
-```
+`PipeTransform.transform`

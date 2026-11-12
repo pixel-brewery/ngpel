@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: IPagePathLevel
 
-Defined in: libs/ui/src/components/page-path/IPagePathLevel.ts:4
+Defined in: [libs/ui/src/components/page-path/IPagePathLevel.ts:4](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/IPagePathLevel.ts#L4)
 
 One level of a page path. The last level names the current page.
 
@@ -14,10 +14,10 @@ One level of a page path. The last level names the current page.
 ### command?
 
 ```ts
-readonly optional command?: Command<void> | null;
+readonly command?: Command<void> | null;
 ```
 
-Defined in: libs/ui/src/components/page-path/IPagePathLevel.ts:8
+Defined in: [libs/ui/src/components/page-path/IPagePathLevel.ts:8](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/IPagePathLevel.ts#L8)
 
 Optional navigation command for a parent level.
 
@@ -29,6 +29,6 @@ Optional navigation command for a parent level.
 readonly label: string;
 ```
 
-Defined in: libs/ui/src/components/page-path/IPagePathLevel.ts:6
+Defined in: [libs/ui/src/components/page-path/IPagePathLevel.ts:6](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/IPagePathLevel.ts#L6)
 
 Display label supplied by the feature.

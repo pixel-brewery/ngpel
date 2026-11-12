@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: IActivityLogControllerOptions\<T\>
 
-Defined in: libs/ui/src/components/activity-log/IActivityLogControllerOptions.ts:6
+Defined in: [libs/ui/src/components/activity-log/IActivityLogControllerOptions.ts:6](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogControllerOptions.ts#L6)
 
 Data and identity supplied by the host for a paged activity log.
 
@@ -13,17 +13,17 @@ Data and identity supplied by the host for a paged activity log.
 
 | Type Parameter |
 | ------ |
-| `T` |
+| <a id="type-parameter-t"></a> `T` |
 
 ## Properties
 
 ### pageSize?
 
 ```ts
-readonly optional pageSize?: number;
+readonly pageSize?: number;
 ```
 
-Defined in: libs/ui/src/components/activity-log/IActivityLogControllerOptions.ts:14
+Defined in: [libs/ui/src/components/activity-log/IActivityLogControllerOptions.ts:14](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogControllerOptions.ts#L14)
 
 Requested page size. Defaults to 100.
 
@@ -32,10 +32,10 @@ Requested page size. Defaults to 100.
 ### scope?
 
 ```ts
-readonly optional scope?: Signal<unknown>;
+readonly scope?: Signal<unknown>;
 ```
 
-Defined in: libs/ui/src/components/activity-log/IActivityLogControllerOptions.ts:12
+Defined in: [libs/ui/src/components/activity-log/IActivityLogControllerOptions.ts:12](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogControllerOptions.ts#L12)
 
 Changing this key discards the current pages and loads the new scope after first use.
 
@@ -47,7 +47,7 @@ Changing this key discards the current pages and loads the new scope after first
 itemKey(item): string | number;
 ```
 
-Defined in: libs/ui/src/components/activity-log/IActivityLogControllerOptions.ts:10
+Defined in: [libs/ui/src/components/activity-log/IActivityLogControllerOptions.ts:10](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogControllerOptions.ts#L10)
 
 Stable entry key used for deduplication and tracking.
 
@@ -69,7 +69,7 @@ Stable entry key used for deduplication and tracking.
 loadPage(offset, limit): Observable<IActivityLogPage<T>>;
 ```
 
-Defined in: libs/ui/src/components/activity-log/IActivityLogControllerOptions.ts:8
+Defined in: [libs/ui/src/components/activity-log/IActivityLogControllerOptions.ts:8](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogControllerOptions.ts#L8)
 
 Loads one page. Unsubscription cancels work when the host's loader supports it.
 

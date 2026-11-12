@@ -23,7 +23,7 @@ same error slot as Angular's built-in validator.
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `TPathKind` *extends* `PathKind` | `Root` | The kind of the validated path. |
+| <a id="type-parameter-tpathkind"></a> `TPathKind` *extends* `PathKind` | `Root` | The kind of the validated path. |
 
 ## Parameters
 

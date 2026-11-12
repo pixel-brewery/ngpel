@@ -20,7 +20,7 @@ columns remain expanded by default.
 
 | Type Parameter |
 | ------ |
-| `TColumnKey` *extends* `string` |
+| <a id="type-parameter-tcolumnkey"></a> `TColumnKey` *extends* `string` |
 
 ## Parameters
 

@@ -53,9 +53,7 @@ Matching image preview descriptor or descriptors.
 
 ##### Implementation of
 
-```ts
-PipeTransform.transform
-```
+`PipeTransform.transform`
 
 #### Call Signature
 
@@ -81,6 +79,4 @@ Matching image preview descriptor or descriptors.
 
 ##### Implementation of
 
-```ts
-PipeTransform.transform
-```
+`PipeTransform.transform`

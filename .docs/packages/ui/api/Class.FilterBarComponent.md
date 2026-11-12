@@ -488,9 +488,7 @@ Synchronizes dynamic form fields after input changes.
 
 #### Implementation of
 
-```ts
-OnChanges.ngOnChanges
-```
+`OnChanges.ngOnChanges`
 
 ***
 
@@ -510,9 +508,7 @@ Synchronizes dynamic form fields before the first view render.
 
 #### Implementation of
 
-```ts
-OnInit.ngOnInit
-```
+`OnInit.ngOnInit`
 
 ***
 
@@ -646,7 +642,7 @@ Updates the controlled value only for a valid number or explicit clear.
 | ------ | ------ | ------ |
 | `field` | () => `FieldState`\<`unknown`\> | `undefined` |
 | `value` | `unknown` | `undefined` |
-| `integer` | `boolean` | `false` |
+| `integer?` | `boolean` | `false` |
 
 #### Returns
 

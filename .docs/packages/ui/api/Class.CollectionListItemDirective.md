@@ -13,7 +13,7 @@ Marks the caller-provided row template of a collection list.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | Collection item type. |
+| <a id="type-parameter-t"></a> `T` | Collection item type. |
 
 ## Constructors
 
@@ -55,7 +55,7 @@ Narrows the Angular template context to the collection item contract.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | Collection item type. |
+| <a id="type-parameter-t-1"></a> `T` | Collection item type. |
 
 #### Parameters
 

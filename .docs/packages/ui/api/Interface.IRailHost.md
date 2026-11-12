@@ -26,7 +26,7 @@ Key of the currently visible rail content.
 ### isFloating?
 
 ```ts
-readonly optional isFloating?: Signal<boolean>;
+readonly isFloating?: Signal<boolean>;
 ```
 
 Defined in: [libs/ui/src/components/rail/IRailHost.ts:22](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/IRailHost.ts#L22)

@@ -55,9 +55,7 @@ Constructs a new instance of the `LocalStorageUnavailableError` class.
 
 #### Overrides
 
-```ts
-Error.constructor
-```
+`Error.constructor`
 
 ## Accessors
 

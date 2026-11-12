@@ -13,7 +13,7 @@ Renders a collection heading and menus above caller-templated rows in one scroll
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | Collection item type. |
+| <a id="type-parameter-t"></a> `T` | Collection item type. |
 
 ## Constructors
 

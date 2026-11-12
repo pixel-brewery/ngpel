@@ -41,7 +41,7 @@ Items displayed inside this section, in display order.
 ### label?
 
 ```ts
-readonly optional label?: string;
+readonly label?: string;
 ```
 
 Defined in: [search/models/ISearchSection.ts:32](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ISearchSection.ts#L32)
@@ -53,7 +53,7 @@ Optional already-resolved label for sections named after provider-owned data.
 ### labelKey?
 
 ```ts
-readonly optional labelKey?: string;
+readonly labelKey?: string;
 ```
 
 Defined in: [search/models/ISearchSection.ts:27](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ISearchSection.ts#L27)
@@ -66,7 +66,7 @@ emits it for the command section when `ISearchConfig.commandSectionLabelKey` is 
 ### layout?
 
 ```ts
-readonly optional layout?: SearchSectionLayout;
+readonly layout?: SearchSectionLayout;
 ```
 
 Defined in: [search/models/ISearchSection.ts:37](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ISearchSection.ts#L37)

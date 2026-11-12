@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: IActivityLogController\<T\>
 
-Defined in: libs/ui/src/components/activity-log/IActivityLogController.ts:6
+Defined in: [libs/ui/src/components/activity-log/IActivityLogController.ts:6](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogController.ts#L6)
 
 State and actions of an activity log whose data source is supplied by its host.
 
@@ -13,7 +13,7 @@ State and actions of an activity log whose data source is supplied by its host.
 
 | Type Parameter |
 | ------ |
-| `T` |
+| <a id="type-parameter-t"></a> `T` |
 
 ## Properties
 
@@ -23,7 +23,7 @@ State and actions of an activity log whose data source is supplied by its host.
 readonly entries: Signal<readonly T[]>;
 ```
 
-Defined in: libs/ui/src/components/activity-log/IActivityLogController.ts:8
+Defined in: [libs/ui/src/components/activity-log/IActivityLogController.ts:8](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogController.ts#L8)
 
 Entries loaded for the active scope.
 
@@ -35,7 +35,7 @@ Entries loaded for the active scope.
 readonly hasMore: Signal<boolean>;
 ```
 
-Defined in: libs/ui/src/components/activity-log/IActivityLogController.ts:14
+Defined in: [libs/ui/src/components/activity-log/IActivityLogController.ts:14](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogController.ts#L14)
 
 Whether another page can be requested.
 
@@ -47,7 +47,7 @@ Whether another page can be requested.
 readonly loadMoreCommand: Command<void>;
 ```
 
-Defined in: libs/ui/src/components/activity-log/IActivityLogController.ts:18
+Defined in: [libs/ui/src/components/activity-log/IActivityLogController.ts:18](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogController.ts#L18)
 
 Requests the next page.
 
@@ -59,7 +59,7 @@ Requests the next page.
 readonly moreState: Signal<ActivityLogState>;
 ```
 
-Defined in: libs/ui/src/components/activity-log/IActivityLogController.ts:12
+Defined in: [libs/ui/src/components/activity-log/IActivityLogController.ts:12](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogController.ts#L12)
 
 Additional page request state, independent of visible entries.
 
@@ -71,7 +71,7 @@ Additional page request state, independent of visible entries.
 readonly reloadCommand: Command<void>;
 ```
 
-Defined in: libs/ui/src/components/activity-log/IActivityLogController.ts:16
+Defined in: [libs/ui/src/components/activity-log/IActivityLogController.ts:16](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogController.ts#L16)
 
 Loads the first page again.
 
@@ -83,7 +83,7 @@ Loads the first page again.
 readonly state: Signal<ActivityLogState>;
 ```
 
-Defined in: libs/ui/src/components/activity-log/IActivityLogController.ts:10
+Defined in: [libs/ui/src/components/activity-log/IActivityLogController.ts:10](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogController.ts#L10)
 
 Initial request state.
 
@@ -95,7 +95,7 @@ Initial request state.
 ensureLoaded(): void;
 ```
 
-Defined in: libs/ui/src/components/activity-log/IActivityLogController.ts:22
+Defined in: [libs/ui/src/components/activity-log/IActivityLogController.ts:22](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogController.ts#L22)
 
 Loads the first page on initial display.
 
@@ -111,7 +111,7 @@ Loads the first page on initial display.
 itemKey(item): string | number;
 ```
 
-Defined in: libs/ui/src/components/activity-log/IActivityLogController.ts:20
+Defined in: [libs/ui/src/components/activity-log/IActivityLogController.ts:20](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogController.ts#L20)
 
 Resolves the stable entry key for rendering.
 
@@ -133,7 +133,7 @@ Resolves the stable entry key for rendering.
 refresh(): void;
 ```
 
-Defined in: libs/ui/src/components/activity-log/IActivityLogController.ts:24
+Defined in: [libs/ui/src/components/activity-log/IActivityLogController.ts:24](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogController.ts#L24)
 
 Adds newly recorded entries while retaining previously loaded pages.
 

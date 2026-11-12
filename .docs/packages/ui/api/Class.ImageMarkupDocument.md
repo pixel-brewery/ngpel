@@ -25,7 +25,7 @@ Creates an empty image markup history.
 
 | Parameter | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
-| `historyLimit` | `number` | `100` | Maximum number of undo snapshots retained. |
+| `historyLimit?` | `number` | `100` | Maximum number of undo snapshots retained. |
 
 #### Returns
 

@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: IDocumentPreviewRequest
 
-Defined in: libs/ui/src/components/document-preview/IDocumentPreviewRequest.ts:14
+Defined in: [libs/ui/src/components/document-preview/IDocumentPreviewRequest.ts:14](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/document-preview/IDocumentPreviewRequest.ts#L14)
 
 Captures one document and the caller-owned operation that loads its bytes.
 Authentication, document identity and permission checks remain with the caller.
@@ -15,10 +15,10 @@ Authentication, document identity and permission checks remain with the caller.
 ### description?
 
 ```ts
-readonly optional description?: string;
+readonly description?: string;
 ```
 
-Defined in: libs/ui/src/components/document-preview/IDocumentPreviewRequest.ts:22
+Defined in: [libs/ui/src/components/document-preview/IDocumentPreviewRequest.ts:22](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/document-preview/IDocumentPreviewRequest.ts#L22)
 
 Optional explanatory context supplied by the owning feature.
 
@@ -30,7 +30,7 @@ Optional explanatory context supplied by the owning feature.
 readonly fileName: string;
 ```
 
-Defined in: libs/ui/src/components/document-preview/IDocumentPreviewRequest.ts:16
+Defined in: [libs/ui/src/components/document-preview/IDocumentPreviewRequest.ts:16](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/document-preview/IDocumentPreviewRequest.ts#L16)
 
 File name displayed when no separate title or description is supplied.
 
@@ -42,7 +42,7 @@ File name displayed when no separate title or description is supplied.
 readonly load: () => Observable<Blob>;
 ```
 
-Defined in: libs/ui/src/components/document-preview/IDocumentPreviewRequest.ts:28
+Defined in: [libs/ui/src/components/document-preview/IDocumentPreviewRequest.ts:28](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/document-preview/IDocumentPreviewRequest.ts#L28)
 
 Loads the same captured document for the initial attempt and every retry.
 
@@ -63,7 +63,7 @@ readonly mimeType:
   | "image/webp";
 ```
 
-Defined in: libs/ui/src/components/document-preview/IDocumentPreviewRequest.ts:25
+Defined in: [libs/ui/src/components/document-preview/IDocumentPreviewRequest.ts:25](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/document-preview/IDocumentPreviewRequest.ts#L25)
 
 Exact supported media type expected from the loader.
 
@@ -72,10 +72,10 @@ Exact supported media type expected from the loader.
 ### onLoaded?
 
 ```ts
-readonly optional onLoaded?: (blob) => void;
+readonly onLoaded?: (blob) => void;
 ```
 
-Defined in: libs/ui/src/components/document-preview/IDocumentPreviewRequest.ts:31
+Defined in: [libs/ui/src/components/document-preview/IDocumentPreviewRequest.ts:31](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/document-preview/IDocumentPreviewRequest.ts#L31)
 
 Notifies the caller when validated bytes become available for download.
 
@@ -94,10 +94,10 @@ Notifies the caller when validated bytes become available for download.
 ### onRendered?
 
 ```ts
-readonly optional onRendered?: (blob) => void;
+readonly onRendered?: (blob) => void;
 ```
 
-Defined in: libs/ui/src/components/document-preview/IDocumentPreviewRequest.ts:34
+Defined in: [libs/ui/src/components/document-preview/IDocumentPreviewRequest.ts:34](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/document-preview/IDocumentPreviewRequest.ts#L34)
 
 Notifies the caller once after an image loads or the managed PDF viewer paints its first page.
 
@@ -116,9 +116,9 @@ Notifies the caller once after an image loads or the managed PDF viewer paints i
 ### title?
 
 ```ts
-readonly optional title?: string;
+readonly title?: string;
 ```
 
-Defined in: libs/ui/src/components/document-preview/IDocumentPreviewRequest.ts:19
+Defined in: [libs/ui/src/components/document-preview/IDocumentPreviewRequest.ts:19](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/document-preview/IDocumentPreviewRequest.ts#L19)
 
 Optional document heading supplied by the owning feature.

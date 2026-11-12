@@ -50,7 +50,7 @@ Visible option label.
 ### testId?
 
 ```ts
-readonly optional testId?: string;
+readonly testId?: string;
 ```
 
 Defined in: [libs/ui/src/components/collection-list/ICollectionListMenuOption.ts:37](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/collection-list/ICollectionListMenuOption.ts#L37)

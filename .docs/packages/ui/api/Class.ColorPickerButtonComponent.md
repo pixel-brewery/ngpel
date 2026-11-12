@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: ColorPickerButtonComponent
 
-Defined in: libs/ui/src/components/color-selector/ColorPickerButtonComponent.ts:45
+Defined in: [libs/ui/src/components/color-selector/ColorPickerButtonComponent.ts:45](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/color-selector/ColorPickerButtonComponent.ts#L45)
 
 Opens Mosaik's color picker beside a preset palette and emits an opaque RGB hex value.
 
@@ -29,7 +29,7 @@ new ColorPickerButtonComponent(): ColorPickerButtonComponent;
 readonly colorChange: OutputEmitterRef<string>;
 ```
 
-Defined in: libs/ui/src/components/color-selector/ColorPickerButtonComponent.ts:55
+Defined in: [libs/ui/src/components/color-selector/ColorPickerButtonComponent.ts:55](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/color-selector/ColorPickerButtonComponent.ts#L55)
 
 Emits a six-digit uppercase RGB hex color.
 
@@ -41,7 +41,7 @@ Emits a six-digit uppercase RGB hex color.
 readonly disabled: InputSignal<boolean>;
 ```
 
-Defined in: libs/ui/src/components/color-selector/ColorPickerButtonComponent.ts:53
+Defined in: [libs/ui/src/components/color-selector/ColorPickerButtonComponent.ts:53](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/color-selector/ColorPickerButtonComponent.ts#L53)
 
 Whether the editor can open.
 
@@ -53,7 +53,7 @@ Whether the editor can open.
 readonly label: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/components/color-selector/ColorPickerButtonComponent.ts:51
+Defined in: [libs/ui/src/components/color-selector/ColorPickerButtonComponent.ts:51](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/color-selector/ColorPickerButtonComponent.ts#L51)
 
 Accessible label for the custom color action.
 
@@ -65,7 +65,7 @@ Accessible label for the custom color action.
 readonly value: InputSignal<string | null>;
 ```
 
-Defined in: libs/ui/src/components/color-selector/ColorPickerButtonComponent.ts:49
+Defined in: [libs/ui/src/components/color-selector/ColorPickerButtonComponent.ts:49](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/color-selector/ColorPickerButtonComponent.ts#L49)
 
 Current editor color, when chosen.
 
@@ -77,7 +77,7 @@ Current editor color, when chosen.
 protected onColorChange(value): void;
 ```
 
-Defined in: libs/ui/src/components/color-selector/ColorPickerButtonComponent.ts:61
+Defined in: [libs/ui/src/components/color-selector/ColorPickerButtonComponent.ts:61](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/color-selector/ColorPickerButtonComponent.ts#L61)
 
 #### Parameters
 

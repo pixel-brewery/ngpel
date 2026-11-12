@@ -87,9 +87,7 @@ The presenter that owns the controller.
 
 #### Inherited from
 
-```ts
-IPresenterController.host
-```
+`IPresenterController.host`
 
 ***
 
@@ -156,7 +154,7 @@ Toggles the filter panel.
 ### presenterConnected()?
 
 ```ts
-optional presenterConnected(): void;
+presenterConnected?(): void;
 ```
 
 Defined in: [libs/mvp/src/controllers/IPresenterController.ts:42](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/controllers/IPresenterController.ts#L42)
@@ -170,16 +168,14 @@ context.
 
 #### Inherited from
 
-```ts
-IPresenterController.presenterConnected
-```
+`IPresenterController.presenterConnected`
 
 ***
 
 ### presenterDisconnected()?
 
 ```ts
-optional presenterDisconnected(): void;
+presenterDisconnected?(): void;
 ```
 
 Defined in: [libs/mvp/src/controllers/IPresenterController.ts:49](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/controllers/IPresenterController.ts#L49)
@@ -192,6 +188,4 @@ Called once, while the owning presenter is disposed.
 
 #### Inherited from
 
-```ts
-IPresenterController.presenterDisconnected
-```
+`IPresenterController.presenterDisconnected`

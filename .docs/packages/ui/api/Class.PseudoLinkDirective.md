@@ -40,8 +40,8 @@ Constructs a new instance of the `PseudoLinkDirective` class.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `elementRef` | `ElementRef`\<`HTMLElement`\> | The host anchor element. |
-| `renderer` | `Renderer2` | The renderer used to apply the neutralising styles. |
+| `elementRef?` | `ElementRef`\<`HTMLElement`\> | The host anchor element. |
+| `renderer?` | `Renderer2` | The renderer used to apply the neutralising styles. |
 
 #### Returns
 
@@ -65,6 +65,4 @@ Neutralises the user-agent link styling on initialisation.
 
 #### Implementation of
 
-```ts
-OnInit.ngOnInit
-```
+`OnInit.ngOnInit`

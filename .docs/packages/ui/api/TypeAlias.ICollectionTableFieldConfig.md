@@ -17,4 +17,4 @@ Data-table behavior for a collection field.
 
 | Type Parameter |
 | ------ |
-| `TItem` |
+| <a id="type-parameter-titem"></a> `TItem` |

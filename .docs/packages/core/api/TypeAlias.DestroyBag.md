@@ -7,8 +7,8 @@ editUrl: false
 
 ```ts
 type DestroyBag = {
-  add: void;
-  destroy: void;
+  add(...entries): void;
+  destroy(): void;
 };
 ```
 

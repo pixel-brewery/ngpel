@@ -29,7 +29,7 @@ Constructs a new instance of the `NotificationSoundPreviewService` class.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `audioPlayer` | [`AudioPlayer`](Class.AudioPlayer) | The player the previews are played through. |
+| `audioPlayer?` | [`AudioPlayer`](Class.AudioPlayer) | The player the previews are played through. |
 
 #### Returns
 

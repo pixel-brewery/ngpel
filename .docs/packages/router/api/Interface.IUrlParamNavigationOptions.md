@@ -19,7 +19,7 @@ Configures the browser history behavior of a URL-backed signal.
 ### replaceUrl?
 
 ```ts
-readonly optional replaceUrl?: boolean;
+readonly replaceUrl?: boolean;
 ```
 
 Defined in: [signals/IUrlParamNavigationOptions.ts:12](https://github.com/pixel-brewery/ngpel/blob/main/libs/router/src/signals/IUrlParamNavigationOptions.ts#L12)

@@ -20,14 +20,14 @@ Validates a set of features:
 
 | Type Parameter |
 | ------ |
-| `TKind` *extends* `string` |
+| <a id="type-parameter-tkind"></a> `TKind` *extends* `string` |
 
 ## Parameters
 
 | Parameter | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
 | `features` | readonly [`IFeature`](Interface.IFeature)\<`TKind`\>[] | `undefined` | Features to validate. |
-| `rules` | readonly [`IFeatureIncompatibilityRule`](Interface.IFeatureIncompatibilityRule)\<`TKind`\>[] | `[]` | Optional incompatibility rules. |
+| `rules?` | readonly [`IFeatureIncompatibilityRule`](Interface.IFeatureIncompatibilityRule)\<`TKind`\>[] | `[]` | Optional incompatibility rules. |
 
 ## Returns
 

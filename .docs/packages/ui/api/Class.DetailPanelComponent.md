@@ -205,7 +205,7 @@ Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:303](ht
 
 | Parameter | Type | Default value |
 | ------ | ------ | ------ |
-| `reason` | [`DetailPanelCloseReason`](TypeAlias.DetailPanelCloseReason) | `'api'` |
+| `reason?` | [`DetailPanelCloseReason`](TypeAlias.DetailPanelCloseReason) | `'api'` |
 
 #### Returns
 
@@ -259,7 +259,7 @@ Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:293](ht
 
 | Parameter | Type | Default value |
 | ------ | ------ | ------ |
-| `reason` | [`DetailPanelCloseReason`](TypeAlias.DetailPanelCloseReason) | `'api'` |
+| `reason?` | [`DetailPanelCloseReason`](TypeAlias.DetailPanelCloseReason) | `'api'` |
 
 #### Returns
 
@@ -279,7 +279,7 @@ Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:317](ht
 
 | Parameter | Type | Default value |
 | ------ | ------ | ------ |
-| `reason` | [`DetailPanelCloseReason`](TypeAlias.DetailPanelCloseReason) | `'handle'` |
+| `reason?` | [`DetailPanelCloseReason`](TypeAlias.DetailPanelCloseReason) | `'handle'` |
 
 #### Returns
 

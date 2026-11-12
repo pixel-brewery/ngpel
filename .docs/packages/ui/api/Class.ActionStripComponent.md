@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: ActionStripComponent\<T\>
 
-Defined in: libs/ui/src/components/action-strip/ActionStripComponent.ts:85
+Defined in: [libs/ui/src/components/action-strip/ActionStripComponent.ts:85](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/action-strip/ActionStripComponent.ts#L85)
 
 Hosts one item-anchored action strip whose actions are declared as projected HTML.
 
@@ -16,7 +16,7 @@ item and its template context is replaced whenever the hovered or focused item c
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `T` | `unknown` | Context value resolved by a trigger. |
+| <a id="type-parameter-t"></a> `T` | `unknown` | Context value resolved by a trigger. |
 
 ## Implements
 
@@ -44,7 +44,7 @@ protected readonly activeRequest: Signal<
 | null>;
 ```
 
-Defined in: libs/ui/src/components/action-strip/ActionStripComponent.ts:108
+Defined in: [libs/ui/src/components/action-strip/ActionStripComponent.ts:108](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/action-strip/ActionStripComponent.ts#L108)
 
 Active item exposed to the declarative content template.
 
@@ -58,7 +58,7 @@ protected readonly content: Signal<
 | undefined>;
 ```
 
-Defined in: libs/ui/src/components/action-strip/ActionStripComponent.ts:111
+Defined in: [libs/ui/src/components/action-strip/ActionStripComponent.ts:111](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/action-strip/ActionStripComponent.ts#L111)
 
 Caller-provided declarative action template.
 
@@ -70,7 +70,7 @@ Caller-provided declarative action template.
 cancelScheduledHide(): void;
 ```
 
-Defined in: libs/ui/src/components/action-strip/ActionStripComponent.ts:163
+Defined in: [libs/ui/src/components/action-strip/ActionStripComponent.ts:163](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/action-strip/ActionStripComponent.ts#L163)
 
 Cancels a pending hide while pointer or focus is inside the floating action surface.
 
@@ -86,7 +86,7 @@ Cancels a pending hide while pointer or focus is inside the floating action surf
 hide(origin?): Promise<void>;
 ```
 
-Defined in: libs/ui/src/components/action-strip/ActionStripComponent.ts:178
+Defined in: [libs/ui/src/components/action-strip/ActionStripComponent.ts:178](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/action-strip/ActionStripComponent.ts#L178)
 
 Hides the strip and clears its active item context.
 
@@ -108,7 +108,7 @@ Hides the strip and clears its active item context.
 ngOnDestroy(): void;
 ```
 
-Defined in: libs/ui/src/components/action-strip/ActionStripComponent.ts:118
+Defined in: [libs/ui/src/components/action-strip/ActionStripComponent.ts:118](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/action-strip/ActionStripComponent.ts#L118)
 
 Cancels deferred interaction work before Angular destroys the strip.
 
@@ -118,9 +118,7 @@ Cancels deferred interaction work before Angular destroys the strip.
 
 #### Implementation of
 
-```ts
-OnDestroy.ngOnDestroy
-```
+`OnDestroy.ngOnDestroy`
 
 ***
 
@@ -130,7 +128,7 @@ OnDestroy.ngOnDestroy
 protected onActionInteraction(event): void;
 ```
 
-Defined in: libs/ui/src/components/action-strip/ActionStripComponent.ts:207
+Defined in: [libs/ui/src/components/action-strip/ActionStripComponent.ts:207](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/action-strip/ActionStripComponent.ts#L207)
 
 Stops item activation and hides the strip after an action has handled its event.
 
@@ -152,7 +150,7 @@ Stops item activation and hides the strip after an action has handled its event.
 protected onClosed(): void;
 ```
 
-Defined in: libs/ui/src/components/action-strip/ActionStripComponent.ts:225
+Defined in: [libs/ui/src/components/action-strip/ActionStripComponent.ts:225](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/action-strip/ActionStripComponent.ts#L225)
 
 Clears transient item context after Mosaik closes the popup.
 
@@ -168,7 +166,7 @@ Clears transient item context after Mosaik closes the popup.
 protected onInteraction(event): void;
 ```
 
-Defined in: libs/ui/src/components/action-strip/ActionStripComponent.ts:202
+Defined in: [libs/ui/src/components/action-strip/ActionStripComponent.ts:202](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/action-strip/ActionStripComponent.ts#L202)
 
 Stops pointer and keyboard events from activating the item beneath the strip.
 
@@ -190,7 +188,7 @@ Stops pointer and keyboard events from activating the item beneath the strip.
 protected onSurfaceEnter(): void;
 ```
 
-Defined in: libs/ui/src/components/action-strip/ActionStripComponent.ts:189
+Defined in: [libs/ui/src/components/action-strip/ActionStripComponent.ts:189](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/action-strip/ActionStripComponent.ts#L189)
 
 Keeps the strip open while its surface contains pointer or keyboard focus.
 
@@ -206,7 +204,7 @@ Keeps the strip open while its surface contains pointer or keyboard focus.
 protected onSurfaceLeave(event): void;
 ```
 
-Defined in: libs/ui/src/components/action-strip/ActionStripComponent.ts:194
+Defined in: [libs/ui/src/components/action-strip/ActionStripComponent.ts:194](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/action-strip/ActionStripComponent.ts#L194)
 
 Starts the hide bridge after pointer or keyboard focus leaves the action surface.
 
@@ -228,7 +226,7 @@ Starts the hide bridge after pointer or keyboard focus leaves the action surface
 scheduleHide(origin?): void;
 ```
 
-Defined in: libs/ui/src/components/action-strip/ActionStripComponent.ts:148
+Defined in: [libs/ui/src/components/action-strip/ActionStripComponent.ts:148](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/action-strip/ActionStripComponent.ts#L148)
 
 Schedules hiding after a short pointer bridge between an item and its floating strip.
 
@@ -250,7 +248,7 @@ Schedules hiding after a short pointer bridge between an item and its floating s
 show(request): Promise<void>;
 ```
 
-Defined in: libs/ui/src/components/action-strip/ActionStripComponent.ts:130
+Defined in: [libs/ui/src/components/action-strip/ActionStripComponent.ts:130](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/action-strip/ActionStripComponent.ts#L130)
 
 Shows this strip at the top end of an item and exposes that item's value to the template.
 

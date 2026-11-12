@@ -18,4 +18,4 @@ serialization, so the codec sees the parsed payload as `unknown` and must valida
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | The preference value type. |
+| <a id="type-parameter-t"></a> `T` | The preference value type. |

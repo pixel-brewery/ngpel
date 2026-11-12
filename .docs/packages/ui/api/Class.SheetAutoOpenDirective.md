@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: SheetAutoOpenDirective
 
-Defined in: libs/ui/src/directives/sheet-auto-open/SheetAutoOpenDirective.ts:20
+Defined in: [libs/ui/src/directives/sheet-auto-open/SheetAutoOpenDirective.ts:20](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/sheet-auto-open/SheetAutoOpenDirective.ts#L20)
 
 Opens a declaratively rendered sheet as soon as its Mosaik element has connected.
 
@@ -21,7 +21,7 @@ as for a sheet opened through the service.
 new SheetAutoOpenDirective(): SheetAutoOpenDirective;
 ```
 
-Defined in: libs/ui/src/directives/sheet-auto-open/SheetAutoOpenDirective.ts:34
+Defined in: [libs/ui/src/directives/sheet-auto-open/SheetAutoOpenDirective.ts:34](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/sheet-auto-open/SheetAutoOpenDirective.ts#L34)
 
 Constructs the directive and schedules the open call after the first render.
 

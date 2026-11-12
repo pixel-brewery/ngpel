@@ -19,7 +19,7 @@ changed value once the reference stayed the same.
 
 | Type Parameter | Default type |
 | ------ | ------ |
-| `TValue` | `unknown` |
+| <a id="type-parameter-tvalue"></a> `TValue` | `unknown` |
 
 ## Implements
 
@@ -63,6 +63,4 @@ The signal carrying the value.
 
 #### Implementation of
 
-```ts
-PipeTransform.transform
-```
+`PipeTransform.transform`

@@ -14,8 +14,8 @@ product registries whose consumers react through RxJS streams.
 
 | Type Parameter |
 | ------ |
-| `TKey` |
-| `TValue` |
+| <a id="type-parameter-tkey"></a> `TKey` |
+| <a id="type-parameter-tvalue"></a> `TValue` |
 
 ## Constructors
 

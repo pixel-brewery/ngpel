@@ -7,7 +7,7 @@ editUrl: false
 
 ```ts
 type DisposableRef = {
-  dispose: void;
+  dispose(): void;
 };
 ```
 

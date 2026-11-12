@@ -23,7 +23,7 @@ disconnected when the presenter's injector is destroyed — no lifecycle hook ha
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `TController` *extends* [`IPresenterController`](Interface.IPresenterController)\<[`IViewPresenter`](Interface.IViewPresenter)\> | The concrete controller type. |
+| <a id="type-parameter-tcontroller"></a> `TController` *extends* [`IPresenterController`](Interface.IPresenterController)\<[`IViewPresenter`](Interface.IViewPresenter)\> | The concrete controller type. |
 
 ### Parameters
 
@@ -65,14 +65,14 @@ disconnected when the presenter's injector is destroyed — no lifecycle hook ha
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `TPresenter` *extends* [`IViewPresenter`](Interface.IViewPresenter) | - |
-| `TController` *extends* [`IPresenterController`](Interface.IPresenterController)\<`TPresenter`\> | The concrete controller type. |
+| <a id="type-parameter-tpresenter"></a> `TPresenter` *extends* [`IViewPresenter`](Interface.IViewPresenter) | - |
+| <a id="type-parameter-tcontroller-1"></a> `TController` *extends* [`IPresenterController`](Interface.IPresenterController)\<`TPresenter`\> | The concrete controller type. |
 
 ### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `controllerFactory` | ((`host`) => `TController`) \| ((`host`) => `TController`) | The controller class, or a factory that builds one from the host. |
+| `controllerFactory` | ((`host`) => `TController`) \| (new (`host`) => `TController`) | The controller class, or a factory that builds one from the host. |
 
 ### Returns
 

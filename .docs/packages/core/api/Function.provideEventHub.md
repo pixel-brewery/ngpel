@@ -9,7 +9,7 @@ editUrl: false
 function provideEventHub<TEvents>(...retainedKeys): EnvironmentProviders;
 ```
 
-Defined in: events/provideEventHub.ts:12
+Defined in: [events/provideEventHub.ts:12](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/events/provideEventHub.ts#L12)
 
 Installs a hub in the current environment injector.
 
@@ -17,7 +17,7 @@ Installs a hub in the current environment injector.
 
 | Type Parameter | Default type |
 | ------ | ------ |
-| `TEvents` *extends* `object` | `Record`\<`string`, `unknown`\> |
+| <a id="type-parameter-tevents"></a> `TEvents` *extends* `object` | `Record`\<`string`, `unknown`\> |
 
 ## Parameters
 

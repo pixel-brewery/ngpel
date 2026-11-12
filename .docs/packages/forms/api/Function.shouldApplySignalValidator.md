@@ -18,8 +18,8 @@ Determines whether a validator applies to the current field state by evaluating 
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `TValue` | - | The value type of the validated field. |
-| `TPathKind` *extends* `PathKind` | `Root` | The kind of the validated path. |
+| <a id="type-parameter-tvalue"></a> `TValue` | - | The value type of the validated field. |
+| <a id="type-parameter-tpathkind"></a> `TPathKind` *extends* `PathKind` | `Root` | The kind of the validated path. |
 
 ## Parameters
 

@@ -14,7 +14,7 @@ Configuration of the browser-based [LocalVoiceTranscriber](Class.LocalVoiceTrans
 ### interimResults?
 
 ```ts
-readonly optional interimResults?: boolean;
+readonly interimResults?: boolean;
 ```
 
 Defined in: [audio/transcribers/ILocalVoiceTranscriberOptions.ts:18](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/audio/transcribers/ILocalVoiceTranscriberOptions.ts#L18)
@@ -27,7 +27,7 @@ interim results because they join them into the running transcript. Defaults to 
 ### language?
 
 ```ts
-readonly optional language?: string;
+readonly language?: string;
 ```
 
 Defined in: [audio/transcribers/ILocalVoiceTranscriberOptions.ts:12](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/audio/transcribers/ILocalVoiceTranscriberOptions.ts#L12)
@@ -39,7 +39,7 @@ BCP 47 recognition language, for example `'en-US'` or `'de-DE'`. Defaults to `'e
 ### maxAlternatives?
 
 ```ts
-readonly optional maxAlternatives?: number;
+readonly maxAlternatives?: number;
 ```
 
 Defined in: [audio/transcribers/ILocalVoiceTranscriberOptions.ts:23](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/audio/transcribers/ILocalVoiceTranscriberOptions.ts#L23)

@@ -14,7 +14,7 @@ Visual summary item for a saved filter definition.
 ### condition?
 
 ```ts
-readonly optional condition?: FilterConditionValue;
+readonly condition?: FilterConditionValue;
 ```
 
 Defined in: [libs/ui/src/components/filter-bar/saved-filters/ISavedFilterSummaryItem.ts:31](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/saved-filters/ISavedFilterSummaryItem.ts#L31)
@@ -26,7 +26,7 @@ Group condition when the item represents a condition group.
 ### conditionLabel?
 
 ```ts
-readonly optional conditionLabel?: string;
+readonly conditionLabel?: string;
 ```
 
 Defined in: [libs/ui/src/components/filter-bar/saved-filters/ISavedFilterSummaryItem.ts:36](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/saved-filters/ISavedFilterSummaryItem.ts#L36)
@@ -50,7 +50,7 @@ Tree depth for advanced filters.
 ### fieldLabel?
 
 ```ts
-readonly optional fieldLabel?: string;
+readonly fieldLabel?: string;
 ```
 
 Defined in: [libs/ui/src/components/filter-bar/saved-filters/ISavedFilterSummaryItem.ts:41](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/saved-filters/ISavedFilterSummaryItem.ts#L41)
@@ -86,7 +86,7 @@ Item kind.
 ### operatorLabel?
 
 ```ts
-readonly optional operatorLabel?: string;
+readonly operatorLabel?: string;
 ```
 
 Defined in: [libs/ui/src/components/filter-bar/saved-filters/ISavedFilterSummaryItem.ts:46](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/saved-filters/ISavedFilterSummaryItem.ts#L46)
@@ -98,7 +98,7 @@ Human readable operator label.
 ### valueLabel?
 
 ```ts
-readonly optional valueLabel?: string;
+readonly valueLabel?: string;
 ```
 
 Defined in: [libs/ui/src/components/filter-bar/saved-filters/ISavedFilterSummaryItem.ts:51](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/saved-filters/ISavedFilterSummaryItem.ts#L51)

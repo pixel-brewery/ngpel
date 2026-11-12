@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: MapViewportDirective
 
-Defined in: libs/ui/src/google-maps/MapViewportDirective.ts:16
+Defined in: [libs/ui/src/google-maps/MapViewportDirective.ts:16](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapViewportDirective.ts#L16)
 
 Applies the server-provided bounds to the native Angular map after initialization.
 
@@ -17,7 +17,7 @@ Applies the server-provided bounds to the native Angular map after initializatio
 new MapViewportDirective(): MapViewportDirective;
 ```
 
-Defined in: libs/ui/src/google-maps/MapViewportDirective.ts:44
+Defined in: [libs/ui/src/google-maps/MapViewportDirective.ts:44](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapViewportDirective.ts#L44)
 
 Reframes when the native map or the server-provided bounds change.
 
@@ -33,7 +33,7 @@ Reframes when the native map or the server-provided bounds change.
 readonly bounds: InputSignal<LatLngBoundsLiteral | null>;
 ```
 
-Defined in: libs/ui/src/google-maps/MapViewportDirective.ts:25
+Defined in: [libs/ui/src/google-maps/MapViewportDirective.ts:25](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapViewportDirective.ts#L25)
 
 Server-provided viewport bounds; null preserves the center and zoom inputs.
 
@@ -45,6 +45,6 @@ Server-provided viewport bounds; null preserves the center and zoom inputs.
 readonly viewportChanged: OutputEmitterRef<LatLngBounds | null>;
 ```
 
-Defined in: libs/ui/src/google-maps/MapViewportDirective.ts:28
+Defined in: [libs/ui/src/google-maps/MapViewportDirective.ts:28](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapViewportDirective.ts#L28)
 
 Actual visible bounds after the camera finishes moving or zooming.

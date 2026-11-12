@@ -17,6 +17,6 @@ type ActivityTextParagraph =
 };
 ```
 
-Defined in: libs/ui/src/components/activity-log/ActivityTextParagraph.ts:4
+Defined in: [libs/ui/src/components/activity-log/ActivityTextParagraph.ts:4](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityTextParagraph.ts#L4)
 
 Paragraph from a text comparison.

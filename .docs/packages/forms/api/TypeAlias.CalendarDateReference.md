@@ -21,4 +21,4 @@ Static or context-dependent minimum calendar date accepted by [calendarDateNotBe
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `TPathKind` *extends* `PathKind` | `PathKind.Root` | The kind of the validated path. |
+| <a id="type-parameter-tpathkind"></a> `TPathKind` *extends* `PathKind` | `PathKind.Root` | The kind of the validated path. |

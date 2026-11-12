@@ -38,7 +38,7 @@ Opens a source image for non-destructive raster markup.
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
 | `file` | `File` | Source image file. |
-| `config` | [`IImageMarkupEditorConfig`](Interface.IImageMarkupEditorConfig) | Optional behavior and label overrides. |
+| `config?` | [`IImageMarkupEditorConfig`](Interface.IImageMarkupEditorConfig) | Optional behavior and label overrides. |
 
 #### Returns
 

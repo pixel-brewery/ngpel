@@ -28,7 +28,7 @@ silently duplicated dashboard tile.
 ### widgets
 
 ```ts
-readonly widgets: readonly () => IWidget[];
+readonly widgets: readonly (() => IWidget)[];
 ```
 
 Defined in: [libs/ui/src/widget/provider/IWithWidgetItemsOptions.ts:27](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/provider/IWithWidgetItemsOptions.ts#L27)

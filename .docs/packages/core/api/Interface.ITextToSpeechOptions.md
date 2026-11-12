@@ -15,7 +15,7 @@ browser default of the selected voice.
 ### lang?
 
 ```ts
-readonly optional lang?: string;
+readonly lang?: string;
 ```
 
 Defined in: [audio/speech/ITextToSpeechOptions.ts:13](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/audio/speech/ITextToSpeechOptions.ts#L13)
@@ -27,7 +27,7 @@ BCP 47 language code, for example `'en-US'` or `'de-DE'`.
 ### pitch?
 
 ```ts
-readonly optional pitch?: number;
+readonly pitch?: number;
 ```
 
 Defined in: [audio/speech/ITextToSpeechOptions.ts:23](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/audio/speech/ITextToSpeechOptions.ts#L23)
@@ -39,7 +39,7 @@ Pitch between `0` and `2`; values outside are clamped.
 ### rate?
 
 ```ts
-readonly optional rate?: number;
+readonly rate?: number;
 ```
 
 Defined in: [audio/speech/ITextToSpeechOptions.ts:18](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/audio/speech/ITextToSpeechOptions.ts#L18)
@@ -51,7 +51,7 @@ Speaking rate between `0.1` and `10`; values outside are clamped.
 ### voiceName?
 
 ```ts
-readonly optional voiceName?: string;
+readonly voiceName?: string;
 ```
 
 Defined in: [audio/speech/ITextToSpeechOptions.ts:34](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/audio/speech/ITextToSpeechOptions.ts#L34)
@@ -64,7 +64,7 @@ keeps the browser default voice.
 ### volume?
 
 ```ts
-readonly optional volume?: number;
+readonly volume?: number;
 ```
 
 Defined in: [audio/speech/ITextToSpeechOptions.ts:28](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/audio/speech/ITextToSpeechOptions.ts#L28)

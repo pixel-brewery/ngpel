@@ -19,8 +19,8 @@ must not be persisted. One contract backs every storage surface of ngpel: `local
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `TSerialized` | The serialized representation. |
-| `T` | The typed application value. |
+| <a id="type-parameter-tserialized"></a> `TSerialized` | The serialized representation. |
+| <a id="type-parameter-t"></a> `T` | The typed application value. |
 
 ## Methods
 

@@ -19,8 +19,8 @@ second codec set.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `TSerialized` | The serialized representation of the inner codec. |
-| `T` | The typed application value. |
+| <a id="type-parameter-tserialized"></a> `TSerialized` | The serialized representation of the inner codec. |
+| <a id="type-parameter-t"></a> `T` | The typed application value. |
 
 ## Parameters
 

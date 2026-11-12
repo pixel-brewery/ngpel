@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: IViewItemAction
 
-Defined in: item-actions/IViewItemAction.ts:10
+Defined in: [item-actions/IViewItemAction.ts:10](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/item-actions/IViewItemAction.ts#L10)
 
 A feature-owned action for an item supplied by the current view.
 
@@ -14,20 +14,20 @@ A feature-owned action for an item supplied by the current view.
 ### choices?
 
 ```ts
-readonly optional choices?: Signal<readonly IViewItemActionChoice[]>;
+readonly choices?: Signal<readonly IViewItemActionChoice[]>;
 ```
 
-Defined in: item-actions/IViewItemAction.ts:17
+Defined in: [item-actions/IViewItemAction.ts:17](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/item-actions/IViewItemAction.ts#L17)
 
 ***
 
 ### descriptionKey?
 
 ```ts
-readonly optional descriptionKey?: string;
+readonly descriptionKey?: string;
 ```
 
-Defined in: item-actions/IViewItemAction.ts:14
+Defined in: [item-actions/IViewItemAction.ts:14](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/item-actions/IViewItemAction.ts#L14)
 
 ***
 
@@ -37,7 +37,7 @@ Defined in: item-actions/IViewItemAction.ts:14
 readonly iconName: string;
 ```
 
-Defined in: item-actions/IViewItemAction.ts:15
+Defined in: [item-actions/IViewItemAction.ts:15](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/item-actions/IViewItemAction.ts#L15)
 
 ***
 
@@ -47,7 +47,7 @@ Defined in: item-actions/IViewItemAction.ts:15
 readonly id: string;
 ```
 
-Defined in: item-actions/IViewItemAction.ts:11
+Defined in: [item-actions/IViewItemAction.ts:11](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/item-actions/IViewItemAction.ts#L11)
 
 ***
 
@@ -57,7 +57,7 @@ Defined in: item-actions/IViewItemAction.ts:11
 readonly isAvailable: Signal<boolean>;
 ```
 
-Defined in: item-actions/IViewItemAction.ts:16
+Defined in: [item-actions/IViewItemAction.ts:16](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/item-actions/IViewItemAction.ts#L16)
 
 ***
 
@@ -67,7 +67,7 @@ Defined in: item-actions/IViewItemAction.ts:16
 readonly labelKey: string;
 ```
 
-Defined in: item-actions/IViewItemAction.ts:13
+Defined in: [item-actions/IViewItemAction.ts:13](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/item-actions/IViewItemAction.ts#L13)
 
 ***
 
@@ -77,7 +77,7 @@ Defined in: item-actions/IViewItemAction.ts:13
 readonly order: number;
 ```
 
-Defined in: item-actions/IViewItemAction.ts:12
+Defined in: [item-actions/IViewItemAction.ts:12](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/item-actions/IViewItemAction.ts#L12)
 
 ## Methods
 
@@ -87,7 +87,7 @@ Defined in: item-actions/IViewItemAction.ts:12
 execute(resource, choiceId?): void | Promise<void>;
 ```
 
-Defined in: item-actions/IViewItemAction.ts:20
+Defined in: [item-actions/IViewItemAction.ts:20](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/item-actions/IViewItemAction.ts#L20)
 
 #### Parameters
 
@@ -105,10 +105,10 @@ Defined in: item-actions/IViewItemAction.ts:20
 ### open()?
 
 ```ts
-optional open(): void;
+open?(): void;
 ```
 
-Defined in: item-actions/IViewItemAction.ts:18
+Defined in: [item-actions/IViewItemAction.ts:18](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/item-actions/IViewItemAction.ts#L18)
 
 #### Returns
 
@@ -119,10 +119,10 @@ Defined in: item-actions/IViewItemAction.ts:18
 ### prefetch()?
 
 ```ts
-optional prefetch(): void;
+prefetch?(): void;
 ```
 
-Defined in: item-actions/IViewItemAction.ts:19
+Defined in: [item-actions/IViewItemAction.ts:19](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/item-actions/IViewItemAction.ts#L19)
 
 #### Returns
 

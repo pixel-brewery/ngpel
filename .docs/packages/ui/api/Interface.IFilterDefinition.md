@@ -14,7 +14,7 @@ Describes a single filter field in the filter bar.
 ### integer?
 
 ```ts
-readonly optional integer?: boolean;
+readonly integer?: boolean;
 ```
 
 Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:141](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L141)
@@ -50,7 +50,7 @@ Display label for the filter field.
 ### options?
 
 ```ts
-readonly optional options?: readonly IFilterOption[];
+readonly options?: readonly IFilterOption[];
 ```
 
 Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:138](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L138)
@@ -62,7 +62,7 @@ Available options for select-type and multi-select-type filters.
 ### placeholder?
 
 ```ts
-readonly optional placeholder?: string;
+readonly placeholder?: string;
 ```
 
 Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:133](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L133)
@@ -86,7 +86,7 @@ The type of filter control to render.
 ### visible?
 
 ```ts
-readonly optional visible?: boolean;
+readonly visible?: boolean;
 ```
 
 Defined in: [libs/ui/src/components/filter-bar/IFilterDefinition.ts:146](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/IFilterDefinition.ts#L146)

@@ -9,6 +9,6 @@ editUrl: false
 type ActivityLogState = "idle" | "loading" | "loaded" | "failed";
 ```
 
-Defined in: libs/ui/src/components/activity-log/ActivityLogState.ts:2
+Defined in: [libs/ui/src/components/activity-log/ActivityLogState.ts:2](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogState.ts#L2)
 
 Lifecycle of a paged activity request.

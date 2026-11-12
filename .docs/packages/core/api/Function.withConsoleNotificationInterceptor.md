@@ -20,7 +20,7 @@ injected directly, and it is disposed with the injector it was composed into.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `options` | [`IConsoleNotificationInterceptorConfig`](Interface.IConsoleNotificationInterceptorConfig) | Diagnostic channel and disable switch; defaults to the global console, enabled. |
+| `options?` | [`IConsoleNotificationInterceptorConfig`](Interface.IConsoleNotificationInterceptorConfig) | Diagnostic channel and disable switch; defaults to the global console, enabled. |
 
 ## Returns
 

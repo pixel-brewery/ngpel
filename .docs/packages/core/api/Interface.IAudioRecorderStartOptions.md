@@ -16,7 +16,7 @@ second, retained in memory.
 ### audioBitsPerSecond?
 
 ```ts
-readonly optional audioBitsPerSecond?: number | null;
+readonly audioBitsPerSecond?: number | null;
 ```
 
 Defined in: [audio/recorder/IAudioRecorderStartOptions.ts:31](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/audio/recorder/IAudioRecorderStartOptions.ts#L31)
@@ -28,7 +28,7 @@ Target encoded audio bitrate in bits per second.
 ### audioConstraints?
 
 ```ts
-readonly optional audioConstraints?: MediaTrackConstraints | null;
+readonly audioConstraints?: MediaTrackConstraints | null;
 ```
 
 Defined in: [audio/recorder/IAudioRecorderStartOptions.ts:21](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/audio/recorder/IAudioRecorderStartOptions.ts#L21)
@@ -41,7 +41,7 @@ Browser audio-track constraints applied during microphone acquisition, such as
 ### audioDeviceId?
 
 ```ts
-readonly optional audioDeviceId?: string | null;
+readonly audioDeviceId?: string | null;
 ```
 
 Defined in: [audio/recorder/IAudioRecorderStartOptions.ts:26](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/audio/recorder/IAudioRecorderStartOptions.ts#L26)
@@ -53,7 +53,7 @@ Exact microphone device identifier. It overrides `audioConstraints.deviceId`.
 ### chunkIntervalMs?
 
 ```ts
-readonly optional chunkIntervalMs?: number | null;
+readonly chunkIntervalMs?: number | null;
 ```
 
 Defined in: [audio/recorder/IAudioRecorderStartOptions.ts:36](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/audio/recorder/IAudioRecorderStartOptions.ts#L36)
@@ -65,7 +65,7 @@ Maximum requested interval between incremental chunks in milliseconds.
 ### preferredMimeTypes?
 
 ```ts
-readonly optional preferredMimeTypes?: readonly string[] | null;
+readonly preferredMimeTypes?: readonly string[] | null;
 ```
 
 Defined in: [audio/recorder/IAudioRecorderStartOptions.ts:41](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/audio/recorder/IAudioRecorderStartOptions.ts#L41)
@@ -77,7 +77,7 @@ Ordered MIME type preferences; the first one the browser supports wins.
 ### retention?
 
 ```ts
-readonly optional retention?:
+readonly retention?:
   | AudioRecordingRetention
   | null;
 ```

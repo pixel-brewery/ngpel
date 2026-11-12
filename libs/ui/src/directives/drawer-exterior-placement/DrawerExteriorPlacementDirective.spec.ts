@@ -76,9 +76,20 @@ class TestHostComponent {
 }
 
 describe('Drawer exterior placement', () => {
+    let drawer: HTMLElement;
+
     afterEach(() => {
+        drawer?.remove();
         vi.unstubAllGlobals();
     });
+
+    function createAttachedDrawerRef(direction: string): ReturnType<typeof createDrawerRef> {
+        const result = createDrawerRef(direction);
+        drawer = result.drawerRef.element;
+        document.body.append(drawer);
+
+        return result;
+    }
 
     it.each([
         ['viewport', 'ltr', 0, 0, 280],
@@ -90,7 +101,7 @@ describe('Drawer exterior placement', () => {
         async (_positioningContext, direction, positioningOriginLeft, positioningOriginTop, expectedViewportLeft) => {
             // arrange
             vi.stubGlobal('ResizeObserver', TestResizeObserver);
-            const { drawerRef, sizeChanged } = createDrawerRef(direction);
+            const { drawerRef, sizeChanged } = createAttachedDrawerRef(direction);
             TestBed.configureTestingModule({
                 imports: [TestHostComponent],
                 providers: [{ provide: DRAWER_REF, useValue: drawerRef }],
@@ -118,7 +129,7 @@ describe('Drawer exterior placement', () => {
     it('keeps dialog content outside while drawer attention changes the fixed positioning context', async () => {
         // arrange
         vi.stubGlobal('ResizeObserver', TestResizeObserver);
-        const { closeAttempted, drawerRef, root } = createDrawerRef('ltr');
+        const { closeAttempted, drawerRef, root } = createAttachedDrawerRef('ltr');
         let positioningOriginLeft = 0;
         let rootAnimationRunning = false;
         const scheduledFrames: FrameRequestCallback[] = [];
@@ -170,7 +181,7 @@ describe('Drawer exterior placement', () => {
     it('keeps dialog content outside when the opening animation releases its fixed positioning context', async () => {
         // arrange
         vi.stubGlobal('ResizeObserver', TestResizeObserver);
-        const { drawerRef, root } = createDrawerRef('ltr');
+        const { drawerRef, root } = createAttachedDrawerRef('ltr');
         let positioningOriginLeft = 320;
         let rootAnimationRunning = true;
         const scheduledFrames: FrameRequestCallback[] = [];

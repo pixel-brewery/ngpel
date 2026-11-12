@@ -17,7 +17,7 @@ Adds an explicit refresh command that is disabled while the presenter is loading
 
 | Type Parameter |
 | ------ |
-| `T` *extends* [`PresenterBehaviorBase`](TypeAlias.PresenterBehaviorBase) |
+| <a id="type-parameter-t"></a> `T` *extends* [`PresenterBehaviorBase`](TypeAlias.PresenterBehaviorBase) |
 
 ## Parameters
 

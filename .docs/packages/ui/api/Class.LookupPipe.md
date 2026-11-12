@@ -50,8 +50,8 @@ Resolves `key` through `table`.
 
 | Type Parameter |
 | ------ |
-| `TKey` *extends* `PropertyKey` |
-| `TValue` |
+| <a id="type-parameter-tkey"></a> `TKey` *extends* `PropertyKey` |
+| <a id="type-parameter-tvalue"></a> `TValue` |
 
 #### Parameters
 
@@ -69,6 +69,4 @@ The entry of `key`, or `fallback`.
 
 #### Implementation of
 
-```ts
-PipeTransform.transform
-```
+`PipeTransform.transform`

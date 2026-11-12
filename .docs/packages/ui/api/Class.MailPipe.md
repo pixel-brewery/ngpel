@@ -54,6 +54,4 @@ The `mailto:` URL, or `null` when the value is not an email address.
 
 #### Implementation of
 
-```ts
-PipeTransform.transform
-```
+`PipeTransform.transform`

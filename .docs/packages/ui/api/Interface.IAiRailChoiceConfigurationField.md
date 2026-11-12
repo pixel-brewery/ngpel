@@ -14,7 +14,7 @@ One reusable select field shown before a configurable AI rail action executes.
 ### disabled?
 
 ```ts
-readonly optional disabled?: boolean;
+readonly disabled?: boolean;
 ```
 
 Defined in: [libs/ui/src/components/ai-rail/IAiRailChoiceConfigurationField.ts:10](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/IAiRailChoiceConfigurationField.ts#L10)
@@ -57,7 +57,7 @@ Defined in: [libs/ui/src/components/ai-rail/IAiRailChoiceConfigurationField.ts:6
 ### showFilter?
 
 ```ts
-readonly optional showFilter?: boolean;
+readonly showFilter?: boolean;
 ```
 
 Defined in: [libs/ui/src/components/ai-rail/IAiRailChoiceConfigurationField.ts:11](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/IAiRailChoiceConfigurationField.ts#L11)
@@ -67,7 +67,7 @@ Defined in: [libs/ui/src/components/ai-rail/IAiRailChoiceConfigurationField.ts:1
 ### testId?
 
 ```ts
-readonly optional testId?: string;
+readonly testId?: string;
 ```
 
 Defined in: [libs/ui/src/components/ai-rail/IAiRailChoiceConfigurationField.ts:12](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/IAiRailChoiceConfigurationField.ts#L12)

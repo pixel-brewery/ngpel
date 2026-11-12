@@ -37,7 +37,7 @@ Creates a strictly typed [BusyScope](Class.BusyScope). Only the provided `states
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `TState` *extends* `string` | A string union of all allowed state names. |
+| <a id="type-parameter-tstate"></a> `TState` *extends* `string` | A string union of all allowed state names. |
 
 #### Parameters
 

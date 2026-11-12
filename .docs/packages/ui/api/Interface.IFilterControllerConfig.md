@@ -60,7 +60,7 @@ Whether a filter is active.
 ### livePreference?
 
 ```ts
-readonly optional livePreference?: ILiveFilterPreference;
+readonly livePreference?: ILiveFilterPreference;
 ```
 
 Defined in: [libs/ui/src/components/filter-bar/saved-filters/IFilterControllerConfig.ts:21](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/saved-filters/IFilterControllerConfig.ts#L21)

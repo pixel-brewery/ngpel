@@ -24,15 +24,15 @@ Angular lifecycle hooks.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `TComponent` *extends* `object` | The concrete component instance type. |
-| `TElement` *extends* `HTMLElement` | The concrete host element type. |
-| `TController` *extends* [`IReactiveController`](Interface.IReactiveController)\<`TComponent`, `TElement`\> | The concrete controller type. |
+| <a id="type-parameter-tcomponent"></a> `TComponent` *extends* `object` | The concrete component instance type. |
+| <a id="type-parameter-telement"></a> `TElement` *extends* `HTMLElement` | The concrete host element type. |
+| <a id="type-parameter-tcontroller"></a> `TController` *extends* [`IReactiveController`](Interface.IReactiveController)\<`TComponent`, `TElement`\> | The concrete controller type. |
 
 ## Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `controllerType` | (`host`) => `TController` | The controller class to instantiate. |
+| `controllerType` | new (`host`) => `TController` | The controller class to instantiate. |
 
 ## Returns
 

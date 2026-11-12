@@ -29,16 +29,15 @@ editUrl: false
 | [AudioSignalQualityIndicatorComponent](Class.AudioSignalQualityIndicatorComponent) | Displays an accessible, business-agnostic audio signal quality state. |
 | [AuditLogComponent](Class.AuditLogComponent) | Renders the inner content of a single audit log timeline entry. |
 | [BackTopComponent](Class.BackTopComponent) | Displays a floating back-to-top button that scrolls the nearest scroll container to the top. |
-| [BooleanPipe](Class.BooleanPipe) | Chooses between two values by a condition, which keeps the two-branch decisions a template makes over and over out of the component: `[icon]="task.isDone | ngpBoolean: 'check' : 'clock'"`, `[variant]="isCritical | ngpBoolean: 'danger' : 'default'"`. |
-| [BytesPipe](Class.BytesPipe) | Renders a byte count as a human readable size: <code v-pre>{{ file.size &#124; ngpBytes }}</code>. |
+| [BooleanPipe](Class.BooleanPipe) | Chooses between two values by a condition, which keeps the two-branch decisions a template makes over and over out of the component: `[icon]="task.isDone \| ngpBoolean: 'check' : 'clock'"`, `[variant]="isCritical \| ngpBoolean: 'danger' : 'default'"`. |
+| [BytesPipe](Class.BytesPipe) | Renders a byte count as a human readable size: <code v-pre>{{ file.size \&#124; ngpBytes }}</code>. |
 | [CaptchaComponent](Class.CaptchaComponent) | Captcha component rendering a generated question with three answer options. |
 | [CaptchaComponentIntl](Class.CaptchaComponentIntl) | Internationalization labels for the captcha component. |
 | [CardAccordion](Class.CardAccordion) | Coordinates the expansion of cards within one owning view. |
 | [CardComponent](Class.CardComponent) | Preserves Mosaik card slots while allowing its body to collapse. |
 | [CardHeaderComponent](Class.CardHeaderComponent) | Adds the card's expansion control to the Mosaik header suffix. |
 | [CellComponent](Class.CellComponent) | Presents up to four semantic tracks inside an owning list item: title, description, hints and chips. The list item remains responsible for click, focus and selection behavior. Use named projection attributes for rich content and leading/trailing elements. A track can alternatively use its text input; do not supply both forms for the same track. |
-| [ChartTheme](Class.ChartTheme) | Applies one Mosaik-token chart language across chart types and layouts. |
-| [ChunkPipe](Class.ChunkPipe) | Splits a list into rows of a fixed length, which is what a template needs to lay a flat collection out as a grid: `@for (row of items() | ngpChunk: 3; track $index)`. |
+| [ChunkPipe](Class.ChunkPipe) | Splits a list into rows of a fixed length, which is what a template needs to lay a flat collection out as a grid: `@for (row of items() \| ngpChunk: 3; track $index)`. |
 | [CloseDescendantMenusDirective](Class.CloseDescendantMenusDirective) | Closes contextual menus before a collection row executes its primary action. |
 | [CodeEditorComponent](Class.CodeEditorComponent) | A consolidated code editor component built on CodeMirror 6. Follows the Mosaik code-editor pattern with compartment-based extension management. Supports placeholder autocompletion for template variables (e.g. <code v-pre>{{firstName}}</code>). |
 | [CodeEditorComponentIntl](Class.CodeEditorComponentIntl) | Internationalization labels for the code editor component. |
@@ -52,7 +51,7 @@ editUrl: false
 | [ColorPickerButtonComponent](Class.ColorPickerButtonComponent) | Opens Mosaik's color picker beside a preset palette and emits an opaque RGB hex value. |
 | [ColorSelectorComponent](Class.ColorSelectorComponent) | A reusable color selector component with palette selection and eye dropper support. Implements ControlValueAccessor for Reactive Forms integration. |
 | [ColorSelectorComponentIntl](Class.ColorSelectorComponentIntl) | Internationalization labels for the color selector component. |
-| [CompactTextPipe](Class.CompactTextPipe) | Condenses a markdown block into a single plain-text line for list rows, tooltips and card subtitles: <code v-pre>{{ note.body &#124; ngpCompactText }}</code>. |
+| [CompactTextPipe](Class.CompactTextPipe) | Condenses a markdown block into a single plain-text line for list rows, tooltips and card subtitles: <code v-pre>{{ note.body \&#124; ngpCompactText }}</code>. |
 | [CompoundActionsDirective](Class.CompoundActionsDirective) | Marks a consumer-owned action template rendered beside the compound navigation. |
 | [CompoundComponent](Class.CompoundComponent) | Renders a collection with single-item, list or stacked editing and consumer-owned actions. |
 | [CompoundEmptyDirective](Class.CompoundEmptyDirective) | Marks a consumer-owned template rendered when a compound collection is empty. |
@@ -96,8 +95,8 @@ editUrl: false
 | [FlameBackgroundComponent](Class.FlameBackgroundComponent) | Renders the decorative flame with its animated heat-haze effect. |
 | [FloatingHostComponent](Class.FloatingHostComponent) | Generic floating host container that can be positioned anywhere on screen. Supports drag-to-move and resize functionality. Use content projection for header and body content. |
 | [FocusTargetDirective](Class.FocusTargetDirective) | Scrolls to and focuses a descendant of the host whenever a focus key is requested. |
-| [HashBrushBackgroundPipe](Class.HashBrushBackgroundPipe) | Derives a stable background colour from a value, which gives avatars, tags and legend swatches a recognisable tint without storing one: `[style.background-color]="tag.name | ngpHashBrushBackground"`. |
-| [HashBrushForegroundPipe](Class.HashBrushForegroundPipe) | Picks the readable text colour for a background colour, and pairs with [HashBrushBackgroundPipe](Class.HashBrushBackgroundPipe): `[style.color]="(tag.name | ngpHashBrushBackground) | ngpHashBrushForeground"`. |
+| [HashBrushBackgroundPipe](Class.HashBrushBackgroundPipe) | Derives a stable background colour from a value, which gives avatars, tags and legend swatches a recognisable tint without storing one: `[style.background-color]="tag.name \| ngpHashBrushBackground"`. |
+| [HashBrushForegroundPipe](Class.HashBrushForegroundPipe) | Picks the readable text colour for a background colour, and pairs with [HashBrushBackgroundPipe](Class.HashBrushBackgroundPipe): `[style.color]="(tag.name \| ngpHashBrushBackground) \| ngpHashBrushForeground"`. |
 | [HoverRevealForDirective](Class.HoverRevealForDirective) | Reveals its host element when the specified area is hovered or receives focus. |
 | [ImageCropDialogComponent](Class.ImageCropDialogComponent) | Renders a localized dialog for selecting and encoding an image region. |
 | [ImageCropSelectionDirective](Class.ImageCropSelectionDirective) | Coordinates pointer selection and renders a selected image region to a PNG file. |
@@ -117,20 +116,20 @@ editUrl: false
 | [ImagePreviewState](Class.ImagePreviewState) | Owns the reactive state of one image preview instance. |
 | [ImmersiveSessionShellComponent](Class.ImmersiveSessionShellComponent) | Provides a responsive, business-agnostic shell for immersive sessions. |
 | [InfiniteScrollDirective](Class.InfiniteScrollDirective) | Emits an event when the user scrolls near the end of a container. |
-| [InitialsPipe](Class.InitialsPipe) | Reduces a display name to at most two upper-case initials for avatar fallbacks: <code v-pre>{{ user.displayName &#124; ngpInitials }}</code> renders `AW` for `Andre Wehlert`. |
+| [InitialsPipe](Class.InitialsPipe) | Reduces a display name to at most two upper-case initials for avatar fallbacks: <code v-pre>{{ user.displayName \&#124; ngpInitials }}</code> renders `AW` for `Andre Wehlert`. |
 | [InputHistoryNavigationDirective](Class.InputHistoryNavigationDirective) | Adds shell-like submitted-value history navigation to `mosaik-chat-prompt-box` elements. |
 | [InputSuggestionsDirective](Class.InputSuggestionsDirective) | Adds whole-field suggestions to an editable input. Selection emits the original option; the caller owns writing the selected value to its form. |
 | [LeadingLineComponent](Class.LeadingLineComponent) | Marks nested content with a narrow vertical line instead of a frame. |
 | [LegalLinksComponent](Class.LegalLinksComponent) | Renders trusted website-level legal navigation without accepting HTML content. |
 | [LiveAudioWaveformComponent](Class.LiveAudioWaveformComponent) | Renders a reusable live audio spectrum without taking ownership of its media stream. |
 | [LogoComponent](Class.LogoComponent) | The `logo` component. |
-| [LookupPipe](Class.LookupPipe) | Resolves a key through a lookup table, which replaces the `@switch` ladders a template grows once a status, a severity or a kind has more than two branches: `[icon]="ticket.status | ngpLookup: statusIcons : 'help'"`. |
-| [MailPipe](Class.MailPipe) | Turns an email address into a `mailto:` link target: `[href]="contact.email | ngpMail"`. |
+| [LookupPipe](Class.LookupPipe) | Resolves a key through a lookup table, which replaces the `@switch` ladders a template grows once a status, a severity or a kind has more than two branches: `[icon]="ticket.status \| ngpLookup: statusIcons : 'help'"`. |
+| [MailPipe](Class.MailPipe) | Turns an email address into a `mailto:` link target: `[href]="contact.email \| ngpMail"`. |
 | [MapComponent](Class.MapComponent) | Composes Angular Google Maps with lazy SDK loading and deferred native overlays. |
 | [MapContentDirective](Class.MapContentDirective) | Defers Angular map overlays until the SDK and their owning GoogleMap exist. |
 | [MapLoadError](Class.MapLoadError) | Sanitized failure at the browser Maps SDK boundary. |
 | [MapScriptLoader](Class.MapScriptLoader) | Loads only Google's rendering SDK through its supported script entry point. |
-| [MapsPipe](Class.MapsPipe) | Turns an address into a map search link: `[href]="site.address | ngpMaps: site.name"`. |
+| [MapsPipe](Class.MapsPipe) | Turns an address into a map search link: `[href]="site.address \| ngpMaps: site.name"`. |
 | [MapViewportDirective](Class.MapViewportDirective) | Applies the server-provided bounds to the native Angular map after initialization. |
 | [MarkdownComponent](Class.MarkdownComponent) | Safely renders the supported Markdown dialect as semantic Angular DOM. |
 | [MarkdownPreviewDirective](Class.MarkdownPreviewDirective) | Supplies the safe Markdown renderer to the Mosaik CodeEditor preview hook. Use it on a CodeEditor version that exposes `previewRenderer`. |
@@ -142,7 +141,7 @@ editUrl: false
 | [NavigationMenuComponent](Class.NavigationMenuComponent) | Wraps the Mosaik menu used by an application navigation surface. |
 | [NavigationMenuGroupComponent](Class.NavigationMenuGroupComponent) | Wraps a Mosaik navigation menu group. |
 | [NavigationMenuItemComponent](Class.NavigationMenuItemComponent) | Application navigation item backed by a Mosaik menu item. |
-| [NotAvailablePipe](Class.NotAvailablePipe) | Renders a placeholder instead of an absent value, so a table cell reads as "not filled in" rather than as an empty gap: <code v-pre>{{ contact.phone &#124; ngpNotAvailable }}</code>. |
+| [NotAvailablePipe](Class.NotAvailablePipe) | Renders a placeholder instead of an absent value, so a table cell reads as "not filled in" rather than as an empty gap: <code v-pre>{{ contact.phone \&#124; ngpNotAvailable }}</code>. |
 | [OverlayScrollBoundaryDirective](Class.OverlayScrollBoundaryDirective) | Keeps wheel and touch scrolling inside an overflow region before an overlay's document-level scroll lock can cancel the event. |
 | [PagePathComponent](Class.PagePathComponent) | Declares the path of the enclosing page for the shell's path outlet. |
 | [PagePathOutletComponent](Class.PagePathOutletComponent) | Renders the current page path as a breadcrumb or a compact parent and title. |
@@ -170,13 +169,13 @@ editUrl: false
 | [SectionContentComponent](Class.SectionContentComponent) | Projects the content that belongs to a section without adding a layout box. |
 | [SectionHeaderComponent](Class.SectionHeaderComponent) | Displays a section heading with its explanatory description. |
 | [SheetAutoOpenDirective](Class.SheetAutoOpenDirective) | Opens a declaratively rendered sheet as soon as its Mosaik element has connected. |
-| [SignalPipe](Class.SignalPipe) | Wraps a template expression in a signal, so a plain value can be handed to an input, a directive or a helper that expects one: `<ngp-chart [series]="rows() | ngpSignal" />`. |
+| [SignalPipe](Class.SignalPipe) | Wraps a template expression in a signal, so a plain value can be handed to an input, a directive or a helper that expects one: `<ngp-chart [series]="rows() \| ngpSignal" />`. |
 | [StopEventPropagationDirective](Class.StopEventPropagationDirective) | Stops the propagation of pointer, mouse and keyboard events at the host element, so nested interactive controls (a delete button inside a clickable row, for instance) do not trigger the surrounding handlers. |
-| [TelPipe](Class.TelPipe) | Turns a phone number into a `tel:` link target: `[href]="contact.phone | ngpTel"`. |
+| [TelPipe](Class.TelPipe) | Turns a phone number into a `tel:` link target: `[href]="contact.phone \| ngpTel"`. |
 | [TextOnlyHtmlTokenizer](Class.TextOnlyHtmlTokenizer) | Drops raw HTML tokens so embedded markup falls back to plain text. The pipeline renders content that nobody in the consuming application authored, and the elements the default renderer emits put their `text` on screen through `unsafeHTML`. Refusing the tokens is what keeps that path inert; escaping the Markdown source instead would corrupt code fences, where the escapes are literal content. |
 | [TicktackPanelComponent](Class.TicktackPanelComponent) | Horizontally switches between a primary and secondary content surface. |
 | [TicktackPanelComponentIntl](Class.TicktackPanelComponentIntl) | Internationalization labels for the ticktack panel component. |
-| [TruncateStartPipe](Class.TruncateStartPipe) | Shortens text from the front, keeping its end readable: <code v-pre>{{ path &#124; ngpTruncateStart: 30 }}</code>. |
+| [TruncateStartPipe](Class.TruncateStartPipe) | Shortens text from the front, keeping its end readable: <code v-pre>{{ path \&#124; ngpTruncateStart: 30 }}</code>. |
 | [TypewriterDirective](Class.TypewriterDirective) | Types one or more text values into its host, character by character, and optionally rotates through them. |
 | [UrlListComponent](Class.UrlListComponent) | Edits categorized web links with caller-owned Signal Forms state, choices and mutations. |
 | [UserSelectDirective](Class.UserSelectDirective) | Ignores initial and bound-value selections emitted while Mosaik reconciles items. |
@@ -225,7 +224,6 @@ editUrl: false
 | [ICaptchaInvalidEvent](Interface.ICaptchaInvalidEvent) | Payload emitted when captcha verification fails. |
 | [ICaptchaProps](Interface.ICaptchaProps) | Public captcha component state contract. |
 | [ICaptchaVerifiedEvent](Interface.ICaptchaVerifiedEvent) | Payload emitted when captcha verification succeeds. |
-| [IChartOptions](Interface.IChartOptions) | Chart inputs shared by Mosaik chart consumers. |
 | [ICollectionCalendarView](Interface.ICollectionCalendarView) | Runtime calendar projection for a collection view. |
 | [ICollectionCalendarViewConfig](Interface.ICollectionCalendarViewConfig) | Configuration for the calendar projection of a collection view. |
 | [ICollectionExportColumn](Interface.ICollectionExportColumn) | Export column metadata derived from a collection field. |
@@ -379,7 +377,6 @@ editUrl: false
 | [AuditLogFieldLabelResolverFn](TypeAlias.AuditLogFieldLabelResolverFn) | Resolves the display label for an audit log field change. |
 | [CaptchaOperator](TypeAlias.CaptchaOperator) | Supported mathematical operations for captcha challenges. |
 | [CaptchaState](TypeAlias.CaptchaState) | Captcha component state. |
-| [ChartLayout](TypeAlias.ChartLayout) | Layout used to apply full chart defaults or a compact sparkline. |
 | [CollectionExportFormat](TypeAlias.CollectionExportFormat) | Supported export document formats. |
 | [CollectionViewKindValue](TypeAlias.CollectionViewKindValue) | Union of all collection-view projection kinds. |
 | [CollectionViewTypeValue](TypeAlias.CollectionViewTypeValue) | Union of all built-in collection view types. |

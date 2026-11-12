@@ -19,7 +19,7 @@ default behavior. Set `includeUntil` for a self-contained RFC 5545 rule.
 | Parameter | Type |
 | ------ | ------ |
 | `value` | [`IRecurrenceValue`](Interface.IRecurrenceValue) |
-| `options` | \{ `includeUntil?`: `boolean`; \} |
+| `options?` | \{ `includeUntil?`: `boolean`; \} |
 | `options.includeUntil?` | `boolean` |
 
 ## Returns

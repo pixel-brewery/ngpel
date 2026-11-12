@@ -46,7 +46,7 @@ Constructs a new instance of the `ViewPresenter` class.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `destroyRef` | `DestroyRef` | The destruction scope the presenter disposes with; injected when omitted. |
+| `destroyRef?` | `DestroyRef` | The destruction scope the presenter disposes with; injected when omitted. |
 
 #### Returns
 
@@ -272,7 +272,7 @@ Balances the loading state around an operation.
 
 | Type Parameter |
 | ------ |
-| `T` |
+| <a id="type-parameter-t"></a> `T` |
 
 ##### Parameters
 
@@ -307,7 +307,7 @@ Balances the loading state around an operation.
 
 | Type Parameter |
 | ------ |
-| `T` |
+| <a id="type-parameter-t-1"></a> `T` |
 
 ##### Parameters
 
@@ -342,7 +342,7 @@ Balances the loading state around an operation.
 
 | Type Parameter |
 | ------ |
-| `T` |
+| <a id="type-parameter-t-2"></a> `T` |
 
 ##### Parameters
 

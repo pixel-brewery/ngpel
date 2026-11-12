@@ -7,11 +7,11 @@ editUrl: false
 
 ```ts
 type CompositeCommand<T> = Command<T> & {
-  clear: void;
+  clear(): void;
   count: Signal<number>;
-  has: boolean;
-  register: void;
-  unregister: void;
+  has(command): boolean;
+  register(command): void;
+  unregister(command): void;
 };
 ```
 
@@ -19,6 +19,12 @@ Defined in: [commands/CompositeCommand.ts:19](https://github.com/pixel-brewery/n
 
 A [Command](TypeAlias.Command) that owns an ordered queue of child commands and executes them sequentially in
 FIFO order with the same parameter.
+
+## Type Parameters
+
+| Type Parameter | Default type | Description |
+| ------ | ------ | ------ |
+| <a id="type-parameter-t"></a> `T` | `void` | The parameter type passed to every child. |
 
 ## Type Declaration
 
@@ -29,12 +35,6 @@ FIFO order with the same parameter.
 | `has()` | (`command`) => `boolean` | Returns whether the child command is registered. | [commands/CompositeCommand.ts:52](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/commands/CompositeCommand.ts#L52) |
 | `register()` | (`command`) => `void` | Appends a child command to the queue. **Throws** Error when the command is `null`/`undefined` or already registered. | [commands/CompositeCommand.ts:37](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/commands/CompositeCommand.ts#L37) |
 | `unregister()` | (`command`) => `void` | Removes a child command from the queue. **Throws** Error when the command is `null`/`undefined` or not registered. | [commands/CompositeCommand.ts:45](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/commands/CompositeCommand.ts#L45) |
-
-## Type Parameters
-
-| Type Parameter | Default type | Description |
-| ------ | ------ | ------ |
-| `T` | `void` | The parameter type passed to every child. |
 
 ## Remarks
 

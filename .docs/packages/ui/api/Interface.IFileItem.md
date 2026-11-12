@@ -14,7 +14,7 @@ Framework-independent view model rendered by the generic files container.
 ### contentType?
 
 ```ts
-readonly optional contentType?: string | null;
+readonly contentType?: string | null;
 ```
 
 Defined in: [libs/ui/src/components/files/IFileItem.ts:21](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/IFileItem.ts#L21)
@@ -26,7 +26,7 @@ Optional MIME type used to infer a preview.
 ### description?
 
 ```ts
-readonly optional description?: string | null;
+readonly description?: string | null;
 ```
 
 Defined in: [libs/ui/src/components/files/IFileItem.ts:24](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/IFileItem.ts#L24)
@@ -38,7 +38,7 @@ Optional supporting text.
 ### disabled?
 
 ```ts
-readonly optional disabled?: boolean;
+readonly disabled?: boolean;
 ```
 
 Defined in: [libs/ui/src/components/files/IFileItem.ts:27](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/IFileItem.ts#L27)
@@ -74,7 +74,7 @@ Stable identifier returned by item interaction events.
 ### preview?
 
 ```ts
-readonly optional preview?: ThumbnailPreview | null;
+readonly preview?: ThumbnailPreview | null;
 ```
 
 Defined in: [libs/ui/src/components/files/IFileItem.ts:30](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/IFileItem.ts#L30)
@@ -86,7 +86,7 @@ Optional explicit Mosaik thumbnail preview.
 ### previewUrl?
 
 ```ts
-readonly optional previewUrl?: string | null;
+readonly previewUrl?: string | null;
 ```
 
 Defined in: [libs/ui/src/components/files/IFileItem.ts:33](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/IFileItem.ts#L33)
@@ -98,7 +98,7 @@ Optional media URL used to infer an image, video, or audio preview.
 ### progress?
 
 ```ts
-readonly optional progress?: number;
+readonly progress?: number;
 ```
 
 Defined in: [libs/ui/src/components/files/IFileItem.ts:36](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/IFileItem.ts#L36)
@@ -110,7 +110,7 @@ Determinate progress between zero and one.
 ### sizeInBytes?
 
 ```ts
-readonly optional sizeInBytes?: number | null;
+readonly sizeInBytes?: number | null;
 ```
 
 Defined in: [libs/ui/src/components/files/IFileItem.ts:39](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/IFileItem.ts#L39)
@@ -122,7 +122,7 @@ File size in bytes.
 ### state?
 
 ```ts
-readonly optional state?: FileStateValue;
+readonly state?: FileStateValue;
 ```
 
 Defined in: [libs/ui/src/components/files/IFileItem.ts:42](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/IFileItem.ts#L42)
@@ -134,7 +134,7 @@ Current visual and interaction state.
 ### stateLabel?
 
 ```ts
-readonly optional stateLabel?: string | null;
+readonly stateLabel?: string | null;
 ```
 
 Defined in: [libs/ui/src/components/files/IFileItem.ts:45](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/IFileItem.ts#L45)

@@ -224,9 +224,7 @@ Keeps the coordinator consistent when conditionally declared rail content disapp
 
 #### Implementation of
 
-```ts
-AfterContentInit.ngAfterContentInit
-```
+`AfterContentInit.ngAfterContentInit`
 
 ***
 

@@ -14,7 +14,7 @@ adapter performs the JSON round trip.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` | The preference value type. |
+| <a id="type-parameter-t"></a> `T` | The preference value type. |
 
 ## Implements
 
@@ -68,9 +68,7 @@ The payload when it passes the guard, otherwise `undefined`.
 
 #### Implementation of
 
-```ts
-IUserPreferenceCodec.parse
-```
+`IUserPreferenceCodec.parse`
 
 ***
 
@@ -98,6 +96,4 @@ The value unchanged.
 
 #### Implementation of
 
-```ts
-IUserPreferenceCodec.serialize
-```
+`IUserPreferenceCodec.serialize`

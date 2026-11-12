@@ -51,6 +51,4 @@ The resolved URL, or `''` for `null`/`undefined`.
 
 #### Implementation of
 
-```ts
-PipeTransform.transform
-```
+`PipeTransform.transform`

@@ -14,7 +14,7 @@ Options of `provideUpdate()`.
 ### checkOnStart?
 
 ```ts
-readonly optional checkOnStart?: boolean;
+readonly checkOnStart?: boolean;
 ```
 
 Defined in: [update/provider/IUpdateConfig.ts:20](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/update/provider/IUpdateConfig.ts#L20)
@@ -32,7 +32,7 @@ false
 ### intl?
 
 ```ts
-readonly optional intl?: Partial<IUpdateIntl>;
+readonly intl?: Partial<IUpdateIntl>;
 ```
 
 Defined in: [update/provider/IUpdateConfig.ts:25](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/update/provider/IUpdateConfig.ts#L25)

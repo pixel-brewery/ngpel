@@ -9,7 +9,7 @@ editUrl: false
 function ViewItemActionable<T>(base): PresenterBehaviorReturn<T, IViewItemActionable>;
 ```
 
-Defined in: item-actions/ViewItemActionable.ts:20
+Defined in: [item-actions/ViewItemActionable.ts:20](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/item-actions/ViewItemActionable.ts#L20)
 
 Adds only generic, registry-backed item actions to a mentionable presenter.
 
@@ -17,7 +17,7 @@ Adds only generic, registry-backed item actions to a mentionable presenter.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `T` *extends* [`PresenterBehaviorBase`](TypeAlias.PresenterBehaviorBase) & (...`args`) => [`IMentionable`](Interface.IMentionable) | Presenter constructor that supplies the current view items. |
+| <a id="type-parameter-t"></a> `T` *extends* [`PresenterBehaviorBase`](TypeAlias.PresenterBehaviorBase) & (new (...`args`) => [`IMentionable`](Interface.IMentionable)) | Presenter constructor that supplies the current view items. |
 
 ## Parameters
 

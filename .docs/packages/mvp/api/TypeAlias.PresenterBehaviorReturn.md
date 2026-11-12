@@ -6,7 +6,7 @@ editUrl: false
 # Type Alias: PresenterBehaviorReturn\<TBase, TBehavior\>
 
 ```ts
-type PresenterBehaviorReturn<TBase, TBehavior> = (...args) => TBehavior & TBase;
+type PresenterBehaviorReturn<TBase, TBehavior> = (abstract new (...args) => TBehavior) & TBase;
 ```
 
 Defined in: [behaviors/PresenterBehaviorReturn.ts:13](https://github.com/pixel-brewery/ngpel/blob/main/libs/mvp/src/behaviors/PresenterBehaviorReturn.ts#L13)
@@ -18,8 +18,8 @@ behavior's own contract, so composed presenters keep every member of every appli
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `TBase` | - | The constructor type the behavior was applied to. |
-| `TBehavior` | `object` | The contract the behavior adds. |
+| <a id="type-parameter-tbase"></a> `TBase` | - | The constructor type the behavior was applied to. |
+| <a id="type-parameter-tbehavior"></a> `TBehavior` | `object` | The contract the behavior adds. |
 
 ## Remarks
 

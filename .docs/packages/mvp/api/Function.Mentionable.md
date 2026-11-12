@@ -17,7 +17,7 @@ Registers a presenter's mention source for the duration of its initialized lifec
 
 | Type Parameter |
 | ------ |
-| `T` *extends* [`PresenterBehaviorBase`](TypeAlias.PresenterBehaviorBase) |
+| <a id="type-parameter-t"></a> `T` *extends* [`PresenterBehaviorBase`](TypeAlias.PresenterBehaviorBase) |
 
 ## Parameters
 

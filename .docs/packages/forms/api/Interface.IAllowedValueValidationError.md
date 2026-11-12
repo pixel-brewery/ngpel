@@ -17,7 +17,7 @@ Validation error emitted when a value is not part of the allowed set.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `TValue` | The value type of the validated field. |
+| <a id="type-parameter-tvalue"></a> `TValue` | The value type of the validated field. |
 
 ## Properties
 
@@ -57,6 +57,4 @@ Identifies the kind of error.
 
 #### Overrides
 
-```ts
-ValidationError.kind
-```
+`ValidationError.kind`

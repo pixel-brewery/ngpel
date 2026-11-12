@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: MapComponent
 
-Defined in: libs/ui/src/google-maps/MapComponent.ts:84
+Defined in: [libs/ui/src/google-maps/MapComponent.ts:84](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapComponent.ts#L84)
 
 Composes Angular Google Maps with lazy SDK loading and deferred native overlays.
 
@@ -17,7 +17,7 @@ Composes Angular Google Maps with lazy SDK loading and deferred native overlays.
 new MapComponent(): MapComponent;
 ```
 
-Defined in: libs/ui/src/google-maps/MapComponent.ts:217
+Defined in: [libs/ui/src/google-maps/MapComponent.ts:217](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapComponent.ts#L217)
 
 Loads the SDK on demand and supplies the actual map to deferred overlays.
 
@@ -33,7 +33,7 @@ Loads the SDK on demand and supplies the actual map to deferred overlays.
 readonly authFailure: OutputEmitterRef<void>;
 ```
 
-Defined in: libs/ui/src/google-maps/MapComponent.ts:197
+Defined in: [libs/ui/src/google-maps/MapComponent.ts:197](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapComponent.ts#L197)
 
 Google Maps authorization failure, such as invalid API restrictions.
 
@@ -45,7 +45,7 @@ Google Maps authorization failure, such as invalid API restrictions.
 readonly center: InputSignal<LatLng | LatLngLiteral | undefined>;
 ```
 
-Defined in: libs/ui/src/google-maps/MapComponent.ts:133
+Defined in: [libs/ui/src/google-maps/MapComponent.ts:133](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapComponent.ts#L133)
 
 Camera center; otherwise the options center applies.
 
@@ -57,7 +57,7 @@ Camera center; otherwise the options center applies.
 protected readonly content: Signal<MapContentDirective | undefined>;
 ```
 
-Defined in: libs/ui/src/google-maps/MapComponent.ts:200
+Defined in: [libs/ui/src/google-maps/MapComponent.ts:200](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapComponent.ts#L200)
 
 ***
 
@@ -67,7 +67,7 @@ Defined in: libs/ui/src/google-maps/MapComponent.ts:200
 protected readonly contentInjector: Signal<Injector>;
 ```
 
-Defined in: libs/ui/src/google-maps/MapComponent.ts:202
+Defined in: [libs/ui/src/google-maps/MapComponent.ts:202](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapComponent.ts#L202)
 
 ***
 
@@ -77,7 +77,7 @@ Defined in: libs/ui/src/google-maps/MapComponent.ts:202
 readonly errorLabel: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/google-maps/MapComponent.ts:109
+Defined in: [libs/ui/src/google-maps/MapComponent.ts:109](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapComponent.ts#L109)
 
 SDK failure message, localized by the consuming feature.
 
@@ -89,7 +89,7 @@ SDK failure message, localized by the consuming feature.
 readonly height: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/google-maps/MapComponent.ts:157
+Defined in: [libs/ui/src/google-maps/MapComponent.ts:157](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapComponent.ts#L157)
 
 Reserved CSS height for the loading, failure, and map surface.
 
@@ -101,7 +101,7 @@ Reserved CSS height for the loading, failure, and map surface.
 readonly label: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/google-maps/MapComponent.ts:93
+Defined in: [libs/ui/src/google-maps/MapComponent.ts:93](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapComponent.ts#L93)
 
 Name for this map region, localized by the consuming feature.
 
@@ -113,7 +113,7 @@ Name for this map region, localized by the consuming feature.
 readonly loadError: OutputEmitterRef<MapLoadError>;
 ```
 
-Defined in: libs/ui/src/google-maps/MapComponent.ts:189
+Defined in: [libs/ui/src/google-maps/MapComponent.ts:189](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapComponent.ts#L189)
 
 Sanitized SDK bootstrap failure.
 
@@ -125,7 +125,7 @@ Sanitized SDK bootstrap failure.
 readonly loadingLabel: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/google-maps/MapComponent.ts:101
+Defined in: [libs/ui/src/google-maps/MapComponent.ts:101](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapComponent.ts#L101)
 
 Accessible loading announcement, localized by the consuming feature.
 
@@ -137,7 +137,7 @@ Accessible loading announcement, localized by the consuming feature.
 protected readonly map: Signal<GoogleMap | undefined>;
 ```
 
-Defined in: libs/ui/src/google-maps/MapComponent.ts:199
+Defined in: [libs/ui/src/google-maps/MapComponent.ts:199](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapComponent.ts#L199)
 
 ***
 
@@ -147,7 +147,7 @@ Defined in: libs/ui/src/google-maps/MapComponent.ts:199
 readonly mapClick: OutputEmitterRef<MapMouseEvent | IconMouseEvent>;
 ```
 
-Defined in: libs/ui/src/google-maps/MapComponent.ts:181
+Defined in: [libs/ui/src/google-maps/MapComponent.ts:181](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapComponent.ts#L181)
 
 Map and POI clicks; POI events preserve their placeId and stop method.
 
@@ -159,7 +159,7 @@ Map and POI clicks; POI events preserve their placeId and stop method.
 readonly mapId: InputSignal<string | undefined>;
 ```
 
-Defined in: libs/ui/src/google-maps/MapComponent.ts:149
+Defined in: [libs/ui/src/google-maps/MapComponent.ts:149](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapComponent.ts#L149)
 
 Google Cloud map ID, required for Advanced Markers and immutable after creation.
 
@@ -171,7 +171,7 @@ Google Cloud map ID, required for Advanced Markers and immutable after creation.
 readonly mapInitialized: OutputEmitterRef<Map>;
 ```
 
-Defined in: libs/ui/src/google-maps/MapComponent.ts:173
+Defined in: [libs/ui/src/google-maps/MapComponent.ts:173](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapComponent.ts#L173)
 
 Native map instance for SDK capabilities beyond declarative overlays.
 
@@ -183,7 +183,7 @@ Native map instance for SDK capabilities beyond declarative overlays.
 readonly markerClustering: InputSignal<boolean>;
 ```
 
-Defined in: libs/ui/src/google-maps/MapComponent.ts:125
+Defined in: [libs/ui/src/google-maps/MapComponent.ts:125](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapComponent.ts#L125)
 
 Loads the official clustering library before creating projected cluster overlays.
 
@@ -195,7 +195,7 @@ Loads the official clustering library before creating projected cluster overlays
 readonly options: InputSignal<MapOptions>;
 ```
 
-Defined in: libs/ui/src/google-maps/MapComponent.ts:117
+Defined in: [libs/ui/src/google-maps/MapComponent.ts:117](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapComponent.ts#L117)
 
 Map options, including camera, POI visibility, controls, and map ID.
 
@@ -207,7 +207,7 @@ Map options, including camera, POI visibility, controls, and map ID.
 protected readonly sdk: ResourceRef<boolean | undefined>;
 ```
 
-Defined in: libs/ui/src/google-maps/MapComponent.ts:201
+Defined in: [libs/ui/src/google-maps/MapComponent.ts:201](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapComponent.ts#L201)
 
 ***
 
@@ -217,7 +217,7 @@ Defined in: libs/ui/src/google-maps/MapComponent.ts:201
 readonly width: InputSignal<string>;
 ```
 
-Defined in: libs/ui/src/google-maps/MapComponent.ts:165
+Defined in: [libs/ui/src/google-maps/MapComponent.ts:165](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapComponent.ts#L165)
 
 Reserved CSS width for the loading, failure, and map surface.
 
@@ -229,6 +229,6 @@ Reserved CSS width for the loading, failure, and map surface.
 readonly zoom: InputSignal<number | undefined>;
 ```
 
-Defined in: libs/ui/src/google-maps/MapComponent.ts:141
+Defined in: [libs/ui/src/google-maps/MapComponent.ts:141](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/google-maps/MapComponent.ts#L141)
 
 Camera zoom; otherwise the options zoom applies.

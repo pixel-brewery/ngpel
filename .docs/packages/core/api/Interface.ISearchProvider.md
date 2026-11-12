@@ -14,7 +14,7 @@ objects and activates a result when the user selects it.
 
 | Type Parameter | Default type | Description |
 | ------ | ------ | ------ |
-| `TData` | `unknown` | Type of the opaque payload carried by the results of this provider. |
+| <a id="type-parameter-tdata"></a> `TData` | `unknown` | Type of the opaque payload carried by the results of this provider. |
 
 ## Properties
 
@@ -34,7 +34,7 @@ produces with it (`'crm.customers:42'`) so the manager can route activation back
 ### isExclusive?
 
 ```ts
-readonly optional isExclusive?: boolean;
+readonly isExclusive?: boolean;
 ```
 
 Defined in: [search/models/ISearchProvider.ts:41](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ISearchProvider.ts#L41)
@@ -64,7 +64,7 @@ Human-readable label shown by provider filters.
 ### layout?
 
 ```ts
-readonly optional layout?: SearchSectionLayout;
+readonly layout?: SearchSectionLayout;
 ```
 
 Defined in: [search/models/ISearchProvider.ts:32](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ISearchProvider.ts#L32)
@@ -100,7 +100,7 @@ Activates a result of this provider, for example by navigating to the entity it 
 ### canAccess()?
 
 ```ts
-optional canAccess(): boolean;
+canAccess?(): boolean;
 ```
 
 Defined in: [search/models/ISearchProvider.ts:51](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/search/models/ISearchProvider.ts#L51)

@@ -13,7 +13,7 @@ Persistent expanded state for the columns of one flow board.
 
 | Type Parameter | Default type |
 | ------ | ------ |
-| `TColumnKey` *extends* `string` | `string` |
+| <a id="type-parameter-tcolumnkey"></a> `TColumnKey` *extends* `string` | `string` |
 
 ## Properties
 

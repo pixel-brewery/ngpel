@@ -26,7 +26,7 @@ states a size exactly the way the templates do.
 | Parameter | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
 | `value` | `number` \| `null` \| `undefined` | `undefined` | The number of bytes. |
-| `fallback` | `string` | `'0 B'` | The text for an unknown size, that is `null`, `undefined` or a non-finite number (defaults to `0 B`). |
+| `fallback?` | `string` | `'0 B'` | The text for an unknown size, that is `null`, `undefined` or a non-finite number (defaults to `0 B`). |
 
 ## Returns
 

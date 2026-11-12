@@ -21,7 +21,7 @@ Composes base providers with validated feature providers.
 
 | Type Parameter |
 | ------ |
-| `TKind` *extends* `string` |
+| <a id="type-parameter-tkind"></a> `TKind` *extends* `string` |
 
 ## Parameters
 
@@ -29,7 +29,7 @@ Composes base providers with validated feature providers.
 | ------ | ------ | ------ | ------ |
 | `base` | readonly `Provider`[] | `undefined` | Base providers of a runtime (e.g., a service). |
 | `features` | readonly [`IFeature`](Interface.IFeature)\<`TKind`\>[] | `undefined` | Features contributing providers. |
-| `rules` | readonly [`IFeatureIncompatibilityRule`](Interface.IFeatureIncompatibilityRule)\<`TKind`\>[] | `[]` | Optional incompatibility rules. |
+| `rules?` | readonly [`IFeatureIncompatibilityRule`](Interface.IFeatureIncompatibilityRule)\<`TKind`\>[] | `[]` | Optional incompatibility rules. |
 
 ## Returns
 

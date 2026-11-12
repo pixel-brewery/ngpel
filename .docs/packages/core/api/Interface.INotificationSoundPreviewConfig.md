@@ -15,7 +15,7 @@ applies the interceptor's own table, so a preview always plays what the notifica
 ### defaultSound?
 
 ```ts
-readonly optional defaultSound?: string;
+readonly defaultSound?: string;
 ```
 
 Defined in: [notification/services/INotificationSoundPreviewConfig.ts:20](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/notification/services/INotificationSoundPreviewConfig.ts#L20)
@@ -27,7 +27,7 @@ Sound played for a severity the table does not name.
 ### options?
 
 ```ts
-readonly optional options?: IAudioPlayOptions;
+readonly options?: IAudioPlayOptions;
 ```
 
 Defined in: [notification/services/INotificationSoundPreviewConfig.ts:25](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/notification/services/INotificationSoundPreviewConfig.ts#L25)
