@@ -42,6 +42,8 @@ jobs:
         run: yarn install --immutable
 
       - name: Verify source, tooling, documentation and package output
+        env:
+          NGPEL_TEST_JOBS: '2'
         run: yarn run verify:ci
 
       - name: Build the Angular consumer fixture
