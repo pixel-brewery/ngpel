@@ -96,7 +96,16 @@
             "preserveLocalDependencyProtocols": false
         },
         "changelog": {
-            "projectChangelogs": true
+            "workspaceChangelog": {
+                "renderOptions": {
+                    "authors": false
+                }
+            },
+            "projectChangelogs": {
+                "renderOptions": {
+                    "authors": false
+                }
+            }
         },
         "git": {
             "commit": false,
