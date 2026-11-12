@@ -90,9 +90,9 @@ import {
 | `@pixel-brewery/markdowner-core`            | `>=0.1.96`                      |
 | `@pixel-brewery/mosaik-elements-angular`    | `>=0.1.188` _(optional)_        |
 | `@pixel-brewery/mosaik-elements-foundation` | `>=0.1.188` _(optional)_        |
-| `@pixel-brewery/ngpel-core`                 | `0.0.3`                         |
-| `@pixel-brewery/ngpel-mvp`                  | `0.0.3`                         |
-| `@pixel-brewery/ngpel-router`               | `0.0.3`                         |
+| `@pixel-brewery/ngpel-core`                 | `0.0.4`                         |
+| `@pixel-brewery/ngpel-mvp`                  | `0.0.4`                         |
+| `@pixel-brewery/ngpel-router`               | `0.0.4`                         |
 | `marked`                                    | `>=18.0.0`                      |
 | `rxjs`                                      | `>=7.8.0 <8.0.0`                |
 
