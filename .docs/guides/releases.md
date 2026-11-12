@@ -51,6 +51,9 @@ the metadata commit when branch rules permit it. For protected `main`, configure
 release GitHub App using `RELEASE_APP_ID` and the `RELEASE_APP_PRIVATE_KEY` environment secret.
 Package publication continues to use the workflow token.
 
+Dependabot refreshes its pull request branches. After CI verifies a current Dependabot commit,
+the merge workflow squash-merges that commit and requests a release for the resulting revision.
+
 ## Recover a release
 
 If publication is interrupted, rerun the failed job from the same run while its verified artifact

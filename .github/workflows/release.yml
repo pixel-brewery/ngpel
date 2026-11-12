@@ -14,6 +14,9 @@ on:
       version:
         description: Exact next version, if supplied
         type: string
+      source_sha:
+        description: Expected main commit for an automatic release request
+        type: string
 
 permissions: {}
 
@@ -48,7 +51,11 @@ jobs:
       - name: Require the triggering commit to remain on main
         env:
           GH_TOKEN: ${{ github.token }}
-        run: test "$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)" = "$GITHUB_SHA"
+          EXPECTED_SOURCE_SHA: ${{ inputs.source_sha }}
+        run: |
+          set -euo pipefail
+          test -z "$EXPECTED_SOURCE_SHA" || test "$EXPECTED_SOURCE_SHA" = "$GITHUB_SHA"
+          test "$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)" = "$GITHUB_SHA"
       - run: corepack enable
       - name: Install dependencies and prepare the coordinated version
         env:
