@@ -1,0 +1,38 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    rebase-strategy: auto
+    schedule:
+      interval: weekly
+      day: monday
+    ignore:
+      - dependency-name: typescript
+      - dependency-name: '@pixel-brewery/*'
+      - dependency-name: '@angular/*'
+        update-types: [version-update:semver-major]
+      - dependency-name: '@angular-devkit/*'
+        update-types: [version-update:semver-major]
+      - dependency-name: '@schematics/angular'
+        update-types: [version-update:semver-major]
+      - dependency-name: angular-eslint
+        update-types: [version-update:semver-major]
+      - dependency-name: '@nx/*'
+        update-types: [version-update:semver-major]
+      - dependency-name: nx
+        update-types: [version-update:semver-major]
+    groups:
+      angular-updates:
+        patterns: ['@angular/*', '@angular-devkit/*', '@schematics/angular', angular-eslint]
+      nx-updates:
+        patterns: ['@nx/*', nx]
+
+  - package-ecosystem: github-actions
+    directory: /
+    rebase-strategy: auto
+    schedule:
+      interval: weekly
+      day: monday
+    groups:
+      github-actions-updates:
+        patterns: ['*']

@@ -1,0 +1,64 @@
+# cspell:ignore pipefail
+name: Merge verified Dependabot updates
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+
+permissions: {}
+
+jobs:
+  merge:
+    if: >-
+      ${{ github.repository == 'pixel-brewery/ngpel' && github.event.repository.id == 1447827206 &&
+          github.event.repository.private == false &&
+          github.event.workflow_run.event == 'pull_request' &&
+          github.event.workflow_run.conclusion == 'success' &&
+          startsWith(github.event.workflow_run.head_branch, 'dependabot/') &&
+          github.event.workflow_run.head_repository.id == github.event.repository.id }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    concurrency:
+      group: dependabot-merge-${{ github.event.workflow_run.pull_requests[0].number || github.event.workflow_run.id }}
+      cancel-in-progress: false
+    permissions:
+      actions: read
+      contents: write
+      pull-requests: read
+    outputs:
+      merge_sha: ${{ steps.merge.outputs.merge_sha }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: refs/heads/main
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '22'
+          package-manager-cache: false
+      - name: Merge the verified Dependabot commit
+        id: merge
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node .github/scripts/mergeDependabotPullRequest.mjs
+
+  request-release:
+    needs: merge
+    if: needs.merge.outputs.merge_sha != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      actions: write
+      contents: read
+    steps:
+      - name: Start the release for the current merge
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MERGE_SHA: ${{ needs.merge.outputs.merge_sha }}
+        run: |
+          set -euo pipefail
+          current=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)
+          if [ "$current" = "$MERGE_SHA" ]; then
+            gh workflow run release.yml --repo "$GITHUB_REPOSITORY" --ref main -f source_sha="$MERGE_SHA"
+          fi
