@@ -111,12 +111,19 @@ export class DataTablePreferencesDirective {
 
     /** Stores only the preference fields from the native table state. */
     @HostListener('dataTableStateChanged', ['$event'])
-    public onDataTableStateChanged(event: Event): void {
-        if (this._restoringWidths || event.composedPath()[0] !== this._dataTable.elementRef.nativeElement || !(event instanceof CustomEvent)) {
+    public onDataTableStateChanged(event: Event | { readonly state: INativeTableLayout }): void {
+        if (this._restoringWidths) {
             return;
         }
-        const state = (event as CustomEvent<{ readonly state: INativeTableLayout }>).detail?.state;
-        if (state) this.persistPreferences(undefined, state);
+        // The Angular wrapper forwards the event detail directly; plain DOM listeners receive a CustomEvent.
+        if ('composedPath' in event && event.composedPath()[0] !== this._dataTable.elementRef.nativeElement) {
+            return;
+        }
+        const state =
+            'state' in event ? event.state : event instanceof CustomEvent ? (event.detail as { readonly state?: INativeTableLayout })?.state : undefined;
+        if (state) {
+            this.persistPreferences(undefined, state);
+        }
     }
 
     /** Persists the resized width under the column's stable key. */

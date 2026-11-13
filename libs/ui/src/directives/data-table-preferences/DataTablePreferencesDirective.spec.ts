@@ -15,17 +15,25 @@ interface ITestDataTableElement extends HTMLElement {
     updateComplete: Promise<boolean>;
 }
 
+interface ITestDataTableComponent {
+    readonly dataTableStateChanged: {
+        emit(detail: unknown): void;
+    };
+}
+
 vi.mock('@pixel-brewery/mosaik-elements-angular', async () => {
     const angular = await vi.importActual<typeof import('@angular/core')>('@angular/core');
 
     class DataTableStub {
         public readonly elementRef = angular.inject<import('@angular/core').ElementRef<ITestDataTableElement>>(angular.ElementRef);
+        public readonly dataTableStateChanged = new angular.EventEmitter<unknown>();
 
         public setInput(key: 'columnDefinitions', value: Array<IDataTableColumnDefinition>): void {
             this.elementRef.nativeElement[key] = value;
         }
     }
 
+    angular.Output()(DataTableStub.prototype, 'dataTableStateChanged');
     angular.Component({ selector: 'mosaik-data-table', template: '' })(DataTableStub);
     return { DataTableComponent: DataTableStub };
 });
@@ -242,18 +250,14 @@ describe('DataTablePreferencesDirective', () => {
     it('persists grouping and pins without copying selection or filtering from native state', async () => {
         // Arrange
         storeColumns([{ key: 'name', hidden: false, width: 235 }]);
-        const { fixture, host } = createTable([{ key: 'name' }, { key: 'state' }], true, true);
+        const { fixture, tableComponent } = createTable([{ key: 'name' }, { key: 'state' }], true, true);
         fixture.detectChanges();
         await fixture.whenStable();
 
         // Act
-        host.dispatchEvent(
-            new CustomEvent('dataTableStateChanged', {
-                detail: {
-                    state: { columns: [{ key: 'name', pinned: 'right' }], groupBy: ['state'], selectedKeys: ['record'], quickFilter: 'sample', filters: [] },
-                },
-            }),
-        );
+        tableComponent.dataTableStateChanged.emit({
+            state: { columns: [{ key: 'name', pinned: 'right' }], groupBy: ['state'], selectedKeys: ['record'], quickFilter: 'sample', filters: [] },
+        });
 
         // Assert
         expect(JSON.parse(browserStorage.getItem(PREFERENCE_KEY) ?? '{}')).toEqual({
@@ -297,6 +301,7 @@ function createTable(columnDefinitions: Array<IDataTableColumnDefinition & { gro
     const fixture = TestBed.createComponent(TableHostComponent);
     const node = fixture.debugElement.query(By.directive(DataTablePreferencesDirective));
     const directive = node.injector.get(DataTablePreferencesDirective);
+    const tableComponent = node.injector.get(DataTableComponent) as unknown as ITestDataTableComponent;
     const host = node.nativeElement as ITestDataTableElement;
     const table = document.createElement('mosaik-table') as HTMLElement & { columns: string };
     table.setAttribute('part', 'table');
@@ -305,7 +310,7 @@ function createTable(columnDefinitions: Array<IDataTableColumnDefinition & { gro
     host.columnDefinitions = columnDefinitions;
     host.updateComplete = Promise.resolve(true);
     Object.assign(directive, { preferenceKey: signal(PREFERENCE_KEY), persistColumnWidths: signal(persistColumnWidths), persistLayout: signal(persistLayout) });
-    return { fixture, host, table };
+    return { fixture, host, table, tableComponent };
 }
 
 function storeColumns(columns: IDataTablePreferenceState['columns']): void {
