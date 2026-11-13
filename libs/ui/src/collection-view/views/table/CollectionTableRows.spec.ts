@@ -32,46 +32,43 @@ describe('CollectionTableRows', () => {
         TestBed.resetTestingModule();
     });
 
-    it('requests exact group counts before fetching only the next page of one expanded group', async () => {
+    it('requests complete group paths and counts, then fetches the next page of one leaf group', async () => {
+        const groupBy = ['status', 'priority'];
+        const groupPath = ['OPEN', null];
+        const groups = [
+            { path: ['OPEN'], count: 9 },
+            { path: ['OPEN', null], count: 7 },
+            { path: ['OPEN', 'HIGH'], count: 2 },
+            { path: [null], count: 3 },
+            { path: [null, 'HIGH'], count: 3 },
+        ];
         const loadPage = vi.fn((_skip: number, _take: number, query: ICollectionTablePageQuery) =>
-            query.groupsOnly
-                ? of({
-                      items: [],
-                      total: 12,
-                      groups: [
-                          { value: 'OPEN', count: 9 },
-                          { value: null, count: 3 },
-                      ],
-                  })
-                : of({ items: [{ id: 6 }], total: 9 }),
+            query.groupsOnly ? of({ items: [], total: 12, groups }) : of({ items: [{ id: 6 }], total: 7 }),
         );
         const receiveRows = vi.fn();
         const rows = createRows(loadPage, receiveRows);
         const nativeProvider = rows.provider();
 
-        await expect(nativeProvider({ ...request(), groupBy: ['status'] })).resolves.toEqual({
+        await expect(nativeProvider({ ...request(), groupBy })).resolves.toEqual({
             rows: [],
             totalCount: 12,
-            groupCounts: [
-                { path: ['OPEN'], count: 9 },
-                { path: [null], count: 3 },
-            ],
+            groupCounts: groups,
         });
         expect(loadPage).toHaveBeenCalledExactlyOnceWith(0, 5, {
-            groupBy: 'status',
-            groupValue: undefined,
+            groupBy,
+            groupPath: undefined,
             groupsOnly: true,
             sortBy: 'id',
             sortDirection: 'desc',
         });
 
-        await expect(nativeProvider({ ...request(1), groupBy: ['status'], groupPath: ['OPEN'] })).resolves.toEqual({
+        await expect(nativeProvider({ ...request(1), groupBy, groupPath })).resolves.toEqual({
             rows: [{ id: 6 }],
-            totalCount: 9,
+            totalCount: 7,
         });
         expect(loadPage).toHaveBeenLastCalledWith(5, 5, {
-            groupBy: 'status',
-            groupValue: 'OPEN',
+            groupBy,
+            groupPath,
             groupsOnly: undefined,
             sortBy: 'id',
             sortDirection: 'desc',

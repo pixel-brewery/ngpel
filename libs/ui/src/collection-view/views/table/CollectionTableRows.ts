@@ -4,6 +4,7 @@ import { computed, effect, signal, untracked, type Signal } from '@angular/core'
 import type { IDataTableRowsRequest, IDataTableRowsResult } from '@pixel-brewery/mosaik-elements-foundation';
 import { firstValueFrom, fromEvent, takeUntil } from 'rxjs';
 import { compactViewportSignal } from '../../../components/navigation/compactViewportSignal';
+import type { ICollectionTablePage } from './ICollectionTablePage';
 import type { ICollectionTablePageQuery } from './ICollectionTablePageQuery';
 import type { ICollectionTableRowsOptions } from './ICollectionTableRowsOptions';
 
@@ -16,10 +17,7 @@ interface ICollectionTableRowsRequest extends IDataTableRowsRequest {
 }
 
 interface ICollectionTableRowsResult extends IDataTableRowsResult {
-    readonly groupCounts?: ReadonlyArray<{
-        readonly path: ReadonlyArray<unknown>;
-        readonly count: number;
-    }>;
+    readonly groupCounts?: ICollectionTablePage<object>['groups'];
 }
 
 /** Connects existing collection queries to Mosaik's native lazy row provider. */
@@ -106,12 +104,12 @@ export class CollectionTableRows<T extends object> {
         const isCurrent = (): boolean => !abort.aborted && version === this._version() && this.isDesktop();
         if (!isCurrent()) throw new DOMException('Table request superseded', 'AbortError');
 
-        const groupBy = request.groupBy?.[0];
+        const groupBy = request.groupBy?.length ? request.groupBy : undefined;
         const groupsOnly = !!groupBy && !groupPath?.length;
         const sort = request.sortExpressions.find((expression) => this._options.sortingFields.includes(expression.sortKey));
         const query: ICollectionTablePageQuery = {
             groupBy,
-            groupValue: groupPath?.[0],
+            groupPath: groupPath?.length ? groupPath : undefined,
             groupsOnly: groupsOnly || undefined,
             sortBy: sort?.sortKey,
             sortDirection: sort?.sortDirection ?? 'asc',
@@ -131,7 +129,7 @@ export class CollectionTableRows<T extends object> {
             if (groupsOnly) {
                 this._total = page.total;
                 this._options.receiveRows([], this._total);
-                return { rows: [], totalCount: page.total, groupCounts: (page.groups ?? []).map(({ value, count }) => ({ path: [value], count })) };
+                return { rows: [], totalCount: page.total, groupCounts: page.groups ?? [] };
             }
 
             if (!groupBy) this._total = page.total;
