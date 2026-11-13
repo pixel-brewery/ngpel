@@ -23,4 +23,7 @@ export interface IDataTablePreferenceState {
      * @public
      */
     readonly columns: ReadonlyArray<IDataTableColumnPreference>;
+
+    /** Column keys used for grouping, from outermost to innermost. */
+    readonly groupBy?: ReadonlyArray<string>;
 }

@@ -3,7 +3,7 @@
 // #endregion
 
 /**
- * Persisted visibility and optional width of one data-table column.
+ * Persisted visibility, width and pinning of one data-table column.
  *
  * @public
  */
@@ -24,4 +24,7 @@ export interface IDataTableColumnPreference {
 
     /** Width in CSS pixels after the column was resized. */
     readonly width?: number;
+
+    /** Pinning chosen in the table when layout persistence is enabled. */
+    readonly pinned?: 'left' | 'right' | 'none';
 }

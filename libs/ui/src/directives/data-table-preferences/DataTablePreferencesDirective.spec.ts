@@ -10,6 +10,8 @@ import type { IDataTablePreferenceState } from './IDataTablePreferenceState';
 
 interface ITestDataTableElement extends HTMLElement {
     columnDefinitions: Array<IDataTableColumnDefinition>;
+    groupBy?: ReadonlyArray<string>;
+    groupable?: boolean;
     updateComplete: Promise<boolean>;
 }
 
@@ -189,9 +191,106 @@ describe('DataTablePreferencesDirective', () => {
         // Assert
         expect(table.columns).toBe('1fr 260px');
     });
+
+    it('restores saved native column widths by key', async () => {
+        // Arrange
+        storeColumns([{ key: 'name', hidden: false, width: 235 }]);
+        const { fixture, table } = createTable([{ key: 'state' }, { key: 'name' }]);
+        const setColumnWidth = vi.fn(() => true);
+        Object.assign(table, { setColumnWidth });
+
+        // Act
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        // Assert
+        expect(setColumnWidth).toHaveBeenCalledExactlyOnceWith('name', '235px');
+    });
+
+    it('persists the current column visibility when the native editor on its own table closes', async () => {
+        // Arrange
+        const { fixture, host, table } = createTable([{ key: 'name' }]);
+        fixture.detectChanges();
+        await fixture.whenStable();
+        host.columnDefinitions = [{ key: 'name', hidden: true }];
+
+        // Act
+        table.dispatchEvent(new CustomEvent('tableColumnEditorClosed', { bubbles: true, composed: true }));
+
+        // Assert
+        expect(storedColumns()).toEqual([{ key: 'name', hidden: true }]);
+    });
+
+    it('restores saved grouping and pins on opt-in tables while ignoring removed group keys', async () => {
+        // Arrange
+        browserStorage.setItem(
+            PREFERENCE_KEY,
+            JSON.stringify({ version: 1, columns: [{ key: 'name', hidden: false, pinned: 'left' }], groupBy: ['removed', 'name', 'state'] }),
+        );
+        const { fixture, host } = createTable([{ key: 'name' }, { key: 'state', groupable: true }], true, true);
+        host.groupBy = [];
+
+        // Act
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        // Assert
+        expect(host.groupBy).toEqual(['state']);
+        expect(host.columnDefinitions[0]?.pinned).toBe('left');
+    });
+
+    it('persists grouping and pins without copying selection or filtering from native state', async () => {
+        // Arrange
+        storeColumns([{ key: 'name', hidden: false, width: 235 }]);
+        const { fixture, host } = createTable([{ key: 'name' }, { key: 'state' }], true, true);
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        // Act
+        host.dispatchEvent(
+            new CustomEvent('dataTableStateChanged', {
+                detail: {
+                    state: { columns: [{ key: 'name', pinned: 'right' }], groupBy: ['state'], selectedKeys: ['record'], quickFilter: 'sample', filters: [] },
+                },
+            }),
+        );
+
+        // Assert
+        expect(JSON.parse(browserStorage.getItem(PREFERENCE_KEY) ?? '{}')).toEqual({
+            version: 1,
+            columns: [
+                { key: 'name', hidden: false, width: 235, pinned: 'right' },
+                { key: 'state', hidden: false },
+            ],
+            groupBy: ['state'],
+        });
+    });
+
+    it('keeps layout persistence disabled while saving native visibility changes', async () => {
+        // Arrange
+        const { fixture, host } = createTable([{ key: 'name' }, { key: 'state' }]);
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        // Act
+        host.dispatchEvent(
+            new CustomEvent('dataTableStateChanged', {
+                detail: { state: { columns: [{ key: 'name', hidden: true, pinned: 'right' }], groupBy: ['state'] } },
+            }),
+        );
+
+        // Assert
+        expect(JSON.parse(browserStorage.getItem(PREFERENCE_KEY) ?? '{}')).toEqual({
+            version: 1,
+            columns: [
+                { key: 'name', hidden: true },
+                { key: 'state', hidden: false },
+            ],
+        });
+    });
 });
 
-function createTable(columnDefinitions: Array<IDataTableColumnDefinition>, persistColumnWidths = true) {
+function createTable(columnDefinitions: Array<IDataTableColumnDefinition & { groupable?: boolean }>, persistColumnWidths = true, persistLayout = false) {
     TestBed.configureTestingModule({
         providers: [{ provide: USER_PREFERENCE_STORAGE, useValue: new WebStorageUserPreferenceStorage(browserStorage) }],
     });
@@ -205,7 +304,7 @@ function createTable(columnDefinitions: Array<IDataTableColumnDefinition>, persi
     host.attachShadow({ mode: 'open' }).append(table);
     host.columnDefinitions = columnDefinitions;
     host.updateComplete = Promise.resolve(true);
-    Object.assign(directive, { preferenceKey: signal(PREFERENCE_KEY), persistColumnWidths: signal(persistColumnWidths) });
+    Object.assign(directive, { preferenceKey: signal(PREFERENCE_KEY), persistColumnWidths: signal(persistColumnWidths), persistLayout: signal(persistLayout) });
     return { fixture, host, table };
 }
 
