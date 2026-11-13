@@ -20,6 +20,11 @@ const DATA_TABLE_PREFERENCE_CODEC = new JsonUserPreferenceCodec<IDataTablePrefer
 type ColumnIdentity = Pick<IDataTableColumnPreference, 'key' | 'hidden'>;
 type ColumnDefinition = IDataTableColumnDefinition & { groupable?: boolean };
 
+interface IGroupingChange {
+    readonly groupBy: ReadonlyArray<string>;
+    cancel: boolean;
+}
+
 interface IPreferenceTable extends HTMLElement {
     // CSS track lists are used by older Mosaik releases. New releases address widths by column key.
     columns?: string;
@@ -69,6 +74,9 @@ export class DataTablePreferencesDirective {
 
     /** Whether to persist native grouping and column pinning for explicitly defined columns. */
     public readonly persistLayout = input(false, { alias: 'ngpDataTablePersistLayout', transform: booleanAttribute });
+
+    /** Keep the most recently chosen field when the data source supports one grouping level. */
+    public readonly singleGroup = input(false, { alias: 'ngpDataTableSingleGroup', transform: booleanAttribute });
 
     // #endregion
 
@@ -126,6 +134,21 @@ export class DataTablePreferencesDirective {
         }
     }
 
+    /** Normalizes the table's grouping action before it changes native state. */
+    @HostListener('dataTableBeforeGroupByChange', ['$event'])
+    public onDataTableBeforeGroupByChange(event: Event | IGroupingChange): void {
+        if (!this.singleGroup()) return;
+        if ('composedPath' in event && event.composedPath()[0] !== this._dataTable.elementRef.nativeElement) return;
+        const detail = 'groupBy' in event ? event : event instanceof CustomEvent ? (event as CustomEvent<IGroupingChange>).detail : undefined;
+        if (!detail || detail.cancel || detail.groupBy.length <= 1) return;
+
+        const table = this._dataTable.elementRef.nativeElement;
+        if ('regroup' in table && typeof table.regroup === 'function') {
+            detail.cancel = true;
+            table.regroup(detail.groupBy.slice(-1));
+        }
+    }
+
     /** Persists the resized width under the column's stable key. */
     @HostListener('tableColumnResized', ['$event'])
     public onTableColumnResized(event: TableColumnResizedEvent): void {
@@ -173,7 +196,8 @@ export class DataTablePreferencesDirective {
         const element = this._dataTable.elementRef.nativeElement;
         if (this.persistLayout() && state.groupBy && 'groupBy' in element && Array.isArray(element.groupBy)) {
             const groupingEnabled = 'groupable' in element && element.groupable === true;
-            element.groupBy = state.groupBy.filter((key) => columns.some((column) => column.key === key && (column.groupable ?? groupingEnabled)));
+            const groups = state.groupBy.filter((key) => columns.some((column) => column.key === key && (column.groupable ?? groupingEnabled)));
+            element.groupBy = this.singleGroup() ? groups.slice(-1) : groups;
         }
         if (this.persistColumnWidths()) {
             void this.restoreColumnWidths();

@@ -292,6 +292,18 @@ describe('DataTablePreferencesDirective', () => {
             ],
         });
     });
+    it('replaces the active grouping when a single-group table receives a second field', () => {
+        const { directive, host } = createTable([], true, true);
+        const regroup = vi.fn();
+        Object.assign(directive, { singleGroup: signal(true) });
+        Object.assign(host, { regroup });
+        const event = { groupBy: ['status', 'priority'], cancel: false };
+
+        directive.onDataTableBeforeGroupByChange(event);
+
+        expect(event.cancel).toBe(true);
+        expect(regroup).toHaveBeenCalledExactlyOnceWith(['priority']);
+    });
 });
 
 function createTable(columnDefinitions: Array<IDataTableColumnDefinition & { groupable?: boolean }>, persistColumnWidths = true, persistLayout = false) {
@@ -310,7 +322,7 @@ function createTable(columnDefinitions: Array<IDataTableColumnDefinition & { gro
     host.columnDefinitions = columnDefinitions;
     host.updateComplete = Promise.resolve(true);
     Object.assign(directive, { preferenceKey: signal(PREFERENCE_KEY), persistColumnWidths: signal(persistColumnWidths), persistLayout: signal(persistLayout) });
-    return { fixture, host, table, tableComponent };
+    return { directive, fixture, host, table, tableComponent };
 }
 
 function storeColumns(columns: IDataTablePreferenceState['columns']): void {

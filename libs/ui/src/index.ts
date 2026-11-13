@@ -34,6 +34,10 @@ export type { IFlowColumnExpansionPreference } from './collection-view/views/flo
 export { defineGalleryCollectionView } from './collection-view/views/gallery/defineGalleryCollectionView';
 export type { ICollectionGalleryView } from './collection-view/views/gallery/ICollectionGalleryView';
 export type { ICollectionGalleryViewConfig } from './collection-view/views/gallery/ICollectionGalleryViewConfig';
+export { CollectionTableRows } from './collection-view/views/table/CollectionTableRows';
+export type { ICollectionTablePage } from './collection-view/views/table/ICollectionTablePage';
+export type { ICollectionTablePageQuery } from './collection-view/views/table/ICollectionTablePageQuery';
+export type { ICollectionTableRowsOptions } from './collection-view/views/table/ICollectionTableRowsOptions';
 export { defineTableCollectionView } from './collection-view/views/table/defineTableCollectionView';
 export type { ICollectionTableFieldConfig } from './collection-view/views/table/ICollectionTableFieldConfig';
 export type { ICollectionTableView } from './collection-view/views/table/ICollectionTableView';
