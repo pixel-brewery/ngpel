@@ -7,7 +7,7 @@ editUrl: false
 
 Defined in: [libs/ui/src/directives/data-table-preferences/IDataTableColumnPreference.ts:10](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/data-table-preferences/IDataTableColumnPreference.ts#L10)
 
-Persisted visibility and optional width of one data-table column.
+Persisted visibility, width and pinning of one data-table column.
 
 ## Properties
 
@@ -32,6 +32,18 @@ readonly key: string;
 Defined in: [libs/ui/src/directives/data-table-preferences/IDataTableColumnPreference.ts:16](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/data-table-preferences/IDataTableColumnPreference.ts#L16)
 
 Stable data-table column key.
+
+***
+
+### pinned?
+
+```ts
+readonly pinned?: "none" | "left" | "right";
+```
+
+Defined in: [libs/ui/src/directives/data-table-preferences/IDataTableColumnPreference.ts:29](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/data-table-preferences/IDataTableColumnPreference.ts#L29)
+
+Pinning chosen in the table when layout persistence is enabled.
 
 ***
 

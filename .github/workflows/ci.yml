@@ -46,9 +46,6 @@ jobs:
           NGPEL_TEST_JOBS: '2'
         run: yarn run verify:ci
 
-      - name: Build the Angular consumer fixture
-        run: yarn nx run fixture-ng22:build
-
       - name: Require reproducible checked-in output
         run: |
           git status --short

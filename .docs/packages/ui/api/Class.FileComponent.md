@@ -427,7 +427,7 @@ small to carry it.
 ### previewFit
 
 ```ts
-readonly previewFit: InputSignal<ImageFit>;
+readonly previewFit: InputSignal<ObjectFit>;
 ```
 
 Defined in: [libs/ui/src/components/file/FileComponent.ts:493](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file/FileComponent.ts#L493)
@@ -601,7 +601,7 @@ the caller already supplied its own; a supplied preview is never overridden.
 ### resolvedPreviewFit
 
 ```ts
-protected readonly resolvedPreviewFit: Signal<ImageFit>;
+protected readonly resolvedPreviewFit: Signal<ObjectFit>;
 ```
 
 Defined in: [libs/ui/src/components/file/FileComponent.ts:754](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file/FileComponent.ts#L754)

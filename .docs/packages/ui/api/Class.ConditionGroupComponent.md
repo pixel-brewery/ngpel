@@ -187,7 +187,7 @@ Defined in: [libs/ui/src/components/condition-group/ConditionGroupComponent.ts:1
 ### removeVariant
 
 ```ts
-readonly removeVariant: InputSignal<"danger" | "primary">;
+readonly removeVariant: InputSignal<"primary" | "danger">;
 ```
 
 Defined in: [libs/ui/src/components/condition-group/ConditionGroupComponent.ts:118](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/condition-group/ConditionGroupComponent.ts#L118)

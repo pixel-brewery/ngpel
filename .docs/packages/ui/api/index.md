@@ -48,6 +48,7 @@ editUrl: false
 | [CollectionListComponent](Class.CollectionListComponent) | Renders a collection heading and menus above caller-templated rows in one scrolling region. |
 | [CollectionListEmptyDirective](Class.CollectionListEmptyDirective) | Marks content rendered when a collection list is empty. |
 | [CollectionListItemDirective](Class.CollectionListItemDirective) | Marks the caller-provided row template of a collection list. |
+| [CollectionTableRows](Class.CollectionTableRows) | Connects existing collection queries to Mosaik's native lazy row provider. |
 | [ColorPickerButtonComponent](Class.ColorPickerButtonComponent) | Opens Mosaik's color picker beside a preset palette and emits an opaque RGB hex value. |
 | [ColorSelectorComponent](Class.ColorSelectorComponent) | A reusable color selector component with palette selection and eye dropper support. Implements ControlValueAccessor for Reactive Forms integration. |
 | [ColorSelectorComponentIntl](Class.ColorSelectorComponentIntl) | Internationalization labels for the color selector component. |
@@ -70,7 +71,7 @@ editUrl: false
 | [ContextMenuContentDirective](Class.ContextMenuContentDirective) | Marks the declarative HTML template rendered inside a context menu. |
 | [ContextMenuTriggerDirective](Class.ContextMenuTriggerDirective) | Connects a host to a context menu. Supply a value for explicit triggers, or omit it on a Mosaik data table to read the row value from the event's composed path. |
 | [DataTableLoadingDirective](Class.DataTableLoadingDirective) | Keeps a Mosaik data table in place while replacing its body with five loading rows. |
-| [DataTablePreferencesDirective](Class.DataTablePreferencesDirective) | Persists column visibility and user-selected widths for a Mosaik data-table. |
+| [DataTablePreferencesDirective](Class.DataTablePreferencesDirective) | Persists column visibility and widths for a Mosaik data-table, with optional grouping and column pinning. |
 | [DayStripComponent](Class.DayStripComponent) | Displays a horizontally scrollable day selector. |
 | [DetailPanelComponent](Class.DetailPanelComponent) | - |
 | [DetailPanelComponentIntl](Class.DetailPanelComponentIntl) | Internationalization labels for the detail panel component. |
@@ -240,6 +241,9 @@ editUrl: false
 | [ICollectionListMenu](Interface.ICollectionListMenu) | Dropdown menu displayed in a collection-list header. |
 | [ICollectionListMenuOption](Interface.ICollectionListMenuOption) | Selectable option shown in a collection-list menu. |
 | [ICollectionListMenuSelection](Interface.ICollectionListMenuSelection) | Activated menu option emitted by a collection list. |
+| [ICollectionTablePage](Interface.ICollectionTablePage) | A bounded page of rows, or group paths and full filtered counts from the source. |
+| [ICollectionTablePageQuery](Interface.ICollectionTablePageQuery) | A grouped collection request, independent of the source transport. |
+| [ICollectionTableRowsOptions](Interface.ICollectionTableRowsOptions) | Host capabilities and data callbacks for a desktop table backed by a paged source. |
 | [ICollectionTableView](Interface.ICollectionTableView) | Runtime table projection for a collection view. |
 | [ICollectionTableViewConfig](Interface.ICollectionTableViewConfig) | Configuration for the table projection of a collection view. |
 | [ICollectionView](Interface.ICollectionView) | Runtime collection-view model exposed by feature presenters. |
@@ -252,7 +256,7 @@ editUrl: false
 | [IContextDrawerTarget](Interface.IContextDrawerTarget) | A feature-owned contextual overlay presented through Mosaik drawers. |
 | [IContextMenuContentContext](Interface.IContextMenuContentContext) | Template context supplied to declarative context-menu content. |
 | [IContextMenuOpenRequest](Interface.IContextMenuOpenRequest) | Describes one request to open a context menu at a viewport position. |
-| [IDataTableColumnPreference](Interface.IDataTableColumnPreference) | Persisted visibility and optional width of one data-table column. |
+| [IDataTableColumnPreference](Interface.IDataTableColumnPreference) | Persisted visibility, width and pinning of one data-table column. |
 | [IDataTablePreferenceState](Interface.IDataTablePreferenceState) | Persisted state for a Mosaik data-table. |
 | [IDateFilterRange](Interface.IDateFilterRange) | Date range resolved from a filter value. |
 | [IDetailPanelChange](Interface.IDetailPanelChange) | - |
