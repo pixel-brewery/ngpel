@@ -207,8 +207,7 @@ import { mapAiRailSelectionChangedEvent } from './mapAiRailSelectionChangedEvent
                                     <mosaik-skeleton [height]="'48px'" [width]="'100%'" [shimmer]="true" />
                                 </div>
                                 <mosaik-text
-                                    ngpTypewriter
-                                    [text]="$any(waitingPrompts())"
+                                    [ngpTypewriter]="waitingPrompts()"
                                     [typingSpeed]="80"
                                     [holdDuration]="60000"
                                     [formatter]="'richtext'"
