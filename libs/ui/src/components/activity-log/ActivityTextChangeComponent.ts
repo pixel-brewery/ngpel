@@ -9,6 +9,7 @@ type ParagraphGroup = Extract<ActivityTextParagraph, { readonly unchanged: false
     selector: 'ngp-activity-text-change',
     imports: [ButtonComponent],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    host: { '[class.ngp-detailed]': 'detailed()' },
     template: `
         @for (group of groups(); track $index) {
             @if (group.unchanged) {
@@ -18,6 +19,8 @@ type ParagraphGroup = Extract<ActivityTextParagraph, { readonly unchanged: false
                     part="toggle"
                     appearance="plain"
                     size="small"
+                    [variant]="detailed() ? 'info' : undefined"
+                    [icon]="detailed() ? (isExpanded ? 'chevronUp' : 'chevronDown') : undefined"
                     [label]="unchangedLabel()(group.texts.length, isExpanded)"
                     [attr.aria-expanded]="isExpanded"
                     (click)="toggle(index)"
@@ -32,10 +35,20 @@ type ParagraphGroup = Extract<ActivityTextParagraph, { readonly unchanged: false
                     @for (part of group.parts; track $index) {
                         @switch (part.kind) {
                             @case ('removed') {
-                                <del part="text-removed">{{ part.text }}</del>
+                                <del part="text-removed">
+                                    @if (beforeLabel(); as before) {
+                                        <span class="sr-only">{{ before }}</span>
+                                    }
+                                    {{ part.text }}</del
+                                >
                             }
                             @case ('added') {
-                                <ins part="text-added">{{ part.text }}</ins>
+                                <ins part="text-added">
+                                    @if (afterLabel(); as after) {
+                                        <span class="sr-only">{{ after }}</span>
+                                    }
+                                    {{ part.text }}</ins
+                                >
                             }
                             @default {
                                 {{ part.text }}
@@ -68,6 +81,42 @@ type ParagraphGroup = Extract<ActivityTextParagraph, { readonly unchanged: false
             background: var(--ngp-activity-text-added-background, var(--mosaik-color-success-100));
             color: var(--ngp-activity-text-added-foreground, var(--mosaik-color-success-700));
         }
+        :host(.ngp-detailed) {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+
+            [part='toggle'] {
+                align-self: start;
+                margin-inline-start: -0.25rem;
+                font: var(--mosaik-typography-body2);
+                font-weight: 600;
+            }
+
+            p {
+                font: var(--mosaik-typography-body1);
+                color: var(--mosaik-scheme-foreground);
+                white-space: normal;
+                overflow-wrap: break-word;
+                hyphens: none;
+            }
+
+            del,
+            ins {
+                padding-inline: 2px;
+                border-radius: 3px;
+            }
+
+            del {
+                text-decoration: line-through;
+                text-decoration-thickness: 1px;
+            }
+
+            ins {
+                text-decoration: underline;
+                text-underline-offset: 3px;
+            }
+        }
     `,
 })
 export class ActivityTextChangeComponent {
@@ -76,6 +125,15 @@ export class ActivityTextChangeComponent {
 
     /** Builds the localized toggle label for an unchanged run. */
     public readonly unchangedLabel = input.required<(count: number, expanded: boolean) => string>();
+
+    /** Uses the activity timeline's typography and a directional toggle icon. */
+    public readonly detailed = input(false);
+
+    /** Announces the meaning of removed text for assistive technology. */
+    public readonly beforeLabel = input<string>();
+
+    /** Announces the meaning of added text for assistive technology. */
+    public readonly afterLabel = input<string>();
 
     protected readonly expanded = signal<ReadonlySet<number>>(new Set());
     protected readonly groups = computed(() => {

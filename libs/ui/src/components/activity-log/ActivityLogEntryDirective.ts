@@ -6,6 +6,9 @@ import type { IActivityLogEntryContext } from './IActivityLogEntryContext';
 export class ActivityLogEntryDirective<T> {
     /** Entry collection used to infer the projected context. */
     public readonly items = input.required<ReadonlyArray<T>>({ alias: 'ngpActivityLogEntry' });
+    /** Optional marker rendered next to the entry. */
+    public readonly marker = input<TemplateRef<IActivityLogEntryContext<T>>>();
+
     /** Template rendered for each item. */
     public readonly template = inject<TemplateRef<IActivityLogEntryContext<T>>>(TemplateRef);
 

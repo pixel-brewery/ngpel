@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: ActivityLogComponent\<T\>
 
-Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:91](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogComponent.ts#L91)
+Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:216](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogComponent.ts#L216)
 
 Renders caller-projected entries with paging, load feedback and an optional unread boundary.
 
@@ -23,7 +23,7 @@ Renders caller-projected entries with paging, load feedback and an optional unre
 new ActivityLogComponent<T>(): ActivityLogComponent<T>;
 ```
 
-Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:103](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogComponent.ts#L103)
+Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:228](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogComponent.ts#L228)
 
 Starts the controller on display and reports only entries rendered in a visible document.
 
@@ -39,9 +39,21 @@ Starts the controller on display and reports only entries rendered in a visible 
 readonly controller: InputSignal<IActivityLogController<T>>;
 ```
 
-Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:129](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogComponent.ts#L129)
+Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:260](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogComponent.ts#L260)
 
 Provides the entries, load state and paging commands.
+
+***
+
+### detailed
+
+```ts
+readonly detailed: InputSignal<boolean>;
+```
+
+Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:268](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogComponent.ts#L268)
+
+Uses timeline-shaped skeletons, detailed empty and error states, and a timeline unread separator.
 
 ***
 
@@ -53,7 +65,7 @@ protected readonly entryTemplate: Signal<
 | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:139](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogComponent.ts#L139)
+Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:276](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogComponent.ts#L276)
 
 ***
 
@@ -63,7 +75,7 @@ Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:139](ht
 readonly isVisible: InputSignal<((item) => boolean) | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:131](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogComponent.ts#L131)
+Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:262](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogComponent.ts#L262)
 
 Optional filter that affects rendering without changing paging or read position.
 
@@ -75,7 +87,7 @@ Optional filter that affects rendering without changing paging or read position.
 readonly labels: InputSignal<Partial<IActivityLogLabels>>;
 ```
 
-Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:133](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogComponent.ts#L133)
+Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:264](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogComponent.ts#L264)
 
 Localized labels; omitted labels retain their defaults.
 
@@ -87,7 +99,7 @@ Localized labels; omitted labels retain their defaults.
 protected readonly placeholders: number[];
 ```
 
-Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:140](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogComponent.ts#L140)
+Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:277](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogComponent.ts#L277)
 
 ***
 
@@ -97,9 +109,21 @@ Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:140](ht
 readonly readRequested: OutputEmitterRef<T | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:137](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogComponent.ts#L137)
+Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:274](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogComponent.ts#L274)
 
 Asks the host to persist the newest entry after a successful visible render.
+
+***
+
+### refreshOnMount
+
+```ts
+readonly refreshOnMount: InputSignal<boolean>;
+```
+
+Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:272](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogComponent.ts#L272)
+
+Refreshes an already loaded log when the view is opened.
 
 ***
 
@@ -108,17 +132,20 @@ Asks the host to persist the newest entry after a successful visible render.
 ```ts
 protected readonly resolvedLabels: Signal<{
   empty: string;
+  emptyDescription?: string;
   error: string;
+  errorDescription?: string;
   heading: string;
   loading: string;
   loadMore: string;
   moreError: string;
   newChanges: string;
+  newChangesDescription?: string;
   retry: string;
 }>;
 ```
 
-Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:141](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogComponent.ts#L141)
+Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:278](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogComponent.ts#L278)
 
 ***
 
@@ -128,7 +155,19 @@ Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:141](ht
 protected readonly showUnreadAtTop: Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:147](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogComponent.ts#L147)
+Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:284](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogComponent.ts#L284)
+
+***
+
+### testIdPrefix
+
+```ts
+readonly testIdPrefix: InputSignal<string | undefined>;
+```
+
+Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:270](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogComponent.ts#L270)
+
+Stable identifier prefix for activity controls and records.
 
 ***
 
@@ -138,7 +177,7 @@ Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:147](ht
 readonly unreadBoundary: InputSignal<string | number | null | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:135](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogComponent.ts#L135)
+Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:266](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogComponent.ts#L266)
 
 Last acknowledged visible entry key. Supply null when all visible entries are new.
 
@@ -150,4 +189,4 @@ Last acknowledged visible entry key. Supply null when all visible entries are ne
 protected readonly visibleEntries: Signal<readonly T[]>;
 ```
 
-Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:142](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogComponent.ts#L142)
+Defined in: [libs/ui/src/components/activity-log/ActivityLogComponent.ts:279](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogComponent.ts#L279)

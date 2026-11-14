@@ -21,13 +21,33 @@ Defined in: [libs/ui/src/components/activity-log/IActivityLogLabels.ts:5](https:
 
 ***
 
+### emptyDescription?
+
+```ts
+readonly emptyDescription?: string;
+```
+
+Defined in: [libs/ui/src/components/activity-log/IActivityLogLabels.ts:6](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogLabels.ts#L6)
+
+***
+
 ### error
 
 ```ts
 readonly error: string;
 ```
 
-Defined in: [libs/ui/src/components/activity-log/IActivityLogLabels.ts:6](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogLabels.ts#L6)
+Defined in: [libs/ui/src/components/activity-log/IActivityLogLabels.ts:7](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogLabels.ts#L7)
+
+***
+
+### errorDescription?
+
+```ts
+readonly errorDescription?: string;
+```
+
+Defined in: [libs/ui/src/components/activity-log/IActivityLogLabels.ts:8](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogLabels.ts#L8)
 
 ***
 
@@ -57,7 +77,7 @@ Defined in: [libs/ui/src/components/activity-log/IActivityLogLabels.ts:4](https:
 readonly loadMore: string;
 ```
 
-Defined in: [libs/ui/src/components/activity-log/IActivityLogLabels.ts:9](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogLabels.ts#L9)
+Defined in: [libs/ui/src/components/activity-log/IActivityLogLabels.ts:11](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogLabels.ts#L11)
 
 ***
 
@@ -67,7 +87,7 @@ Defined in: [libs/ui/src/components/activity-log/IActivityLogLabels.ts:9](https:
 readonly moreError: string;
 ```
 
-Defined in: [libs/ui/src/components/activity-log/IActivityLogLabels.ts:7](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogLabels.ts#L7)
+Defined in: [libs/ui/src/components/activity-log/IActivityLogLabels.ts:9](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogLabels.ts#L9)
 
 ***
 
@@ -77,7 +97,17 @@ Defined in: [libs/ui/src/components/activity-log/IActivityLogLabels.ts:7](https:
 readonly newChanges: string;
 ```
 
-Defined in: [libs/ui/src/components/activity-log/IActivityLogLabels.ts:10](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogLabels.ts#L10)
+Defined in: [libs/ui/src/components/activity-log/IActivityLogLabels.ts:12](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogLabels.ts#L12)
+
+***
+
+### newChangesDescription?
+
+```ts
+readonly newChangesDescription?: string;
+```
+
+Defined in: [libs/ui/src/components/activity-log/IActivityLogLabels.ts:13](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogLabels.ts#L13)
 
 ***
 
@@ -87,4 +117,4 @@ Defined in: [libs/ui/src/components/activity-log/IActivityLogLabels.ts:10](https
 readonly retry: string;
 ```
 
-Defined in: [libs/ui/src/components/activity-log/IActivityLogLabels.ts:8](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogLabels.ts#L8)
+Defined in: [libs/ui/src/components/activity-log/IActivityLogLabels.ts:10](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/IActivityLogLabels.ts#L10)

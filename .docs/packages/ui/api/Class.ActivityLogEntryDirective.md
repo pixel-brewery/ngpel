@@ -41,13 +41,27 @@ Entry collection used to infer the projected context.
 
 ***
 
+### marker
+
+```ts
+readonly marker: InputSignal<
+  | TemplateRef<IActivityLogEntryContext<T>>
+| undefined>;
+```
+
+Defined in: [libs/ui/src/components/activity-log/ActivityLogEntryDirective.ts:10](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogEntryDirective.ts#L10)
+
+Optional marker rendered next to the entry.
+
+***
+
 ### template
 
 ```ts
 readonly template: TemplateRef<IActivityLogEntryContext<T>>;
 ```
 
-Defined in: [libs/ui/src/components/activity-log/ActivityLogEntryDirective.ts:10](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogEntryDirective.ts#L10)
+Defined in: [libs/ui/src/components/activity-log/ActivityLogEntryDirective.ts:13](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogEntryDirective.ts#L13)
 
 Template rendered for each item.
 
@@ -59,7 +73,7 @@ Template rendered for each item.
 static ngTemplateContextGuard<TItem>(_directive, value): value is IActivityLogEntryContext<TItem>;
 ```
 
-Defined in: [libs/ui/src/components/activity-log/ActivityLogEntryDirective.ts:13](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogEntryDirective.ts#L13)
+Defined in: [libs/ui/src/components/activity-log/ActivityLogEntryDirective.ts:16](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/activity-log/ActivityLogEntryDirective.ts#L16)
 
 Supplies the template context type to Angular's compiler.
 
