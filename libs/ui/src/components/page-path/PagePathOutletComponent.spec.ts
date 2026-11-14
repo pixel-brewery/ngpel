@@ -50,9 +50,10 @@ describe('PagePathOutletComponent', () => {
         const fixture = TestBed.createComponent(PagePathOutletComponent);
         const root = fixture.nativeElement as HTMLElement;
         const renderedLevels = () => Array.from(root.querySelectorAll<HTMLElement>('mosaik-breadcrumb-item'));
+        const compact = signal(options?.compact ?? false);
         Object.assign(fixture.componentInstance, {
             headerLayout: signal(true),
-            compact: signal(options?.compact ?? false),
+            compact,
             animateLevels: signal(options?.animated ?? false),
             // JIT does not compile signal query initializers in the fixture.
             _levelElements: () => renderedLevels().map((element) => new ElementRef(element)),
@@ -65,7 +66,7 @@ describe('PagePathOutletComponent', () => {
             await fixture.whenStable();
         };
         await render();
-        return { root, renderedLevels, levels, player, render };
+        return { root, renderedLevels, levels, compact, player, render };
     }
 
     function pauseExit(player: { playToFinal: ReturnType<typeof vi.fn<() => Promise<Event>>> }): () => void {
@@ -153,5 +154,19 @@ describe('PagePathOutletComponent', () => {
             expect(last && getDebugNode(last)?.componentInstance).toMatchObject({ label: 'Latest' });
             expect(view.player.playToFinal).toHaveBeenCalledOnce();
         });
+    });
+
+    it('restores the shared prefix without replaying its entrance after the compact view', async () => {
+        const view = await create([{ label: 'List' }], { animated: true });
+        view.levels.set([{ label: 'List' }, { label: 'Detail' }]);
+        await view.render();
+        view.compact.set(true);
+        await view.render();
+        view.player.play.mockClear();
+
+        view.compact.set(false);
+        await view.render();
+
+        expect(view.player.play.mock.calls).toEqual([[view.renderedLevels()[1], AnimationPreset.fadeSlideIn, { duration: 200, delay: 0, fill: 'both' }]]);
     });
 });

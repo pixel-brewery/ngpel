@@ -17,7 +17,7 @@ Renders the current page path as a breadcrumb or a compact parent and title.
 new PagePathOutletComponent(): PagePathOutletComponent;
 ```
 
-Defined in: [libs/ui/src/components/page-path/PagePathOutletComponent.ts:286](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/PagePathOutletComponent.ts#L286)
+Defined in: [libs/ui/src/components/page-path/PagePathOutletComponent.ts:288](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/PagePathOutletComponent.ts#L288)
 
 #### Returns
 
@@ -31,7 +31,7 @@ Defined in: [libs/ui/src/components/page-path/PagePathOutletComponent.ts:286](ht
 readonly animateLevels: InputSignalWithTransform<boolean, unknown>;
 ```
 
-Defined in: [libs/ui/src/components/page-path/PagePathOutletComponent.ts:313](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/PagePathOutletComponent.ts#L313)
+Defined in: [libs/ui/src/components/page-path/PagePathOutletComponent.ts:321](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/PagePathOutletComponent.ts#L321)
 
 Animates path changes when the application supplies Mosaik's AnimationPlayer.
 
@@ -43,7 +43,7 @@ Animates path changes when the application supplies Mosaik's AnimationPlayer.
 readonly ariaLabel: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/page-path/PagePathOutletComponent.ts:307](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/PagePathOutletComponent.ts#L307)
+Defined in: [libs/ui/src/components/page-path/PagePathOutletComponent.ts:315](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/PagePathOutletComponent.ts#L315)
 
 Accessible name for the page path navigation.
 
@@ -55,7 +55,7 @@ Accessible name for the page path navigation.
 readonly backLabel: InputSignal<string | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/page-path/PagePathOutletComponent.ts:309](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/PagePathOutletComponent.ts#L309)
+Defined in: [libs/ui/src/components/page-path/PagePathOutletComponent.ts:317](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/PagePathOutletComponent.ts#L317)
 
 Optional accessible label for the compact back action. In header layout, {0} inserts the parent label.
 
@@ -67,7 +67,7 @@ Optional accessible label for the compact back action. In header layout, {0} ins
 readonly compact: InputSignal<boolean | null>;
 ```
 
-Defined in: [libs/ui/src/components/page-path/PagePathOutletComponent.ts:317](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/PagePathOutletComponent.ts#L317)
+Defined in: [libs/ui/src/components/page-path/PagePathOutletComponent.ts:325](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/PagePathOutletComponent.ts#L325)
 
 Overrides the application's compact breakpoint.
 
@@ -79,7 +79,7 @@ Overrides the application's compact breakpoint.
 readonly current: Signal<IPagePathLevel | null>;
 ```
 
-Defined in: [libs/ui/src/components/page-path/PagePathOutletComponent.ts:321](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/PagePathOutletComponent.ts#L321)
+Defined in: [libs/ui/src/components/page-path/PagePathOutletComponent.ts:329](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/PagePathOutletComponent.ts#L329)
 
 Current page, or null before a page declares a path.
 
@@ -91,7 +91,7 @@ Current page, or null before a page declares a path.
 protected readonly displayedLevels: Signal<readonly IPagePathLevel[]>;
 ```
 
-Defined in: [libs/ui/src/components/page-path/PagePathOutletComponent.ts:327](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/PagePathOutletComponent.ts#L327)
+Defined in: [libs/ui/src/components/page-path/PagePathOutletComponent.ts:335](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/PagePathOutletComponent.ts#L335)
 
 ***
 
@@ -101,7 +101,7 @@ Defined in: [libs/ui/src/components/page-path/PagePathOutletComponent.ts:327](ht
 readonly headerLayout: InputSignalWithTransform<boolean, unknown>;
 ```
 
-Defined in: [libs/ui/src/components/page-path/PagePathOutletComponent.ts:311](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/PagePathOutletComponent.ts#L311)
+Defined in: [libs/ui/src/components/page-path/PagePathOutletComponent.ts:319](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/PagePathOutletComponent.ts#L319)
 
 Opts into the header layout with truncating breadcrumbs and a two-line compact title.
 
@@ -113,7 +113,7 @@ Opts into the header layout with truncating breadcrumbs and a two-line compact t
 readonly isCompact: Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/page-path/PagePathOutletComponent.ts:325](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/PagePathOutletComponent.ts#L325)
+Defined in: [libs/ui/src/components/page-path/PagePathOutletComponent.ts:333](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/PagePathOutletComponent.ts#L333)
 
 Whether only the immediate parent and current page are displayed.
 
@@ -125,7 +125,7 @@ Whether only the immediate parent and current page are displayed.
 readonly isLoading: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/page-path/PagePathOutletComponent.ts:315](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/PagePathOutletComponent.ts#L315)
+Defined in: [libs/ui/src/components/page-path/PagePathOutletComponent.ts:323](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/PagePathOutletComponent.ts#L323)
 
 Whether the view is transitioning and needs a loading placeholder.
 
@@ -137,7 +137,7 @@ Whether the view is transitioning and needs a loading placeholder.
 readonly levels: Signal<readonly IPagePathLevel[]>;
 ```
 
-Defined in: [libs/ui/src/components/page-path/PagePathOutletComponent.ts:319](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/PagePathOutletComponent.ts#L319)
+Defined in: [libs/ui/src/components/page-path/PagePathOutletComponent.ts:327](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/PagePathOutletComponent.ts#L327)
 
 Live levels registered by the active page.
 
@@ -149,7 +149,7 @@ Live levels registered by the active page.
 readonly parent: Signal<IPagePathLevel | null>;
 ```
 
-Defined in: [libs/ui/src/components/page-path/PagePathOutletComponent.ts:323](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/PagePathOutletComponent.ts#L323)
+Defined in: [libs/ui/src/components/page-path/PagePathOutletComponent.ts:331](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/PagePathOutletComponent.ts#L331)
 
 Immediate parent of the current page.
 
@@ -164,7 +164,7 @@ protected readonly trail: Signal<{
 }[]>;
 ```
 
-Defined in: [libs/ui/src/components/page-path/PagePathOutletComponent.ts:328](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/PagePathOutletComponent.ts#L328)
+Defined in: [libs/ui/src/components/page-path/PagePathOutletComponent.ts:336](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/PagePathOutletComponent.ts#L336)
 
 ## Methods
 
@@ -178,7 +178,7 @@ protected activate(
 ): void;
 ```
 
-Defined in: [libs/ui/src/components/page-path/PagePathOutletComponent.ts:342](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/PagePathOutletComponent.ts#L342)
+Defined in: [libs/ui/src/components/page-path/PagePathOutletComponent.ts:350](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/page-path/PagePathOutletComponent.ts#L350)
 
 #### Parameters
 

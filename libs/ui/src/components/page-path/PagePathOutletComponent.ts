@@ -274,6 +274,8 @@ export class PagePathOutletComponent {
     private readonly _leavingElements = new Map<HTMLElement, ReturnType<AnimationPlayer['playToFinal']>>();
     private _pendingKey: string | undefined;
     private _transition = 0;
+    private _enteringFrom = 0;
+    private _resumeMotion = true;
     private readonly _breakpoints = inject(BreakpointService, { optional: true });
     private readonly _compactViewport = this._breakpoints
         ? toSignal(this._breakpoints.observe('lt-md'), { initialValue: this._breakpoints.isMatched('lt-md') })
@@ -285,16 +287,22 @@ export class PagePathOutletComponent {
 
     public constructor() {
         effect(() => {
+            const levels = this.levels();
             if (!this.useMotion()) {
+                const shown = untracked(this._shownLevels);
+                const kept = countSharedLevels(shown, levels);
+                if (kept !== shown.length || kept !== levels.length) {
+                    this._enteringFrom = kept;
+                }
                 this._pendingKey = undefined;
                 this._transition++;
+                this._resumeMotion = true;
                 this._leavingElements.clear();
-                this._shownLevels.set([]);
+                this._shownLevels.set(levels);
                 return;
             }
 
             // Declarations can be replaced during a render. Only animate the path that survives it.
-            this.levels();
             untracked(() => afterNextRender({ mixedReadWrite: () => this.showLevels() }, { injector: this._injector }));
         });
     }
@@ -358,9 +366,16 @@ export class PagePathOutletComponent {
             return;
         }
 
-        const kept = countSharedLevels(this._shownLevels(), levels);
+        const shown = this._shownLevels();
+        const kept = countSharedLevels(shown, levels);
         const elements = this._levelElements().map(({ nativeElement }) => nativeElement);
         const transition = ++this._transition;
+        if (this._resumeMotion) {
+            this._resumeMotion = false;
+            const samePath = kept === levels.length && kept === shown.length;
+            this.applyLevels(levels, samePath ? this._enteringFrom : kept, transition);
+            return;
+        }
         for (const element of elements.slice(0, kept)) {
             if (this._leavingElements.delete(element)) {
                 const { opacity, transform } = getComputedStyle(element);
@@ -374,7 +389,7 @@ export class PagePathOutletComponent {
 
         const leaving = elements.slice(kept);
         if (leaving.length === 0) {
-            this.applyLevels(levels, elements.length === 0 ? 0 : kept, transition);
+            this.applyLevels(levels, kept, transition);
             return;
         }
 
@@ -400,6 +415,7 @@ export class PagePathOutletComponent {
     private applyLevels(levels: ReadonlyArray<IPagePathLevel>, enteringFrom: number, transition: number): void {
         this._pendingKey = undefined;
         this._leavingElements.clear();
+        this._enteringFrom = enteringFrom;
         this._shownLevels.set(levels);
 
         afterNextRender(
