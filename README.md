@@ -6,7 +6,7 @@
 
 **Build Angular applications on one shared foundation.**
 
-ngpel brings recurring frontend work into five reusable Angular libraries. Compose browser services,
+ngpel brings recurring frontend work into four reusable Angular libraries. Compose browser services,
 presenters, forms, routing and UI from the same building blocks across applications. ngpel is the
 frontend companion to [Archipel](https://github.com/pixel-brewery/archipel).
 

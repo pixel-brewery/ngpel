@@ -210,7 +210,7 @@ jobs:
           done
           if ! gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
             notes="$RUNNER_TEMP/ngpel-release-notes.md"
-            git show "$RELEASE_COMMIT:CHANGELOG.md" |
+            git -C "$GITHUB_WORKSPACE" show "$RELEASE_COMMIT:CHANGELOG.md" |
               awk -v version="$RELEASE_VERSION" '$1 == "##" { if (found) exit; if ($2 == version) { found = 1; next } } found { print }' > "$notes"
             test -s "$notes"
             gh release create "$tag" --repo "$GITHUB_REPOSITORY" --verify-tag --title "$tag" --notes-file "$notes"

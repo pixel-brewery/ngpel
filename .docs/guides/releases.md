@@ -5,7 +5,7 @@ description: How to version, publish and verify the ngpel packages and documenta
 
 # Releases and public handover
 
-The five libraries share one Nx release group. Package names and published versions stay in
+The four libraries share one Nx release group. Package names and published versions stay in
 the `@pixel-brewery` scope on GitHub Packages. The workspace manifest is private; only the
 library distributions are released.
 
@@ -14,7 +14,7 @@ library distributions are released.
 1. Seed a new private `pixel-brewery/ngpel` repository from the reviewed source snapshot.
    Push only its root commit to `main`. Do not import old tags, pull request refs or
    releases. Verify the new repository's refs and CI before enabling public visibility.
-2. In [GitHub Packages](https://github.com/orgs/pixel-brewery/packages), inventory the five
+2. In [GitHub Packages](https://github.com/orgs/pixel-brewery/packages), inventory the four
    `ngpel-*` packages. Under **Manage Actions access**, grant `pixel-brewery/ngpel`
    **Write** on each existing package in the release group. The first release creates the
    missing packages. The publication workflow uses the repository's scoped `GITHUB_TOKEN`.
@@ -40,7 +40,7 @@ release. Public GitHub npm packages still require an authenticated registry clie
 A push to `main`, including a pull request merge, starts **Release ngpel packages** in the public
 `pixel-brewery/ngpel` repository. The workflow prepares the next patch version with Nx, updates the
 internal peer ranges and lockfile, and verifies the versioned sources. An Angular consumer builds
-against the same five tarballs that the workflow later uploads to GitHub Packages.
+against the same four tarballs that the workflow later uploads to GitHub Packages.
 
 The publisher checks that `main` still points to the triggering commit before pushing the verified
 metadata commit and tag together. It checks each registry version, downloads the published archives
