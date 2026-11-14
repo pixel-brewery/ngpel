@@ -1,6 +1,6 @@
 {
     "name": "@pixel-brewery/ngpel-core",
-    "version": "0.0.12",
+    "version": "0.0.13",
     "description": "Application foundation: the provide<Feature>(...with<Option>()) composition kernel, the RFC 9457 result envelope and the cross-cutting runtime services every product re-solves.",
     "keywords": [
         "angular",

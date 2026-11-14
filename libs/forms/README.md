@@ -24,7 +24,7 @@ import { allowedValue, bic, calendarDateNotBefore, CalendarDateReference, countr
 | --------------------------- | ------------------ |
 | `@angular/core`             | `>=22.0.0 <23.0.0` |
 | `@angular/forms`            | `>=22.0.0 <23.0.0` |
-| `@pixel-brewery/ngpel-core` | `0.0.12`           |
+| `@pixel-brewery/ngpel-core` | `0.0.13`           |
 
 ## Quick Start
 

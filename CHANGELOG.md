@@ -1,3 +1,9 @@
+## 0.0.13 (2026-11-14)
+
+### 🩹 Fixes
+
+- **ui:** preserve collection filter metadata ([9b0c660](https://github.com/pixel-brewery/ngpel/commit/9b0c660))
+
 ## 0.0.12 (2026-11-14)
 
 This was a version bump only, there were no code changes.
