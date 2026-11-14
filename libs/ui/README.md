@@ -121,4 +121,4 @@ Layer 2 — depends on `@pixel-brewery/ngpel-core`, `@pixel-brewery/ngpel-mvp`, 
 
 ## What stays in the application
 
-Theme tokens, translation catalogues, product-specific layouts and domain views stay in the application. For Mosaik controls, use a Mosaik release that exports the providers and import them from their Angular component entry points, for example `provideCalendarIntl` from `@pixel-brewery/mosaik-elements-angular/components/calendar`. Import the providers for ngPEL components from ngPEL. Mosaik and CodeMirror are optional peers: install them only for the components that render through them.
+Theme tokens, translation catalogues, product-specific layouts and domain views stay in the application. For Mosaik controls, use Mosaik Angular 0.1.203 or later and import the providers from their Angular component entry points, for example `provideCalendarIntl` from `@pixel-brewery/mosaik-elements-angular/components/calendar`. Import the providers for ngPEL components from ngPEL. Mosaik and CodeMirror are optional peers: install them only for the components that render through them.
