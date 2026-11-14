@@ -71,7 +71,7 @@
         "verify:esm": "node tools/verify-esm-packages.mjs",
         "verify": "yarn verify:docs && yarn format && yarn verify:checks",
         "verify:ci": "yarn verify:docs && yarn format:check && yarn verify:checks",
-        "verify:docs": "node tools/render-package-docs.mjs && prettier --write 'libs/*/README.md' '.docs/packages/*/index.md' && yarn docs --skip-nx-cache",
+        "verify:docs": "node tools/render-package-docs.mjs && prettier --write 'libs/*/README.md' '.docs/packages/*/index.md' && nx run-many -t build,docs-build-llm -p docs --parallel=1 --skipNxCache && node tools/generate-packages-manifest.mjs",
         "verify:checks": "yarn agents:check && yarn public:check && yarn ci:check && yarn lint && yarn test && yarn spell && yarn build && yarn verify:esm && yarn typecheck && yarn nx run fixture-ng22:build",
         "public:check": "node .github/scripts/findPrivateReferences.mjs",
         "release:major": "gh workflow run release.yml --ref main -f specifier=major",

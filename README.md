@@ -112,9 +112,10 @@ yarn install --immutable
 yarn run verify
 ```
 
-Run `yarn run verify` before committing or pushing. It regenerates package guides and API
-references first, then formats the workspace and runs repository checks, tests, library builds
-and the packed Angular consumer fixture. Commit the regenerated documentation with your changes.
+Run `yarn run verify` before committing or pushing. It regenerates package guides, API references,
+the API index, LLM artifacts and the package manifest, and builds the documentation site. It also
+formats the workspace and runs repository checks, tests, library builds and the packed Angular
+consumer fixture. Commit the regenerated documentation with your changes.
 GitHub Actions uses `yarn run verify:ci` to regenerate the same docs, check formatting and run
 the same verification. The PR workflow checks that regeneration leaves the checkout clean.
 
