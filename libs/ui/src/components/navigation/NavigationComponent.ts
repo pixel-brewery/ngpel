@@ -1,6 +1,8 @@
 // #region Imports
 
+import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, inject, input, type InputSignal } from '@angular/core';
+import { ScrollComponent } from '@pixel-brewery/mosaik-elements-angular';
 
 // #endregion
 
@@ -14,7 +16,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, inject, input, type Inp
  */
 @Component({
     selector: 'ngp-navigation',
-    imports: [],
+    imports: [NgTemplateOutlet, ScrollComponent],
     template: `
         <section
             part="root"
@@ -38,8 +40,21 @@ import { ChangeDetectionStrategy, Component, ElementRef, inject, input, type Inp
                 <ng-content select="[ngpNavigationBrand]" />
             </header>
 
-            <nav part="content" class="min-h-0 flex-1 overflow-y-auto overflow-x-hidden" [attr.aria-label]="ariaLabel()">
-                <ng-content select="[ngpNavigationContent]" />
+            <nav
+                part="content"
+                class="min-h-0 flex-1 overflow-x-hidden"
+                [class.overflow-y-auto]="!showScrollControls()"
+                [class.overflow-y-hidden]="showScrollControls()"
+                [attr.aria-label]="ariaLabel()"
+            >
+                <ng-template #content><ng-content select="[ngpNavigationContent]" /></ng-template>
+                @if (showScrollControls()) {
+                    <mosaik-scroll part="scroller" class="h-full min-h-0 w-full" [orientation]="'vertical'" [showScrollButtons]="true" [showScrollbar]="true">
+                        <ng-container [ngTemplateOutlet]="content" />
+                    </mosaik-scroll>
+                } @else {
+                    <ng-container [ngTemplateOutlet]="content" />
+                }
             </nav>
 
             <footer part="footer" class="shrink-0">
@@ -59,6 +74,12 @@ import { ChangeDetectionStrategy, Component, ElementRef, inject, input, type Inp
         nav {
             scrollbar-width: thin;
             scrollbar-color: var(--mosaik-scheme-middlelight) transparent;
+        }
+
+        mosaik-scroll::part(scroller) {
+            overscroll-behavior-y: contain;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -84,6 +105,9 @@ export class NavigationComponent {
      * @readonly
      */
     public readonly compact: InputSignal<boolean> = input<boolean>(false);
+
+    /** Uses the Mosaik vertical scrollbar and scroll buttons for overflowing navigation. */
+    public readonly showScrollControls = input(false);
 
     // #endregion
 }

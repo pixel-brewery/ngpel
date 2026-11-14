@@ -15,6 +15,7 @@ import type { IHasElementRef } from '../../directives/hover-reveal-for/IHasEleme
     template: `
         <mosaik-fab
             part="button"
+            [class.ngp-edge-button]="edgeButton()"
             [attr.test-id]="testId() || null"
             [attr.aria-label]="label()"
             [attr.aria-expanded]="!collapsed()"
@@ -22,11 +23,10 @@ import type { IHasElementRef } from '../../directives/hover-reveal-for/IHasEleme
             [attr.aria-keyshortcuts]="ariaShortcut()"
             [appearance]="'outline'"
             [size]="'small'"
-            [iconName]="collapsed() ? 'chevron-right' : 'chevron-left'"
+            [iconName]="collapsed() ? 'chevronRight' : 'chevronLeft'"
             [disabled]="disabled()"
-            [mosaikTooltip]="tooltip()"
+            [mosaikTooltip]="edgeButton() ? { content: tooltip(), showDelay: 400 } : tooltip()"
             [mosaikTooltipPlacement]="'right'"
-            (click)="activate()"
         >
             <span slot="label" class="sr-only">{{ label() }}</span>
         </mosaik-fab>
@@ -41,12 +41,39 @@ import type { IHasElementRef } from '../../directives/hover-reveal-for/IHasEleme
             display: grid;
             place-items: center;
         }
+        :host([data-ngp-edge-button]) {
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+        }
+        .ngp-edge-button {
+            width: 28px;
+            height: 28px;
+            --fab-border-radius: 9999px;
+            --fab-background-color: var(--mosaik-scheme-surface);
+            --fab-focus-ring-color: var(--mosaik-color-primary-500);
+        }
+        .ngp-edge-button:hover {
+            --fab-background-color: var(--mosaik-scheme-background);
+        }
         @media (hover: hover) {
             :host([data-ngp-navigation]:not(:hover):not([data-ngp-revealed])) {
                 opacity: 0;
             }
             :host {
                 transition: opacity var(--mosaik-duration-short) ease;
+            }
+        }
+        @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+            :host([data-ngp-edge-button]) {
+                transition:
+                    opacity 160ms ease-in 80ms,
+                    inset-inline-start var(--mosaik-duration-short) ease;
+            }
+            :host([data-ngp-edge-button]:is(:hover, [data-ngp-revealed])) {
+                transition:
+                    opacity 120ms ease-out,
+                    inset-inline-start var(--mosaik-duration-short) ease;
             }
         }
         @media (prefers-reduced-motion: reduce) {
@@ -56,8 +83,10 @@ import type { IHasElementRef } from '../../directives/hover-reveal-for/IHasEleme
         }
     `,
     host: {
+        '[attr.data-ngp-edge-button]': 'edgeButton() ? "" : null',
         '[attr.data-ngp-navigation]': 'navigation() ? "" : null',
         '[attr.data-ngp-revealed]': 'revealed() ? "" : null',
+        '(click)': 'activate()',
         '(focusin)': 'focusEntered($event)',
         '(focusout)': 'focusLeft()',
         '(keydown)': 'keyboardFocused()',
@@ -120,6 +149,8 @@ export class NavigationCollapseToggleComponent {
     public readonly controlKeyLabel = input('Ctrl');
     /** Whether pointer and keyboard activation are unavailable. */
     public readonly disabled = input(false);
+    /** Uses a larger pointer target around the floating button when it straddles a panel edge. */
+    public readonly edgeButton = input(false);
     /** Optional automation identifier for the action. */
     public readonly testId = input('');
     /** Requested state. The shell applies and persists it. */
@@ -152,7 +183,11 @@ export class NavigationCollapseToggleComponent {
 
     protected focusEntered(event: FocusEvent): void {
         const [target] = event.composedPath();
-        this._keyboardFocused.set(target instanceof Element && target.matches(':focus-visible'));
+        try {
+            this._keyboardFocused.set(target instanceof Element && target.matches(':focus-visible'));
+        } catch {
+            this._keyboardFocused.set(false);
+        }
     }
 
     protected focusLeft(): void {

@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: NavigationComponent
 
-Defined in: [libs/ui/src/components/navigation/NavigationComponent.ts:66](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationComponent.ts#L66)
+Defined in: [libs/ui/src/components/navigation/NavigationComponent.ts:87](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationComponent.ts#L87)
 
 Provides the layout shell for an application navigation surface.
 
@@ -32,7 +32,7 @@ new NavigationComponent(): NavigationComponent;
 readonly ariaLabel: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/navigation/NavigationComponent.ts:78](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationComponent.ts#L78)
+Defined in: [libs/ui/src/components/navigation/NavigationComponent.ts:99](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationComponent.ts#L99)
 
 Accessible name for the primary navigation region.
 
@@ -44,7 +44,7 @@ Accessible name for the primary navigation region.
 readonly compact: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/navigation/NavigationComponent.ts:86](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationComponent.ts#L86)
+Defined in: [libs/ui/src/components/navigation/NavigationComponent.ts:107](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationComponent.ts#L107)
 
 Whether the navigation is displayed as an icon-only rail.
 
@@ -56,6 +56,18 @@ Whether the navigation is displayed as an icon-only rail.
 readonly elementRef: ElementRef<HTMLElement>;
 ```
 
-Defined in: [libs/ui/src/components/navigation/NavigationComponent.ts:70](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationComponent.ts#L70)
+Defined in: [libs/ui/src/components/navigation/NavigationComponent.ts:91](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationComponent.ts#L91)
 
 Host element used by a collapse toggle positioned alongside this navigation.
+
+***
+
+### showScrollControls
+
+```ts
+readonly showScrollControls: InputSignal<boolean>;
+```
+
+Defined in: [libs/ui/src/components/navigation/NavigationComponent.ts:110](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/navigation/NavigationComponent.ts#L110)
+
+Uses the Mosaik vertical scrollbar and scroll buttons for overflowing navigation.

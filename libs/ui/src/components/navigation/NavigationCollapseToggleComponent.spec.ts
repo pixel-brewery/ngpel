@@ -1,4 +1,4 @@
-import { signal } from '@angular/core';
+import { ElementRef, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { NavigationCollapseToggleComponent } from './NavigationCollapseToggleComponent';
@@ -24,6 +24,22 @@ describe('NavigationCollapseToggleComponent', () => {
 
         // Assert
         expect(change).toHaveBeenCalledExactlyOnceWith(false);
+    });
+
+    it('cleans up the active hover target when navigation is removed', () => {
+        const target = document.createElement('nav');
+        const navigation = signal<{ elementRef: ElementRef<HTMLElement> } | null>({ elementRef: new ElementRef(target) });
+        const toggle = TestBed.runInInjectionContext(() => new NavigationCollapseToggleComponent());
+        Object.assign(toggle, { navigation });
+        TestBed.tick();
+        target.dispatchEvent(new Event('pointerenter'));
+        expect(toggle.revealed()).toBe(true);
+
+        navigation.set(null);
+        TestBed.tick();
+        target.dispatchEvent(new Event('pointerenter'));
+
+        expect(toggle.revealed()).toBe(false);
     });
 
     it('leaves a platform shortcut in an editor available to the editor', () => {
