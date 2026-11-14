@@ -149,6 +149,8 @@ export type { IEmailLayoutSymbolAppearance } from './components/email-layout-sym
 export { FileComponent } from './components/file/FileComponent';
 export { FilePresentation } from './components/file/FilePresentation';
 export type { FilePresentationValue } from './components/file/FilePresentationValue';
+export { createFilePreview, createFilePreviewFallback, resolveFilePreviewMediaKind } from './components/file/FilePreview';
+export type { FilePreviewMediaKind } from './components/file/FilePreview';
 export { FilePreviewPipe } from './components/file/FilePreviewPipe';
 export { FileState } from './components/file/FileState';
 export type { FileStateValue } from './components/file/FileStateValue';
@@ -178,6 +180,7 @@ export type { FilterValues } from './components/filter-bar/IFilterDefinition';
 export { flattenAdvancedFilterTree } from './components/filter-bar/filterConditions';
 export { getBooleanFilterValue } from './components/filter-bar/filterValues';
 export { getDateFilterRange } from './components/filter-bar/filterValues';
+export { getDateFilterValue } from './components/filter-bar/filterValues';
 export { getNumberFilterValue } from './components/filter-bar/filterValues';
 export { getOptionFilterValue } from './components/filter-bar/filterValues';
 export { getTextFilterValue } from './components/filter-bar/filterValues';

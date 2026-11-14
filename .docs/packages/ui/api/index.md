@@ -190,6 +190,7 @@ editUrl: false
 | [VoiceSessionControlsComponent](Class.VoiceSessionControlsComponent) | Renders externally controlled actions for a long-running voice session. |
 | [WeekPanelComponent](Class.WeekPanelComponent) | - |
 | [WeekStripComponent](Class.WeekStripComponent) | Displays one controlled calendar-week row inside a week panel. |
+| [WidgetComponent](Class.WidgetComponent) | Renders a single widget by lazy-loading its front and optional back view. |
 | [WidgetEditorCanvasComponent](Class.WidgetEditorCanvasComponent) | Visual authoring canvas for semantic zones and their widget grid items. |
 | [WidgetGridComponent](Class.WidgetGridComponent) | Generic configurable widget grid with local persistence. |
 | [WidgetGridDragDirective](Class.WidgetGridDragDirective) | Applies the shared widget-grid drag-preview configuration to an Angular CDK drag source. |
@@ -354,6 +355,7 @@ editUrl: false
 | [IWidgetSizeRange](Interface.IWidgetSizeRange) | An inclusive span range used by one axis of an [IWidgetSizeCondition](Interface.IWidgetSizeCondition). An omitted bound is unconstrained. |
 | [IWidgetSpanRange](Interface.IWidgetSpanRange) | The supported span range of one widget axis together with the span it starts out with. The same shape describes a contributed [IWidgetLayout](Interface.IWidgetLayout) and a reconciled [IWidgetGridItemDefinition](Interface.IWidgetGridItemDefinition), so a widget declares its constraints exactly once. |
 | [IWidgetViews](Interface.IWidgetViews) | The lazily loaded components of one widget: the face it normally shows and an optional back side a shell may flip to. Both are loaders rather than component references, so a dashboard only pays for the widgets it actually renders. |
+| [IWidgetVisualConfig](Interface.IWidgetVisualConfig) | Visual treatment applied by the shared widget shell. |
 | [IWidgetZone](Interface.IWidgetZone) | A page-neutral suggestion for a widget's initial semantic zone. Widgets contribute these descriptors dynamically, so a new contribution can introduce a zone without a central zone inventory. The consuming page owns the localized labels and decides whether or how to render a zone heading. |
 | [IWithTourDefinitionsOptions](Interface.IWithTourDefinitionsOptions) | Options for contributing one or more native Mosaik tour definitions. |
 | [IWithWidgetItemsOptions](Interface.IWithWidgetItemsOptions) | Options of `withWidgetItems(...)`. |
@@ -400,6 +402,7 @@ editUrl: false
 | [DynamicFormValue](TypeAlias.DynamicFormValue) | Value supported by the dynamic form renderer. |
 | [DynamicFormValues](TypeAlias.DynamicFormValues) | Values indexed by stable dynamic form field keys. |
 | [FilePresentationValue](TypeAlias.FilePresentationValue) | Union of semantic file presentation values. |
+| [FilePreviewMediaKind](TypeAlias.FilePreviewMediaKind) | Media families supported by a Mosaik file thumbnail. |
 | [FilesLayoutValue](TypeAlias.FilesLayoutValue) | Value represented by [FilesLayout](Variable.FilesLayout). |
 | [FileSourceTypeValue](TypeAlias.FileSourceTypeValue) | Value represented by [FileSourceType](Variable.FileSourceType). |
 | [FileStateValue](TypeAlias.FileStateValue) | Union of visual states supported by the file component. |
@@ -481,6 +484,7 @@ editUrl: false
 | [TourFeatureKinds](Variable.TourFeatureKinds) | Branded feature kinds supported by the root tour composition. |
 | [WIDGET](Variable.WIDGET) | The multi-provider token every feature library contributes its widgets to. `provideWidget(...)` collects the contributions and hands them to the [WidgetManager](Class.WidgetManager); contribute through `withWidgetItems(...)` rather than binding the token by hand. |
 | [WIDGET\_DATA](Variable.WIDGET_DATA) | The token a widget shell binds in the child injector of a rendered widget view, so the view can read the payload its widget was registered with. |
+| [WIDGET\_FLIP](Variable.WIDGET_FLIP) | Switches between the card's primary view and its settings. |
 | [WIDGET\_GRID\_LAYOUT\_CODEC](Variable.WIDGET_GRID_LAYOUT_CODEC) | The codec for a locally persisted widget-grid layout. It plugs straight into the user-preference port of `@pixel-brewery/ngpel-core/storage`. |
 | [WIDGET\_GRID\_LAYOUT\_VERSION](Variable.WIDGET_GRID_LAYOUT_VERSION) | The schema version of the persisted widget-grid layout. `WIDGET_GRID_LAYOUT_CODEC` migrates older payloads to it and rejects payloads it does not understand, so a stored layout never reaches the grid half-applied. |
 | [WIDGET\_SIZE](Variable.WIDGET_SIZE) | The token a widget shell binds to publish the logical grid size of the widget it renders, including a live resize preview. A view reads it through `WidgetViewDirective` and adapts its density to the space it actually has. |
@@ -501,6 +505,8 @@ editUrl: false
 | [createAdvancedFilterRule](Function.createAdvancedFilterRule) | Creates an advanced filter rule. |
 | [createCollectionView](Function.createCollectionView) | Creates a signal-based collection-view model from a declarative configuration. |
 | [createDefaultWidgetGridLayout](Function.createDefaultWidgetGridLayout) | Creates the layout a user starts with, purely from what the zones and items contribute. |
+| [createFilePreview](Function.createFilePreview) | Creates a thumbnail for a URL whose lifecycle is owned by the caller. |
+| [createFilePreviewFallback](Function.createFilePreviewFallback) | Returns a generic document thumbnail for files without a media preview. |
 | [createFilterController](Function.createFilterController) | Creates the shared controller for list filter interactions. |
 | [createFlowColumnExpansionPreference](Function.createFlowColumnExpansionPreference) | Creates a local-storage-backed flow-column expansion preference. |
 | [createImageCropSelection](Function.createImageCropSelection) | Creates a normalized rectangle independent of drag direction. |
@@ -525,6 +531,7 @@ editUrl: false
 | [getBooleanFilterValue](Function.getBooleanFilterValue) | Resolves a boolean filter value. |
 | [getContrastingTextColor](Function.getContrastingTextColor) | Picks the text colour that stays readable on a background colour, using the YIQ brightness of the background: dark text on a light ground, light text on a dark one. |
 | [getDateFilterRange](Function.getDateFilterRange) | Resolves a date filter to a full-day UTC range. |
+| [getDateFilterValue](Function.getDateFilterValue) | Reads the raw selected value of a date filter from a simple filter or the first matching equality or on-date rule in an advanced filter. Callers choose how to interpret the stored date. |
 | [getNumberFilterValue](Function.getNumberFilterValue) | Resolves a finite number filter value. |
 | [getOptionFilterValue](Function.getOptionFilterValue) | Resolves an option value when it is part of the allowed backend enum values. |
 | [getTextFilterValue](Function.getTextFilterValue) | Resolves a trimmed string filter value. |
@@ -559,6 +566,7 @@ editUrl: false
 | [resizeWidgetGridItem](Function.resizeWidgetGridItem) | Grows or shrinks one widget by a number of grid cells, clamped to the constraints the widget itself declares. A resize gesture therefore never has to be validated by the pointer code: an over-long drag simply stops at the widget's own maximum. |
 | [resolveDeclarativeTourTargetElements](Function.resolveDeclarativeTourTargetElements) | Collects the first rendered element for every declarative tour target value. |
 | [resolveDynamicFormLayoutClasses](Function.resolveDynamicFormLayoutClasses) | Resolves semantic grid placement into statically discoverable Tailwind classes. |
+| [resolveFilePreviewMediaKind](Function.resolveFilePreviewMediaKind) | Determines the thumbnail media family from MIME type, then from the file extension. |
 | [resolveMosaikSelectionValue](Function.resolveMosaikSelectionValue) | Resolves the string value selected by a Mosaik selector. |
 | [setWidgetGridItemEnabled](Function.setWidgetGridItemEnabled) | Shows or hides one widget while keeping its placement, so bringing it back puts it exactly where the user last had it. |
 | [toPositiveInteger](Function.toPositiveInteger) | - |

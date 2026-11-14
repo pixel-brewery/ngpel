@@ -20,14 +20,23 @@ import { LeadingLineComponent } from '../leading-line/LeadingLineComponent';
     selector: 'ngp-condition-group',
     template: `
         <div part="root" class="flex min-w-0 gap-2.5">
-            @if (level() > 1) {
+            @if (showLeadingLine() && level() > 1) {
                 <ngp-leading-line [level]="level()" />
             }
             <div part="group" class="flex min-w-0 flex-1 flex-col gap-3">
-                <div part="toolbar" class="relative z-1 flex min-w-0 items-center gap-1 py-0.5">
+                <div
+                    part="toolbar"
+                    class="relative z-1 flex min-w-0 items-center"
+                    [class.gap-1]="!inlineActions()"
+                    [class.py-0.5]="!inlineActions()"
+                    [class.gap-2]="inlineActions()"
+                    [class.py-1]="inlineActions()"
+                >
                     <mosaik-segment
-                        class="w-[9.5rem] shrink-0"
+                        class="shrink-0"
+                        [class]="inlineActions() ? 'w-40' : 'w-[9.5rem]'"
                         [appearance]="'soft'"
+                        [attr.aria-label]="conditionLabel()"
                         [attr.data-ngp-part]="testIdPrefix() + '-condition'"
                         [attr.test-id]="testIdPrefix() + '-condition'"
                     >
@@ -52,7 +61,7 @@ import { LeadingLineComponent } from '../leading-line/LeadingLineComponent';
                             />
                         }
                     </mosaik-segment>
-                    <div class="flex min-w-0 flex-1 items-center gap-1 overflow-hidden">
+                    <div class="flex min-w-0 items-center gap-1 overflow-hidden" [class.flex-1]="!inlineActions()">
                         @if (canAddRule() || canAddGroup()) {
                             <mosaik-dropdown-button
                                 [iconName]="'add'"
@@ -126,9 +135,15 @@ export class ConditionGroupComponent {
     public readonly canAddRule = input(true);
     public readonly canAddGroup = input(true);
     public readonly canRemove = input(false);
+    /** Keeps actions beside the condition selector. */
+    public readonly inlineActions = input(false);
+    /** Shows the leading line for nested groups. Disable when the consumer draws its own tree. */
+    public readonly showLeadingLine = input(true);
     public readonly removeVariant = input<'primary' | 'danger'>('danger');
     public readonly andLabel = input.required<string>();
     public readonly orLabel = input.required<string>();
+    /** Accessible name of the condition selector. */
+    public readonly conditionLabel = input<string>();
     public readonly addRuleLabel = input('');
     public readonly addGroupLabel = input('');
     public readonly removeLabel = input('');

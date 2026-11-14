@@ -23,7 +23,7 @@ The presentation layer: every component, directive and pipe the products share �
 ## Import Options
 
 ```typescript
-// @pixel-brewery/ngpel-ui — 475 exports
+// @pixel-brewery/ngpel-ui — 480 exports
 import {
     ActionStripComponent,
     ActionStripContentDirective,
@@ -56,7 +56,7 @@ import {
     MapScriptLoader /* … */,
 } from '@pixel-brewery/ngpel-ui/google-maps';
 
-// @pixel-brewery/ngpel-ui/widget — 50 exports
+// @pixel-brewery/ngpel-ui/widget — 53 exports
 import {
     collectWidgetZones,
     createDefaultWidgetGridLayout,

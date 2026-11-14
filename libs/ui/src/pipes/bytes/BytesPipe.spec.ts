@@ -19,10 +19,11 @@ function instantiatePipe<TPipe>(pipeType: Type<TPipe>, providers: ReadonlyArray<
 
 @Component({
     imports: [BytesPipe],
-    template: '{{ size() | ngpBytes }}',
+    template: '{{ size() | ngpBytes: locale() }}',
 })
 class HostComponent {
     public readonly size = signal<number | null>(1536);
+    public readonly locale = signal<string | undefined>(undefined);
 }
 
 describe('BytesPipe', () => {
@@ -50,6 +51,19 @@ describe('BytesPipe', () => {
 
         // Assert
         expect(result).toBe('0 B');
+    });
+
+    it('reformats the same byte count when the locale changes', () => {
+        const fixture = TestBed.configureTestingModule({ imports: [HostComponent] }).createComponent(HostComponent);
+        fixture.componentInstance.locale.set('en');
+        fixture.detectChanges();
+        const initial = (fixture.nativeElement as HTMLElement).textContent?.trim();
+
+        fixture.componentInstance.locale.set('de');
+        fixture.detectChanges();
+
+        expect(initial).toBe('1.5 KB');
+        expect((fixture.nativeElement as HTMLElement).textContent?.trim()).toBe('1,5 KB');
     });
 
     it('renders the provided fallback for an unknown size', () => {

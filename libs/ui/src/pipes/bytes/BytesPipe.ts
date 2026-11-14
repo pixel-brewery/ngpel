@@ -29,10 +29,11 @@ export class BytesPipe implements PipeTransform {
      *
      * @public
      * @param value The number of bytes.
+     * @param locale The current locale, when the caller needs localized number formatting.
      * @returns The formatted size, or the configured fallback for an unknown size.
      */
-    public transform(value: null | number | undefined): string {
-        return byteSize(value, this._fallback);
+    public transform(value: null | number | undefined, locale?: string): string {
+        return byteSize(value, this._fallback, locale);
     }
 
     // #endregion

@@ -48,3 +48,7 @@ export type { IWidgetManager } from './services/IWidgetManager';
 export type { IWidgetRegistry } from './services/IWidgetRegistry';
 export { WidgetManager } from './services/WidgetManager';
 export { WidgetRegistry } from './services/WidgetRegistry';
+
+export { WidgetComponent } from './components/WidgetComponent';
+export type { IWidgetVisualConfig } from './models/IWidgetVisualConfig';
+export { WIDGET_FLIP } from './provider/WIDGET_FLIP';

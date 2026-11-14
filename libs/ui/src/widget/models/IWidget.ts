@@ -4,6 +4,7 @@ import type { Signal } from '@angular/core';
 import type { IWidgetData } from './IWidgetData';
 import type { IWidgetLayout } from './IWidgetLayout';
 import type { IWidgetViews } from './IWidgetViews';
+import type { IWidgetVisualConfig } from './IWidgetVisualConfig';
 
 // #endregion
 
@@ -68,6 +69,9 @@ export interface IWidget<TData extends IWidgetData = IWidgetData> {
      * The lazily loaded components rendered for this widget.
      */
     readonly views: IWidgetViews;
+
+    /** Optional appearance of the widget card. */
+    readonly visual?: IWidgetVisualConfig;
 
     /**
      * Decides whether the widget is available at all — a permission check, a licence, a feature

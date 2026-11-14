@@ -33,10 +33,10 @@ new BytesPipe(): BytesPipe;
 ### transform()
 
 ```ts
-transform(value): string;
+transform(value, locale?): string;
 ```
 
-Defined in: [libs/ui/src/pipes/bytes/BytesPipe.ts:34](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/pipes/bytes/BytesPipe.ts#L34)
+Defined in: [libs/ui/src/pipes/bytes/BytesPipe.ts:35](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/pipes/bytes/BytesPipe.ts#L35)
 
 Formats `value` as a human readable size.
 
@@ -45,6 +45,7 @@ Formats `value` as a human readable size.
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
 | `value` | `number` \| `null` \| `undefined` | The number of bytes. |
+| `locale?` | `string` | The current locale, when the caller needs localized number formatting. |
 
 #### Returns
 

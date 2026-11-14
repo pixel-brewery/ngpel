@@ -6,10 +6,14 @@ editUrl: false
 # Function: byteSize()
 
 ```ts
-function byteSize(value, fallback?): string;
+function byteSize(
+   value,
+   fallback?,
+   locale?
+): string;
 ```
 
-Defined in: [libs/ui/src/pipes/bytes/byteSize.ts:26](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/pipes/bytes/byteSize.ts#L26)
+Defined in: [libs/ui/src/pipes/bytes/byteSize.ts:27](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/pipes/bytes/byteSize.ts#L27)
 
 Formats a byte count as a human readable size.
 
@@ -27,6 +31,7 @@ states a size exactly the way the templates do.
 | ------ | ------ | ------ | ------ |
 | `value` | `number` \| `null` \| `undefined` | `undefined` | The number of bytes. |
 | `fallback?` | `string` | `'0 B'` | The text for an unknown size, that is `null`, `undefined` or a non-finite number (defaults to `0 B`). |
+| `locale?` | `string` | `undefined` | The locale for number formatting. Omitting it preserves the plain decimal representation. |
 
 ## Returns
 

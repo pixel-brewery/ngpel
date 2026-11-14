@@ -21,9 +21,10 @@ const COMPACT_THRESHOLD = 10;
  * @param value The number of bytes.
  * @param fallback The text for an unknown size, that is `null`, `undefined` or a non-finite number
  * (defaults to `0 B`).
+ * @param locale The locale for number formatting. Omitting it preserves the plain decimal representation.
  * @returns The formatted size.
  */
-export function byteSize(value: null | number | undefined, fallback = '0 B'): string {
+export function byteSize(value: null | number | undefined, fallback = '0 B', locale?: string): string {
     if (value === null || value === undefined || !Number.isFinite(value)) {
         return fallback;
     }
@@ -42,5 +43,9 @@ export function byteSize(value: null | number | undefined, fallback = '0 B'): st
 
     const fractionDigits = unitIndex > 0 && size < COMPACT_THRESHOLD ? 1 : 0;
 
-    return `${size.toFixed(fractionDigits)} ${UNITS[unitIndex] ?? 'B'}`;
+    const amount = locale
+        ? new Intl.NumberFormat(locale, { minimumFractionDigits: fractionDigits, maximumFractionDigits: fractionDigits }).format(size)
+        : size.toFixed(fractionDigits);
+
+    return `${amount} ${UNITS[unitIndex] ?? 'B'}`;
 }

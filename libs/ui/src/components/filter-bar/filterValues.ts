@@ -103,7 +103,7 @@ export function getOptionFilterValue<TValue extends string>(values: FilterValues
  * @public
  */
 export function getDateFilterRange(values: FilterValues, key: string): IDateFilterRange {
-    const date = resolveDate(getFilterValue(values, key, [FilterOperator.Equals, FilterOperator.On]));
+    const date = resolveDate(getDateFilterValue(values, key));
 
     if (!date) {
         return {};
@@ -113,6 +113,19 @@ export function getDateFilterRange(values: FilterValues, key: string): IDateFilt
         from: new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0)).toISOString(),
         to: new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59, 999)).toISOString(),
     };
+}
+
+/**
+ * Reads the raw selected value of a date filter from a simple filter or the first matching
+ * equality or on-date rule in an advanced filter. Callers choose how to interpret the stored date.
+ *
+ * @param values Current filter values.
+ * @param key The date field key.
+ * @returns The selected value, if present.
+ * @public
+ */
+export function getDateFilterValue(values: FilterValues, key: string): unknown {
+    return getFilterValue(values, key, [FilterOperator.Equals, FilterOperator.On]);
 }
 
 function getFilterValue(values: FilterValues, key: string, supportedAdvancedOperators: ReadonlyArray<FilterOperatorValue>): unknown {

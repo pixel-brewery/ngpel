@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: IWidget\<TData\>
 
-Defined in: [libs/ui/src/widget/models/IWidget.ts:37](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidget.ts#L37)
+Defined in: [libs/ui/src/widget/models/IWidget.ts:38](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidget.ts#L38)
 
 One dashboard widget, contributed as plain data so any host can render the same registry: its
 identity and order, its reactive display text, the default placement and resize constraints it
@@ -45,7 +45,7 @@ const widget: IWidget = {
 readonly canActivate?: () => boolean;
 ```
 
-Defined in: [libs/ui/src/widget/models/IWidget.ts:76](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidget.ts#L76)
+Defined in: [libs/ui/src/widget/models/IWidget.ts:80](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidget.ts#L80)
 
 Decides whether the widget is available at all — a permission check, a licence, a feature
 flag. An absent predicate means the widget is always available.
@@ -62,7 +62,7 @@ flag. An absent predicate means the widget is always available.
 readonly data?: TData;
 ```
 
-Defined in: [libs/ui/src/widget/models/IWidget.ts:81](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidget.ts#L81)
+Defined in: [libs/ui/src/widget/models/IWidget.ts:85](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidget.ts#L85)
 
 The payload handed to the widget's views, usually through the `WIDGET_DATA` token.
 
@@ -74,7 +74,7 @@ The payload handed to the widget's views, usually through the `WIDGET_DATA` toke
 readonly id: string;
 ```
 
-Defined in: [libs/ui/src/widget/models/IWidget.ts:44](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidget.ts#L44)
+Defined in: [libs/ui/src/widget/models/IWidget.ts:45](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidget.ts#L45)
 
 The unique identifier of the widget. Registering a second widget under the same id replaces
 the first one.
@@ -87,7 +87,7 @@ the first one.
 readonly layout: IWidgetLayout;
 ```
 
-Defined in: [libs/ui/src/widget/models/IWidget.ts:65](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidget.ts#L65)
+Defined in: [libs/ui/src/widget/models/IWidget.ts:66](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidget.ts#L66)
 
 The default grid placement and the resize constraints of the widget.
 
@@ -99,7 +99,7 @@ The default grid placement and the resize constraints of the widget.
 readonly order: number;
 ```
 
-Defined in: [libs/ui/src/widget/models/IWidget.ts:50](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidget.ts#L50)
+Defined in: [libs/ui/src/widget/models/IWidget.ts:51](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidget.ts#L51)
 
 The display order within a zone. Lower values come first; ties are broken by id so the order
 never depends on registration timing.
@@ -112,7 +112,7 @@ never depends on registration timing.
 readonly subTitle?: Signal<string>;
 ```
 
-Defined in: [libs/ui/src/widget/models/IWidget.ts:60](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidget.ts#L60)
+Defined in: [libs/ui/src/widget/models/IWidget.ts:61](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidget.ts#L61)
 
 The widget subtitle, as a signal.
 
@@ -124,7 +124,7 @@ The widget subtitle, as a signal.
 readonly title: Signal<string>;
 ```
 
-Defined in: [libs/ui/src/widget/models/IWidget.ts:55](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidget.ts#L55)
+Defined in: [libs/ui/src/widget/models/IWidget.ts:56](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidget.ts#L56)
 
 The widget title, as a signal so a host may resolve it from a translation that arrives late.
 
@@ -136,6 +136,18 @@ The widget title, as a signal so a host may resolve it from a translation that a
 readonly views: IWidgetViews;
 ```
 
-Defined in: [libs/ui/src/widget/models/IWidget.ts:70](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidget.ts#L70)
+Defined in: [libs/ui/src/widget/models/IWidget.ts:71](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidget.ts#L71)
 
 The lazily loaded components rendered for this widget.
+
+***
+
+### visual?
+
+```ts
+readonly visual?: IWidgetVisualConfig;
+```
+
+Defined in: [libs/ui/src/widget/models/IWidget.ts:74](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidget.ts#L74)
+
+Optional appearance of the widget card.

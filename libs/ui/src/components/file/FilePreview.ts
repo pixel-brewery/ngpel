@@ -4,6 +4,7 @@ import type { ThumbnailPreview } from '@pixel-brewery/mosaik-elements-foundation
 
 // #endregion
 
+/** Media families supported by a Mosaik file thumbnail. @public */
 export type FilePreviewMediaKind = 'audio' | 'image' | 'other' | 'video';
 
 const AUDIO_EXTENSIONS: ReadonlySet<string> = new Set(['aac', 'flac', 'm4a', 'mp3', 'oga', 'ogg', 'wav']);
@@ -17,6 +18,15 @@ const CODE_EXTENSIONS: ReadonlySet<string> = new Set(['css', 'html', 'js', 'json
 const SPREADSHEET_EXTENSIONS: ReadonlySet<string> = new Set(['csv', 'ods', 'tsv', 'xls', 'xlsm', 'xlsx']);
 const TEXT_EXTENSIONS: ReadonlySet<string> = new Set(['log', 'md', 'rtf', 'txt']);
 
+/**
+ * Creates a thumbnail for a URL whose lifecycle is owned by the caller.
+ *
+ * @param mediaKind The media family to render.
+ * @param url The media URL, which may be an object URL.
+ * @param fileName Alternative text for an image thumbnail.
+ * @returns The thumbnail or the generic document fallback.
+ * @public
+ */
 export function createFilePreview(mediaKind: FilePreviewMediaKind, url: string, fileName: string): ThumbnailPreview {
     switch (mediaKind) {
         case 'image':
@@ -30,6 +40,7 @@ export function createFilePreview(mediaKind: FilePreviewMediaKind, url: string, 
     }
 }
 
+/** Returns a generic document thumbnail for files without a media preview. @public */
 export function createFilePreviewFallback(): ThumbnailPreview {
     return { type: 'other' };
 }
@@ -81,6 +92,14 @@ export function matchesFilePreviewMediaKind(mediaKind: FilePreviewMediaKind, fil
     }
 }
 
+/**
+ * Determines the thumbnail media family from MIME type, then from the file extension.
+ *
+ * @param contentType The MIME type, or an empty string if unavailable.
+ * @param fileName The original file name.
+ * @returns The media family for the thumbnail.
+ * @public
+ */
 export function resolveFilePreviewMediaKind(contentType: string, fileName: string): FilePreviewMediaKind {
     const normalizedContentType = contentType.trim().toLowerCase();
     if (normalizedContentType.startsWith('image/')) {
