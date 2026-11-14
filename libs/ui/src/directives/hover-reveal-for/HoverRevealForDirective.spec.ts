@@ -48,12 +48,12 @@ describe('HoverRevealForDirective', () => {
     let row: HTMLDivElement;
     let target: WritableSignal<HoverRevealTarget>;
     let hoverCapability: EventTarget;
-    let hoverless: boolean;
+    let noHoverQuery: boolean;
 
     beforeEach(() => {
-        hoverless = false;
+        noHoverQuery = false;
         hoverCapability = new EventTarget();
-        Object.defineProperty(hoverCapability, 'matches', { get: () => hoverless });
+        Object.defineProperty(hoverCapability, 'matches', { get: () => noHoverQuery });
         vi.stubGlobal('matchMedia', (query: string) => (query === '(hover: none)' ? hoverCapability : undefined));
         fixture = TestBed.configureTestingModule({ imports: [HostComponent] }).createComponent(HostComponent);
         const root = fixture.nativeElement as HTMLElement;
@@ -85,7 +85,7 @@ describe('HoverRevealForDirective', () => {
 
     it('keeps the action visible after pointer leave when the primary pointer cannot hover', () => {
         // Arrange
-        hoverless = true;
+        noHoverQuery = true;
         hoverCapability.dispatchEvent(new Event('change'));
 
         // Act
@@ -98,10 +98,10 @@ describe('HoverRevealForDirective', () => {
 
     it('re-applies hover-dependent visibility when the primary pointer gains hover', () => {
         // Arrange
-        hoverless = true;
+        noHoverQuery = true;
         hoverCapability.dispatchEvent(new Event('change'));
         expect(action.style.pointerEvents).toBe('auto');
-        hoverless = false;
+        noHoverQuery = false;
 
         // Act
         hoverCapability.dispatchEvent(new Event('change'));

@@ -38,7 +38,7 @@ export class HoverRevealForDirective implements OnInit, AfterViewInit {
     // #region Fields
 
     private readonly _host: HTMLElement;
-    private readonly _hoverlessQuery: MediaQueryList | undefined;
+    private readonly _noHoverQuery: MediaQueryList | undefined;
     private readonly _renderer: Renderer2;
     private _cleanups: Array<() => void> = [];
     private _isPointerWithin = false;
@@ -63,11 +63,11 @@ export class HoverRevealForDirective implements OnInit, AfterViewInit {
     ) {
         this._host = elementRef.nativeElement;
         this._renderer = renderer;
-        this._hoverlessQuery = this._host.ownerDocument.defaultView?.matchMedia?.('(hover: none)');
+        this._noHoverQuery = this._host.ownerDocument.defaultView?.matchMedia?.('(hover: none)');
         const updateHoverCapability = (): void => this.updateVisibility();
-        this._hoverlessQuery?.addEventListener?.('change', updateHoverCapability);
+        this._noHoverQuery?.addEventListener?.('change', updateHoverCapability);
         destroyRef.onDestroy(() => {
-            this._hoverlessQuery?.removeEventListener?.('change', updateHoverCapability);
+            this._noHoverQuery?.removeEventListener?.('change', updateHoverCapability);
             this.unbind();
         });
         effect(() => this.rebind(this.for()));
@@ -160,7 +160,7 @@ export class HoverRevealForDirective implements OnInit, AfterViewInit {
     }
 
     private updateVisibility(): void {
-        const isVisible = (this._hoverlessQuery?.matches ?? false) || this._isPointerWithin || this._hasFocusWithin;
+        const isVisible = (this._noHoverQuery?.matches ?? false) || this._isPointerWithin || this._hasFocusWithin;
         this._renderer.setStyle(this._host, 'opacity', isVisible ? '1' : '0');
         this._renderer.setStyle(this._host, 'pointer-events', isVisible ? 'auto' : 'none');
     }
