@@ -326,7 +326,7 @@ Emits the stable identifier of a file requested for opening.
 ### previewFit
 
 ```ts
-readonly previewFit: InputSignal<ImageFit>;
+readonly previewFit: InputSignal<ObjectFit>;
 ```
 
 Defined in: [libs/ui/src/components/files/FilesComponent.ts:361](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/files/FilesComponent.ts#L361)

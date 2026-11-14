@@ -23,6 +23,18 @@ Persisted column preferences.
 
 ***
 
+### groupBy?
+
+```ts
+readonly groupBy?: readonly string[];
+```
+
+Defined in: [libs/ui/src/directives/data-table-preferences/IDataTablePreferenceState.ts:28](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/data-table-preferences/IDataTablePreferenceState.ts#L28)
+
+Column keys used for grouping, from outermost to innermost.
+
+***
+
 ### version
 
 ```ts

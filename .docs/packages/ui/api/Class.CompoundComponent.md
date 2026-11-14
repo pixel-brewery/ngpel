@@ -535,7 +535,7 @@ Optional resolver for stable, domain-specific list-item test identifiers.
 ### listSelectionMode
 
 ```ts
-protected readonly listSelectionMode: Signal<"single" | "none">;
+protected readonly listSelectionMode: Signal<"none" | "single">;
 ```
 
 Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:773](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L773)
