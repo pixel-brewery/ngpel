@@ -23,7 +23,7 @@ The presentation layer: every component, directive and pipe the products share �
 ## Import Options
 
 ```typescript
-// @pixel-brewery/ngpel-ui — 487 exports
+// @pixel-brewery/ngpel-ui — 472 exports
 import {
     ActionStripComponent,
     ActionStripContentDirective,
@@ -121,4 +121,4 @@ Layer 2 — depends on `@pixel-brewery/ngpel-core`, `@pixel-brewery/ngpel-mvp`, 
 
 ## What stays in the application
 
-Theme tokens, the translation catalogue behind the `provide*Intl()` providers, product-specific layouts and every domain view stay in the application. Mosaik and CodeMirror are optional peers: install them only for the components that render through them.
+Theme tokens, translation catalogues, product-specific layouts and domain views stay in the application. For Mosaik controls, use a Mosaik release that exports the providers and import them from their Angular component entry points, for example `provideCalendarIntl` from `@pixel-brewery/mosaik-elements-angular/components/calendar`. Import the providers for ngPEL components from ngPEL. Mosaik and CodeMirror are optional peers: install them only for the components that render through them.
