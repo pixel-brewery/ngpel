@@ -77,7 +77,7 @@ class CollectionView<TItem, TView extends string, TCalendarItem = TItem> impleme
         this._availableViews = signal(viewDefinitions).asReadonly();
         this._activeFilters = signal({});
         this._isFilterActive = computed(() => Object.values(this._activeFilters()).some((value) => this.hasFilterValue(value)));
-        this._filterDefinitions = signal(this.buildFilterDefinitions(config.fields)).asReadonly();
+        this._filterDefinitions = computed(() => this.buildFilterDefinitions(config.fields));
         this._exportColumns = signal(this.buildExportColumns(config.fields)).asReadonly();
         this._viewTypes = new Set(viewDefinitions.map((view) => view.type));
         this.table = this.createTableView(config.fields, this.getTableViewConfig(config.views));
@@ -290,7 +290,8 @@ class CollectionView<TItem, TView extends string, TCalendarItem = TItem> impleme
                 label: field.title,
                 type: field.filter.type,
                 placeholder: field.filter.placeholder,
-                options: field.filter.options,
+                options: typeof field.filter.options === 'function' ? field.filter.options() : field.filter.options,
+                integer: field.filter.integer,
             });
         }
 

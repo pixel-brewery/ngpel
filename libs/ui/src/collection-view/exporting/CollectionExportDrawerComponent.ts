@@ -53,7 +53,7 @@ interface IFormatOption {
         <ng-template mosaikDrawerContent>
             <div class="flex min-h-0 flex-col gap-2 px-2 py-2">
                 @if (recordCount() !== null) {
-                    <p class="m-0" data-ngp-export-record-count>{{ recordCount() }} {{ intl.recordsLabel }}</p>
+                    <p class="m-0" test-id="collection-export-record-count" data-ngp-export-record-count>{{ recordCount() }} {{ intl.recordsLabel }}</p>
                 }
                 <div class="flex flex-col gap-1">
                     <mosaik-toolbar [appearance]="'plain'">
@@ -110,7 +110,13 @@ interface IFormatOption {
         <ng-template mosaikDrawerFooter>
             <div class="flex flex-1 flex-row gap-1 justify-end">
                 <mosaik-button [label]="intl.cancelLabel" [appearance]="'plain'" [variant]="'tertiary'" (click)="onCancel()" />
-                <mosaik-button [label]="intl.exportLabel" [appearance]="'solid'" [variant]="'primary'" (click)="onExport()" />
+                <mosaik-button
+                    [attr.test-id]="'collection-export-confirm'"
+                    [label]="intl.exportLabel"
+                    [appearance]="'solid'"
+                    [variant]="'primary'"
+                    (click)="onExport()"
+                />
             </div>
         </ng-template>
     `,

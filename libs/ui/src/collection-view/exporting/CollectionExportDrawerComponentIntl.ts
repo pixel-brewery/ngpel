@@ -29,6 +29,7 @@ export class CollectionExportDrawerComponentIntl {
     private _cancelLabel: string;
     private _exportLabel: string;
     private _columnsRequiredMessage: string;
+    private _recordsLabel: string;
 
     // #endregion
 
@@ -53,6 +54,7 @@ export class CollectionExportDrawerComponentIntl {
         this._cancelLabel = 'Cancel';
         this._exportLabel = 'Export';
         this._columnsRequiredMessage = 'Select at least one column before exporting.';
+        this._recordsLabel = 'records will be exported';
     }
 
     // #endregion
@@ -179,7 +181,12 @@ export class CollectionExportDrawerComponentIntl {
 
     /** Label shown after the number of records to export. */
     public get recordsLabel(): string {
-        return 'records will be exported';
+        return this._recordsLabel;
+    }
+
+    public set recordsLabel(value: string) {
+        this._recordsLabel = value;
+        this._changes.next();
     }
 
     // #endregion

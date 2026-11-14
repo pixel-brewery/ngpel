@@ -40,7 +40,10 @@ export interface ICollectionField<TItem> {
     readonly filter?: {
         readonly type: FilterTypeValue;
         readonly placeholder?: string;
-        readonly options?: ReadonlyArray<IFilterOption>;
+        /** Static choices or choices read from signals as they become available. */
+        readonly options?: ReadonlyArray<IFilterOption> | (() => ReadonlyArray<IFilterOption>);
+        /** Restricts numeric input to whole numbers. */
+        readonly integer?: boolean;
     };
 
     /**
