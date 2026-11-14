@@ -83,8 +83,8 @@ describe('Drawer exterior placement', () => {
         vi.unstubAllGlobals();
     });
 
-    function createAttachedDrawerRef(direction: string): ReturnType<typeof createDrawerRef> {
-        const result = createDrawerRef(direction);
+    function createAttachedDrawerRef(direction: string, bounds?: DOMRect): ReturnType<typeof createDrawerRef> {
+        const result = createDrawerRef(direction, bounds);
         drawer = result.drawerRef.element;
         document.body.append(drawer);
 
@@ -125,6 +125,56 @@ describe('Drawer exterior placement', () => {
             expect(target.style.transform).toBe('none');
         },
     );
+
+    it.each(['ltr', 'rtl'])('hides exterior content beside a full-width %s drawer', async (direction) => {
+        // arrange
+        vi.stubGlobal('ResizeObserver', TestResizeObserver);
+        vi.stubGlobal('innerWidth', 375);
+        const { drawerRef, sizeChanged } = createAttachedDrawerRef(direction, new DOMRect(0, 0, 375, 812));
+        TestBed.configureTestingModule({
+            imports: [TestHostComponent],
+            providers: [{ provide: DRAWER_REF, useValue: drawerRef }],
+        });
+        const fixture = TestBed.createComponent(TestHostComponent);
+        fixture.detectChanges();
+        const target = fixture.nativeElement.querySelector('[test-id="drawer-exterior-placement"]') as HTMLElement;
+        Object.defineProperty(target, 'getBoundingClientRect', {
+            value: vi.fn(() => new DOMRect(0, 0, 16, 160)),
+        });
+        await fixture.whenStable();
+
+        // act
+        sizeChanged.next({ width: 375 });
+
+        // assert
+        expect(target.style.visibility).toBe('hidden');
+    });
+
+    it('restores exterior content when the viewport grows enough to fit it beside the drawer', async () => {
+        // arrange
+        vi.stubGlobal('ResizeObserver', TestResizeObserver);
+        vi.stubGlobal('innerWidth', 414);
+        const { drawerRef } = createAttachedDrawerRef('ltr', new DOMRect(40, 0, 375, 812));
+        TestBed.configureTestingModule({
+            imports: [TestHostComponent],
+            providers: [{ provide: DRAWER_REF, useValue: drawerRef }],
+        });
+        const fixture = TestBed.createComponent(TestHostComponent);
+        fixture.detectChanges();
+        const target = fixture.nativeElement.querySelector('[test-id="drawer-exterior-placement"]') as HTMLElement;
+        Object.defineProperty(target, 'getBoundingClientRect', {
+            value: vi.fn(() => new DOMRect(0, 0, 16, 160)),
+        });
+        await fixture.whenStable();
+        expect(target.style.visibility).toBe('hidden');
+        vi.stubGlobal('innerWidth', 415);
+
+        // act
+        window.dispatchEvent(new Event('resize'));
+
+        // assert
+        expect(target.style.visibility).toBe('visible');
+    });
 
     it('keeps dialog content outside while drawer attention changes the fixed positioning context', async () => {
         // arrange
@@ -226,7 +276,10 @@ describe('Drawer exterior placement', () => {
     });
 });
 
-function createDrawerRef(direction: string): {
+function createDrawerRef(
+    direction: string,
+    bounds: DOMRect = new DOMRect(320, 40, 600, 800),
+): {
     closeAttempted: Subject<void>;
     drawerRef: IDrawerRef;
     root: HTMLElement;
@@ -239,7 +292,7 @@ function createDrawerRef(direction: string): {
     const root = document.createElement('div');
     root.setAttribute('part', 'root');
     Object.defineProperty(root, 'getBoundingClientRect', {
-        value: vi.fn(() => new DOMRect(320, 40, 600, 800)),
+        value: vi.fn(() => bounds),
     });
     shadowRoot.append(root);
     const positionChanged = new Subject<Partial<{ top: number | string; bottom: number | string; left: number | string; right: number | string }>>();

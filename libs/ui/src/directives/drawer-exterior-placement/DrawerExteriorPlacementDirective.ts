@@ -11,7 +11,8 @@ import { merge } from 'rxjs';
  * Places contextual drawer content outside the drawer on its leading backdrop edge.
  *
  * The host must be projected through the drawer's Mosaik portal so drawer transforms
- * and overflow clipping cannot hide the externally positioned content.
+ * and overflow clipping cannot hide the externally positioned content. The host stays
+ * hidden when the drawer and its exterior content do not fit side by side in the viewport.
  *
  * @public
  */
@@ -141,16 +142,20 @@ export class DrawerExteriorPlacementDirective implements AfterViewInit {
         const hostBounds = host.getBoundingClientRect();
         const positioningOriginLeft = hostBounds.left;
         const positioningOriginTop = hostBounds.top;
-        const direction = host.ownerDocument.defaultView?.getComputedStyle(this._drawerRef.element).direction ?? 'ltr';
+        const viewport = host.ownerDocument.defaultView;
+        const direction = viewport?.getComputedStyle(this._drawerRef.element).direction ?? 'ltr';
         const isRightToLeft = direction === 'rtl';
         const targetLeft = isRightToLeft
             ? rootBounds.right + DrawerExteriorPlacementDirective._exteriorGap
             : rootBounds.left - DrawerExteriorPlacementDirective._exteriorGap - hostBounds.width;
         const targetTop = rootBounds.top + (rootBounds.height - hostBounds.height) / 2;
+        // Use the drawer width because its horizontal position changes during the slide animation.
+        const requiredWidth = rootBounds.width + DrawerExteriorPlacementDirective._exteriorGap + hostBounds.width;
+        const hasRoomBeside = requiredWidth <= (viewport?.innerWidth ?? Number.POSITIVE_INFINITY);
 
         this._renderer.setStyle(host, 'left', `${targetLeft - positioningOriginLeft}px`);
         this._renderer.setStyle(host, 'top', `${targetTop - positioningOriginTop}px`);
-        this._renderer.setStyle(host, 'visibility', 'visible');
+        this._renderer.setStyle(host, 'visibility', hasRoomBeside ? 'visible' : 'hidden');
     }
 
     private placeAnimationFrame(): void {
