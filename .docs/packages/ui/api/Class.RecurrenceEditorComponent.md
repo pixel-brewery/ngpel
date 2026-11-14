@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: RecurrenceEditorComponent\<TNumber, TEnd\>
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:328](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L328)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:352](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L352)
 
 Reusable RFC 5545 recurrence editor for Signal Forms.
 
@@ -40,7 +40,7 @@ new RecurrenceEditorComponent<TNumber, TEnd>(): RecurrenceEditorComponent<TNumbe
 readonly allowEnd: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:374](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L374)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:401](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L401)
 
 Shows the controls for limiting the series.
 
@@ -52,7 +52,7 @@ Shows the controls for limiting the series.
 readonly allowNone: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:371](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L371)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:398](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L398)
 
 Allows a one-off occurrence in the frequency options.
 
@@ -64,7 +64,7 @@ Allows a one-off occurrence in the frequency options.
 readonly byDaysField: InputSignal<() => FieldState<string>>;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:352](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L352)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:376](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L376)
 
 ***
 
@@ -74,7 +74,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 readonly countField: InputSignal<() => FieldState<TNumber>>;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:356](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L356)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:380](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L380)
 
 ***
 
@@ -84,7 +84,19 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 readonly endAtField: InputSignal<() => FieldState<TEnd>>;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:358](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L358)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:382](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L382)
+
+***
+
+### endDateMode
+
+```ts
+readonly endDateMode: InputSignal<"instant" | "calendar-day">;
+```
+
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:404](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L404)
+
+Controls whether the end field edits a calendar day or an instant.
 
 ***
 
@@ -94,7 +106,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 readonly endModeField: InputSignal<() => FieldState<RecurrenceEndMode>>;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:354](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L354)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:378](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L378)
 
 ***
 
@@ -104,7 +116,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected readonly endModeOptions: readonly IRecurrenceOption<RecurrenceEndMode>[] = RECURRENCE_END_MODE_OPTIONS;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:474](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L474)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:504](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L504)
 
 ***
 
@@ -114,7 +126,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 readonly frequencyField: InputSignal<() => FieldState<RecurrenceFrequency>>;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:348](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L348)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:372](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L372)
 
 ***
 
@@ -124,7 +136,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected readonly frequencyOptions: Signal<readonly RecurrenceFrequency[]>;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:461](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L461)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:491](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L491)
 
 ***
 
@@ -134,7 +146,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 readonly intervalField: InputSignal<() => FieldState<string>>;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:350](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L350)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:374](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L374)
 
 ***
 
@@ -144,7 +156,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected readonly intervalOptions: readonly IRecurrenceOption<number>[] = RECURRENCE_INTERVAL_OPTIONS;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:466](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L466)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:496](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L496)
 
 ***
 
@@ -154,7 +166,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 readonly labels: InputSignal<Partial<IRecurrenceEditorLabels>>;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:368](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L368)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:392](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L392)
 
 ***
 
@@ -164,7 +176,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 readonly monthDayField: InputSignal<() => FieldState<TNumber>>;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:362](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L362)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:386](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L386)
 
 ***
 
@@ -174,7 +186,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 readonly monthlyModeField: InputSignal<() => FieldState<RecurrenceMonthlyMode>>;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:360](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L360)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:384](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L384)
 
 ***
 
@@ -184,7 +196,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected readonly monthlyModeOptions: readonly IRecurrenceOption<RecurrenceMonthlyMode>[] = RECURRENCE_MONTHLY_MODE_OPTIONS;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:470](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L470)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:500](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L500)
 
 ***
 
@@ -194,7 +206,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 readonly previewFrom: InputSignal<Date | null>;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:377](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L377)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:407](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L407)
 
 Reference day for the weekday and monthly choice previews. Omit to show the labels alone.
 
@@ -206,7 +218,24 @@ Reference day for the weekday and monthly choice previews. Omit to show the labe
 protected readonly resolvedLabels: Signal<IRecurrenceEditorLabels>;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:456](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L456)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:486](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L486)
+
+***
+
+### summary
+
+```ts
+readonly summary: InputSignal<
+  | {
+  detail: string;
+  head: string;
+}
+| undefined>;
+```
+
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:395](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L395)
+
+Optional two-line summary. Defaults to the built-in read-only field.
 
 ***
 
@@ -227,7 +256,7 @@ readonly targets: WritableSignal<Map<
 | "weekdays", ITourAccessorTarget>>;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:380](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L380)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:410](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L410)
 
 Reactive component capabilities available to an external tour mapping.
 
@@ -243,7 +272,7 @@ Reactive component capabilities available to an external tour mapping.
 readonly weekdayField: InputSignal<() => FieldState<RecurrenceWeekday>>;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:366](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L366)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:390](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L390)
 
 ***
 
@@ -253,7 +282,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected readonly weekdayOptions: readonly IRecurrenceOption<RecurrenceWeekday>[] = RECURRENCE_WEEKDAY_OPTIONS;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:468](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L468)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:498](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L498)
 
 ***
 
@@ -263,7 +292,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 readonly weekdayOrdinalField: InputSignal<() => FieldState<string>>;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:364](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L364)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:388](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L388)
 
 ***
 
@@ -273,7 +302,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected readonly weekdayOrdinalOptions: readonly IRecurrenceOption<string>[] = RECURRENCE_WEEKDAY_ORDINAL_OPTIONS;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:472](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L472)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:502](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L502)
 
 ## Methods
 
@@ -283,7 +312,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected endModeLabel(value): string;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:648](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L648)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:678](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L678)
 
 #### Parameters
 
@@ -303,7 +332,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected frequencyLabel(value): string;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:485](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L485)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:515](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L515)
 
 #### Parameters
 
@@ -323,7 +352,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected isMonthlyDayOfMonthMode(): boolean;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:568](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L568)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:598](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L598)
 
 #### Returns
 
@@ -337,7 +366,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected isMonthlyRecurrence(): boolean;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:539](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L539)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:569](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L569)
 
 #### Returns
 
@@ -351,7 +380,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected isMonthlyWeekdayOfMonthMode(): boolean;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:572](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L572)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:602](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L602)
 
 #### Returns
 
@@ -365,7 +394,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected isRecurrenceEnabled(): boolean;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:531](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L531)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:561](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L561)
 
 #### Returns
 
@@ -379,7 +408,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected isRecurrenceEndCount(): boolean;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:644](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L644)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:674](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L674)
 
 #### Returns
 
@@ -393,7 +422,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected isRecurrenceEndModeSelected(value): boolean;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:632](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L632)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:662](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L662)
 
 #### Parameters
 
@@ -413,7 +442,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected isRecurrenceEndUntil(): boolean;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:640](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L640)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:670](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L670)
 
 #### Returns
 
@@ -427,7 +456,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected isRecurrenceIntervalSelected(value): boolean;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:523](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L523)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:553](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L553)
 
 #### Parameters
 
@@ -447,7 +476,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected isRecurrenceMonthlyModeSelected(value): boolean;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:560](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L560)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:590](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L590)
 
 #### Parameters
 
@@ -467,7 +496,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected isRecurrenceSingleWeekdaySelected(value): boolean;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:604](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L604)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:634](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L634)
 
 #### Parameters
 
@@ -487,7 +516,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected isRecurrenceWeekdayOrdinalSelected(value): boolean;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:580](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L580)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:610](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L610)
 
 #### Parameters
 
@@ -507,7 +536,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected isRecurrenceWeekdaySelected(value): boolean;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:543](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L543)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:573](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L573)
 
 #### Parameters
 
@@ -527,7 +556,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected isWeeklyRecurrence(): boolean;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:535](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L535)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:565](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L565)
 
 #### Returns
 
@@ -541,7 +570,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected monthlyModeLabel(value): string;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:576](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L576)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:606](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L606)
 
 #### Parameters
 
@@ -561,7 +590,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected ordinalLabel(value): string;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:588](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L588)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:618](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L618)
 
 #### Parameters
 
@@ -585,7 +614,7 @@ protected previewLabel(
 ): string;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:480](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L480)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:510](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L510)
 
 #### Parameters
 
@@ -607,7 +636,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected recurrenceIntervalLabel(value): string;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:509](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L509)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:539](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L539)
 
 #### Parameters
 
@@ -627,7 +656,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected recurrenceIntervalValue(): string;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:519](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L519)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:549](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L549)
 
 #### Returns
 
@@ -641,7 +670,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected recurrenceSummary(): string;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:501](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L501)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:531](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L531)
 
 #### Returns
 
@@ -655,7 +684,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected setRecurrenceEndMode(value): void;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:636](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L636)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:666](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L666)
 
 #### Parameters
 
@@ -675,7 +704,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected setRecurrenceInterval(value): void;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:527](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L527)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:557](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L557)
 
 #### Parameters
 
@@ -695,7 +724,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected setRecurrenceMonthlyMode(value): void;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:564](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L564)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:594](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L594)
 
 #### Parameters
 
@@ -715,7 +744,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected setRecurrenceSingleWeekday(value): void;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:608](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L608)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:638](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L638)
 
 #### Parameters
 
@@ -735,7 +764,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected setRecurrenceWeekdayOrdinal(value): void;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:584](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L584)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:614](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L614)
 
 #### Parameters
 
@@ -755,7 +784,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected toggleRecurrenceWeekday(value): void;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:547](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L547)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:577](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L577)
 
 #### Parameters
 
@@ -775,7 +804,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.
 protected weekdayLabel(value): string;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:612](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L612)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts:642](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceEditorComponent.ts#L642)
 
 #### Parameters
 

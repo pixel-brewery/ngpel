@@ -9,7 +9,7 @@ editUrl: false
 function parseRecurrenceRule(value, options?): IRecurrenceValue;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:131](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L131)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:134](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L134)
 
 ## Parameters
 

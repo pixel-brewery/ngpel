@@ -33,4 +33,17 @@ describe('RecurrenceEditorService', () => {
         // Assert
         expect(result).toBeUndefined();
     });
+
+    it('passes the caller-owned tour mapping to the drawer', async () => {
+        // Arrange
+        const tour = { tourId: 'schedule', anchors: { frequency: 'repeat', timeMode: 'include-time', cancel: 'discard' } };
+        const show = vi.fn(() => ({ closed: of({ reason: 'negative' }) }));
+        TestBed.configureTestingModule({ providers: [{ provide: DrawerService, useValue: { show } }] });
+
+        // Act
+        await TestBed.inject(RecurrenceEditorService).open({ tour });
+
+        // Assert
+        expect(show).toHaveBeenCalledWith(expect.any(Function), { data: { tour } });
+    });
 });

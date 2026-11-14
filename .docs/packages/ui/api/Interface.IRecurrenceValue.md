@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Interface: IRecurrenceValue
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:20](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L20)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:21](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L21)
 
 ## Properties
 
@@ -15,7 +15,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:20](http
 recurrenceByDays: string;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:21](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L21)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:22](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L22)
 
 ***
 
@@ -25,7 +25,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:21](http
 recurrenceCount: string;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:22](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L22)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:23](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L23)
 
 ***
 
@@ -35,7 +35,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:22](http
 recurrenceEndAt: string;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:23](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L23)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:24](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L24)
 
 ***
 
@@ -45,7 +45,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:23](http
 recurrenceEndMode: RecurrenceEndMode;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:24](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L24)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:25](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L25)
 
 ***
 
@@ -55,7 +55,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:24](http
 recurrenceFrequency: RecurrenceFrequency;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:25](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L25)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:26](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L26)
 
 ***
 
@@ -65,7 +65,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:25](http
 recurrenceInterval: string;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:26](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L26)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:27](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L27)
 
 ***
 
@@ -75,7 +75,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:26](http
 recurrenceMonthDay: string;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:27](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L27)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:28](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L28)
 
 ***
 
@@ -85,7 +85,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:27](http
 recurrenceMonthlyMode: RecurrenceMonthlyMode;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:28](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L28)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:29](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L29)
 
 ***
 
@@ -95,7 +95,7 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:28](http
 recurrenceTime?: string;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:32](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L32)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:33](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L33)
 
 Optional local wall-clock time in HH:mm form. Omit for all-day recurrence.
 
@@ -107,7 +107,7 @@ Optional local wall-clock time in HH:mm form. Omit for all-day recurrence.
 recurrenceWeekday: RecurrenceWeekday;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:29](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L29)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:30](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L30)
 
 ***
 
@@ -117,4 +117,4 @@ Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:29](http
 recurrenceWeekdayOrdinal: string;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:30](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L30)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:31](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L31)

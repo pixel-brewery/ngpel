@@ -29,7 +29,10 @@ export class RecurrenceSummaryPipe implements PipeTransform {
         locale = this._locale,
     ): string {
         const summary = describeRecurrence(value, labels, locale);
-        return part === 'full' ? [summary.head, summary.detail].filter(Boolean).join(' · ') : summary[part];
+        if (part !== 'full') {
+            return summary[part];
+        }
+        return value && value.recurrenceFrequency !== 'NONE' ? [summary.head, summary.detail].filter(Boolean).join(' · ') : summary.head;
     }
 
     // #endregion

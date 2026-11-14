@@ -9,7 +9,7 @@ editUrl: false
 function toPositiveInteger(value): number;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:199](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L199)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:201](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L201)
 
 ## Parameters
 

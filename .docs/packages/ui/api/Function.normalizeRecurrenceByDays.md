@@ -9,7 +9,7 @@ editUrl: false
 function normalizeRecurrenceByDays(value): readonly RecurrenceWeekday[];
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:190](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L190)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:194](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L194)
 
 ## Parameters
 

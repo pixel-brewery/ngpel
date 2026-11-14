@@ -33,17 +33,20 @@ export function describeRecurrence(
 ): { readonly head: string; readonly detail: string } {
     const intl = { ...DEFAULT_LABELS, ...labels };
     if (!value || value.recurrenceFrequency === 'NONE') {
-        return { head: intl.none, detail: '' };
+        return { head: intl.none, detail: intl.noneDetail ?? '' };
     }
 
-    const fragments = [intl.every(value.recurrenceFrequency, toPositiveInteger(value.recurrenceInterval))];
-    const weekday = (day: RecurrenceWeekday): string => {
-        const index = RECURRENCE_WEEKDAY_OPTIONS.findIndex((option) => option.value === day);
-        return new Intl.DateTimeFormat(locale, { weekday: 'long', timeZone: 'UTC' }).format(new Date(Date.UTC(2020, 0, 6 + Math.max(0, index))));
-    };
+    const frequency = intl.every(value.recurrenceFrequency, toPositiveInteger(value.recurrenceInterval));
+    const fragments: string[] = [];
+    const weekday =
+        intl.weekday ??
+        ((day: RecurrenceWeekday): string => {
+            const index = RECURRENCE_WEEKDAY_OPTIONS.findIndex((option) => option.value === day);
+            return new Intl.DateTimeFormat(locale, { weekday: 'long', timeZone: 'UTC' }).format(new Date(Date.UTC(2020, 0, 6 + Math.max(0, index))));
+        });
     if (value.recurrenceFrequency === 'WEEKLY') {
         const days = normalizeRecurrenceByDays(value.recurrenceByDays).map(weekday);
-        fragments.push(intl.onWeekdays(new Intl.ListFormat(locale).format(days)));
+        fragments.push(intl.onWeekdays(intl.joinWeekdays?.(days) ?? new Intl.ListFormat(locale).format(days)));
     } else if (value.recurrenceFrequency === 'MONTHLY') {
         fragments.push(
             value.recurrenceMonthlyMode === 'DAY_OF_MONTH'
@@ -51,23 +54,27 @@ export function describeRecurrence(
                 : intl.onOrdinalWeekday(value.recurrenceWeekdayOrdinal, weekday(value.recurrenceWeekday)),
         );
     }
-    const time = recurrenceTime(value.recurrenceTime);
-    if (time) {
+    const localTime = value.recurrenceTime;
+    const time = recurrenceTime(localTime);
+    if (localTime && time) {
         fragments.push(
             intl.atTime(
-                new Intl.DateTimeFormat(locale, { hour: 'numeric', minute: '2-digit', timeZone: 'UTC' }).format(
-                    new Date(Date.UTC(2020, 0, 1, time.hours, time.minutes)),
-                ),
+                intl.formatTime?.(localTime) ??
+                    new Intl.DateTimeFormat(locale, { hour: 'numeric', minute: '2-digit', timeZone: 'UTC' }).format(
+                        new Date(Date.UTC(2020, 0, 1, time.hours, time.minutes)),
+                    ),
             ),
         );
+    } else if (intl.allDay) {
+        fragments.push(intl.allDay);
     }
 
     const end = value.recurrenceEndMode === 'UNTIL' ? fromCalendarDate(value.recurrenceEndAt) : null;
     const detail = end
-        ? intl.until(new Intl.DateTimeFormat(locale, { dateStyle: 'medium' }).format(end))
+        ? intl.until(intl.formatDate?.(end) ?? new Intl.DateTimeFormat(locale, { dateStyle: 'medium' }).format(end))
         : value.recurrenceEndMode === 'COUNT'
           ? intl.count(toPositiveInteger(value.recurrenceCount))
           : intl.never;
 
-    return { head: fragments.join(' '), detail };
+    return { head: intl.joinHead?.(frequency, fragments) ?? [frequency, ...fragments].join(' '), detail };
 }

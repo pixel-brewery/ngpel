@@ -6,6 +6,7 @@ import {
     ChipComponent,
     ChipGroupComponent,
     createTourAccessorTarget,
+    DateBoxComponent,
     DateTimeBoxComponent,
     LocaleDirective,
     FormFieldComponent,
@@ -15,6 +16,8 @@ import {
     SelectComponent,
     SelectItemComponent,
     TextBoxComponent,
+    TextComponent,
+    TypographyDirective,
     type ITourAccessor,
     TOUR_ACCESSOR,
 } from '@pixel-brewery/mosaik-elements-angular';
@@ -158,7 +161,14 @@ const DEFAULT_RECURRENCE_EDITOR_LABELS: IRecurrenceEditorLabels = {
                     }
                 </mosaik-select>
             </mosaik-form-field>
-            <mosaik-textbox #summaryTarget [value]="recurrenceSummary()" [variant]="'primary'" [label]="resolvedLabels().summary" [readonly]="true" />
+            @if (summary(); as detail) {
+                <div #summaryTarget class="flex flex-col gap-1" test-id="recurrence-editor-summary">
+                    <mosaik-text [text]="detail.head" [wrap]="true" [mosaikTypography]="'subtitle1'" />
+                    <mosaik-text [text]="detail.detail" [wrap]="true" [readonly]="true" [mosaikTypography]="'body2'" />
+                </div>
+            } @else {
+                <mosaik-textbox #summaryTarget [value]="recurrenceSummary()" [variant]="'primary'" [label]="resolvedLabels().summary" [readonly]="true" />
+            }
             @if (isRecurrenceEnabled()) {
                 <div #intervalTarget class="flex flex-col gap-2 md:col-span-2 surface-input">
                     <span class="surface-input-text"> {{ resolvedLabels().interval }} </span>
@@ -278,13 +288,24 @@ const DEFAULT_RECURRENCE_EDITOR_LABELS: IRecurrenceEditorLabels = {
                     </div>
                     @if (isRecurrenceEndUntil()) {
                         <mosaik-form-field [fieldState]="endAtField()()">
-                            <mosaik-datetimebox
-                                #endAtTarget
-                                [formField]="endAtField()"
-                                [variant]="'primary'"
-                                [label]="resolvedLabels().recurrenceEndAt"
-                                [dropDownPlacement]="'bottom-end'"
-                            />
+                            @if (endDateMode() === 'calendar-day') {
+                                <mosaik-datebox
+                                    #endAtTarget
+                                    [formField]="endAtField()"
+                                    [variant]="'primary'"
+                                    [label]="resolvedLabels().recurrenceEndAt"
+                                    [dropDownPlacement]="'bottom-end'"
+                                    [required]="true"
+                                />
+                            } @else {
+                                <mosaik-datetimebox
+                                    #endAtTarget
+                                    [formField]="endAtField()"
+                                    [variant]="'primary'"
+                                    [label]="resolvedLabels().recurrenceEndAt"
+                                    [dropDownPlacement]="'bottom-end'"
+                                />
+                            }
                         </mosaik-form-field>
                     }
                     @if (isRecurrenceEndCount()) {
@@ -308,6 +329,7 @@ const DEFAULT_RECURRENCE_EDITOR_LABELS: IRecurrenceEditorLabels = {
     imports: [
         ChipComponent,
         ChipGroupComponent,
+        DateBoxComponent,
         DateTimeBoxComponent,
         LocaleDirective,
         FormFieldComponent,
@@ -317,6 +339,8 @@ const DEFAULT_RECURRENCE_EDITOR_LABELS: IRecurrenceEditorLabels = {
         SelectComponent,
         SelectItemComponent,
         TextBoxComponent,
+        TextComponent,
+        TypographyDirective,
     ],
     providers: [
         {
@@ -329,7 +353,7 @@ export class RecurrenceEditorComponent<TNumber extends string | number | null = 
     // #region Fields
 
     private readonly _countTarget = viewChild<NumberBoxComponent>('countTarget');
-    private readonly _endAtTarget = viewChild<DateTimeBoxComponent>('endAtTarget');
+    private readonly _endAtTarget = viewChild<unknown, ElementRef<HTMLElement>>('endAtTarget', { read: ElementRef });
     private readonly _endModeTarget = viewChild<ElementRef<HTMLElement>>('endModeTarget');
     private readonly _frequencyTarget = viewChild<SelectComponent>('frequencyTarget');
     private readonly _intervalTarget = viewChild<ElementRef<HTMLElement>>('intervalTarget');
@@ -337,7 +361,7 @@ export class RecurrenceEditorComponent<TNumber extends string | number | null = 
     private readonly _monthlyModeTarget = viewChild<ElementRef<HTMLElement>>('monthlyModeTarget');
     private readonly _monthlyWeekdayTarget = viewChild<ElementRef<HTMLElement>>('monthlyWeekdayTarget');
     private readonly _ordinalTarget = viewChild<ElementRef<HTMLElement>>('ordinalTarget');
-    private readonly _summaryTarget = viewChild<TextBoxComponent>('summaryTarget');
+    private readonly _summaryTarget = viewChild<unknown, ElementRef<HTMLElement>>('summaryTarget', { read: ElementRef });
     private readonly _weekdaysTarget = viewChild<ElementRef<HTMLElement>>('weekdaysTarget');
     private readonly _previewFormat = new Intl.DateTimeFormat(inject(LOCALE_ID), { month: 'short', day: 'numeric' });
 
@@ -367,11 +391,17 @@ export class RecurrenceEditorComponent<TNumber extends string | number | null = 
 
     public readonly labels = input<Partial<IRecurrenceEditorLabels>>({});
 
+    /** Optional two-line summary. Defaults to the built-in read-only field. */
+    public readonly summary = input<{ readonly head: string; readonly detail: string }>();
+
     /** Allows a one-off occurrence in the frequency options. */
     public readonly allowNone = input(true);
 
     /** Shows the controls for limiting the series. */
     public readonly allowEnd = input(true);
+
+    /** Controls whether the end field edits a calendar day or an instant. */
+    public readonly endDateMode = input<'calendar-day' | 'instant'>('instant');
 
     /** Reference day for the weekday and monthly choice previews. Omit to show the labels alone. */
     public readonly previewFrom = input<Date | null>(null);
@@ -389,7 +419,7 @@ export class RecurrenceEditorComponent<TNumber extends string | number | null = 
             [
                 RECURRENCE_EDITOR_TOUR_TARGETS.endAt,
                 createTourAccessorTarget(
-                    computed(() => this._endAtTarget()?.elementRef.nativeElement ?? null),
+                    computed(() => this._endAtTarget()?.nativeElement ?? null),
                     computed(() => this.endAtField()().value),
                 ),
             ],
@@ -442,7 +472,7 @@ export class RecurrenceEditorComponent<TNumber extends string | number | null = 
                     computed(() => this.weekdayOrdinalField()().value),
                 ),
             ],
-            [RECURRENCE_EDITOR_TOUR_TARGETS.summary, createTourAccessorTarget(computed(() => this._summaryTarget()?.elementRef.nativeElement ?? null))],
+            [RECURRENCE_EDITOR_TOUR_TARGETS.summary, createTourAccessorTarget(computed(() => this._summaryTarget()?.nativeElement ?? null))],
             [
                 RECURRENCE_EDITOR_TOUR_TARGETS.weekdays,
                 createTourAccessorTarget(

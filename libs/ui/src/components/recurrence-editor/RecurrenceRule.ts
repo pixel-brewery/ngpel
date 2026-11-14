@@ -2,6 +2,7 @@
 
 import { fromCalendarDate } from '@pixel-brewery/ngpel-core';
 import { recurrenceTime } from './recurrenceTime';
+import { toCalendarDayEnd } from './toCalendarDayEnd';
 
 // #endregion
 
@@ -34,6 +35,8 @@ export interface IRecurrenceValue {
 
 export interface IParseRecurrenceRuleOptions {
     readonly recurrenceEndAt?: null | string;
+    /** Converts date-only ends to the inclusive local end instant. Timed ends retain their instant. */
+    readonly endDateMode?: 'calendar-day' | 'instant';
 }
 
 export const RECURRENCE_INTERVAL_OPTIONS: ReadonlyArray<IRecurrenceOption<number>> = [
@@ -150,7 +153,8 @@ export function parseRecurrenceRule(value: null | string | undefined, options: I
     const byDay = parts.get('BYDAY');
     const byMonthDay = /^-?\d+/u.exec(parts.get('BYMONTHDAY') ?? '')?.[0];
     const count = /^\d+$/u.exec(parts.get('COUNT') ?? '')?.[0];
-    const until = parseUntil(parts.get('UNTIL')) ?? options.recurrenceEndAt ?? '';
+    const rawUntil = parseUntil(parts.get('UNTIL')) ?? options.recurrenceEndAt ?? '';
+    const until = options.endDateMode === 'calendar-day' ? toCalendarDayEndInstant(rawUntil) : rawUntil;
     const hour = parts.get('BYHOUR');
     const minutes = parts.get('BYMINUTE') ?? '0';
     const time = hour === undefined ? undefined : `${hour.padStart(2, '0')}:${minutes.padStart(2, '0')}`;
@@ -188,10 +192,8 @@ export function parseRecurrenceRule(value: null | string | undefined, options: I
 }
 
 export function normalizeRecurrenceByDays(value: string): ReadonlyArray<RecurrenceWeekday> {
-    const values = value
-        .split(',')
-        .map((entry) => entry.trim())
-        .filter((entry): entry is RecurrenceWeekday => RECURRENCE_WEEKDAY_OPTIONS.some((option) => option.value === entry));
+    const entries = new Set(value.split(',').map((entry) => entry.trim().toUpperCase()));
+    const values = RECURRENCE_WEEKDAY_OPTIONS.map((option) => option.value).filter((weekday) => entries.has(weekday));
 
     return values.length > 0 ? values : ['MO'];
 }
@@ -210,6 +212,16 @@ function toMonthDay(value: string): number {
 
 function toWeekdayOrdinal(value: string): string {
     return RECURRENCE_WEEKDAY_ORDINAL_OPTIONS.some((option) => option.value === value) ? value : '1';
+}
+
+function toCalendarDayEndInstant(value: string): string {
+    if (/^\d{4}-\d{2}-\d{2}$/u.test(value)) {
+        const day = fromCalendarDate(value);
+        return day ? toCalendarDayEnd(day).toISOString() : '';
+    }
+
+    const timestamp = Date.parse(value);
+    return Number.isFinite(timestamp) ? new Date(timestamp).toISOString() : '';
 }
 
 function formatUntil(value: string): string | undefined {

@@ -47,7 +47,7 @@ Formats one part of the recurrence description.
 | Parameter | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
 | `value` | [`IRecurrenceValue`](Interface.IRecurrenceValue) \| `null` \| `undefined` | `undefined` | Recurrence to describe. |
-| `part?` | `"full"` \| `"detail"` \| `"head"` | `'full'` | Which part of the description to render. |
+| `part?` | `"detail"` \| `"head"` \| `"full"` | `'full'` | Which part of the description to render. |
 | `labels?` | `Partial`\<[`IRecurrenceSummaryLabels`](Interface.IRecurrenceSummaryLabels)\> | `undefined` | Optional application translations. |
 | `locale?` | `string` | `...` | Locale override for calendar display. |
 

@@ -9,7 +9,7 @@ editUrl: false
 function createRecurrenceRule(value, options?): string | null;
 ```
 
-Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:90](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L90)
+Defined in: [libs/ui/src/components/recurrence-editor/RecurrenceRule.ts:93](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/recurrence-editor/RecurrenceRule.ts#L93)
 
 Serializes the editable recurrence. Applications that store the end separately can keep the
 default behavior. Set `includeUntil` for a self-contained RFC 5545 rule.
