@@ -200,8 +200,13 @@ jobs:
           set -euo pipefail
           tag="v$RELEASE_VERSION"
           test "$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$tag" --jq .object.sha)" = "$RELEASE_COMMIT"
-          for package in core forms mvp router ui; do
-            test "$(gh api "orgs/$GITHUB_REPOSITORY_OWNER/packages/npm/ngpel-$package" --jq .visibility)" = public
+          cd "$RUNNER_TEMP/ngpel-release"
+          shopt -s nullglob
+          tarballs=(./*.tgz)
+          test "${#tarballs[@]}" -gt 0
+          for tarball in "${tarballs[@]}"; do
+            package=$(tar -xOf "$tarball" package/package.json | jq -er '.name | sub("^@pixel-brewery/"; "")')
+            test "$(gh api "orgs/$GITHUB_REPOSITORY_OWNER/packages/npm/$package" --jq .visibility)" = public
           done
           if ! gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
             notes="$RUNNER_TEMP/ngpel-release-notes.md"

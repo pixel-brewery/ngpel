@@ -32,7 +32,7 @@ The repository owner changes the repository visibility to **Public**.
    **Publish documentation** on `main`. After that, pushes to public `main` refresh the site.
 
 GitHub manages npm package visibility separately from repository visibility. New packages
-default to **Private**. Check that all five packages are **Public** before announcing the
+default to **Private**. Check that all listed packages are **Public** before announcing the
 release. Public GitHub npm packages still require an authenticated registry client.
 
 ## Continuous package releases

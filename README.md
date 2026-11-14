@@ -80,7 +80,6 @@ export const appConfig: ApplicationConfig = {
 | --------------------------------------- | ----- | --------------------------------------------------------------------------------------------------------- |
 | [`ngpel-core`](libs/core/README.md)     | 0     | Feature composition, RxJS helpers, storage, browser, notifications, audio, search and the operation queue |
 | [`ngpel-mvp`](libs/mvp/README.md)       | 0     | Model–View–Presenter, commands, presenter behaviors and controllers                                       |
-| [`ngpel-forms`](libs/forms/README.md)   | 1     | Signal Forms validators, status classes and password strength                                             |
 | [`ngpel-router`](libs/router/README.md) | 1     | Route paths, URL signals, navigation and application shell                                                |
 | [`ngpel-ui`](libs/ui/README.md)         | 2     | Components, directives, pipes, Markdown and widgets                                                       |
 

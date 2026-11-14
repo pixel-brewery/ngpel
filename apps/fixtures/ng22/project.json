@@ -4,7 +4,7 @@
     "sourceRoot": "apps/fixtures/ng22/src",
     "projectType": "application",
     "tags": ["app", "type:app", "fixture"],
-    "implicitDependencies": ["core", "mvp", "ui", "forms", "router"],
+    "implicitDependencies": ["core", "mvp", "ui", "router"],
     "targets": {
         "build": {
             "executor": "nx:run-commands",

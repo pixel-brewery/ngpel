@@ -13,9 +13,9 @@
         "@angular/service-worker": ">=22.0.0 <23.0.0",
         "rxjs": ">=7.8.0 <8.0.0",
         "marked": ">=18.0.0",
-        "@pixel-brewery/markdowner-core": ">=0.1.96",
-        "@pixel-brewery/mosaik-elements-angular": ">=0.1.188",
-        "@pixel-brewery/mosaik-elements-foundation": ">=0.1.188",
+        "@pixel-brewery/markdowner-core": ">=0.1.204",
+        "@pixel-brewery/mosaik-elements-angular": ">=0.1.204",
+        "@pixel-brewery/mosaik-elements-foundation": ">=0.1.204",
         "@angular/cdk": ">=22.0.0 <23.0.0",
         "@codemirror/autocomplete": ">=6.0.0",
         "@codemirror/commands": ">=6.0.0",
@@ -125,17 +125,6 @@
                 ]
             },
             "inlineStyleLanguage": "scss"
-        },
-        {
-            "name": "forms",
-            "layer": 1,
-            "category": "Presentation",
-            "description": "Signal Forms validators, async validator helpers, the shared status-class map and the password-strength service.",
-            "keywords": ["forms", "validators", "signal-forms", "password-strength"],
-            "dependsOn": ["core"],
-            "entryPoints": {
-                ".": ["@angular/core", "@angular/forms"]
-            }
         },
         {
             "name": "router",

@@ -13,9 +13,6 @@
             "path": "./libs/ui"
         },
         {
-            "path": "./libs/forms"
-        },
-        {
             "path": "./libs/router"
         }
     ],

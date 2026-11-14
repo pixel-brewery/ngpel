@@ -7,7 +7,7 @@ import { ImageUploadPreparationService } from '@pixel-brewery/ngpel-core/browser
 import { OperationQueue } from '@pixel-brewery/ngpel-core/operation-queue';
 import { View, VIEW_PRESENTER } from '@pixel-brewery/ngpel-mvp';
 import { renderPlainMarkdown } from '@pixel-brewery/ngpel-ui/markdown';
-import { NG_STATUS_CLASSES, trimmedMaxLength } from '@pixel-brewery/ngpel-forms';
+import { NG_STATUS_CLASSES, trimmedMaxLength } from '@pixel-brewery/mosaik-elements-angular';
 import { RoutePath } from '@pixel-brewery/ngpel-router';
 import { filter, firstValueFrom, timeout } from 'rxjs';
 import { ContextMenuFixture } from './ContextMenuFixture';

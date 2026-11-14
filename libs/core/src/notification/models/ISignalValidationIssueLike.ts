@@ -1,6 +1,5 @@
 /**
- * Structural shape of a Signal Forms validation issue, narrow enough that this package does not
- * depend on the forms package to report one. Each entry of {@link ISignalValidationIssueLike.errors}
+ * Structural shape of a Signal Forms validation issue, for reporting without a dependency on Angular Forms. Each entry of {@link ISignalValidationIssueLike.errors}
  * is inspected for a user-facing message — a string, a signal of a string, or an object carrying
  * either under `message`.
  *

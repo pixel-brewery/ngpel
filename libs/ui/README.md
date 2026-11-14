@@ -88,9 +88,9 @@ import {
 | `@codemirror/view`                          | `>=6.0.0` _(optional)_          |
 | `@googlemaps/markerclusterer`               | `>=2.6.2 <3` _(optional)_       |
 | `@lezer/highlight`                          | `>=1.2.0` _(optional)_          |
-| `@pixel-brewery/markdowner-core`            | `>=0.1.96`                      |
-| `@pixel-brewery/mosaik-elements-angular`    | `>=0.1.188` _(optional)_        |
-| `@pixel-brewery/mosaik-elements-foundation` | `>=0.1.188` _(optional)_        |
+| `@pixel-brewery/markdowner-core`            | `>=0.1.204`                     |
+| `@pixel-brewery/mosaik-elements-angular`    | `>=0.1.204` _(optional)_        |
+| `@pixel-brewery/mosaik-elements-foundation` | `>=0.1.204` _(optional)_        |
 | `@pixel-brewery/ngpel-core`                 | `0.0.17`                        |
 | `@pixel-brewery/ngpel-mvp`                  | `0.0.17`                        |
 | `@pixel-brewery/ngpel-router`               | `0.0.17`                        |
@@ -121,4 +121,4 @@ Layer 2 — depends on `@pixel-brewery/ngpel-core`, `@pixel-brewery/ngpel-mvp`, 
 
 ## What stays in the application
 
-Theme tokens, translation catalogues, product-specific layouts and domain views stay in the application. For Mosaik controls, use Mosaik Angular 0.1.203 or later and import the providers from their Angular component entry points, for example `provideCalendarIntl` from `@pixel-brewery/mosaik-elements-angular/components/calendar`. Import the providers for ngPEL components from ngPEL. Mosaik and CodeMirror are optional peers: install them only for the components that render through them.
+Theme tokens, translation catalogues, product-specific layouts and domain views stay in the application. For Mosaik controls, use Mosaik Angular 0.1.204 or later and import the providers from their Angular component entry points, for example `provideCalendarIntl` from `@pixel-brewery/mosaik-elements-angular/components/calendar`. Import Signal Forms validators and status classes from `@pixel-brewery/mosaik-elements-angular`. Import the providers for ngPEL components from ngPEL. Mosaik and CodeMirror are optional peers: install them only for the components that render through them.

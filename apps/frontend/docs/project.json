@@ -73,5 +73,5 @@
             "cache": true
         }
     },
-    "implicitDependencies": ["core", "mvp", "ui", "forms", "router"]
+    "implicitDependencies": ["core", "mvp", "ui", "router"]
 }

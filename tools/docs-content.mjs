@@ -112,30 +112,7 @@ import { BytesPipe, InitialsPipe, PseudoLinkDirective } from '@pixel-brewery/ngp
 })
 export class FileRowComponent {}`,
         productSide:
-            'Theme tokens, translation catalogues, product-specific layouts and domain views stay in the application. For Mosaik controls, use Mosaik Angular 0.1.203 or later and import the providers from their Angular component entry points, for example `provideCalendarIntl` from `@pixel-brewery/mosaik-elements-angular/components/calendar`. Import the providers for ngPEL components from ngPEL. Mosaik and CodeMirror are optional peers: install them only for the components that render through them.',
-    },
-    forms: {
-        tagline: 'Signal Forms validators, the async validator helpers, the status-class map all three products duplicated, and the password-strength service.',
-        features: [
-            '**Validators** — IBAN with a mod-97 check and a country-length table, BIC, email, hostname, HTTP and HTTPS URLs, UUID, hex colour, country, currency and language-region codes, ports, safe integers, decimal places, dates and cross-field comparisons.',
-            '**Dynamic and trimmed values** — `allowedValue` accepts a static list or a resolver that reads other fields or signals; `trimmedMinLength` and `trimmedMaxLength` ignore surrounding whitespace.',
-            '**Typed errors** — every validator ships its own `I*ValidationError` shape, so a template can react to the specific failure rather than a boolean.',
-            '**Async helpers** — `useAsyncValidator` and its debounced variant, both honouring the shared `when` option.',
-            '**Status classes** — `NG_STATUS_CLASSES` wires `provideSignalFormsConfig` in one line.',
-            '**Password strength** — a configurable rule set with thresholds and a score signal.',
-        ],
-        quickStart: `import { form, schema } from '@angular/forms/signals';
-import { emailAddress, iban, NG_STATUS_CLASSES, trimmedMinLength } from '@pixel-brewery/ngpel-forms';
-
-const paymentSchema = schema<IPayment>((path) => {
-    emailAddress(path.email);
-    iban(path.iban);
-    trimmedMinLength(path.reference, 3);
-});
-
-// Once, in the application configuration:
-provideSignalFormsConfig({ classes: NG_STATUS_CLASSES });`,
-        productSide: 'Locale-specific catalogues such as academic titles, and any validator bound to a product domain, stay in the application.',
+            'Theme tokens, translation catalogues, product-specific layouts and domain views stay in the application. For Mosaik controls, use Mosaik Angular 0.1.204 or later and import the providers from their Angular component entry points, for example `provideCalendarIntl` from `@pixel-brewery/mosaik-elements-angular/components/calendar`. Import Signal Forms validators and status classes from `@pixel-brewery/mosaik-elements-angular`. Import the providers for ngPEL components from ngPEL. Mosaik and CodeMirror are optional peers: install them only for the components that render through them.',
     },
     router: {
         tagline:
