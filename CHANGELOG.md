@@ -1,3 +1,16 @@
+## 0.0.16 (2026-11-14)
+
+### 🚀 Features
+
+- **ui:** expose typewriter text for renderers ([71cbb9d](https://github.com/pixel-brewery/ngpel/commit/71cbb9d))
+- **ui:** support animated header page paths ([59e86b5](https://github.com/pixel-brewery/ngpel/commit/59e86b5))
+
+### 🩹 Fixes
+
+- **ui:** expose agreement gate test identifiers ([765153b](https://github.com/pixel-brewery/ngpel/commit/765153b))
+- **ui:** bind rail typewriter input ([1620bf0](https://github.com/pixel-brewery/ngpel/commit/1620bf0))
+- **ui:** retain path motion on viewport changes ([79ea951](https://github.com/pixel-brewery/ngpel/commit/79ea951))
+
 ## 0.0.15 (2026-11-14)
 
 ### 🚀 Features
