@@ -3,7 +3,7 @@
 import { Component, ElementRef, type Signal, signal, type WritableSignal } from '@angular/core';
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { HoverRevealForDirective } from './HoverRevealForDirective';
 import type { HoverRevealTarget } from './HoverRevealTarget';
 
@@ -47,8 +47,14 @@ describe('HoverRevealForDirective', () => {
     let outside: HTMLButtonElement;
     let row: HTMLDivElement;
     let target: WritableSignal<HoverRevealTarget>;
+    let hoverCapability: EventTarget;
+    let hoverless: boolean;
 
     beforeEach(() => {
+        hoverless = false;
+        hoverCapability = new EventTarget();
+        Object.defineProperty(hoverCapability, 'matches', { get: () => hoverless });
+        vi.stubGlobal('matchMedia', (query: string) => (query === '(hover: none)' ? hoverCapability : undefined));
         fixture = TestBed.configureTestingModule({ imports: [HostComponent] }).createComponent(HostComponent);
         const root = fixture.nativeElement as HTMLElement;
         action = root.querySelector('#action') as HTMLButtonElement;
@@ -63,6 +69,7 @@ describe('HoverRevealForDirective', () => {
 
     afterEach(() => {
         TestBed.resetTestingModule();
+        vi.unstubAllGlobals();
     });
 
     it('keeps the contextual action in layout while hiding it at rest', () => {
@@ -73,6 +80,34 @@ describe('HoverRevealForDirective', () => {
 
         // Assert
         expect(opacity).toBe('0');
+        expect(action.style.pointerEvents).toBe('none');
+    });
+
+    it('keeps the action visible after pointer leave when the primary pointer cannot hover', () => {
+        // Arrange
+        hoverless = true;
+        hoverCapability.dispatchEvent(new Event('change'));
+
+        // Act
+        row.dispatchEvent(new MouseEvent('mouseleave'));
+
+        // Assert
+        expect(action.style.opacity).toBe('1');
+        expect(action.style.pointerEvents).toBe('auto');
+    });
+
+    it('re-applies hover-dependent visibility when the primary pointer gains hover', () => {
+        // Arrange
+        hoverless = true;
+        hoverCapability.dispatchEvent(new Event('change'));
+        expect(action.style.pointerEvents).toBe('auto');
+        hoverless = false;
+
+        // Act
+        hoverCapability.dispatchEvent(new Event('change'));
+
+        // Assert
+        expect(action.style.opacity).toBe('0');
         expect(action.style.pointerEvents).toBe('none');
     });
 

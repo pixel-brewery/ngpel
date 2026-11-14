@@ -68,6 +68,7 @@ export class ViewSlotAnchorOutletComponent<TSelection = unknown> {
     private readonly _parentInjector: Injector;
     private readonly _loadedComponents: WritableSignal<Array<ILoadedViewSlotComponent>> = signal([]);
     private readonly _loadingViewId: WritableSignal<string | null> = signal(null);
+    private readonly _loadingViewIds = new Set<string>();
     private readonly _viewInjectors: Map<string, Injector> = new Map<string, Injector>();
 
     // #endregion
@@ -191,7 +192,7 @@ export class ViewSlotAnchorOutletComponent<TSelection = unknown> {
     public readonly isLoading: Signal<boolean>;
 
     /**
-     * Identifier of the view currently loading.
+     * Identifier of a pending view, or null when all views have finished loading.
      *
      * @public
      * @readonly
@@ -278,6 +279,10 @@ export class ViewSlotAnchorOutletComponent<TSelection = unknown> {
     }
 
     private async loadViewComponent(viewId: string): Promise<void> {
+        if (this._loadingViewIds.has(viewId)) {
+            return;
+        }
+
         const view = this.getViewDefinition(viewId);
 
         if (!view) {
@@ -293,12 +298,14 @@ export class ViewSlotAnchorOutletComponent<TSelection = unknown> {
             return;
         }
 
+        this._loadingViewIds.add(viewId);
         this._loadingViewId.set(viewId);
 
         try {
             this.addLoadedComponent(viewId, await view.loadComponent());
         } finally {
-            this._loadingViewId.set(null);
+            this._loadingViewIds.delete(viewId);
+            this._loadingViewId.set(this._loadingViewIds.values().next().value ?? null);
         }
     }
 

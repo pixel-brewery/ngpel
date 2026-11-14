@@ -23,7 +23,7 @@ Renders active Mosaik view-slot entries with stable DOM anchors.
 new ViewSlotAnchorOutletComponent<TSelection>(registry?, parentInjector?): ViewSlotAnchorOutletComponent<TSelection>;
 ```
 
-Defined in: [libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts:82](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts#L82)
+Defined in: [libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts:83](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts#L83)
 
 Constructs a new instance of the `ViewSlotAnchorOutletComponent` class.
 
@@ -46,7 +46,7 @@ Constructs a new instance of the `ViewSlotAnchorOutletComponent` class.
 readonly activeViewId: InputSignal<string | null>;
 ```
 
-Defined in: [libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts:134](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts#L134)
+Defined in: [libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts:135](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts#L135)
 
 Active view ID that should be scrolled into view.
 
@@ -58,7 +58,7 @@ Active view ID that should be scrolled into view.
 readonly anchorRequest: InputSignal<number>;
 ```
 
-Defined in: [libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts:167](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts#L167)
+Defined in: [libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts:168](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts#L168)
 
 Monotonic request marker used to re-scroll the same active view.
 
@@ -70,7 +70,7 @@ Monotonic request marker used to re-scroll the same active view.
 readonly displayedViews: Signal<IViewSlotDefinition<TSelection>[]>;
 ```
 
-Defined in: [libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts:183](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts#L183)
+Defined in: [libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts:184](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts#L184)
 
 Views that should actually be rendered.
 
@@ -82,7 +82,7 @@ Views that should actually be rendered.
 readonly fillItems: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts:159](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts#L159)
+Defined in: [libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts:160](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts#L160)
 
 Indicates whether each rendered view should fill the available outlet height.
 
@@ -94,7 +94,7 @@ Indicates whether each rendered view should fill the available outlet height.
 readonly hasViews: Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts:207](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts#L207)
+Defined in: [libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts:208](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts#L208)
 
 Indicates whether the active slot contains visible views.
 
@@ -106,7 +106,7 @@ Indicates whether the active slot contains visible views.
 readonly isLoading: Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts:191](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts#L191)
+Defined in: [libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts:192](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts#L192)
 
 Indicates whether a lazy view component is loading.
 
@@ -118,9 +118,9 @@ Indicates whether a lazy view component is loading.
 readonly loadingViewId: Signal<string | null>;
 ```
 
-Defined in: [libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts:199](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts#L199)
+Defined in: [libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts:200](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts#L200)
 
-Identifier of the view currently loading.
+Identifier of a pending view, or null when all views have finished loading.
 
 ***
 
@@ -130,7 +130,7 @@ Identifier of the view currently loading.
 readonly selection: InputSignal<TSelection | null>;
 ```
 
-Defined in: [libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts:126](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts#L126)
+Defined in: [libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts:127](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts#L127)
 
 Selection forwarded to registered view-slot activation predicates.
 
@@ -142,7 +142,7 @@ Selection forwarded to registered view-slot activation predicates.
 readonly slot: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts:118](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts#L118)
+Defined in: [libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts:119](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts#L119)
 
 Slot identifier whose active views should be rendered.
 
@@ -154,7 +154,7 @@ Slot identifier whose active views should be rendered.
 readonly views: Signal<IViewSlotDefinition<TSelection>[]>;
 ```
 
-Defined in: [libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts:175](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts#L175)
+Defined in: [libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts:176](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts#L176)
 
 Active view definitions in the current slot.
 
@@ -166,7 +166,7 @@ Active view definitions in the current slot.
 readonly visibleViewId: InputSignal<string | null>;
 ```
 
-Defined in: [libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts:143](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts#L143)
+Defined in: [libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts:144](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts#L144)
 
 When set, only the view with this ID is rendered.
 All other views remain in the slot registry but are hidden.
@@ -179,7 +179,7 @@ All other views remain in the slot registry but are hidden.
 readonly visibleViewIds: InputSignal<ReadonlySet<string> | null>;
 ```
 
-Defined in: [libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts:151](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts#L151)
+Defined in: [libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts:152](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts#L152)
 
 When set, only views whose IDs belong to this set are rendered.
 
@@ -191,7 +191,7 @@ When set, only views whose IDs belong to this set are rendered.
 getComponent(viewId): Type<unknown> | null;
 ```
 
-Defined in: [libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts:254](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts#L254)
+Defined in: [libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts:255](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts#L255)
 
 Gets the loaded Angular component for a view.
 
@@ -215,7 +215,7 @@ Component type when loaded; otherwise `null`.
 getInjectorForView(viewId): Injector;
 ```
 
-Defined in: [libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts:220](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts#L220)
+Defined in: [libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts:221](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/view-slot-anchor-outlet/ViewSlotAnchorOutletComponent.ts#L221)
 
 Gets a stable injector for the rendered view component.
 

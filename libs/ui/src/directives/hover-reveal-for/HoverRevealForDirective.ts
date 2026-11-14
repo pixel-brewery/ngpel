@@ -14,7 +14,8 @@ import type { IHasElementRef } from './IHasElementRef';
  * whose actions appear contextually.
  *
  * The directive preserves the host's layout while coordinating opacity and pointer events, so the
- * host remains focusable and keyboard focus can reveal it.
+ * host remains focusable and keyboard focus can reveal it. On devices whose primary pointer
+ * cannot hover, the host stays visible and can be tapped directly.
  *
  * @example
  * ```html
@@ -37,6 +38,7 @@ export class HoverRevealForDirective implements OnInit, AfterViewInit {
     // #region Fields
 
     private readonly _host: HTMLElement;
+    private readonly _hoverlessQuery: MediaQueryList | undefined;
     private readonly _renderer: Renderer2;
     private _cleanups: Array<() => void> = [];
     private _isPointerWithin = false;
@@ -61,7 +63,13 @@ export class HoverRevealForDirective implements OnInit, AfterViewInit {
     ) {
         this._host = elementRef.nativeElement;
         this._renderer = renderer;
-        destroyRef.onDestroy(() => this.unbind());
+        this._hoverlessQuery = this._host.ownerDocument.defaultView?.matchMedia?.('(hover: none)');
+        const updateHoverCapability = (): void => this.updateVisibility();
+        this._hoverlessQuery?.addEventListener?.('change', updateHoverCapability);
+        destroyRef.onDestroy(() => {
+            this._hoverlessQuery?.removeEventListener?.('change', updateHoverCapability);
+            this.unbind();
+        });
         effect(() => this.rebind(this.for()));
     }
 
@@ -83,7 +91,7 @@ export class HoverRevealForDirective implements OnInit, AfterViewInit {
     // #region Methods
 
     /**
-     * Hides the host element on initialisation.
+     * Applies the initial visibility for the current pointer capabilities.
      *
      * @public
      */
@@ -152,7 +160,7 @@ export class HoverRevealForDirective implements OnInit, AfterViewInit {
     }
 
     private updateVisibility(): void {
-        const isVisible = this._isPointerWithin || this._hasFocusWithin;
+        const isVisible = (this._hoverlessQuery?.matches ?? false) || this._isPointerWithin || this._hasFocusWithin;
         this._renderer.setStyle(this._host, 'opacity', isVisible ? '1' : '0');
         this._renderer.setStyle(this._host, 'pointer-events', isVisible ? 'auto' : 'none');
     }

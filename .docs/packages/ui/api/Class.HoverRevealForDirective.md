@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: HoverRevealForDirective
 
-Defined in: [libs/ui/src/directives/hover-reveal-for/HoverRevealForDirective.ts:36](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/hover-reveal-for/HoverRevealForDirective.ts#L36)
+Defined in: [libs/ui/src/directives/hover-reveal-for/HoverRevealForDirective.ts:37](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/hover-reveal-for/HoverRevealForDirective.ts#L37)
 
 Reveals its host element when the specified area is hovered or receives focus.
 
@@ -14,7 +14,8 @@ pointer or keyboard focus. Typical use cases are row-level action buttons in tab
 whose actions appear contextually.
 
 The directive preserves the host's layout while coordinating opacity and pointer events, so the
-host remains focusable and keyboard focus can reveal it.
+host remains focusable and keyboard focus can reveal it. On devices whose primary pointer
+cannot hover, the host stays visible and can be tapped directly.
 
 ## Example
 
@@ -45,7 +46,7 @@ new HoverRevealForDirective(
 ): HoverRevealForDirective;
 ```
 
-Defined in: [libs/ui/src/directives/hover-reveal-for/HoverRevealForDirective.ts:57](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/hover-reveal-for/HoverRevealForDirective.ts#L57)
+Defined in: [libs/ui/src/directives/hover-reveal-for/HoverRevealForDirective.ts:59](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/hover-reveal-for/HoverRevealForDirective.ts#L59)
 
 Constructs a new instance of the `HoverRevealForDirective` class.
 
@@ -69,7 +70,7 @@ Constructs a new instance of the `HoverRevealForDirective` class.
 readonly for: InputSignal<HoverRevealTarget>;
 ```
 
-Defined in: [libs/ui/src/directives/hover-reveal-for/HoverRevealForDirective.ts:79](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/hover-reveal-for/HoverRevealForDirective.ts#L79)
+Defined in: [libs/ui/src/directives/hover-reveal-for/HoverRevealForDirective.ts:87](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/hover-reveal-for/HoverRevealForDirective.ts#L87)
 
 Element reference, native element or component to monitor for pointer and focus events.
 While the user hovers over or focuses within this target, the directive host becomes visible.
@@ -82,7 +83,7 @@ While the user hovers over or focuses within this target, the directive host bec
 ngAfterViewInit(): void;
 ```
 
-Defined in: [libs/ui/src/directives/hover-reveal-for/HoverRevealForDirective.ts:99](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/hover-reveal-for/HoverRevealForDirective.ts#L99)
+Defined in: [libs/ui/src/directives/hover-reveal-for/HoverRevealForDirective.ts:107](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/hover-reveal-for/HoverRevealForDirective.ts#L107)
 
 Binds pointer and focus listeners once the view has been initialised.
 
@@ -102,9 +103,9 @@ Binds pointer and focus listeners once the view has been initialised.
 ngOnInit(): void;
 ```
 
-Defined in: [libs/ui/src/directives/hover-reveal-for/HoverRevealForDirective.ts:90](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/hover-reveal-for/HoverRevealForDirective.ts#L90)
+Defined in: [libs/ui/src/directives/hover-reveal-for/HoverRevealForDirective.ts:98](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/hover-reveal-for/HoverRevealForDirective.ts#L98)
 
-Hides the host element on initialisation.
+Applies the initial visibility for the current pointer capabilities.
 
 #### Returns
 
