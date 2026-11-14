@@ -1,3 +1,9 @@
+## 0.0.20 (2026-11-14)
+
+### 🚀 Features
+
+- **ui:** share widget card and display helpers ([8fcac20](https://github.com/pixel-brewery/ngpel/commit/8fcac20))
+
 ## 0.0.19 (2026-11-14)
 
 ### 🚀 Features
