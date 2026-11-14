@@ -1,3 +1,14 @@
+## 0.0.9 (2026-11-14)
+
+### 🚀 Features
+
+- **ui:** support nested table groups ([c4a3e08](https://github.com/pixel-brewery/ngpel/commit/c4a3e08))
+- **ui:** adapt server-backed data tables ([65b9a0c](https://github.com/pixel-brewery/ngpel/commit/65b9a0c))
+
+### 🩹 Fixes
+
+- **ui:** restore CI after the Mosaik dependency update ([#11](https://github.com/pixel-brewery/ngpel/pull/11))
+
 ## 0.0.8 (2026-11-12)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
