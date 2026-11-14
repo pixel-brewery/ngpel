@@ -18,6 +18,7 @@ import {
     DividerComponent,
     DropDownButtonComponent,
     IconComponent,
+    IconNameDirective,
     ListComponent,
     ListItemComponent,
     MenuComponent,
@@ -25,6 +26,8 @@ import {
     SkeletonComponent,
 } from '@pixel-brewery/mosaik-elements-angular';
 import type { Variant } from '@pixel-brewery/mosaik-elements-foundation';
+import { StopEventPropagationDirective } from '../../directives/stop-event-propagation/StopEventPropagationDirective';
+import { CellComponent } from '../cell/CellComponent';
 import type { ContextMenuComponent } from '../context-menu/ContextMenuComponent';
 import { ContextMenuTriggerDirective } from '../context-menu/ContextMenuTriggerDirective';
 import { CollectionListEmptyDirective } from './CollectionListEmptyDirective';
@@ -43,25 +46,38 @@ import type { ICollectionListMenuSelection } from './ICollectionListMenuSelectio
  */
 @Component({
     selector: 'ngp-collection-list',
-    host: { class: 'flex min-h-0 w-full flex-1 flex-col', role: 'region', '[attr.aria-busy]': 'isLoading() || null' },
+    host: {
+        class: 'flex min-h-0 w-full flex-col',
+        '[class.flex-1]': '!compact()',
+        '[class.h-full]': 'compact()',
+        '[class.min-w-0]': 'compact()',
+        '[attr.role]': 'compact() ? null : "region"',
+        '[attr.aria-busy]': '(!compact() && isLoading()) || null',
+    },
     imports: [
         ButtonComponent,
+        CellComponent,
         ContextMenuTriggerDirective,
         DividerComponent,
         DropDownButtonComponent,
         IconComponent,
+        IconNameDirective,
         ListComponent,
         ListItemComponent,
         MenuComponent,
         MenuItemComponent,
         NgTemplateOutlet,
         SkeletonComponent,
+        StopEventPropagationDirective,
     ],
     styles: `
         .ngp-collection-row {
             display: flex;
             align-items: center;
             gap: var(--mosaik-layout-space);
+            &.gap-2 {
+                gap: 0.5rem;
+            }
             min-width: 0;
             width: 100%;
         }
@@ -69,57 +85,86 @@ import type { ICollectionListMenuSelection } from './ICollectionListMenuSelectio
             flex: 1;
             min-width: 0;
         }
-        mosaik-list {
+        mosaik-list:not(.collection-view) {
             flex: 1;
             min-height: 0;
             overflow: auto;
         }
     `,
     template: `
-        <div
-            part="header"
-            class="flex min-h-13 flex-none min-w-0 items-center justify-between gap-2 px-2 py-2 max-[44rem]:h-auto max-[44rem]:flex-col max-[44rem]:items-start"
-        >
-            <div part="header-heading" class="flex min-w-0 items-center gap-2">
-                @if (headingIcon(); as icon) {
-                    <mosaik-icon part="heading-icon" [icon]="icon" [appearance]="'plain'" [variant]="headingIconVariant()" [size]="'small'" />
-                }
-                <strong part="heading">{{ heading() }}</strong>
-            </div>
-            @if (menus().length) {
-                <div part="menus" class="flex min-w-0 items-center gap-2 max-[44rem]:w-full max-[44rem]:justify-end">
-                    @for (menu of menus(); track menu.id) {
-                        <mosaik-dropdown-button
-                            #menuButton
-                            part="menu"
-                            [attr.test-id]="menu.testId ?? null"
-                            [label]="menu.label"
-                            [appearance]="'plain'"
-                            [dropDownPlacement]="'bottom-end'"
-                        >
-                            <mosaik-menu>
-                                @for (option of menu.options; track option.id) {
-                                    <mosaik-menu-item
-                                        part="menu-option"
-                                        [attr.test-id]="option.testId ?? null"
-                                        [label]="option.label"
-                                        [isChecked]="option.checked"
-                                        (activated)="onMenuOptionActivated(menu.id, option.id, menuButton)"
-                                    />
-                                }
-                            </mosaik-menu>
-                        </mosaik-dropdown-button>
+        <ng-template #footer><ng-content select="[slot=footer]" /></ng-template>
+        @if (!compact()) {
+            <div
+                part="header"
+                class="flex min-h-13 flex-none min-w-0 items-center justify-between gap-2 px-2 py-2 max-[44rem]:h-auto max-[44rem]:flex-col max-[44rem]:items-start"
+            >
+                <div part="header-heading" class="flex min-w-0 items-center gap-2">
+                    @if (headingIcon(); as icon) {
+                        <mosaik-icon part="heading-icon" [icon]="icon" [appearance]="'plain'" [variant]="headingIconVariant()" [size]="'small'" />
                     }
+                    <strong part="heading">{{ heading() }}</strong>
                 </div>
-            }
-        </div>
+                @if (menus().length) {
+                    <div part="menus" class="flex min-w-0 items-center gap-2 max-[44rem]:w-full max-[44rem]:justify-end">
+                        @for (menu of menus(); track menu.id) {
+                            <mosaik-dropdown-button
+                                #menuButton
+                                part="menu"
+                                [attr.test-id]="menu.testId ?? null"
+                                [label]="menu.label"
+                                [appearance]="'plain'"
+                                [dropDownPlacement]="'bottom-end'"
+                            >
+                                <mosaik-menu>
+                                    @for (option of menu.options; track option.id) {
+                                        <mosaik-menu-item
+                                            part="menu-option"
+                                            [attr.test-id]="option.testId ?? null"
+                                            [label]="option.label"
+                                            [isChecked]="option.checked"
+                                            (activated)="onMenuOptionActivated(menu.id, option.id, menuButton)"
+                                        />
+                                    }
+                                </mosaik-menu>
+                            </mosaik-dropdown-button>
+                        }
+                    </div>
+                }
+            </div>
+        }
         <ng-content />
         @if (isLoading() || managedRows()) {
-            <mosaik-list [attr.aria-label]="listLabel()">
+            <mosaik-list
+                [attr.part]="compact() ? 'list' : null"
+                [class.collection-view]="compact()"
+                [class.h-full]="compact()"
+                [class.min-h-0]="compact()"
+                [attr.aria-label]="listLabel()"
+                [attr.aria-busy]="(compact() && isLoading()) || null"
+            >
                 @if (isLoading()) {
-                    @for (placeholder of placeholders; track placeholder; let last = $last) {
+                    @for (placeholder of placeholders(); track placeholder; let last = $last) {
                         <mosaik-list-item part="placeholder" [disabled]="true" aria-hidden="true">
-                            <mosaik-skeleton width="65%" height="1rem" [shimmer]="true" />
+                            @if (compact()) {
+                                <ngp-cell>
+                                    <mosaik-skeleton
+                                        ngpCellTitle
+                                        [width]="'64%'"
+                                        [height]="'16px'"
+                                        [shimmer]="true"
+                                        style="--skeleton-background-color: var(--mosaik-scheme-highlight)"
+                                    />
+                                    <mosaik-skeleton
+                                        ngpCellHints
+                                        [width]="'40%'"
+                                        [height]="'12px'"
+                                        [shimmer]="true"
+                                        style="--skeleton-background-color: var(--mosaik-scheme-highlight)"
+                                    />
+                                </ngp-cell>
+                            } @else {
+                                <mosaik-skeleton width="65%" height="1rem" [shimmer]="true" />
+                            }
                         </mosaik-list-item>
                         @if (!last) {
                             <mosaik-divider />
@@ -133,11 +178,12 @@ import type { ICollectionListMenuSelection } from './ICollectionListMenuSelectio
                             part="item"
                             [value]="item"
                             [attr.data-ngp-collection-item]="itemKey()(item)"
-                            [ngpContextMenuTriggerFor]="contextMenu()"
+                            [attr.test-id]="itemTestIdPrefix() ? itemTestIdPrefix() + '-' + itemKey()(item) : null"
+                            [ngpContextMenuTriggerFor]="compact() ? undefined : contextMenu()"
                             [ngpContextMenuValue]="item"
                             (click)="itemActivated.emit(item)"
                         >
-                            <div class="ngp-collection-row">
+                            <div class="ngp-collection-row" [class.gap-2]="compact()">
                                 <div class="ngp-collection-row-body">
                                     <ng-container *ngTemplateOutlet="rowTemplate; context: { $implicit: item, index: $index }" />
                                 </div>
@@ -145,7 +191,12 @@ import type { ICollectionListMenuSelection } from './ICollectionListMenuSelectio
                                     <mosaik-button
                                         part="actions"
                                         appearance="plain"
-                                        [label]="contextMenuLabel()"
+                                        [class.shrink-0]="compact()"
+                                        [attr.test-id]="itemTestIdPrefix() ? itemTestIdPrefix() + '-actions-' + itemKey()(item) : null"
+                                        [label]="compact() ? undefined : contextMenuLabel()"
+                                        [iconName]="compact() ? 'moreHorizontal' : undefined"
+                                        [attr.aria-label]="compact() ? contextMenuLabel() : null"
+                                        [ngpStopEventPropagation]="compact()"
                                         [ngpContextMenuTriggerFor]="context"
                                         [ngpContextMenuValue]="item"
                                         [ngpContextMenuOpenOnClick]="true"
@@ -157,6 +208,9 @@ import type { ICollectionListMenuSelection } from './ICollectionListMenuSelectio
                             <mosaik-divider />
                         }
                     }
+                }
+                @if (compact()) {
+                    <ng-container [ngTemplateOutlet]="footer" />
                 }
             </mosaik-list>
         } @else if (itemTemplate(); as rowTemplate) {
@@ -170,13 +224,15 @@ import type { ICollectionListMenuSelection } from './ICollectionListMenuSelectio
                 <ng-container *ngTemplateOutlet="emptyTemplate() ?? null" />
             }
         }
-        <ng-content select="[slot=footer]" />
+        @if (!compact()) {
+            <ng-container [ngTemplateOutlet]="footer" />
+        }
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CollectionListComponent<T> {
     // #region Fields
-    protected readonly placeholders = [0, 1, 2, 3, 4];
+    protected readonly placeholders = computed(() => Array.from({ length: this.compact() ? 6 : 5 }, (_, index) => index));
     // #endregion
 
     // #region Ctor
@@ -198,7 +254,7 @@ export class CollectionListComponent<T> {
      * @public
      * @readonly
      */
-    public readonly itemKey: InputSignal<(item: T) => number | string> = input.required<(item: T) => number | string>();
+    public readonly itemKey: InputSignal<(item: T) => number | string> = input<(item: T) => number | string>(readItemId);
 
     /**
      * Summary heading displayed above the collection.
@@ -206,7 +262,7 @@ export class CollectionListComponent<T> {
      * @public
      * @readonly
      */
-    public readonly heading: InputSignal<string> = input.required<string>();
+    public readonly heading: InputSignal<string> = input<string>('');
 
     /**
      * Optional resolved Mosaik icon data displayed before the heading.
@@ -243,6 +299,12 @@ export class CollectionListComponent<T> {
     /** Replaces rows with loading placeholders and marks the list as busy. */
     public readonly isLoading = input(false);
 
+    /** Renders full-width Mosaik rows and holds the footer inside the list. */
+    public readonly compact = input(false);
+
+    /** Prefix for test identifiers on managed rows and their actions. */
+    public readonly itemTestIdPrefix = input('');
+
     /** Gives each item a Mosaik row. Project its contents rather than a list item when enabled. */
     public readonly useManagedRows = input(false);
 
@@ -256,7 +318,7 @@ export class CollectionListComponent<T> {
     public readonly itemActivated = output<T>();
 
     /** Supplying a context menu opts into the managed Mosaik row contract. */
-    protected readonly managedRows = computed(() => this.useManagedRows() || this.contextMenu() !== undefined);
+    protected readonly managedRows = computed(() => this.compact() || this.useManagedRows() || this.contextMenu() !== undefined);
 
     /**
      * Emits the menu and option identifiers activated by the user.
@@ -303,4 +365,9 @@ export class CollectionListComponent<T> {
     }
 
     // #endregion
+}
+
+function readItemId(item: unknown): number | string {
+    const id = typeof item === 'object' && item !== null ? (item as { readonly id?: unknown }).id : undefined;
+    return typeof id === 'number' || typeof id === 'string' ? id : String(item);
 }
