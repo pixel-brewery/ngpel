@@ -99,6 +99,7 @@ passkey
 passkeys
 passwordbox
 persistable
+pinable
 postbuild
 presenters
 previewable
