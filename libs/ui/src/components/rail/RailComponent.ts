@@ -1,6 +1,6 @@
 // #region Imports
 
-import { NgTemplateOutlet } from '@angular/common';
+import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
@@ -9,6 +9,7 @@ import {
     computed,
     DestroyRef,
     effect,
+    ElementRef,
     ErrorHandler,
     forwardRef,
     inject,
@@ -21,8 +22,10 @@ import {
     type Signal,
     type WritableSignal,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import {
+    BreakpointService,
+    ButtonComponent,
     DRAWER_REF,
     IconNameDirective,
     type IDrawerRef,
@@ -48,15 +51,29 @@ import { RAIL_HOST } from './RailHostToken';
  */
 @Component({
     selector: 'ngp-rail',
-    imports: [CommandDirective, IconNameDirective, NgTemplateOutlet, SheetComponent, SheetContentComponent, ToggleButtonComponent, TooltipDirective],
+    imports: [
+        ButtonComponent,
+        CommandDirective,
+        IconNameDirective,
+        NgTemplateOutlet,
+        SheetComponent,
+        SheetContentComponent,
+        ToggleButtonComponent,
+        TooltipDirective,
+    ],
     template: `
-        <div part="actions" [class.hidden]="!isFloating() && activeContentKey() !== null">
+        <div #actionsLayer part="actions" [class.rail-floating-actions]="usesFloatingActions()" [class.hidden]="!isFloating() && activeContentKey() !== null">
             <ng-content select="ngp-rail-actions" />
         </div>
         @if (isFloating()) {
             @if (activeContentKey() !== null) {
                 <mosaik-sheet
                     part="sheet"
+                    [class.rail-in-drawer-sheet]="usesFloatingActions()"
+                    animate.enter="rail-sheet-enter"
+                    animate.leave="rail-sheet-exit"
+                    [attr.test-id]="usesFloatingActions() ? 'rail-sheet' : null"
+                    [style.--sheet-max-width]="usesFloatingActions() ? '100%' : null"
                     [width]="'100%'"
                     [height]="'90dvh'"
                     [snaps]="['90dvh']"
@@ -66,6 +83,7 @@ import { RAIL_HOST } from './RailHostToken';
                     [closeable]="true"
                     [pressEscapeToClose]="true"
                     [clickOutsideToClose]="true"
+                    (closeAttempted)="onSheetCloseAttempted()"
                     (closed)="onSheetClosed()"
                 >
                     <mosaik-sheet-content>
@@ -79,24 +97,94 @@ import { RAIL_HOST } from './RailHostToken';
             </div>
         }
         <ng-template #content>
-            <div class="flex h-full min-h-0 w-full flex-row gap-4">
-                <div class="flex shrink-0 flex-col gap-2">
-                    <mosaik-toggle-button
-                        [attr.test-id]="(isFloating() ? closeTestId() : backTestId()) || null"
-                        [attr.aria-label]="isFloating() ? closeLabel() : backLabel()"
-                        [mosaikTooltip]="isFloating() ? closeLabel() : backLabel()"
-                        [iconName]="isFloating() ? 'close' : 'arrow-left'"
-                        [appearance]="'plain'"
-                        [variant]="'neutral'"
-                        [size]="'small'"
-                        [ngpCommand]="{ click: backCommand }"
-                    />
-                </div>
-                <div class="min-w-0 flex-1">
+            <div
+                class="h-full min-h-0 w-full"
+                [class.relative]="isAdaptiveDrawer()"
+                [class.flex]="!isAdaptiveDrawer()"
+                [class.flex-row]="!isAdaptiveDrawer()"
+                [class.gap-4]="!isAdaptiveDrawer()"
+            >
+                @if (isAdaptiveDrawer()) {
+                    <div class="absolute right-0 top-0 z-10">
+                        <mosaik-button
+                            [attr.test-id]="closeTestId() || null"
+                            [attr.aria-label]="closeLabel()"
+                            [iconName]="'dismiss'"
+                            [appearance]="'plain'"
+                            [size]="'small'"
+                            [ngpCommand]="{ click: backCommand }"
+                        />
+                    </div>
+                } @else {
+                    <div class="flex shrink-0 flex-col gap-2">
+                        <mosaik-toggle-button
+                            [attr.test-id]="(isFloating() ? closeTestId() : backTestId()) || null"
+                            [attr.aria-label]="isFloating() ? closeLabel() : backLabel()"
+                            [mosaikTooltip]="isFloating() ? closeLabel() : backLabel()"
+                            [iconName]="isFloating() ? 'close' : 'arrow-left'"
+                            [appearance]="'plain'"
+                            [variant]="'neutral'"
+                            [size]="'small'"
+                            [ngpCommand]="{ click: backCommand }"
+                        />
+                    </div>
+                }
+                <div class="min-w-0 flex-1" [class.h-full]="isAdaptiveDrawer()" [class.min-h-0]="isAdaptiveDrawer()">
                     <ng-content select="[ngpRailContent]" />
                 </div>
             </div>
         </ng-template>
+    `,
+    styles: `
+        .rail-floating-actions {
+            position: absolute;
+            inset-inline-end: calc(var(--mosaik-layout-space) * 3);
+            bottom: calc(var(--rail-floating-offset, 0px) + var(--mosaik-layout-space) * 3);
+            z-index: 20;
+        }
+        .rail-in-drawer-sheet::part(backdrop) {
+            opacity: 1;
+            pointer-events: all;
+            background: var(--backdrop-background-color);
+            backdrop-filter: blur(var(--backdrop-blur));
+            -webkit-backdrop-filter: blur(var(--backdrop-blur));
+        }
+        .rail-in-drawer-sheet.rail-sheet-enter {
+            animation: ngp-rail-sheet-fade var(--mosaik-duration-short) ease-out both;
+        }
+        .rail-in-drawer-sheet.rail-sheet-exit {
+            animation: ngp-rail-sheet-fade var(--mosaik-duration-short) ease-in both reverse;
+        }
+        .rail-in-drawer-sheet.rail-sheet-enter::part(root) {
+            animation: ngp-rail-sheet-slide var(--mosaik-duration-short) ease-out both;
+        }
+        .rail-in-drawer-sheet.rail-sheet-exit::part(root) {
+            animation: ngp-rail-sheet-slide var(--mosaik-duration-short) ease-in both reverse;
+        }
+        @keyframes ngp-rail-sheet-fade {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes ngp-rail-sheet-slide {
+            from {
+                transform: translate3d(0, 100%, 0);
+            }
+            to {
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .rail-in-drawer-sheet.rail-sheet-enter,
+            .rail-in-drawer-sheet.rail-sheet-exit,
+            .rail-in-drawer-sheet.rail-sheet-enter::part(root),
+            .rail-in-drawer-sheet.rail-sheet-exit::part(root) {
+                animation-duration: 0.01ms;
+            }
+        }
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
@@ -117,6 +205,12 @@ export class RailComponent implements AfterContentInit, IRailHost {
     // #region Fields
 
     private readonly _destroyRef: DestroyRef = inject(DestroyRef);
+    private readonly _document = inject(DOCUMENT);
+    private readonly _hostElement = inject(ElementRef<HTMLElement>);
+    private readonly _breakpoints = inject(BreakpointService, { optional: true });
+    private readonly _compactViewport = this._breakpoints
+        ? toSignal(this._breakpoints.observe('lt-md'), { initialValue: this._breakpoints.isMatched('lt-md') })
+        : signal(false).asReadonly();
     private readonly _errorHandler = inject(ErrorHandler);
     private readonly _intl: RailComponentIntl = inject(RailComponentIntl, { optional: true }) ?? new RailComponentIntl();
     private readonly _drawerRef: IDrawerRef | null = inject(DRAWER_REF, { optional: true }) as IDrawerRef | null;
@@ -129,6 +223,7 @@ export class RailComponent implements AfterContentInit, IRailHost {
         : null;
     private readonly _activeContentKey: WritableSignal<string | null> = signal<string | null>(null);
     private readonly _sheet = viewChild(SheetComponent);
+    private readonly _actionsLayer = viewChild<ElementRef<HTMLElement>>('actionsLayer');
     private readonly _contentRegistrationVersion: WritableSignal<number> = signal(0);
     private readonly _backCommand: Command<void> = command(
         () => this.requestClose(),
@@ -177,6 +272,23 @@ export class RailComponent implements AfterContentInit, IRailHost {
                     }
                 });
         });
+        effect((onCleanup) => {
+            const layer = this._actionsLayer()?.nativeElement;
+            if (!this.usesFloatingActions() || !layer) {
+                return;
+            }
+            untracked(() => this._drawerController?.float(layer));
+            onCleanup(() => this._drawerController?.dock());
+        });
+        effect((onCleanup) => {
+            const view = this._document.defaultView;
+            if (!this.usesFloatingActions() || this._activeContentKey() === null || !view) {
+                return;
+            }
+            const onKeydown = (event: KeyboardEvent): void => this.closeSheetOnEscape(event);
+            view.addEventListener('keydown', onKeydown, { capture: true });
+            onCleanup(() => view.removeEventListener('keydown', onKeydown, { capture: true }));
+        });
         this._destroyRef.onDestroy(() => this._drawerController?.close());
     }
 
@@ -203,8 +315,16 @@ export class RailComponent implements AfterContentInit, IRailHost {
     /** Presents activated content in a sheet, leaving the host drawer width intact. */
     public readonly floating = input(false);
 
+    /** Uses an adaptive drawer rail with floating actions below the Mosaik medium breakpoint. */
+    public readonly layout = input<'standard' | 'adaptive-drawer'>('standard');
+
+    protected readonly isAdaptiveDrawer = computed(() => this.layout() === 'adaptive-drawer');
+
     /** Current presentation mode, available to participating rail actions. */
-    public readonly isFloating: Signal<boolean> = this.floating;
+    public readonly isFloating: Signal<boolean> = computed(() => (this.isAdaptiveDrawer() ? this._compactViewport() : this.floating()));
+
+    /** Whether the rail gives its column back to the drawer and shows floating action buttons. */
+    public readonly usesFloatingActions: Signal<boolean> = computed(() => this.isAdaptiveDrawer() && this.isFloating());
 
     /** Accessible label of the sheet's close action. */
     public readonly closeLabel = input(this._intl.closeLabel);
@@ -292,13 +412,34 @@ export class RailComponent implements AfterContentInit, IRailHost {
         this.closeContent();
     }
 
+    protected onSheetCloseAttempted(): void {
+        if (this.usesFloatingActions()) {
+            this.closeContent();
+        }
+    }
+
     private requestClose(): void {
         const sheet = this._sheet();
-        if (!sheet) {
+        if (!sheet || this.usesFloatingActions()) {
             this.closeContent();
             return;
         }
         void Promise.resolve(sheet.invoke('close')).catch((error: unknown) => this._errorHandler.handleError(error));
+    }
+
+    private closeSheetOnEscape(event: KeyboardEvent): void {
+        if (event.key !== 'Escape') {
+            return;
+        }
+        const ownPane = this._hostElement.nativeElement.closest('.cdk-overlay-pane');
+        const focusedPane = event.composedPath().find((target) => target instanceof Element && target.classList.contains('cdk-overlay-pane'));
+        if (focusedPane && focusedPane !== ownPane) {
+            return;
+        }
+
+        event.preventDefault();
+        event.stopPropagation();
+        this.closeContent();
     }
 
     private closeContent(): void {

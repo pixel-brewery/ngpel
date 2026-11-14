@@ -6209,6 +6209,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@pixel-brewery/ngpel-ui@workspace:libs/ui"
   dependencies:
+    chroma-js: "npm:^3.3.0"
     diff: "npm:9.0.0"
     tslib: "npm:2.9.1"
   peerDependencies:
@@ -13539,6 +13540,7 @@ __metadata:
     "@tiptap/extensions": "npm:3.34.0"
     "@tiptap/pm": "npm:3.34.0"
     "@tiptap/suggestion": "npm:3.34.0"
+    "@types/chroma-js": "npm:^3.1.3"
     "@types/node": "npm:26.6.6"
     "@typescript-eslint/parser": "npm:8.72.2"
     "@typescript-eslint/utils": "npm:8.72.2"

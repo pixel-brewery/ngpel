@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: InputSuggestionsDirective\<TOption\>
 
-Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:39](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L39)
+Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:40](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L40)
 
 Adds whole-field suggestions to an editable input. Selection emits the original option;
 the caller owns writing the selected value to its form.
@@ -24,7 +24,7 @@ the caller owns writing the selected value to its form.
 new InputSuggestionsDirective<TOption>(): InputSuggestionsDirective<TOption>;
 ```
 
-Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:62](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L62)
+Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:63](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L63)
 
 Listens before the input control can submit or consume an option key.
 
@@ -40,7 +40,7 @@ Listens before the input control can submit or consume an option key.
 readonly attribution: InputSignal<string | null>;
 ```
 
-Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:89](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L89)
+Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:90](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L90)
 
 Optional attribution displayed beneath results.
 
@@ -52,7 +52,7 @@ Optional attribution displayed beneath results.
 readonly delay: InputSignal<number>;
 ```
 
-Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:86](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L86)
+Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:87](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L87)
 
 Debounce in milliseconds.
 
@@ -64,7 +64,7 @@ Debounce in milliseconds.
 readonly isOpen: Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:95](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L95)
+Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:96](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L96)
 
 Whether the listbox is open.
 
@@ -76,7 +76,7 @@ Whether the listbox is open.
 readonly menuId: string;
 ```
 
-Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:98](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L98)
+Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:99](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L99)
 
 Stable accessibility ID of the listbox.
 
@@ -88,7 +88,7 @@ Stable accessibility ID of the listbox.
 readonly messages: InputSignal<ITextSuggestionMessages>;
 ```
 
-Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:80](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L80)
+Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:81](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L81)
 
 Localized listbox and request state labels.
 
@@ -100,7 +100,7 @@ Localized listbox and request state labels.
 readonly minimumLength: InputSignal<number>;
 ```
 
-Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:83](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L83)
+Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:84](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L84)
 
 Minimum query length before the source is called.
 
@@ -112,7 +112,7 @@ Minimum query length before the source is called.
 readonly selected: OutputEmitterRef<TOption>;
 ```
 
-Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:92](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L92)
+Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:93](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L93)
 
 Emits the selected result, including any extra data supplied by the source.
 
@@ -124,7 +124,7 @@ Emits the selected result, including any extra data supplied by the source.
 readonly source: InputSignal<InputSuggestionSource<TOption>>;
 ```
 
-Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:77](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L77)
+Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:78](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L78)
 
 Source called for each distinct query after the debounce.
 
@@ -136,7 +136,7 @@ Source called for each distinct query after the debounce.
 dismiss(): void;
 ```
 
-Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:146](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L146)
+Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:147](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L147)
 
 Closes suggestions and cancels the pending lookup.
 
@@ -152,7 +152,7 @@ Closes suggestions and cancels the pending lookup.
 protected onCompositionEnd(event): void;
 ```
 
-Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:171](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L171)
+Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:172](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L172)
 
 #### Parameters
 
@@ -172,7 +172,7 @@ Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.
 protected onCompositionStart(): void;
 ```
 
-Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:166](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L166)
+Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:167](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L167)
 
 #### Returns
 
@@ -186,7 +186,7 @@ Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.
 protected onFocusIn(event): void;
 ```
 
-Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:153](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L153)
+Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:154](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L154)
 
 #### Parameters
 
@@ -206,7 +206,7 @@ Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.
 protected onFocusOut(event): void;
 ```
 
-Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:157](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L157)
+Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:158](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L158)
 
 #### Parameters
 
@@ -226,7 +226,7 @@ Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.
 refresh(event?): void;
 ```
 
-Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:105](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L105)
+Defined in: [libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts:106](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/InputSuggestionsDirective.ts#L106)
 
 Refreshes results from the current editable value.
 

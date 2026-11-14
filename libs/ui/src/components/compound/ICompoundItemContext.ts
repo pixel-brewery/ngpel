@@ -36,4 +36,7 @@ export interface ICompoundItemContext<T> {
      * @readonly
      */
     readonly count: number;
+
+    /** Resolves a tour anchor only for the active entry, avoiding duplicate anchor registrations. */
+    readonly tourAnchor: (anchorId: string) => string;
 }

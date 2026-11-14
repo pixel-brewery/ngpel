@@ -6,6 +6,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     computed,
+    contentChild,
     DOCUMENT,
     effect,
     ElementRef,
@@ -14,12 +15,14 @@ import {
     input,
     type InputSignal,
     output,
+    signal,
     type Signal,
     untracked,
     viewChild,
 } from '@angular/core';
 import { BackdropComponent } from '@pixel-brewery/mosaik-elements-angular';
 import { PointerIdleDirective } from '../../directives/pointer-idle/PointerIdleDirective';
+import { ImmersiveSessionOrbAnchorDirective } from './ImmersiveSessionOrbAnchorDirective';
 import type { ImmersiveSessionPhase } from './ImmersiveSessionPhase';
 import type { ImmersiveSessionRailState } from './ImmersiveSessionRailState';
 
@@ -43,17 +46,20 @@ import type { ImmersiveSessionRailState } from './ImmersiveSessionRailState';
             ngpPointerIdle
             #idle="ngpPointerIdle"
             [ngpPointerIdleDisabled]="!idleDetectionEnabled()"
-            [ngpPointerIdleHold]="idleHoldSelector"
+            [ngpPointerIdleHold]="idleHoldSelector()"
             [attr.data-ngp-phase]="phase()"
             [attr.data-ngp-idle]="idleDetectionEnabled() && idle.isIdle() ? '' : null"
+            [attr.data-mosaik-portal-scope]="orbLayout() && modal() ? '' : null"
             [attr.aria-modal]="modal() && !overlayOpen() ? 'true' : null"
             [attr.aria-label]="ariaLabel()"
             [attr.role]="modal() && !overlayOpen() ? 'dialog' : 'region'"
             [attr.data-rail]="effectiveRailState()"
             [class.shell--rail-open]="railVisible()"
+            [class.shell--orb]="orbLayout()"
             [cdkTrapFocus]="modal() && !overlayOpen()"
             [cdkTrapFocusAutoCapture]="modal()"
             [style.--ngp-immersive-session-rail-width]="railWidthStyle()"
+            [style.--ngp-immersive-session-orb-preflight-transform]="orbPreflightTransform()"
         >
             <div part="notification" class="notification" [attr.inert]="overlayOpen() ? '' : null">
                 <ng-content select="[ngpImmersiveSessionNotification]" />
@@ -70,19 +76,53 @@ import type { ImmersiveSessionRailState } from './ImmersiveSessionRailState';
 
             <div part="body" class="body" [attr.inert]="overlayOpen() ? '' : null">
                 <main #stage part="stage" class="stage" tabindex="-1">
-                    <div part="preflight" class="phase-content" [hidden]="!preflightVisible()" [attr.inert]="preflightVisible() ? null : ''">
+                    @if (orbLayout()) {
+                        <div #orb part="orb">
+                            <ng-content select="[ngpImmersiveSessionOrb]" />
+                        </div>
+                    }
+                    <div
+                        part="preflight"
+                        class="phase-content"
+                        [hidden]="!preflightVisible() && !(orbLayout() && phase() === 'connecting')"
+                        [attr.inert]="preflightVisible() ? null : ''"
+                    >
                         <ng-content select="[ngpImmersiveSessionPreflight]" />
                     </div>
-                    <div part="live" class="phase-content" [hidden]="preflightVisible()" [attr.inert]="preflightVisible() ? '' : null">
+                    <div
+                        part="live"
+                        class="phase-content"
+                        [hidden]="preflightVisible() && !orbLayout()"
+                        [attr.role]="orbLayout() ? 'region' : null"
+                        [attr.tabindex]="orbLayout() ? 0 : null"
+                        [attr.aria-label]="orbLayout() ? ariaLabel() : null"
+                        [attr.inert]="preflightVisible() ? '' : null"
+                    >
                         <ng-content select="[ngpImmersiveSessionStage]" />
                     </div>
-                    <div part="rail-handle" class="rail-handle" [hidden]="railVisible() || phase() !== 'live'">
+                    @if (orbLayout()) {
+                        <div part="aside" [attr.inert]="railVisible() ? '' : null">
+                            <ng-content select="[ngpImmersiveSessionAside]" />
+                        </div>
+                    }
+                    <div
+                        part="rail-handle"
+                        class="rail-handle"
+                        [hidden]="!orbLayout() && (railVisible() || phase() !== 'live')"
+                        [attr.inert]="orbLayout() && (railVisible() || phase() !== 'live') ? '' : null"
+                    >
                         <ng-content select="[ngpImmersiveSessionRailHandle]" />
                     </div>
                 </main>
 
                 @if (railAttached()) {
-                    <aside part="rail" class="rail" [attr.aria-label]="railAriaLabel()" [hidden]="!railVisible()" [attr.inert]="railVisible() ? null : ''">
+                    <aside
+                        part="rail"
+                        class="rail"
+                        [attr.aria-label]="railAriaLabel()"
+                        [hidden]="!railVisible() && !orbLayout()"
+                        [attr.inert]="railVisible() ? null : ''"
+                    >
                         <ng-content select="[ngpImmersiveSessionRail]" />
                     </aside>
                 }
@@ -91,6 +131,15 @@ import type { ImmersiveSessionRailState } from './ImmersiveSessionRailState';
             <footer part="footer" class="footer" [attr.inert]="overlayOpen() ? '' : null">
                 <ng-content select="[ngpImmersiveSessionFooter]" />
             </footer>
+
+            @if (orbLayout()) {
+                <div part="caption" [attr.inert]="overlayOpen() ? '' : null">
+                    <ng-content select="[ngpImmersiveSessionCaption]" />
+                </div>
+                <div part="sheet">
+                    <ng-content select="[ngpImmersiveSessionSheet]" />
+                </div>
+            }
 
             @if (overlayOpen()) {
                 <mosaik-backdrop part="backdrop" class="backdrop" (click)="requestOverlayDismissal($event)" />
@@ -111,6 +160,7 @@ import type { ImmersiveSessionRailState } from './ImmersiveSessionRailState';
             }
         </section>
     `,
+    styleUrl: './ImmersiveSessionOrbLayout.scss',
     styles: `
         @use '@pixel-brewery/mosaik-themes/scss' as themes;
 
@@ -329,8 +379,12 @@ export class ImmersiveSessionShellComponent {
     // #region Fields
 
     private readonly _document = inject(DOCUMENT);
+    private readonly _host = inject<ElementRef<HTMLElement>>(ElementRef);
     private readonly _injector = inject(Injector);
     private readonly _stage = viewChild<ElementRef<HTMLElement>>('stage');
+    private readonly _orb = viewChild<ElementRef<HTMLElement>>('orb');
+    private readonly _orbAnchor = contentChild(ImmersiveSessionOrbAnchorDirective, { descendants: true });
+    private readonly _orbPreflightTransform = signal<string | null>(null);
     private _focusBeforeOverlay: HTMLElement | null = null;
     private _showingPreflight: boolean | undefined;
 
@@ -342,6 +396,33 @@ export class ImmersiveSessionShellComponent {
     public constructor() {
         effect(() => this.synchronizeOverlayFocus(this.overlayOpen()));
         effect(() => this.synchronizePhaseFocus(this.preflightVisible()));
+        effect((onCleanup) => {
+            const register = this.registerModalLayer();
+            if (this.modal() && register) {
+                onCleanup(untracked(() => register(this._host.nativeElement)));
+            }
+        });
+        effect((onCleanup) => {
+            if (!this.orbLayout() || !this.preflightVisible()) {
+                return;
+            }
+
+            const anchor = this._orbAnchor()?.elementRef.nativeElement;
+            const stage = this._stage()?.nativeElement;
+            const orb = this._orb()?.nativeElement;
+            const ResizeObserverConstructor = this._document.defaultView?.ResizeObserver;
+            if (!anchor || !stage || !orb || !ResizeObserverConstructor) {
+                this._orbPreflightTransform.set(null);
+                return;
+            }
+
+            const measure = (): void => this.measureOrbAnchor(anchor, stage, orb);
+            const observer = new ResizeObserverConstructor(measure);
+            observer.observe(stage);
+            observer.observe(anchor);
+            observer.observe(orb);
+            onCleanup(() => observer.disconnect());
+        });
     }
 
     // #endregion
@@ -358,6 +439,12 @@ export class ImmersiveSessionShellComponent {
 
     /** Shows the preparation slot during preflight and the stage during connection, live and completion. */
     public readonly phase = input<ImmersiveSessionPhase>('live');
+
+    /** Uses the stage centered on a persistent orb with animated phase and rail transitions. */
+    public readonly layout = input<'standard' | 'orb'>('standard');
+
+    /** Registers the modal host in an application-owned layer and returns its cleanup. */
+    public readonly registerModalLayer = input<(host: HTMLElement) => () => void>();
 
     /** Allows shell controls to fade during inactivity in the live phase on hover-capable devices. */
     public readonly idleEnabled = input(false);
@@ -405,8 +492,13 @@ export class ImmersiveSessionShellComponent {
     protected readonly railVisible = computed(() => this.phase() === 'live' && this.effectiveRailState() !== 'closed');
     protected readonly railAttached = computed(() => this.railState() !== undefined || this.railOpen());
     protected readonly preflightVisible = computed(() => this.phase() === 'preflight');
+    protected readonly orbLayout = computed(() => this.layout() === 'orb');
+    protected readonly orbPreflightTransform = this._orbPreflightTransform.asReadonly();
     protected readonly idleDetectionEnabled = computed(() => this.idleEnabled() && this.phase() === 'live' && !this.overlayOpen());
-    protected readonly idleHoldSelector = "[part='header'], [part='footer'], [part='rail'], [part='rail-handle']";
+    protected readonly idleHoldSelector = computed(() => {
+        const regions = "[part='header'], [part='footer'], [part='rail'], [part='rail-handle']";
+        return this.orbLayout() ? regions + ", [part='overlay'], mosaik-portal-projection" : regions;
+    });
 
     /**
      * CSS width derived from the public rail-width input.
@@ -426,6 +518,29 @@ export class ImmersiveSessionShellComponent {
             event?.stopPropagation();
             this.overlayDismissed.emit();
         }
+    }
+
+    private measureOrbAnchor(anchor: HTMLElement, stage: HTMLElement, orb: HTMLElement): void {
+        // The offset chain excludes CSS transforms, including the one this method updates.
+        let left = 0;
+        let top = 0;
+        let current: HTMLElement | null = anchor;
+        while (current && current !== stage) {
+            left += current.offsetLeft;
+            top += current.offsetTop;
+            const parent: Element | null = current.offsetParent;
+            current = parent instanceof HTMLElement ? parent : null;
+        }
+
+        if (current !== stage || !anchor.offsetWidth || !orb.offsetWidth) {
+            this._orbPreflightTransform.set(null);
+            return;
+        }
+
+        const x = left + anchor.offsetWidth / 2 - (orb.offsetLeft + orb.offsetWidth / 2);
+        const y = top + anchor.offsetHeight / 2 - (orb.offsetTop + orb.offsetHeight / 2);
+        const scale = anchor.offsetWidth / orb.offsetWidth;
+        this._orbPreflightTransform.set(`translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) scale(${scale.toFixed(4)})`);
     }
 
     private synchronizeOverlayFocus(open: boolean): void {

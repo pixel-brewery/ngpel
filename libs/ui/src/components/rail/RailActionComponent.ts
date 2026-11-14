@@ -1,7 +1,13 @@
 // #region Imports
 
 import { ChangeDetectionStrategy, Component, computed, inject, input, isSignal, type InputSignal, type Signal } from '@angular/core';
-import { IconNameDirective, SkeletonComponent, ToggleButtonComponent, TooltipDirective } from '@pixel-brewery/mosaik-elements-angular';
+import {
+    FloatingActionButtonComponent,
+    IconNameDirective,
+    SkeletonComponent,
+    ToggleButtonComponent,
+    TooltipDirective,
+} from '@pixel-brewery/mosaik-elements-angular';
 import type { Appearance, Variant } from '@pixel-brewery/mosaik-elements-foundation';
 import { CommandDirective } from '@pixel-brewery/ngpel-mvp';
 import { command, type Command } from '@pixel-brewery/ngpel-mvp';
@@ -17,11 +23,32 @@ import { RAIL_HOST } from './RailHostToken';
  */
 @Component({
     selector: 'ngp-rail-action',
-    imports: [CommandDirective, IconNameDirective, SkeletonComponent, ToggleButtonComponent, TooltipDirective],
+    imports: [CommandDirective, FloatingActionButtonComponent, IconNameDirective, SkeletonComponent, ToggleButtonComponent, TooltipDirective],
     template: `
         @if (visible()) {
             @if (loading()) {
-                <mosaik-skeleton [height]="'32px'" [width]="'32px'" [shimmer]="true" [attr.test-id]="skeletonTestId() || null" />
+                <mosaik-skeleton
+                    [style.--skeleton-border-radius]="floatingAction() ? '9999px' : null"
+                    [height]="floatingAction() ? '52px' : '32px'"
+                    [width]="floatingAction() ? (floatingLabel() ? '76px' : '52px') : '32px'"
+                    [shimmer]="true"
+                    [attr.test-id]="skeletonTestId() || null"
+                />
+            } @else if (floatingAction()) {
+                <mosaik-fab
+                    [style.--fab-border-radius]="'9999px'"
+                    [attr.aria-label]="label()"
+                    [mosaikTooltip]="label()"
+                    [iconName]="icon()"
+                    [variant]="variant()"
+                    [appearance]="appearance()"
+                    [size]="'large'"
+                    [disabled]="!activateCommand.canExecute()"
+                    [attr.test-id]="testId() || null"
+                    [ngpCommand]="{ click: activateCommand }"
+                >
+                    <span slot="label" [class.sr-only]="!floatingLabel()">{{ floatingLabel() || label() }}</span>
+                </mosaik-fab>
             } @else {
                 <mosaik-toggle-button
                     [attr.aria-label]="label()"
@@ -47,6 +74,7 @@ export class RailActionComponent {
     // #region Fields
 
     protected readonly _railHost = inject(RAIL_HOST);
+    protected readonly floatingAction = this._railHost.usesFloatingActions ?? (() => false);
     private readonly _activateCommand: Command<void> = command(
         () => {
             const target = this.target();

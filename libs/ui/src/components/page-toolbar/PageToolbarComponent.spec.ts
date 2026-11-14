@@ -55,11 +55,11 @@ describe('PageToolbarComponent', () => {
         const translation = signal('More actions');
         const { component, moreActionsLabel } = createToolbar({ moreActionsLabel: translation });
 
-        translation.set('Weitere Aktionen');
+        translation.set('Additional actions');
         const localized = component.moreActionsLabel();
         moreActionsLabel.set('List actions');
 
-        expect(localized).toBe('Weitere Aktionen');
+        expect(localized).toBe('Additional actions');
         expect(component.moreActionsLabel()).toBe('List actions');
     });
 

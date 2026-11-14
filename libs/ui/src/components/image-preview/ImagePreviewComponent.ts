@@ -2,8 +2,16 @@
 
 import { StopEventPropagationDirective } from '../../directives/stop-event-propagation/StopEventPropagationDirective';
 import { CdkDrag, CdkDragHandle, type CdkDragEnd, type CdkDragStart, type Point } from '@angular/cdk/drag-drop';
-import { ChangeDetectionStrategy, Component, ElementRef, HostListener, inject, viewChild, type Signal } from '@angular/core';
-import { ButtonComponent, Cancel, DIALOG_REF, DIALOG_REF_DATA, IconNameDirective, type IDialogRef } from '@pixel-brewery/mosaik-elements-angular';
+import { ChangeDetectionStrategy, Component, effect, ElementRef, HostListener, inject, viewChild, type Signal } from '@angular/core';
+import {
+    ButtonComponent,
+    Cancel,
+    DIALOG_REF,
+    DIALOG_REF_DATA,
+    IconNameDirective,
+    VideoComponent,
+    type IDialogRef,
+} from '@pixel-brewery/mosaik-elements-angular';
 import type { IImagePreviewImage } from './IImagePreviewImage';
 import type { IImagePreviewData } from './ImagePreviewData';
 import { ImagePreviewDialogSurfaceDirective } from './ImagePreviewDialogSurfaceDirective';
@@ -11,13 +19,13 @@ import { ImagePreviewDialogSurfaceDirective } from './ImagePreviewDialogSurfaceD
 // #endregion
 
 /**
- * Renders a keyboard-accessible, zoomable and draggable image overlay.
+ * Renders a keyboard-accessible overlay for zoomable images and playable videos.
  *
  * @public
  */
 @Component({
     selector: 'ngp-image-preview',
-    imports: [ButtonComponent, CdkDrag, CdkDragHandle, IconNameDirective, StopEventPropagationDirective],
+    imports: [ButtonComponent, CdkDrag, CdkDragHandle, IconNameDirective, StopEventPropagationDirective, VideoComponent],
     hostDirectives: [ImagePreviewDialogSurfaceDirective],
     template: `
         <section
@@ -37,43 +45,46 @@ import { ImagePreviewDialogSurfaceDirective } from './ImagePreviewDialogSurfaceD
                 role="toolbar"
                 [ngpStopEventPropagation]="['click']"
             >
+                @if (currentImage().mediaKind !== 'video') {
+                    <mosaik-button
+                        [appearance]="'solid'"
+                        [variant]="'tertiary'"
+                        [attr.aria-label]="labels.zoomOut"
+                        [attr.title]="labels.zoomOut"
+                        [disabled]="!canZoomOut()"
+                        [iconName]="'zoomOut'"
+                        (click)="zoomOut()"
+                    />
+                    <mosaik-button
+                        [appearance]="'solid'"
+                        [variant]="'tertiary'"
+                        [attr.aria-label]="labels.zoomIn"
+                        [attr.title]="labels.zoomIn"
+                        [disabled]="!canZoomIn()"
+                        [iconName]="'zoomIn'"
+                        (click)="zoomIn()"
+                    />
+                    <mosaik-button
+                        [appearance]="'solid'"
+                        [variant]="'tertiary'"
+                        [attr.aria-label]="labels.rotateLeft"
+                        [attr.title]="labels.rotateLeft"
+                        [iconName]="'arrowRotateCounterclockwise'"
+                        (click)="rotateLeft()"
+                    />
+                    <mosaik-button
+                        [appearance]="'solid'"
+                        [variant]="'tertiary'"
+                        [attr.aria-label]="labels.rotateRight"
+                        [attr.title]="labels.rotateRight"
+                        [iconName]="'arrowRotateClockwise'"
+                        (click)="rotateRight()"
+                    />
+                }
                 <mosaik-button
                     [appearance]="'solid'"
                     [variant]="'tertiary'"
-                    [attr.aria-label]="labels.zoomOut"
-                    [attr.title]="labels.zoomOut"
-                    [disabled]="!canZoomOut()"
-                    [iconName]="'zoomOut'"
-                    (click)="zoomOut()"
-                />
-                <mosaik-button
-                    [appearance]="'solid'"
-                    [variant]="'tertiary'"
-                    [attr.aria-label]="labels.zoomIn"
-                    [attr.title]="labels.zoomIn"
-                    [disabled]="!canZoomIn()"
-                    [iconName]="'zoomIn'"
-                    (click)="zoomIn()"
-                />
-                <mosaik-button
-                    [appearance]="'solid'"
-                    [variant]="'tertiary'"
-                    [attr.aria-label]="labels.rotateLeft"
-                    [attr.title]="labels.rotateLeft"
-                    [iconName]="'arrowRotateCounterclockwise'"
-                    (click)="rotateLeft()"
-                />
-                <mosaik-button
-                    [appearance]="'solid'"
-                    [variant]="'tertiary'"
-                    [attr.aria-label]="labels.rotateRight"
-                    [attr.title]="labels.rotateRight"
-                    [iconName]="'arrowRotateClockwise'"
-                    (click)="rotateRight()"
-                />
-                <mosaik-button
-                    [appearance]="'solid'"
-                    [variant]="'tertiary'"
+                    [attr.test-id]="'media-preview-close'"
                     [attr.aria-label]="labels.close"
                     [attr.title]="labels.close"
                     [iconName]="'dismiss'"
@@ -81,30 +92,51 @@ import { ImagePreviewDialogSurfaceDirective } from './ImagePreviewDialogSurfaceD
                 />
             </div>
 
-            <div
-                part="image-stage"
-                class="pointer-events-auto max-h-[calc(100%-5rem)] max-w-[calc(100%-3rem)]"
-                cdkDrag
-                [cdkDragFreeDragPosition]="position()"
-                [ngpStopEventPropagation]="['click']"
-                (cdkDragEnded)="onDragEnded($event)"
-                (cdkDragStarted)="onDragStarted($event)"
-            >
-                <img
-                    #imageElement
-                    part="image"
-                    class="block max-h-[calc(100vh-5rem)] max-w-[calc(100vw-3rem)] cursor-grab touch-none object-contain select-none active:cursor-grabbing"
-                    cdkDragHandle
-                    draggable="false"
-                    [attr.alt]="currentImage().alt ?? ''"
-                    [attr.height]="currentImage().height ?? null"
-                    [attr.src]="currentImage().src"
-                    [attr.srcset]="currentImage().srcset ?? null"
-                    [attr.width]="currentImage().width ?? null"
-                    [style.transform]="transform()"
-                />
-            </div>
-
+            @if (currentImage().mediaKind === 'video') {
+                <div
+                    part="video-stage"
+                    class="pointer-events-auto aspect-video w-[min(90vw,72rem)] max-h-[calc(100dvh-5rem)]"
+                    [ngpStopEventPropagation]="['click']"
+                >
+                    <mosaik-video
+                        part="video"
+                        [attr.test-id]="'media-preview-video'"
+                        class="block h-full w-full"
+                        [src]="currentImage().src"
+                        [poster]="currentImage().poster ?? undefined"
+                        [fit]="'contain'"
+                        [ratio]="'16/9'"
+                        [showControls]="true"
+                        [width]="'100%'"
+                        [height]="'100%'"
+                        [attr.aria-label]="currentImage().alt ?? labels.viewer"
+                    />
+                </div>
+            } @else {
+                <div
+                    part="image-stage"
+                    class="pointer-events-auto max-h-[calc(100%-5rem)] max-w-[calc(100%-3rem)]"
+                    cdkDrag
+                    [cdkDragFreeDragPosition]="position()"
+                    [ngpStopEventPropagation]="['click']"
+                    (cdkDragEnded)="onDragEnded($event)"
+                    (cdkDragStarted)="onDragStarted($event)"
+                >
+                    <img
+                        #imageElement
+                        part="image"
+                        class="block max-h-[calc(100vh-5rem)] max-w-[calc(100vw-3rem)] cursor-grab touch-none object-contain select-none active:cursor-grabbing"
+                        cdkDragHandle
+                        draggable="false"
+                        [attr.alt]="currentImage().alt ?? ''"
+                        [attr.height]="currentImage().height ?? null"
+                        [attr.src]="currentImage().src"
+                        [attr.srcset]="currentImage().srcset ?? null"
+                        [attr.width]="currentImage().width ?? null"
+                        [style.transform]="transform()"
+                    />
+                </div>
+            }
             @if (canGoPrevious()) {
                 <mosaik-button
                     part="previous"
@@ -150,9 +182,41 @@ export class ImagePreviewComponent {
 
     private readonly _data = inject(DIALOG_REF_DATA) as IImagePreviewData;
     private readonly _dialogRef = inject(DIALOG_REF) as IDialogRef<IImagePreviewData>;
-    private readonly _imageElement = viewChild.required<ElementRef<HTMLImageElement>>('imageElement');
+    private readonly _imageElement = viewChild<ElementRef<HTMLImageElement>>('imageElement');
+    private readonly _videoComponent = viewChild(VideoComponent);
     private readonly _viewerElement = viewChild.required<ElementRef<HTMLElement>>('viewerElement');
     private _positionBeforeDrag: Point = { x: 0, y: 0 };
+
+    // #endregion
+
+    // #region Ctor
+
+    public constructor() {
+        effect((onCleanup) => {
+            const media = this._data.state.currentImage();
+            const component = this._videoComponent();
+            if (media.mediaKind !== 'video' || !component) return;
+
+            let cancelled = false;
+            let player: HTMLVideoElement | null = null;
+            onCleanup(() => {
+                cancelled = true;
+                player?.pause();
+            });
+
+            void (async () => {
+                const element = component.elementRef.nativeElement;
+                await element.updateComplete;
+                if (cancelled) return;
+
+                player = element.shadowRoot?.querySelector<HTMLVideoElement>('video[part="video"]') ?? null;
+                if (!player) return;
+                this.attachCaptions(player, media);
+
+                if (!cancelled) void component.play().catch(() => undefined);
+            })();
+        });
+    }
 
     // #endregion
 
@@ -305,7 +369,12 @@ export class ImagePreviewComponent {
      * @protected
      */
     protected onDragEnded(event: CdkDragEnd): void {
-        const imageBounds = this._imageElement().nativeElement.getBoundingClientRect();
+        const imageElement = this._imageElement();
+        if (!imageElement) {
+            return;
+        }
+
+        const imageBounds = imageElement.nativeElement.getBoundingClientRect();
         const viewerBounds = this._viewerElement().nativeElement.getBoundingClientRect();
         const visibleWidth = Math.min(imageBounds.right, viewerBounds.right) - Math.max(imageBounds.left, viewerBounds.left);
         const visibleHeight = Math.min(imageBounds.bottom, viewerBounds.bottom) - Math.max(imageBounds.top, viewerBounds.top);
@@ -365,6 +434,23 @@ export class ImagePreviewComponent {
      */
     protected zoomOut(): void {
         this._data.state.zoomOut();
+    }
+
+    private attachCaptions(player: HTMLVideoElement, media: IImagePreviewImage): void {
+        player.querySelector('track[data-preview-captions]')?.remove();
+        if (!media.captions) return;
+
+        // Mosaik Video owns the player but does not yet expose a captions input.
+        player.crossOrigin = 'anonymous';
+        const track = player.ownerDocument.createElement('track');
+        track.dataset['previewCaptions'] = '';
+        track.kind = 'captions';
+        track.src = media.captions.src;
+        track.srclang = media.captions.language;
+        track.label = media.captions.label;
+        track.default = true;
+        player.append(track);
+        player.load();
     }
 
     // #endregion

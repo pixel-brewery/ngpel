@@ -11,7 +11,7 @@ import { LegalLinksComponent } from './LegalLinksComponent';
 // #endregion
 
 vi.mock('@pixel-brewery/mosaik-elements-angular', async () => {
-    const { Component, Directive } = await import('@angular/core');
+    const { Component, Directive, inject, TemplateRef, ViewContainerRef } = await import('@angular/core');
 
     class TestTextComponent {
         // #region Fields
@@ -68,8 +68,16 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', async () => {
         inputs: ['mosaikTypography'],
     })(TestTypographyDirective);
 
+    class TestTranslateDirective {
+        public constructor() {
+            inject(ViewContainerRef).createEmbeddedView(inject(TemplateRef), { $implicit: (key: string) => `translated:${key}` });
+        }
+    }
+    Directive({ selector: '[mosaikTranslate]', standalone: true })(TestTranslateDirective);
+
     return {
         TextComponent: TestTextComponent,
+        TranslateDirective: TestTranslateDirective,
         TranslateService: class TranslateService {},
         TypographyDirective: TestTypographyDirective,
     };
@@ -137,6 +145,28 @@ describe('LegalLinksComponent', () => {
             expect(termsTextComponent?.text).toBe('AGB');
             expect(termsLink?.target).toBe('');
             expect(termsLink?.getAttribute('referrerpolicy')).toBe('no-referrer');
+        });
+
+        it('resolves link translation keys and keeps additional documents reachable in a second row', () => {
+            // arrange
+            TestBed.configureTestingModule({ imports: [LegalLinksComponent] });
+            const fixture = TestBed.createComponent(LegalLinksComponent);
+            setSignalInput(fixture.componentInstance.links, [
+                { label: 'Privacy', translationKey: 'legal.privacy', url: 'https://contoso.example/privacy' },
+                LINKS[1]!,
+            ]);
+            setSignalInput(fixture.componentInstance.firstRowSize, 2);
+            setSignalInput(fixture.componentInstance.additionalLinks, [{ label: 'Terms', url: 'https://tenant.example/terms' }]);
+
+            // act
+            fixture.detectChanges();
+
+            // assert
+            const navigation = fixture.nativeElement as HTMLElement;
+            expect(navigation.querySelector('a[href="https://contoso.example/privacy"]')?.textContent).toBe('translated:legal.privacy');
+            const terms = navigation.querySelector('a[href="https://tenant.example/terms"]');
+            expect(terms?.closest('ul')?.querySelectorAll('a')).toHaveLength(1);
+            expect(terms?.textContent).toBe('Terms');
         });
     });
 });

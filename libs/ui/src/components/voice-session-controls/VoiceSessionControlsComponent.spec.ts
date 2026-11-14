@@ -11,6 +11,7 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', () => ({
     ButtonComponent: class ButtonComponent {},
     IconNameDirective: class IconNameDirective {},
     PressButtonComponent: class PressButtonComponent {},
+    TooltipDirective: class TooltipDirective {},
 }));
 
 interface IVoiceSessionControlsComponentTestApi {
@@ -93,12 +94,25 @@ describe('VoiceSessionControlsComponent', () => {
         expect(stopped).not.toHaveBeenCalled();
     });
 
-    it('emits no end request when the surface does not offer ending', () => {
+    it('emits a request for consumer confirmation when ending is enabled', () => {
         // Arrange
         const component = createComponent();
         const api = component as unknown as IVoiceSessionControlsComponentTestApi;
         const ended = vi.spyOn(component.endRequested, 'emit');
-        Object.defineProperty(component, 'canEnd', { value: signal(false) });
+
+        // Act
+        api.requestEnd();
+
+        // Assert
+        expect(ended).toHaveBeenCalledOnce();
+    });
+
+    it.each(['canEnd', 'disabled', 'endBusy'] as const)('ignores an end request blocked by %s', (input) => {
+        // Arrange
+        const component = createComponent();
+        const api = component as unknown as IVoiceSessionControlsComponentTestApi;
+        const ended = vi.spyOn(component.endRequested, 'emit');
+        Object.defineProperty(component, input, { value: signal(input !== 'canEnd') });
 
         // Act
         api.requestEnd();

@@ -1,10 +1,11 @@
 // #region Imports
 
-import { computed, signal, type Signal, type WritableSignal } from '@angular/core';
+import { computed, Injector, runInInjectionContext, signal, type Signal, type WritableSignal } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { describe, expect, it, vi } from 'vitest';
-import { CompoundComponent } from './CompoundComponent';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { COMPOUND_TOUR_TARGETS, CompoundComponent } from './CompoundComponent';
 import { CompoundViewMode } from './CompoundViewMode';
 import type { CompoundViewModeValue } from './CompoundViewModeValue';
 
@@ -51,7 +52,7 @@ function inlineBlockOf(fileName: string, key: 'styles' | 'template'): string {
 vi.mock('@pixel-brewery/mosaik-elements-angular', () => ({
     BadgeComponent: class BadgeComponent {},
     ButtonComponent: class ButtonComponent {},
-    createTourAccessorTarget: vi.fn(() => ({})),
+    createTourAccessorTarget: (element: Signal<HTMLElement | null>, _value?: unknown, click?: () => boolean) => ({ element, click }),
     ExpanderComponent: class ExpanderComponent {},
     ExpanderGroupComponent: class ExpanderGroupComponent {},
     IconNameDirective: class IconNameDirective {},
@@ -71,6 +72,7 @@ interface ICompoundItemTestContext {
     readonly item: string;
     readonly index: number;
     readonly count: number;
+    readonly tourAnchor?: (anchorId: string) => string;
 }
 
 interface ICompoundComponentTestApi {
@@ -82,6 +84,9 @@ interface ICompoundComponentTestApi {
     readonly canOpenItemsFromList: WritableSignal<boolean>;
     readonly itemKey: WritableSignal<((item: string, index: number) => unknown) | undefined>;
     readonly listItemDisabled: WritableSignal<((item: string, index: number) => boolean) | undefined>;
+    readonly itemTestId: WritableSignal<((item: string, index: number) => string | undefined) | undefined>;
+    readonly itemDeleteTestId: WritableSignal<((item: string, index: number) => string | undefined) | undefined>;
+    readonly deleteTestId: WritableSignal<string | undefined>;
     readonly listItemTestId: WritableSignal<((item: string, index: number) => string | undefined) | undefined>;
     readonly selectLastOnCollectionGrowth: Signal<boolean>;
     readonly itemCount: Signal<number>;
@@ -113,6 +118,8 @@ interface ICompoundComponentTestApi {
 
     resolveListItemTestId(context: ICompoundItemTestContext): string | undefined;
 
+    resolveItemDeleteTestId(context: ICompoundItemTestContext): string | undefined;
+
     selectFromIndicator(event: unknown): void;
 
     selectNext(): void;
@@ -137,6 +144,27 @@ interface ICompoundComponentTestApi {
 }
 
 describe('CompoundComponent', () => {
+    afterEach(() => TestBed.resetTestingModule());
+
+    it('derives the nesting level from the nearest parent collection', () => {
+        const rootInjector = TestBed.inject(Injector);
+        const root = runInInjectionContext(rootInjector, () => new CompoundComponent<string>());
+        const parentInjector = Injector.create({ providers: [{ provide: CompoundComponent, useValue: root }], parent: rootInjector });
+        const nestedInjector = Injector.create({ providers: [], parent: parentInjector });
+        const nested = runInInjectionContext(nestedInjector, () => new CompoundComponent<string>());
+
+        expect([root.level(), nested.level()]).toEqual([1, 2]);
+    });
+
+    it('derives distinct delete actions when the caller supplies one collection test ID', () => {
+        const { api } = createComponentApi(['Ada', 'Alan']);
+        api.deleteTestId.set('delete-contact');
+
+        const ids = api.listItemContexts().map((context) => api.resolveItemDeleteTestId(context));
+
+        expect(ids).toEqual(['delete-contact-0', 'delete-contact-1']);
+    });
+
     it('should expose stable component targets without embedding feature tour directives', () => {
         // arrange
         const template = inlineTemplateOf('CompoundComponent.ts');
@@ -371,6 +399,78 @@ describe('CompoundComponent', () => {
         expect(addRequested).toHaveBeenCalledOnce();
     });
 
+    it('opens the active enabled stacked item through the tour target', () => {
+        const { component, context } = createTourComponent();
+        component.selectedIndex.set(1);
+        const expand = component.targets().get(COMPOUND_TOUR_TARGETS.expandItem);
+        const panel = document.createElement('div');
+        Object.defineProperty(component, '_itemTargets', {
+            value: signal([{ elementRef: { nativeElement: document.createElement('div') } }, { elementRef: { nativeElement: panel } }]),
+        });
+
+        expect(expand?.element()).toBe(panel);
+        expect(expand?.click?.()).toBe(true);
+        expect(context.isItemExpanded(context.items[1]!)).toBe(true);
+    });
+
+    it('declines the expansion action for disabled or non-stacked items', () => {
+        const { component, context, stacked, disabled } = createTourComponent();
+        const expand = component.targets().get(COMPOUND_TOUR_TARGETS.expandItem);
+        disabled.set(true);
+
+        expect(expand?.click?.()).toBe(false);
+        expect(context.isItemExpanded(context.items[0]!)).toBe(false);
+
+        disabled.set(false);
+        stacked.set(false);
+
+        expect(expand?.element()).toBeNull();
+        expect(expand?.click?.()).toBe(false);
+    });
+
+    it('resolves the active delete control in either layout and emits the corresponding intent', () => {
+        const { component, context, stacked } = createTourComponent();
+        const deleteTarget = component.targets().get(COMPOUND_TOUR_TARGETS.delete);
+        const stackedDelete = document.createElement('button');
+        const singleDelete = document.createElement('button');
+        Object.defineProperties(component, {
+            _itemDeleteTargets: {
+                value: signal([{ elementRef: { nativeElement: document.createElement('button') } }, { elementRef: { nativeElement: stackedDelete } }]),
+            },
+            _deleteTarget: { value: signal({ elementRef: { nativeElement: singleDelete } }) },
+        });
+        const emitted = vi.fn();
+        component.deleteRequested.subscribe(emitted);
+        component.selectedIndex.set(1);
+
+        expect(deleteTarget?.element()).toBe(stackedDelete);
+        expect(deleteTarget?.click?.()).toBe(true);
+        expect(emitted).toHaveBeenLastCalledWith(context.items[1]);
+
+        stacked.set(false);
+        component.selectedIndex.set(0);
+
+        expect(deleteTarget?.element()).toBe(singleDelete);
+        expect(deleteTarget?.click?.()).toBe(true);
+        expect(emitted).toHaveBeenLastCalledWith(context.items[0]);
+    });
+
+    it('declines the tour delete action when deletion is unavailable', () => {
+        const { component, deletable, listView } = createTourComponent();
+        const deleteTarget = component.targets().get(COMPOUND_TOUR_TARGETS.delete);
+        const emitted = vi.fn();
+        component.deleteRequested.subscribe(emitted);
+        deletable.set(false);
+
+        expect(deleteTarget?.click?.()).toBe(false);
+
+        deletable.set(true);
+        listView.set(true);
+
+        expect(deleteTarget?.click?.()).toBe(false);
+        expect(emitted).not.toHaveBeenCalled();
+    });
+
     it('should reject the tour add action when adding is disabled', () => {
         // arrange
         const { api, addRequested } = createComponentApi(['First'], false);
@@ -512,6 +612,26 @@ describe('CompoundComponent', () => {
     });
 });
 
+function createTourComponent() {
+    const component = TestBed.runInInjectionContext(() => new CompoundComponent<string>());
+    const items = ['First', 'Second'];
+    const stacked = signal(true);
+    const disabled = signal(false);
+    const deletable = signal(true);
+    const listView = signal(false);
+    Object.defineProperties(component, {
+        items: { value: signal(items) },
+        isStacked: { value: stacked },
+        isListView: { value: listView },
+        itemDisabled: { value: signal(() => disabled()) },
+        canDelete: { value: deletable },
+    });
+
+    const api = component as unknown as ICompoundComponentTestApi;
+
+    return { component, context: { items: api.listItemContexts(), isItemExpanded: api.isItemExpanded.bind(api) }, stacked, disabled, deletable, listView };
+}
+
 function createComponentApi(
     initialItems: ReadonlyArray<string>,
     canAdd = true,
@@ -541,6 +661,9 @@ function createComponentApi(
         canOpenItemsFromList: signal(true),
         itemKey: signal<((item: string, index: number) => unknown) | undefined>(undefined),
         listItemDisabled: signal<((item: string, index: number) => boolean) | undefined>(undefined),
+        itemTestId: signal(undefined),
+        itemDeleteTestId: signal(undefined),
+        deleteTestId: signal(undefined),
         listItemTestId: signal<((item: string, index: number) => string | undefined) | undefined>(undefined),
         selectLastOnCollectionGrowth: signal(selectLastOnCollectionGrowth),
         itemCount: computed(() => items().length),
@@ -557,7 +680,9 @@ function createComponentApi(
         hasPrevious: computed(() => items().length > 0 && selectedIndex() > 0),
         addRequested: { emit: addRequested },
         deleteRequested: { emit: deleteRequested },
-        listItemContexts: computed(() => items().map((item, index, collection) => ({ $implicit: item, item, index, count: collection.length }))),
+        listItemContexts: computed(() =>
+            items().map((item, index, collection) => ({ $implicit: item, item, index, count: collection.length, tourAnchor: (anchorId: string) => anchorId })),
+        ),
         _expandedItemKeys: signal<ReadonlySet<unknown>>(new Set()),
         _hasObservedNonEmptyCollection: initialItems.length > 0,
         _previousItemCount: items().length,

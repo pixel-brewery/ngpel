@@ -62,3 +62,25 @@ readonly item: T;
 Defined in: [libs/ui/src/components/compound/ICompoundItemContext.ts:22](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/ICompoundItemContext.ts#L22)
 
 Active item exposed as a named template value.
+
+***
+
+### tourAnchor
+
+```ts
+readonly tourAnchor: (anchorId) => string;
+```
+
+Defined in: [libs/ui/src/components/compound/ICompoundItemContext.ts:41](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/ICompoundItemContext.ts#L41)
+
+Resolves a tour anchor only for the active entry, avoiding duplicate anchor registrations.
+
+#### Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `anchorId` | `string` |
+
+#### Returns
+
+`string`

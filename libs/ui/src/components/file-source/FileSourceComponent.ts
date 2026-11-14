@@ -32,6 +32,9 @@ export class FileSourceComponent {
     /** Stable key used to identify the source. */
     public readonly key: InputSignal<string> = input.required<string>();
 
+    /** Stable automation identifier of the rendered acquisition action. */
+    public readonly testId = input<string | null>(null);
+
     /** Acquisition mechanism provided by the source. */
     public readonly type: InputSignal<FileSourceTypeValue> = input<FileSourceTypeValue>(FileSourceType.Action);
 

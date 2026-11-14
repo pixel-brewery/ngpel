@@ -23,6 +23,33 @@ Optional context displayed below the label.
 
 ***
 
+### group?
+
+```ts
+readonly group?: {
+  key: string;
+  label: string;
+};
+```
+
+Defined in: [libs/ui/src/directives/input-suggestions/ITextSuggestionOption.ts:16](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/ITextSuggestionOption.ts#L16)
+
+Optional source-owned group.
+
+#### key
+
+```ts
+readonly key: string;
+```
+
+#### label
+
+```ts
+readonly label: string;
+```
+
+***
+
 ### icon?
 
 ```ts
@@ -56,3 +83,15 @@ readonly label: string;
 Defined in: [libs/ui/src/directives/input-suggestions/ITextSuggestionOption.ts:7](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/ITextSuggestionOption.ts#L7)
 
 Text shown as the primary option label.
+
+***
+
+### tone?
+
+```ts
+readonly tone?: "primary" | "secondary";
+```
+
+Defined in: [libs/ui/src/directives/input-suggestions/ITextSuggestionOption.ts:19](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/ITextSuggestionOption.ts#L19)
+
+Optional Mosaik emphasis for this option.

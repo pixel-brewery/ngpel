@@ -84,10 +84,15 @@ export interface IColorSelectedEvent {
                         <div class="relative">
                             <mosaik-button
                                 [iconName]="'eyeDropper'"
+                                [attr.aria-label]="eyeDropperLabel() || null"
                                 [disabled]="isInteractionDisabled()"
                                 ngpEyeDropper
                                 (colorChange)="onEyeDropperColorChange($event)"
-                            />
+                            >
+                                @if (eyeDropperIcon() === 'hue-wheel') {
+                                    <span slot="icon" part="spectrum" aria-hidden="true"></span>
+                                }
+                            </mosaik-button>
                             @if (customColor(); as color) {
                                 <span class="h-1 rounded-(--mosaik-layout-radius) absolute left-0 right-0 -bottom-2" [style.background-color]="color"></span>
                             }
@@ -107,6 +112,15 @@ export interface IColorSelectedEvent {
             @include themes.joy-style();
 
             display: block;
+
+            [part='spectrum'] {
+                display: block;
+                inline-size: 1rem;
+                block-size: 1rem;
+                flex-shrink: 0;
+                border-radius: 50%;
+                background: conic-gradient(red, yellow, lime, cyan, blue, magenta, red);
+            }
 
             &.disabled {
                 pointer-events: none;
@@ -195,6 +209,12 @@ export class ColorSelectorComponent implements ControlValueAccessor {
     // #endregion
 
     // #region Properties
+
+    /** Accessible label for the eye dropper action. */
+    public readonly eyeDropperLabel = input('');
+
+    /** Uses a hue wheel in the eye dropper's icon slot when requested. */
+    public readonly eyeDropperIcon = input<'eye-dropper' | 'hue-wheel'>('eye-dropper');
 
     /**
      * The currently selected color value (hex string).

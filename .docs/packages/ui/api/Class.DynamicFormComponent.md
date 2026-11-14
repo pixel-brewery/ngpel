@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: DynamicFormComponent
 
-Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:413](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L413)
+Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:461](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L461)
 
 Renders a versioned UI-owned form definition with Mosaik controls and Signal Forms.
 
@@ -21,7 +21,7 @@ Renders a versioned UI-owned form definition with Mosaik controls and Signal For
 new DynamicFormComponent(): DynamicFormComponent;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:426](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L426)
+Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:474](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L474)
 
 #### Returns
 
@@ -35,7 +35,7 @@ Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:426](ht
 readonly canSubmit: Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:488](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L488)
+Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:539](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L539)
 
 Indicates whether consumers may submit the current dynamic form values.
 
@@ -60,7 +60,7 @@ protected readonly controlType: {
 } = DynamicFormControlType;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:500](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L500)
+Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:551](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L551)
 
 Renderer kinds available to the template.
 
@@ -144,7 +144,7 @@ readonly Text: "text" = 'text';
 readonly definition: InputSignal<IDynamicFormDefinition>;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:445](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L445)
+Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:493](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L493)
 
 Definition rendered by the component.
 
@@ -156,9 +156,21 @@ Definition rendered by the component.
 readonly isReadonly: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:453](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L453)
+Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:504](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L504)
 
 Forces every editable control into a read-only presentation.
+
+***
+
+### useSectionHeaders
+
+```ts
+readonly useSectionHeaders: InputSignal<boolean>;
+```
+
+Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:496](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L496)
+
+Uses the shared section-heading presentation for the form and its sections.
 
 ***
 
@@ -168,7 +180,7 @@ Forces every editable control into a read-only presentation.
 readonly valid: Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:480](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L480)
+Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:531](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L531)
 
 Indicates whether the complete dynamic form is valid and has no pending validation.
 
@@ -180,7 +192,7 @@ Indicates whether the complete dynamic form is valid and has no pending validati
 readonly validationAttempted: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:464](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L464)
+Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:515](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L515)
 
 Indicates that the host attempted to submit the form.
 
@@ -195,7 +207,7 @@ editable controls as touched when a host requests validation.
 readonly value: ModelSignal<DynamicFormValues>;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:472](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L472)
+Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:523](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L523)
 
 Two-way value map of all dynamic fields.
 
@@ -209,7 +221,7 @@ Two-way value map of all dynamic fields.
 get protected clearAnswerLabel(): string;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:503](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L503)
+Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:554](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L554)
 
 Accessible text of the optional radio clear button.
 
@@ -225,7 +237,7 @@ Accessible text of the optional radio clear button.
 protected clearAnswer(field): void;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:591](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L591)
+Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:642](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L642)
 
 Clears the selected answer and updates the field's interaction state.
 
@@ -247,7 +259,7 @@ Clears the selected answer and updates the field's interaction state.
 protected copyLink(field): Promise<void>;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:778](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L778)
+Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:833](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L833)
 
 Copies a safe link without surfacing Clipboard API failures as unhandled errors.
 
@@ -271,7 +283,7 @@ A promise resolved after the copy attempt.
 protected field(key): () => FieldState<DynamicFormValue>;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:536](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L536)
+Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:587](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L587)
 
 Returns the Signal Form field addressed by a definition key.
 
@@ -295,7 +307,7 @@ Dynamic Signal Form field accessor.
 protected isFieldClearable(field): boolean;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:586](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L586)
+Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:637](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L637)
 
 Indicates whether an optional field may expose its clear action.
 
@@ -319,7 +331,7 @@ Whether the renderer may clear the field.
 protected isFieldReadonly(field): boolean;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:575](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L575)
+Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:626](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L626)
 
 Indicates whether a field is immutable either by definition or host policy.
 
@@ -343,7 +355,7 @@ Whether the renderer must prevent edits.
 protected isRequired(field): boolean;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:564](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L564)
+Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:615](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L615)
 
 Indicates whether the field is required by its definition or declarative rules.
 
@@ -367,7 +379,7 @@ Whether the field requires a non-empty value.
 protected layoutClasses(field): string;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:553](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L553)
+Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:604](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L604)
 
 Resolves a semantic field layout for the template.
 
@@ -391,7 +403,7 @@ Statically discoverable layout classes.
 protected linkCopyLabel(field): string;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:735](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L735)
+Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:790](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L790)
 
 Resolves the accessible label used for copying a link.
 
@@ -415,7 +427,7 @@ Configured or safe default label.
 protected linkCopyStatus(field): string | null;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:757](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L757)
+Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:812](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L812)
 
 Resolves the status text announced after a copy attempt.
 
@@ -439,7 +451,7 @@ Copy result text or `null` before copying.
 protected linkInvalidLabel(field): string;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:746](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L746)
+Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:801](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L801)
 
 Resolves the text shown for an unsafe or missing link.
 
@@ -463,7 +475,7 @@ Configured or safe default text.
 protected linkOpenLabel(field): string;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:722](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L722)
+Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:777](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L777)
 
 Resolves the accessible label used for opening a link.
 
@@ -487,7 +499,7 @@ Configured or safe default label.
 protected linkUrl(field): string | null;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:672](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L672)
+Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:727](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L727)
 
 Resolves a dynamic link value after applying the UI security policy.
 
@@ -511,7 +523,7 @@ A safe link or `null` for missing and unsafe values.
 protected maximumDate(field): Date | null;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:634](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L634)
+Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:685](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L685)
 
 Resolves an optional maximum date into the value expected by Mosaik.
 
@@ -535,7 +547,7 @@ Latest accepted date or `null`.
 protected maximumLength(field): number | null;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:612](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L612)
+Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:663](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L663)
 
 Resolves the maximum text length declared for a field.
 
@@ -559,7 +571,7 @@ Maximum length or `null` when unrestricted.
 protected minimumDate(field): Date | null;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:623](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L623)
+Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:674](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L674)
 
 Resolves an optional minimum date into the value expected by Mosaik.
 
@@ -583,9 +595,9 @@ Earliest accepted date or `null`.
 ngOnChanges(changes): void;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:517](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L517)
+Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:568](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L568)
 
-Rebuilds the versioned field tree when its definition changes.
+Initializes missing values and rebuilds the field tree for changed definitions.
 
 #### Parameters
 
@@ -609,7 +621,7 @@ Rebuilds the versioned field tree when its definition changes.
 protected readonlyValue(field): string;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:645](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L645)
+Defined in: [libs/ui/src/components/dynamic-form/DynamicFormComponent.ts:696](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/DynamicFormComponent.ts#L696)
 
 Resolves a readonly value to its human-readable representation.
 

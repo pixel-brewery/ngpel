@@ -2,11 +2,18 @@
 
 import { ElementRef, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import type { IMentionDocument } from '@pixel-brewery/mosaik-elements-foundation';
 import { AudioInputDevicePreferenceService, AudioRecorder, VOICE_TRANSCRIBER, type AudioRecorderState } from '@pixel-brewery/ngpel-core/audio';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { VoiceRecorderDirective } from './VoiceRecorderDirective';
 
 // #endregion
+
+// Load the real mention utility without evaluating unrelated browser controls in the Mosaik barrel.
+vi.mock('@pixel-brewery/mosaik-elements-foundation', async () => ({
+    trimMentionDocument: (await import('@pixel-brewery/mosaik-elements-foundation/dist/controls/components/inputs/text-suggestions/trimMentionDocument'))
+        .trimMentionDocument,
+}));
 
 type RecorderState = 'idle' | 'paused' | 'recording' | 'stopped';
 
@@ -14,7 +21,19 @@ class PromptBoxMock extends EventTarget {
     // #region Fields
 
     public focused = false;
-    public value = '';
+    public mentionDocument: IMentionDocument = { text: '', mentions: [] };
+
+    // #endregion
+
+    // #region Properties
+
+    public get value(): string {
+        return this.mentionDocument.text;
+    }
+
+    public set value(text: string) {
+        this.mentionDocument = { text, mentions: [] };
+    }
 
     // #endregion
 
@@ -245,6 +264,26 @@ describe('VoiceRecorderDirective', () => {
         expect(received).toHaveReturnedWith('Existing prompt dictated text');
         expect(promptBox.focused).toBe(true);
         expect(tool.state).toBe('idle');
+    });
+
+    it('preserves mention identity and range when adding dictated text', async () => {
+        // Arrange
+        promptBox.mentionDocument = {
+            text: '  @Ada existing prompt  ',
+            mentions: [{ id: 'ada', label: 'Ada', start: 2, end: 6 }],
+        };
+        const observed = vi.fn(() => promptBox.mentionDocument);
+        promptBox.addEventListener('input', observed);
+        await directive.onRecorderStart();
+
+        // Act
+        await directive.onRecorderStop();
+
+        // Assert
+        expect(observed).toHaveReturnedWith({
+            text: '@Ada existing prompt dictated text',
+            mentions: [{ id: 'ada', label: 'Ada', start: 0, end: 4 }],
+        });
     });
 
     it('does not request microphone access while the owning surface disables capture', async () => {

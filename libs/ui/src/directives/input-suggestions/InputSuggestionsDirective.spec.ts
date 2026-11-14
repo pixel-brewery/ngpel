@@ -9,8 +9,15 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', () => ({
     IconNameDirective: class IconNameDirective {},
     MenuComponent: class MenuComponent {},
     MenuItemComponent: class MenuItemComponent {},
+    MenuItemGroupComponent: class MenuItemGroupComponent {},
     PopupComponent: class PopupComponent {},
     TextComponent: class TextComponent {},
+}));
+
+vi.mock('@pixel-brewery/mosaik-elements-foundation', async () => ({
+    groupTextSuggestionOptions: (
+        await import('@pixel-brewery/mosaik-elements-foundation/dist/controls/components/inputs/text-suggestions/groupTextSuggestionOptions')
+    ).groupTextSuggestionOptions,
 }));
 
 interface ISuggestionLifecycle {
@@ -94,6 +101,26 @@ describe('InputSuggestionsDirective', () => {
         expect(selected).toHaveBeenCalledWith(BETA);
         expect(host.value).toBe('query');
         expect(host.getAttribute('aria-expanded')).toBe('false');
+    });
+
+    it('keeps keyboard and pointer selection in the visual group order', async () => {
+        const location = { key: 'location', label: 'Locations' };
+        const first = { ...ALPHA, group: location };
+        const secondInGroup = { id: 'alternate', label: 'Alternate', value: 'alternate', group: location };
+        const { directive, host, state, activate } = createDirective(() => [first, BETA, secondInGroup]);
+        const selected = vi.fn();
+        directive.selected.subscribe(selected);
+        host.value = 'query';
+        directive.refresh();
+        await vi.advanceTimersByTimeAsync(300);
+
+        host.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', cancelable: true }));
+        expect(state()?.selectedIndex).toBe(1);
+        expect(state()?.items).toEqual([first, secondInGroup, BETA]);
+
+        activate(1);
+
+        expect(selected).toHaveBeenCalledWith(secondInGroup);
     });
 
     it('uses the same selection path for activated menu items', async () => {

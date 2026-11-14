@@ -5,6 +5,7 @@ import { DIALOG_REF, DIALOG_REF_DATA } from '@pixel-brewery/mosaik-elements-angu
 import { describe, expect, it, vi } from 'vitest';
 import { ImagePreviewComponent } from './ImagePreviewComponent';
 import type { IImagePreviewData } from './ImagePreviewData';
+import type { IImagePreviewImage } from './IImagePreviewImage';
 import { ImagePreviewState } from './ImagePreviewState';
 
 // #endregion
@@ -17,6 +18,7 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', () => ({
     DIALOG_REF: 'DIALOG_REF',
     DIALOG_REF_DATA: 'DIALOG_REF_DATA',
     IconNameDirective: class IconNameDirective {},
+    VideoComponent: class VideoComponent {},
 }));
 
 const PREVIEW_DATA_BASE: Omit<IImagePreviewData, 'state'> = {
@@ -49,6 +51,8 @@ const PREVIEW_DATA_BASE: Omit<IImagePreviewData, 'state'> = {
     },
 };
 interface IImagePreviewComponentTestApi {
+    attachCaptions(player: HTMLVideoElement, media: IImagePreviewImage): void;
+
     rotateRight(): void;
 
     zoomIn(): void;
@@ -100,6 +104,28 @@ describe('ImagePreviewComponent', () => {
         expect(component.canZoomIn()).toBe(false);
         expect(component.canZoomOut()).toBe(true);
         expect(component.transform()).toContain('scale3d(2, 2, 1)');
+    });
+
+    it('attaches WebVTT captions to the player and clears them for another video', () => {
+        const api = createComponent() as unknown as IImagePreviewComponentTestApi;
+        const player = document.createElement('video');
+        const load = vi.spyOn(player, 'load').mockImplementation(() => undefined);
+
+        api.attachCaptions(player, {
+            mediaKind: 'video',
+            src: '/intro.mp4',
+            captions: { src: '/intro.vtt', language: 'de', label: 'German captions' },
+        });
+
+        const track = player.querySelector('track');
+        expect(track?.src).toContain('/intro.vtt');
+        expect(track?.srclang).toBe('de');
+        expect(track?.label).toBe('German captions');
+        expect(player.crossOrigin).toBe('anonymous');
+        expect(load).toHaveBeenCalledOnce();
+
+        api.attachCaptions(player, { mediaKind: 'video', src: '/other.mp4' });
+        expect(player.querySelector('track')).toBeNull();
     });
 });
 

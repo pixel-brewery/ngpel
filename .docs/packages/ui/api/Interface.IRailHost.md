@@ -33,6 +33,18 @@ Defined in: [libs/ui/src/components/rail/IRailHost.ts:22](https://github.com/pix
 
 Whether the current layout presents rail content in a floating sheet.
 
+***
+
+### usesFloatingActions?
+
+```ts
+readonly usesFloatingActions?: Signal<boolean>;
+```
+
+Defined in: [libs/ui/src/components/rail/IRailHost.ts:24](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/IRailHost.ts#L24)
+
+Whether actions are presented as floating action buttons inside the drawer.
+
 ## Methods
 
 ### activateContent()
@@ -41,7 +53,7 @@ Whether the current layout presents rail content in a floating sheet.
 activateContent(target): void;
 ```
 
-Defined in: [libs/ui/src/components/rail/IRailHost.ts:30](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/IRailHost.ts#L30)
+Defined in: [libs/ui/src/components/rail/IRailHost.ts:32](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/IRailHost.ts#L32)
 
 Activates the rail content registered for the supplied key.
 
@@ -63,7 +75,7 @@ Activates the rail content registered for the supplied key.
 hasContent(target): boolean;
 ```
 
-Defined in: [libs/ui/src/components/rail/IRailHost.ts:39](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/IRailHost.ts#L39)
+Defined in: [libs/ui/src/components/rail/IRailHost.ts:41](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/IRailHost.ts#L41)
 
 Indicates whether content is currently registered for a key.
 

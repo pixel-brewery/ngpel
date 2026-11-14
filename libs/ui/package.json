@@ -30,6 +30,7 @@
         "registry": "https://npm.pkg.github.com"
     },
     "dependencies": {
+        "chroma-js": "^3.3.0",
         "diff": "9.0.0",
         "tslib": "2.9.1"
     },

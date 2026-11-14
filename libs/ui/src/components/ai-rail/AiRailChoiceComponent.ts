@@ -98,6 +98,9 @@ export class AiRailChoiceComponent {
     /** Pair of configuration fields whose values the user can exchange. */
     public readonly configurationSwapFields = input<readonly [string, string] | null>(null);
 
+    /** Requires the two exchange fields to have different values before submission. */
+    public readonly configurationRequireDistinctSwapValues = input(false);
+
     /** Accessible label for the exchange action. */
     public readonly configurationSwapLabel = input('Swap values');
 

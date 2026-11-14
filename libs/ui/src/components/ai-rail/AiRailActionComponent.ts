@@ -12,7 +12,8 @@ import { RailActionComponent } from '../rail/RailActionComponent';
     template: `
         <ngp-rail-action
             [target]="'ai'"
-            [label]="label"
+            [label]="label()"
+            [floatingLabel]="floatingLabel()"
             [icon]="'sparkle'"
             [variant]="'highlight'"
             [loading]="loading()"
@@ -31,6 +32,11 @@ export class AiRailActionComponent {
     public readonly skeletonTestId: InputSignal<string> = input('dialog-ai-toggle-skeleton');
     public readonly testId: InputSignal<string> = input('dialog-ai-toggle');
 
-    protected readonly label =
-        this._locale === 'de' ? 'KI nutzen' : this._locale === 'nl' ? 'AI gebruiken' : this._locale === 'uk' ? 'Використати ШІ' : 'Use AI';
+    /** Accessible label of the rail action. */
+    public readonly label = input(
+        this._locale === 'de' ? 'KI nutzen' : this._locale === 'nl' ? 'AI gebruiken' : this._locale === 'uk' ? 'Використати ШІ' : 'Use AI',
+    );
+
+    /** Visible text in the floating rail. */
+    public readonly floatingLabel = input('');
 }

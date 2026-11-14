@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: VoiceRecorderDirective
 
-Defined in: [libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts:71](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts#L71)
+Defined in: [libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts:72](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts#L72)
 
 Connects the Mosaik prompt box voice controls to the audio recorder and transcriber of `ngpel-core`.
 
@@ -29,7 +29,7 @@ its normal input event so existing value accessors and listeners observe the dic
 new VoiceRecorderDirective(): VoiceRecorderDirective;
 ```
 
-Defined in: [libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts:97](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts#L97)
+Defined in: [libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts:98](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts#L98)
 
 Creates the Prompt Box voice bridge and synchronizes Core recorder state with Mosaik.
 
@@ -45,7 +45,7 @@ Creates the Prompt Box voice bridge and synchronizes Core recorder state with Mo
 readonly enabled: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts:144](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts#L144)
+Defined in: [libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts:145](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts#L145)
 
 Allows the owning surface to prevent new microphone captures.
 
@@ -57,7 +57,7 @@ Allows the owning surface to prevent new microphone captures.
 readonly failed: OutputEmitterRef<unknown>;
 ```
 
-Defined in: [libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts:155](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts#L155)
+Defined in: [libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts:156](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts#L156)
 
 Emits recorder or transcription failures for application-level feedback.
 
@@ -69,7 +69,7 @@ Emits recorder or transcription failures for application-level feedback.
 readonly transcribed: OutputEmitterRef<string>;
 ```
 
-Defined in: [libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts:147](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts#L147)
+Defined in: [libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts:148](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts#L148)
 
 Emits the completed transcript after updating the surrounding prompt box when present.
 
@@ -83,7 +83,7 @@ Emits the completed transcript after updating the surrounding prompt box when pr
 get isAcquiring(): Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts:134](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts#L134)
+Defined in: [libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts:135](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts#L135)
 
 Whether this tool is waiting for access to the microphone.
 
@@ -101,7 +101,7 @@ Whether this tool is waiting for access to the microphone.
 get isActive(): Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts:129](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts#L129)
+Defined in: [libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts:130](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts#L130)
 
 Whether this tool is acquiring, recording, or transcribing its own audio.
 
@@ -119,7 +119,7 @@ Whether this tool is acquiring, recording, or transcribing its own audio.
 get isRecording(): Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts:124](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts#L124)
+Defined in: [libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts:125](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts#L125)
 
 Indicates whether this Prompt Box currently owns an active recording.
 
@@ -137,7 +137,7 @@ Indicates whether this Prompt Box currently owns an active recording.
 get isTranscribing(): Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts:139](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts#L139)
+Defined in: [libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts:140](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts#L140)
 
 Whether this tool is converting a stopped recording to text.
 
@@ -153,7 +153,7 @@ Whether this tool is converting a stopped recording to text.
 protected onRecorderCancel(): Promise<void>;
 ```
 
-Defined in: [libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts:168](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts#L168)
+Defined in: [libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts:169](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts#L169)
 
 Cancels the active recording and discards its retained audio.
 
@@ -169,7 +169,7 @@ Cancels the active recording and discards its retained audio.
 protected onRecorderPause(): void;
 ```
 
-Defined in: [libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts:177](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts#L177)
+Defined in: [libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts:178](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts#L178)
 
 Pauses the recording owned by this Prompt Box.
 
@@ -185,7 +185,7 @@ Pauses the recording owned by this Prompt Box.
 protected onRecorderResume(): void;
 ```
 
-Defined in: [libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts:194](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts#L194)
+Defined in: [libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts:195](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts#L195)
 
 Resumes the recording owned by this Prompt Box.
 
@@ -201,7 +201,7 @@ Resumes the recording owned by this Prompt Box.
 protected onRecorderStart(): Promise<void>;
 ```
 
-Defined in: [libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts:211](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts#L211)
+Defined in: [libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts:212](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts#L212)
 
 Starts recording with the last successfully tested browser microphone when available.
 
@@ -217,7 +217,7 @@ Starts recording with the last successfully tested browser microphone when avail
 protected onRecorderStop(): Promise<void>;
 ```
 
-Defined in: [libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts:220](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts#L220)
+Defined in: [libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts:221](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/voice-recorder/VoiceRecorderDirective.ts#L221)
 
 Stops, transcribes and writes the dictated text into the surrounding Prompt Box.
 

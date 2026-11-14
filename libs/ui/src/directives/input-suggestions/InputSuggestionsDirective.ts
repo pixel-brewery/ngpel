@@ -1,6 +1,7 @@
 // #region Imports
 
 import { type ComponentRef, computed, DestroyRef, Directive, ElementRef, ErrorHandler, inject, input, output, signal, ViewContainerRef } from '@angular/core';
+import { groupTextSuggestionOptions } from '@pixel-brewery/mosaik-elements-foundation';
 import type { ITextSuggestionMenuState } from '../../components/text-suggestions/ITextSuggestionMenuState';
 import { TextSuggestionMenuComponent } from '../../components/text-suggestions/TextSuggestionMenuComponent';
 import type { InputSuggestionSource } from './InputSuggestionSource';
@@ -222,7 +223,8 @@ export class InputSuggestionsDirective<TOption extends ITextSuggestionOption = I
 
         this._request = null;
         if (this.source() === source) {
-            this.show({ items: [...items], selectedIndex: 0, loading: false, error });
+            const orderedItems = groupTextSuggestionOptions(items) as ReadonlyArray<TOption>;
+            this.show({ items: orderedItems, selectedIndex: 0, loading: false, error });
         } else {
             this.dismiss();
         }

@@ -29,7 +29,7 @@ new AiRailChoiceComponent(): AiRailChoiceComponent;
 readonly configurationExecuteCommand: InputSignal<Command<Readonly<Record<string, string>>> | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailChoiceComponent.ts:113](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailChoiceComponent.ts#L113)
+Defined in: [libs/ui/src/components/ai-rail/AiRailChoiceComponent.ts:116](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailChoiceComponent.ts#L116)
 
 Feature-owned operation executed with the selected configuration values.
 
@@ -44,6 +44,18 @@ readonly configurationFields: InputSignal<readonly IAiRailChoiceConfigurationFie
 Defined in: [libs/ui/src/components/ai-rail/AiRailChoiceComponent.ts:91](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailChoiceComponent.ts#L91)
 
 Select fields rendered before a configurable choice executes.
+
+***
+
+### configurationRequireDistinctSwapValues
+
+```ts
+readonly configurationRequireDistinctSwapValues: InputSignal<boolean>;
+```
+
+Defined in: [libs/ui/src/components/ai-rail/AiRailChoiceComponent.ts:102](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailChoiceComponent.ts#L102)
+
+Requires the two exchange fields to have different values before submission.
 
 ***
 
@@ -77,7 +89,7 @@ Pair of configuration fields whose values the user can exchange.
 readonly configurationSwapLabel: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailChoiceComponent.ts:102](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailChoiceComponent.ts#L102)
+Defined in: [libs/ui/src/components/ai-rail/AiRailChoiceComponent.ts:105](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailChoiceComponent.ts#L105)
 
 Accessible label for the exchange action.
 
@@ -101,7 +113,7 @@ Supporting choice description.
 readonly executeCommand: InputSignal<Command<string> | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailChoiceComponent.ts:110](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailChoiceComponent.ts#L110)
+Defined in: [libs/ui/src/components/ai-rail/AiRailChoiceComponent.ts:113](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailChoiceComponent.ts#L113)
 
 Feature-owned operation executed by the rail.
 

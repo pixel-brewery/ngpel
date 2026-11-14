@@ -4,7 +4,7 @@ import { SimpleChange, ɵresolveComponentResources as resolveComponentResources,
 import { TestBed, type ComponentFixture } from '@angular/core/testing';
 import type { FieldState } from '@angular/forms/signals';
 import { By } from '@angular/platform-browser';
-import { TranslateService } from '@pixel-brewery/mosaik-elements-angular';
+import { NumberBoxDecimalDirective, TranslateService } from '@pixel-brewery/mosaik-elements-angular';
 import { readFile } from 'node:fs/promises';
 import { EMPTY } from 'rxjs';
 import { afterEach, describe, expect, it, vi } from 'vitest';
@@ -27,6 +27,7 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', async () => {
         'dropDownPlacement',
         'fieldState',
         'formField',
+        'hint',
         'href',
         'iconName',
         'isClearable',
@@ -37,6 +38,8 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', async () => {
         'maxlength',
         'min',
         'minDate',
+        'mosaikDecimalStep',
+        'mosaikTypography',
         'multiline',
         'multilineRows',
         'orientation',
@@ -91,6 +94,7 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', async () => {
         IconNameDirective: createDirective('[iconName]'),
         LocaleDirective: createDirective('[locale]'),
         NumberBoxComponent: createComponent('mosaik-numberbox'),
+        NumberBoxDecimalDirective: createDirective('[mosaikDecimal]'),
         PasswordBoxComponent: createComponent('mosaik-passwordbox'),
         RadioComponent: createComponent('mosaik-radio'),
         RadioGroupComponent: createComponent('mosaik-radio-group'),
@@ -98,8 +102,24 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', async () => {
         SelectItemComponent: createComponent('mosaik-select-item'),
         TextBoxComponent: createComponent('mosaik-textbox'),
         TextComponent: createComponent('mosaik-text'),
+        TypographyDirective: createDirective('[mosaikTypography]'),
         TranslateService: class TranslateService {},
     };
+});
+
+vi.mock('../section/SectionHeaderComponent', async () => {
+    const { Component } = await vi.importActual<typeof import('@angular/core')>('@angular/core');
+
+    class SectionHeaderComponent {}
+
+    Component({
+        selector: 'ngp-section-header',
+        standalone: true,
+        template: '',
+        inputs: ['header', 'description'],
+    })(SectionHeaderComponent);
+
+    return { SectionHeaderComponent };
 });
 
 const ORIGINAL_CLIPBOARD_DESCRIPTOR = Object.getOwnPropertyDescriptor(globalThis.navigator, 'clipboard');
@@ -157,6 +177,59 @@ describe('DynamicFormComponent', () => {
         expect(anchor.componentInstance.target).toBe('_blank');
         expect(anchor.componentInstance.rel).toBe('noopener noreferrer');
         expect((fixture.componentInstance as unknown as IDynamicFormComponentTestApi).field('recipientEmail')().errors()).toEqual([]);
+    });
+
+    it('projects supplied section text and exposes each editable field description as a hint', async () => {
+        const fixture = await createFixture();
+        setRequiredInput(fixture.componentInstance.useSectionHeaders, true);
+        setDefinition(fixture.componentInstance, {
+            key: 'document',
+            version: 1,
+            title: 'Document',
+            description: 'Prepare delivery.',
+            sections: [
+                {
+                    key: 'details',
+                    title: 'Details',
+                    description: 'Verify delivery method.',
+                    fields: [
+                        {
+                            key: 'channel',
+                            label: 'Channel',
+                            description: 'Delivery channel used by the recipient.',
+                            controlType: DynamicFormControlType.Text,
+                        },
+                    ],
+                },
+            ],
+        });
+
+        fixture.detectChanges();
+
+        const section = fixture.debugElement.query(By.css('[test-id="dynamic-form-section-details"]'));
+        const formField = section.query(By.css('[test-id="dynamic-form-field-channel"] mosaik-form-field'));
+        const header = fixture.debugElement.query(By.css('[part="header"]')).componentInstance;
+        const sectionHeader = section.query(By.css('[part="section-header"]')).componentInstance;
+        expect(header.description).toBe('Prepare delivery.');
+        expect(sectionHeader.description).toBe('Verify delivery method.');
+        expect(formField.componentInstance.hint).toBe('Delivery channel used by the recipient.');
+    });
+
+    it('keeps fractional number input and step separate from integer validation', async () => {
+        const fixture = await createFixture();
+        fixture.componentInstance.value.set({ ratio: 1.5 });
+        setDefinition(
+            fixture.componentInstance,
+            createFieldsDefinition([{ key: 'ratio', label: 'Ratio', controlType: DynamicFormControlType.Number, step: 0.125 }]),
+        );
+
+        fixture.detectChanges();
+
+        const numberBox = fixture.debugElement.query(By.css('[test-id="dynamic-form-control-ratio"]'));
+        const api = fixture.componentInstance as unknown as IDynamicFormComponentTestApi;
+        expect(numberBox.injector.get(NumberBoxDecimalDirective)).toMatchObject({ mosaikDecimalStep: 0.125 });
+        expect(api.field('ratio')().value()).toBe(1.5);
+        expect(fixture.componentInstance.valid()).toBe(true);
     });
 
     it('should render only HTTPS, root-relative, and local development HTTP links', async () => {
@@ -274,6 +347,53 @@ describe('DynamicFormComponent', () => {
             retained: 'future-value',
             status: 'OPEN',
         });
+    });
+
+    it('hydrates fields omitted from a later external value', async () => {
+        const fixture = await createFixture();
+        setDefinition(fixture.componentInstance, createDefinition());
+        fixture.detectChanges();
+
+        const previousValue = fixture.componentInstance.value();
+        const value = { accepted: false, retained: 'server-value' };
+        fixture.componentInstance.value.set(value);
+        fixture.componentInstance.ngOnChanges({ value: new SimpleChange(previousValue, value, false) });
+        fixture.detectChanges();
+
+        const api = fixture.componentInstance as unknown as IDynamicFormComponentTestApi;
+        expect(api.field('status')().value()).toBe('OPEN');
+        expect(fixture.componentInstance.value()).toMatchObject(value);
+    });
+
+    it('renders readonly choices by label and identifies unanswered choices', async () => {
+        const fixture = await createFixture();
+        fixture.componentInstance.value.set({ selected: ['NEW', 'HISTORIC'], unanswered: [] });
+        const options = [{ value: 'NEW', label: 'New' }];
+        setDefinition(
+            fixture.componentInstance,
+            createFieldsDefinition([
+                { key: 'selected', label: 'Selected', controlType: DynamicFormControlType.Readonly, options },
+                { key: 'unanswered', label: 'Unanswered', controlType: DynamicFormControlType.Readonly, options, emptyValueLabel: 'Unanswered' },
+            ]),
+        );
+
+        fixture.detectChanges();
+
+        expect(readonlyText(fixture, 'selected')).toBe('New, HISTORIC');
+        expect(readonlyText(fixture, 'unanswered')).toBe('Unanswered');
+    });
+
+    it('renders the local calendar day in readonly date values', async () => {
+        const fixture = await createFixture();
+        fixture.componentInstance.value.set({ selectedDate: new Date(2026, 10, 14) });
+        setDefinition(
+            fixture.componentInstance,
+            createFieldsDefinition([{ key: 'selectedDate', label: 'Selected date', controlType: DynamicFormControlType.Readonly }]),
+        );
+
+        fixture.detectChanges();
+
+        expect(readonlyText(fixture, 'selectedDate')).toBe('2026-11-14');
     });
 
     it('renders Mosaik choices and accepts false and zero as required scalar answers', async () => {
@@ -643,6 +763,11 @@ function setDefinition(component: DynamicFormComponent, definition: IDynamicForm
 function setRequiredInput<TValue>(input: InputSignal<TValue>, value: TValue): void {
     const node = input[SIGNAL];
     node.applyValueToInputSignal(node, value);
+}
+
+function readonlyText(fixture: ComponentFixture<DynamicFormComponent>, key: string): string {
+    const field = fixture.debugElement.query(By.css(`[test-id="dynamic-form-field-${key}"]`));
+    return (field.query(By.css('[part="readonly-value"]')).componentInstance as { text: string }).text;
 }
 
 function createFieldsDefinition(fields: ReadonlyArray<IDynamicFormFieldDefinition>): IDynamicFormDefinition {

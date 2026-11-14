@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: VoiceSessionControlsComponent
 
-Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:188](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L188)
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:281](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L281)
 
 Renders externally controlled actions for a long-running voice session.
 
@@ -29,10 +29,10 @@ new VoiceSessionControlsComponent(): VoiceSessionControlsComponent;
 ### actionSize
 
 ```ts
-protected readonly actionSize: Signal<"small" | "large">;
+protected readonly actionSize: Signal<"small" | "large" | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:315](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L315)
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:427](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L427)
 
 ***
 
@@ -42,7 +42,7 @@ Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsC
 protected readonly assistantActionsDisabled: Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:316](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L316)
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:428](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L428)
 
 ***
 
@@ -52,7 +52,7 @@ Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsC
 readonly assistantAudioAvailable: InputSignal<boolean | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:195](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L195)
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:288](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L288)
 
 Whether assistant audio actions are available. Providing a value keeps the stop control
 mounted between utterances. When omitted, the stop control appears only while speaking.
@@ -65,7 +65,7 @@ mounted between utterances. When omitted, the stop control appears only while sp
 readonly assistantMuted: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:203](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L203)
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:296](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L296)
 
 Indicates whether assistant audio output is currently muted.
 
@@ -77,9 +77,21 @@ Indicates whether assistant audio output is currently muted.
 readonly assistantMutedChange: OutputEmitterRef<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:211](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L211)
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:304](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L304)
 
 Emits the requested assistant-audio mute state.
+
+***
+
+### assistantMuteIconNames
+
+```ts
+readonly assistantMuteIconNames: InputSignal<readonly [string, string]>;
+```
+
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:346](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L346)
+
+Icon names for the assistant-audio control when unmuted and muted, respectively.
 
 ***
 
@@ -89,9 +101,33 @@ Emits the requested assistant-audio mute state.
 readonly assistantSpeaking: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:219](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L219)
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:312](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L312)
 
 Indicates whether the assistant is currently emitting spoken audio.
+
+***
+
+### assistantStopAppearance
+
+```ts
+readonly assistantStopAppearance: InputSignal<Appearance>;
+```
+
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:352](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L352)
+
+Appearance of the action that interrupts spoken output.
+
+***
+
+### assistantStopIconName
+
+```ts
+readonly assistantStopIconName: InputSignal<string>;
+```
+
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:349](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L349)
+
+Icon shown on the action that interrupts spoken output.
 
 ***
 
@@ -101,7 +137,7 @@ Indicates whether the assistant is currently emitting spoken audio.
 readonly assistantStopRequested: OutputEmitterRef<void>;
 ```
 
-Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:227](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L227)
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:320](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L320)
 
 Requests interruption of the assistant's current spoken response.
 
@@ -113,7 +149,7 @@ Requests interruption of the assistant's current spoken response.
 readonly canEnd: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:238](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L238)
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:331](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L331)
 
 Whether the toolbar offers an end-session action.
 
@@ -125,7 +161,7 @@ Whether the toolbar offers an end-session action.
 readonly canPause: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:235](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L235)
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:328](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L328)
 
 Indicates whether pause and resume actions are available.
 
@@ -137,7 +173,7 @@ Indicates whether pause and resume actions are available.
 readonly compact: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:241](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L241)
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:334](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L334)
 
 Uses compact action sizes and displays the end action as an accessible icon button.
 
@@ -149,9 +185,21 @@ Uses compact action sizes and displays the end action as an accessible icon butt
 readonly disabled: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:249](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L249)
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:360](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L360)
 
 Disables every control except while an end request is already busy.
+
+***
+
+### endActivation
+
+```ts
+readonly endActivation: InputSignal<"click" | "hold">;
+```
+
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:340](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L340)
+
+How the user activates the end action. Use click when the host already confirms ending.
 
 ***
 
@@ -161,7 +209,7 @@ Disables every control except while an end request is already busy.
 readonly endBusy: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:257](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L257)
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:368](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L368)
 
 Indicates that an end-session request is currently being processed.
 
@@ -173,9 +221,31 @@ Indicates that an end-session request is currently being processed.
 readonly endRequested: OutputEmitterRef<void>;
 ```
 
-Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:265](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L265)
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:376](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L376)
 
 Requests the consumer-owned session termination flow.
+
+***
+
+### inactiveVariant
+
+```ts
+readonly inactiveVariant: InputSignal<Variant>;
+```
+
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:343](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L343)
+
+Visual variant of toggle actions when they are inactive.
+
+***
+
+### inline
+
+```ts
+protected readonly inline: Signal<boolean>;
+```
+
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:426](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L426)
 
 ***
 
@@ -185,9 +255,21 @@ Requests the consumer-owned session termination flow.
 readonly labels: InputSignal<IVoiceSessionControlLabels>;
 ```
 
-Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:273](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L273)
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:384](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L384)
 
 Localized labels and accessible names used by every control.
+
+***
+
+### layout
+
+```ts
+readonly layout: InputSignal<"inline" | "panel">;
+```
+
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:337](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L337)
+
+Renders a self-contained panel or inline controls for an existing host surface.
 
 ***
 
@@ -197,7 +279,7 @@ Localized labels and accessible names used by every control.
 readonly microphoneMuted: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:281](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L281)
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:392](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L392)
 
 Indicates whether microphone input is currently muted.
 
@@ -209,7 +291,7 @@ Indicates whether microphone input is currently muted.
 readonly microphoneMutedChange: OutputEmitterRef<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:289](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L289)
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:400](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L400)
 
 Emits the requested microphone mute state.
 
@@ -221,7 +303,7 @@ Emits the requested microphone mute state.
 readonly paused: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:297](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L297)
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:408](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L408)
 
 Indicates whether the complete session is paused.
 
@@ -233,7 +315,7 @@ Indicates whether the complete session is paused.
 readonly pausedChange: OutputEmitterRef<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:305](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L305)
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:416](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L416)
 
 Emits the requested pause state.
 
@@ -245,7 +327,7 @@ Emits the requested pause state.
 readonly showAssistantControl: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:313](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L313)
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:424](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L424)
 
 Indicates whether assistant-audio actions are rendered.
 
@@ -257,7 +339,7 @@ Indicates whether assistant-audio actions are rendered.
 protected requestAssistantStop(): void;
 ```
 
-Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:351](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L351)
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:463](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L463)
 
 #### Returns
 
@@ -271,7 +353,7 @@ Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsC
 protected requestEnd(): void;
 ```
 
-Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:357](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L357)
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:469](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L469)
 
 #### Returns
 
@@ -285,7 +367,7 @@ Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsC
 protected toggleAssistantMuted(): void;
 ```
 
-Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:327](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L327)
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:439](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L439)
 
 Emits the inverse of the current assistant-audio mute state.
 
@@ -301,7 +383,7 @@ Emits the inverse of the current assistant-audio mute state.
 protected toggleMicrophoneMuted(): void;
 ```
 
-Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:338](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L338)
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:450](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L450)
 
 Emits the inverse of the current microphone mute state.
 
@@ -317,7 +399,7 @@ Emits the inverse of the current microphone mute state.
 protected togglePaused(): void;
 ```
 
-Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:347](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L347)
+Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:459](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L459)
 
 Emits the inverse of the current pause state.
 

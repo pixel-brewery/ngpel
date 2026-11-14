@@ -29,7 +29,7 @@ new FileSourceComponent(): FileSourceComponent;
 readonly accept: InputSignal<readonly string[]>;
 ```
 
-Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:48](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L48)
+Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:51](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L51)
 
 Accepted file extensions or MIME patterns for picker sources.
 
@@ -41,7 +41,7 @@ Accepted file extensions or MIME patterns for picker sources.
 readonly appearance: InputSignal<Appearance>;
 ```
 
-Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:66](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L66)
+Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:69](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L69)
 
 Visual appearance of the rendered source action.
 
@@ -53,7 +53,7 @@ Visual appearance of the rendered source action.
 readonly busy: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:63](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L63)
+Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:66](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L66)
 
 Whether the source currently performs an operation.
 
@@ -65,7 +65,7 @@ Whether the source currently performs an operation.
 readonly description: InputSignal<string | null>;
 ```
 
-Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:45](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L45)
+Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:48](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L48)
 
 Optional explanatory copy rendered below the action.
 
@@ -77,7 +77,7 @@ Optional explanatory copy rendered below the action.
 readonly directory: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:54](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L54)
+Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:57](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L57)
 
 Whether a picker source may select directories.
 
@@ -89,7 +89,7 @@ Whether a picker source may select directories.
 readonly disabled: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:60](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L60)
+Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:63](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L63)
 
 Whether the source rejects user interactions.
 
@@ -101,7 +101,7 @@ Whether the source rejects user interactions.
 readonly dropEnabled: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:57](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L57)
+Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:60](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L60)
 
 Whether dropped files are routed to this picker source.
 
@@ -113,7 +113,7 @@ Whether dropped files are routed to this picker source.
 readonly filesRejected: OutputEmitterRef<readonly File[]>;
 ```
 
-Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:78](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L78)
+Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:81](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L81)
 
 Emits files rejected by a picker source.
 
@@ -125,7 +125,7 @@ Emits files rejected by a picker source.
 readonly filesSelected: OutputEmitterRef<readonly File[]>;
 ```
 
-Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:75](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L75)
+Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:78](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L78)
 
 Emits files accepted by a picker source.
 
@@ -137,7 +137,7 @@ Emits files accepted by a picker source.
 readonly iconName: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:42](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L42)
+Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:45](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L45)
 
 Mosaik icon rendered with the action.
 
@@ -161,7 +161,7 @@ Stable key used to identify the source.
 readonly label: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:39](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L39)
+Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:42](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L42)
 
 Visible action label.
 
@@ -173,7 +173,7 @@ Visible action label.
 readonly multiple: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:51](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L51)
+Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:54](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L54)
 
 Whether one picker interaction may select multiple files.
 
@@ -185,9 +185,21 @@ Whether one picker interaction may select multiple files.
 readonly requested: OutputEmitterRef<void>;
 ```
 
-Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:72](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L72)
+Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:75](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L75)
 
 Emits when an action source is invoked.
+
+***
+
+### testId
+
+```ts
+readonly testId: InputSignal<string | null>;
+```
+
+Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:36](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L36)
+
+Stable automation identifier of the rendered acquisition action.
 
 ***
 
@@ -197,7 +209,7 @@ Emits when an action source is invoked.
 readonly type: InputSignal<FileSourceTypeValue>;
 ```
 
-Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:36](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L36)
+Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:39](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L39)
 
 Acquisition mechanism provided by the source.
 
@@ -209,7 +221,7 @@ Acquisition mechanism provided by the source.
 readonly variant: InputSignal<Variant>;
 ```
 
-Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:69](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L69)
+Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:72](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L72)
 
 Visual variant of the rendered source action.
 
@@ -221,7 +233,7 @@ Visual variant of the rendered source action.
 rejectFiles(files): void;
 ```
 
-Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:99](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L99)
+Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:102](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L102)
 
 Emits a rejected non-empty file selection for an enabled picker source.
 
@@ -243,7 +255,7 @@ Emits a rejected non-empty file selection for an enabled picker source.
 request(): void;
 ```
 
-Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:85](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L85)
+Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:88](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L88)
 
 Invokes an enabled action source.
 
@@ -259,7 +271,7 @@ Invokes an enabled action source.
 selectFiles(files): void;
 ```
 
-Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:92](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L92)
+Defined in: [libs/ui/src/components/file-source/FileSourceComponent.ts:95](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/file-source/FileSourceComponent.ts#L95)
 
 Emits an accepted non-empty file selection for an enabled picker source.
 

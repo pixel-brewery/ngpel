@@ -32,6 +32,7 @@ import { command, type Command } from '@pixel-brewery/ngpel-mvp';
 import { AiRailComponentIntl, provideAiRailComponentIntl } from './AiRailComponentIntl';
 import { TypewriterDirective } from '../../directives/typewriter/TypewriterDirective';
 import { VoiceRecorderDirective } from '../../directives/voice-recorder/VoiceRecorderDirective';
+import { resolveMosaikSelectionValue } from '../../events/resolveMosaikSelectionValue';
 import { SectionComponent } from '../section/SectionComponent';
 import { SectionContentComponent } from '../section/SectionContentComponent';
 import { SectionHeaderComponent } from '../section/SectionHeaderComponent';
@@ -40,7 +41,6 @@ import type { AiRailBadgeVariant } from './AiRailBadgeVariant';
 import { AiRailChoiceType } from './AiRailChoiceType';
 import { AiRailSection, type AiRailSection as AiRailSectionValue } from './AiRailSection';
 import { mapAiRailPromptSubmittedEvent } from './mapAiRailPromptSubmittedEvent';
-import { mapAiRailSelectionChangedEvent } from './mapAiRailSelectionChangedEvent';
 
 // #endregion
 
@@ -129,7 +129,7 @@ import { mapAiRailSelectionChangedEvent } from './mapAiRailSelectionChangedEvent
                                             [value]="configurationValues()[field.key]"
                                             [label]="field.label"
                                             [variant]="'primary'"
-                                            [disabled]="field.disabled ?? false"
+                                            [disabled]="loading() || !canExecuteChoice(choice) || (field.disabled ?? false)"
                                             [showFilter]="field.showFilter ?? true"
                                             (selectionChanged)="changeConfigurationValue(field.key, $event)"
                                         >
@@ -139,6 +139,7 @@ import { mapAiRailSelectionChangedEvent } from './mapAiRailSelectionChangedEvent
                                         </mosaik-select>
                                         @if (choice.configurationSwapFields()?.[0] === field.key) {
                                             <mosaik-button
+                                                [attr.test-id]="choice.testId() ? choice.testId() + '-swap' : null"
                                                 appearance="plain"
                                                 iconName="arrowSync"
                                                 [label]="choice.configurationSwapLabel()"
@@ -175,6 +176,7 @@ import { mapAiRailSelectionChangedEvent } from './mapAiRailSelectionChangedEvent
                             <ngp-section-header [header]="choice.label()" [description]="choice.description()" />
                             <ngp-section-content>
                                 <mosaik-prompt-box
+                                    [attr.test-id]="choice.testId() ? choice.testId() + '-prompt' : null"
                                     [appearance]="'outline'"
                                     [placeholder]="choice.promptPlaceholder()"
                                     [minRows]="5"
@@ -245,6 +247,7 @@ import { mapAiRailSelectionChangedEvent } from './mapAiRailSelectionChangedEvent
 
                                     @if (isOutdated() && outdatedText()) {
                                         <mosaik-banner
+                                            [attr.test-id]="outdatedTestId() || null"
                                             [isOpen]="true"
                                             [appearance]="'soft'"
                                             [variant]="'warning'"
@@ -457,6 +460,9 @@ export class AiRailComponent {
      */
     public readonly outdatedText: InputSignal<string> = input('');
 
+    /** Test identifier applied to the outdated-result notice. */
+    public readonly outdatedTestId = input('');
+
     /**
      * Indicates whether the result was produced by a fallback strategy.
      *
@@ -559,11 +565,25 @@ export class AiRailComponent {
     protected readonly submitConfigurationCommand: Command<void> = command<void>(
         () => this.submitConfiguration(),
         computed(() => {
-            const choice = this._activeChoice();
+            const choice = this.editableConfigurationChoice();
+            if (!choice) {
+                return false;
+            }
+
+            const values = this._configurationValues();
+            const swapFields = choice.configurationSwapFields();
+            const hasValidValues = choice.configurationFields().every((field) => {
+                const value = values[field.key];
+                return Boolean(value) && field.options.some((option) => option.value === value);
+            });
+            if (!hasValidValues || !choice.configurationRequireDistinctSwapValues()) {
+                return hasValidValues;
+            }
+
             return (
-                choice?.type() === AiRailChoiceType.CONFIGURATION &&
-                choice.configurationFields().every((field) => Boolean(this._configurationValues()[field.key])) &&
-                Boolean(choice.configurationExecuteCommand()?.canExecute())
+                swapFields !== null &&
+                swapFields.every((key) => choice.configurationFields().some((field) => field.key === key)) &&
+                values[swapFields[0]] !== values[swapFields[1]]
             );
         }),
     );
@@ -610,14 +630,31 @@ export class AiRailComponent {
 
     /** Updates one configurable choice value from a Mosaik selection event. */
     protected changeConfigurationValue(key: string, event: unknown): void {
-        const value = mapAiRailSelectionChangedEvent(event);
-        if (value === null) {
+        const field = this.editableConfigurationChoice()
+            ?.configurationFields()
+            .find((candidate) => candidate.key === key);
+        const value = resolveMosaikSelectionValue(event);
+        if (!field || field.disabled || !value || !field.options.some((option) => option.value === value)) {
             return;
         }
         this._configurationValues.update((current) => ({ ...current, [key]: value }));
     }
 
+    private editableConfigurationChoice(): AiRailChoiceComponent | null {
+        const choice = this._activeChoice();
+        return choice?.type() === AiRailChoiceType.CONFIGURATION &&
+            this._section() === AiRailSection.CONFIGURATION &&
+            !this.loading() &&
+            !this._requestPending() &&
+            this.canExecuteChoice(choice)
+            ? choice
+            : null;
+    }
+
     private selectChoice(choice: AiRailChoiceComponent): void {
+        if (this.loading() || this._requestPending() || !this.canExecuteChoice(choice)) {
+            return;
+        }
         this._activeChoice.set(choice);
         if (choice.type() === AiRailChoiceType.PROMPT) {
             this._section.set(AiRailSection.PROMPT);
@@ -644,7 +681,7 @@ export class AiRailComponent {
 
     private executeChoice(choice: AiRailChoiceComponent, prompt: string): void {
         const executeCommand = choice.executeCommand();
-        if (!executeCommand?.canExecute()) {
+        if (!executeCommand?.canExecute() || this.loading() || this._requestPending()) {
             return;
         }
 
@@ -655,7 +692,7 @@ export class AiRailComponent {
 
     private submitConfiguration(): void {
         const executeCommand = this._activeChoice()?.configurationExecuteCommand();
-        if (!executeCommand?.canExecute()) {
+        if (!executeCommand || !this.submitConfigurationCommand.canExecute()) {
             return;
         }
         this._requestPending.set(true);
@@ -664,17 +701,9 @@ export class AiRailComponent {
     }
 
     private swappedValues(): Readonly<Record<string, string>> | null {
-        const choice = this._activeChoice();
+        const choice = this.editableConfigurationChoice();
         const pair = choice?.configurationSwapFields();
-        if (
-            !choice ||
-            !pair ||
-            pair[0] === pair[1] ||
-            this.loading() ||
-            this._requestPending() ||
-            this._section() !== AiRailSection.CONFIGURATION ||
-            !choice.configurationExecuteCommand()?.canExecute()
-        ) {
+        if (!choice || !pair || pair[0] === pair[1]) {
             return null;
         }
         const fields = choice.configurationFields();

@@ -125,17 +125,17 @@ describe('RecurrenceEditorDrawerComponent', () => {
             value,
             defaultTime: '08:00',
             summaryLabels: {
-                allDay: 'ganztägig',
-                every: () => 'Täglich',
-                atTime: (time) => `um ${time} Uhr`,
+                allDay: 'All day',
+                every: () => 'Every day',
+                atTime: (time) => `at ${time}`,
                 formatTime: (time) => time,
-                never: 'Endet nie.',
+                never: 'Runs indefinitely.',
             },
         });
 
         drawer.enableScheduledTime();
 
-        expect(drawer.readSummary()).toEqual({ head: 'Täglich um 08:00 Uhr', detail: 'Endet nie.' });
+        expect(drawer.readSummary()).toEqual({ head: 'Every day at 08:00', detail: 'Runs indefinitely.' });
     });
 
     it('uses the default time when switching a recurrence to timed', () => {

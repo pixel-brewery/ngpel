@@ -4,13 +4,11 @@
  * @public
  */
 export interface ILegalLink {
-    /**
-     * Human-readable link label.
-     *
-     * @public
-     * @readonly
-     */
+    /** Human-readable label and fallback when no translation is supplied. */
     readonly label: string;
+
+    /** Optional translation key resolved in the surrounding application. */
+    readonly translationKey?: string;
 
     /**
      * Trusted destination URL.

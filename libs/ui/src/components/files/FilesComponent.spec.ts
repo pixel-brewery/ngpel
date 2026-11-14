@@ -241,6 +241,20 @@ describe('FilesComponent', () => {
         expect(result).toBe('document');
     });
 
+    it('keeps the inline drop source active before any files have been added', () => {
+        // arrange
+        const source = createSource({ dropEnabled: true });
+        const { api } = createComponent({ layout: FilesLayout.Inline, showHeader: false, sources: [source] });
+        const selected = vi.spyOn(source.filesSelected, 'emit');
+        const file = new File(['content'], 'document.pdf');
+
+        // act
+        api.onDropZoneData({ files: [file] });
+
+        // assert
+        expect(selected).toHaveBeenCalledExactlyOnceWith([file]);
+    });
+
     it('should reject ambiguous drop ownership without selecting an arbitrary source', () => {
         // arrange
         const first = createSource({ dropEnabled: true });
@@ -346,7 +360,7 @@ describe('FilesComponent template', () => {
         const emptyState = template.slice(template.indexOf('<mosaik-empty-state'), template.indexOf('</mosaik-empty-state>'));
 
         // act
-        const populatedSources = template.indexOf('@if (renderedFiles().length > 0 && sources().length > 0)');
+        const populatedSources = template.indexOf('@if (renderedFiles().length > 0 && sources().length > 0 && !inlineWithoutHeader())');
 
         // assert
         expect(emptyState).toContain('[iconName]="resolvedEmptyIconName()"');
@@ -367,6 +381,7 @@ function createComponent(
         layout: FilesLayoutValue;
         openLabel: null | string;
         showFileSize: boolean;
+        showHeader: boolean;
         sources: ReadonlyArray<FileSourceComponent>;
         testIdPrefix: null | string;
     }> = {},
@@ -380,6 +395,7 @@ function createComponent(
         label: { value: signal('Files') },
         openLabel: { value: signal(config.openLabel ?? null) },
         showFileSize: { value: signal(config.showFileSize ?? false) },
+        showHeader: { value: signal(config.showHeader ?? true) },
         sources: { value: signal(config.sources ?? []) },
         testIdPrefix: { value: signal(config.testIdPrefix ?? null) },
     });

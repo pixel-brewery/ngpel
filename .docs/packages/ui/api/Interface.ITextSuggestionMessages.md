@@ -35,10 +35,10 @@ Status shown when the source fails.
 
 ***
 
-### label
+### label?
 
 ```ts
-readonly label: string;
+readonly label?: string;
 ```
 
 Defined in: [libs/ui/src/directives/input-suggestions/ITextSuggestionMessages.ts:4](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-suggestions/ITextSuggestionMessages.ts#L4)

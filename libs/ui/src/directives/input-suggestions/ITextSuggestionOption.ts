@@ -11,4 +11,10 @@ export interface ITextSuggestionOption {
 
     /** Optional Mosaik icon registry name. */
     readonly icon?: string;
+
+    /** Optional source-owned group. */
+    readonly group?: { readonly key: string; readonly label: string };
+
+    /** Optional Mosaik emphasis for this option. */
+    readonly tone?: 'primary' | 'secondary';
 }

@@ -1,0 +1,486 @@
+// Registered so the stage glow can blend between phase accents instead of switching abruptly.
+@property --ngp-immersive-session-glow-accent {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: transparent;
+}
+
+@property --ngp-immersive-session-glow-secondary {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: transparent;
+}
+
+.shell.shell--orb {
+    --ngp-immersive-session-rail-width: 384px;
+    --ngp-immersive-session-easing: ease;
+    --ngp-immersive-session-glow-accent: var(--mosaik-color-highlight-500);
+    --ngp-immersive-session-glow-secondary: var(--mosaik-color-info-500);
+    // The full-screen surface starts behind the iPhone status bar. Grow the grid row by its
+    // safe inset so header controls remain inside the row and the stage starts below them.
+    --ngp-immersive-session-header-height: calc(4rem + env(safe-area-inset-top, 0px));
+    // Reserve space below the centered orb when page zoom leaves less viewport height.
+    --ngp-immersive-session-orb-size: clamp(7rem, calc(60dvh - 15rem), 21.375rem);
+    --ngp-immersive-session-orb-top: calc(50% - var(--ngp-immersive-session-header-height) / 2 - var(--ngp-immersive-session-orb-size) / 2);
+    --ngp-immersive-session-orb-stage-gap: clamp(0.75rem, calc(10dvh - 4rem), 2rem);
+    --ngp-immersive-session-dock-bottom: max(1.75rem, env(safe-area-inset-bottom));
+    // Fits one row of default-size Mosaik controls with even padding.
+    --ngp-immersive-session-dock-height: 3.25rem;
+    --ngp-immersive-session-stage-shift: calc(var(--ngp-immersive-session-rail-width) * -0.4);
+
+    position: relative;
+    display: grid;
+    grid-template-rows: var(--ngp-immersive-session-header-height) minmax(0, 1fr);
+    width: 100%;
+    height: 100%;
+    min-height: 100dvh;
+    // Clipping instead of hiding keeps the surface from becoming a scroll container that focus or
+    // scrollIntoView could shift.
+    overflow: clip;
+    background: var(--mosaik-scheme-background);
+    isolation: isolate;
+    transition:
+        --ngp-immersive-session-glow-accent var(--mosaik-duration-long) var(--ngp-immersive-session-easing),
+        --ngp-immersive-session-glow-secondary var(--mosaik-duration-long) var(--ngp-immersive-session-easing);
+
+    // Gradients cannot be interpolated, so two glow layers cross-fade between preflight and session.
+    &::before,
+    &::after {
+        position: absolute;
+        z-index: 0;
+        inset: 0;
+        content: '';
+        pointer-events: none;
+        transition: opacity var(--mosaik-duration-long) var(--ngp-immersive-session-easing);
+    }
+
+    &::before {
+        background: radial-gradient(circle at 28% 22%, color-mix(in srgb, var(--ngp-immersive-session-glow-accent) 9%, transparent), transparent 32%);
+    }
+
+    &::after {
+        opacity: 0;
+        background:
+            radial-gradient(circle at 50% 42%, color-mix(in srgb, var(--ngp-immersive-session-glow-accent) 13%, transparent), transparent 38%),
+            radial-gradient(circle at 50% 100%, color-mix(in srgb, var(--ngp-immersive-session-glow-secondary) 5%, transparent), transparent 40%);
+    }
+
+    // A finished session glows in the success accent.
+    &[data-ngp-phase='completed'] {
+        --ngp-immersive-session-glow-accent: var(--mosaik-color-success-500);
+        --ngp-immersive-session-glow-secondary: var(--mosaik-color-success-500);
+    }
+
+    &:not([data-ngp-phase='preflight'])::before {
+        opacity: 0;
+    }
+
+    &:not([data-ngp-phase='preflight'])::after {
+        opacity: 1;
+    }
+
+    [part='notification'] {
+        position: absolute;
+        z-index: 6;
+        top: calc(var(--ngp-immersive-session-header-height) + 1rem);
+        right: 0;
+        left: 0;
+        display: grid;
+        width: min(40rem, 100% - 2rem);
+        margin-inline: auto;
+        gap: 0.5rem;
+    }
+
+    [part='header'] {
+        position: relative;
+        z-index: 4;
+        display: flex;
+        min-width: 0;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+        gap: 1rem;
+        background: none;
+        backdrop-filter: none;
+        padding: calc(0.75rem + env(safe-area-inset-top, 0px)) max(1.5rem, env(safe-area-inset-right)) 0.75rem max(1.5rem, env(safe-area-inset-left));
+        border-bottom: 1px solid transparent;
+        transition:
+            opacity var(--mosaik-duration-medium) var(--ngp-immersive-session-easing),
+            border-color var(--mosaik-duration-long) var(--ngp-immersive-session-easing);
+    }
+
+    &[data-ngp-phase='preflight'] [part='header'],
+    &[data-ngp-phase='completed'] [part='header'] {
+        border-bottom-color: color-mix(in srgb, var(--mosaik-scheme-foreground) 10%, transparent);
+    }
+
+    [part='header-content'],
+    [part='status'] {
+        display: flex;
+        min-width: 0;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    [part='status'] {
+        flex-shrink: 0;
+        width: auto;
+        justify-content: flex-end;
+        transition: translate var(--mosaik-duration-medium) var(--ngp-immersive-session-easing);
+    }
+
+    [part='body'],
+    [part='stage'] {
+        position: relative;
+        min-width: 0;
+        min-height: 0;
+        overflow: clip;
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: minmax(0, 1fr);
+    }
+
+    [part='stage'] {
+        position: absolute;
+        inset: 0;
+        display: block;
+        padding: 0;
+    }
+
+    [part='orb'] {
+        position: absolute;
+        z-index: 1;
+        top: var(--ngp-immersive-session-orb-top);
+        left: 50%;
+        display: grid;
+        width: var(--ngp-immersive-session-orb-size);
+        height: var(--ngp-immersive-session-orb-size);
+        margin-left: calc(var(--ngp-immersive-session-orb-size) / -2);
+        place-items: center;
+        transition:
+            transform var(--mosaik-duration-long) var(--ngp-immersive-session-easing),
+            translate var(--mosaik-duration-medium) var(--ngp-immersive-session-easing);
+    }
+
+    &[data-ngp-phase='preflight'] [part='orb'] {
+        transform: var(--ngp-immersive-session-orb-preflight-transform, scale(0.33));
+    }
+
+    &[data-ngp-phase='completed'] [part='orb'] {
+        transform: translateY(calc(var(--ngp-immersive-session-orb-size) * -0.4)) scale(0.63);
+    }
+
+    [part='preflight'] {
+        position: absolute;
+        z-index: 2;
+        inset: 0;
+        display: grid;
+        width: min(47.5rem, 100% - 2rem);
+        min-height: 0;
+        margin-inline: auto;
+        padding-block: clamp(1.5rem, 8dvh, 4.375rem) 1.5rem;
+        transition:
+            opacity var(--mosaik-duration-short) var(--ngp-immersive-session-easing),
+            transform var(--mosaik-duration-medium) var(--ngp-immersive-session-easing);
+    }
+
+    &[data-ngp-phase='connecting'] [part='preflight'] {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(3rem) scale(0.96);
+    }
+
+    &:not([data-ngp-phase='preflight'], [data-ngp-phase='connecting']) [part='preflight'] {
+        display: none;
+    }
+
+    [part='live'] {
+        position: absolute;
+        z-index: 2;
+        top: calc(var(--ngp-immersive-session-orb-top) + var(--ngp-immersive-session-orb-size) + var(--ngp-immersive-session-orb-stage-gap));
+        right: 0;
+        bottom: calc(var(--ngp-immersive-session-dock-bottom) + var(--ngp-immersive-session-dock-height) + 1rem);
+        left: 0;
+        display: flex;
+        min-height: 0;
+        flex-direction: column;
+        align-items: center;
+        padding-inline: 1rem;
+        overflow-x: hidden;
+        overflow-y: auto;
+        overscroll-behavior-y: contain;
+        transition:
+            opacity var(--mosaik-duration-medium) var(--ngp-immersive-session-easing) var(--mosaik-duration-medium),
+            translate var(--mosaik-duration-medium) var(--ngp-immersive-session-easing);
+    }
+
+    &[data-ngp-phase='preflight'] [part='live'] {
+        opacity: 0;
+        pointer-events: none;
+        transition-delay: 0s;
+    }
+
+    &[data-ngp-phase='completed'] [part='live'] {
+        top: calc(var(--ngp-immersive-session-orb-top) + var(--ngp-immersive-session-orb-size) * 0.53);
+    }
+
+    [part='aside'] {
+        position: absolute;
+        z-index: 3;
+        top: var(--ngp-immersive-session-orb-top);
+        right: clamp(1rem, 3.5vw, 3.125rem);
+        width: min(20.625rem, 24vw);
+        height: calc(var(--ngp-immersive-session-orb-size) + 1.5rem);
+        overflow: clip;
+        overflow-clip-margin: 1rem;
+        transition:
+            opacity var(--mosaik-duration-medium) var(--ngp-immersive-session-easing),
+            translate var(--mosaik-duration-medium) var(--ngp-immersive-session-easing);
+    }
+
+    &:not([data-ngp-phase='live']) [part='aside'] {
+        display: none;
+    }
+
+    [part='rail-handle'] {
+        position: absolute;
+        display: block;
+        z-index: 4;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        transition: opacity var(--mosaik-duration-medium) var(--ngp-immersive-session-easing) var(--mosaik-duration-long);
+    }
+
+    &:not([data-ngp-phase='live']) [part='rail-handle'] {
+        opacity: 0;
+        pointer-events: none;
+        transition-delay: 0s;
+    }
+
+    [part='rail'] {
+        position: absolute;
+        z-index: 7;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        width: var(--ngp-immersive-session-rail-width);
+        max-width: 100%;
+        min-height: 0;
+        flex-direction: column;
+        overflow: clip;
+        padding: 0;
+        border-top: 0;
+        border-left: 1px solid color-mix(in srgb, var(--mosaik-scheme-foreground) 10%, transparent);
+        background: var(--mosaik-scheme-surface);
+        box-shadow: var(--mosaik-elevation-semibold);
+        transform: translateX(100%);
+        visibility: hidden;
+        transition:
+            transform var(--mosaik-duration-medium) var(--ngp-immersive-session-easing),
+            visibility 0s linear var(--mosaik-duration-medium);
+    }
+
+    &:not([data-ngp-phase='live']) [part='rail'] {
+        display: none;
+    }
+
+    [part='footer'] {
+        position: absolute;
+        z-index: 4;
+        right: 0;
+        bottom: var(--ngp-immersive-session-dock-bottom);
+        left: 0;
+        display: flex;
+        width: fit-content;
+        min-width: min(40rem, 100% - 2rem);
+        max-width: calc(100% - 2rem);
+        min-height: var(--ngp-immersive-session-dock-height);
+        align-items: center;
+        margin-inline: auto;
+        padding: 0 0.75rem;
+        backdrop-filter: none;
+        border: 1px solid color-mix(in srgb, var(--mosaik-scheme-foreground) 8%, transparent);
+        border-radius: calc(var(--mosaik-layout-radius) * 2.25);
+        background: var(--mosaik-scheme-surface);
+        box-shadow: var(--mosaik-elevation-regular);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(1.5rem);
+        transition:
+            opacity var(--mosaik-duration-medium) var(--ngp-immersive-session-easing),
+            transform var(--mosaik-duration-long) var(--ngp-immersive-session-easing),
+            translate var(--mosaik-duration-medium) var(--ngp-immersive-session-easing);
+    }
+
+    &[data-ngp-phase='connecting'] [part='footer'] {
+        opacity: 0.5;
+        transform: none;
+        transition-delay: var(--mosaik-duration-medium);
+    }
+
+    &[data-ngp-phase='live'] [part='footer'] {
+        opacity: 1;
+        pointer-events: auto;
+        transform: none;
+    }
+
+    // No empty dock while the consumer renders no controls, for example while the session ends.
+    [part='footer']:empty {
+        display: none;
+    }
+
+    [part='caption'] {
+        position: absolute;
+        z-index: 5;
+        right: 0;
+        bottom: 0.25rem;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        padding-inline: 1rem;
+        text-align: center;
+        pointer-events: none;
+    }
+
+    // Modal surfaces such as sheets position themselves against the viewport.
+    [part='sheet'] {
+        display: contents;
+    }
+
+    // Open rail: shift the stage, fade bubbles and handle, slide the rail in.
+    &[data-rail='preview'],
+    &[data-rail='pinned'] {
+        [part='orb'],
+        [part='live'],
+        [part='footer'] {
+            translate: var(--ngp-immersive-session-stage-shift) 0;
+        }
+
+        [part='status'] {
+            translate: calc(var(--ngp-immersive-session-rail-width) * -1) 0;
+        }
+
+        [part='aside'] {
+            opacity: 0;
+            pointer-events: none;
+            translate: 1.75rem 0;
+        }
+
+        [part='rail-handle'] {
+            opacity: 0;
+            pointer-events: none;
+            transition-delay: 0s;
+        }
+
+        [part='rail'] {
+            transform: translateX(0);
+            visibility: visible;
+            transition-delay: 0s;
+        }
+    }
+
+    // Idle chrome: the consumer enables detection only while the session is live.
+    &[data-ngp-idle] {
+        [part='header']:not(:focus-within) {
+            opacity: 0.35;
+        }
+
+        [part='rail-handle']:not(:focus-within) {
+            opacity: 0.4;
+            transition-delay: 0s;
+        }
+
+        [part='footer']:not(:focus-within) {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(1rem);
+        }
+    }
+
+    [part='backdrop'] {
+        position: absolute;
+        z-index: 8;
+        inset: 0;
+    }
+
+    [part='overlay'] {
+        position: absolute;
+        z-index: 9;
+        inset: auto 0 calc(var(--ngp-immersive-session-dock-bottom) + var(--ngp-immersive-session-dock-height) + 2rem);
+        display: block;
+        padding: 0;
+        width: min(30rem, 100% - 2rem);
+        margin-inline: auto;
+    }
+
+    [part='overlay-content'] {
+        overflow: visible;
+    }
+
+    // Mosaik lt-md (< 960px): the consumer shows the transcript as a sheet; no rail, bubbles or handle.
+    @media (width < 60rem) {
+        & {
+            --ngp-immersive-session-orb-size: clamp(7rem, min(34dvh, 70vw, calc(60dvh - 15rem)), 17rem);
+        }
+
+        [part='header'] {
+            padding-inline: max(1rem, env(safe-area-inset-left)) max(1rem, env(safe-area-inset-right));
+        }
+
+        [part='aside'],
+        [part='rail-handle'],
+        [part='rail'] {
+            display: none;
+        }
+    }
+
+    // Mosaik xs (< 600px): the dock spans the viewport.
+    @media (width < 37.5rem) {
+        & {
+            --ngp-immersive-session-dock-bottom: max(0.5rem, env(safe-area-inset-bottom));
+        }
+
+        [part='preflight'] {
+            // Reserve the hint below the start action and keep both above the home indicator.
+            padding-bottom: calc(3.75rem + env(safe-area-inset-bottom, 0px));
+        }
+
+        [part='footer'] {
+            min-width: calc(100% - 1rem);
+            padding-inline: 0.375rem;
+        }
+
+        [part='live'] {
+            // The live stage scrolls above the hint and dock instead of letting its last line hide behind them.
+            bottom: calc(var(--ngp-immersive-session-dock-bottom) + var(--ngp-immersive-session-dock-height) + 4.5rem);
+        }
+
+        [part='caption'] {
+            bottom: max(0.25rem, env(safe-area-inset-bottom));
+        }
+
+        [data-ngp-phase='connecting'] [part='caption'],
+        [data-ngp-phase='live'] [part='caption'] {
+            bottom: calc(var(--ngp-immersive-session-dock-bottom) + var(--ngp-immersive-session-dock-height) + 0.75rem);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        &,
+        &::before,
+        &::after,
+        [part='header'],
+        [part='status'],
+        [part='orb'],
+        [part='preflight'],
+        [part='live'],
+        [part='aside'],
+        [part='rail-handle'],
+        [part='rail'],
+        [part='footer'] {
+            transition-duration: 1ms;
+            transition-delay: 0s;
+        }
+    }
+}

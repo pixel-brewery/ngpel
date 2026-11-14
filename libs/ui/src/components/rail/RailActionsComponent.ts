@@ -1,7 +1,8 @@
 // #region Imports
 
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { AnimateDirective } from '@pixel-brewery/mosaik-elements-angular';
+import { RAIL_HOST } from './RailHostToken';
 
 // #endregion
 
@@ -14,7 +15,14 @@ import { AnimateDirective } from '@pixel-brewery/mosaik-elements-angular';
     selector: 'ngp-rail-actions',
     imports: [AnimateDirective],
     template: `
-        <div class="flex flex-col gap-2" [mosaikAnimate]="'fadeSlideInRight'" [mosaikAnimateOptions]="{ duration: 240 }">
+        <div
+            class="flex gap-2"
+            [class.flex-col]="!floatingActions()"
+            [class.flex-row-reverse]="floatingActions()"
+            [class.items-center]="floatingActions()"
+            [mosaikAnimate]="'fadeSlideInRight'"
+            [mosaikAnimateOptions]="{ duration: 240 }"
+        >
             <ng-content />
         </div>
     `,
@@ -25,6 +33,10 @@ import { AnimateDirective } from '@pixel-brewery/mosaik-elements-angular';
 })
 export class RailActionsComponent {
     // #region Fields
+
+    private readonly _railHost = inject(RAIL_HOST, { optional: true });
+    protected readonly floatingActions = this._railHost?.usesFloatingActions ?? (() => false);
+
     // #endregion
     // #region Ctor
     // #endregion

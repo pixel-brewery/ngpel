@@ -74,6 +74,7 @@ import type { IWidgetGridResizePreview } from '../models/IWidgetGridResizePrevie
                     <mosaik-menu>
                         <mosaik-menu-item
                             [label]="labels().moveWidgetEarlier"
+                            [subLabel]="labels().moveWidgetDescription"
                             [iconName]="'arrowUp'"
                             [disabled]="!canMoveEarlier()"
                             [attr.test-id]="'widget-grid-item-move-earlier-' + item().id"
@@ -83,6 +84,7 @@ import type { IWidgetGridResizePreview } from '../models/IWidgetGridResizePrevie
                         />
                         <mosaik-menu-item
                             [label]="labels().moveWidgetLater"
+                            [subLabel]="labels().moveWidgetDescription"
                             [iconName]="'arrowDown'"
                             [disabled]="!canMoveLater()"
                             [attr.test-id]="'widget-grid-item-move-later-' + item().id"
@@ -92,6 +94,7 @@ import type { IWidgetGridResizePreview } from '../models/IWidgetGridResizePrevie
                         />
                         <mosaik-menu-item
                             [label]="labels().moveWidgetToPreviousZone"
+                            [subLabel]="labels().moveWidgetDescription"
                             [iconName]="'arrowLeft'"
                             [disabled]="!canMoveToPreviousZone()"
                             [attr.test-id]="'widget-grid-item-move-previous-zone-' + item().id"
@@ -101,6 +104,7 @@ import type { IWidgetGridResizePreview } from '../models/IWidgetGridResizePrevie
                         />
                         <mosaik-menu-item
                             [label]="labels().moveWidgetToNextZone"
+                            [subLabel]="labels().moveWidgetDescription"
                             [iconName]="'arrowRight'"
                             [disabled]="!canMoveToNextZone()"
                             [attr.test-id]="'widget-grid-item-move-next-zone-' + item().id"
@@ -111,6 +115,7 @@ import type { IWidgetGridResizePreview } from '../models/IWidgetGridResizePrevie
                         <mosaik-divider />
                         <mosaik-menu-item
                             [label]="labels().makeWidgetNarrower"
+                            [subLabel]="labels().resizeWidgetDescription"
                             [iconName]="'arrowLeft'"
                             [disabled]="!canResize(-1, 0)"
                             [attr.test-id]="'widget-grid-item-narrower-' + item().id"
@@ -120,6 +125,7 @@ import type { IWidgetGridResizePreview } from '../models/IWidgetGridResizePrevie
                         />
                         <mosaik-menu-item
                             [label]="labels().makeWidgetWider"
+                            [subLabel]="labels().resizeWidgetDescription"
                             [iconName]="'arrowRight'"
                             [disabled]="!canResize(1, 0)"
                             [attr.test-id]="'widget-grid-item-wider-' + item().id"
@@ -129,6 +135,7 @@ import type { IWidgetGridResizePreview } from '../models/IWidgetGridResizePrevie
                         />
                         <mosaik-menu-item
                             [label]="labels().makeWidgetShorter"
+                            [subLabel]="labels().resizeWidgetDescription"
                             [iconName]="'arrowUp'"
                             [disabled]="!canResize(0, -1)"
                             [attr.test-id]="'widget-grid-item-shorter-' + item().id"
@@ -138,6 +145,7 @@ import type { IWidgetGridResizePreview } from '../models/IWidgetGridResizePrevie
                         />
                         <mosaik-menu-item
                             [label]="labels().makeWidgetTaller"
+                            [subLabel]="labels().resizeWidgetDescription"
                             [iconName]="'arrowDown'"
                             [disabled]="!canResize(0, 1)"
                             [attr.test-id]="'widget-grid-item-taller-' + item().id"
@@ -148,6 +156,7 @@ import type { IWidgetGridResizePreview } from '../models/IWidgetGridResizePrevie
                         <mosaik-divider />
                         <mosaik-menu-item
                             [label]="labels().hide"
+                            [subLabel]="labels().hideWidgetDescription"
                             [iconName]="'eyeOff'"
                             [attr.test-id]="'widget-grid-item-hide-' + item().id"
                             (click)="hidden.emit()"

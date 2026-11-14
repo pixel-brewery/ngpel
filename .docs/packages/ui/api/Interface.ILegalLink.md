@@ -17,9 +17,9 @@ Describes a trusted website-level legal or company link.
 readonly label: string;
 ```
 
-Defined in: [libs/ui/src/components/legal-links/ILegalLink.ts:13](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/legal-links/ILegalLink.ts#L13)
+Defined in: [libs/ui/src/components/legal-links/ILegalLink.ts:8](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/legal-links/ILegalLink.ts#L8)
 
-Human-readable link label.
+Human-readable label and fallback when no translation is supplied.
 
 ***
 
@@ -29,9 +29,21 @@ Human-readable link label.
 readonly openInNewTab?: boolean;
 ```
 
-Defined in: [libs/ui/src/components/legal-links/ILegalLink.ts:29](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/legal-links/ILegalLink.ts#L29)
+Defined in: [libs/ui/src/components/legal-links/ILegalLink.ts:27](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/legal-links/ILegalLink.ts#L27)
 
 Whether the destination opens in a separate browser context.
+
+***
+
+### translationKey?
+
+```ts
+readonly translationKey?: string;
+```
+
+Defined in: [libs/ui/src/components/legal-links/ILegalLink.ts:11](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/legal-links/ILegalLink.ts#L11)
+
+Optional translation key resolved in the surrounding application.
 
 ***
 
@@ -41,6 +53,6 @@ Whether the destination opens in a separate browser context.
 readonly url: string;
 ```
 
-Defined in: [libs/ui/src/components/legal-links/ILegalLink.ts:21](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/legal-links/ILegalLink.ts#L21)
+Defined in: [libs/ui/src/components/legal-links/ILegalLink.ts:19](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/legal-links/ILegalLink.ts#L19)
 
 Trusted destination URL.

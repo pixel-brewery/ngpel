@@ -72,7 +72,7 @@ export class ContentAnchorDirective implements AfterViewInit, OnInit, OnDestroy 
         const defaultView = this._document.defaultView;
         const IntersectionObserverConstructor = defaultView?.IntersectionObserver;
 
-        if (!defaultView || !IntersectionObserverConstructor) {
+        if (!defaultView) {
             return;
         }
 
@@ -87,18 +87,14 @@ export class ContentAnchorDirective implements AfterViewInit, OnInit, OnDestroy 
             scrollTarget.removeEventListener('scroll', handleScroll);
         };
 
-        this._intersectionObserver = new IntersectionObserverConstructor(
-            (entries): void => {
-                this.handleIntersections(entries);
-            },
-            {
+        if (IntersectionObserverConstructor) {
+            this._intersectionObserver = new IntersectionObserverConstructor(() => this.synchronizeTrackingBand(), {
                 root: this._scrollContainer,
-                rootMargin: '-15% 0px -75% 0px',
                 threshold: 0,
-            },
-        );
-        this._intersectionObserver.observe(this._elementRef.nativeElement);
-        this.synchronizeViewport();
+            });
+            this._intersectionObserver.observe(this._elementRef.nativeElement);
+        }
+        this.synchronizeTrackingBand();
     }
 
     /**
@@ -116,18 +112,9 @@ export class ContentAnchorDirective implements AfterViewInit, OnInit, OnDestroy 
         this._unregister = null;
     }
 
-    private handleIntersections(entries: ReadonlyArray<IntersectionObserverEntry>): void {
-        this.updateScrollDirection();
-        const viewport = this.readViewportState();
-
-        for (const entry of entries) {
-            this._context.synchronizeIntersection(this.anchor().id, entry.isIntersecting, viewport);
-        }
-    }
-
     private handleScroll(): void {
         this.updateScrollDirection();
-        this.synchronizeViewport();
+        this.synchronizeTrackingBand();
     }
 
     private readScrollTop(): number {
@@ -155,6 +142,10 @@ export class ContentAnchorDirective implements AfterViewInit, OnInit, OnDestroy 
         let candidate = this._elementRef.nativeElement.parentElement;
 
         while (candidate) {
+            if (candidate === this._document.body || candidate === this._document.documentElement) {
+                return null;
+            }
+
             const overflowY = defaultView.getComputedStyle(candidate).overflowY;
 
             if (/^(auto|overlay|scroll)$/u.test(overflowY)) {
@@ -167,8 +158,19 @@ export class ContentAnchorDirective implements AfterViewInit, OnInit, OnDestroy 
         return null;
     }
 
-    private synchronizeViewport(): void {
-        this._context.synchronizeViewport(this.readViewportState());
+    private synchronizeTrackingBand(): void {
+        const defaultView = this._document.defaultView;
+        if (!defaultView) {
+            return;
+        }
+
+        const elementBounds = this._elementRef.nativeElement.getBoundingClientRect();
+        const bandTop = this._scrollContainer?.getBoundingClientRect().top ?? 0;
+        const viewportHeight = this._scrollContainer?.clientHeight ?? defaultView.innerHeight;
+        const bandBottom = bandTop + viewportHeight * 0.2;
+        const isIntersecting = elementBounds.bottom >= bandTop && elementBounds.top <= bandBottom;
+
+        this._context.synchronizeIntersection(this.anchor().id, isIntersecting, this.readViewportState());
     }
 
     private updateScrollDirection(): void {

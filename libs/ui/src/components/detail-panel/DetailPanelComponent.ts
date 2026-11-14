@@ -58,6 +58,7 @@ export interface IDetailPanelChange {
                     <mosaik-button
                         class="ngp-detail-panel__handle"
                         part="handle"
+                        [attr.test-id]="'detail-panel-toggle'"
                         [type]="'button'"
                         [appearance]="'solid'"
                         [variant]="'tertiary'"

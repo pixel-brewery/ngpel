@@ -1,7 +1,8 @@
 // #region Imports
 
 import { ChangeDetectionStrategy, Component, computed, input, output, type InputSignal, type OutputEmitterRef } from '@angular/core';
-import { ButtonComponent, IconNameDirective, PressButtonComponent } from '@pixel-brewery/mosaik-elements-angular';
+import { ButtonComponent, IconNameDirective, PressButtonComponent, TooltipDirective } from '@pixel-brewery/mosaik-elements-angular';
+import type { Appearance, Variant } from '@pixel-brewery/mosaik-elements-foundation';
 import type { IVoiceSessionControlLabels } from './IVoiceSessionControlLabels';
 
 // #endregion
@@ -17,34 +18,45 @@ import type { IVoiceSessionControlLabels } from './IVoiceSessionControlLabels';
 
 @Component({
     selector: 'ngp-voice-session-controls',
-    imports: [ButtonComponent, IconNameDirective, PressButtonComponent],
+    imports: [ButtonComponent, IconNameDirective, PressButtonComponent, TooltipDirective],
+    host: {
+        '[attr.data-ngp-layout]': 'layout()',
+    },
     template: `
         <div part="root" class="controls" role="toolbar" [attr.aria-label]="labels().toolbar" [class.controls--compact]="compact()">
             <div part="primary-actions" class="action-group">
                 <mosaik-button
                     data-action="microphone"
+                    [attr.test-id]="'voice-session-microphone'"
                     [appearance]="microphoneMuted() ? 'soft' : 'plain'"
                     [attr.aria-label]="microphoneMuted() ? labels().microphoneUnmute : labels().microphoneMute"
                     [attr.aria-pressed]="microphoneMuted()"
-                    [attr.title]="microphoneMuted() ? labels().microphoneUnmute : labels().microphoneMute"
+                    [attr.title]="inline() ? null : microphoneMuted() ? labels().microphoneUnmute : labels().microphoneMute"
+                    [mosaikTooltip]="microphoneMuted() ? labels().microphoneUnmute : labels().microphoneMute"
+                    [mosaikTooltipDisabled]="!inline()"
+                    [mosaikTooltipPlacement]="'top'"
                     [disabled]="disabled()"
                     [iconName]="'mic'"
                     [size]="actionSize()"
-                    [variant]="microphoneMuted() ? 'danger' : 'tertiary'"
+                    [variant]="microphoneMuted() ? 'danger' : inactiveVariant()"
                     (click)="toggleMicrophoneMuted()"
                 />
 
                 @if (canPause()) {
                     <mosaik-button
                         data-action="pause"
+                        [attr.test-id]="'voice-session-pause'"
                         [appearance]="paused() ? 'soft' : 'plain'"
                         [attr.aria-label]="paused() ? labels().resume : labels().pause"
                         [attr.aria-pressed]="paused()"
-                        [attr.title]="paused() ? labels().resume : labels().pause"
+                        [attr.title]="inline() ? null : paused() ? labels().resume : labels().pause"
+                        [mosaikTooltip]="paused() ? labels().resume : labels().pause"
+                        [mosaikTooltipDisabled]="!inline()"
+                        [mosaikTooltipPlacement]="'top'"
                         [disabled]="disabled()"
                         [iconName]="paused() ? 'play' : 'pause'"
                         [size]="actionSize()"
-                        [variant]="paused() ? 'warning' : 'tertiary'"
+                        [variant]="paused() ? 'warning' : inactiveVariant()"
                         (click)="togglePaused()"
                     />
                 }
@@ -52,11 +64,15 @@ import type { IVoiceSessionControlLabels } from './IVoiceSessionControlLabels';
                     @if (assistantSpeaking() || assistantAudioAvailable() !== undefined) {
                         <mosaik-button
                             data-action="assistant-stop"
-                            [appearance]="'soft'"
+                            [attr.test-id]="'voice-session-assistant-stop'"
+                            [appearance]="assistantStopAppearance()"
                             [attr.aria-label]="labels().assistantStop"
-                            [attr.title]="labels().assistantStop"
+                            [attr.title]="inline() ? null : labels().assistantStop"
+                            [mosaikTooltip]="labels().assistantStop"
+                            [mosaikTooltipDisabled]="!inline()"
+                            [mosaikTooltipPlacement]="'top'"
                             [disabled]="assistantActionsDisabled() || !assistantSpeaking()"
-                            [iconName]="'dismiss'"
+                            [iconName]="assistantStopIconName()"
                             [size]="actionSize()"
                             [variant]="'warning'"
                             (click)="requestAssistantStop()"
@@ -65,14 +81,18 @@ import type { IVoiceSessionControlLabels } from './IVoiceSessionControlLabels';
 
                     <mosaik-button
                         data-action="assistant-mute"
+                        [attr.test-id]="'voice-session-assistant-mute'"
                         [appearance]="assistantMuted() ? 'soft' : 'plain'"
                         [attr.aria-label]="assistantMuted() ? labels().assistantUnmute : labels().assistantMute"
                         [attr.aria-pressed]="assistantMuted()"
-                        [attr.title]="assistantMuted() ? labels().assistantUnmute : labels().assistantMute"
+                        [attr.title]="inline() ? null : assistantMuted() ? labels().assistantUnmute : labels().assistantMute"
+                        [mosaikTooltip]="assistantMuted() ? labels().assistantUnmute : labels().assistantMute"
+                        [mosaikTooltipDisabled]="!inline()"
+                        [mosaikTooltipPlacement]="'top'"
                         [disabled]="assistantActionsDisabled()"
-                        [iconName]="assistantMuted() ? 'speakerOff' : 'speaker'"
+                        [iconName]="assistantMuteIconNames()[assistantMuted() ? 1 : 0]"
                         [size]="actionSize()"
-                        [variant]="assistantMuted() ? 'danger' : 'tertiary'"
+                        [variant]="assistantMuted() ? 'danger' : inactiveVariant()"
                         (click)="toggleAssistantMuted()"
                     />
                 }
@@ -83,24 +103,51 @@ import type { IVoiceSessionControlLabels } from './IVoiceSessionControlLabels';
             </div>
 
             @if (canEnd()) {
-                <span part="separator" class="separator" aria-hidden="true"></span>
+                @if (!inline()) {
+                    <span part="separator" class="separator" aria-hidden="true"></span>
+                }
 
-                <mosaik-press-button
-                    data-action="end"
-                    [attr.test-id]="'voice-session-end'"
-                    part="end-action"
-                    class="end-action"
-                    [appearance]="'solid'"
-                    [attr.aria-label]="labels().end"
-                    [attr.title]="labels().end"
-                    [disabled]="disabled() || endBusy()"
-                    [iconName]="'dismiss'"
-                    [isBusy]="endBusy()"
-                    [label]="compact() ? '' : labels().end"
-                    [size]="actionSize()"
-                    [variant]="'danger'"
-                    (pressed)="requestEnd()"
-                />
+                @if (endActivation() === 'click') {
+                    <mosaik-button
+                        data-action="end"
+                        [attr.test-id]="'voice-session-end'"
+                        part="end-action"
+                        class="end-action"
+                        [appearance]="'solid'"
+                        [attr.aria-label]="labels().end"
+                        [attr.title]="inline() ? null : labels().end"
+                        [mosaikTooltip]="labels().end"
+                        [mosaikTooltipDisabled]="!inline()"
+                        [mosaikTooltipPlacement]="'top'"
+                        [disabled]="disabled() || endBusy()"
+                        [iconName]="'dismiss'"
+                        [isBusy]="endBusy()"
+                        [label]="compact() ? '' : labels().end"
+                        [size]="actionSize()"
+                        [variant]="'danger'"
+                        (click)="requestEnd()"
+                    />
+                } @else {
+                    <mosaik-press-button
+                        data-action="end"
+                        [attr.test-id]="'voice-session-end'"
+                        part="end-action"
+                        class="end-action"
+                        [appearance]="'solid'"
+                        [attr.aria-label]="labels().end"
+                        [attr.title]="inline() ? null : labels().end"
+                        [mosaikTooltip]="labels().end"
+                        [mosaikTooltipDisabled]="!inline()"
+                        [mosaikTooltipPlacement]="'top'"
+                        [disabled]="disabled() || endBusy()"
+                        [iconName]="'dismiss'"
+                        [isBusy]="endBusy()"
+                        [label]="compact() ? '' : labels().end"
+                        [size]="actionSize()"
+                        [variant]="'danger'"
+                        (pressed)="requestEnd()"
+                    />
+                }
             }
         </div>
     `,
@@ -182,6 +229,52 @@ import type { IVoiceSessionControlLabels } from './IVoiceSessionControlLabels';
                 backdrop-filter: none;
             }
         }
+
+        :host([data-ngp-layout='inline']) {
+            display: block;
+            width: 100%;
+            min-width: 0;
+
+            .controls {
+                width: 100%;
+                min-width: 0;
+                justify-content: flex-start;
+                gap: 0;
+                overflow: visible;
+                padding: 0;
+                border: 0;
+                background: none;
+                box-shadow: none;
+                backdrop-filter: none;
+            }
+
+            .action-group {
+                justify-content: flex-start;
+                gap: 0;
+            }
+
+            .controls > * + *,
+            .action-group:not(.secondary-actions) > * + * {
+                margin-inline-start: 0.375rem;
+            }
+
+            .secondary-actions {
+                gap: 0.375rem;
+            }
+
+            .secondary-actions:not(:empty)::before {
+                width: 1px;
+                height: 2rem;
+                flex: 0 0 auto;
+                margin-inline: 0.375rem;
+                background: color-mix(in srgb, var(--mosaik-scheme-foreground) 14%, transparent);
+                content: '';
+            }
+
+            .end-action {
+                margin-inline-start: auto;
+            }
+        }
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -239,6 +332,24 @@ export class VoiceSessionControlsComponent {
 
     /** Uses compact action sizes and displays the end action as an accessible icon button. */
     public readonly compact = input(false);
+
+    /** Renders a self-contained panel or inline controls for an existing host surface. */
+    public readonly layout = input<'panel' | 'inline'>('panel');
+
+    /** How the user activates the end action. Use click when the host already confirms ending. */
+    public readonly endActivation = input<'hold' | 'click'>('hold');
+
+    /** Visual variant of toggle actions when they are inactive. */
+    public readonly inactiveVariant = input<Variant>('tertiary');
+
+    /** Icon names for the assistant-audio control when unmuted and muted, respectively. */
+    public readonly assistantMuteIconNames = input<readonly [string, string]>(['speaker', 'speakerOff']);
+
+    /** Icon shown on the action that interrupts spoken output. */
+    public readonly assistantStopIconName = input('dismiss');
+
+    /** Appearance of the action that interrupts spoken output. */
+    public readonly assistantStopAppearance = input<Appearance>('soft');
 
     /**
      * Disables every control except while an end request is already busy.
@@ -312,7 +423,8 @@ export class VoiceSessionControlsComponent {
      */
     public readonly showAssistantControl: InputSignal<boolean> = input<boolean>(true);
 
-    protected readonly actionSize = computed(() => (this.compact() ? 'small' : 'large'));
+    protected readonly inline = computed(() => this.layout() === 'inline');
+    protected readonly actionSize = computed(() => (this.inline() ? undefined : this.compact() ? 'small' : 'large'));
     protected readonly assistantActionsDisabled = computed(() => this.disabled() || this.assistantAudioAvailable() === false);
 
     // #endregion

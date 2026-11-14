@@ -1,5 +1,5 @@
 /**
- * Describes an image rendered by the image preview.
+ * Describes an image or video rendered by the preview.
  *
  * @public
  */
@@ -12,6 +12,13 @@ export interface IImagePreviewImage {
      */
     readonly alt?: string;
 
+    /** Optional WebVTT captions for video playback. */
+    readonly captions?: {
+        readonly src: string;
+        readonly language: string;
+        readonly label: string;
+    } | null;
+
     /**
      * Intrinsic or preferred image height.
      *
@@ -19,6 +26,12 @@ export interface IImagePreviewImage {
      * @readonly
      */
     readonly height?: number | string;
+
+    /** Type of media to render. Defaults to an image. */
+    readonly mediaKind?: 'image' | 'video';
+
+    /** Optional still image shown before a video starts. */
+    readonly poster?: string | null;
 
     /**
      * Image source URL.

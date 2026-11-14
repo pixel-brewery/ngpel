@@ -250,6 +250,7 @@ export { ImagePreviewImagePipe } from './components/image-preview/ImagePreviewIm
 export { ImagePreviewRef } from './components/image-preview/ImagePreviewRef';
 export { ImagePreviewService } from './components/image-preview/ImagePreviewService';
 export { ImagePreviewState } from './components/image-preview/ImagePreviewState';
+export { ImmersiveSessionOrbAnchorDirective } from './components/immersive-session-shell/ImmersiveSessionOrbAnchorDirective';
 export { ImmersiveSessionShellComponent } from './components/immersive-session-shell/ImmersiveSessionShellComponent';
 export type { ImmersiveSessionPhase } from './components/immersive-session-shell/ImmersiveSessionPhase';
 export type { ImmersiveSessionRailState } from './components/immersive-session-shell/ImmersiveSessionRailState';

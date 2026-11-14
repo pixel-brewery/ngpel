@@ -77,6 +77,7 @@ interface IRenderedFileItem {
             @if (source.type() === sourceTypes.Picker) {
                 <mosaik-file-picker
                     part="source-picker"
+                    [attr.test-id]="source.testId() ? source.testId() + '-picker' : null"
                     [accept]="pickerAccept(source)"
                     [multiple]="source.multiple()"
                     [directory]="source.directory()"
@@ -85,10 +86,12 @@ interface IRenderedFileItem {
                 >
                     <mosaik-button
                         part="source-button"
+                        [attr.test-id]="source.testId()"
                         [label]="source.label()"
                         [iconName]="source.iconName()"
                         [appearance]="source.appearance()"
                         [variant]="source.variant()"
+                        [size]="sourceSize()"
                         [isBusy]="source.busy()"
                         [disabled]="disabled() || source.disabled() || source.busy()"
                     />
@@ -96,10 +99,12 @@ interface IRenderedFileItem {
             } @else {
                 <mosaik-button
                     part="source-button"
+                    [attr.test-id]="source.testId()"
                     [label]="source.label()"
                     [iconName]="source.iconName()"
                     [appearance]="source.appearance()"
                     [variant]="source.variant()"
+                    [size]="sourceSize()"
                     [isBusy]="source.busy()"
                     [disabled]="disabled() || source.disabled() || source.busy()"
                     (click)="source.request()"
@@ -107,6 +112,14 @@ interface IRenderedFileItem {
             }
             @if (source.description(); as text) {
                 <mosaik-text part="source-description" [text]="text" [wrap]="true" [readonly]="true" />
+            }
+        </ng-template>
+
+        <ng-template #sourcesContent>
+            @for (source of sources(); track source.key()) {
+                <div part="source" class="flex min-w-0 flex-col gap-1">
+                    <ng-container [ngTemplateOutlet]="sourceContent" [ngTemplateOutletContext]="{ $implicit: source }" />
+                </div>
             }
         </ng-template>
 
@@ -142,7 +155,12 @@ interface IRenderedFileItem {
         </ng-template>
 
         <ng-template #filesContent>
-            @if (renderedFiles().length > 0) {
+            @if (inlineWithoutHeader()) {
+                <div part="inline" class="flex min-w-0 flex-wrap items-center gap-2">
+                    <ng-container [ngTemplateOutlet]="sourcesContent" />
+                    <ng-container [ngTemplateOutlet]="compactFiles" />
+                </div>
+            } @else if (renderedFiles().length > 0) {
                 @switch (layout()) {
                     @case (layouts.Gallery) {
                         <div part="gallery" class="grid grid-cols-[repeat(auto-fill,minmax(min(100%,12rem),1fr))] items-stretch gap-3">
@@ -233,7 +251,12 @@ interface IRenderedFileItem {
                     [class.min-h-12]="layout() === layouts.Inline"
                     [style.aspect-ratio]="layout() === layouts.Preview ? resolvedPreviewRatio() : null"
                 >
-                    <mosaik-empty-state part="empty-state" [iconSize]="'small'" [iconName]="resolvedEmptyIconName()" [header]="emptyMessage() ?? label()">
+                    <mosaik-empty-state
+                        part="empty-state"
+                        [iconSize]="showHeader() ? 'small' : undefined"
+                        [iconName]="resolvedEmptyIconName()"
+                        [header]="emptyMessage() ?? label()"
+                    >
                         @for (source of sources(); track source.key()) {
                             <div slot="actions" part="source" class="flex min-w-0 flex-col gap-1">
                                 <ng-container [ngTemplateOutlet]="sourceContent" [ngTemplateOutletContext]="{ $implicit: source }" />
@@ -244,36 +267,47 @@ interface IRenderedFileItem {
             }
         </ng-template>
 
-        <div part="root" class="flex min-w-0 flex-col gap-4 surface-input" [attr.aria-label]="label()" [attr.role]="'group'">
-            <ngp-section>
-                <ngp-section-header part="heading" [header]="label()" [description]="description() ?? ''" [disabled]="disabled()" />
-                <ngp-section-content>
-                    @if (activeDropSource()) {
-                        <mosaik-drop-zone
-                            part="drop-zone"
-                            class="block w-full"
-                            [variant]="variant()"
-                            [attr.aria-label]="label()"
-                            (dropZoneData)="onDropZoneData($event)"
-                        >
-                            <ng-container [ngTemplateOutlet]="filesContent" />
-                        </mosaik-drop-zone>
-                    } @else {
-                        <div part="files" class="min-w-0">
-                            <ng-container [ngTemplateOutlet]="filesContent" />
-                        </div>
-                    }
-                    @if (renderedFiles().length > 0 && sources().length > 0) {
-                        <div part="sources" class="flex flex-wrap items-start justify-end gap-2">
-                            @for (source of sources(); track source.key()) {
-                                <div part="source" class="flex min-w-0 flex-col gap-1">
-                                    <ng-container [ngTemplateOutlet]="sourceContent" [ngTemplateOutletContext]="{ $implicit: source }" />
-                                </div>
-                            }
-                        </div>
-                    }
-                </ngp-section-content>
-            </ngp-section>
+        <ng-template #collectionContent>
+            @if (activeDropSource()) {
+                <mosaik-drop-zone
+                    part="drop-zone"
+                    class="block w-full"
+                    [class.ngp-inline-drop-zone]="inlineWithoutHeader()"
+                    [variant]="variant()"
+                    [attr.aria-label]="label() || emptyMessage()"
+                    (dropZoneData)="onDropZoneData($event)"
+                >
+                    <ng-container [ngTemplateOutlet]="filesContent" />
+                </mosaik-drop-zone>
+            } @else {
+                <div part="files" class="min-w-0">
+                    <ng-container [ngTemplateOutlet]="filesContent" />
+                </div>
+            }
+            @if (renderedFiles().length > 0 && sources().length > 0 && !inlineWithoutHeader()) {
+                <div part="sources" class="flex flex-wrap items-start justify-end gap-2">
+                    <ng-container [ngTemplateOutlet]="sourcesContent" />
+                </div>
+            }
+        </ng-template>
+
+        <div
+            part="root"
+            class="flex min-w-0 flex-col gap-4"
+            [class.surface-input]="!inlineWithoutHeader()"
+            [attr.aria-label]="label() || null"
+            [attr.role]="label() ? 'group' : null"
+        >
+            @if (showHeader()) {
+                <ngp-section>
+                    <ngp-section-header part="heading" [header]="label()" [description]="description() ?? ''" [disabled]="disabled()" />
+                    <ngp-section-content>
+                        <ng-container [ngTemplateOutlet]="collectionContent" />
+                    </ngp-section-content>
+                </ngp-section>
+            } @else {
+                <ng-container [ngTemplateOutlet]="collectionContent" />
+            }
         </div>
 
         <ng-content select="ngp-file-source" />
@@ -281,6 +315,15 @@ interface IRenderedFileItem {
     styles: `
         :host {
             display: block;
+        }
+
+        .ngp-inline-drop-zone {
+            --drop-zone-border-width: 0;
+            --drop-zone-background-color: var(--mosaik-scheme-transparent);
+            --drop-zone-padding-top: 0;
+            --drop-zone-padding-right: 0;
+            --drop-zone-padding-bottom: 0;
+            --drop-zone-padding-left: 0;
         }
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -304,7 +347,10 @@ export class FilesComponent {
     public readonly layout: InputSignal<FilesLayoutValue> = input<FilesLayoutValue>(FilesLayout.Gallery);
 
     /** User-facing label framing the complete control. */
-    public readonly label: InputSignal<string> = input.required<string>();
+    public readonly label = input('');
+
+    /** Shows a section header around the files. Disable when the surrounding view already provides one. */
+    public readonly showHeader = input(true);
 
     /** Optional explanation rendered below the label. */
     public readonly description: InputSignal<null | string> = input<null | string>(null);
@@ -389,6 +435,9 @@ export class FilesComponent {
 
     /** File-state constants exposed to the template. */
     protected readonly fileStates: typeof FileState = FileState;
+
+    protected readonly inlineWithoutHeader = computed(() => !this.showHeader() && this.layout() === FilesLayout.Inline);
+    protected readonly sourceSize = computed(() => (this.showHeader() ? undefined : this.inlineWithoutHeader() ? 'small' : 'medium'));
 
     /** Presentation derived from the container layout. */
     protected readonly filePresentation: Signal<FilePresentationValue> = computed(() => {

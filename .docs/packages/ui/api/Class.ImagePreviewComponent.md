@@ -5,9 +5,9 @@ editUrl: false
 ---
 # Class: ImagePreviewComponent
 
-Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:148](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L148)
+Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:180](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L180)
 
-Renders a keyboard-accessible, zoomable and draggable image overlay.
+Renders a keyboard-accessible overlay for zoomable images and playable videos.
 
 ## Constructors
 
@@ -16,6 +16,8 @@ Renders a keyboard-accessible, zoomable and draggable image overlay.
 ```ts
 new ImagePreviewComponent(): ImagePreviewComponent;
 ```
+
+Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:194](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L194)
 
 #### Returns
 
@@ -29,7 +31,7 @@ new ImagePreviewComponent(): ImagePreviewComponent;
 readonly canGoNext: Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:167](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L167)
+Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:231](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L231)
 
 Indicates whether another image follows the current image.
 
@@ -41,7 +43,7 @@ Indicates whether another image follows the current image.
 readonly canGoPrevious: Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:175](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L175)
+Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:239](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L239)
 
 Indicates whether another image precedes the current image.
 
@@ -53,7 +55,7 @@ Indicates whether another image precedes the current image.
 readonly canZoomIn: Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:183](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L183)
+Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:247](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L247)
 
 Indicates whether the image can be enlarged.
 
@@ -65,7 +67,7 @@ Indicates whether the image can be enlarged.
 readonly canZoomOut: Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:191](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L191)
+Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:255](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L255)
 
 Indicates whether the image can be reduced.
 
@@ -77,7 +79,7 @@ Indicates whether the image can be reduced.
 readonly currentImage: Signal<IImagePreviewImage>;
 ```
 
-Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:199](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L199)
+Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:263](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L263)
 
 Currently rendered image.
 
@@ -89,7 +91,7 @@ Currently rendered image.
 readonly labels: IImagePreviewLabels;
 ```
 
-Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:207](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L207)
+Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:271](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L271)
 
 Resolved preview labels.
 
@@ -101,7 +103,7 @@ Resolved preview labels.
 readonly position: Signal<Point>;
 ```
 
-Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:215](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L215)
+Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:279](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L279)
 
 Current free-drag position.
 
@@ -113,7 +115,7 @@ Current free-drag position.
 readonly transform: Signal<string>;
 ```
 
-Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:223](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L223)
+Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:287](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L287)
 
 CSS transform applied to the current image.
 
@@ -125,7 +127,7 @@ CSS transform applied to the current image.
 protected close(): void;
 ```
 
-Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:262](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L262)
+Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:326](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L326)
 
 Closes the preview explicitly.
 
@@ -141,7 +143,7 @@ Closes the preview explicitly.
 protected closeFromBackdrop(): void;
 ```
 
-Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:272](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L272)
+Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:336](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L336)
 
 Closes the preview when the backdrop itself was activated.
 
@@ -157,7 +159,7 @@ Closes the preview when the backdrop itself was activated.
 protected handleKeydown(event): void;
 ```
 
-Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:285](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L285)
+Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:349](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L349)
 
 Handles image navigation keys inside the active preview.
 
@@ -179,7 +181,7 @@ Handles image navigation keys inside the active preview.
 next(): void;
 ```
 
-Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:234](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L234)
+Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:298](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L298)
 
 Selects the next image when available.
 
@@ -195,7 +197,7 @@ Selects the next image when available.
 protected onDragEnded(event): void;
 ```
 
-Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:307](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L307)
+Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:371](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L371)
 
 Stores the final free-drag position.
 
@@ -217,7 +219,7 @@ Stores the final free-drag position.
 protected onDragStarted(event): void;
 ```
 
-Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:330](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L330)
+Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:399](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L399)
 
 Remembers the last valid position before a drag begins.
 
@@ -239,7 +241,7 @@ Remembers the last valid position before a drag begins.
 previous(): void;
 ```
 
-Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:243](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L243)
+Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:307](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L307)
 
 Selects the previous image when available.
 
@@ -255,7 +257,7 @@ Selects the previous image when available.
 protected rotateLeft(): void;
 ```
 
-Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:339](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L339)
+Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:408](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L408)
 
 Rotates the image counter-clockwise.
 
@@ -271,7 +273,7 @@ Rotates the image counter-clockwise.
 protected rotateRight(): void;
 ```
 
-Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:348](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L348)
+Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:417](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L417)
 
 Rotates the image clockwise.
 
@@ -287,7 +289,7 @@ Rotates the image clockwise.
 select(index): void;
 ```
 
-Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:253](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L253)
+Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:317](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L317)
 
 Selects an image by its zero-based index.
 
@@ -309,7 +311,7 @@ Selects an image by its zero-based index.
 protected zoomIn(): void;
 ```
 
-Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:357](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L357)
+Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:426](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L426)
 
 Enlarges the image by the configured step.
 
@@ -325,7 +327,7 @@ Enlarges the image by the configured step.
 protected zoomOut(): void;
 ```
 
-Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:366](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L366)
+Defined in: [libs/ui/src/components/image-preview/ImagePreviewComponent.ts:435](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/image-preview/ImagePreviewComponent.ts#L435)
 
 Reduces the image by the configured step.
 

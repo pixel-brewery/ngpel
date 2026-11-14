@@ -1,9 +1,10 @@
 // #region Imports
 
-import { Component, signal } from '@angular/core';
+import { Component, getDebugNode, ɵSIGNAL as SIGNAL, type InputSignal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { TranslateService } from '@pixel-brewery/mosaik-elements-angular';
+import { BreakpointService, SheetComponent, TranslateService } from '@pixel-brewery/mosaik-elements-angular';
+import { BehaviorSubject } from 'rxjs';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { RailComponent } from './RailComponent';
 import { RailContentDirective } from './RailContentDirective';
@@ -22,6 +23,9 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', async () => {
         inputs: ['appearance', 'ngpCommand', 'size', 'variant'],
     })(ToggleButtonStub);
 
+    class ButtonStub {}
+    angular.Component({ selector: 'mosaik-button', template: '', inputs: ['appearance', 'ngpCommand', 'size'] })(ButtonStub);
+
     class IconNameStub {}
     angular.Directive({ selector: '[iconName]', inputs: ['iconName'] })(IconNameStub);
 
@@ -31,6 +35,7 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', async () => {
     class SheetStub {
         public readonly elementRef = angular.inject(angular.ElementRef<HTMLElement>);
         public readonly closed = new angular.EventEmitter<void>();
+        public readonly closeAttempted = new angular.EventEmitter<void>();
 
         public invoke(action: 'open' | 'close'): void {
             if (action === 'close') {
@@ -42,13 +47,15 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', async () => {
         selector: 'mosaik-sheet',
         template: '<ng-content />',
         inputs: ['width', 'height', 'snaps', 'dragMode', 'isModal', 'hasBackdrop', 'closeable', 'pressEscapeToClose', 'clickOutsideToClose'],
-        outputs: ['closed'],
+        outputs: ['closed', 'closeAttempted'],
     })(SheetStub);
 
     class SheetContentStub {}
     angular.Component({ selector: 'mosaik-sheet-content', template: '<ng-content />' })(SheetContentStub);
 
     return {
+        BreakpointService: class BreakpointService {},
+        ButtonComponent: ButtonStub,
         DialogService: class DialogService {},
         DRAWER_REF: new angular.InjectionToken('DRAWER_REF'),
         GlobalDomRef: class GlobalDomRef {},
@@ -78,21 +85,31 @@ describe('RailComponent', () => {
     let rail: RailComponent;
     let host: HTMLElement;
     let detectChanges: () => void;
-    let floating: ReturnType<typeof signal<boolean>>;
+    let finishSheet: () => void;
+    let smallViewport: BehaviorSubject<boolean>;
 
     beforeEach(() => {
+        smallViewport = new BehaviorSubject(false);
         TestBed.configureTestingModule({
             imports: [RailHostComponent],
-            providers: [{ provide: TranslateService, useValue: { translate: (_key: string, fallback: string): string => fallback } }],
+            providers: [
+                { provide: TranslateService, useValue: { translate: (_key: string, fallback: string): string => fallback } },
+                { provide: BreakpointService, useValue: { observe: () => smallViewport, isMatched: () => smallViewport.value } },
+            ],
         });
 
         const fixture = TestBed.createComponent(RailHostComponent);
-        const instance = fixture.debugElement.query(By.directive(RailComponent)).componentInstance as RailComponent;
-        floating = signal(false);
-        Object.assign(instance, { floating, isFloating: floating });
         fixture.detectChanges();
-        detectChanges = () => fixture.detectChanges();
+        detectChanges = () => {
+            fixture.detectChanges();
+            TestBed.tick();
+        };
         host = fixture.nativeElement as HTMLElement;
+        finishSheet = () => {
+            const sheet = host.querySelector('mosaik-sheet')!;
+            const component = getDebugNode(sheet)?.injector.get(SheetComponent) as unknown as { closed: { emit(): void } };
+            component.closed.emit();
+        };
         rail = fixture.debugElement.query(By.directive(RailComponent)).componentInstance as RailComponent;
     });
 
@@ -144,7 +161,7 @@ describe('RailComponent', () => {
 
     it('uses a sheet in floating mode and clears the active content on close', () => {
         // Arrange
-        floating.set(true);
+        setSignalInput(rail.floating, true);
         detectChanges();
         rail.activateContent('ai');
         detectChanges();
@@ -152,11 +169,66 @@ describe('RailComponent', () => {
         expect(sheet?.querySelector('[test-id="ai-content"]')).not.toBeNull();
 
         // Act
-        sheet?.dispatchEvent(new Event('closed'));
+        finishSheet();
         detectChanges();
 
         // Assert
         expect(rail.activeContentKey()).toBeNull();
         expect(host.querySelector('mosaik-sheet')).toBeNull();
     });
+
+    it('keeps existing rails docked on compact screens unless the layout is opted in', () => {
+        // Arrange
+        smallViewport.next(true);
+        rail.activateContent('ai');
+
+        // Act
+        detectChanges();
+
+        // Assert
+        expect(rail.usesFloatingActions()).toBe(false);
+        expect(host.querySelector('[test-id="rail-sheet"]')).toBeNull();
+        expect(rail.activeContentKey()).toBe('ai');
+    });
+
+    it('closes adaptive rail content before the enclosing drawer can handle Escape', () => {
+        // Arrange
+        setSignalInput(rail.layout, 'adaptive-drawer');
+        smallViewport.next(true);
+        detectChanges();
+        rail.activateContent('ai');
+        detectChanges();
+        const event = new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true });
+
+        // Act
+        window.dispatchEvent(event);
+        detectChanges();
+
+        // Assert
+        expect(event.defaultPrevented).toBe(true);
+        expect(rail.activeContentKey()).toBeNull();
+    });
+
+    it('closes adaptive sheet content as it returns to the docked layout', () => {
+        // Arrange
+        setSignalInput(rail.layout, 'adaptive-drawer');
+        smallViewport.next(true);
+        detectChanges();
+        rail.activateContent('ai');
+        detectChanges();
+        expect(host.querySelector('[test-id="rail-sheet"] [test-id="ai-content"]')).not.toBeNull();
+
+        // Act
+        smallViewport.next(false);
+        detectChanges();
+
+        // Assert
+        expect(rail.activeContentKey()).toBeNull();
+        expect(rail.usesFloatingActions()).toBe(false);
+    });
 });
+
+function setSignalInput<T>(input: InputSignal<T>, value: T): void {
+    const node = (input as unknown as { [SIGNAL]: { applyValueToInputSignal(node: unknown, inputValue: T): void } })[SIGNAL];
+    node.applyValueToInputSignal(node, value);
+}

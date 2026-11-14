@@ -30,6 +30,7 @@ import {
     FormFieldStateDirective,
     IconNameDirective,
     NumberBoxComponent,
+    NumberBoxDecimalDirective,
     PasswordBoxComponent,
     RadioComponent,
     RadioGroupComponent,
@@ -38,7 +39,9 @@ import {
     TextBoxComponent,
     TextComponent,
 } from '@pixel-brewery/mosaik-elements-angular';
-import { isEmailAddress } from '@pixel-brewery/ngpel-core';
+import { isEmailAddress, toCalendarDate } from '@pixel-brewery/ngpel-core';
+import { ExpandableMultilineDirective } from '../../directives/expandable-multiline/ExpandableMultilineDirective';
+import { SectionHeaderComponent } from '../section/SectionHeaderComponent';
 import { DynamicFormControlType } from './DynamicFormControlType';
 import { DynamicFormComponentIntl, provideDynamicFormComponentIntl } from './DynamicFormComponentIntl';
 import { DynamicFormValidationRuleKey } from './DynamicFormValidationRuleKey';
@@ -89,26 +92,34 @@ function schemaPathOf<TPath>(schema: Readonly<Record<string, TPath>>, key: strin
     template: `
         <div part="root" class="flex flex-col gap-6">
             @if (definition().title || definition().description) {
-                <header part="header" class="flex flex-col gap-1">
-                    @if (definition().title) {
-                        <h2 part="title" class="text-lg font-semibold">{{ definition().title }}</h2>
-                    }
-                    @if (definition().description) {
-                        <mosaik-text part="description" [text]="definition().description" [readonly]="true" [wrap]="true" />
-                    }
-                </header>
+                @if (useSectionHeaders()) {
+                    <ngp-section-header part="header" [header]="definition().title ?? ''" [description]="definition().description ?? ''" />
+                } @else {
+                    <header part="header" class="flex flex-col gap-1">
+                        @if (definition().title) {
+                            <h2 part="title" class="text-lg font-semibold">{{ definition().title }}</h2>
+                        }
+                        @if (definition().description) {
+                            <mosaik-text part="description" [text]="definition().description" [readonly]="true" [wrap]="true" />
+                        }
+                    </header>
+                }
             }
             @for (section of definition().sections; track section.key) {
                 <section part="section" class="flex flex-col gap-3" [attr.test-id]="'dynamic-form-section-' + section.key">
                     @if (section.title || section.description) {
-                        <header part="section-header" class="flex flex-col gap-1">
-                            @if (section.title) {
-                                <h3 part="section-title" class="text-base font-semibold">{{ section.title }}</h3>
-                            }
-                            @if (section.description) {
-                                <mosaik-text part="section-description" [text]="section.description" [readonly]="true" [wrap]="true" />
-                            }
-                        </header>
+                        @if (useSectionHeaders()) {
+                            <ngp-section-header part="section-header" [header]="section.title ?? ''" [description]="section.description ?? ''" />
+                        } @else {
+                            <header part="section-header" class="flex flex-col gap-1">
+                                @if (section.title) {
+                                    <h3 part="section-title" class="text-base font-semibold">{{ section.title }}</h3>
+                                }
+                                @if (section.description) {
+                                    <mosaik-text part="section-description" [text]="section.description" [readonly]="true" [wrap]="true" />
+                                }
+                            </header>
+                        }
                     }
 
                     <div part="fields" class="grid grid-cols-12 gap-4">
@@ -121,9 +132,10 @@ function schemaPathOf<TPath>(schema: Readonly<Record<string, TPath>>, key: strin
                             >
                                 @switch (fieldDefinition.controlType) {
                                     @case (controlType.Text) {
-                                        <mosaik-form-field [fieldState]="field(fieldDefinition.key)()">
+                                        <mosaik-form-field [fieldState]="field(fieldDefinition.key)()" [hint]="fieldDefinition.description">
                                             <mosaik-textbox
                                                 part="control"
+                                                [attr.test-id]="'dynamic-form-control-' + fieldDefinition.key"
                                                 [formField]="field(fieldDefinition.key)"
                                                 [label]="fieldDefinition.label"
                                                 [placeholder]="fieldDefinition.placeholder"
@@ -136,9 +148,10 @@ function schemaPathOf<TPath>(schema: Readonly<Record<string, TPath>>, key: strin
                                         </mosaik-form-field>
                                     }
                                     @case (controlType.Password) {
-                                        <mosaik-form-field [fieldState]="field(fieldDefinition.key)()">
+                                        <mosaik-form-field [fieldState]="field(fieldDefinition.key)()" [hint]="fieldDefinition.description">
                                             <mosaik-passwordbox
                                                 part="control"
+                                                [attr.test-id]="'dynamic-form-control-' + fieldDefinition.key"
                                                 [formField]="field(fieldDefinition.key)"
                                                 [label]="fieldDefinition.label"
                                                 [placeholder]="fieldDefinition.placeholder"
@@ -149,9 +162,10 @@ function schemaPathOf<TPath>(schema: Readonly<Record<string, TPath>>, key: strin
                                         </mosaik-form-field>
                                     }
                                     @case (controlType.Email) {
-                                        <mosaik-form-field [fieldState]="field(fieldDefinition.key)()">
+                                        <mosaik-form-field [fieldState]="field(fieldDefinition.key)()" [hint]="fieldDefinition.description">
                                             <mosaik-textbox
                                                 part="control"
+                                                [attr.test-id]="'dynamic-form-control-' + fieldDefinition.key"
                                                 type="email"
                                                 [autocomplete]="true"
                                                 [formField]="field(fieldDefinition.key)"
@@ -166,9 +180,10 @@ function schemaPathOf<TPath>(schema: Readonly<Record<string, TPath>>, key: strin
                                         </mosaik-form-field>
                                     }
                                     @case (controlType.Multiline) {
-                                        <mosaik-form-field [fieldState]="field(fieldDefinition.key)()">
+                                        <mosaik-form-field [fieldState]="field(fieldDefinition.key)()" [hint]="fieldDefinition.description">
                                             <mosaik-textbox
                                                 part="control"
+                                                [attr.test-id]="'dynamic-form-control-' + fieldDefinition.key"
                                                 [formField]="field(fieldDefinition.key)"
                                                 [label]="fieldDefinition.label"
                                                 [placeholder]="fieldDefinition.placeholder"
@@ -177,33 +192,52 @@ function schemaPathOf<TPath>(schema: Readonly<Record<string, TPath>>, key: strin
                                                 [isClearable]="isFieldClearable(fieldDefinition)"
                                                 [multiline]="true"
                                                 [multilineRows]="fieldDefinition.multilineRows ?? 4"
+                                                ngpExpandableMultiline
                                                 [maxlength]="maximumLength(fieldDefinition)"
                                                 [variant]="'primary'"
                                             />
                                         </mosaik-form-field>
                                     }
                                     @case (controlType.Number) {
-                                        <mosaik-form-field [fieldState]="field(fieldDefinition.key)()">
-                                            <mosaik-numberbox
-                                                part="control"
-                                                [formField]="field(fieldDefinition.key)"
-                                                [label]="fieldDefinition.label"
-                                                [placeholder]="fieldDefinition.placeholder"
-                                                [required]="isRequired(fieldDefinition)"
-                                                [readonly]="isFieldReadonly(fieldDefinition)"
-                                                [isClearable]="isFieldClearable(fieldDefinition)"
-                                                [min]="fieldDefinition.integer ? undefined : fieldDefinition.minimum"
-                                                [max]="fieldDefinition.integer ? undefined : fieldDefinition.maximum"
-                                                [step]="fieldDefinition.integer ? 1 : fieldDefinition.step"
-                                                [decimalPlaces]="fieldDefinition.integer ? 15 : undefined"
-                                                [variant]="'primary'"
-                                            />
+                                        <mosaik-form-field [fieldState]="field(fieldDefinition.key)()" [hint]="fieldDefinition.description">
+                                            @if (fieldDefinition.integer) {
+                                                <mosaik-numberbox
+                                                    part="control"
+                                                    [attr.test-id]="'dynamic-form-control-' + fieldDefinition.key"
+                                                    [formField]="field(fieldDefinition.key)"
+                                                    [label]="fieldDefinition.label"
+                                                    [placeholder]="fieldDefinition.placeholder"
+                                                    [required]="isRequired(fieldDefinition)"
+                                                    [readonly]="isFieldReadonly(fieldDefinition)"
+                                                    [isClearable]="isFieldClearable(fieldDefinition)"
+                                                    [step]="1"
+                                                    [decimalPlaces]="15"
+                                                    [variant]="'primary'"
+                                                />
+                                            } @else {
+                                                <mosaik-numberbox
+                                                    mosaikDecimal
+                                                    part="control"
+                                                    [attr.test-id]="'dynamic-form-control-' + fieldDefinition.key"
+                                                    [formField]="field(fieldDefinition.key)"
+                                                    [label]="fieldDefinition.label"
+                                                    [placeholder]="fieldDefinition.placeholder"
+                                                    [required]="isRequired(fieldDefinition)"
+                                                    [readonly]="isFieldReadonly(fieldDefinition)"
+                                                    [isClearable]="isFieldClearable(fieldDefinition)"
+                                                    [min]="fieldDefinition.minimum"
+                                                    [max]="fieldDefinition.maximum"
+                                                    [mosaikDecimalStep]="fieldDefinition.step"
+                                                    [variant]="'primary'"
+                                                />
+                                            }
                                         </mosaik-form-field>
                                     }
                                     @case (controlType.Select) {
-                                        <mosaik-form-field [fieldState]="field(fieldDefinition.key)()">
+                                        <mosaik-form-field [fieldState]="field(fieldDefinition.key)()" [hint]="fieldDefinition.description">
                                             <mosaik-select
                                                 part="control"
+                                                [attr.test-id]="'dynamic-form-control-' + fieldDefinition.key"
                                                 [formField]="field(fieldDefinition.key)"
                                                 [label]="fieldDefinition.label"
                                                 [placeholder]="fieldDefinition.placeholder"
@@ -215,6 +249,7 @@ function schemaPathOf<TPath>(schema: Readonly<Record<string, TPath>>, key: strin
                                                 @for (option of fieldDefinition.options ?? []; track option.value) {
                                                     <mosaik-select-item
                                                         part="option"
+                                                        [attr.test-id]="'dynamic-form-option-' + fieldDefinition.key + '-' + option.value"
                                                         [label]="option.label"
                                                         [value]="option.value"
                                                         [disabled]="option.disabled ?? false"
@@ -224,12 +259,13 @@ function schemaPathOf<TPath>(schema: Readonly<Record<string, TPath>>, key: strin
                                         </mosaik-form-field>
                                     }
                                     @case (controlType.Radio) {
-                                        <mosaik-form-field [fieldState]="field(fieldDefinition.key)()">
+                                        <mosaik-form-field [fieldState]="field(fieldDefinition.key)()" [hint]="fieldDefinition.description">
                                             <div class="flex items-center justify-between gap-2">
                                                 <span part="choice-label">{{ fieldDefinition.label }}</span>
                                                 @if (isFieldClearable(fieldDefinition)) {
                                                     <mosaik-button
                                                         part="clear-answer"
+                                                        [attr.test-id]="'dynamic-form-clear-' + fieldDefinition.key"
                                                         [attr.aria-label]="clearAnswerLabel"
                                                         [appearance]="'plain'"
                                                         [iconName]="'dismiss'"
@@ -242,6 +278,7 @@ function schemaPathOf<TPath>(schema: Readonly<Record<string, TPath>>, key: strin
                                             </div>
                                             <mosaik-radio-group
                                                 part="control"
+                                                [attr.test-id]="'dynamic-form-control-' + fieldDefinition.key"
                                                 [attr.aria-label]="fieldDefinition.label"
                                                 [formField]="field(fieldDefinition.key)"
                                                 [required]="isRequired(fieldDefinition)"
@@ -252,6 +289,7 @@ function schemaPathOf<TPath>(schema: Readonly<Record<string, TPath>>, key: strin
                                                 @for (option of fieldDefinition.options ?? []; track option.value) {
                                                     <mosaik-radio
                                                         part="option"
+                                                        [attr.test-id]="'dynamic-form-option-' + fieldDefinition.key + '-' + option.value"
                                                         [label]="option.label"
                                                         [value]="option.value"
                                                         [disabled]="option.disabled ?? false"
@@ -261,10 +299,11 @@ function schemaPathOf<TPath>(schema: Readonly<Record<string, TPath>>, key: strin
                                         </mosaik-form-field>
                                     }
                                     @case (controlType.MultipleChoice) {
-                                        <mosaik-form-field [fieldState]="field(fieldDefinition.key)()">
+                                        <mosaik-form-field [fieldState]="field(fieldDefinition.key)()" [hint]="fieldDefinition.description">
                                             <span part="choice-label">{{ fieldDefinition.label }}</span>
                                             <mosaik-checkbox-group
                                                 part="control"
+                                                [attr.test-id]="'dynamic-form-control-' + fieldDefinition.key"
                                                 [attr.aria-label]="fieldDefinition.label"
                                                 [formField]="field(fieldDefinition.key)"
                                                 [required]="isRequired(fieldDefinition)"
@@ -274,6 +313,7 @@ function schemaPathOf<TPath>(schema: Readonly<Record<string, TPath>>, key: strin
                                                 @for (option of fieldDefinition.options ?? []; track option.value) {
                                                     <mosaik-checkbox
                                                         part="option"
+                                                        [attr.test-id]="'dynamic-form-option-' + fieldDefinition.key + '-' + option.value"
                                                         [label]="option.label"
                                                         [value]="option.value"
                                                         [disabled]="option.disabled ?? false"
@@ -283,9 +323,10 @@ function schemaPathOf<TPath>(schema: Readonly<Record<string, TPath>>, key: strin
                                         </mosaik-form-field>
                                     }
                                     @case (controlType.Boolean) {
-                                        <mosaik-form-field [fieldState]="field(fieldDefinition.key)()">
+                                        <mosaik-form-field [fieldState]="field(fieldDefinition.key)()" [hint]="fieldDefinition.description">
                                             <mosaik-checkbox
                                                 part="control"
+                                                [attr.test-id]="'dynamic-form-control-' + fieldDefinition.key"
                                                 [formField]="field(fieldDefinition.key)"
                                                 [label]="fieldDefinition.label"
                                                 [required]="isRequired(fieldDefinition)"
@@ -295,9 +336,10 @@ function schemaPathOf<TPath>(schema: Readonly<Record<string, TPath>>, key: strin
                                         </mosaik-form-field>
                                     }
                                     @case (controlType.Date) {
-                                        <mosaik-form-field [fieldState]="field(fieldDefinition.key)()">
+                                        <mosaik-form-field [fieldState]="field(fieldDefinition.key)()" [hint]="fieldDefinition.description">
                                             <mosaik-datebox
                                                 part="control"
+                                                [attr.test-id]="'dynamic-form-control-' + fieldDefinition.key"
                                                 [formField]="field(fieldDefinition.key)"
                                                 [label]="fieldDefinition.label"
                                                 [placeholder]="fieldDefinition.placeholder"
@@ -357,7 +399,10 @@ function schemaPathOf<TPath>(schema: Readonly<Record<string, TPath>>, key: strin
                                         </div>
                                     }
                                 }
-                                @if (fieldDefinition.description) {
+                                @if (
+                                    fieldDefinition.description &&
+                                    (fieldDefinition.controlType === controlType.Link || fieldDefinition.controlType === controlType.Readonly)
+                                ) {
                                     <mosaik-text
                                         part="field-description"
                                         class="mt-1 text-sm"
@@ -383,15 +428,18 @@ function schemaPathOf<TPath>(schema: Readonly<Record<string, TPath>>, key: strin
         CheckBoxGroupComponent,
         CheckboxComponent,
         DateBoxComponent,
+        ExpandableMultilineDirective,
         LocaleDirective,
         FormFieldComponent,
         FormFieldDirective,
         FormFieldStateDirective,
         IconNameDirective,
         NumberBoxComponent,
+        NumberBoxDecimalDirective,
         PasswordBoxComponent,
         RadioComponent,
         RadioGroupComponent,
+        SectionHeaderComponent,
         SelectComponent,
         SelectItemComponent,
         TextBoxComponent,
@@ -443,6 +491,9 @@ export class DynamicFormComponent implements OnChanges {
      * @readonly
      */
     public readonly definition = input.required<IDynamicFormDefinition>();
+
+    /** Uses the shared section-heading presentation for the form and its sections. */
+    public readonly useSectionHeaders = input(false);
 
     /**
      * Forces every editable control into a read-only presentation.
@@ -509,21 +560,21 @@ export class DynamicFormComponent implements OnChanges {
     // #region Methods
 
     /**
-     * Rebuilds the versioned field tree when its definition changes.
+     * Initializes missing values and rebuilds the field tree for changed definitions.
      *
      * @param changes - Angular input changes.
      * @public
      */
     public ngOnChanges(changes: SimpleChanges): void {
-        if (!changes['definition']) {
-            return;
+        if (changes['definition']) {
+            this._isInitialized.set(false);
+            this._linkCopyStatuses.set({});
+            this.ensureFormFields();
+            this.rebuildForm();
+            this._isInitialized.set(true);
+        } else if (changes['value']) {
+            this.ensureFormFields();
         }
-
-        this._isInitialized.set(false);
-        this._linkCopyStatuses.set({});
-        this.ensureFormFields();
-        this.rebuildForm();
-        this._isInitialized.set(true);
     }
 
     /**
@@ -645,8 +696,12 @@ export class DynamicFormComponent implements OnChanges {
     protected readonlyValue(field: IDynamicFormFieldDefinition): string {
         const value = this.field(field.key)().value();
 
-        if (value === null || value === '') {
+        if (value === null || value === '' || (Array.isArray(value) && value.length === 0)) {
             return field.emptyValueLabel ?? '—';
+        }
+
+        if (Array.isArray(value)) {
+            return value.map((selected) => field.options?.find((candidate) => candidate.value === selected)?.label ?? selected).join(', ');
         }
 
         const option = field.options?.find((candidate) => candidate.value === value);
@@ -656,7 +711,7 @@ export class DynamicFormComponent implements OnChanges {
         }
 
         if (value instanceof Date) {
-            return value.toISOString().slice(0, 10);
+            return toCalendarDate(value) ?? String(value);
         }
 
         return String(value);

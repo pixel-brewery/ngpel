@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: CompoundComponent\<T\>
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:294](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L294)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:324](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L324)
 
 Renders a collection with single-item, list or stacked editing and consumer-owned actions.
 
@@ -28,7 +28,7 @@ Renders a collection with single-item, list or stacked editing and consumer-owne
 new CompoundComponent<T>(): CompoundComponent<T>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:349](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L349)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:388](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L388)
 
 Constructs the component and keeps its selection valid as the collection changes.
 
@@ -46,7 +46,7 @@ protected readonly actionsTemplate: Signal<
 | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:713](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L713)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:781](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L781)
 
 Optional consumer template replacing the built-in add action.
 
@@ -58,7 +58,7 @@ Optional consumer template replacing the built-in add action.
 protected readonly activeIndex: Signal<number>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:781](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L781)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:849](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L849)
 
 Selected index restricted to the current collection range.
 
@@ -70,7 +70,7 @@ Selected index restricted to the current collection range.
 protected readonly activeItemKey: Signal<unknown>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:841](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L841)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:910](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L910)
 
 Identity of the currently active item.
 
@@ -82,7 +82,7 @@ Identity of the currently active item.
 readonly addLabel: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:441](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L441)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:489](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L489)
 
 Accessible label for the add-item button.
 
@@ -94,7 +94,7 @@ Accessible label for the add-item button.
 readonly addRequested: OutputEmitterRef<void>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:627](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L627)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:675](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L675)
 
 Emits when the consumer should add a new item.
 
@@ -106,7 +106,7 @@ Emits when the consumer should add a new item.
 readonly addTestId: InputSignal<string | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:449](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L449)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:497](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L497)
 
 Optional stable test identifier for the add action.
 
@@ -118,7 +118,7 @@ Optional stable test identifier for the add action.
 readonly canAdd: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:541](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L541)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:589](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L589)
 
 Whether the collection exposes its add action.
 
@@ -130,7 +130,7 @@ Whether the collection exposes its add action.
 readonly canDelete: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:544](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L544)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:592](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L592)
 
 Enables the built-in delete action for a visible item.
 
@@ -142,7 +142,7 @@ Enables the built-in delete action for a visible item.
 readonly canOpenItemsFromList: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:565](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L565)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:613](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L613)
 
 Whether selecting a list item opens that item in the single view.
 
@@ -154,7 +154,7 @@ Whether selecting a list item opens that item in the single view.
 readonly canSwitchViewMode: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:557](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L557)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:605](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L605)
 
 Whether the built-in segment for changing the view mode is displayed.
 
@@ -168,9 +168,21 @@ A list item template must also be present. Consumers enabling the switch provide
 readonly constrainListToSingleViewHeight: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:573](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L573)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:621](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L621)
 
 Whether the list view uses the active single-item view as its live height boundary.
+
+***
+
+### controlsInHeader
+
+```ts
+readonly controlsInHeader: InputSignal<boolean>;
+```
+
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:411](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L411)
+
+Whether collection navigation and actions are placed beside the heading.
 
 ***
 
@@ -180,7 +192,7 @@ Whether the list view uses the active single-item view as its live height bounda
 readonly deleteLabel: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:452](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L452)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:500](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L500)
 
 Accessible label of the built-in delete action.
 
@@ -192,7 +204,7 @@ Accessible label of the built-in delete action.
 readonly deleteRequested: OutputEmitterRef<ICompoundItemContext<T>>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:630](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L630)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:678](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L678)
 
 Emits the item the consumer should delete. The consumer owns the mutation.
 
@@ -204,7 +216,7 @@ Emits the item the consumer should delete. The consumer owns the mutation.
 readonly deleteTestId: InputSignal<string | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:455](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L455)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:503](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L503)
 
 Test identifier of the single-view delete action.
 
@@ -216,7 +228,7 @@ Test identifier of the single-view delete action.
 readonly description: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:377](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L377)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:425](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L425)
 
 Explanatory text displayed below the collection heading.
 
@@ -228,7 +240,7 @@ Explanatory text displayed below the collection heading.
 protected readonly emptyTemplate: Signal<CompoundEmptyDirective | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:721](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L721)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:789](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L789)
 
 Optional consumer template displayed for an empty collection.
 
@@ -240,7 +252,7 @@ Optional consumer template displayed for an empty collection.
 protected readonly hasNext: Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:797](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L797)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:865](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L865)
 
 Indicates whether forward navigation is available.
 
@@ -252,7 +264,7 @@ Indicates whether forward navigation is available.
 protected readonly hasPrevious: Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:789](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L789)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:857](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L857)
 
 Indicates whether backward navigation is available.
 
@@ -264,7 +276,7 @@ Indicates whether backward navigation is available.
 protected readonly hasViewModeSwitch: Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:758](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L758)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:826](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L826)
 
 Indicates whether the built-in view-mode segment can be rendered.
 
@@ -278,7 +290,7 @@ readonly initialViewMode: InputSignal<
 | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:417](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L417)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:465](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L465)
 
 Optional view mode applied once when the component receives its initial inputs.
 
@@ -293,7 +305,7 @@ controls the mode throughout the component lifetime.
 protected readonly isListView: Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:747](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L747)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:815](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L815)
 
 Indicates whether the collection currently renders its list view.
 
@@ -307,7 +319,7 @@ A missing list item template fails closed to the existing single view.
 protected readonly isStacked: Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:750](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L750)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:818](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L818)
 
 Whether items use independently expandable panels.
 
@@ -321,7 +333,7 @@ protected readonly itemContext: Signal<
 | null>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:817](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L817)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:885](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L885)
 
 Template context for the currently active item.
 
@@ -333,7 +345,7 @@ Template context for the currently active item.
 protected readonly itemCount: Signal<number>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:729](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L729)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:797](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L797)
 
 Number of items currently available.
 
@@ -345,7 +357,7 @@ Number of items currently available.
 readonly itemDeleteTestId: InputSignal<((item, index) => string | undefined) | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:464](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L464)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:512](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L512)
 
 Resolves a stable test identifier for a stacked item's delete action.
 
@@ -357,7 +369,7 @@ Resolves a stable test identifier for a stacked item's delete action.
 readonly itemDisabled: InputSignal<((item, index) => boolean) | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:547](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L547)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:595](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L595)
 
 Keeps matching stacked panels closed and uneditable.
 
@@ -369,7 +381,7 @@ Keeps matching stacked panels closed and uneditable.
 readonly itemKey: InputSignal<((item, index) => unknown) | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:533](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L533)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:581](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L581)
 
 Optional resolver for the identity of an item.
 
@@ -386,7 +398,7 @@ removal. Without a resolver the position itself is the identity.
 readonly items: InputSignal<readonly T[]>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:385](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L385)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:433](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L433)
 
 Ordered items managed by the consumer.
 
@@ -400,7 +412,7 @@ protected readonly itemStatusTemplate: Signal<
 | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:689](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L689)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:757](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L757)
 
 Optional template for the status shown alongside each stacked panel heading.
 
@@ -412,7 +424,7 @@ Optional template for the status shown alongside each stacked panel heading.
 readonly itemsTestId: InputSignal<string | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:458](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L458)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:506](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L506)
 
 Test identifier of the stacked panel group.
 
@@ -426,7 +438,7 @@ protected readonly itemSummaryTemplate: Signal<
 | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:686](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L686)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:754](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L754)
 
 Optional template for each stacked panel heading.
 
@@ -438,7 +450,7 @@ Optional template for each stacked panel heading.
 protected readonly itemTemplate: Signal<CompoundItemDirective<T>>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:683](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L683)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:751](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L751)
 
 Consumer template used to render the active item.
 
@@ -450,7 +462,7 @@ Consumer template used to render the active item.
 readonly itemTestId: InputSignal<((item, index) => string | undefined) | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:461](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L461)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:509](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L509)
 
 Resolves a stable test identifier for a stacked item.
 
@@ -462,9 +474,21 @@ Resolves a stable test identifier for a stacked item.
 readonly layout: InputSignal<CompoundLayoutValue>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:388](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L388)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:436](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L436)
 
 The collection layout. The default retains the existing single and list views.
+
+***
+
+### level
+
+```ts
+readonly level: Signal<number>;
+```
+
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:417](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L417)
+
+One-based nesting depth of this collection.
 
 ***
 
@@ -476,7 +500,7 @@ protected readonly listHeaderTemplate: Signal<
 | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:705](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L705)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:773](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L773)
 
 Optional consumer template rendered in the Mosaik list header slot.
 
@@ -488,7 +512,7 @@ Optional consumer template rendered in the Mosaik list header slot.
 protected readonly listItemContexts: Signal<readonly ICompoundItemContext<T>[]>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:849](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L849)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:918](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L918)
 
 Template contexts for all items displayed in the list view.
 
@@ -500,7 +524,7 @@ Template contexts for all items displayed in the list view.
 readonly listItemDisabled: InputSignal<((item, index) => boolean) | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:581](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L581)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:629](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L629)
 
 Optional resolver that disables individual entries in the list view.
 
@@ -514,7 +538,7 @@ protected readonly listItemTemplate: Signal<
 | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:697](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L697)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:765](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L765)
 
 Optional consumer template used to render each item in the list view.
 
@@ -526,7 +550,7 @@ Optional consumer template used to render each item in the list view.
 readonly listItemTestId: InputSignal<((item, index) => string | undefined) | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:520](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L520)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:568](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L568)
 
 Optional resolver for stable, domain-specific list-item test identifiers.
 
@@ -538,7 +562,7 @@ Optional resolver for stable, domain-specific list-item test identifiers.
 protected readonly listSelectionMode: Signal<"none" | "single">;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:773](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L773)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:841](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L841)
 
 Mosaik selection mode matching whether list items can open the single view.
 
@@ -550,7 +574,7 @@ Mosaik selection mode matching whether list items can open the single view.
 readonly listTestId: InputSignal<string | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:512](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L512)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:560](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L560)
 
 Optional stable test identifier for the list surface.
 
@@ -562,7 +586,7 @@ Optional stable test identifier for the list surface.
 readonly listViewLabel: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:591](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L591)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:639](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L639)
 
 Consumer-owned label for the list-view segment item.
 
@@ -576,7 +600,7 @@ A non-empty label is required when the built-in view-mode switch is enabled.
 readonly listViewTestId: InputSignal<string | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:496](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L496)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:544](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L544)
 
 Optional stable test identifier for the list-view segment item.
 
@@ -588,7 +612,7 @@ Optional stable test identifier for the list-view segment item.
 readonly nextLabel: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:433](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L433)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:481](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L481)
 
 Accessible label for the next-item button.
 
@@ -600,7 +624,7 @@ Accessible label for the next-item button.
 readonly nextTestId: InputSignal<string | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:480](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L480)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:528](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L528)
 
 Optional stable test identifier for the next-item action.
 
@@ -612,7 +636,7 @@ Optional stable test identifier for the next-item action.
 protected readonly positionText: Signal<string>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:805](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L805)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:873](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L873)
 
 Human-readable one-based collection position.
 
@@ -624,7 +648,7 @@ Human-readable one-based collection position.
 readonly previousLabel: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:425](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L425)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:473](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L473)
 
 Accessible label for the previous-item button.
 
@@ -636,7 +660,7 @@ Accessible label for the previous-item button.
 readonly previousTestId: InputSignal<string | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:472](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L472)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:520](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L520)
 
 Optional stable test identifier for the previous-item action.
 
@@ -648,7 +672,7 @@ Optional stable test identifier for the previous-item action.
 readonly selectedIndex: ModelSignal<number>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:396](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L396)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:444](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L444)
 
 Index of the currently displayed item.
 
@@ -660,11 +684,23 @@ Index of the currently displayed item.
 readonly selectLastOnCollectionGrowth: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:619](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L619)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:667](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L667)
 
 Whether later collection growth selects the newly appended last item.
 
 The first non-empty collection is treated as hydration and keeps the initial selection.
+
+***
+
+### showNesting
+
+```ts
+readonly showNesting: InputSignal<boolean>;
+```
+
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:414](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L414)
+
+Whether nested collections display a visual nesting indicator.
 
 ***
 
@@ -674,7 +710,7 @@ The first non-empty collection is treated as hydration and keeps the initial sel
 readonly singleViewLabel: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:601](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L601)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:649](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L649)
 
 Consumer-owned label for the single-view segment item.
 
@@ -688,7 +724,7 @@ A non-empty label is required when the built-in view-mode switch is enabled.
 readonly singleViewTestId: InputSignal<string | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:504](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L504)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:552](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L552)
 
 Optional stable test identifier for the single-view segment item.
 
@@ -697,10 +733,17 @@ Optional stable test identifier for the single-view segment item.
 ### targets
 
 ```ts
-readonly targets: WritableSignal<Map<"next" | "add" | "activeItem" | "previous" | "singleView", ITourAccessorTarget>>;
+readonly targets: WritableSignal<Map<
+  | "next"
+  | "add"
+  | "activeItem"
+  | "delete"
+  | "expandItem"
+  | "previous"
+| "singleView", ITourAccessorTarget>>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:639](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L639)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:687](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L687)
 
 Reactive component capabilities available to an external tour mapping.
 No tour identifiers or feature-specific anchors are stored here.
@@ -717,7 +760,7 @@ No tour identifiers or feature-specific anchors are stored here.
 readonly title: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:369](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L369)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:408](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L408)
 
 Heading displayed above the collection item.
 
@@ -729,7 +772,7 @@ Heading displayed above the collection item.
 readonly viewMode: ModelSignal<CompoundViewModeValue>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:406](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L406)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:454](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L454)
 
 Current collection view mode.
 
@@ -746,7 +789,7 @@ protected readonly viewModes: {
 } = CompoundViewMode;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:737](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L737)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:805](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L805)
 
 View-mode values available to the component template.
 
@@ -770,7 +813,7 @@ readonly Single: "single" = 'single';
 readonly viewModeSwitchLabel: InputSignal<string | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:609](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L609)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:657](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L657)
 
 Optional accessible label for the view-mode segment.
 
@@ -782,7 +825,7 @@ Optional accessible label for the view-mode segment.
 readonly viewModeSwitchTestId: InputSignal<string | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:488](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L488)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:536](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L536)
 
 Optional stable test identifier for the view-mode segment.
 
@@ -794,7 +837,7 @@ Optional stable test identifier for the view-mode segment.
 protected isItemDisabled(context): boolean;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:957](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L957)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:1027](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L1027)
 
 Whether the consumer has disabled editing for this stacked item.
 
@@ -816,7 +859,7 @@ Whether the consumer has disabled editing for this stacked item.
 protected isItemExpanded(context): boolean;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:962](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L962)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:1032](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L1032)
 
 Whether this stacked panel is open.
 
@@ -838,7 +881,7 @@ Whether this stacked panel is open.
 protected isListItemDisabled(context): boolean;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:927](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L927)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:997](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L997)
 
 Resolves whether a list item is unavailable for opening.
 
@@ -862,7 +905,7 @@ Whether the list item is disabled.
 ngOnInit(): void;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:869](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L869)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:939](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L939)
 
 Applies the optional uncontrolled starting mode after Angular initializes the component inputs.
 
@@ -882,7 +925,7 @@ Applies the optional uncontrolled starting mode after Angular initializes the co
 protected openItemFromList(context): void;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:911](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L911)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:981](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L981)
 
 Opens a list item in the existing single-item view.
 
@@ -904,7 +947,7 @@ Opens a list item in the existing single-item view.
 protected requestAdd(event?): void;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:1012](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L1012)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:1090](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L1090)
 
 Requests a new item from the collection owner.
 
@@ -926,7 +969,7 @@ Requests a new item from the collection owner.
 protected requestDelete(context): void;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:999](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L999)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:1073](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L1073)
 
 Emits a delete intent only while the rendered entry is still current.
 
@@ -934,7 +977,7 @@ Emits a delete intent only while the rendered entry is still current.
 
 | Parameter | Type |
 | ------ | ------ |
-| `context` | [`ICompoundItemContext`](Interface.ICompoundItemContext)\<`T`\> |
+| `context` | \| [`ICompoundItemContext`](Interface.ICompoundItemContext)\<`T`\> \| `null` |
 
 #### Returns
 
@@ -948,7 +991,7 @@ Emits a delete intent only while the rendered entry is still current.
 protected resolveItemDeleteTestId(context): string | undefined;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:992](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L992)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:1062](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L1062)
 
 Resolves the optional test identifier for a stacked delete action.
 
@@ -970,7 +1013,7 @@ Resolves the optional test identifier for a stacked delete action.
 protected resolveItemKey(context): unknown;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:1110](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L1110)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:1210](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L1210)
 
 Resolves the identity that keeps the projected item view alive.
 
@@ -994,7 +1037,7 @@ The consumer-resolved identity, or the active position when none is supplied.
 protected resolveListItemTestId(context): string | undefined;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:938](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L938)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:1008](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L1008)
 
 Resolves the optional stable test identifier of a list item.
 
@@ -1018,7 +1061,7 @@ The consumer-provided test identifier.
 protected selectFromIndicator(event): void;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:948](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L948)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:1018](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L1018)
 
 Selects an item requested through the Mosaik indicator.
 
@@ -1040,7 +1083,7 @@ Selects an item requested through the Mosaik indicator.
 protected selectNext(): void;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:891](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L891)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:961](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L961)
 
 Selects the item after the current item.
 
@@ -1056,7 +1099,7 @@ Selects the item after the current item.
 protected selectPrevious(): void;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:882](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L882)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:952](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L952)
 
 Selects the item before the current item.
 
@@ -1072,7 +1115,7 @@ Selects the item before the current item.
 protected selectViewMode(viewMode): void;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:901](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L901)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:971](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L971)
 
 Changes the currently rendered collection view.
 
@@ -1094,7 +1137,7 @@ Changes the currently rendered collection view.
 protected setItemExpanded(context, expanded): void;
 ```
 
-Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:967](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L967)
+Defined in: [libs/ui/src/components/compound/CompoundComponent.ts:1037](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/compound/CompoundComponent.ts#L1037)
 
 Updates one panel without closing other editors.
 

@@ -1,8 +1,17 @@
 // #region Imports
 
-import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, ErrorHandler, inject, input, output, viewChild } from '@angular/core';
-import { IconNameDirective, MenuComponent, MenuItemComponent, PopupComponent, TextComponent } from '@pixel-brewery/mosaik-elements-angular';
+import { NgTemplateOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, DestroyRef, ElementRef, ErrorHandler, inject, input, output, viewChild } from '@angular/core';
+import {
+    IconNameDirective,
+    MenuComponent,
+    MenuItemComponent,
+    MenuItemGroupComponent,
+    PopupComponent,
+    TextComponent,
+} from '@pixel-brewery/mosaik-elements-angular';
 import type { ITextSuggestionMessages } from '../../directives/input-suggestions/ITextSuggestionMessages';
+import type { ITextSuggestionOption } from '../../directives/input-suggestions/ITextSuggestionOption';
 import type { ITextSuggestionMenuState } from './ITextSuggestionMenuState';
 
 // #endregion
@@ -10,7 +19,7 @@ import type { ITextSuggestionMenuState } from './ITextSuggestionMenuState';
 /** Internal popup that keeps keyboard focus in the editable input. */
 @Component({
     selector: 'ngp-text-suggestion-menu',
-    imports: [IconNameDirective, MenuComponent, MenuItemComponent, PopupComponent, TextComponent],
+    imports: [IconNameDirective, MenuComponent, MenuItemComponent, MenuItemGroupComponent, NgTemplateOutlet, PopupComponent, TextComponent],
     template: `
         <mosaik-popup
             part="popup"
@@ -38,24 +47,45 @@ import type { ITextSuggestionMenuState } from './ITextSuggestionMenuState';
                 }
 
                 <mosaik-menu #listbox part="listbox" role="listbox" [attr.id]="menuId()" [attr.aria-label]="messages().label">
-                    @for (item of state().items; track item.id; let index = $index) {
+                    @for (group of groups(); track group.key) {
+                        @if (group.label) {
+                            <mosaik-menu-item-group
+                                part="suggestion-group"
+                                role="group"
+                                [header]="group.label"
+                                [attr.aria-label]="group.label"
+                                [attr.test-id]="'text-suggestion-group-' + group.key"
+                            >
+                                <ng-container [ngTemplateOutlet]="options" [ngTemplateOutletContext]="{ $implicit: group.entries }" />
+                            </mosaik-menu-item-group>
+                        } @else {
+                            <ng-container [ngTemplateOutlet]="options" [ngTemplateOutletContext]="{ $implicit: group.entries }" />
+                        }
+                    }
+                </mosaik-menu>
+
+                <ng-template #options let-entries>
+                    @for (entry of entries; track entry.item.id) {
                         <mosaik-menu-item
                             part="option"
                             role="option"
                             tabindex="-1"
-                            [attr.id]="menuId() + '-option-' + index"
-                            [attr.aria-selected]="index === state().selectedIndex"
-                            [label]="item.label"
-                            [iconName]="item.icon ?? ''"
-                            [appearance]="index === state().selectedIndex ? 'soft' : 'plain'"
-                            (activated)="selected.emit(index)"
+                            [attr.id]="menuId() + '-option-' + entry.index"
+                            [attr.test-id]="'text-suggestion-' + entry.item.id"
+                            [attr.aria-selected]="entry.index === state().selectedIndex"
+                            [attr.data-ngp-mention-tone]="entry.item.tone ?? null"
+                            [label]="entry.item.label"
+                            [iconName]="entry.item.icon ?? ''"
+                            [variant]="entry.item.tone"
+                            [appearance]="entry.index === state().selectedIndex ? 'soft' : 'plain'"
+                            (activated)="selected.emit(entry.index)"
                         >
-                            @if (item.description; as description) {
+                            @if (entry.item.description; as description) {
                                 <mosaik-text slot="subLabel" [text]="description" [wrap]="true" />
                             }
                         </mosaik-menu-item>
                     }
-                </mosaik-menu>
+                </ng-template>
 
                 @if (attribution(); as credit) {
                     <mosaik-text part="attribution" class="attribution" [text]="credit" [wrap]="true" translate="no" />
@@ -105,6 +135,24 @@ export class TextSuggestionMenuComponent {
     public readonly menuId = input.required<string>();
     public readonly attribution = input<string | null>(null);
     public readonly selected = output<number>();
+
+    protected readonly groups = computed(() => {
+        const groups = new Map<string | null, { key: string | null; label?: string; entries: Array<{ item: ITextSuggestionOption; index: number }> }>();
+
+        this.state().items.forEach((item, index) => {
+            const key = item.group?.key ?? null;
+            let group = groups.get(key);
+
+            if (!group) {
+                group = { key, label: item.group?.label, entries: [] };
+                groups.set(key, group);
+            }
+
+            group.entries.push({ item, index });
+        });
+
+        return [...groups.values()];
+    });
 
     // #endregion
 
@@ -159,7 +207,7 @@ export class TextSuggestionMenuComponent {
     }
 
     public optionElement(index: number): HTMLElement | null {
-        return this.listboxElement()?.querySelector<HTMLElement>(`[role="option"]:nth-child(${index + 1})`) ?? null;
+        return this.listboxElement()?.querySelector<HTMLElement>(`[role="option"][id="${this.menuId()}-option-${index}"]`) ?? null;
     }
 
     protected preserveInputFocus(event: PointerEvent): void {

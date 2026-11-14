@@ -17,7 +17,7 @@ Resolved user-facing labels needed by the generic widget-grid editor.
 readonly arrangeWidget: string;
 ```
 
-Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:26](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidgetGridLabels.ts#L26)
+Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:28](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidgetGridLabels.ts#L28)
 
 ***
 
@@ -111,13 +111,25 @@ Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:13](https://github.c
 
 ***
 
+### hideWidgetDescription?
+
+```ts
+readonly hideWidgetDescription?: string;
+```
+
+Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:42](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidgetGridLabels.ts#L42)
+
+Optional explanation for hiding a widget.
+
+***
+
 ### makeWidgetNarrower
 
 ```ts
 readonly makeWidgetNarrower: string;
 ```
 
-Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:31](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidgetGridLabels.ts#L31)
+Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:35](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidgetGridLabels.ts#L35)
 
 ***
 
@@ -127,7 +139,7 @@ Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:31](https://github.c
 readonly makeWidgetShorter: string;
 ```
 
-Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:33](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidgetGridLabels.ts#L33)
+Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:37](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidgetGridLabels.ts#L37)
 
 ***
 
@@ -137,7 +149,7 @@ Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:33](https://github.c
 readonly makeWidgetTaller: string;
 ```
 
-Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:34](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidgetGridLabels.ts#L34)
+Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:38](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidgetGridLabels.ts#L38)
 
 ***
 
@@ -147,7 +159,7 @@ Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:34](https://github.c
 readonly makeWidgetWider: string;
 ```
 
-Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:32](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidgetGridLabels.ts#L32)
+Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:36](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidgetGridLabels.ts#L36)
 
 ***
 
@@ -171,13 +183,25 @@ Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:15](https://github.c
 
 ***
 
+### moveWidgetDescription?
+
+```ts
+readonly moveWidgetDescription?: string;
+```
+
+Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:34](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidgetGridLabels.ts#L34)
+
+Optional explanation shared by the widget move actions.
+
+***
+
 ### moveWidgetEarlier
 
 ```ts
 readonly moveWidgetEarlier: string;
 ```
 
-Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:27](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidgetGridLabels.ts#L27)
+Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:29](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidgetGridLabels.ts#L29)
 
 ***
 
@@ -187,7 +211,7 @@ Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:27](https://github.c
 readonly moveWidgetLater: string;
 ```
 
-Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:28](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidgetGridLabels.ts#L28)
+Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:30](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidgetGridLabels.ts#L30)
 
 ***
 
@@ -197,7 +221,7 @@ Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:28](https://github.c
 readonly moveWidgetToNextZone: string;
 ```
 
-Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:30](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidgetGridLabels.ts#L30)
+Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:32](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidgetGridLabels.ts#L32)
 
 ***
 
@@ -207,7 +231,19 @@ Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:30](https://github.c
 readonly moveWidgetToPreviousZone: string;
 ```
 
-Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:29](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidgetGridLabels.ts#L29)
+Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:31](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidgetGridLabels.ts#L31)
+
+***
+
+### moveZoneDescription?
+
+```ts
+readonly moveZoneDescription?: string;
+```
+
+Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:27](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidgetGridLabels.ts#L27)
+
+Optional explanation shared by both zone move actions.
 
 ***
 
@@ -248,6 +284,18 @@ readonly resizeWidget: string;
 ```
 
 Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:22](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidgetGridLabels.ts#L22)
+
+***
+
+### resizeWidgetDescription?
+
+```ts
+readonly resizeWidgetDescription?: string;
+```
+
+Defined in: [libs/ui/src/widget/models/IWidgetGridLabels.ts:40](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/widget/models/IWidgetGridLabels.ts#L40)
+
+Optional explanation shared by the widget resize actions.
 
 ***
 

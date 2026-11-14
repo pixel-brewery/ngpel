@@ -17,7 +17,9 @@ import {
     OnInit,
     output,
     signal,
+    type Signal,
     viewChild,
+    viewChildren,
 } from '@angular/core';
 import {
     BadgeComponent,
@@ -36,6 +38,7 @@ import {
     TOUR_ACCESSOR,
 } from '@pixel-brewery/mosaik-elements-angular';
 import { StopEventPropagationDirective } from '../../directives/stop-event-propagation/StopEventPropagationDirective';
+import { LeadingLineComponent } from '../leading-line/LeadingLineComponent';
 import { SectionComponent } from '../section/SectionComponent';
 import { SectionContentComponent } from '../section/SectionContentComponent';
 import { SectionHeaderComponent } from '../section/SectionHeaderComponent';
@@ -58,6 +61,8 @@ import type { ICompoundItemContext } from './ICompoundItemContext';
 export const COMPOUND_TOUR_TARGETS = {
     activeItem: 'activeItem',
     add: 'add',
+    delete: 'delete',
+    expandItem: 'expandItem',
     next: 'next',
     previous: 'previous',
     singleView: 'singleView',
@@ -72,12 +77,18 @@ export const COMPOUND_TOUR_TARGETS = {
 @Component({
     selector: 'ngp-compound',
     template: `
-        <div part="root" class="flex min-w-0 flex-col gap-4 surface-input">
-            <ngp-section>
-                <div part="header" class="flex min-w-0 items-start justify-between gap-3">
-                    <ngp-section-header class="min-w-0 flex-1" [header]="title()" [description]="description()" />
+        <div part="root" class="flex min-w-0 gap-2.5" [class.surface-input]="!controlsInHeader()">
+            @if (showNesting() && level() > 1) {
+                <ngp-leading-line part="leading-line" [level]="level()" />
+            }
+            <ngp-section class="min-w-0 flex-1">
+                <div part="header" class="flex min-w-0 items-start justify-between gap-x-3 gap-y-2" [class.flex-wrap]="controlsInHeader()">
+                    <ngp-section-header class="min-w-0 flex-1" [class.basis-56]="controlsInHeader()" [header]="title()" [description]="description()" />
 
-                    <div part="header-actions" class="flex shrink-0 items-center gap-2">
+                    <div part="header-actions" class="flex shrink-0 items-center gap-2" [class.ml-auto]="controlsInHeader()">
+                        @if (controlsInHeader()) {
+                            <ng-container [ngTemplateOutlet]="collectionActions" />
+                        }
                         @if (hasViewModeSwitch()) {
                             <mosaik-segment [attr.test-id]="viewModeSwitchTestId()" [attr.aria-label]="viewModeSwitchLabel()" [appearance]="'soft'">
                                 <mosaik-segment-item
@@ -107,6 +118,7 @@ export const COMPOUND_TOUR_TARGETS = {
                             <mosaik-expander-group part="items" class="w-full" [attr.test-id]="itemsTestId()" [mode]="'multiple'" [stacking]="'joined'">
                                 @for (context of listItemContexts(); track resolveItemKey(context)) {
                                     <mosaik-expander
+                                        #itemTarget
                                         part="item"
                                         [attr.test-id]="itemTestId()?.(context.item, context.index)"
                                         [header]="itemSummaryTemplate() ? undefined : '' + (context.index + 1)"
@@ -128,9 +140,10 @@ export const COMPOUND_TOUR_TARGETS = {
                                         }
                                         @if (canDelete()) {
                                             <mosaik-press-button
+                                                #itemDeleteTarget
                                                 slot="actions"
                                                 part="item-delete"
-                                                ngpStopEventPropagation
+                                                [ngpStopEventPropagation]="['click']"
                                                 [attr.test-id]="resolveItemDeleteTestId(context)"
                                                 [attr.aria-label]="deleteLabel()"
                                                 [type]="'button'"
@@ -171,70 +184,86 @@ export const COMPOUND_TOUR_TARGETS = {
                         }
                     </div>
 
-                    <div part="actions" class="flex items-center justify-between gap-3">
-                        <div part="position" class="flex min-w-0 items-center gap-2">
-                            @if (itemCount() > 0) {
-                                @if (!isListView() && !isStacked()) {
-                                    <mosaik-indicator [total]="itemCount()" [selected]="activeIndex()" (indicated)="selectFromIndicator($event)" />
-                                }
-                                <mosaik-badge [label]="positionText()" [appearance]="'soft'" />
-                            }
-                        </div>
-
-                        <div part="item-actions" class="flex shrink-0 items-center gap-1">
-                            @if (!isListView() && !isStacked()) {
-                                <mosaik-button
-                                    #previousTarget
-                                    [attr.test-id]="previousTestId()"
-                                    [type]="'button'"
-                                    [iconName]="'chevronLeft'"
-                                    [appearance]="'plain'"
-                                    [disabled]="!hasPrevious()"
-                                    [attr.aria-label]="previousLabel()"
-                                    (click)="selectPrevious()"
-                                />
-                                <mosaik-button
-                                    #nextTarget
-                                    [attr.test-id]="nextTestId()"
-                                    [type]="'button'"
-                                    [iconName]="'chevronRight'"
-                                    [appearance]="'plain'"
-                                    [disabled]="!hasNext()"
-                                    [attr.aria-label]="nextLabel()"
-                                    (click)="selectNext()"
-                                />
-                                @if (canDelete() && itemContext(); as context) {
-                                    <mosaik-press-button
-                                        part="item-delete"
-                                        [attr.test-id]="deleteTestId()"
-                                        [attr.aria-label]="deleteLabel()"
-                                        [type]="'button'"
-                                        [iconName]="'delete'"
-                                        [appearance]="'plain'"
-                                        [variant]="'danger'"
-                                        (pressed)="requestDelete(context)"
-                                    />
-                                }
-                            }
-                            @if (actionsTemplate(); as template) {
-                                <ng-container [ngTemplateOutlet]="template.templateRef" />
-                            } @else if (canAdd()) {
-                                <mosaik-button
-                                    #addTarget
-                                    [attr.test-id]="addTestId()"
-                                    [type]="'button'"
-                                    [iconName]="'add'"
-                                    [appearance]="'solid'"
-                                    [variant]="'primary'"
-                                    [attr.aria-label]="addLabel()"
-                                    (click)="requestAdd($event)"
-                                />
-                            }
-                        </div>
-                    </div>
+                    @if (!controlsInHeader()) {
+                        <ng-container [ngTemplateOutlet]="collectionActions" />
+                    }
                 </ngp-section-content>
             </ngp-section>
         </div>
+
+        <ng-template #collectionActions>
+            @let activeItem = itemContext();
+            <div part="actions" class="flex items-center justify-between gap-3" [class.flex-wrap]="controlsInHeader()">
+                <div part="position" class="flex min-w-0 items-center gap-2">
+                    @if (itemCount() > 0) {
+                        @if (!controlsInHeader() && !isListView() && !isStacked()) {
+                            <mosaik-indicator [total]="itemCount()" [selected]="activeIndex()" (indicated)="selectFromIndicator($event)" />
+                        }
+                        <mosaik-badge part="position-count" [label]="positionText()" [appearance]="'soft'" />
+                    }
+                </div>
+
+                <div part="item-actions" class="flex shrink-0 items-center gap-1">
+                    @if (!isListView() && !isStacked()) {
+                        <mosaik-button
+                            #previousTarget
+                            [attr.test-id]="previousTestId()"
+                            [type]="'button'"
+                            [iconName]="'chevronLeft'"
+                            [appearance]="'plain'"
+                            [disabled]="!hasPrevious()"
+                            [attr.aria-label]="previousLabel()"
+                            (click)="selectPrevious()"
+                        />
+                        <mosaik-button
+                            #nextTarget
+                            [attr.test-id]="nextTestId()"
+                            [type]="'button'"
+                            [iconName]="'chevronRight'"
+                            [appearance]="'plain'"
+                            [disabled]="!hasNext()"
+                            [attr.aria-label]="nextLabel()"
+                            (click)="selectNext()"
+                        />
+                        @if (!controlsInHeader() && canDelete() && activeItem) {
+                            <ng-container [ngTemplateOutlet]="deleteAction" [ngTemplateOutletContext]="{ $implicit: activeItem }" />
+                        }
+                    }
+                    @if (actionsTemplate(); as template) {
+                        <ng-container [ngTemplateOutlet]="template.templateRef" />
+                    } @else if (canAdd()) {
+                        <mosaik-button
+                            #addTarget
+                            [attr.test-id]="addTestId()"
+                            [type]="'button'"
+                            [iconName]="'add'"
+                            [appearance]="'solid'"
+                            [variant]="'primary'"
+                            [attr.aria-label]="addLabel()"
+                            (click)="requestAdd($event)"
+                        />
+                    }
+                    @if (controlsInHeader() && !isListView() && !isStacked() && canDelete()) {
+                        <ng-container [ngTemplateOutlet]="deleteAction" [ngTemplateOutletContext]="{ $implicit: activeItem }" />
+                    }
+                </div>
+            </div>
+        </ng-template>
+
+        <ng-template #deleteAction let-context>
+            <mosaik-press-button
+                #deleteTarget
+                part="item-delete"
+                [attr.test-id]="deleteTestId()"
+                [attr.aria-label]="deleteLabel()"
+                [type]="'button'"
+                [iconName]="'delete'"
+                [appearance]="'plain'"
+                [variant]="'danger'"
+                [disabled]="!context"
+                (pressed)="requestDelete(context)"
+            />
+        </ng-template>
 
         <ng-template #listViewTemplate>
             @if (listItemTemplate(); as template) {
@@ -276,6 +305,7 @@ export const COMPOUND_TOUR_TARGETS = {
         SectionHeaderComponent,
         IconNameDirective,
         IndicatorComponent,
+        LeadingLineComponent,
         ListComponent,
         ListItemComponent,
         PressButtonComponent,
@@ -322,11 +352,20 @@ export class CompoundComponent<T> implements ITourAccessor, OnInit {
 
     private readonly _injector = inject(Injector);
 
+    private readonly _parent = inject(CompoundComponent, { optional: true, skipSelf: true });
+
     /** Current projected item surface exposed through the signal tour accessor. */
     private readonly _activeItemTarget = viewChild<ElementRef<HTMLElement>>('activeItemTarget');
 
     /** Built-in add action exposed through the signal tour accessor. */
     private readonly _addTarget = viewChild<ButtonComponent>('addTarget');
+
+    /** Built-in delete control in the single-item layout. */
+    private readonly _deleteTarget = viewChild<PressButtonComponent>('deleteTarget');
+
+    /** Stacked panels and their delete controls in item order. */
+    private readonly _itemTargets = viewChildren<ExpanderComponent>('itemTarget');
+    private readonly _itemDeleteTargets = viewChildren<PressButtonComponent>('itemDeleteTarget');
 
     /** Built-in next action exposed through the signal tour accessor. */
     private readonly _nextTarget = viewChild<ButtonComponent>('nextTarget');
@@ -367,6 +406,15 @@ export class CompoundComponent<T> implements ITourAccessor, OnInit {
      * @readonly
      */
     public readonly title = input.required<string>();
+
+    /** Whether collection navigation and actions are placed beside the heading. */
+    public readonly controlsInHeader = input(false);
+
+    /** Whether nested collections display a visual nesting indicator. */
+    public readonly showNesting = input(false);
+
+    /** One-based nesting depth of this collection. */
+    public readonly level: Signal<number> = computed(() => (this._parent?.level() ?? 0) + 1);
 
     /**
      * Explanatory text displayed below the collection heading.
@@ -422,7 +470,7 @@ export class CompoundComponent<T> implements ITourAccessor, OnInit {
      * @public
      * @readonly
      */
-    public readonly previousLabel = input.required<string>();
+    public readonly previousLabel = input('');
 
     /**
      * Accessible label for the next-item button.
@@ -430,7 +478,7 @@ export class CompoundComponent<T> implements ITourAccessor, OnInit {
      * @public
      * @readonly
      */
-    public readonly nextLabel = input.required<string>();
+    public readonly nextLabel = input('');
 
     /**
      * Accessible label for the add-item button.
@@ -648,6 +696,26 @@ export class CompoundComponent<T> implements ITourAccessor, OnInit {
                 ),
             ],
             [
+                COMPOUND_TOUR_TARGETS.delete,
+                createTourAccessorTarget(
+                    computed(() => {
+                        const target = this.isStacked() ? this._itemDeleteTargets()[this.activeIndex()] : this._deleteTarget();
+
+                        return target?.elementRef.nativeElement ?? null;
+                    }),
+                    undefined,
+                    () => this.requestDeleteFromTour(),
+                ),
+            ],
+            [
+                COMPOUND_TOUR_TARGETS.expandItem,
+                createTourAccessorTarget(
+                    computed(() => (this.isStacked() ? (this._itemTargets()[this.activeIndex()]?.elementRef.nativeElement ?? null) : null)),
+                    undefined,
+                    () => this.expandActiveItemFromTour(),
+                ),
+            ],
+            [
                 COMPOUND_TOUR_TARGETS.next,
                 createTourAccessorTarget(
                     computed(() => this._nextTarget()?.elementRef.nativeElement ?? null),
@@ -829,6 +897,7 @@ export class CompoundComponent<T> implements ITourAccessor, OnInit {
             item,
             index,
             count: items.length,
+            tourAnchor: (anchorId: string) => (index === this.activeIndex() ? anchorId : ''),
         };
     });
 
@@ -854,6 +923,7 @@ export class CompoundComponent<T> implements ITourAccessor, OnInit {
             item,
             index,
             count: items.length,
+            tourAnchor: (anchorId: string) => (index === this.activeIndex() ? anchorId : ''),
         }));
     });
 
@@ -991,12 +1061,20 @@ export class CompoundComponent<T> implements ITourAccessor, OnInit {
     /** Resolves the optional test identifier for a stacked delete action. */
     protected resolveItemDeleteTestId(context: ICompoundItemContext<T>): string | undefined {
         const itemTestId = this.itemTestId()?.(context.item, context.index);
+        const deleteTestId = this.deleteTestId();
 
-        return this.itemDeleteTestId()?.(context.item, context.index) ?? (itemTestId ? `${itemTestId}-delete` : undefined);
+        return (
+            this.itemDeleteTestId()?.(context.item, context.index) ??
+            (itemTestId !== undefined ? `${itemTestId}-delete` : deleteTestId === undefined ? undefined : `${deleteTestId}-${context.index}`)
+        );
     }
 
     /** Emits a delete intent only while the rendered entry is still current. */
-    protected requestDelete(context: ICompoundItemContext<T>): void {
+    protected requestDelete(context: ICompoundItemContext<T> | null): void {
+        if (!context) {
+            return;
+        }
+
         const current = this.currentItemContext(context);
 
         if (this.canDelete() && current) {
@@ -1031,6 +1109,28 @@ export class CompoundComponent<T> implements ITourAccessor, OnInit {
         }
 
         this.requestAdd();
+        return true;
+    }
+
+    private requestDeleteFromTour(): boolean {
+        const context = this.itemContext();
+
+        if (!context || this.isListView() || !this.canDelete()) {
+            return false;
+        }
+
+        this.requestDelete(context);
+        return true;
+    }
+
+    private expandActiveItemFromTour(): boolean {
+        const context = this.itemContext();
+
+        if (!this.isStacked() || !context || this.isItemDisabled(context)) {
+            return false;
+        }
+
+        this.setItemExpanded(context, true);
         return true;
     }
 

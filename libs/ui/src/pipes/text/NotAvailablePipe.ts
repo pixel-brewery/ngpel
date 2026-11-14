@@ -10,7 +10,7 @@ import { NOT_AVAILABLE_TEXT } from './NOT_AVAILABLE_TEXT';
  * than as an empty gap: `{{ contact.phone | ngpNotAvailable }}`.
  *
  * `null`, `undefined` and the empty string are treated as absent; every other value is rendered
- * through its string representation. The placeholder comes from {@link NOT_AVAILABLE_TEXT}.
+ * through its string representation. The default placeholder comes from {@link NOT_AVAILABLE_TEXT}.
  *
  * @public
  */
@@ -29,16 +29,17 @@ export class NotAvailablePipe implements PipeTransform {
      *
      * @public
      * @param value The value to render.
+     * @param placeholder Overrides the default placeholder for this binding.
      * @returns The string representation of `value`, or the placeholder.
      */
-    public transform<TValue>(value: TValue): string {
+    public transform<TValue>(value: TValue, placeholder = this._placeholder): string {
         if (value === null || value === undefined) {
-            return this._placeholder;
+            return placeholder;
         }
 
         const text = String(value);
 
-        return text === '' ? this._placeholder : text;
+        return text === '' ? placeholder : text;
     }
 
     // #endregion

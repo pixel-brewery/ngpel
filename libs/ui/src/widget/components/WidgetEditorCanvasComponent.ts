@@ -127,6 +127,7 @@ export interface IWidgetGridItemResizeRequest extends IWidgetGridResizePreview {
                                 <mosaik-menu>
                                     <mosaik-menu-item
                                         [label]="labels().moveZoneEarlier"
+                                        [subLabel]="labels().moveZoneDescription"
                                         [iconName]="'arrowUp'"
                                         [disabled]="!canMoveZone(zone.definition.id, -1)"
                                         [attr.test-id]="'widget-grid-zone-move-earlier-' + zone.definition.id"
@@ -136,6 +137,7 @@ export interface IWidgetGridItemResizeRequest extends IWidgetGridResizePreview {
                                     />
                                     <mosaik-menu-item
                                         [label]="labels().moveZoneLater"
+                                        [subLabel]="labels().moveZoneDescription"
                                         [iconName]="'arrowDown'"
                                         [disabled]="!canMoveZone(zone.definition.id, 1)"
                                         [attr.test-id]="'widget-grid-zone-move-later-' + zone.definition.id"

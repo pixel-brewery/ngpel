@@ -3,100 +3,33 @@
 import { DOCUMENT } from '@angular/common';
 import { ElementRef, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { ContentAnchorDirective } from './ContentAnchorDirective';
 import { ContentNavigationContext } from './ContentNavigationContext';
 
 // #endregion
 
-class TestIntersectionObserver implements IntersectionObserver {
-    // #region Fields
-
-    public static latest: TestIntersectionObserver | null = null;
-
-    public readonly root: Element | Document | null;
-    public readonly rootMargin: string;
-    public readonly scrollMargin = '';
-    public readonly thresholds: ReadonlyArray<number>;
-    private readonly _callback: IntersectionObserverCallback;
-    private readonly _observedTargets = new Set<Element>();
-
-    // #endregion
-
-    // #region Ctor
-
-    public constructor(callback: IntersectionObserverCallback, options: IntersectionObserverInit = {}) {
-        this._callback = callback;
-        this.root = options.root ?? null;
-        this.rootMargin = options.rootMargin ?? '';
-        this.thresholds = Array.isArray(options.threshold) ? options.threshold : [options.threshold ?? 0];
-        TestIntersectionObserver.latest = this;
-    }
-
-    // #endregion
-
-    // #region Properties
-
-    // #endregion
-
-    // #region Methods
-
-    public disconnect(): void {
-        this._observedTargets.clear();
-    }
-
-    public observe(target: Element): void {
-        this._observedTargets.add(target);
-    }
-
-    public takeRecords(): IntersectionObserverEntry[] {
-        return [];
-    }
-
-    public trigger(isIntersecting: boolean): void {
-        const [target] = this._observedTargets;
-
-        if (!target) {
-            return;
-        }
-
-        this._callback(
-            [
-                {
-                    isIntersecting,
-                    target,
-                } as IntersectionObserverEntry,
-            ],
-            this,
-        );
-    }
-
-    public unobserve(target: Element): void {
-        this._observedTargets.delete(target);
-    }
-
-    // #endregion
-}
-
 describe('Content navigation anchor', () => {
-    afterEach(() => {
-        TestIntersectionObserver.latest = null;
-        vi.restoreAllMocks();
-    });
-
     describe('viewport synchronization', () => {
-        it('activates its destination when the anchor enters the viewport tracking band', () => {
+        it('tracks the anchor in a band based on the height and position of the nested scroll viewport', () => {
             // arrange
             const context = new ContentNavigationContext();
             context.register({ id: 'summary', label: 'Summary' });
+            const scrollContainer = document.createElement('div');
             const element = document.createElement('section');
+            scrollContainer.append(element);
+            Object.defineProperties(scrollContainer, {
+                clientHeight: { value: 500 },
+                scrollHeight: { value: 1_500 },
+                scrollTop: { value: 250, writable: true },
+            });
+            vi.spyOn(scrollContainer, 'getBoundingClientRect').mockReturnValue({ top: 100, width: 1_600 } as DOMRect);
+            let elementTop = 201;
+            vi.spyOn(element, 'getBoundingClientRect').mockImplementation(() => ({ top: elementTop, bottom: elementTop + 250 }) as DOMRect);
             const documentValue = {
                 defaultView: {
-                    addEventListener: vi.fn(),
                     innerHeight: 1_000,
-                    IntersectionObserver: TestIntersectionObserver,
-                    removeEventListener: vi.fn(),
-                    scrollY: 250,
+                    getComputedStyle: () => ({ overflowY: 'auto' }),
                 },
                 documentElement: {
                     clientHeight: 1_000,
@@ -117,9 +50,59 @@ describe('Content navigation anchor', () => {
             });
             directive.ngOnInit();
             directive.ngAfterViewInit();
+            const activeBeforeEnteringBand = context.activeItemId();
 
             // act
-            TestIntersectionObserver.latest?.trigger(true);
+            elementTop = 198;
+            scrollContainer.scrollTop = 253;
+            scrollContainer.dispatchEvent(new Event('scroll'));
+
+            // assert
+            expect(activeBeforeEnteringBand).toBe('summary');
+            expect(context.activeItemId()).toBe('signature');
+        });
+
+        it('tracks document scrolling even when the root element declares overflow auto', () => {
+            // arrange
+            const context = new ContentNavigationContext();
+            context.register({ id: 'summary', label: 'Summary' });
+            const root = document.createElement('div');
+            const element = document.createElement('section');
+            root.append(element);
+            let elementTop = 1_100;
+            vi.spyOn(element, 'getBoundingClientRect').mockImplementation(() => ({ top: elementTop, bottom: elementTop + 200 }) as DOMRect);
+            let scrollY = 0;
+            const scrollTarget = new EventTarget();
+            const documentValue = {
+                defaultView: {
+                    addEventListener: scrollTarget.addEventListener.bind(scrollTarget),
+                    removeEventListener: scrollTarget.removeEventListener.bind(scrollTarget),
+                    innerHeight: 1_000,
+                    getComputedStyle: () => ({ overflowY: 'auto' }),
+                    get scrollY() {
+                        return scrollY;
+                    },
+                },
+                documentElement: root,
+                scrollingElement: { scrollHeight: 3_000 },
+            } as unknown as Document;
+            TestBed.configureTestingModule({
+                providers: [
+                    ContentAnchorDirective,
+                    { provide: ContentNavigationContext, useValue: context },
+                    { provide: DOCUMENT, useValue: documentValue },
+                    { provide: ElementRef, useValue: new ElementRef(element) },
+                ],
+            });
+            const directive = TestBed.inject(ContentAnchorDirective);
+            Object.defineProperty(directive, 'anchor', { value: signal({ id: 'signature', label: 'Signature' }) });
+            directive.ngOnInit();
+            directive.ngAfterViewInit();
+
+            // act
+            elementTop = 48;
+            scrollY = 1_052;
+            scrollTarget.dispatchEvent(new Event('scroll'));
 
             // assert
             expect(context.activeItemId()).toBe('signature');
@@ -145,7 +128,6 @@ describe('Content navigation anchor', () => {
             });
             const documentValue = {
                 defaultView: {
-                    IntersectionObserver: TestIntersectionObserver,
                     getComputedStyle: (target: Element): Pick<CSSStyleDeclaration, 'overflowY'> => ({
                         overflowY: target === scrollContainer ? 'auto' : 'visible',
                     }),
@@ -166,7 +148,6 @@ describe('Content navigation anchor', () => {
             });
             directive.ngOnInit();
             directive.ngAfterViewInit();
-            TestIntersectionObserver.latest?.trigger(true);
             const activeAtStart = context.activeItemId();
 
             // act

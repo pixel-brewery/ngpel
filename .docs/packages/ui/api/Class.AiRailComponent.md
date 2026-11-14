@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: AiRailComponent
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:299](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L299)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:302](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L302)
 
 Renders a declaratively configured, inline AI interaction inside a drawer rail.
 
@@ -17,7 +17,7 @@ Renders a declaratively configured, inline AI interaction inside a drawer rail.
 new AiRailComponent(): AiRailComponent;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:317](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L317)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:320](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L320)
 
 Constructs a new AI rail and synchronizes requests with its busy and result sections.
 
@@ -33,7 +33,7 @@ Constructs a new AI rail and synchronizes requests with its busy and result sect
 protected readonly activeChoice: Signal<AiRailChoiceComponent | null>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:514](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L514)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:520](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L520)
 
 Currently selected prompt choice.
 
@@ -45,7 +45,7 @@ Currently selected prompt choice.
 protected readonly backCommand: Command<void>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:588](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L588)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:608](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L608)
 
 Returns to the declarative choice list.
 
@@ -57,7 +57,7 @@ Returns to the declarative choice list.
 readonly backLabel: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:386](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L386)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:389](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L389)
 
 Label of the inline back action.
 
@@ -69,7 +69,7 @@ Label of the inline back action.
 protected readonly choices: Signal<readonly AiRailChoiceComponent[]>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:506](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L506)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:512](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L512)
 
 Declaratively supplied headless choices.
 
@@ -81,7 +81,7 @@ Declaratively supplied headless choices.
 protected readonly configurationValues: Signal<Readonly<Record<string, string>>>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:517](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L517)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:523](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L523)
 
 Current configurable choice values.
 
@@ -93,7 +93,7 @@ Current configurable choice values.
 readonly description: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:362](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L362)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:365](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L365)
 
 Choice section description.
 
@@ -105,7 +105,7 @@ Choice section description.
 readonly emptyText: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:498](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L498)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:504](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L504)
 
 Message shown when a completed operation has no result.
 
@@ -117,7 +117,7 @@ Message shown when a completed operation has no result.
 readonly explanationItems: InputSignal<readonly string[]>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:378](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L378)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:381](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L381)
 
 Context-specific explanation points for the AI interaction.
 
@@ -129,7 +129,7 @@ Context-specific explanation points for the AI interaction.
 readonly explanationTitle: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:370](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L370)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:373](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L373)
 
 Heading for the contextual explanation shown below the available choices.
 
@@ -141,7 +141,7 @@ Heading for the contextual explanation shown below the available choices.
 readonly fallbackText: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:474](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L474)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:480](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L480)
 
 Text displayed for a fallback result.
 
@@ -153,7 +153,7 @@ Text displayed for a fallback result.
 readonly hasResult: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:418](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L418)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:421](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L421)
 
 Indicates whether projected result content is available.
 
@@ -165,7 +165,7 @@ Indicates whether projected result content is available.
 readonly header: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:354](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L354)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:357](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L357)
 
 Choice section headline.
 
@@ -177,7 +177,7 @@ Choice section headline.
 readonly isFallback: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:466](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L466)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:472](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L472)
 
 Indicates whether the result was produced by a fallback strategy.
 
@@ -189,7 +189,7 @@ Indicates whether the result was produced by a fallback strategy.
 readonly isOutdated: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:450](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L450)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:453](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L453)
 
 Indicates whether the result no longer matches the current form state.
 
@@ -201,7 +201,7 @@ Indicates whether the result no longer matches the current form state.
 readonly isPartial: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:482](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L482)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:488](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L488)
 
 Indicates whether only a partial result is available.
 
@@ -213,7 +213,7 @@ Indicates whether only a partial result is available.
 readonly loading: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:394](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L394)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:397](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L397)
 
 Indicates whether the feature-owned AI operation is running.
 
@@ -225,7 +225,7 @@ Indicates whether the feature-owned AI operation is running.
 readonly loadingLabel: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:402](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L402)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:405](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L405)
 
 Accessible label for the busy section.
 
@@ -237,7 +237,7 @@ Accessible label for the busy section.
 protected readonly mapPromptSubmittedEvent: (event) => string = mapAiRailPromptSubmittedEvent;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:598](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L598)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:618](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L618)
 
 Maps Prompt Box events into command parameters.
 
@@ -253,13 +253,25 @@ Maps Prompt Box events into command parameters.
 
 ***
 
+### outdatedTestId
+
+```ts
+readonly outdatedTestId: InputSignal<string>;
+```
+
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:464](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L464)
+
+Test identifier applied to the outdated-result notice.
+
+***
+
 ### outdatedText
 
 ```ts
 readonly outdatedText: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:458](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L458)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:461](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L461)
 
 Text displayed for an outdated result.
 
@@ -271,7 +283,7 @@ Text displayed for an outdated result.
 readonly partialText: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:490](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L490)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:496](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L496)
 
 Text displayed for a partial result.
 
@@ -283,7 +295,7 @@ Text displayed for a partial result.
 protected readonly section: Signal<AiRailSection>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:525](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L525)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:531](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L531)
 
 Current inline rail section.
 
@@ -301,7 +313,7 @@ protected readonly sections: {
 } = AiRailSection;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:533](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L533)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:539](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L539)
 
 Exposes section constants to the component template.
 
@@ -343,7 +355,7 @@ readonly RESULT: "RESULT" = 'RESULT';
 protected readonly selectChoiceCommand: Command<AiRailChoiceComponent>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:541](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L541)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:547](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L547)
 
 Selects a declarative choice.
 
@@ -355,7 +367,7 @@ Selects a declarative choice.
 readonly sourceLabel: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:442](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L442)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:445](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L445)
 
 Result source label.
 
@@ -367,7 +379,7 @@ Result source label.
 readonly statusLabel: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:426](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L426)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:429](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L429)
 
 Result status label.
 
@@ -379,7 +391,7 @@ Result status label.
 readonly statusVariant: InputSignal<AiRailBadgeVariant>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:434](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L434)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:437](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L437)
 
 Result status appearance.
 
@@ -391,7 +403,7 @@ Result status appearance.
 protected readonly submitConfigurationCommand: Command<void>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:559](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L559)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:565](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L565)
 
 Submits the active configurable choice.
 
@@ -403,7 +415,7 @@ Submits the active configurable choice.
 protected readonly submitPromptCommand: Command<string>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:551](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L551)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:557](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L557)
 
 Submits the active free-text prompt.
 
@@ -415,7 +427,7 @@ Submits the active free-text prompt.
 protected readonly swapConfigurationCommand: Command<void>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:572](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L572)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:592](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L592)
 
 Exchanges compatible values without changing the other configuration fields.
 
@@ -427,7 +439,7 @@ Exchanges compatible values without changing the other configuration fields.
 readonly waitingPrompts: InputSignal<readonly string[]>;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:410](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L410)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:413](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L413)
 
 Typewriter messages displayed while waiting.
 
@@ -439,7 +451,7 @@ Typewriter messages displayed while waiting.
 protected canExecuteChoice(choice): boolean;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:605](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L605)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:625](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L625)
 
 Returns whether one choice currently exposes an executable command.
 
@@ -461,7 +473,7 @@ Returns whether one choice currently exposes an executable command.
 protected changeConfigurationValue(key, event): void;
 ```
 
-Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:612](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L612)
+Defined in: [libs/ui/src/components/ai-rail/AiRailComponent.ts:632](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/ai-rail/AiRailComponent.ts#L632)
 
 Updates one configurable choice value from a Mosaik selection event.
 

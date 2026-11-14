@@ -14,6 +14,7 @@ import {
     type OutputEmitterRef,
     type WritableSignal,
 } from '@angular/core';
+import { trimMentionDocument, type IMentionDocument } from '@pixel-brewery/mosaik-elements-foundation';
 import {
     AudioInputDevicePreferenceService,
     AudioRecorder,
@@ -27,7 +28,7 @@ import {
 // #endregion
 
 interface IPromptBoxElement extends HTMLElement {
-    value: string;
+    mentionDocument: IMentionDocument;
     focus(): void;
 }
 
@@ -228,7 +229,8 @@ export class VoiceRecorderDirective {
             return;
         }
 
-        promptBox.value = this.joinText(promptBox.value, transcript);
+        const document = trimMentionDocument(promptBox.mentionDocument);
+        promptBox.mentionDocument = { ...document, text: this.joinText(document.text, transcript) };
         promptBox.dispatchEvent(
             new Event('input', {
                 bubbles: true,

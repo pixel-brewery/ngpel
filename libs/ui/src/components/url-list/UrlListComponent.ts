@@ -38,6 +38,7 @@ import type { IUrlListLabels } from './IUrlListLabels';
         <ngp-compound
             [title]="labels().title"
             [description]="labels().description"
+            [controlsInHeader]="controlsInHeader()"
             [items]="fields()().value()"
             [addLabel]="labels().add"
             [deleteLabel]="labels().remove"
@@ -67,7 +68,11 @@ import type { IUrlListLabels } from './IUrlListLabels';
                                     [attr.test-id]="testIdPrefix() + '-type-' + index"
                                 >
                                     @for (option of options(); track option.value) {
-                                        <mosaik-select-item [value]="option.value" [label]="option.label" />
+                                        <mosaik-select-item
+                                            [value]="option.value"
+                                            [label]="option.label"
+                                            [attr.test-id]="testIdPrefix() + '-option-' + option.value"
+                                        />
                                     }
                                 </mosaik-select>
                             </mosaik-form-field>
@@ -147,6 +152,8 @@ export class UrlListComponent<TCategory extends string = string> {
     public readonly options = input.required<ReadonlyArray<{ readonly value: TCategory; readonly label: string }>>();
     /** Translated presentation text supplied by the caller. */
     public readonly labels = input.required<IUrlListLabels>();
+    /** Places collection actions in the heading instead of beneath the active URL. */
+    public readonly controlsInHeader = input(false);
     /** Disables editing and collection mutations. Valid links can still be opened. */
     public readonly disabled = input(false);
     /** Optional collection limit for the add action. */

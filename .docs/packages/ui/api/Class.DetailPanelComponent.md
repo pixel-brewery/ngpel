@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: DetailPanelComponent
 
-Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:231](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L231)
+Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:232](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L232)
 
 ## Constructors
 
@@ -15,7 +15,7 @@ Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:231](ht
 new DetailPanelComponent(): DetailPanelComponent;
 ```
 
-Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:269](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L269)
+Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:270](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L270)
 
 #### Returns
 
@@ -29,7 +29,7 @@ Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:269](ht
 readonly backdropLabel: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:257](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L257)
+Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:258](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L258)
 
 ***
 
@@ -39,7 +39,7 @@ Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:257](ht
 protected readonly canCloseByBackdrop: Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:265](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L265)
+Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:266](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L266)
 
 ***
 
@@ -49,7 +49,7 @@ Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:265](ht
 readonly closeLabel: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:256](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L256)
+Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:257](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L257)
 
 ***
 
@@ -59,7 +59,7 @@ Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:256](ht
 readonly closeOnBackdropClick: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:248](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L248)
+Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:249](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L249)
 
 ***
 
@@ -69,7 +69,7 @@ Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:248](ht
 readonly closeOnEscape: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:249](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L249)
+Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:250](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L250)
 
 ***
 
@@ -79,7 +79,7 @@ Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:249](ht
 protected readonly closing: WritableSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:242](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L242)
+Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:243](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L243)
 
 ***
 
@@ -89,7 +89,7 @@ Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:242](ht
 readonly disabled: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:246](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L246)
+Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:247](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L247)
 
 ***
 
@@ -99,7 +99,7 @@ Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:246](ht
 readonly handleVariant: InputSignal<DetailPanelHandleVariant>;
 ```
 
-Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:252](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L252)
+Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:253](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L253)
 
 ***
 
@@ -109,7 +109,7 @@ Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:252](ht
 readonly hasBackdrop: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:247](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L247)
+Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:248](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L248)
 
 ***
 
@@ -119,7 +119,7 @@ Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:247](ht
 readonly opened: ModelSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:244](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L244)
+Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:245](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L245)
 
 ***
 
@@ -129,7 +129,7 @@ Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:244](ht
 readonly openedChangeReason: OutputEmitterRef<IDetailPanelChange>;
 ```
 
-Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:259](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L259)
+Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:260](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L260)
 
 ***
 
@@ -139,7 +139,7 @@ Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:259](ht
 readonly openLabel: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:255](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L255)
+Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:256](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L256)
 
 ***
 
@@ -149,7 +149,7 @@ Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:255](ht
 readonly panelClosed: OutputEmitterRef<IDetailPanelChange>;
 ```
 
-Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:261](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L261)
+Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:262](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L262)
 
 ***
 
@@ -159,7 +159,7 @@ Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:261](ht
 protected readonly panelId: string;
 ```
 
-Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:241](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L241)
+Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:242](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L242)
 
 ***
 
@@ -169,7 +169,7 @@ Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:241](ht
 readonly panelLabel: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:254](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L254)
+Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:255](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L255)
 
 ***
 
@@ -179,7 +179,7 @@ Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:254](ht
 readonly panelOpened: OutputEmitterRef<IDetailPanelChange>;
 ```
 
-Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:260](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L260)
+Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:261](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L261)
 
 ***
 
@@ -189,7 +189,7 @@ Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:260](ht
 readonly restoreFocusOnClose: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:250](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L250)
+Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:251](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L251)
 
 ## Methods
 
@@ -199,7 +199,7 @@ Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:250](ht
 close(reason?): void;
 ```
 
-Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:303](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L303)
+Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:304](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L304)
 
 #### Parameters
 
@@ -219,7 +219,7 @@ Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:303](ht
 protected handleIconName(): string;
 ```
 
-Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:326](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L326)
+Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:327](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L327)
 
 #### Returns
 
@@ -233,7 +233,7 @@ Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:326](ht
 protected onPanelTransitionEnd(event): void;
 ```
 
-Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:334](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L334)
+Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:335](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L335)
 
 #### Parameters
 
@@ -253,7 +253,7 @@ Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:334](ht
 open(reason?): void;
 ```
 
-Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:293](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L293)
+Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:294](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L294)
 
 #### Parameters
 
@@ -273,7 +273,7 @@ Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:293](ht
 toggle(reason?): void;
 ```
 
-Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:317](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L317)
+Defined in: [libs/ui/src/components/detail-panel/DetailPanelComponent.ts:318](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/detail-panel/DetailPanelComponent.ts#L318)
 
 #### Parameters
 

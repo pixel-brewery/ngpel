@@ -67,7 +67,7 @@ Observes the anchor inside a narrow viewport band to keep the outline in sync wi
 ngOnDestroy(): void;
 ```
 
-Defined in: [libs/ui/src/components/content-navigation/ContentAnchorDirective.ts:109](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/content-navigation/ContentAnchorDirective.ts#L109)
+Defined in: [libs/ui/src/components/content-navigation/ContentAnchorDirective.ts:105](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/content-navigation/ContentAnchorDirective.ts#L105)
 
 Removes the destination when its routed content is destroyed.
 

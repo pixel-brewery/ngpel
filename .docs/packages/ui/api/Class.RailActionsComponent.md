@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: RailActionsComponent
 
-Defined in: [libs/ui/src/components/rail/RailActionsComponent.ts:26](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailActionsComponent.ts#L26)
+Defined in: [libs/ui/src/components/rail/RailActionsComponent.ts:34](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailActionsComponent.ts#L34)
 
 Groups the compact actions displayed in a rail's initial state.
 
@@ -20,3 +20,13 @@ new RailActionsComponent(): RailActionsComponent;
 #### Returns
 
 `RailActionsComponent`
+
+## Properties
+
+### floatingActions
+
+```ts
+protected readonly floatingActions: Signal<boolean> | (() => false);
+```
+
+Defined in: [libs/ui/src/components/rail/RailActionsComponent.ts:38](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/rail/RailActionsComponent.ts#L38)

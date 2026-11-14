@@ -1,7 +1,7 @@
 // #region Imports
 
 import { ChangeDetectionStrategy, Component, computed, inject, input, type Signal } from '@angular/core';
-import { TextComponent, TypographyDirective } from '@pixel-brewery/mosaik-elements-angular';
+import { TextComponent, TranslateDirective, TypographyDirective } from '@pixel-brewery/mosaik-elements-angular';
 import { LegalLinksComponentIntl, provideLegalLinksComponentIntl } from './LegalLinksComponentIntl';
 import type { ILegalLink } from './ILegalLink';
 
@@ -14,33 +14,46 @@ import type { ILegalLink } from './ILegalLink';
  */
 @Component({
     selector: 'ngp-legal-links',
-    imports: [TextComponent, TypographyDirective],
+    imports: [TextComponent, TranslateDirective, TypographyDirective],
     template: `
-        <nav part="navigation" [attr.aria-label]="ariaLabel()" [attr.data-tone]="tone()" class="min-w-0 w-full">
-            <ul
-                part="links"
-                class="m-0 flex w-full min-w-0 list-none flex-wrap items-center gap-x-2 gap-y-1 p-0"
-                [class.justify-center]="alignment() === 'center'"
-                [class.justify-start]="alignment() === 'start'"
-            >
-                @for (link of allLinks(); track link.url + link.label) {
-                    <li part="item" class="inline-flex max-w-full shrink-0 items-center gap-x-2 whitespace-nowrap">
-                        @if (!$first || leadingSeparator()) {
-                            <mosaik-text part="separator" aria-hidden="true" [mosaikTypography]="'caption'" [text]="'·'" [readonly]="true" />
-                        }
-                        <a
-                            part="link"
-                            class="max-w-full min-w-0"
-                            [href]="link.url"
-                            [attr.target]="link.openInNewTab === false ? null : '_blank'"
-                            [attr.rel]="link.openInNewTab === false ? null : 'noopener noreferrer'"
-                            referrerpolicy="no-referrer"
-                        >
-                            <mosaik-text [mosaikTypography]="'caption'" [text]="link.label" [wrap]="false" [readonly]="tone() === 'default'" />
-                        </a>
-                    </li>
-                }
-            </ul>
+        <nav part="navigation" [attr.aria-label]="ariaLabel()" [attr.data-tone]="tone()" class="flex min-w-0 w-full flex-col gap-y-1">
+            @for (row of linkRows(); track $index; let rowIndex = $index) {
+                <ul
+                    part="links"
+                    class="m-0 flex w-full min-w-0 list-none items-center gap-x-2 gap-y-1 p-0"
+                    [class.flex-wrap]="!fixedRows()"
+                    [class.justify-center]="alignment() === 'center'"
+                    [class.justify-start]="alignment() === 'start'"
+                >
+                    @for (link of row; track link.url + (link.translationKey ?? link.label)) {
+                        <li part="item" class="inline-flex max-w-full shrink-0 items-center gap-x-2 whitespace-nowrap">
+                            @if (!$first || (rowIndex === 0 && leadingSeparator())) {
+                                <mosaik-text part="separator" aria-hidden="true" [mosaikTypography]="'caption'" [text]="'·'" [readonly]="true" />
+                            }
+                            <a
+                                part="link"
+                                class="max-w-full min-w-0"
+                                [href]="link.url"
+                                [attr.target]="link.openInNewTab === false ? null : '_blank'"
+                                [attr.rel]="link.openInNewTab === false ? null : 'noopener noreferrer'"
+                                referrerpolicy="no-referrer"
+                            >
+                                @if (link.translationKey; as key) {
+                                    <mosaik-text
+                                        *mosaikTranslate="let t"
+                                        [mosaikTypography]="'caption'"
+                                        [text]="t(key) ?? link.label"
+                                        [wrap]="false"
+                                        [readonly]="tone() === 'default'"
+                                    />
+                                } @else {
+                                    <mosaik-text [mosaikTypography]="'caption'" [text]="link.label" [wrap]="false" [readonly]="tone() === 'default'" />
+                                }
+                            </a>
+                        </li>
+                    }
+                </ul>
+            }
         </nav>
     `,
     styles: `
@@ -52,8 +65,8 @@ import type { ILegalLink } from './ILegalLink';
             display: block;
         }
 
-        [part='navigation'][data-tone='inverse'] {
-            --text-foreground-color: var(--mosaik-color-neutral-0);
+        [part='navigation'][data-tone='inverse'] [part='link'] {
+            --text-foreground-color: var(--ngp-legal-links-inverse-foreground, var(--mosaik-color-neutral-0));
         }
 
         [part='link'] {
@@ -139,7 +152,14 @@ export class LegalLinksComponent {
      */
     public readonly leadingSeparator = input(false);
 
-    private readonly _allLinks = computed<ReadonlyArray<ILegalLink>>(() => [...this.links(), ...this.additionalLinks()]);
+    /** Number of links in the first fixed row. Remaining links form a second row. Omit for flexible wrapping. */
+    public readonly firstRowSize = input<number>();
+
+    private readonly _fixedRowSize = computed(() => {
+        const size = this.firstRowSize();
+        return size !== undefined && Number.isSafeInteger(size) && size > 0 ? size : undefined;
+    });
+    protected readonly fixedRows = computed(() => this._fixedRowSize() !== undefined);
     // #endregion
 
     // #region Ctor
@@ -149,14 +169,16 @@ export class LegalLinksComponent {
     // #region Properties
 
     /**
-     * Combined legal navigation links visible to the template.
+     * Legal links grouped into the configured display rows.
      *
      * @protected
      * @readonly
      */
-    protected get allLinks(): Signal<ReadonlyArray<ILegalLink>> {
-        return this._allLinks;
-    }
+    protected readonly linkRows: Signal<ReadonlyArray<ReadonlyArray<ILegalLink>>> = computed(() => {
+        const links = [...this.links(), ...this.additionalLinks()];
+        const size = this._fixedRowSize();
+        return size !== undefined && links.length > size ? [links.slice(0, size), links.slice(size)] : [links];
+    });
 
     // #endregion
 

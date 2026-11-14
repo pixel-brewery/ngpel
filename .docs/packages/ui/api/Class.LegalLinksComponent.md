@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: LegalLinksComponent
 
-Defined in: [libs/ui/src/components/legal-links/LegalLinksComponent.ts:87](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/legal-links/LegalLinksComponent.ts#L87)
+Defined in: [libs/ui/src/components/legal-links/LegalLinksComponent.ts:100](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/legal-links/LegalLinksComponent.ts#L100)
 
 Renders trusted website-level legal navigation without accepting HTML content.
 
@@ -29,7 +29,7 @@ new LegalLinksComponent(): LegalLinksComponent;
 readonly additionalLinks: InputSignal<readonly ILegalLink[]>;
 ```
 
-Defined in: [libs/ui/src/components/legal-links/LegalLinksComponent.ts:106](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/legal-links/LegalLinksComponent.ts#L106)
+Defined in: [libs/ui/src/components/legal-links/LegalLinksComponent.ts:119](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/legal-links/LegalLinksComponent.ts#L119)
 
 Additional website-level links such as tenant-specific terms and conditions.
 Contract attachments are intentionally outside this component's responsibility.
@@ -42,7 +42,7 @@ Contract attachments are intentionally outside this component's responsibility.
 readonly alignment: InputSignal<"start" | "center">;
 ```
 
-Defined in: [libs/ui/src/components/legal-links/LegalLinksComponent.ts:124](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/legal-links/LegalLinksComponent.ts#L124)
+Defined in: [libs/ui/src/components/legal-links/LegalLinksComponent.ts:137](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/legal-links/LegalLinksComponent.ts#L137)
 
 Horizontal alignment used by the surrounding shell.
 
@@ -54,9 +54,31 @@ Horizontal alignment used by the surrounding shell.
 readonly ariaLabel: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/legal-links/LegalLinksComponent.ts:116](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/legal-links/LegalLinksComponent.ts#L116)
+Defined in: [libs/ui/src/components/legal-links/LegalLinksComponent.ts:129](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/legal-links/LegalLinksComponent.ts#L129)
 
 Accessible navigation label.
+
+***
+
+### firstRowSize
+
+```ts
+readonly firstRowSize: InputSignal<number | undefined>;
+```
+
+Defined in: [libs/ui/src/components/legal-links/LegalLinksComponent.ts:156](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/legal-links/LegalLinksComponent.ts#L156)
+
+Number of links in the first fixed row. Remaining links form a second row. Omit for flexible wrapping.
+
+***
+
+### fixedRows
+
+```ts
+protected readonly fixedRows: Signal<boolean>;
+```
+
+Defined in: [libs/ui/src/components/legal-links/LegalLinksComponent.ts:162](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/legal-links/LegalLinksComponent.ts#L162)
 
 ***
 
@@ -66,9 +88,21 @@ Accessible navigation label.
 readonly leadingSeparator: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/legal-links/LegalLinksComponent.ts:140](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/legal-links/LegalLinksComponent.ts#L140)
+Defined in: [libs/ui/src/components/legal-links/LegalLinksComponent.ts:153](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/legal-links/LegalLinksComponent.ts#L153)
 
 Whether the first link is prefixed with a separator supplied by the surrounding sequence.
+
+***
+
+### linkRows
+
+```ts
+protected readonly linkRows: Signal<readonly (readonly ILegalLink[])[]>;
+```
+
+Defined in: [libs/ui/src/components/legal-links/LegalLinksComponent.ts:177](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/legal-links/LegalLinksComponent.ts#L177)
+
+Legal links grouped into the configured display rows.
 
 ***
 
@@ -78,7 +112,7 @@ Whether the first link is prefixed with a separator supplied by the surrounding 
 readonly links: InputSignal<readonly ILegalLink[]>;
 ```
 
-Defined in: [libs/ui/src/components/legal-links/LegalLinksComponent.ts:97](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/legal-links/LegalLinksComponent.ts#L97)
+Defined in: [libs/ui/src/components/legal-links/LegalLinksComponent.ts:110](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/legal-links/LegalLinksComponent.ts#L110)
 
 The website and legal navigation to render. Every product ships its own, so this package
 carries no defaults.
@@ -91,24 +125,6 @@ carries no defaults.
 readonly tone: InputSignal<"default" | "inverse">;
 ```
 
-Defined in: [libs/ui/src/components/legal-links/LegalLinksComponent.ts:132](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/legal-links/LegalLinksComponent.ts#L132)
+Defined in: [libs/ui/src/components/legal-links/LegalLinksComponent.ts:145](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/legal-links/LegalLinksComponent.ts#L145)
 
 Color treatment for light and inverse shell backgrounds.
-
-## Accessors
-
-### allLinks
-
-#### Get Signature
-
-```ts
-get protected allLinks(): Signal<readonly ILegalLink[]>;
-```
-
-Defined in: [libs/ui/src/components/legal-links/LegalLinksComponent.ts:157](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/legal-links/LegalLinksComponent.ts#L157)
-
-Combined legal navigation links visible to the template.
-
-##### Returns
-
-`Signal`\<readonly [`ILegalLink`](Interface.ILegalLink)[]\>

@@ -107,7 +107,7 @@ editUrl: false
 | [ImageMarkupDocument](Class.ImageMarkupDocument) | Framework-neutral immutable history for raster image markup operations. |
 | [ImageMarkupEditorDialogComponent](Class.ImageMarkupEditorDialogComponent) | Renders the localized, feature-neutral image markup editor dialog. |
 | [ImageMarkupEditorService](Class.ImageMarkupEditorService) | Opens image files in the framework-neutral raster markup editor. |
-| [ImagePreviewComponent](Class.ImagePreviewComponent) | Renders a keyboard-accessible, zoomable and draggable image overlay. |
+| [ImagePreviewComponent](Class.ImagePreviewComponent) | Renders a keyboard-accessible overlay for zoomable images and playable videos. |
 | [ImagePreviewDialogSurfaceDirective](Class.ImagePreviewDialogSurfaceDirective) | Makes the owning Mosaik dialog an invisible interaction host for the full-screen preview. |
 | [ImagePreviewDirective](Class.ImagePreviewDirective) | Opens image-bearing controls and elements in the shared image preview. |
 | [ImagePreviewGroupDirective](Class.ImagePreviewGroupDirective) | Opens descendant Mosaik image controls as one navigable preview collection. |
@@ -115,6 +115,7 @@ editUrl: false
 | [ImagePreviewRef](Class.ImagePreviewRef) | Controls one open image preview. |
 | [ImagePreviewService](Class.ImagePreviewService) | Opens images in a full-screen CDK overlay. |
 | [ImagePreviewState](Class.ImagePreviewState) | Owns the reactive state of one image preview instance. |
+| [ImmersiveSessionOrbAnchorDirective](Class.ImmersiveSessionOrbAnchorDirective) | Marks the element whose box the orb occupies while the session is in preflight. |
 | [ImmersiveSessionShellComponent](Class.ImmersiveSessionShellComponent) | Provides a responsive, business-agnostic shell for immersive sessions. |
 | [InfiniteScrollDirective](Class.InfiniteScrollDirective) | Emits an event when the user scrolls near the end of a container. |
 | [InitialsPipe](Class.InitialsPipe) | Reduces a display name to at most two upper-case initials for avatar fallbacks: <code v-pre>{{ user.displayName \&#124; ngpInitials }}</code> renders `AW` for `Andre Wehlert`. |
@@ -159,7 +160,7 @@ editUrl: false
 | [RailComponent](Class.RailComponent) | Coordinates a compact action list with one independently declared drawer rail at a time. |
 | [RailComponentIntl](Class.RailComponentIntl) | Internationalization labels for the rail component. |
 | [RailContentDirective](Class.RailContentDirective) | Registers independently declared content with its nearest generic rail coordinator. |
-| [RailDrawerController](Class.RailDrawerController) | Coordinates an expandable generic rail with its host drawer width. |
+| [RailDrawerController](Class.RailDrawerController) | Coordinates a generic rail with its host drawer: the docked rail expands the drawer for its content, the floating rail gives its column back to the drawer body and anchors the floating actions above the drawer footer. |
 | [RecurrenceEditorComponent](Class.RecurrenceEditorComponent) | Reusable RFC 5545 recurrence editor for Signal Forms. |
 | [RecurrenceEditorService](Class.RecurrenceEditorService) | Opens the recurrence editor in the application's Mosaik drawer. |
 | [RecurrenceSummaryPipe](Class.RecurrenceSummaryPipe) | Renders a localized description of the recurrence in a read-only view. |
@@ -297,7 +298,7 @@ editUrl: false
 | [IImageMarkupOperation](Interface.IImageMarkupOperation) | Immutable drawing operation stored by the markup editor history. |
 | [IImageMarkupPoint](Interface.IImageMarkupPoint) | Point in source-image pixel coordinates. |
 | [IImagePreviewConfig](Interface.IImagePreviewConfig) | Configures image preview behavior and presentation. |
-| [IImagePreviewImage](Interface.IImagePreviewImage) | Describes an image rendered by the image preview. |
+| [IImagePreviewImage](Interface.IImagePreviewImage) | Describes an image or video rendered by the preview. |
 | [IImagePreviewLabels](Interface.IImagePreviewLabels) | Accessible labels used by image preview controls. |
 | [IImageRemovedEvent](Interface.IImageRemovedEvent) | Event emitted when the image is removed. |
 | [IInputHistoryNavigationEvent](Interface.IInputHistoryNavigationEvent) | Describes a value recalled through input history navigation. |

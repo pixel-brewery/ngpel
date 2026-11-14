@@ -23,15 +23,23 @@ export interface IWidgetGridLabels {
     readonly arrangeZone: string;
     readonly moveZoneEarlier: string;
     readonly moveZoneLater: string;
+    /** Optional explanation shared by both zone move actions. */
+    readonly moveZoneDescription?: string;
     readonly arrangeWidget: string;
     readonly moveWidgetEarlier: string;
     readonly moveWidgetLater: string;
     readonly moveWidgetToPreviousZone: string;
     readonly moveWidgetToNextZone: string;
+    /** Optional explanation shared by the widget move actions. */
+    readonly moveWidgetDescription?: string;
     readonly makeWidgetNarrower: string;
     readonly makeWidgetWider: string;
     readonly makeWidgetShorter: string;
     readonly makeWidgetTaller: string;
+    /** Optional explanation shared by the widget resize actions. */
+    readonly resizeWidgetDescription?: string;
+    /** Optional explanation for hiding a widget. */
+    readonly hideWidgetDescription?: string;
 
     // #endregion
 }

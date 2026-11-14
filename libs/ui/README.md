@@ -23,7 +23,7 @@ The presentation layer: every component, directive and pipe the products share �
 ## Import Options
 
 ```typescript
-// @pixel-brewery/ngpel-ui — 472 exports
+// @pixel-brewery/ngpel-ui — 475 exports
 import {
     ActionStripComponent,
     ActionStripContentDirective,

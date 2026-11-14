@@ -173,7 +173,7 @@ const DEFAULT_RECURRENCE_EDITOR_LABELS: IRecurrenceEditorLabels = {
                 <div #intervalTarget class="flex flex-col gap-2 md:col-span-2 surface-input">
                     <span class="surface-input-text"> {{ resolvedLabels().interval }} </span>
                     <mosaik-chip-group [selectionMode]="'single'" [wrap]="true" [value]="recurrenceIntervalValue()">
-                        @for (option of intervalOptions; track option.value) {
+                        @for (option of intervalOptions(); track option.value) {
                             <mosaik-chip
                                 [label]="recurrenceIntervalLabel(option.value)"
                                 [appearance]="'soft'"
@@ -493,7 +493,14 @@ export class RecurrenceEditorComponent<TNumber extends string | number | null = 
         return this.allowNone() ? ['NONE', ...repeating] : repeating;
     });
 
-    protected readonly intervalOptions = RECURRENCE_INTERVAL_OPTIONS;
+    protected readonly intervalOptions = computed(() => {
+        const current = toPositiveInteger(this.intervalField()().value());
+        if (RECURRENCE_INTERVAL_OPTIONS.some((option) => option.value === current)) {
+            return RECURRENCE_INTERVAL_OPTIONS;
+        }
+
+        return [...RECURRENCE_INTERVAL_OPTIONS, { value: current }].sort((left, right) => left.value - right.value);
+    });
 
     protected readonly weekdayOptions = RECURRENCE_WEEKDAY_OPTIONS;
 

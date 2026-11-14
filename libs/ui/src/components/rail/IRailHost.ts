@@ -20,6 +20,8 @@ export interface IRailHost {
 
     /** Whether the current layout presents rail content in a floating sheet. */
     readonly isFloating?: Signal<boolean>;
+    /** Whether actions are presented as floating action buttons inside the drawer. */
+    readonly usesFloatingActions?: Signal<boolean>;
 
     /**
      * Activates the rail content registered for the supplied key.

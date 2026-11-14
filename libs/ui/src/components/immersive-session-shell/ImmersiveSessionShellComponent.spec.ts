@@ -1,8 +1,8 @@
 // #region Imports
 
-import { signal, type Signal } from '@angular/core';
+import { ElementRef, signal, type Signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { ImmersiveSessionShellComponent } from './ImmersiveSessionShellComponent';
 import type { ImmersiveSessionPhase } from './ImmersiveSessionPhase';
 import type { ImmersiveSessionRailState } from './ImmersiveSessionRailState';
@@ -20,11 +20,18 @@ interface IImmersiveSessionShellComponentTestApi {
     readonly railAttached: Signal<boolean>;
     readonly preflightVisible: Signal<boolean>;
     readonly idleDetectionEnabled: Signal<boolean>;
+    readonly orbPreflightTransform: Signal<string | null>;
 
     requestOverlayDismissal(event?: Event): void;
+    measureOrbAnchor(anchor: HTMLElement, stage: HTMLElement, orb: HTMLElement): void;
 }
 
 describe('ImmersiveSessionShellComponent', () => {
+    afterEach(() => {
+        TestBed.resetTestingModule();
+        vi.restoreAllMocks();
+    });
+
     it('should expose business-agnostic layout defaults', () => {
         const component = createComponent();
 
@@ -136,11 +143,73 @@ describe('ImmersiveSessionShellComponent', () => {
         // Assert
         expect(api.idleDetectionEnabled()).toBe(false);
     });
+
+    it('aligns one orb with the nested preflight anchor in the stage coordinate space', () => {
+        // Arrange
+        const api = createComponent() as unknown as IImmersiveSessionShellComponentTestApi;
+        const stage = document.createElement('main');
+        const details = elementWithOffsets(stage, 340, 0, 760);
+        const anchor = elementWithOffsets(details, 0, 70, 114);
+        const orb = elementWithOffsets(stage, 549, 138, 342);
+
+        // Act
+        api.measureOrbAnchor(anchor, stage, orb);
+
+        // Assert
+        expect(api.orbPreflightTransform()).toBe('translate(-323.0px, -182.0px) scale(0.3333)');
+    });
+
+    it('clears a measured transform when the anchor has left the stage layout', () => {
+        // Arrange
+        const api = createComponent() as unknown as IImmersiveSessionShellComponentTestApi;
+        const stage = document.createElement('main');
+        const anchor = elementWithOffsets(stage, 340, 70, 114);
+        const orb = elementWithOffsets(stage, 549, 138, 342);
+        api.measureOrbAnchor(anchor, stage, orb);
+        const detachedAnchor = elementWithOffsets(null, 340, 70, 114);
+
+        // Act
+        api.measureOrbAnchor(detachedAnchor, stage, orb);
+
+        // Assert
+        expect(api.orbPreflightTransform()).toBeNull();
+    });
+
+    it('releases the application modal layer when the shell stops being modal', () => {
+        // Arrange
+        const host = document.createElement('ngp-immersive-session-shell');
+        const closeLayer = vi.fn();
+        const register = vi.fn(() => closeLayer);
+        const modal = signal(true);
+        const component = createComponent(host);
+        Object.assign(component, { modal, registerModalLayer: signal(register) });
+        TestBed.tick();
+        expect(register).toHaveBeenCalledExactlyOnceWith(host);
+
+        // Act
+        modal.set(false);
+        TestBed.tick();
+
+        // Assert
+        expect(closeLayer).toHaveBeenCalledOnce();
+    });
 });
 
-function createComponent(): ImmersiveSessionShellComponent {
+function createComponent(host = document.createElement('ngp-immersive-session-shell')): ImmersiveSessionShellComponent {
     TestBed.resetTestingModule();
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({ providers: [{ provide: ElementRef, useValue: new ElementRef(host) }] });
 
     return TestBed.runInInjectionContext(() => new ImmersiveSessionShellComponent());
+}
+
+function elementWithOffsets(parent: HTMLElement | null, left: number, top: number, size: number): HTMLElement {
+    const element = document.createElement('div');
+    Object.defineProperties(element, {
+        offsetParent: { value: parent },
+        offsetLeft: { value: left },
+        offsetTop: { value: top },
+        offsetWidth: { value: size },
+        offsetHeight: { value: size },
+    });
+    return element;
 }
