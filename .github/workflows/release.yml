@@ -75,15 +75,11 @@ jobs:
             exit 1
           fi
           yarn release:nx "$specifier" "${args[@]}"
-          node tools/render-package-docs.mjs forms router ui
-          yarn prettier --write 'libs/*/README.md' '.docs/packages/*/index.md'
           yarn install --immutable
       - name: Verify the versioned source and built packages
         env:
           NGPEL_TEST_JOBS: '2'
         run: yarn verify:ci
-      - name: Pack and verify the Angular consumer fixture
-        run: yarn nx run fixture-ng22:build
       - name: Bind the verified packages to the release commit
         run: node .github/scripts/releaseCandidate.mjs prepare "$RUNNER_TEMP/ngpel-release" "$GITHUB_SHA"
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2

@@ -53,8 +53,11 @@
             "cache": true,
             "inputs": [
                 "{projectRoot}/src/**/*.ts",
+                "{projectRoot}/package.json",
                 "{projectRoot}/*/ng-package.json",
+                "{projectRoot}/tsconfig*.json",
                 "{workspaceRoot}/tsconfig.base.json",
+                "{workspaceRoot}/yarn.lock",
                 "{workspaceRoot}/infra/nx-plugins/src/executors/generate-package-docs/**/*",
                 "{workspaceRoot}/infra/nx-plugins/src/utils/markdown-processing.ts",
                 "^production"
