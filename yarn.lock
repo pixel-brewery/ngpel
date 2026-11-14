@@ -5329,24 +5329,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nx/nx-darwin-arm64@npm:23.3.1":
-  version: 23.3.1
-  resolution: "@nx/nx-darwin-arm64@npm:23.3.1"
-  conditions: os=darwin & cpu=arm64
-  languageName: node
-  linkType: hard
-
 "@nx/nx-darwin-arm64@npm:23.3.2":
   version: 23.3.2
   resolution: "@nx/nx-darwin-arm64@npm:23.3.2"
   conditions: os=darwin & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"@nx/nx-darwin-x64@npm:23.3.1":
-  version: 23.3.1
-  resolution: "@nx/nx-darwin-x64@npm:23.3.1"
-  conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
@@ -5357,24 +5343,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nx/nx-freebsd-x64@npm:23.3.1":
-  version: 23.3.1
-  resolution: "@nx/nx-freebsd-x64@npm:23.3.1"
-  conditions: os=freebsd & cpu=x64
-  languageName: node
-  linkType: hard
-
 "@nx/nx-freebsd-x64@npm:23.3.2":
   version: 23.3.2
   resolution: "@nx/nx-freebsd-x64@npm:23.3.2"
   conditions: os=freebsd & cpu=x64
-  languageName: node
-  linkType: hard
-
-"@nx/nx-linux-arm-gnueabihf@npm:23.3.1":
-  version: 23.3.1
-  resolution: "@nx/nx-linux-arm-gnueabihf@npm:23.3.1"
-  conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
@@ -5385,24 +5357,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nx/nx-linux-arm64-gnu@npm:23.3.1":
-  version: 23.3.1
-  resolution: "@nx/nx-linux-arm64-gnu@npm:23.3.1"
-  conditions: os=linux & cpu=arm64 & libc=glibc
-  languageName: node
-  linkType: hard
-
 "@nx/nx-linux-arm64-gnu@npm:23.3.2":
   version: 23.3.2
   resolution: "@nx/nx-linux-arm64-gnu@npm:23.3.2"
   conditions: os=linux & cpu=arm64 & libc=glibc
-  languageName: node
-  linkType: hard
-
-"@nx/nx-linux-arm64-musl@npm:23.3.1":
-  version: 23.3.1
-  resolution: "@nx/nx-linux-arm64-musl@npm:23.3.1"
-  conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
@@ -5413,24 +5371,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nx/nx-linux-x64-gnu@npm:23.3.1":
-  version: 23.3.1
-  resolution: "@nx/nx-linux-x64-gnu@npm:23.3.1"
-  conditions: os=linux & cpu=x64 & libc=glibc
-  languageName: node
-  linkType: hard
-
 "@nx/nx-linux-x64-gnu@npm:23.3.2":
   version: 23.3.2
   resolution: "@nx/nx-linux-x64-gnu@npm:23.3.2"
   conditions: os=linux & cpu=x64 & libc=glibc
-  languageName: node
-  linkType: hard
-
-"@nx/nx-linux-x64-musl@npm:23.3.1":
-  version: 23.3.1
-  resolution: "@nx/nx-linux-x64-musl@npm:23.3.1"
-  conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
@@ -5441,24 +5385,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nx/nx-win32-arm64-msvc@npm:23.3.1":
-  version: 23.3.1
-  resolution: "@nx/nx-win32-arm64-msvc@npm:23.3.1"
-  conditions: os=win32 & cpu=arm64
-  languageName: node
-  linkType: hard
-
 "@nx/nx-win32-arm64-msvc@npm:23.3.2":
   version: 23.3.2
   resolution: "@nx/nx-win32-arm64-msvc@npm:23.3.2"
   conditions: os=win32 & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"@nx/nx-win32-x64-msvc@npm:23.3.1":
-  version: 23.3.1
-  resolution: "@nx/nx-win32-x64-msvc@npm:23.3.1"
-  conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
@@ -6003,24 +5933,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pixel-brewery/markdowner-core@npm:0.1.201":
-  version: 0.1.201
-  resolution: "@pixel-brewery/markdowner-core@npm:0.1.201::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40pixel-brewery%2Fmarkdowner-core%2F0.1.201%2F2aa254755e5d1b212ca1474f063cd57cc8368fa2"
+"@pixel-brewery/markdowner-core@npm:0.1.202":
+  version: 0.1.202
+  resolution: "@pixel-brewery/markdowner-core@npm:0.1.202::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40pixel-brewery%2Fmarkdowner-core%2F0.1.202%2F438ef7cc7b89bdb633d5ac1d97add41b0dfdd9b0"
   dependencies:
     tslib: "npm:2.9.1"
   peerDependencies:
     marked: ">=18.0.0"
-  checksum: 10c0/650380fdf35b2dd775ef2cf0aa902dbe3a5eba25be057df1123fc01fd4dede4d4d9cd272627d003435e4d8b9081b4eaa7e354efdf5f3380bdeebf623cb22ecbd
+  checksum: 10c0/92b424322c74242786396b89625b2b9c58e59d14e3ba0d66dbf93326a5849c813854469b303f553254eee2f0c1072453df05098dee76ce8f29c9f19c1cf598eb
   languageName: node
   linkType: hard
 
-"@pixel-brewery/mosaik-elements-angular@npm:0.1.201":
-  version: 0.1.201
-  resolution: "@pixel-brewery/mosaik-elements-angular@npm:0.1.201::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40pixel-brewery%2Fmosaik-elements-angular%2F0.1.201%2Fbd789044b263d5e0a033e113eb2ad3ff430d71c5"
+"@pixel-brewery/mosaik-elements-angular@npm:0.1.202":
+  version: 0.1.202
+  resolution: "@pixel-brewery/mosaik-elements-angular@npm:0.1.202::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40pixel-brewery%2Fmosaik-elements-angular%2F0.1.202%2F5be742c0676f43cf5e057c5cee3e12afc0215cb2"
   dependencies:
-    "@pixel-brewery/mosaik-elements": "npm:0.1.201"
-    "@pixel-brewery/mosaik-elements-foundation": "npm:0.1.201"
-    "@pixel-brewery/mosaik-icons": "npm:0.1.201"
+    "@pixel-brewery/mosaik-elements": "npm:0.1.202"
+    "@pixel-brewery/mosaik-elements-foundation": "npm:0.1.202"
+    "@pixel-brewery/mosaik-icons": "npm:0.1.202"
     tslib: "npm:2.9.1"
   peerDependencies:
     "@angular/cdk": ">=18.0.0"
@@ -6077,18 +6007,18 @@ __metadata:
     rxjs: ">=7.0.0"
     signature_pad: ">=5.0.0"
     three: ^0.187.0
-  checksum: 10c0/e3f85e7053e722aaf871018fd5ea53eb0c526c88aced8486b4eefc0c974e394685fe19aee3e517fb4823c8a71e7d97a945dd4478a6f5888ab44e5b8ef8a43cf3
+  checksum: 10c0/25ac15b7d04fcac6a7dd6f93bc55dfb608805d3660a43a951a65724c9b832c1807e60f098fc21582baec9838406b7113d729dcc384b58071bee3cbad33d48d99
   languageName: node
   linkType: hard
 
-"@pixel-brewery/mosaik-elements-foundation@npm:0.1.201":
-  version: 0.1.201
-  resolution: "@pixel-brewery/mosaik-elements-foundation@npm:0.1.201::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40pixel-brewery%2Fmosaik-elements-foundation%2F0.1.201%2F7dd913106c92a6380588443ce530b568b596edeb"
+"@pixel-brewery/mosaik-elements-foundation@npm:0.1.202":
+  version: 0.1.202
+  resolution: "@pixel-brewery/mosaik-elements-foundation@npm:0.1.202::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40pixel-brewery%2Fmosaik-elements-foundation%2F0.1.202%2Fa4f542a843dc37bd8da9215aff061887e2bab64c"
   dependencies:
     "@dagrejs/dagre": "npm:3.1.3"
-    "@pixel-brewery/mosaik-elements": "npm:0.1.201"
-    "@pixel-brewery/mosaik-icons": "npm:0.1.201"
-    "@pixel-brewery/mosaik-themes": "npm:0.1.201"
+    "@pixel-brewery/mosaik-elements": "npm:0.1.202"
+    "@pixel-brewery/mosaik-icons": "npm:0.1.202"
+    "@pixel-brewery/mosaik-themes": "npm:0.1.202"
     elkjs: "npm:0.12.1"
     reflect-metadata: "npm:^0.2.2"
     tslib: "npm:2.9.1"
@@ -6150,33 +6080,33 @@ __metadata:
     rxjs: ">=7.0.0"
     signature_pad: ">=5.0.0"
     three: ^0.187.0
-  checksum: 10c0/15e11894d115fcb95de5d5ae87b9f1bc58c89ed3205dd16ddebe6e8ed15c77809d292d69990512018474911a08c0e5fe0f7d10a1aa1929a84177b9259a6a001c
+  checksum: 10c0/6d90807ee365cb0bc770cf4172d91182ddaac40c6766b8a28d28c3b83aa09a6ec0ad03862cc141401163e55dd0d10bf9a78d08a3eb6a3b43440c42767ac8ec31
   languageName: node
   linkType: hard
 
-"@pixel-brewery/mosaik-elements@npm:0.1.201":
-  version: 0.1.201
-  resolution: "@pixel-brewery/mosaik-elements@npm:0.1.201::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40pixel-brewery%2Fmosaik-elements%2F0.1.201%2F5d893e149e1f8a873be6b84fcf39d1a9a7833acb"
+"@pixel-brewery/mosaik-elements@npm:0.1.202":
+  version: 0.1.202
+  resolution: "@pixel-brewery/mosaik-elements@npm:0.1.202::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40pixel-brewery%2Fmosaik-elements%2F0.1.202%2Ffec5a8bb88c7b8978ff5c98d6a512613bed54376"
   dependencies:
     tslib: "npm:2.9.1"
-  checksum: 10c0/3e381c5f05bfa02d617ec8b3c1237d0892ab7b9f059f6d45c23b3caefdf6fc0dd0cc46a191fe04ff06dcbda0aeb4e2ac8cb0331708ddf3b005bd62dbafeb7ec6
+  checksum: 10c0/a472f1cb4777093a5212f1da5947312524e6776beba8005258bad8e5d45745d2907679b12ab240bc0a65330e2f91112e7d6c7d3917cbe0e55682e8bbdab01143
   languageName: node
   linkType: hard
 
-"@pixel-brewery/mosaik-icons@npm:0.1.201":
-  version: 0.1.201
-  resolution: "@pixel-brewery/mosaik-icons@npm:0.1.201::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40pixel-brewery%2Fmosaik-icons%2F0.1.201%2Fa584aa670cae9c1344f1b95bfb33011222af9654"
+"@pixel-brewery/mosaik-icons@npm:0.1.202":
+  version: 0.1.202
+  resolution: "@pixel-brewery/mosaik-icons@npm:0.1.202::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40pixel-brewery%2Fmosaik-icons%2F0.1.202%2F58635052e96cd267f978db9fc421e81e27edad8b"
   dependencies:
     tslib: "npm:2.9.1"
-  checksum: 10c0/6ef2715d80d47c729ad0a3490a44493da65af52f6ce4ed8221231ffe7a574e52ca8510d54f38ebf1eba3d450d82e291c5ea7821cb3f8ae0895161b03bb697921
+  checksum: 10c0/151b04995ee80556b27aad72e4e73e7403a4bff9d2afc0d7cfeddc447ab4a75abeec43bbe5ca2cdccbf8134b733742d6f6b78a824b271f08e1cbd453941abe9f
   languageName: node
   linkType: hard
 
-"@pixel-brewery/mosaik-themes@npm:0.1.201":
-  version: 0.1.201
-  resolution: "@pixel-brewery/mosaik-themes@npm:0.1.201::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40pixel-brewery%2Fmosaik-themes%2F0.1.201%2F793bab5b001d106970c6825cfd60e19a742c90a8"
+"@pixel-brewery/mosaik-themes@npm:0.1.202":
+  version: 0.1.202
+  resolution: "@pixel-brewery/mosaik-themes@npm:0.1.202::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40pixel-brewery%2Fmosaik-themes%2F0.1.202%2F18e0d8df3c5eec1c5915ab225d5de0427b6cb740"
   dependencies:
-    "@pixel-brewery/mosaik-elements": "npm:0.1.201"
+    "@pixel-brewery/mosaik-elements": "npm:0.1.202"
     tslib: "npm:2.9.1"
   peerDependencies:
     "@google/design.md": ">=0.4.0"
@@ -6184,7 +6114,7 @@ __metadata:
     typescript: ">=5.0.0"
   bin:
     mosaik-design-md: bin/design-md.mjs
-  checksum: 10c0/42631322dd9d764c8fe589447d5e4aa085bddd0eb567a744f96e6cff2e8772509afa3deee33144791b4a87089c5f9ce39352a8e45f01253ef47b79055cd8cb8c
+  checksum: 10c0/6888bb253c53b6c3e8807b21e3637c520b109b3c72ce36099420f8702d58728fd38c50a2a84ae542219bac541860f076c102e157474370a5f369b5c3e96f5677
   languageName: node
   linkType: hard
 
@@ -6234,10 +6164,10 @@ __metadata:
     "@lit-labs/virtualizer": "npm:^2.1.1"
     "@lit/context": "npm:^1.1.6"
     "@lit/task": "npm:^1.0.3"
-    "@pixel-brewery/mosaik-elements-angular": "npm:0.1.201"
-    "@pixel-brewery/mosaik-elements-foundation": "npm:0.1.201"
-    "@pixel-brewery/mosaik-icons": "npm:0.1.201"
-    "@pixel-brewery/mosaik-themes": "npm:0.1.201"
+    "@pixel-brewery/mosaik-elements-angular": "npm:0.1.202"
+    "@pixel-brewery/mosaik-elements-foundation": "npm:0.1.202"
+    "@pixel-brewery/mosaik-icons": "npm:0.1.202"
+    "@pixel-brewery/mosaik-themes": "npm:0.1.202"
     "@types/chroma-js": "npm:^3.1.3"
     chroma-js: "npm:^3.3.0"
     lit: "npm:^3.3.3"
@@ -13594,10 +13524,10 @@ __metadata:
     "@nx/vite": "npm:23.3.2"
     "@nx/vitest": "npm:23.3.2"
     "@nx/web": "npm:23.3.2"
-    "@pixel-brewery/markdowner-core": "npm:0.1.201"
-    "@pixel-brewery/mosaik-elements-angular": "npm:0.1.201"
-    "@pixel-brewery/mosaik-elements-foundation": "npm:0.1.201"
-    "@pixel-brewery/mosaik-themes": "npm:0.1.201"
+    "@pixel-brewery/markdowner-core": "npm:0.1.202"
+    "@pixel-brewery/mosaik-elements-angular": "npm:0.1.202"
+    "@pixel-brewery/mosaik-elements-foundation": "npm:0.1.202"
+    "@pixel-brewery/mosaik-themes": "npm:0.1.202"
     "@replit/codemirror-lang-svelte": "npm:^6.0.0"
     "@schematics/angular": "npm:22.2.7"
     "@simplewebauthn/browser": "npm:14.0.0"
@@ -13638,7 +13568,7 @@ __metadata:
     lit: "npm:^3.3.3"
     marked: "npm:18.2.0"
     ng-packagr: "npm:22.2.6"
-    nx: "npm:23.3.1"
+    nx: "npm:23.3.2"
     prettier: "npm:3.10.1"
     qr-creator: "npm:^1.0.0"
     rxjs: "npm:7.8.2"
@@ -13763,153 +13693,6 @@ __metadata:
     typedoc-plugin-markdown: "npm:4.14.1"
   languageName: unknown
   linkType: soft
-
-"nx@npm:23.3.1":
-  version: 23.3.1
-  resolution: "nx@npm:23.3.1"
-  dependencies:
-    "@clack/core": "npm:1.4.3"
-    "@clack/prompts": "npm:1.7.0"
-    "@emnapi/core": "npm:1.4.5"
-    "@emnapi/runtime": "npm:1.4.5"
-    "@emnapi/wasi-threads": "npm:1.0.4"
-    "@jest/diff-sequences": "npm:30.0.1"
-    "@napi-rs/wasm-runtime": "npm:0.2.4"
-    "@nx/nx-darwin-arm64": "npm:23.3.1"
-    "@nx/nx-darwin-x64": "npm:23.3.1"
-    "@nx/nx-freebsd-x64": "npm:23.3.1"
-    "@nx/nx-linux-arm-gnueabihf": "npm:23.3.1"
-    "@nx/nx-linux-arm64-gnu": "npm:23.3.1"
-    "@nx/nx-linux-arm64-musl": "npm:23.3.1"
-    "@nx/nx-linux-x64-gnu": "npm:23.3.1"
-    "@nx/nx-linux-x64-musl": "npm:23.3.1"
-    "@nx/nx-win32-arm64-msvc": "npm:23.3.1"
-    "@nx/nx-win32-x64-msvc": "npm:23.3.1"
-    "@tybys/wasm-util": "npm:0.9.0"
-    "@yarnpkg/lockfile": "npm:1.1.0"
-    "@zkochan/js-yaml": "npm:0.0.7"
-    ansi-regex: "npm:5.0.1"
-    ansi-styles: "npm:4.3.0"
-    argparse: "npm:2.0.1"
-    balanced-match: "npm:4.0.3"
-    base64-js: "npm:1.5.1"
-    bl: "npm:4.1.0"
-    brace-expansion: "npm:5.0.12"
-    buffer: "npm:5.7.1"
-    bundle-name: "npm:4.1.0"
-    chalk: "npm:4.1.2"
-    cli-cursor: "npm:3.1.0"
-    cli-spinners: "npm:2.6.1"
-    cliui: "npm:8.0.1"
-    clone: "npm:1.0.4"
-    color-convert: "npm:2.0.1"
-    color-name: "npm:1.1.4"
-    default-browser: "npm:5.2.1"
-    default-browser-id: "npm:5.0.0"
-    defaults: "npm:1.0.4"
-    define-lazy-prop: "npm:3.0.0"
-    dotenv: "npm:16.4.7"
-    dotenv-expand: "npm:12.0.3"
-    ejs: "npm:5.0.1"
-    emoji-regex: "npm:8.0.0"
-    end-of-stream: "npm:1.4.5"
-    escalade: "npm:3.2.0"
-    escape-string-regexp: "npm:1.0.5"
-    fast-string-truncated-width: "npm:3.0.3"
-    fast-string-width: "npm:3.0.2"
-    fast-wrap-ansi: "npm:0.2.0"
-    figures: "npm:3.2.0"
-    fs-constants: "npm:1.0.0"
-    get-caller-file: "npm:2.0.5"
-    has-flag: "npm:4.0.0"
-    ieee754: "npm:1.2.1"
-    ignore: "npm:7.0.6"
-    inherits: "npm:2.0.4"
-    is-docker: "npm:3.0.0"
-    is-fullwidth-code-point: "npm:3.0.0"
-    is-inside-container: "npm:1.0.0"
-    is-interactive: "npm:1.0.0"
-    is-unicode-supported: "npm:0.1.0"
-    is-wsl: "npm:3.1.0"
-    isexe: "npm:2.0.0"
-    json5: "npm:2.2.3"
-    jsonc-parser: "npm:3.3.1"
-    lines-and-columns: "npm:2.0.3"
-    log-symbols: "npm:4.1.0"
-    mimic-fn: "npm:2.1.0"
-    minimatch: "npm:10.2.5"
-    minimist: "npm:1.2.8"
-    npm-run-path: "npm:4.0.1"
-    once: "npm:1.4.0"
-    onetime: "npm:5.1.2"
-    open: "npm:10.1.0"
-    ora: "npm:5.4.1"
-    path-key: "npm:3.1.1"
-    picocolors: "npm:1.1.1"
-    readable-stream: "npm:3.6.2"
-    require-directory: "npm:2.1.1"
-    resolve.exports: "npm:2.0.3"
-    restore-cursor: "npm:3.1.0"
-    run-applescript: "npm:7.0.0"
-    safe-buffer: "npm:5.2.1"
-    semver: "npm:7.8.5"
-    signal-exit: "npm:3.0.7"
-    sisteransi: "npm:1.0.5"
-    smol-toml: "npm:1.9.0"
-    string-width: "npm:4.2.3"
-    string_decoder: "npm:1.3.0"
-    strip-ansi: "npm:6.0.1"
-    strip-bom: "npm:3.0.0"
-    supports-color: "npm:7.2.0"
-    tar-stream: "npm:2.2.0"
-    tmp: "npm:0.2.7"
-    tsconfig-paths: "npm:4.2.0"
-    tslib: "npm:2.8.1"
-    undici: "npm:7.29.0"
-    util-deprecate: "npm:1.0.2"
-    wcwidth: "npm:1.0.1"
-    which: "npm:3.0.1"
-    wrap-ansi: "npm:7.0.0"
-    wrappy: "npm:1.0.2"
-    y18n: "npm:5.0.8"
-    yaml: "npm:2.9.0"
-    yargs: "npm:17.7.2"
-    yargs-parser: "npm:21.1.1"
-  peerDependencies:
-    "@swc-node/register": ^1.11.1
-    "@swc/core": ^1.15.8
-  dependenciesMeta:
-    "@nx/nx-darwin-arm64":
-      optional: true
-    "@nx/nx-darwin-x64":
-      optional: true
-    "@nx/nx-freebsd-x64":
-      optional: true
-    "@nx/nx-linux-arm-gnueabihf":
-      optional: true
-    "@nx/nx-linux-arm64-gnu":
-      optional: true
-    "@nx/nx-linux-arm64-musl":
-      optional: true
-    "@nx/nx-linux-x64-gnu":
-      optional: true
-    "@nx/nx-linux-x64-musl":
-      optional: true
-    "@nx/nx-win32-arm64-msvc":
-      optional: true
-    "@nx/nx-win32-x64-msvc":
-      optional: true
-  peerDependenciesMeta:
-    "@swc-node/register":
-      optional: true
-    "@swc/core":
-      optional: true
-  bin:
-    nx: ./dist/bin/nx.js
-    nx-cloud: ./dist/bin/nx-cloud.js
-  checksum: 10c0/f12834aaeb64588c23a54bb93ebdaa7730d5d913be1a712428506efd2f6d89fcff8b7dd70e3b25a3f964d719c347af5a6b5dac83ddf6f75cabf5882b5e6325ec
-  languageName: node
-  linkType: hard
 
 "nx@npm:23.3.2":
   version: 23.3.2
