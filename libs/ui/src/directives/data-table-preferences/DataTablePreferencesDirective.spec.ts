@@ -315,9 +315,8 @@ function createTable(columnDefinitions: Array<IDataTableColumnDefinition & { gro
     const directive = node.injector.get(DataTablePreferencesDirective);
     const tableComponent = node.injector.get(DataTableComponent) as unknown as ITestDataTableComponent;
     const host = node.nativeElement as ITestDataTableElement;
-    const table = document.createElement('mosaik-table') as HTMLElement & { columns: string };
+    const table = Object.assign(document.createElement('mosaik-table'), { columns: '' });
     table.setAttribute('part', 'table');
-    table.columns = '';
     host.attachShadow({ mode: 'open' }).append(table);
     host.columnDefinitions = columnDefinitions;
     host.updateComplete = Promise.resolve(true);
