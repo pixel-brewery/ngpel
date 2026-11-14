@@ -307,6 +307,7 @@ editUrl: false
 | [IMapsAddress](Interface.IMapsAddress) | A postal address as [MapsPipe](Class.MapsPipe) reads it. Every part is optional, because the shape mirrors what an API actually returns rather than what a complete address would hold. |
 | [IMarkdownRendererOptions](Interface.IMarkdownRendererOptions) | Options for the markdown renderer. |
 | [IPagePathLevel](Interface.IPagePathLevel) | One level of a page path. The last level names the current page. |
+| [IPageToolbarDefaults](Interface.IPageToolbarDefaults) | Application defaults for the page toolbar. Label getters can read translation signals. |
 | [IParseRecurrenceRuleOptions](Interface.IParseRecurrenceRuleOptions) | - |
 | [IPdfPreviewOptions](Interface.IPdfPreviewOptions) | Host configuration for the optional PDF.js preview. The host owns the matching SDK, worker, viewer styles and any assets it chooses to serve. |
 | [IPrimaryLegalAction](Interface.IPrimaryLegalAction) | One prominent route-scoped legal action rendered by a public shell. |
@@ -544,6 +545,7 @@ editUrl: false
 | [provideDocumentPreviewIntl](Function.provideDocumentPreviewIntl) | Maps the preview labels to application translation keys. Unmapped labels retain their defaults. |
 | [provideFilterBarComponentIntl](Function.provideFilterBarComponentIntl) | Provides application-specific internationalization labels for the filter bar component. |
 | [provideMap](Function.provideMap) | Registers application-owned Maps configuration without loading Google's SDK. |
+| [providePageToolbarDefaults](Function.providePageToolbarDefaults) | Supplies application defaults for page toolbars. Individual toolbar inputs take precedence. |
 | [providePdfPreview](Function.providePdfPreview) | Enables lazy PDF.js rendering for document previews opened by the host application. |
 | [provideRailComponentIntl](Function.provideRailComponentIntl) | Provides application-specific internationalization labels for the rail component. |
 | [provideTicktackPanelComponentIntl](Function.provideTicktackPanelComponentIntl) | Provides application-specific internationalization labels for the ticktack panel component. |

@@ -269,7 +269,9 @@ export { NavigationComponent } from './components/navigation/NavigationComponent
 export { NavigationMenuComponent } from './components/navigation/NavigationMenuComponent';
 export { NavigationMenuGroupComponent } from './components/navigation/NavigationMenuGroupComponent';
 export { NavigationMenuItemComponent } from './components/navigation/NavigationMenuItemComponent';
+export type { IPageToolbarDefaults } from './components/page-toolbar/IPageToolbarDefaults';
 export { PageToolbarComponent } from './components/page-toolbar/PageToolbarComponent';
+export { providePageToolbarDefaults } from './components/page-toolbar/providePageToolbarDefaults';
 export { PaperSurfaceComponent } from './components/paper-surface/PaperSurfaceComponent';
 export { PickerCreateActionComponent } from './components/picker-create-action/PickerCreateActionComponent';
 export { PickerLoadingSkeletonComponent } from './components/picker-loading-skeleton/PickerLoadingSkeletonComponent';

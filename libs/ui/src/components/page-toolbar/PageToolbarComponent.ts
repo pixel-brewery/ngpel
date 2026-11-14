@@ -1,6 +1,6 @@
 // #region Imports
 
-import { ChangeDetectionStrategy, Component, computed, contentChildren, effect, ElementRef, input, signal, untracked, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, contentChildren, effect, ElementRef, inject, input, signal, untracked, viewChild } from '@angular/core';
 import {
     ButtonComponent,
     DividerComponent,
@@ -12,8 +12,10 @@ import {
     ToolbarComponent,
     TooltipDirective,
 } from '@pixel-brewery/mosaik-elements-angular';
+import type { Appearance } from '@pixel-brewery/mosaik-elements-foundation';
 import { CommandDirective } from '@pixel-brewery/ngpel-mvp';
 import { compactViewportSignal } from '../navigation/compactViewportSignal';
+import { PAGE_TOOLBAR_DEFAULTS } from './PAGE_TOOLBAR_DEFAULTS';
 
 // #endregion
 
@@ -24,6 +26,7 @@ interface IToolbarAction {
 }
 
 interface IToolbarOverflow {
+    readonly primary: IToolbarAction | undefined;
     readonly start: ReadonlyArray<IToolbarAction>;
     readonly end: ReadonlyArray<IToolbarAction>;
     readonly startDividers: ReadonlyArray<HTMLElement>;
@@ -41,7 +44,7 @@ interface IToolbarOverflow {
  */
 @Component({
     selector: 'ngp-page-toolbar',
-    imports: [DropDownButtonComponent, IconNameDirective, MenuComponent, MenuItemComponent, ToolbarComponent],
+    imports: [DropDownButtonComponent, IconNameDirective, MenuComponent, MenuItemComponent, ToolbarComponent, TooltipDirective],
     template: `
         <div part="root" class="border-y border-(--mosaik-scheme-highlight)">
             <mosaik-toolbar #toolbar part="toolbar" role="toolbar" [attr.aria-label]="ariaLabel()" [appearance]="'plain'" [fit]="'width'">
@@ -51,11 +54,14 @@ interface IToolbarOverflow {
                         #more
                         part="overflow"
                         slot="end"
+                        [attr.test-id]="'page-toolbar-more'"
                         [attr.aria-label]="moreActionsLabel()"
-                        [label]="moreActionsLabel()"
-                        [iconName]="'more-horizontal'"
+                        [label]="moreActionsIconOnly() ? undefined : moreActionsLabel()"
+                        [iconName]="moreActionsIconName()"
+                        [mosaikTooltip]="moreActionsLabel()"
+                        [mosaikTooltipDisabled]="!moreActionsIconOnly()"
                         [caretVisible]="false"
-                        [appearance]="'plain'"
+                        [appearance]="moreActionsAppearance()"
                         [dropDownPlacement]="'bottom-end'"
                     >
                         <mosaik-menu>
@@ -88,11 +94,13 @@ interface IToolbarOverflow {
     host: {
         class: 'block min-w-0',
         slot: 'preContent',
+        '[attr.data-ngp-compact]': 'isCompact() ? true : null',
     },
 })
 export class PageToolbarComponent {
     // #region Fields
 
+    private readonly _defaults = inject(PAGE_TOOLBAR_DEFAULTS, { optional: true });
     private readonly _compactViewport = compactViewportSignal();
     private readonly _toolbar = viewChild('toolbar', { read: ElementRef<HTMLElement> });
     private readonly _more = viewChild('more', { read: ElementRef<HTMLElement> });
@@ -147,6 +155,9 @@ export class PageToolbarComponent {
                 }
             }
             const view = toolbar.ownerDocument.defaultView;
+            const defaultShortLabel = this._defaults?.compactPrimaryLabel;
+            const shortLabel = this.compactPrimaryLabel() ?? (typeof defaultShortLabel === 'function' ? defaultShortLabel() : defaultShortLabel);
+            const restorePrimaryLabel = shortLabel ? this.applyPrimaryLabel(this.group(toolbar, actions, dividers).primary, shortLabel) : undefined;
             let frame: number | undefined;
             const measure = (): void => this.measure(toolbar, more, actions, dividers);
             const schedule = (): void => {
@@ -174,6 +185,7 @@ export class PageToolbarComponent {
             onCleanup(() => {
                 resize?.disconnect();
                 mutations?.disconnect();
+                restorePrimaryLabel?.();
                 if (frame !== undefined) {
                     view?.cancelAnimationFrame(frame);
                 }
@@ -197,8 +209,26 @@ export class PageToolbarComponent {
     /** Overrides the compact breakpoint. Leave it unset to follow the application's breakpoints. */
     public readonly compact = input<boolean | null>(null);
 
+    /** Overrides the accessible label of the menu for overflow actions. */
+    protected readonly _moreActionsLabel = input<string | undefined>(undefined, { alias: 'moreActionsLabel' });
+
     /** Accessible label of the menu for overflow actions. */
-    public readonly moreActionsLabel = input('More actions');
+    public readonly moreActionsLabel = computed(() => {
+        const defaultLabel = this._defaults?.moreActionsLabel;
+        return this._moreActionsLabel() ?? (typeof defaultLabel === 'function' ? defaultLabel() : defaultLabel) ?? 'More actions';
+    });
+
+    /** Icon displayed on the button for overflow actions. */
+    public readonly moreActionsIconName = input(this._defaults?.moreActionsIconName ?? 'more-horizontal');
+
+    /** Appearance of the button for overflow actions. */
+    public readonly moreActionsAppearance = input<Appearance>(this._defaults?.moreActionsAppearance ?? 'plain');
+
+    /** Shows the overflow button label in a tooltip instead of on the button. */
+    public readonly moreActionsIconOnly = input(this._defaults?.moreActionsIconOnly ?? false);
+
+    /** Optional short label for the primary start button in compact mode. */
+    public readonly compactPrimaryLabel = input<string>();
 
     /** Whether the toolbar currently uses its compact layout. */
     public readonly isCompact = computed(() => this.compact() ?? this._compactViewport());
@@ -277,10 +307,39 @@ export class PageToolbarComponent {
         };
 
         return {
+            primary,
             start: start.filter((action) => action !== primary && canMove(action)),
             end: ordered.filter((action) => action.element.getAttribute('slot') === 'end' && canMove(action)),
             startDividers: dividers.filter((element) => element.parentElement === toolbar && element.getAttribute('slot') === 'start'),
             endDividers: dividers.filter((element) => element.parentElement === toolbar && element.getAttribute('slot') === 'end'),
+        };
+    }
+
+    private applyPrimaryLabel(primary: IToolbarAction | undefined, shortLabel: string): (() => void) | undefined {
+        if (!primary) {
+            return undefined;
+        }
+
+        const { element, control } = primary;
+        const fullLabel = control.label();
+        const hasAccessibleLabel = element.hasAttribute('aria-label');
+        if ((!fullLabel && !hasAccessibleLabel) || element.querySelector(':scope > [slot="label"]')) {
+            return undefined;
+        }
+
+        const label = element.ownerDocument.createElement('span');
+        label.slot = 'label';
+        label.textContent = shortLabel;
+        if (!hasAccessibleLabel && fullLabel) {
+            element.setAttribute('aria-label', fullLabel);
+        }
+        element.append(label);
+
+        return () => {
+            label.remove();
+            if (!hasAccessibleLabel && element.getAttribute('aria-label') === fullLabel) {
+                element.removeAttribute('aria-label');
+            }
         };
     }
 
