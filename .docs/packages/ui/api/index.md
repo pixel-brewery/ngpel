@@ -535,32 +535,17 @@ editUrl: false
 | [normalizeRecurrenceByDays](Function.normalizeRecurrenceByDays) | - |
 | [parseRecurrenceRule](Function.parseRecurrenceRule) | - |
 | [provideAiRailComponentIntl](Function.provideAiRailComponentIntl) | Provides application-specific internationalization labels for the AI rail component. |
-| [provideAutoCompleteBoxIntl](Function.provideAutoCompleteBoxIntl) | Provides application-specific internationalization labels for the autocomplete box component. |
-| [provideCalendarIntl](Function.provideCalendarIntl) | Provides application-specific internationalization labels for the calendar component. |
 | [provideCaptchaComponentIntl](Function.provideCaptchaComponentIntl) | Provides application-specific internationalization labels for the captcha component. |
-| [provideChatIntl](Function.provideChatIntl) | Provides application-specific internationalization labels for the chat component. |
 | [provideCodeEditorComponentIntl](Function.provideCodeEditorComponentIntl) | Provides application-specific internationalization labels for the code editor component. |
 | [provideCollectionExportDrawerComponentIntl](Function.provideCollectionExportDrawerComponentIntl) | Provides application-specific internationalization labels for the collection export drawer component. |
 | [provideColorSelectorComponentIntl](Function.provideColorSelectorComponentIntl) | Provides application-specific internationalization labels for the color selector component. |
-| [provideComboIntl](Function.provideComboIntl) | Provides application-specific internationalization labels for the combo component. |
 | [provideContextDrawerTarget](Function.provideContextDrawerTarget) | Registers a contextual target using the application's existing Mosaik drawer provider. The router owns URL-driven closing, while Mosaik retains the shell's presentation defaults. |
-| [provideCookiesConsentIntl](Function.provideCookiesConsentIntl) | Provides application-specific internationalization labels for the cookies consent component. |
-| [provideDataTableIntl](Function.provideDataTableIntl) | Provides the application's own labels for the Mosaik data table. |
 | [provideDetailPanelComponentIntl](Function.provideDetailPanelComponentIntl) | Provides application-specific internationalization labels for the detail panel component. |
 | [provideDocumentPreviewIntl](Function.provideDocumentPreviewIntl) | Maps the preview labels to application translation keys. Unmapped labels retain their defaults. |
-| [provideFileUploadIntl](Function.provideFileUploadIntl) | Provides application-specific internationalization labels for the file upload component. |
 | [provideFilterBarComponentIntl](Function.provideFilterBarComponentIntl) | Provides application-specific internationalization labels for the filter bar component. |
-| [provideListIntl](Function.provideListIntl) | Provides application-specific internationalization labels for the list component. |
 | [provideMap](Function.provideMap) | Registers application-owned Maps configuration without loading Google's SDK. |
-| [provideMessageBoxIntl](Function.provideMessageBoxIntl) | Provides application-specific internationalization labels for the message box component. |
-| [providePaginatorIntl](Function.providePaginatorIntl) | Provides application-specific internationalization labels for the paginator component. |
 | [providePdfPreview](Function.providePdfPreview) | Enables lazy PDF.js rendering for document previews opened by the host application. |
 | [provideRailComponentIntl](Function.provideRailComponentIntl) | Provides application-specific internationalization labels for the rail component. |
-| [provideRichTextBoxIntl](Function.provideRichTextBoxIntl) | Provides application-specific internationalization labels for the rich text box component. |
-| [provideSchedulerIntl](Function.provideSchedulerIntl) | Provides application-specific internationalization labels for the scheduler component. |
-| [provideSelectIntl](Function.provideSelectIntl) | Provides application-specific internationalization labels for the select component. |
-| [provideTableColumnEditorIntl](Function.provideTableColumnEditorIntl) | Provides application-specific internationalization labels for the table column editor component. |
-| [provideTableIntl](Function.provideTableIntl) | Provides the application's own labels for the Mosaik table. |
 | [provideTicktackPanelComponentIntl](Function.provideTicktackPanelComponentIntl) | Provides application-specific internationalization labels for the ticktack panel component. |
 | [provideTour](Function.provideTour) | Provides the native tour runtime and composes feature-owned tour definitions. |
 | [provideWidget](Function.provideWidget) | Composes the widget infrastructure: the [WidgetRegistry](Class.WidgetRegistry) that stores and orders widgets, the [WidgetManager](Class.WidgetManager) that collects the contributed ones, and every contribution passed in. Call it once, in the application composition root. |

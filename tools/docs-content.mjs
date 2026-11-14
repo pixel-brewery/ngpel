@@ -112,7 +112,7 @@ import { BytesPipe, InitialsPipe, PseudoLinkDirective } from '@pixel-brewery/ngp
 })
 export class FileRowComponent {}`,
         productSide:
-            'Theme tokens, the translation catalogue behind the `provide*Intl()` providers, product-specific layouts and every domain view stay in the application. Mosaik and CodeMirror are optional peers: install them only for the components that render through them.',
+            'Theme tokens, translation catalogues, product-specific layouts and domain views stay in the application. For Mosaik controls, use Mosaik Angular 0.1.203 or later and import the providers from their Angular component entry points, for example `provideCalendarIntl` from `@pixel-brewery/mosaik-elements-angular/components/calendar`. Import the providers for ngPEL components from ngPEL. Mosaik and CodeMirror are optional peers: install them only for the components that render through them.',
     },
     forms: {
         tagline: 'Signal Forms validators, the async validator helpers, the status-class map all three products duplicated, and the password-strength service.',
