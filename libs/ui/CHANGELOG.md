@@ -1,3 +1,10 @@
+## 0.0.14 (2026-11-14)
+
+### 🩹 Fixes
+
+- **ui:** fit exterior drawer content to viewport ([6e5c1d7](https://github.com/pixel-brewery/ngpel/commit/6e5c1d7))
+- **ui:** preserve filter bar interactions ([e1b21b2](https://github.com/pixel-brewery/ngpel/commit/e1b21b2))
+
 ## 0.0.13 (2026-11-14)
 
 ### 🩹 Fixes
