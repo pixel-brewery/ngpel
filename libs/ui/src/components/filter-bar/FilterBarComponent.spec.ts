@@ -1,10 +1,11 @@
 // #region Imports
 
-import type { Signal } from '@angular/core';
+import { ElementRef, type Signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import type { FieldState } from '@angular/forms/signals';
-import { DrawerService } from '@pixel-brewery/mosaik-elements-angular';
+import { DialogService, DrawerService } from '@pixel-brewery/mosaik-elements-angular';
 import { USER_PREFERENCE_STORAGE, type IUserPreferenceCodec, type IUserPreferenceStorage } from '@pixel-brewery/ngpel-core/storage';
+import { of } from 'rxjs';
 import { describe, expect, it, vi } from 'vitest';
 import { FilterBarComponent } from './FilterBarComponent';
 import { FilterBarComponentIntl } from './FilterBarComponentIntl';
@@ -102,6 +103,15 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', async () => {
             positive: (result?: unknown) => ({ reason: 'positive', result }),
             negative: (result?: unknown) => ({ reason: 'negative', result }),
         },
+        DIALOG_REF: new angular.InjectionToken('DIALOG_REF'),
+        DIALOG_REF_DATA: new angular.InjectionToken('DIALOG_REF_DATA'),
+        DialogContentDirective: createDirective('ng-template[mosaikDialogContent]'),
+        DialogFooterDirective: createDirective('ng-template[mosaikDialogFooter]'),
+        DialogHeaderComponent: createComponent('mosaik-dialog-header'),
+        DialogHeaderDirective: createDirective('ng-template[mosaikDialogHeader]'),
+        DialogService: class DialogService {},
+        LeadingLineComponent: createComponent('mosaik-leading-line'),
+        NumberBoxDecimalDirective: createDirective('[mosaikDecimal]'),
         DRAWER_REF: new angular.InjectionToken('DRAWER_REF'),
         DRAWER_REF_DATA: new angular.InjectionToken('DRAWER_REF_DATA'),
         DrawerContentDirective: createDirective('ng-template[mosaikDrawerContent]'),
@@ -151,6 +161,14 @@ interface IFilterBarComponentTestApi {
 
     onReset(): void;
 
+    onSaveFilter(): void;
+
+    readonly saveFilterPresentation: Signal<'drawer' | 'dialog'>;
+
+    readonly savedFilterCreate: FilterBarComponent['savedFilterCreate'];
+
+    onAddAdvancedRule(groupId: string): void;
+
     normalizedValues(): FilterValues;
 }
 
@@ -175,6 +193,7 @@ describe('FilterBarComponent', () => {
         const api = createComponentApi();
 
         api.onModeChanged(FilterBarMode.Advanced);
+        addFirstRule(api);
 
         const rule = findFirstRule(api.advancedRows());
         api.advancedField(api.advancedRuleControlKey(rule, 'value'))().value.set('Max');
@@ -198,6 +217,7 @@ describe('FilterBarComponent', () => {
         const api = createComponentApi();
 
         api.onModeChanged(FilterBarMode.Advanced);
+        addFirstRule(api);
 
         const rule = findFirstRule(api.advancedRows());
         api.advancedField(api.advancedRuleControlKey(rule, 'value'))().value.set('Max');
@@ -206,10 +226,7 @@ describe('FilterBarComponent', () => {
 
         api.onReset();
 
-        const resetRule = findFirstRule(api.advancedRows());
-
-        expect(resetRule.id).not.toBe(rule.id);
-        expect(api.advancedField(api.advancedRuleControlKey(resetRule, 'value'))().value()).toBeNull();
+        expect(api.advancedRows().map((row) => row.node.kind)).toEqual(['group']);
         expect(api.isFilterActive()).toBe(false);
     });
 
@@ -218,6 +235,7 @@ describe('FilterBarComponent', () => {
 
         api.field('status')().value.set('OPEN');
         api.onModeChanged(FilterBarMode.Advanced);
+        addFirstRule(api);
         const rule = findFirstRule(api.advancedRows());
         api.advancedField(api.advancedRuleControlKey(rule, 'value'))().value.set('Max');
 
@@ -228,10 +246,26 @@ describe('FilterBarComponent', () => {
         expect(api.normalizedValues()).toEqual({});
     });
 
+    it('opens the compact dialog over the filter bar and emits the approved filter', () => {
+        const result = { name: 'Open items', values: { status: 'OPEN' } };
+        const show = vi.fn(() => ({ closed: of({ reason: 'positive', result }) }));
+        const api = createComponentApi(undefined, show);
+        Object.defineProperty(api, 'saveFilterPresentation', { value: () => 'dialog' });
+        api.field('status')().value.set('OPEN');
+        const saved = vi.fn();
+        api.savedFilterCreate.subscribe(saved);
+
+        api.onSaveFilter();
+
+        expect(show).toHaveBeenCalledOnce();
+        expect(saved).toHaveBeenCalledExactlyOnceWith(result);
+    });
+
     it('should use intl labels for advanced operator options', () => {
         const api = createComponentApi(new TestFilterBarComponentIntl());
 
         api.onModeChanged(FilterBarMode.Advanced);
+        addFirstRule(api);
 
         const rule = findFirstRule(api.advancedRows());
 
@@ -261,13 +295,15 @@ function createFilters(): ReadonlyArray<IFilterDefinition> {
     ];
 }
 
-function createComponentApi(intl?: FilterBarComponentIntl): IFilterBarComponentTestApi {
+function createComponentApi(intl?: FilterBarComponentIntl, showDialog = vi.fn()): IFilterBarComponentTestApi {
     let component: FilterBarComponent | undefined;
 
     TestBed.resetTestingModule();
     TestBed.configureTestingModule({
         providers: [
+            { provide: ElementRef, useValue: new ElementRef(document.createElement('div')) },
             { provide: DrawerService, useValue: { show: vi.fn() } },
+            { provide: DialogService, useValue: { show: showDialog } },
             { provide: USER_PREFERENCE_STORAGE, useValue: inMemoryUserPreferenceStorage() },
             ...(intl ? [{ provide: FilterBarComponentIntl, useValue: intl }] : []),
         ],
@@ -297,6 +333,12 @@ class TestFilterBarComponentIntl extends FilterBarComponentIntl {
     }
 
     // #endregion
+}
+
+function addFirstRule(api: IFilterBarComponentTestApi): void {
+    const root = api.advancedRows()[0];
+    if (!root) throw new Error('Expected an advanced filter root.');
+    api.onAddAdvancedRule(root.node.id);
 }
 
 function findFirstRule(rows: ReadonlyArray<IAdvancedFilterRow>): IAdvancedFilterRule {

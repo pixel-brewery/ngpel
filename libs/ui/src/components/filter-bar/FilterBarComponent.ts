@@ -1,6 +1,23 @@
 // #region Imports
 
-import { ChangeDetectionStrategy, Component, computed, effect, inject, input, OnChanges, OnInit, output, signal, type Signal } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    DestroyRef,
+    effect,
+    ElementRef,
+    inject,
+    Injector,
+    input,
+    OnChanges,
+    OnInit,
+    output,
+    signal,
+    viewChildren,
+    type Signal,
+} from '@angular/core';
 import type { FieldState, FieldTree } from '@angular/forms/signals';
 import { form } from '@angular/forms/signals';
 import {
@@ -12,6 +29,7 @@ import {
     CardTitleComponent,
     CheckboxComponent,
     DateBoxComponent,
+    DialogService,
     LocaleDirective,
     DrawerService,
     DropDownButtonComponent,
@@ -22,6 +40,7 @@ import {
     MenuComponent,
     MenuItemComponent,
     NumberBoxComponent,
+    NumberBoxDecimalDirective,
     PressButtonComponent,
     SegmentComponent,
     SegmentItemComponent,
@@ -32,6 +51,7 @@ import {
 } from '@pixel-brewery/mosaik-elements-angular';
 import { JsonUserPreferenceCodec, USER_PREFERENCE_STORAGE, type IUserPreferenceStorage } from '@pixel-brewery/ngpel-core/storage';
 import { onceOn } from '@pixel-brewery/ngpel-core/rx';
+import { ConditionGroupComponent } from '../condition-group/ConditionGroupComponent';
 import { FilterBarComponentIntl, provideFilterBarComponentIntl } from './FilterBarComponentIntl';
 import {
     addAdvancedFilterNode,
@@ -150,25 +170,26 @@ const NO_VALUE_OPERATORS: ReadonlySet<FilterOperatorValue> = new Set<FilterOpera
 @Component({
     selector: 'ngp-filter-bar',
     template: `
-        <mosaik-card class="flex h-full max-h-full min-h-0 flex-col overflow-hidden">
+        <mosaik-card part="root" class="flex h-full max-h-full min-h-0 flex-col overflow-hidden">
             <mosaik-card-header class="shrink-0">
                 <mosaik-card-title [mosaikTypography]="'caption'" [text]="intl.filterTitleLabel" />
             </mosaik-card-header>
-            <mosaik-card-content class="min-h-0 flex-1 overflow-y-auto">
-                <div class="flex flex-col gap-2">
-                    <mosaik-segment class="w-full" [appearance]="'soft'">
-                        <mosaik-segment-item
-                            [label]="intl.standardModeLabel"
-                            [isChecked]="mode() === filterBarMode.Standard"
-                            (checked)="onModeChanged(filterBarMode.Standard)"
-                        />
-                        <mosaik-segment-item
-                            [label]="intl.advancedModeLabel"
-                            [isChecked]="mode() === filterBarMode.Advanced"
-                            (checked)="onModeChanged(filterBarMode.Advanced)"
-                        />
-                    </mosaik-segment>
-
+            <mosaik-card-content class="min-h-0 flex-1 gap-2 overflow-hidden">
+                <mosaik-segment class="w-full shrink-0" [appearance]="'soft'" [attr.test-id]="'filter-mode'">
+                    <mosaik-segment-item
+                        [attr.test-id]="'filter-mode-standard'"
+                        [label]="intl.standardModeLabel"
+                        [isChecked]="mode() === filterBarMode.Standard"
+                        (checked)="onModeChanged(filterBarMode.Standard)"
+                    />
+                    <mosaik-segment-item
+                        [attr.test-id]="'filter-mode-advanced'"
+                        [label]="intl.advancedModeLabel"
+                        [isChecked]="mode() === filterBarMode.Advanced"
+                        (checked)="onModeChanged(filterBarMode.Advanced)"
+                    />
+                </mosaik-segment>
+                <div class="min-h-0 flex-1 overflow-y-auto" [attr.test-id]="'filter-fields'">
                     @if (mode() === filterBarMode.Standard) {
                         <div class="flex flex-col gap-2">
                             @for (filter of filters(); track standardFilterTrackKey(filter)) {
@@ -177,6 +198,7 @@ const NO_VALUE_OPERATORS: ReadonlySet<FilterOperatorValue> = new Set<FilterOpera
                                         @case (filterType.Text) {
                                             <mosaik-form-field [fieldState]="field(filter.key)()">
                                                 <mosaik-textbox
+                                                    [attr.test-id]="'filter-field-' + filter.key"
                                                     [formField]="field(filter.key)"
                                                     [label]="filter.placeholder ?? filter.label"
                                                     [isClearable]="true"
@@ -186,30 +208,50 @@ const NO_VALUE_OPERATORS: ReadonlySet<FilterOperatorValue> = new Set<FilterOpera
                                         }
                                         @case (filterType.Number) {
                                             <mosaik-form-field [fieldState]="field(filter.key)()">
-                                                <mosaik-numberbox
-                                                    #standardNumber
-                                                    [value]="numberValue(field(filter.key))"
-                                                    [label]="filter.placeholder ?? filter.label"
-                                                    [variant]="'primary'"
-                                                    [decimalPlaces]="filter.integer ? 0 : 2"
-                                                    [step]="filter.integer ? 1 : 0.01"
-                                                    [isClearable]="true"
-                                                    (input)="onNumberInput(field(filter.key), $event, filter.integer)"
-                                                    (cleared)="onNumberInput(field(filter.key), null, filter.integer)"
-                                                    (connected)="restoreEmptyNumber(standardNumber, field(filter.key))"
-                                                />
+                                                @if (filter.integer) {
+                                                    <mosaik-numberbox
+                                                        #standardNumberBox
+                                                        [attr.test-id]="'filter-field-' + filter.key"
+                                                        [value]="numberValue(field(filter.key))"
+                                                        [label]="filter.placeholder ?? filter.label"
+                                                        [variant]="'primary'"
+                                                        [isClearable]="true"
+                                                        (input)="onNumberInput(field(filter.key), $event, filter.integer)"
+                                                        (cleared)="onNumberInput(field(filter.key), null)"
+                                                        (connected)="restoreEmptyNumber(standardNumberBox, field(filter.key))"
+                                                    />
+                                                } @else {
+                                                    <mosaik-numberbox
+                                                        #standardDecimalNumberBox
+                                                        [attr.test-id]="'filter-field-' + filter.key"
+                                                        mosaikDecimal
+                                                        [value]="numberValue(field(filter.key))"
+                                                        [label]="filter.placeholder ?? filter.label"
+                                                        [variant]="'primary'"
+                                                        [isClearable]="true"
+                                                        (input)="onNumberInput(field(filter.key), $event, filter.integer)"
+                                                        (cleared)="onNumberInput(field(filter.key), null)"
+                                                        (connected)="restoreEmptyNumber(standardDecimalNumberBox, field(filter.key))"
+                                                    />
+                                                }
                                             </mosaik-form-field>
                                         }
                                         @case (filterType.Select) {
                                             <mosaik-form-field [fieldState]="field(filter.key)()">
                                                 <mosaik-select
+                                                    [attr.test-id]="'filter-field-' + filter.key"
                                                     [formField]="field(filter.key)"
+                                                    [value]="selectionValue(filter.key)"
                                                     [label]="filter.placeholder ?? filter.label"
                                                     [variant]="'primary'"
                                                     [isClearable]="true"
                                                 >
                                                     @for (option of filter.options; track option.value) {
-                                                        <mosaik-select-item [label]="option.label" [value]="option.value" />
+                                                        <mosaik-select-item
+                                                            [attr.test-id]="'filter-field-' + filter.key + '-option-' + option.value"
+                                                            [label]="option.label"
+                                                            [value]="option.value"
+                                                        />
                                                     }
                                                 </mosaik-select>
                                             </mosaik-form-field>
@@ -217,13 +259,19 @@ const NO_VALUE_OPERATORS: ReadonlySet<FilterOperatorValue> = new Set<FilterOpera
                                         @case (filterType.MultiSelect) {
                                             <mosaik-form-field [fieldState]="field(filter.key)()">
                                                 <mosaik-select
+                                                    [attr.test-id]="'filter-field-' + filter.key"
                                                     [formField]="field(filter.key)"
+                                                    [value]="selectionValue(filter.key)"
                                                     [label]="filter.placeholder ?? filter.label"
                                                     [variant]="'primary'"
                                                     [isClearable]="true"
                                                 >
                                                     @for (option of filter.options; track option.value) {
-                                                        <mosaik-select-item [label]="option.label" [value]="option.value" />
+                                                        <mosaik-select-item
+                                                            [attr.test-id]="'filter-field-' + filter.key + '-option-' + option.value"
+                                                            [label]="option.label"
+                                                            [value]="option.value"
+                                                        />
                                                     }
                                                 </mosaik-select>
                                             </mosaik-form-field>
@@ -231,6 +279,7 @@ const NO_VALUE_OPERATORS: ReadonlySet<FilterOperatorValue> = new Set<FilterOpera
                                         @case (filterType.Date) {
                                             <mosaik-form-field [fieldState]="field(filter.key)()">
                                                 <mosaik-datebox
+                                                    [attr.test-id]="'filter-field-' + filter.key"
                                                     [formField]="field(filter.key)"
                                                     [label]="filter.placeholder ?? filter.label"
                                                     [variant]="'primary'"
@@ -242,6 +291,7 @@ const NO_VALUE_OPERATORS: ReadonlySet<FilterOperatorValue> = new Set<FilterOpera
                                         @case (filterType.DateRange) {
                                             <mosaik-form-field [fieldState]="field(filter.key)()">
                                                 <mosaik-datebox
+                                                    [attr.test-id]="'filter-field-' + filter.key"
                                                     [formField]="field(filter.key)"
                                                     [label]="filter.placeholder ?? filter.label"
                                                     [variant]="'primary'"
@@ -252,7 +302,12 @@ const NO_VALUE_OPERATORS: ReadonlySet<FilterOperatorValue> = new Set<FilterOpera
                                         }
                                         @case (filterType.Boolean) {
                                             <mosaik-form-field [fieldState]="field(filter.key)()">
-                                                <mosaik-checkbox [formField]="field(filter.key)" [label]="filter.label" [variant]="'primary'" />
+                                                <mosaik-checkbox
+                                                    [attr.test-id]="'filter-field-' + filter.key"
+                                                    [formField]="field(filter.key)"
+                                                    [label]="filter.label"
+                                                    [variant]="'primary'"
+                                                />
                                             </mosaik-form-field>
                                         }
                                     }
@@ -269,37 +324,21 @@ const NO_VALUE_OPERATORS: ReadonlySet<FilterOperatorValue> = new Set<FilterOpera
                                         [class.advanced-filter-row-root]="row.depth === 0"
                                         [style.margin-left.rem]="row.depth * 0.45"
                                     >
-                                        <div class="relative z-1 flex min-w-0 items-center gap-1 py-0.5">
-                                            <mosaik-segment class="w-[9.5rem] shrink-0" [appearance]="'soft'">
-                                                <mosaik-segment-item
-                                                    [label]="intl.andConditionLabel"
-                                                    [isChecked]="group.condition === filterCondition.And"
-                                                    (checked)="onSetAdvancedGroupCondition(group.id, filterCondition.And)"
-                                                />
-                                                <mosaik-segment-item
-                                                    [label]="intl.orConditionLabel"
-                                                    [isChecked]="group.condition === filterCondition.Or"
-                                                    (checked)="onSetAdvancedGroupCondition(group.id, filterCondition.Or)"
-                                                />
-                                            </mosaik-segment>
-                                            <div class="flex min-w-0 flex-1 items-center gap-1 overflow-hidden">
-                                                <mosaik-dropdown-button [iconName]="'add'" [caretVisible]="false" [dropDownPlacement]="'bottom-end'">
-                                                    <mosaik-menu>
-                                                        <mosaik-menu-item [label]="intl.addRuleLabel" (click)="onAddAdvancedRule(group.id)" />
-                                                        <mosaik-menu-item [label]="intl.addGroupLabel" (click)="onAddAdvancedGroup(group.id)" />
-                                                    </mosaik-menu>
-                                                </mosaik-dropdown-button>
-                                            </div>
-                                            @if (canRemoveAdvancedRow(row)) {
-                                                <mosaik-press-button
-                                                    [appearance]="'plain'"
-                                                    [variant]="'primary'"
-                                                    [iconName]="'delete'"
-                                                    [attr.title]="intl.removeGroupLabel"
-                                                    (pressed)="onRemoveAdvancedNode(group.id)"
-                                                />
-                                            }
-                                        </div>
+                                        <ngp-condition-group
+                                            [condition]="group.condition"
+                                            [andLabel]="intl.andConditionLabel"
+                                            [orLabel]="intl.orConditionLabel"
+                                            [addRuleLabel]="intl.addRuleLabel"
+                                            [addGroupLabel]="intl.addGroupLabel"
+                                            [removeLabel]="intl.removeGroupLabel"
+                                            [canRemove]="canRemoveAdvancedRow(row)"
+                                            [removeVariant]="'primary'"
+                                            [testIdPrefix]="'filter-group-' + group.id"
+                                            (conditionChanged)="onSetAdvancedGroupCondition(group.id, $event)"
+                                            (addRuleRequested)="onAddAdvancedRule(group.id)"
+                                            (addGroupRequested)="onAddAdvancedGroup(group.id)"
+                                            (removeRequested)="onRemoveAdvancedNode(group.id)"
+                                        />
                                     </div>
                                 } @else if (advancedRule(row.node); as rule) {
                                     <div part="advanced-filter-row" class="relative min-w-0 pl-3" [style.margin-left.rem]="row.depth * 0.45">
@@ -347,32 +386,52 @@ const NO_VALUE_OPERATORS: ReadonlySet<FilterOperatorValue> = new Set<FilterOpera
                                                                 class="col-start-1 min-w-0"
                                                                 [fieldState]="advancedField(advancedRuleControlKey(rule, 'value'))()"
                                                             >
-                                                                <mosaik-numberbox
-                                                                    #advancedNumber
-                                                                    [value]="numberValue(advancedField(advancedRuleControlKey(rule, 'value')))"
-                                                                    [label]="intl.valueLabel"
-                                                                    [variant]="'primary'"
-                                                                    [decimalPlaces]="selectedFilter.integer ? 0 : 2"
-                                                                    [step]="selectedFilter.integer ? 1 : 0.01"
-                                                                    [isClearable]="true"
-                                                                    (input)="
-                                                                        onNumberInput(
-                                                                            advancedField(advancedRuleControlKey(rule, 'value')),
-                                                                            $event,
-                                                                            selectedFilter.integer
-                                                                        )
-                                                                    "
-                                                                    (cleared)="
-                                                                        onNumberInput(
-                                                                            advancedField(advancedRuleControlKey(rule, 'value')),
-                                                                            null,
-                                                                            selectedFilter.integer
-                                                                        )
-                                                                    "
-                                                                    (connected)="
-                                                                        restoreEmptyNumber(advancedNumber, advancedField(advancedRuleControlKey(rule, 'value')))
-                                                                    "
-                                                                />
+                                                                @if (selectedFilter.integer) {
+                                                                    <mosaik-numberbox
+                                                                        #advancedNumberBox
+                                                                        [value]="numberValue(advancedField(advancedRuleControlKey(rule, 'value')))"
+                                                                        [label]="intl.valueLabel"
+                                                                        [variant]="'primary'"
+                                                                        [isClearable]="true"
+                                                                        (input)="
+                                                                            onNumberInput(
+                                                                                advancedField(advancedRuleControlKey(rule, 'value')),
+                                                                                $event,
+                                                                                selectedFilter.integer
+                                                                            )
+                                                                        "
+                                                                        (cleared)="onNumberInput(advancedField(advancedRuleControlKey(rule, 'value')), null)"
+                                                                        (connected)="
+                                                                            restoreEmptyNumber(
+                                                                                advancedNumberBox,
+                                                                                advancedField(advancedRuleControlKey(rule, 'value'))
+                                                                            )
+                                                                        "
+                                                                    />
+                                                                } @else {
+                                                                    <mosaik-numberbox
+                                                                        #advancedDecimalNumberBox
+                                                                        mosaikDecimal
+                                                                        [value]="numberValue(advancedField(advancedRuleControlKey(rule, 'value')))"
+                                                                        [label]="intl.valueLabel"
+                                                                        [variant]="'primary'"
+                                                                        [isClearable]="true"
+                                                                        (input)="
+                                                                            onNumberInput(
+                                                                                advancedField(advancedRuleControlKey(rule, 'value')),
+                                                                                $event,
+                                                                                selectedFilter.integer
+                                                                            )
+                                                                        "
+                                                                        (cleared)="onNumberInput(advancedField(advancedRuleControlKey(rule, 'value')), null)"
+                                                                        (connected)="
+                                                                            restoreEmptyNumber(
+                                                                                advancedDecimalNumberBox,
+                                                                                advancedField(advancedRuleControlKey(rule, 'value'))
+                                                                            )
+                                                                        "
+                                                                    />
+                                                                }
                                                             </mosaik-form-field>
                                                         }
                                                         @case (filterType.Select) {
@@ -470,13 +529,20 @@ const NO_VALUE_OPERATORS: ReadonlySet<FilterOperatorValue> = new Set<FilterOpera
                 <mosaik-card-footer>
                     <div class="flex items-center justify-end gap-2">
                         <mosaik-button
+                            [attr.test-id]="'filter-reset'"
                             [appearance]="'plain'"
                             [variant]="'primary'"
                             [iconName]="'arrowReset'"
                             [label]="intl.resetFiltersLabel"
                             (click)="onReset()"
                         />
-                        <mosaik-button [appearance]="'solid'" [variant]="'primary'" [label]="intl.saveFilterActionLabel" (click)="onSaveFilter()" />
+                        <mosaik-button
+                            [attr.test-id]="'filter-save'"
+                            [appearance]="'solid'"
+                            [variant]="'primary'"
+                            [label]="intl.saveFilterActionLabel"
+                            (click)="onSaveFilter()"
+                        />
                     </div>
                 </mosaik-card-footer>
             }
@@ -506,6 +572,38 @@ const NO_VALUE_OPERATORS: ReadonlySet<FilterOperatorValue> = new Set<FilterOpera
             }
         }
 
+        [part='root'] {
+            --card-border-width: 0;
+            --card-border-radius: 0;
+        }
+
+        // Only the docked desktop bar needs a separator towards the list; inside the narrow-screen sheet it would
+        // draw a stray line along the sheet's edge.
+        @media (min-width: 60rem) {
+            [part='root']::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                width: 1px;
+                background-color: var(--mosaik-scheme-middlelight);
+            }
+        }
+
+        mosaik-card-header {
+            --card-header-padding-top: var(--mosaik-layout-space);
+            --card-header-padding-bottom: var(--mosaik-layout-space);
+
+            border-bottom: var(--mosaik-layout-thickness) solid var(--mosaik-scheme-highlight);
+        }
+
+        mosaik-card-title {
+            display: flex;
+            align-items: center;
+            min-block-size: calc(var(--mosaik-layout-space) * 4);
+        }
+
         [part='advanced-filter-row']:not(.advanced-filter-row-root)::before {
             position: absolute;
             top: -0.55rem;
@@ -524,9 +622,11 @@ const NO_VALUE_OPERATORS: ReadonlySet<FilterOperatorValue> = new Set<FilterOpera
             content: '';
         }
     `,
+    host: { '[style.height]': 'sheetHeight()' },
     exportAs: 'filterBar',
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
+        ConditionGroupComponent,
         ButtonComponent,
         PressButtonComponent,
         CardComponent,
@@ -541,6 +641,7 @@ const NO_VALUE_OPERATORS: ReadonlySet<FilterOperatorValue> = new Set<FilterOpera
         FormFieldStateDirective,
         IconNameDirective,
         NumberBoxComponent,
+        NumberBoxDecimalDirective,
         SegmentComponent,
         SegmentItemComponent,
         SelectComponent,
@@ -597,12 +698,17 @@ const NO_VALUE_OPERATORS: ReadonlySet<FilterOperatorValue> = new Set<FilterOpera
         }),
     ],
 })
-export class FilterBarComponent implements OnChanges, OnInit {
+export class FilterBarComponent implements AfterViewInit, OnChanges, OnInit {
     // #region Fields
 
     private readonly _intl: FilterBarComponentIntl = inject(FilterBarComponentIntl, { optional: true }) ?? new FilterBarComponentIntl();
     private readonly _storage: IUserPreferenceStorage = inject(USER_PREFERENCE_STORAGE);
-    private readonly _drawerService: DrawerService = inject(DrawerService);
+    private readonly _injector = inject(Injector);
+    private readonly _host = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+    private readonly _destroyRef = inject(DestroyRef);
+    protected readonly sheetHeight = signal<string | null>(null);
+    private readonly _filterKeys = signal<ReadonlyArray<string>>([]);
+    private readonly _selectComponents = viewChildren(SelectComponent);
     private readonly _formModel = signal<Record<string, unknown>>({});
     private readonly _advancedFormModel = signal<Record<string, unknown>>({});
     private readonly _filterResetVersion = signal(0);
@@ -615,6 +721,7 @@ export class FilterBarComponent implements OnChanges, OnInit {
     private _isChangeTrackingInitialized = false;
     private _restoredPreferenceKey?: string;
     private _appliedValueSignature?: string;
+    private _emittedValueSignature?: string;
 
     // #endregion
 
@@ -626,12 +733,16 @@ export class FilterBarComponent implements OnChanges, OnInit {
 
         effect(() => {
             const values = this.normalizedValues();
+            const signature = JSON.stringify(values);
 
             if (!this._isChangeTrackingInitialized) {
                 this._isChangeTrackingInitialized = true;
+                this._emittedValueSignature = signature;
                 return;
             }
 
+            if (signature === this._emittedValueSignature) return;
+            this._emittedValueSignature = signature;
             this.persistValues(values);
             this.filterChange.emit(values);
         });
@@ -656,6 +767,9 @@ export class FilterBarComponent implements OnChanges, OnInit {
      * @readonly
      */
     public readonly persistenceKey = input<string | undefined>();
+
+    /** Chooses the overlay used to name a saved filter. */
+    public readonly saveFilterPresentation = input<'drawer' | 'dialog'>('drawer');
 
     /**
      * Externally controlled filter values, for example when applying a saved filter.
@@ -727,6 +841,40 @@ export class FilterBarComponent implements OnChanges, OnInit {
 
     // #region Methods
 
+    public ngAfterViewInit(): void {
+        const sheetContent = this._host.closest('mosaik-sheet-content');
+        const view = sheetContent?.ownerDocument.defaultView;
+        if (!sheetContent || !view?.ResizeObserver) {
+            return;
+        }
+
+        const updateHeight = (): void => {
+            if (sheetContent.clientHeight > 0) {
+                const height = `calc(${sheetContent.clientHeight}px - var(--sheet-content-padding-top) - var(--sheet-content-padding-bottom))`;
+                if (this.sheetHeight() !== height) {
+                    this.sheetHeight.set(height);
+                }
+            }
+        };
+        let frame: number | null = null;
+        const observer = new view.ResizeObserver(() => {
+            if (frame === null) {
+                frame = view.requestAnimationFrame(() => {
+                    frame = null;
+                    updateHeight();
+                });
+            }
+        });
+        observer.observe(sheetContent);
+        this._destroyRef.onDestroy(() => {
+            observer.disconnect();
+            if (frame !== null) {
+                view.cancelAnimationFrame(frame);
+            }
+        });
+        updateHeight();
+    }
+
     /**
      * Synchronizes dynamic form fields after input changes.
      *
@@ -734,7 +882,6 @@ export class FilterBarComponent implements OnChanges, OnInit {
      */
     public ngOnChanges(): void {
         this.ensureFilterFields(this.filters());
-        this.ensureAdvancedRoot();
         this.ensureAdvancedFilterFields();
 
         if (!this.applyInputValues()) {
@@ -749,7 +896,6 @@ export class FilterBarComponent implements OnChanges, OnInit {
      */
     public ngOnInit(): void {
         this.ensureFilterFields(this.filters());
-        this.ensureAdvancedRoot();
         this.ensureAdvancedFilterFields();
 
         if (!this.applyInputValues()) {
@@ -776,6 +922,12 @@ export class FilterBarComponent implements OnChanges, OnInit {
         }
 
         return field;
+    }
+
+    /** Reads the controlled select value, keeping an empty selection separate from a filter option. */
+    protected selectionValue(key: string): string | null {
+        const value = this.field(key)().value();
+        return typeof value === 'string' ? value : null;
     }
 
     /** Reads a controlled numeric field without treating an empty value as zero. */
@@ -830,16 +982,25 @@ export class FilterBarComponent implements OnChanges, OnInit {
      * @protected
      */
     protected onReset(): void {
+        for (const filter of this.filters()) {
+            this.field(filter.key)().value.set(null);
+        }
         this._formModel.set(this.createEmptyFormModel(this.filters()));
         this._advancedRoot.set(this.createEmptyAdvancedRoot());
         this._advancedFormModel.set(this.createAdvancedFormModel(this._advancedRoot(), {}));
 
         this._filterResetVersion.update((version) => version + 1);
         this.removePersistedValues();
+        this._appliedValueSignature = JSON.stringify({});
+        for (const select of this._selectComponents()) {
+            select.invoke('clear', true);
+        }
+        this._emittedValueSignature = JSON.stringify({});
+        this.filterChange.emit({});
     }
 
     /**
-     * Opens the drawer used to save the current filter values.
+     * Opens the overlay used to save the current filter values.
      *
      * @protected
      */
@@ -850,14 +1011,23 @@ export class FilterBarComponent implements OnChanges, OnInit {
             return;
         }
 
-        const ref = this._drawerService.show(SavedFilterDrawerComponent, {
-            size: { width: '32rem', height: 'auto' },
-            maxSize: { width: '96vw', height: '96dvh' },
-            data: {
-                filters: this.filters(),
-                values,
-            },
-        });
+        const data = { filters: this.filters(), values };
+        const ref =
+            this.saveFilterPresentation() === 'dialog'
+                ? this._injector.get(DialogService).show(SavedFilterDrawerComponent, {
+                      data,
+                      hasBackdrop: true,
+                      backdropStrategy: 'own',
+                      clickOutsideToClose: false,
+                      pressEscapeToClose: true,
+                      size: { width: '32rem' },
+                      maxSize: { width: '100vw', height: '100vh' },
+                  })
+                : this._injector.get(DrawerService).show(SavedFilterDrawerComponent, {
+                      data,
+                      size: { width: '32rem', height: 'auto' },
+                      maxSize: { width: '96vw', height: '96dvh' },
+                  });
 
         onceOn(ref.closed, (closeResult) => {
             if (closeResult.reason !== 'positive' || !closeResult.result) {
@@ -1058,16 +1228,6 @@ export class FilterBarComponent implements OnChanges, OnInit {
         return FilterBarMode;
     }
 
-    /**
-     * Returns the current filter condition enum for template usage.
-     *
-     * @protected
-     * @readonly
-     */
-    protected get filterCondition(): typeof FilterCondition {
-        return FilterCondition;
-    }
-
     private hasFilterValue(value: unknown): boolean {
         return value !== null && value !== undefined && value !== '' && !(Array.isArray(value) && value.length === 0);
     }
@@ -1153,6 +1313,11 @@ export class FilterBarComponent implements OnChanges, OnInit {
     }
 
     private ensureFilterFields(filters: ReadonlyArray<IFilterDefinition>): void {
+        const nextKeys = filters.map((filter) => filter.key);
+        const previousKeys = this._filterKeys();
+        if (previousKeys.length !== nextKeys.length || previousKeys.some((key, index) => key !== nextKeys[index])) {
+            this._filterKeys.set(nextKeys);
+        }
         const nextModel = this.createFormModel(filters, this._formModel());
 
         if (this.hasSameKeys(nextModel, this._formModel())) {
@@ -1182,7 +1347,11 @@ export class FilterBarComponent implements OnChanges, OnInit {
             return this.normalizedAdvancedValues();
         }
 
-        return Object.fromEntries(Object.entries(this._formModel()).filter(([, value]) => this.hasFilterValue(value)));
+        return Object.fromEntries(
+            this._filterKeys()
+                .map((key) => [key, this.field(key)().value()] as const)
+                .filter(([, value]) => this.hasFilterValue(value)),
+        );
     }
 
     private normalizedAdvancedValues(): FilterValues {
@@ -1245,14 +1414,6 @@ export class FilterBarComponent implements OnChanges, OnInit {
         }
 
         this._advancedFormModel.set(nextModel);
-    }
-
-    private ensureAdvancedRoot(): void {
-        if (this._advancedRoot().children.length > 0 || this.visibleFilters().length === 0) {
-            return;
-        }
-
-        this._advancedRoot.set(this.createEmptyAdvancedRoot());
     }
 
     private createAdvancedFormModel(root: IAdvancedFilterGroup, values: Readonly<Record<string, unknown>>): Record<string, unknown> {
@@ -1379,9 +1540,7 @@ export class FilterBarComponent implements OnChanges, OnInit {
     }
 
     private createEmptyAdvancedRoot(): IAdvancedFilterGroup {
-        const rule = this.createAdvancedRule();
-
-        return createAdvancedFilterGroup(this.createAdvancedNodeId(), FilterCondition.And, rule ? [rule] : []);
+        return createAdvancedFilterGroup(this.createAdvancedNodeId(), FilterCondition.And);
     }
 
     private createAdvancedRule(): IAdvancedFilterRule | undefined {

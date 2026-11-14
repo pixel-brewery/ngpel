@@ -25,13 +25,19 @@ import { LeadingLineComponent } from '../leading-line/LeadingLineComponent';
             }
             <div part="group" class="flex min-w-0 flex-1 flex-col gap-3">
                 <div part="toolbar" class="relative z-1 flex min-w-0 items-center gap-1 py-0.5">
-                    <mosaik-segment class="w-[9.5rem] shrink-0" [appearance]="'soft'" [attr.data-ngp-part]="testIdPrefix() + '-condition'">
+                    <mosaik-segment
+                        class="w-[9.5rem] shrink-0"
+                        [appearance]="'soft'"
+                        [attr.data-ngp-part]="testIdPrefix() + '-condition'"
+                        [attr.test-id]="testIdPrefix() + '-condition'"
+                    >
                         @if (allowConditionChange() || condition() === 'and') {
                             <mosaik-segment-item
                                 [label]="andLabel()"
                                 [isChecked]="condition() === 'and'"
                                 [disabled]="disabled()"
                                 [attr.data-ngp-part]="testIdPrefix() + '-and'"
+                                [attr.test-id]="testIdPrefix() + '-and'"
                                 (checked)="setCondition('and')"
                             />
                         }
@@ -41,6 +47,7 @@ import { LeadingLineComponent } from '../leading-line/LeadingLineComponent';
                                 [isChecked]="condition() === 'or'"
                                 [disabled]="disabled()"
                                 [attr.data-ngp-part]="testIdPrefix() + '-or'"
+                                [attr.test-id]="testIdPrefix() + '-or'"
                                 (checked)="setCondition('or')"
                             />
                         }
@@ -54,6 +61,7 @@ import { LeadingLineComponent } from '../leading-line/LeadingLineComponent';
                                 [dropDownPlacement]="'bottom-end'"
                                 [attr.aria-label]="canAddRule() ? addRuleLabel() : addGroupLabel()"
                                 [attr.data-ngp-part]="testIdPrefix() + '-add'"
+                                [attr.test-id]="testIdPrefix() + '-add'"
                             >
                                 <mosaik-menu>
                                     @if (canAddRule()) {
@@ -61,6 +69,7 @@ import { LeadingLineComponent } from '../leading-line/LeadingLineComponent';
                                             [label]="addRuleLabel()"
                                             [disabled]="disabled()"
                                             [attr.data-ngp-part]="testIdPrefix() + '-add-rule'"
+                                            [attr.test-id]="testIdPrefix() + '-add-rule'"
                                             (click)="!disabled() && addRuleRequested.emit()"
                                         />
                                     }
@@ -69,6 +78,7 @@ import { LeadingLineComponent } from '../leading-line/LeadingLineComponent';
                                             [label]="addGroupLabel()"
                                             [disabled]="disabled()"
                                             [attr.data-ngp-part]="testIdPrefix() + '-add-group'"
+                                            [attr.test-id]="testIdPrefix() + '-add-group'"
                                             (click)="!disabled() && addGroupRequested.emit()"
                                         />
                                     }
@@ -85,6 +95,7 @@ import { LeadingLineComponent } from '../leading-line/LeadingLineComponent';
                             [attr.title]="removeLabel()"
                             [attr.aria-label]="removeLabel()"
                             [attr.data-ngp-part]="testIdPrefix() + '-remove'"
+                            [attr.test-id]="testIdPrefix() + '-remove'"
                             (pressed)="!disabled() && removeRequested.emit()"
                         />
                     }

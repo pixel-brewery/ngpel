@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: SavedFilterDrawerComponent
 
-Defined in: [libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts:240](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts#L240)
+Defined in: [libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts:281](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts#L281)
 
 Drawer used to name and review a saved filter.
 
@@ -17,7 +17,7 @@ Drawer used to name and review a saved filter.
 new SavedFilterDrawerComponent(): SavedFilterDrawerComponent;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts:262](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts#L262)
+Defined in: [libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts:303](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts#L303)
 
 #### Returns
 
@@ -25,13 +25,23 @@ Defined in: [libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerCo
 
 ## Properties
 
+### isDialog
+
+```ts
+protected readonly isDialog: boolean;
+```
+
+Defined in: [libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts:285](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts#L285)
+
+***
+
 ### summaryItems
 
 ```ts
 readonly summaryItems: Signal<readonly ISavedFilterSummaryItem[]>;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts:316](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts#L316)
+Defined in: [libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts:357](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts#L357)
 
 Summary items for the filter definition.
 
@@ -45,7 +55,7 @@ Summary items for the filter definition.
 get form(): FieldTree<ISavedFilterDrawerFormData>;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts:306](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts#L306)
+Defined in: [libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts:347](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts#L347)
 
 Signal form fields.
 
@@ -63,7 +73,7 @@ Signal form fields.
 get intl(): FilterBarComponentIntl;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts:297](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts#L297)
+Defined in: [libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts:338](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts#L338)
 
 Internationalized labels.
 
@@ -79,7 +89,7 @@ Internationalized labels.
 isOrCondition(condition): boolean;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts:380](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts#L380)
+Defined in: [libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts:421](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts#L421)
 
 Returns whether a condition is an OR group.
 
@@ -101,7 +111,7 @@ Returns whether a condition is an OR group.
 onCancel(): void;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts:329](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts#L329)
+Defined in: [libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts:370](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts#L370)
 
 Closes the drawer without saving.
 
@@ -117,7 +127,7 @@ Closes the drawer without saving.
 onSave(): void;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts:338](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts#L338)
+Defined in: [libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts:379](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts#L379)
 
 Confirms the saved filter name.
 
@@ -133,7 +143,7 @@ Confirms the saved filter name.
 summaryIndent(item): string;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts:370](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts#L370)
+Defined in: [libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts:411](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/saved-filters/SavedFilterDrawerComponent.ts#L411)
 
 Returns the CSS indentation for one summary item.
 

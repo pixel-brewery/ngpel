@@ -1,10 +1,18 @@
 // #region Imports
 
+import { NgTemplateOutlet } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, LOCALE_ID, signal, type Signal } from '@angular/core';
 import { FormField, form, required, type FieldTree } from '@angular/forms/signals';
 import {
     ButtonComponent,
     Cancel,
+    DIALOG_REF,
+    DIALOG_REF_DATA,
+    DialogContentDirective,
+    DialogFooterDirective,
+    DialogHeaderComponent,
+    DialogHeaderDirective,
     DRAWER_REF,
     DRAWER_REF_DATA,
     DrawerContentDirective,
@@ -18,6 +26,8 @@ import {
     TextBoxComponent,
     ToastService,
     TypographyDirective,
+    TranslateService,
+    type IDialogRef,
     type IDrawerRef,
 } from '@pixel-brewery/mosaik-elements-angular';
 import { type IToastVisibility, TOAST_VISIBILITY } from '@pixel-brewery/ngpel-core';
@@ -83,14 +93,39 @@ interface ISavedFilterDrawerFormData {
 @Component({
     selector: 'ngp-saved-filter-drawer',
     template: `
-        <ng-template mosaikDrawerHeader>
-            <mosaik-drawer-header [text]="intl.saveFilterTitleLabel" />
-        </ng-template>
+        @if (isDialog) {
+            <ng-template mosaikDialogHeader>
+                <mosaik-dialog-header [text]="intl.saveFilterTitleLabel" />
+            </ng-template>
+            <ng-template mosaikDialogContent>
+                <ng-container [ngTemplateOutlet]="content" />
+            </ng-template>
+            <ng-template mosaikDialogFooter>
+                <ng-container [ngTemplateOutlet]="actions" />
+            </ng-template>
+        } @else {
+            <ng-template mosaikDrawerHeader>
+                <mosaik-drawer-header [text]="intl.saveFilterTitleLabel" />
+            </ng-template>
+            <ng-template mosaikDrawerContent>
+                <ng-container [ngTemplateOutlet]="content" />
+            </ng-template>
+            <ng-template mosaikDrawerFooter>
+                <ng-container [ngTemplateOutlet]="actions" />
+            </ng-template>
+        }
 
-        <ng-template mosaikDrawerContent>
-            <form class="flex min-h-0 flex-col gap-4 px-2 py-2" [ngpScrollToError]="form()">
+        <ng-template #content>
+            <form
+                [class.max-h-[60vh]]="isDialog"
+                [class.overflow-y-auto]="isDialog"
+                test-id="saved-filter-dialog"
+                class="flex min-h-0 flex-col gap-4 px-2 py-2"
+                [ngpScrollToError]="form()"
+            >
                 <mosaik-form-field [fieldState]="form.name()">
                     <mosaik-textbox
+                        test-id="saved-filter-name"
                         [formField]="form.name"
                         [label]="intl.saveFilterNameLabel"
                         [placeholder]="intl.saveFilterNamePlaceholder"
@@ -163,10 +198,11 @@ interface ISavedFilterDrawerFormData {
             </form>
         </ng-template>
 
-        <ng-template mosaikDrawerFooter>
+        <ng-template #actions>
             <div class="flex items-center justify-end gap-2">
-                <mosaik-button [label]="intl.cancelLabel" [appearance]="'plain'" (click)="onCancel()" />
+                <mosaik-button test-id="saved-filter-cancel" [label]="intl.cancelLabel" [appearance]="'plain'" (click)="onCancel()" />
                 <mosaik-button
+                    test-id="saved-filter-confirm"
                     [label]="intl.saveFilterActionLabel"
                     [appearance]="'solid'"
                     [variant]="'primary'"
@@ -179,6 +215,11 @@ interface ISavedFilterDrawerFormData {
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         ButtonComponent,
+        DialogContentDirective,
+        DialogFooterDirective,
+        DialogHeaderComponent,
+        DialogHeaderDirective,
+        NgTemplateOutlet,
         DrawerContentDirective,
         DrawerFooterDirective,
         DrawerHeaderComponent,
@@ -240,13 +281,13 @@ interface ISavedFilterDrawerFormData {
 export class SavedFilterDrawerComponent {
     // #region Fields
 
-    private readonly _drawerRef: IDrawerRef<ISavedFilterDrawerData, ISavedFilterDrawerResult> = inject(DRAWER_REF) as IDrawerRef<
-        ISavedFilterDrawerData,
-        ISavedFilterDrawerResult
-    >;
-    private readonly _drawerData: ISavedFilterDrawerData = inject<ISavedFilterDrawerData>(DRAWER_REF_DATA);
+    private readonly _dialogRef = inject(DIALOG_REF, { optional: true }) as IDialogRef<ISavedFilterDrawerData, ISavedFilterDrawerResult> | null;
+    protected readonly isDialog = this._dialogRef !== null;
+    private readonly _overlayRef = this._dialogRef ?? (inject(DRAWER_REF) as IDrawerRef<ISavedFilterDrawerData, ISavedFilterDrawerResult>);
+    private readonly _drawerData = this.isDialog ? inject<ISavedFilterDrawerData>(DIALOG_REF_DATA) : inject<ISavedFilterDrawerData>(DRAWER_REF_DATA);
     private readonly _intl: FilterBarComponentIntl = inject(FilterBarComponentIntl);
     private readonly _locale = inject(LOCALE_ID);
+    private readonly _translate = inject(TranslateService, { optional: true });
     private readonly _toastService: ToastService = inject(ToastService);
     private readonly _toastVisibility: IToastVisibility = inject(TOAST_VISIBILITY);
     private readonly _formValidator: SignalFormValidator = inject(SignalFormValidator);
@@ -267,7 +308,7 @@ export class SavedFilterDrawerComponent {
         });
         this._closeAttemptedSubscription?.unsubscribe();
         this._closeAttemptedSubscription = guardImplicitCloseAttempts(
-            this._drawerRef,
+            this._overlayRef,
             () => this._form().dirty(),
             () => {
                 if (!this._toastVisibility.canShow()) {
@@ -314,7 +355,7 @@ export class SavedFilterDrawerComponent {
      * @readonly
      */
     public readonly summaryItems: Signal<ReadonlyArray<ISavedFilterSummaryItem>> = computed(() =>
-        createSavedFilterSummary(this._drawerData.filters, this._drawerData.values, this._intl, this._locale),
+        createSavedFilterSummary(this._drawerData.filters, this._drawerData.values, this._intl, this._translate?.currentLanguage || this._locale),
     );
 
     // #endregion
@@ -327,7 +368,7 @@ export class SavedFilterDrawerComponent {
      * @public
      */
     public onCancel(): void {
-        this._drawerRef.close(Cancel.negative());
+        this._overlayRef.close(Cancel.negative());
     }
 
     /**
@@ -351,7 +392,7 @@ export class SavedFilterDrawerComponent {
                 });
             })
             .onSuccess((formData) => {
-                this._drawerRef.close(
+                this._overlayRef.close(
                     Cancel.positive({
                         name: formData.name.trim(),
                         values: this._drawerData.values,
