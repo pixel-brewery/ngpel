@@ -144,6 +144,8 @@ function resolveFirstDayOfWeek(locale: string): DayOfWeek {
                     @for (week of page.compactWeeks; track week.getTime()) {
                         <ngp-week-strip
                             [displayDate]="week"
+                            [locale]="locale()"
+                            [compactDays]="compactDays()"
                             [selectedDate]="selectedDate()"
                             [firstDayOfWeek]="firstDayOfWeek()"
                             [events]="events()"
@@ -167,6 +169,8 @@ function resolveFirstDayOfWeek(locale: string): DayOfWeek {
                                 @for (week of page.additionalWeeks; track week.getTime()) {
                                     <ngp-week-strip
                                         [displayDate]="week"
+                                        [locale]="locale()"
+                                        [compactDays]="compactDays()"
                                         [selectedDate]="selectedDate()"
                                         [firstDayOfWeek]="firstDayOfWeek()"
                                         [events]="events()"
@@ -309,8 +313,8 @@ export class WeekPanelComponent {
     private static _nextId = 0;
 
     private readonly _host = inject<ElementRef<HTMLElement>>(ElementRef);
-    private readonly _locale = inject(LOCALE_ID);
-    private readonly _weekdayFormatter = new Intl.DateTimeFormat(this._locale, { weekday: 'narrow' });
+    private readonly _defaultLocale = inject(LOCALE_ID);
+    private readonly _weekdayFormatter = computed(() => new Intl.DateTimeFormat(this.locale() ?? this._defaultLocale, { weekday: 'narrow' }));
 
     protected readonly weeksId = `week-panel-weeks-${WeekPanelComponent._nextId++}`;
 
@@ -320,6 +324,12 @@ export class WeekPanelComponent {
     // #endregion
 
     // #region Properties
+
+    /** Overrides the locale used for the week and day names. */
+    public readonly locale = input<string>();
+
+    /** Uses the compact day cells in each displayed week. */
+    public readonly compactDays = input(false);
 
     /**
      * Date contained by the first visible week.
@@ -391,7 +401,7 @@ export class WeekPanelComponent {
      * @public
      * @readonly
      */
-    public readonly firstDayOfWeek = input<DayOfWeek>(resolveFirstDayOfWeek(this._locale));
+    public readonly firstDayOfWeek = input<DayOfWeek>(resolveFirstDayOfWeek(this._defaultLocale));
 
     /**
      * Calendar dates carrying an event marker.
@@ -579,7 +589,7 @@ export class WeekPanelComponent {
      * @protected
      */
     protected formatWeekday(date: Date): string {
-        return this._weekdayFormatter.format(date).toUpperCase();
+        return this._weekdayFormatter().format(date).toUpperCase();
     }
 
     /**

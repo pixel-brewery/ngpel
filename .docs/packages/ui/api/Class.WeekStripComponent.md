@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: WeekStripComponent
 
-Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:75](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L75)
+Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:135](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L135)
 
 Displays one controlled calendar-week row inside a week panel.
 
@@ -23,13 +23,49 @@ new WeekStripComponent(): WeekStripComponent;
 
 ## Properties
 
+### compactDays
+
+```ts
+readonly compactDays: InputSignal<boolean>;
+```
+
+Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:161](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L161)
+
+Uses a compact day cell with fixed rows for month, date and event marker.
+
+***
+
+### dateKey
+
+```ts
+protected readonly dateKey: (value) => string | undefined = toCalendarDate;
+```
+
+Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:163](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L163)
+
+Formats the local calendar day shown by a date control as `YYYY-MM-DD`.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `value` | `Date` | Date from the control. |
+
+#### Returns
+
+`string` \| `undefined`
+
+The calendar day or `undefined` for an invalid date.
+
+***
+
 ### dateSelected
 
 ```ts
 readonly dateSelected: OutputEmitterRef<Date>;
 ```
 
-Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:148](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L148)
+Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:219](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L219)
 
 Emits the selected calendar date.
 
@@ -41,7 +77,7 @@ Emits the selected calendar date.
 readonly disabled: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:140](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L140)
+Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:211](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L211)
 
 Whether day selection is disabled.
 
@@ -53,7 +89,7 @@ Whether day selection is disabled.
 readonly displayDate: InputSignal<Date>;
 ```
 
-Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:100](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L100)
+Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:171](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L171)
 
 Date contained by the represented week.
 
@@ -65,7 +101,7 @@ Date contained by the represented week.
 readonly events: InputSignal<readonly Date[]>;
 ```
 
-Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:124](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L124)
+Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:195](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L195)
 
 Calendar dates carrying an event marker.
 
@@ -77,9 +113,21 @@ Calendar dates carrying an event marker.
 readonly firstDayOfWeek: InputSignal<DayOfWeek>;
 ```
 
-Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:116](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L116)
+Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:187](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L187)
 
 First day of the represented week.
+
+***
+
+### locale
+
+```ts
+readonly locale: InputSignal<string | undefined>;
+```
+
+Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:158](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L158)
+
+Overrides the locale used for day and month names.
 
 ***
 
@@ -89,7 +137,7 @@ First day of the represented week.
 readonly selectedDate: InputSignal<Date | null>;
 ```
 
-Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:108](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L108)
+Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:179](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L179)
 
 Currently selected calendar date.
 
@@ -101,7 +149,7 @@ Currently selected calendar date.
 readonly showWeekNumber: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:132](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L132)
+Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:203](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L203)
 
 Indicates whether the week-number column is visible.
 
@@ -113,7 +161,7 @@ Indicates whether the week-number column is visible.
 protected readonly weekDates: Signal<readonly Date[]>;
 ```
 
-Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:156](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L156)
+Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:227](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L227)
 
 Dates contained by the represented week.
 
@@ -125,7 +173,7 @@ Dates contained by the represented week.
 protected readonly weekNumber: Signal<number>;
 ```
 
-Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:164](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L164)
+Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:235](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L235)
 
 ISO week number for the represented week.
 
@@ -137,7 +185,7 @@ ISO week number for the represented week.
 protected formatDateLabel(date): string;
 ```
 
-Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:177](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L177)
+Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:248](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L248)
 
 Formats a complete accessible date label.
 
@@ -161,7 +209,7 @@ Localized accessible label.
 protected formatMonthLabel(date): string;
 ```
 
-Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:188](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L188)
+Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:259](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L259)
 
 Formats the month label shown at a month boundary.
 
@@ -185,7 +233,7 @@ Localized short month or an empty label.
 protected isEventDate(date): boolean;
 ```
 
-Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:203](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L203)
+Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:274](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L274)
 
 Indicates whether the provided date carries an event marker.
 
@@ -209,7 +257,7 @@ Whether the exact calendar day is marked.
 protected isSelectedDate(date): boolean;
 ```
 
-Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:214](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L214)
+Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:285](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L285)
 
 Indicates whether the provided date is selected.
 
@@ -233,7 +281,7 @@ Whether the date is selected.
 protected isToday(date): boolean;
 ```
 
-Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:225](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L225)
+Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:296](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L296)
 
 Indicates whether the provided date is today.
 
@@ -257,7 +305,7 @@ Whether the date is today.
 protected onDateSelected(date): void;
 ```
 
-Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:235](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L235)
+Defined in: [libs/ui/src/components/week-strip/WeekStripComponent.ts:306](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/week-strip/WeekStripComponent.ts#L306)
 
 Emits a defensive copy of the selected date.
 
