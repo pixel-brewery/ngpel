@@ -23,6 +23,7 @@ import { CardComponent } from './CardComponent';
                 <mosaik-button
                     slot="suffix"
                     [attr.data-ngp-part]="'card-expand-toggle'"
+                    [attr.test-id]="'card-expand-toggle'"
                     [type]="'button'"
                     [appearance]="'plain'"
                     [size]="'small'"

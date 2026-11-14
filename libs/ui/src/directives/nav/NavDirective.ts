@@ -1,10 +1,10 @@
 // #region Imports
 
 import { DestroyRef, Directive, ElementRef, HostListener, inject, input, computed, effect } from '@angular/core';
-import { Router, UrlTree, NavigationEnd, Event as RouterEvent } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NavigationCancel, NavigationEnd, NavigationError, NavigationSkipped, NavigationStart, Router, UrlTree } from '@angular/router';
 import type { INavItem, NavHandle } from '@pixel-brewery/ngpel-router/navigation';
-import { IParsedHandle, NavigationManager, parseHandle } from '@pixel-brewery/ngpel-router/navigation';
-import { filter } from 'rxjs/operators';
+import { type IParsedHandle, NavigationManager, parseHandle } from '@pixel-brewery/ngpel-router/navigation';
 
 // #endregion
 
@@ -81,38 +81,19 @@ export class NavDirective {
         el.setAttribute('role', 'link');
         el.setAttribute('tabindex', '0');
 
-        const teardown = effect(() => {
-            const isRoute = this._isRoute();
-            const tree = this._tree();
-            const strict = this.ngpNavStrictActive();
+        const teardown = effect(() => this.updateActive());
 
-            this.setActive(
-                isRoute && tree
-                    ? this._router.isActive(tree, {
-                          paths: strict ? 'exact' : 'subset',
-                          queryParams: strict ? 'exact' : 'subset',
-                          fragment: 'ignored',
-                          matrixParams: 'ignored',
-                      })
-                    : false,
-            );
-
-            const sub = this._router.events.pipe(filter((e: RouterEvent): e is NavigationEnd => e instanceof NavigationEnd)).subscribe(() => {
-                const t = this._tree();
-                const r = this._isRoute();
-                this.setActive(
-                    r && t
-                        ? this._router.isActive(t, {
-                              paths: strict ? 'exact' : 'subset',
-                              queryParams: strict ? 'exact' : 'subset',
-                              fragment: 'ignored',
-                              matrixParams: 'ignored',
-                          })
-                        : false,
-                );
-            });
-
-            this._destroyRef.onDestroy(() => sub.unsubscribe());
+        this._router.events.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((event) => {
+            if (event instanceof NavigationStart) {
+                this.updateActive(event.url);
+            } else if (
+                event instanceof NavigationEnd ||
+                event instanceof NavigationCancel ||
+                event instanceof NavigationError ||
+                event instanceof NavigationSkipped
+            ) {
+                this.updateActive();
+            }
         });
 
         this._destroyRef.onDestroy(() => teardown.destroy());
@@ -121,6 +102,37 @@ export class NavDirective {
     // #endregion
 
     // #region Methods
+
+    private updateActive(pendingUrl?: string): void {
+        const tree = this._tree();
+        const strict = this.ngpNavStrictActive();
+        this.setActive(
+            this._isRoute() && tree
+                ? pendingUrl !== undefined
+                    ? this.isTargetActive(pendingUrl, tree, strict)
+                    : this._router.isActive(tree, {
+                          paths: strict ? 'exact' : 'subset',
+                          queryParams: strict ? 'exact' : 'subset',
+                          fragment: 'ignored',
+                          matrixParams: 'ignored',
+                      })
+                : false,
+        );
+    }
+
+    private isTargetActive(url: string, tree: UrlTree, strict: boolean): boolean {
+        const target = this._router.parseUrl(url);
+        const targetSegments = target.root.children['primary']?.segments.map((segment) => segment.path) ?? [];
+        const navSegments = tree.root.children['primary']?.segments.map((segment) => segment.path) ?? [];
+        const pathMatches =
+            (!strict || targetSegments.length === navSegments.length) && navSegments.every((segment, index) => targetSegments[index] === segment);
+        const navQuery = tree.queryParams;
+        const queryMatches =
+            (!strict || Object.keys(target.queryParams).length === Object.keys(navQuery).length) &&
+            Object.entries(navQuery).every(([key, value]) => JSON.stringify(target.queryParams[key]) === JSON.stringify(value));
+
+        return pathMatches && queryMatches;
+    }
 
     /**
      * Updates the active state on the host element.

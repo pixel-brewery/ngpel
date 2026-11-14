@@ -96,7 +96,7 @@ When disabled, `ArrowUp` can replace an unfinished draft and `ArrowDown` restore
 protected onFocusOut(): void;
 ```
 
-Defined in: [libs/ui/src/directives/input-history-navigation/InputHistoryNavigationDirective.ts:322](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-history-navigation/InputHistoryNavigationDirective.ts#L322)
+Defined in: [libs/ui/src/directives/input-history-navigation/InputHistoryNavigationDirective.ts:336](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-history-navigation/InputHistoryNavigationDirective.ts#L336)
 
 Ends navigation once focus leaves the editable control.
 
@@ -112,7 +112,7 @@ Ends navigation once focus leaves the editable control.
 protected onInput(): void;
 ```
 
-Defined in: [libs/ui/src/directives/input-history-navigation/InputHistoryNavigationDirective.ts:311](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-history-navigation/InputHistoryNavigationDirective.ts#L311)
+Defined in: [libs/ui/src/directives/input-history-navigation/InputHistoryNavigationDirective.ts:321](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-history-navigation/InputHistoryNavigationDirective.ts#L321)
 
 Cancels navigation after genuine user editing.
 
@@ -131,7 +131,7 @@ Synthetic input events dispatched by this directive are excluded so repeated
 protected onKeydown(event): void;
 ```
 
-Defined in: [libs/ui/src/directives/input-history-navigation/InputHistoryNavigationDirective.ts:285](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-history-navigation/InputHistoryNavigationDirective.ts#L285)
+Defined in: [libs/ui/src/directives/input-history-navigation/InputHistoryNavigationDirective.ts:294](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-history-navigation/InputHistoryNavigationDirective.ts#L294)
 
 Handles keyboard navigation from the directive host element.
 
@@ -156,7 +156,7 @@ directive does not break text composition or native selection shortcuts.
 recallNext(): boolean;
 ```
 
-Defined in: [libs/ui/src/directives/input-history-navigation/InputHistoryNavigationDirective.ts:252](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-history-navigation/InputHistoryNavigationDirective.ts#L252)
+Defined in: [libs/ui/src/directives/input-history-navigation/InputHistoryNavigationDirective.ts:256](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/input-history-navigation/InputHistoryNavigationDirective.ts#L256)
 
 Recalls the next submitted value or restores the captured draft.
 

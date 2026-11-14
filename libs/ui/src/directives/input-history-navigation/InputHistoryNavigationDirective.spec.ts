@@ -244,6 +244,18 @@ describe('InputHistoryNavigationDirective', () => {
             expect(result).toBe(false);
         });
 
+        it('keeps an edited draft when the value was changed by the consumer', () => {
+            Object.defineProperty(directive, 'history', { value: () => ['first', 'last'] });
+            Object.defineProperty(directive, 'onlyWhenEmpty', { value: () => false });
+            Object.defineProperty(directive, 'disabled', { value: () => false });
+            mockElement.value = '';
+            directive.recallPrevious();
+            mockElement.value = 'edited draft';
+
+            expect(directive.recallNext()).toBe(false);
+            expect(mockElement.value).toBe('edited draft');
+        });
+
         it('should navigate forward through history', () => {
             TestBed.runInInjectionContext(() => {
                 const historySignal = signal<readonly string[]>(['first', 'second', 'third']);
@@ -367,11 +379,13 @@ describe('InputHistoryNavigationDirective', () => {
                     bubbles: true,
                 });
                 const preventDefaultSpy = vi.spyOn(event, 'preventDefault');
+                const stopPropagationSpy = vi.spyOn(event, 'stopPropagation');
 
                 // Call the protected method directly
                 (directive as unknown as { onKeydown: (e: KeyboardEvent) => void }).onKeydown(event);
 
                 expect(preventDefaultSpy).toHaveBeenCalled();
+                expect(stopPropagationSpy).toHaveBeenCalled();
                 expect(mockElement.value).toBe('entry');
             });
         });
@@ -475,6 +489,7 @@ describe('InputHistoryNavigationDirective', () => {
                 directive.recallPrevious();
 
                 // Simulate user input (not from directive)
+                mockElement.value = 'edited entry';
                 (directive as unknown as { onInput: () => void }).onInput();
 
                 // Session should be cleared

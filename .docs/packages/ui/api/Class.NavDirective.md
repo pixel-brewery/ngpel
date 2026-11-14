@@ -70,7 +70,7 @@ When true, uses strict path comparison for active state.
 protected onClick(ev): Promise<void>;
 ```
 
-Defined in: [libs/ui/src/directives/nav/NavDirective.ts:144](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/nav/NavDirective.ts#L144)
+Defined in: [libs/ui/src/directives/nav/NavDirective.ts:156](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/nav/NavDirective.ts#L156)
 
 Click activates navigation or command.
 
@@ -92,7 +92,7 @@ Click activates navigation or command.
 protected onKeydown(ev): Promise<void>;
 ```
 
-Defined in: [libs/ui/src/directives/nav/NavDirective.ts:172](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/nav/NavDirective.ts#L172)
+Defined in: [libs/ui/src/directives/nav/NavDirective.ts:184](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/nav/NavDirective.ts#L184)
 
 Keyboard support (Enter / Space).
 

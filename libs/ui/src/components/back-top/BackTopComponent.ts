@@ -1,8 +1,24 @@
 // #region Imports
 
 import { type ExtendedScrollToOptions } from '@angular/cdk/scrolling';
-import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, HostBinding, inject, input, output, signal } from '@angular/core';
+import {
+    AfterViewInit,
+    type AnimationCallbackEvent,
+    booleanAttribute,
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    DestroyRef,
+    effect,
+    ElementRef,
+    HostBinding,
+    inject,
+    input,
+    output,
+    signal,
+} from '@angular/core';
 import { FloatingActionButtonComponent, IconNameDirective } from '@pixel-brewery/mosaik-elements-angular';
+import { AnimationPlayer, AnimationPreset } from '@pixel-brewery/mosaik-elements-foundation';
 
 // #endregion
 
@@ -15,14 +31,14 @@ import { FloatingActionButtonComponent, IconNameDirective } from '@pixel-brewery
     selector: 'ngp-back-top',
     template: `
         @if (visible()) {
-            <div part="root">
+            <div part="root" (animate.enter)="onEnter($event)" (animate.leave)="onLeave($event)">
                 <mosaik-fab
                     part="button"
                     [attr.aria-label]="label()"
                     [attr.test-id]="testId()"
                     [appearance]="'solid'"
                     [iconName]="'chevronUp'"
-                    [size]="'large'"
+                    [size]="size()"
                     [variant]="'primary'"
                     (click)="onClick()"
                 >
@@ -36,10 +52,13 @@ import { FloatingActionButtonComponent, IconNameDirective } from '@pixel-brewery
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [FloatingActionButtonComponent, IconNameDirective],
 })
-export class BackTopComponent {
+export class BackTopComponent implements AfterViewInit {
     // #region Fields
 
     private readonly _elementRef = inject(ElementRef<HTMLElement>);
+    private readonly _destroyRef = inject(DestroyRef);
+    private readonly _animationPlayer = inject(AnimationPlayer, { optional: true }) ?? new AnimationPlayer();
+    private readonly _viewReady = signal(false);
     private readonly _scrollable = signal<HTMLElement | null>(null);
     private readonly _visible = signal(false);
     private readonly _position = signal(0);
@@ -54,7 +73,24 @@ export class BackTopComponent {
      * @public
      */
     public constructor() {
+        // Routed views may join their scroll container only after the first render.
+        const capturedScroll = (event: Event) => {
+            const scrollable = this.findScrollContainer();
+            if (scrollable && event.target === scrollable) {
+                this._scrollable.set(scrollable);
+                this.updateVisibility();
+            }
+        };
+        if (typeof window !== 'undefined') {
+            window.addEventListener('scroll', capturedScroll, { capture: true, passive: true });
+            this._destroyRef.onDestroy(() => window.removeEventListener('scroll', capturedScroll, true));
+        }
+
         effect((onCleanup) => {
+            if (!this._viewReady()) {
+                return;
+            }
+
             const scrollable = this.findScrollContainer();
             this._scrollable.set(scrollable);
             this.updateVisibility();
@@ -82,6 +118,11 @@ export class BackTopComponent {
         });
     }
 
+    /** Starts observing the scroll container once the view is mounted. */
+    public ngAfterViewInit(): void {
+        this._viewReady.set(true);
+    }
+
     // #endregion
 
     // #region Properties
@@ -105,6 +146,12 @@ export class BackTopComponent {
 
     /** Stable automation identifier for the action. */
     public readonly testId = input<string>('back-top');
+
+    /** Whether the floating action button fades in and out. */
+    public readonly animate = input(false, { transform: booleanAttribute });
+
+    /** Size of the floating action button. Pass `undefined` to use the host theme default. */
+    public readonly size = input<ReturnType<FloatingActionButtonComponent['size']>>('large');
 
     /**
      * The scroll options applied when the button is clicked.
@@ -159,7 +206,8 @@ export class BackTopComponent {
      * @protected
      */
     protected onClick(): void {
-        const scrollable = this._scrollable();
+        // The host can be attached to its scroll container after the first effect runs.
+        const scrollable = this.findScrollContainer() ?? this._scrollable();
         if (!scrollable) {
             return;
         }
@@ -167,6 +215,38 @@ export class BackTopComponent {
         const behavior: ScrollBehavior = this.prefersReducedMotion() ? 'auto' : 'smooth';
         scrollable.scrollTo({ ...(this.options() ?? { top: 0 }), behavior });
         this.restored.emit({ sender: this, restored: true });
+    }
+
+    /** Fades in the button using the Mosaik preset. */
+    protected onEnter(event: AnimationCallbackEvent): void {
+        if (!this.animate()) {
+            event.animationComplete();
+            return;
+        }
+
+        const element = event.target as HTMLElement;
+        element.style.opacity = '0';
+        void this._animationPlayer.playToFinal(element, AnimationPreset.fadeIn).finally(() => event.animationComplete());
+    }
+
+    /** Keeps the button mounted until Mosaik's fade-out has finished. */
+    protected onLeave(event: AnimationCallbackEvent): void {
+        if (!this.animate()) {
+            event.animationComplete();
+            return;
+        }
+
+        const element = event.target as HTMLElement;
+        const opacity = window.getComputedStyle(element).opacity;
+
+        void this._animationPlayer
+            .stopAll(element)
+            .then(() => {
+                // Preserve the current fade-in frame if scrolling reverses direction mid-animation.
+                element.style.opacity = opacity;
+                return this._animationPlayer.playToFinal(element, AnimationPreset.fadeOut);
+            })
+            .finally(() => event.animationComplete());
     }
 
     /**
@@ -177,6 +257,8 @@ export class BackTopComponent {
     private updateVisibility(): void {
         const currentScrollable = this._scrollable();
         if (!currentScrollable) {
+            this._visible.set(false);
+            this._position.set(0);
             return;
         }
 
@@ -205,10 +287,10 @@ export class BackTopComponent {
             const style = window.getComputedStyle(currentElement);
             const overflowY = style.overflowY;
             const overflowX = style.overflowX;
-            const canScroll = currentElement.scrollHeight > currentElement.clientHeight;
             const isScrollable = ['auto', 'scroll', 'overlay'].includes(overflowY) || ['auto', 'scroll', 'overlay'].includes(overflowX);
 
-            if (isScrollable && canScroll) {
+            // Loading content can make this container scrollable after the button is initialized.
+            if (isScrollable) {
                 return currentElement;
             }
 

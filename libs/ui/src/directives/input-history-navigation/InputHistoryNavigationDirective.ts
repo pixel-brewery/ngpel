@@ -208,6 +208,10 @@ export class InputHistoryNavigationDirective {
 
         const currentMessage = this.getMessage(element);
 
+        if (this._session !== null && currentMessage !== this._session.entries[this._session.index]) {
+            this.reset();
+        }
+
         if (this._session === null) {
             if (this.onlyWhenEmpty() && currentMessage.length > 0) {
                 return false;
@@ -256,6 +260,11 @@ export class InputHistoryNavigationDirective {
             return false;
         }
 
+        if (this.getMessage(element) !== this._session.entries[this._session.index]) {
+            this.reset();
+            return false;
+        }
+
         if (this._session.index < this._session.entries.length - 1) {
             this._session.index += 1;
 
@@ -297,6 +306,7 @@ export class InputHistoryNavigationDirective {
 
         if (handled) {
             event.preventDefault();
+            event.stopPropagation();
         }
     }
 
@@ -309,7 +319,11 @@ export class InputHistoryNavigationDirective {
      * @protected
      */
     protected onInput(): void {
-        if (!this._isApplyingHistoryValue) {
+        if (
+            !this._isApplyingHistoryValue &&
+            this._session !== null &&
+            this.getMessage(this._elementRef.nativeElement) !== this._session.entries[this._session.index]
+        ) {
             this.reset();
         }
     }
