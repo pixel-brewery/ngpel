@@ -1,6 +1,6 @@
 // #region Imports
 
-import { DestroyRef, Directive, ElementRef, effect, inject, input, signal } from '@angular/core';
+import { booleanAttribute, DestroyRef, Directive, ElementRef, effect, inject, input, signal } from '@angular/core';
 
 // #endregion
 
@@ -33,6 +33,7 @@ interface ITextElement extends HTMLElement {
  */
 @Directive({
     selector: '[ngpTypewriter]',
+    exportAs: 'ngpTypewriter',
 })
 export class TypewriterDirective {
     // #region Fields
@@ -59,6 +60,10 @@ export class TypewriterDirective {
         });
 
         effect(() => {
+            if (!this.renderToHost()) {
+                return;
+            }
+
             const element = this._elementRef.nativeElement;
             const value = `\u200B${this._text()}`;
 
@@ -105,6 +110,12 @@ export class TypewriterDirective {
     public readonly holdDuration = input<number | undefined, number | string | null | undefined>(undefined, {
         transform: (value: number | string | null | undefined): number | undefined => normalizeHoldDuration(value),
     });
+
+    /** When disabled, the caller renders the current text from {@link displayedText}. */
+    public readonly renderToHost = input(true, { transform: booleanAttribute });
+
+    /** The current text without the host renderer's line-height placeholder. */
+    public readonly displayedText = this._text.asReadonly();
 
     // #endregion
 

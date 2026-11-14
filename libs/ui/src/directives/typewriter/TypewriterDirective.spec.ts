@@ -49,6 +49,19 @@ describe('TypewriterDirective', () => {
         vi.restoreAllMocks();
     });
 
+    it('allows the caller to render the current text with a separate renderer', () => {
+        const directive = TestBed.inject(TypewriterDirective);
+        Object.defineProperty(directive, 'renderToHost', { value: signal(false) });
+        const originalText = 'Host content';
+        element.text = originalText;
+
+        vi.advanceTimersByTime(10);
+        TestBed.tick();
+
+        expect(directive.displayedText()).toBe('AB');
+        expect(element.text).toBe(originalText);
+    });
+
     it('waits for the configured character interval before typing the next character', () => {
         // Arrange
         const zeroWidthSpace = '\u200B';
