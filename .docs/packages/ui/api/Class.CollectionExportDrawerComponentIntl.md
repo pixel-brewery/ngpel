@@ -17,7 +17,7 @@ Internationalization labels for the collection export dialog component.
 new CollectionExportDrawerComponentIntl(): CollectionExportDrawerComponentIntl;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:42](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L42)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:43](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L43)
 
 Constructs a new instance of the `CollectionExportDrawerComponentIntl` class.
 
@@ -35,7 +35,7 @@ Constructs a new instance of the `CollectionExportDrawerComponentIntl` class.
 get cancelLabel(): string;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:158](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L158)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:160](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L160)
 
 Label for the cancel button.
 
@@ -53,7 +53,7 @@ Label for the cancel button.
 get changes(): Subject<void>;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:68](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L68)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:70](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L70)
 
 Emits when any label changes.
 
@@ -71,7 +71,7 @@ Emits when any label changes.
 get columnsRequiredMessage(): string;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:176](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L176)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:178](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L178)
 
 Validation message shown when no export column is selected.
 
@@ -89,7 +89,7 @@ Validation message shown when no export column is selected.
 get columnsSelectedLabel(): string;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:95](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L95)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:97](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L97)
 
 Suffix shown after the column count (e.g. "3 / 5 columns selected").
 
@@ -107,7 +107,7 @@ Suffix shown after the column count (e.g. "3 / 5 columns selected").
 get columnsTitleLabel(): string;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:86](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L86)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:88](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L88)
 
 Heading above the column selection section.
 
@@ -125,7 +125,7 @@ Heading above the column selection section.
 get csvFormatLabel(): string;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:140](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L140)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:142](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L142)
 
 Label for the CSV export format.
 
@@ -143,7 +143,7 @@ Label for the CSV export format.
 get deselectAllLabel(): string;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:113](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L113)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:115](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L115)
 
 Label for the "deselect all" button.
 
@@ -161,7 +161,7 @@ Label for the "deselect all" button.
 get exportLabel(): string;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:167](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L167)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:169](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L169)
 
 Label for the export / confirm button.
 
@@ -179,7 +179,7 @@ Label for the export / confirm button.
 get formatTitleLabel(): string;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:122](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L122)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:124](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L124)
 
 Heading above the format selection section.
 
@@ -197,7 +197,7 @@ Heading above the format selection section.
 get odsFormatLabel(): string;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:149](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L149)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:151](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L151)
 
 Label for the OpenDocument export format.
 
@@ -215,13 +215,31 @@ Label for the OpenDocument export format.
 get recordsLabel(): string;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:181](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L181)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:183](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L183)
 
 Label shown after the number of records to export.
 
 ##### Returns
 
 `string`
+
+#### Set Signature
+
+```ts
+set recordsLabel(value): void;
+```
+
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:187](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L187)
+
+##### Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `value` | `string` |
+
+##### Returns
+
+`void`
 
 ***
 
@@ -233,7 +251,7 @@ Label shown after the number of records to export.
 get selectAllLabel(): string;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:104](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L104)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:106](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L106)
 
 Label for the "select all" button.
 
@@ -251,7 +269,7 @@ Label for the "select all" button.
 get titleLabel(): string;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:77](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L77)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:79](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L79)
 
 Title of the export dialog.
 
@@ -269,7 +287,7 @@ Title of the export dialog.
 get xlsxFormatLabel(): string;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:131](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L131)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:133](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L133)
 
 Label for the Excel export format.
 
@@ -285,7 +303,7 @@ Label for the Excel export format.
 getFormatLabel(format): string;
 ```
 
-Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:196](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L196)
+Defined in: [libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts:203](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/exporting/CollectionExportDrawerComponentIntl.ts#L203)
 
 Resolves the display label for an export format.
 

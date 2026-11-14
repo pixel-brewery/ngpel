@@ -25,7 +25,7 @@ readonly export?:
   | ICollectionExportFieldConfig;
 ```
 
-Defined in: [libs/ui/src/collection-view/fields/ICollectionField.ts:54](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/fields/ICollectionField.ts#L54)
+Defined in: [libs/ui/src/collection-view/fields/ICollectionField.ts:57](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/fields/ICollectionField.ts#L57)
 
 Optional export projection. Set enabled=false to exclude the field from exports.
 
@@ -35,7 +35,9 @@ Optional export projection. Set enabled=false to exclude the field from exports.
 
 ```ts
 readonly filter?: {
-  options?: readonly IFilterOption[];
+  integer?: boolean;
+  options?:   | readonly IFilterOption[]
+     | (() => readonly IFilterOption[]);
   placeholder?: string;
   type: FilterTypeValue;
 };
@@ -45,11 +47,23 @@ Defined in: [libs/ui/src/collection-view/fields/ICollectionField.ts:40](https://
 
 Optional filter projection. Omit to exclude the field from filters.
 
+#### integer?
+
+```ts
+readonly integer?: boolean;
+```
+
+Restricts numeric input to whole numbers.
+
 #### options?
 
 ```ts
-readonly options?: readonly IFilterOption[];
+readonly options?:
+  | readonly IFilterOption[]
+  | (() => readonly IFilterOption[]);
 ```
+
+Static choices or choices read from signals as they become available.
 
 #### placeholder?
 
@@ -109,7 +123,7 @@ readonly table?:
 | Partial<Omit<IDataTableColumnDefinition<TItem>, "key" | "title">>;
 ```
 
-Defined in: [libs/ui/src/collection-view/fields/ICollectionField.ts:49](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/fields/ICollectionField.ts#L49)
+Defined in: [libs/ui/src/collection-view/fields/ICollectionField.ts:52](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/collection-view/fields/ICollectionField.ts#L52)
 
 Optional table projection. Set to false to exclude the field from the table.
 
