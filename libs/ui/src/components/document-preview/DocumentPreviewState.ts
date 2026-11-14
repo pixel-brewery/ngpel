@@ -123,6 +123,11 @@ export class DocumentPreviewState {
         if (this._loadFailed() || this.renderFailed()) this.load();
     }
 
+    /** Marks the current bytes as pending while their viewer is recreated. */
+    public beginRendering(attempt: IDocumentPreviewRenderAttempt): void {
+        if (this._renderAttempt() === attempt && !this.renderFailed()) this._renderState.set('rendering');
+    }
+
     /** Acknowledges the first successful display of the current bytes. */
     public acknowledgeRendered(attempt: IDocumentPreviewRenderAttempt): void {
         if (this._renderAttempt() !== attempt || !this.rendering()) return;

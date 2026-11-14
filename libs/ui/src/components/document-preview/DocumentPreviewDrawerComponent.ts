@@ -37,6 +37,7 @@ import { PdfPreviewDirective } from './PdfPreviewDirective';
                     [size]="'small'"
                     [disabled]="!data.state.blob()"
                     [attr.data-ngp-part]="'document-preview-download'"
+                    [attr.test-id]="'document-preview-download'"
                     (click)="onDownload()"
                 />
                 <mosaik-button
@@ -46,6 +47,7 @@ import { PdfPreviewDirective } from './PdfPreviewDirective';
                     [appearance]="'plain'"
                     [size]="'small'"
                     [attr.data-ngp-part]="'document-preview-close'"
+                    [attr.test-id]="'document-preview-close'"
                     (click)="onClose()"
                 />
             </mosaik-drawer-header>
@@ -55,18 +57,43 @@ import { PdfPreviewDirective } from './PdfPreviewDirective';
             <div
                 class="relative flex h-full min-h-0 w-full flex-col overflow-hidden"
                 [attr.data-ngp-part]="'document-preview-drawer'"
+                [attr.test-id]="'document-preview-drawer'"
                 [attr.aria-busy]="data.state.loading() || data.state.rendering()"
             >
                 @if (data.state.loading()) {
-                    <mosaik-text [attr.data-ngp-part]="'document-preview-loading'" [text]="intl.loading" [wrap]="true" role="status" />
+                    <mosaik-text
+                        [attr.data-ngp-part]="'document-preview-loading'"
+                        [attr.test-id]="'document-preview-loading'"
+                        [text]="intl.loading"
+                        [wrap]="true"
+                        role="status"
+                    />
                 } @else if (data.state.loadFailed() || data.state.renderFailed()) {
-                    <div class="flex flex-col items-start gap-3" [attr.data-ngp-part]="'document-preview-error'" role="alert">
+                    <div
+                        class="flex flex-col items-start gap-3"
+                        [attr.data-ngp-part]="'document-preview-error'"
+                        [attr.test-id]="'document-preview-error'"
+                        role="alert"
+                    >
                         <mosaik-text [text]="data.state.renderFailed() ? intl.renderError : intl.loadError" [wrap]="true" />
-                        <mosaik-button [attr.data-ngp-part]="'document-preview-retry'" [label]="intl.retry" [appearance]="'outline'" (click)="onRetry()" />
+                        <mosaik-button
+                            [attr.data-ngp-part]="'document-preview-retry'"
+                            [attr.test-id]="'document-preview-retry'"
+                            [label]="intl.retry"
+                            [appearance]="'outline'"
+                            (click)="onRetry()"
+                        />
                     </div>
                 } @else {
                     @if (data.state.rendering()) {
-                        <mosaik-text class="render-status" data-ngp-part="document-preview-rendering" [text]="intl.rendering" [wrap]="true" role="status" />
+                        <mosaik-text
+                            class="render-status"
+                            data-ngp-part="document-preview-rendering"
+                            test-id="document-preview-rendering"
+                            [text]="intl.rendering"
+                            [wrap]="true"
+                            role="status"
+                        />
                     }
                     @if (data.state.renderAttempt(); as attempt) {
                         @if (data.pdfOptions; as options) {
@@ -74,11 +101,16 @@ import { PdfPreviewDirective } from './PdfPreviewDirective';
                                 <div
                                     class="pdf-container"
                                     data-ngp-part="document-preview-pdf-container"
+                                    test-id="document-preview-frame"
+                                    [attr.data-rendered]="data.state.rendered()"
+                                    [style.visibility]="data.state.rendered() ? 'visible' : 'hidden'"
+                                    [attr.aria-busy]="data.state.rendering()"
                                     role="region"
                                     tabindex="0"
                                     [attr.aria-label]="data.title ?? data.fileName"
                                     [ngpPdfPreview]="attempt"
                                     [ngpPdfPreviewOptions]="options"
+                                    (rendering)="data.state.beginRendering($event)"
                                     (rendered)="data.state.acknowledgeRendered($event)"
                                     (failed)="data.state.failRendering($event)"
                                 ></div>
@@ -88,6 +120,8 @@ import { PdfPreviewDirective } from './PdfPreviewDirective';
                                 <img
                                     class="preview-image"
                                     data-ngp-part="document-preview-image"
+                                    test-id="document-preview-frame"
+                                    [attr.data-rendered]="data.state.rendered()"
                                     [src]="source"
                                     [alt]="data.title ?? data.fileName"
                                     (load)="data.state.acknowledgeRendered(image)"
@@ -99,6 +133,7 @@ import { PdfPreviewDirective } from './PdfPreviewDirective';
                         <iframe
                             class="h-full min-h-0 w-full flex-1"
                             data-ngp-part="document-preview-frame"
+                            test-id="document-preview-frame"
                             [src]="source"
                             [title]="data.title ?? data.fileName"
                             referrerpolicy="no-referrer"

@@ -1,3 +1,5 @@
+import type { Signal } from '@angular/core';
+
 /**
  * Host configuration for the optional PDF.js preview. The host owns the matching SDK, worker,
  * viewer styles and any assets it chooses to serve.
@@ -11,8 +13,8 @@ export interface IPdfPreviewOptions {
     /** URL of the matching PDF.js module worker. */
     readonly workerSrc: string;
 
-    /** Optional viewer locale. Defaults to the current document language. */
-    readonly locale?: string;
+    /** Viewer locale. A signal refreshes an open preview when the language changes. Defaults to the document language. */
+    readonly locale?: string | Signal<string>;
 
     /** Base URL of the viewer's annotation image assets. */
     readonly imageResourcesPath?: string;

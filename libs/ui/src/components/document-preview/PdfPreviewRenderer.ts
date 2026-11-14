@@ -68,7 +68,7 @@ export class PdfPreviewRenderer {
 
     public constructor(
         private readonly _container: HTMLDivElement,
-        private readonly _options: IPdfPreviewOptions,
+        private readonly _options: Omit<IPdfPreviewOptions, 'locale'> & { readonly locale?: string },
         private readonly _onRendered: () => void,
         private readonly _onFailed: () => void,
     ) {

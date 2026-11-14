@@ -109,6 +109,27 @@ describe('DocumentPreviewState', () => {
         expect(onRendered).toHaveBeenCalledExactlyOnceWith(blob);
     });
 
+    it('renders the same PDF bytes again without fetching or notifying the caller twice', () => {
+        const blob = new Blob(['document'], { type: 'application/pdf' });
+        const load = vi.fn(() => of(blob));
+        const onRendered = vi.fn();
+        const state = create({ load, onRendered }, true);
+        state.load();
+        const attempt = state.renderAttempt();
+        if (!attempt) throw new Error('Expected a validated PDF attempt.');
+        state.acknowledgeRendered(attempt);
+
+        state.beginRendering(attempt);
+        expect(state.rendered()).toBe(false);
+        expect(state.rendering()).toBe(true);
+        state.acknowledgeRendered(attempt);
+
+        expect(state.rendered()).toBe(true);
+        expect(state.renderAttempt()).toBe(attempt);
+        expect(load).toHaveBeenCalledOnce();
+        expect(onRendered).toHaveBeenCalledExactlyOnceWith(blob);
+    });
+
     it('keeps validated bytes available after a render failure', () => {
         // arrange
         const state = create({}, true);

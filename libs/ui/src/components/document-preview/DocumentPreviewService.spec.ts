@@ -1,6 +1,6 @@
 // #region Imports
 
-import { Injector, runInInjectionContext } from '@angular/core';
+import { inject, InjectionToken, Injector, runInInjectionContext, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FileDownloadService } from '@pixel-brewery/ngpel-core/browser';
@@ -11,6 +11,7 @@ import { DocumentPreviewService } from './DocumentPreviewService';
 import { DocumentPreviewDrawerComponent } from './DocumentPreviewDrawerComponent';
 import type { IDocumentPreviewData } from './IDocumentPreviewData';
 import type { IDocumentPreviewRef } from './IDocumentPreviewRef';
+import { providePdfPreview } from './providePdfPreview';
 
 // #endregion
 
@@ -79,6 +80,31 @@ describe('DocumentPreviewService', () => {
         restoreProperty('revokeObjectURL', originalRevokeObjectUrl);
         TestBed.resetTestingModule();
         vi.restoreAllMocks();
+    });
+
+    it('resolves managed PDF settings in the application injection context', () => {
+        const locale = signal('de');
+        const language = new InjectionToken<typeof locale>('Preview language');
+        const injector = Injector.create({
+            parent: TestBed.inject(Injector),
+            providers: [
+                DocumentPreviewService,
+                { provide: language, useValue: locale },
+                providePdfPreview(() => ({
+                    load: async () => ({ api: {}, viewer: {} }),
+                    locale: inject(language),
+                    workerSrc: 'pdf.worker.mjs',
+                })),
+            ],
+        });
+        const blob = new Blob(['preview'], { type: 'application/pdf' });
+        const preview = injector.get(DocumentPreviewService).open({ fileName: 'preview.pdf', mimeType: 'application/pdf', load: () => of(blob) });
+
+        expect(sessions[0]?.data.pdfOptions?.locale).toBe(locale);
+        expect(sessions[0]?.data.state.renderAttempt()?.blob).toBe(blob);
+        expect(createObjectUrl).not.toHaveBeenCalled();
+        preview.close();
+        injector.destroy();
     });
 
     it('opens independent nested drawers and closes only the requested document session', () => {

@@ -17,7 +17,7 @@ Enables lazy PDF.js rendering for document previews opened by the host applicati
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `options` | [`IPdfPreviewOptions`](Interface.IPdfPreviewOptions) | SDK loader and URLs for the host's matching worker and assets. |
+| `options` | \| [`IPdfPreviewOptions`](Interface.IPdfPreviewOptions) \| (() => [`IPdfPreviewOptions`](Interface.IPdfPreviewOptions)) | SDK loader and asset URLs, or a factory that resolves them in the application injector. |
 
 ## Returns
 
