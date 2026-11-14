@@ -1,6 +1,6 @@
 {
     "name": "@pixel-brewery/ngpel-mvp",
-    "version": "0.0.16",
+    "version": "0.0.17",
     "description": "The Model-View-Presenter pattern as a package: the ViewPresenter base class, composable presenter behaviors, the View host and the command and ref primitives they are built from.",
     "keywords": [
         "angular",

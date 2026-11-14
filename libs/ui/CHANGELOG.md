@@ -1,3 +1,10 @@
+## 0.0.17 (2026-11-14)
+
+### 🚀 Features
+
+- **ui:** support compact localized week panels ([8520cdf](https://github.com/pixel-brewery/ngpel/commit/8520cdf))
+- **ui:** refresh PDF previews on locale changes ([ab2ede8](https://github.com/pixel-brewery/ngpel/commit/ab2ede8))
+
 ## 0.0.16 (2026-11-14)
 
 ### 🚀 Features
