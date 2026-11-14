@@ -21,7 +21,7 @@ import {
     IconNameDirective,
     TextComponent,
 } from '@pixel-brewery/mosaik-elements-angular';
-import type { IDropZoneDataEventDetail, IFilesPickedEventDetail, ObjectFit, Variant } from '@pixel-brewery/mosaik-elements-foundation';
+import type { IDropZoneDataEventDetail, IFilesPickedEventDetail, ThumbnailElement, Variant } from '@pixel-brewery/mosaik-elements-foundation';
 import { FileSourceComponent } from '../file-source/FileSourceComponent';
 import { FileSourceType } from '../file-source/FileSourceType';
 import { FileComponent } from '../file/FileComponent';
@@ -358,7 +358,7 @@ export class FilesComponent {
     public readonly retryLabel: InputSignal<null | string> = input<null | string>(null);
 
     /** Image and video fit used by preview layout. */
-    public readonly previewFit: InputSignal<ObjectFit> = input<ObjectFit>('contain');
+    public readonly previewFit: InputSignal<ThumbnailElement['fit']> = input<ThumbnailElement['fit']>('contain');
 
     /** Aspect ratio used by preview layout. */
     public readonly previewRatio: InputSignal<string> = input<string>('16 / 9');

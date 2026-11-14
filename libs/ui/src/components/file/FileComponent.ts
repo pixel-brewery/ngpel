@@ -20,7 +20,7 @@ import {
     TextComponent,
     ThumbnailComponent,
 } from '@pixel-brewery/mosaik-elements-angular';
-import type { ObjectFit, Size, ThumbnailPreview, Variant } from '@pixel-brewery/mosaik-elements-foundation';
+import type { Size, ThumbnailElement, ThumbnailPreview, Variant } from '@pixel-brewery/mosaik-elements-foundation';
 import { HoverRevealForDirective } from '../../directives/hover-reveal-for/HoverRevealForDirective';
 import { StopEventPropagationDirective } from '../../directives/stop-event-propagation/StopEventPropagationDirective';
 import { FilePresentation } from './FilePresentation';
@@ -490,7 +490,7 @@ export class FileComponent {
      * @public
      * @readonly
      */
-    public readonly previewFit: InputSignal<ObjectFit> = input<ObjectFit>('contain');
+    public readonly previewFit: InputSignal<ThumbnailElement['fit']> = input<ThumbnailElement['fit']>('contain');
 
     /**
      * Aspect ratio used by the full-width preview presentation.
@@ -751,7 +751,7 @@ export class FileComponent {
      * @protected
      * @readonly
      */
-    protected readonly resolvedPreviewFit: Signal<ObjectFit> = computed(() => (this.isPreview() ? this.previewFit() : 'cover'));
+    protected readonly resolvedPreviewFit: Signal<ThumbnailElement['fit']> = computed(() => (this.isPreview() ? this.previewFit() : 'cover'));
 
     /**
      * Non-empty aspect ratio used by the preview surface.
