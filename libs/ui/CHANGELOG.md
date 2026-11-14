@@ -1,3 +1,16 @@
+## 0.0.19 (2026-11-14)
+
+### 🚀 Features
+
+- **ui:** consolidate shared control behavior ([e7d7bef](https://github.com/pixel-brewery/ngpel/commit/e7d7bef))
+- **ui:** support inclusive recurrence end dates ([d189225](https://github.com/pixel-brewery/ngpel/commit/d189225))
+- **ui:** configure compact toolbar actions ([153aab2](https://github.com/pixel-brewery/ngpel/commit/153aab2))
+- **ui:** support detailed activity timelines ([af42610](https://github.com/pixel-brewery/ngpel/commit/af42610))
+
+### 🩹 Fixes
+
+- **ci:** publish notes from the release checkout ([ef5c94a](https://github.com/pixel-brewery/ngpel/commit/ef5c94a))
+
 ## 0.0.18 (2026-11-14)
 
 This was a version bump only for ui to align it with other projects, there were no code changes.

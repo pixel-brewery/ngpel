@@ -1,3 +1,13 @@
+## 0.0.19 (2026-11-14)
+
+### 🚀 Features
+
+- **ui:** consolidate shared control behavior ([e7d7bef](https://github.com/pixel-brewery/ngpel/commit/e7d7bef))
+
+### 🩹 Fixes
+
+- **ci:** publish notes from the release checkout ([ef5c94a](https://github.com/pixel-brewery/ngpel/commit/ef5c94a))
+
 ## 0.0.18 (2026-11-14)
 
 This was a version bump only for mvp to align it with other projects, there were no code changes.

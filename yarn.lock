@@ -6200,7 +6200,7 @@ __metadata:
     "@angular/common": ">=22.0.0 <23.0.0"
     "@angular/core": ">=22.0.0 <23.0.0"
     "@angular/router": ">=22.0.0 <23.0.0"
-    "@pixel-brewery/ngpel-core": 0.0.18
+    "@pixel-brewery/ngpel-core": 0.0.19
     rxjs: ">=7.8.0 <8.0.0"
   languageName: unknown
   linkType: soft
@@ -6233,9 +6233,9 @@ __metadata:
     "@pixel-brewery/markdowner-core": ">=0.1.204"
     "@pixel-brewery/mosaik-elements-angular": ">=0.1.204"
     "@pixel-brewery/mosaik-elements-foundation": ">=0.1.204"
-    "@pixel-brewery/ngpel-core": 0.0.18
-    "@pixel-brewery/ngpel-mvp": 0.0.18
-    "@pixel-brewery/ngpel-router": 0.0.18
+    "@pixel-brewery/ngpel-core": 0.0.19
+    "@pixel-brewery/ngpel-mvp": 0.0.19
+    "@pixel-brewery/ngpel-router": 0.0.19
     marked: ">=18.0.0"
     rxjs: ">=7.8.0 <8.0.0"
   peerDependenciesMeta:
