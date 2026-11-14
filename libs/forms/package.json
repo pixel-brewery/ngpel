@@ -1,6 +1,6 @@
 {
     "name": "@pixel-brewery/ngpel-forms",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "description": "Signal Forms validators, async validator helpers, the shared status-class map and the password-strength service.",
     "keywords": [
         "angular",
@@ -31,7 +31,7 @@
     "peerDependencies": {
         "@angular/core": ">=22.0.0 <23.0.0",
         "@angular/forms": ">=22.0.0 <23.0.0",
-        "@pixel-brewery/ngpel-core": "0.0.9"
+        "@pixel-brewery/ngpel-core": "0.0.10"
     },
     "ngpel": {
         "category": "Presentation",

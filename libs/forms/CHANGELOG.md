@@ -1,3 +1,9 @@
+## 0.0.10 (2026-11-14)
+
+### 🩹 Fixes
+
+- **ci:** verify the full documentation build ([#12](https://github.com/pixel-brewery/ngpel/pull/12))
+
 ## 0.0.9 (2026-11-14)
 
 ### 🚀 Features

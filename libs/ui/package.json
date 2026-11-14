@@ -1,6 +1,6 @@
 {
     "name": "@pixel-brewery/ngpel-ui",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "description": "The presentation layer: every component, directive and pipe the products share — AI surfaces, media and file components, the collection view, the guided tour and the dashboard widget grid — plus a safe markdown pipeline. Mosaik and CodeMirror are optional peers.",
     "keywords": [
         "angular",
@@ -54,9 +54,9 @@
         "@pixel-brewery/markdowner-core": ">=0.1.96",
         "@pixel-brewery/mosaik-elements-angular": ">=0.1.188",
         "@pixel-brewery/mosaik-elements-foundation": ">=0.1.188",
-        "@pixel-brewery/ngpel-core": "0.0.9",
-        "@pixel-brewery/ngpel-mvp": "0.0.9",
-        "@pixel-brewery/ngpel-router": "0.0.9",
+        "@pixel-brewery/ngpel-core": "0.0.10",
+        "@pixel-brewery/ngpel-mvp": "0.0.10",
+        "@pixel-brewery/ngpel-router": "0.0.10",
         "marked": ">=18.0.0",
         "rxjs": ">=7.8.0 <8.0.0"
     },
