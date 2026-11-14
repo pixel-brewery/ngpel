@@ -1,3 +1,15 @@
+## 0.0.15 (2026-11-14)
+
+### 🚀 Features
+
+- **ui:** support compact collection lists ([c585f15](https://github.com/pixel-brewery/ngpel/commit/c585f15))
+- **ui:** support navigation scroll controls ([9d62557](https://github.com/pixel-brewery/ngpel/commit/9d62557))
+
+### 🩹 Fixes
+
+- **ui:** preserve slot loading and touch actions ([b5c7682](https://github.com/pixel-brewery/ngpel/commit/b5c7682))
+- **ui:** preserve card and navigation behavior ([27fdeb7](https://github.com/pixel-brewery/ngpel/commit/27fdeb7))
+
 ## 0.0.14 (2026-11-14)
 
 ### 🩹 Fixes
