@@ -31,6 +31,7 @@ import { AnchorComponent, BannerComponent, BannerSubHeaderComponent, ButtonCompo
                     part="link"
                     class="block"
                     [attr.data-ngp-part]="'agreement-gate-link'"
+                    [attr.test-id]="'agreement-gate-link'"
                     [href]="safeUrl()"
                     [label]="linkLabel()"
                     [variant]="'info'"
@@ -41,6 +42,7 @@ import { AnchorComponent, BannerComponent, BannerSubHeaderComponent, ButtonCompo
                     slot="actions"
                     part="submit"
                     [attr.data-ngp-part]="'agreement-gate-accept'"
+                    [attr.test-id]="'agreement-gate-accept'"
                     [label]="actionLabel()"
                     [appearance]="'solid'"
                     [variant]="'primary'"
@@ -50,7 +52,14 @@ import { AnchorComponent, BannerComponent, BannerSubHeaderComponent, ButtonCompo
                 />
             </mosaik-banner>
             @if (errorText(); as error) {
-                <mosaik-banner part="error" [attr.data-ngp-part]="'agreement-gate-error'" [isOpen]="true" [variant]="'danger'" [subHeader]="error" />
+                <mosaik-banner
+                    part="error"
+                    [attr.data-ngp-part]="'agreement-gate-error'"
+                    [attr.test-id]="'agreement-gate-error'"
+                    [isOpen]="true"
+                    [variant]="'danger'"
+                    [subHeader]="error"
+                />
             }
         </div>
     `,
