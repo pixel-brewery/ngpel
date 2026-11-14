@@ -68,6 +68,16 @@ describe('PagePathOutletComponent', () => {
         return { root, renderedLevels, levels, player, render };
     }
 
+    function pauseExit(player: { playToFinal: ReturnType<typeof vi.fn<() => Promise<Event>>> }): () => void {
+        let finish: (() => void) | undefined;
+        player.playToFinal.mockReturnValueOnce(
+            new Promise((resolve) => {
+                finish = () => resolve(new Event('finish'));
+            }),
+        );
+        return () => finish?.();
+    }
+
     it('offers the parent action on a compact path and executes it on activation', async () => {
         const back = vi.fn();
         const { root } = await create([{ label: 'List', command: command(back) }, { label: 'Detail' }], { compact: true });
@@ -111,13 +121,12 @@ describe('PagePathOutletComponent', () => {
     it('retains the departing level until its animation finishes', async () => {
         const view = await create([{ label: 'List' }, { label: 'Old' }], { animated: true });
         const [parent, old] = view.renderedLevels();
-        const animation = Promise.withResolvers<Event>();
-        view.player.playToFinal.mockReturnValueOnce(animation.promise);
+        const finish = pauseExit(view.player);
 
         view.levels.set([{ label: 'List' }, { label: 'New' }]);
         await view.render();
         expect(view.renderedLevels()).toEqual([parent, old]);
-        animation.resolve(new Event('finish'));
+        finish();
 
         await vi.waitFor(async () => {
             await view.render();
@@ -130,14 +139,13 @@ describe('PagePathOutletComponent', () => {
 
     it('shows the latest path when navigation changes again during an exit', async () => {
         const view = await create([{ label: 'List' }, { label: 'Old' }], { animated: true });
-        const animation = Promise.withResolvers<Event>();
-        view.player.playToFinal.mockReturnValueOnce(animation.promise);
+        const finish = pauseExit(view.player);
 
         view.levels.set([{ label: 'List' }, { label: 'Intermediate' }]);
         await view.render();
         view.levels.set([{ label: 'List' }, { label: 'Latest' }]);
         await view.render();
-        animation.resolve(new Event('finish'));
+        finish();
 
         await vi.waitFor(async () => {
             await view.render();
