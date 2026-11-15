@@ -1,7 +1,7 @@
 // #region Imports
 
 import { computed, DestroyRef, inject, type Signal, signal, type WritableSignal } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, type ActivatedRouteSnapshot, type Data, NavigationEnd, Router } from '@angular/router';
 import { booleanCodec, jsonCodec, type LocalStorageSignal, localStorageSignal } from '@pixel-brewery/ngpel-core/storage';
 import type { ISideNavigationController } from './ISideNavigationController';
 import type { ISideNavigationControllerConfig } from './ISideNavigationControllerConfig';
@@ -243,16 +243,27 @@ export class SideNavigationController implements ISideNavigationController {
     }
 
     /**
-     * Reads the `hasNav` flag of the deepest activated route.
+     * Reads the `hasNav` flag of the deepest activated route. A controller created inside a
+     * routed component runs while the router is still activating that component's child routes,
+     * which carry no snapshot yet; the walk stops there and keeps the navigation, and the
+     * `NavigationEnd` that completes the activation reads the settled route again.
      */
     private readHasRouteNavigation(): boolean {
-        let route = this._route;
+        let route: ActivatedRoute | null = this._route;
+        let data: Data = {};
 
-        while (route.firstChild !== null) {
+        while (route !== null) {
+            const snapshot: ActivatedRouteSnapshot | undefined = route.snapshot;
+
+            if (snapshot === undefined) {
+                return true;
+            }
+
+            data = snapshot.data;
             route = route.firstChild;
         }
 
-        return route.snapshot.data[this._config.hasNavigationDataKey] !== false;
+        return data[this._config.hasNavigationDataKey] !== false;
     }
 
     /**
