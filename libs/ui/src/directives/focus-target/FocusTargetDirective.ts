@@ -1,6 +1,7 @@
 // #region Imports
 
 import { DestroyRef, Directive, effect, ElementRef, inject, input } from '@angular/core';
+import type { IFocusTargetMarker } from './IFocusTargetMarker';
 
 // #endregion
 
@@ -21,7 +22,8 @@ const DEFAULT_FOCUSABLE_SELECTOR =
  * The element that finally receives focus is the marked element itself when it is focusable,
  * otherwise its first focusable descendant; the marked element is scrolled into view either way.
  * When the host itself carries the marker it is the target, which is how a page can move focus
- * to a freshly rendered status heading.
+ * to a freshly rendered status heading. When the primary marker is absent, the directive uses
+ * the first rendered fallback marker in the supplied order.
  *
  * @example
  * ```html
@@ -90,12 +92,28 @@ export class FocusTargetDirective {
     public readonly attribute = input<string>(DEFAULT_MARKER_ATTRIBUTE, { alias: 'ngpFocusTargetAttribute' });
 
     /**
-     * The selector that identifies focusable elements within a target.
+     * Ordered alternate markers considered when the primary marker is absent.
+     *
+     * @public
+     * @readonly
+     */
+    public readonly fallbacks = input<ReadonlyArray<IFocusTargetMarker>>([], { alias: 'ngpFocusTargetFallbacks' });
+
+    /**
+     * The selector that identifies focusable descendants of a target.
      *
      * @public
      * @readonly
      */
     public readonly focusableSelector = input<string>(DEFAULT_FOCUSABLE_SELECTOR, { alias: 'ngpFocusTargetFocusable' });
+
+    /**
+     * The selector for focusing the marked element itself. Defaults to the descendant selector.
+     *
+     * @public
+     * @readonly
+     */
+    public readonly selfFocusableSelector = input<string | null>(null, { alias: 'ngpFocusTargetSelfFocusable' });
 
     /**
      * The vertical alignment used to scroll the target into view; `null` skips scrolling.
@@ -154,8 +172,7 @@ export class FocusTargetDirective {
     }
 
     private focusKey(key: string): void {
-        const selector = `[${this.attribute()}="${escapeAttributeValue(key)}"]`;
-        const target = this._host.matches(selector) ? this._host : this._host.querySelector<HTMLElement>(selector);
+        const target = this.findMarkedTarget(this.attribute(), key) ?? this.findFallbackTarget();
         if (!target) {
             return;
         }
@@ -166,13 +183,35 @@ export class FocusTargetDirective {
         }
 
         const focusable = this.focusableSelector();
-        const focusTarget = target.matches(focusable) ? target : target.querySelector<HTMLElement>(focusable);
+        const selfFocusable = this.selfFocusableSelector() ?? focusable;
+        const focusTarget = target.matches(selfFocusable) ? target : target.querySelector<HTMLElement>(focusable);
         focusTarget?.focus({ preventScroll: true });
     }
 
-    // #endregion
-}
+    private findFallbackTarget(): HTMLElement | null {
+        for (const marker of this.fallbacks()) {
+            const target = this.findMarkedTarget(marker.attribute, marker.key);
+            if (target) {
+                return target;
+            }
+        }
 
-function escapeAttributeValue(value: string): string {
-    return value.replace(/["\\]/gu, (character) => `\\${character}`);
+        return null;
+    }
+
+    private findMarkedTarget(attribute: string, key: string): HTMLElement | null {
+        if (this._host.getAttribute(attribute) === key) {
+            return this._host;
+        }
+
+        for (const target of this._host.querySelectorAll<HTMLElement>(`[${attribute}]`)) {
+            if (target.getAttribute(attribute) === key) {
+                return target;
+            }
+        }
+
+        return null;
+    }
+
+    // #endregion
 }

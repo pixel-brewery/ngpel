@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: FocusTargetDirective
 
-Defined in: [libs/ui/src/directives/focus-target/FocusTargetDirective.ts:40](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/focus-target/FocusTargetDirective.ts#L40)
+Defined in: [libs/ui/src/directives/focus-target/FocusTargetDirective.ts:42](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/focus-target/FocusTargetDirective.ts#L42)
 
 Scrolls to and focuses a descendant of the host whenever a focus key is requested.
 
@@ -15,7 +15,8 @@ schedules the focus after two animation frames so freshly rendered content has b
 The element that finally receives focus is the marked element itself when it is focusable,
 otherwise its first focusable descendant; the marked element is scrolled into view either way.
 When the host itself carries the marker it is the target, which is how a page can move focus
-to a freshly rendered status heading.
+to a freshly rendered status heading. When the primary marker is absent, the directive uses
+the first rendered fallback marker in the supplied order.
 
 ## Example
 
@@ -34,7 +35,7 @@ to a freshly rendered status heading.
 new FocusTargetDirective(elementRef?, destroyRef?): FocusTargetDirective;
 ```
 
-Defined in: [libs/ui/src/directives/focus-target/FocusTargetDirective.ts:58](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/focus-target/FocusTargetDirective.ts#L58)
+Defined in: [libs/ui/src/directives/focus-target/FocusTargetDirective.ts:60](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/focus-target/FocusTargetDirective.ts#L60)
 
 Constructs a new instance of the `FocusTargetDirective` class.
 
@@ -57,9 +58,21 @@ Constructs a new instance of the `FocusTargetDirective` class.
 readonly attribute: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/directives/focus-target/FocusTargetDirective.ts:90](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/focus-target/FocusTargetDirective.ts#L90)
+Defined in: [libs/ui/src/directives/focus-target/FocusTargetDirective.ts:92](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/focus-target/FocusTargetDirective.ts#L92)
 
 The attribute that marks focus targets (defaults to `data-focus-target`).
+
+***
+
+### fallbacks
+
+```ts
+readonly fallbacks: InputSignal<readonly IFocusTargetMarker[]>;
+```
+
+Defined in: [libs/ui/src/directives/focus-target/FocusTargetDirective.ts:100](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/focus-target/FocusTargetDirective.ts#L100)
+
+Ordered alternate markers considered when the primary marker is absent.
 
 ***
 
@@ -69,9 +82,9 @@ The attribute that marks focus targets (defaults to `data-focus-target`).
 readonly focusableSelector: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/directives/focus-target/FocusTargetDirective.ts:98](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/focus-target/FocusTargetDirective.ts#L98)
+Defined in: [libs/ui/src/directives/focus-target/FocusTargetDirective.ts:108](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/focus-target/FocusTargetDirective.ts#L108)
 
-The selector that identifies focusable elements within a target.
+The selector that identifies focusable descendants of a target.
 
 ***
 
@@ -81,7 +94,7 @@ The selector that identifies focusable elements within a target.
 readonly key: InputSignal<string | null>;
 ```
 
-Defined in: [libs/ui/src/directives/focus-target/FocusTargetDirective.ts:74](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/focus-target/FocusTargetDirective.ts#L74)
+Defined in: [libs/ui/src/directives/focus-target/FocusTargetDirective.ts:76](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/focus-target/FocusTargetDirective.ts#L76)
 
 The key of the descendant to focus; `null` or an empty string clears the pending request.
 
@@ -93,7 +106,7 @@ The key of the descendant to focus; `null` or an empty string clears the pending
 readonly request: InputSignal<number>;
 ```
 
-Defined in: [libs/ui/src/directives/focus-target/FocusTargetDirective.ts:82](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/focus-target/FocusTargetDirective.ts#L82)
+Defined in: [libs/ui/src/directives/focus-target/FocusTargetDirective.ts:84](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/focus-target/FocusTargetDirective.ts#L84)
 
 Monotonic request marker used to focus the same key again.
 
@@ -105,6 +118,18 @@ Monotonic request marker used to focus the same key again.
 readonly scrollBlock: InputSignal<ScrollLogicalPosition | null>;
 ```
 
-Defined in: [libs/ui/src/directives/focus-target/FocusTargetDirective.ts:106](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/focus-target/FocusTargetDirective.ts#L106)
+Defined in: [libs/ui/src/directives/focus-target/FocusTargetDirective.ts:124](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/focus-target/FocusTargetDirective.ts#L124)
 
 The vertical alignment used to scroll the target into view; `null` skips scrolling.
+
+***
+
+### selfFocusableSelector
+
+```ts
+readonly selfFocusableSelector: InputSignal<string | null>;
+```
+
+Defined in: [libs/ui/src/directives/focus-target/FocusTargetDirective.ts:116](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/directives/focus-target/FocusTargetDirective.ts#L116)
+
+The selector for focusing the marked element itself. Defaults to the descendant selector.

@@ -80,6 +80,8 @@ editUrl: false
 | [ICommandItem](Interface.ICommandItem) | A single executable action offered by the command palette. Features contribute command items either statically through `withSearchCommands({ commands })` or dynamically through a command source, and the surface renders them without knowing the feature that owns them. |
 | [ICommandSource](Interface.ICommandSource) | A dynamic contributor of command items. Sources are injectable classes and are asked on every query, so labels and permissions that resolve late (translations, session state) stay current. |
 | [IConsoleNotificationInterceptorConfig](Interface.IConsoleNotificationInterceptorConfig) | Options of the [ConsoleNotificationInterceptor](Class.ConsoleNotificationInterceptor). |
+| [IDictationOptions](Interface.IDictationOptions) | Options for a dictation that completes when the browser ends recognition. |
+| [IDictationResult](Interface.IDictationResult) | The final result of a browser dictation. |
 | [IExternalLinkOpener](Interface.IExternalLinkOpener) | Port for handing a URL to a new, isolated browsing context from a command context (menus, shortcuts) where no rendered link exists. Rendered links keep using anchors with `target="_blank"`; this port only owns the raw open primitive. |
 | [IFeature](Interface.IFeature) | A generic, DI-provider contributing feature. |
 | [IFeatureIncompatibilityRule](Interface.IFeatureIncompatibilityRule) | Describes an incompatibility rule between features. If `isViolated()` returns true, composition must fail fast with `message`. |
@@ -251,6 +253,7 @@ editUrl: false
 | [composeWithBase](Function.composeWithBase) | Convenience to compose a **single** base provider with features. |
 | [createFeature](Function.createFeature) | Factory to create a typed feature from metadata and static providers. |
 | [destroyBag](Function.destroyBag) | Creates a new destroy bag tied to a `DestroyRef`. Co-located with the [DestroyBag](TypeAlias.DestroyBag) type because a separate `destroyBag.ts` would collide with `DestroyBag.ts` on case-insensitive file systems. |
+| [endOfLocalDay](Function.endOfLocalDay) | Resolves the last millisecond of a local calendar day as an RFC 3339 date-time with the local offset. |
 | [enumCodec](Function.enumCodec) | Creates a codec that restricts a persisted string to a compile-time union of allowed values. |
 | [featureKind](Function.featureKind) | Brands a plain string literal as a [FeatureKind](TypeAlias.FeatureKind). Co-located with the type because a separate `featureKind.ts` would collide with `FeatureKind.ts` on case-insensitive file systems. |
 | [fromCalendarDate](Function.fromCalendarDate) | Creates the local date shown by a date control for a stored calendar day. |
@@ -288,9 +291,11 @@ editUrl: false
 | [readStorageValue](Function.readStorageValue) | Reads and parses one value from a storage area. This is the framework-free read path for call sites outside an injection context, such as bootstrap configuration. |
 | [resolveBrowserStorage](Function.resolveBrowserStorage) | Resolves a Web Storage area of a window when the accessor is usable. The accessor can throw (for example under a restrictive storage policy) and the window itself is absent outside a browser, so both cases degrade to `null` — the marker this entry point uses for "storage is unavailable", never `undefined`, which always means "not specified, resolve the default". |
 | [resolveMediaUrl](Function.resolveMediaUrl) | Resolves a root-relative backend media path against an API origin while preserving browser-local and absolute URLs. Only single-leading-slash paths are prefixed: absolute (`https://`), protocol-relative (`//cdn`), `data:` and `blob:` URLs and empty values pass through unchanged, and an empty origin keeps the path relative (local proxies). |
+| [startOfLocalDay](Function.startOfLocalDay) | Resolves the first instant of a local calendar day as an RFC 3339 date-time with the local offset. |
 | [toApiFailure](Function.toApiFailure) | Creates a failed API result envelope from a transport-agnostic failure source. When the body is a problem detail it is carried over (missing `title`/`status` members are backfilled from the response); otherwise a synthetic problem is built from the status text and message. |
 | [toApiSuccess](Function.toApiSuccess) | Creates a successful API result envelope. |
 | [toCalendarDate](Function.toCalendarDate) | Formats the local calendar day shown by a date control as `YYYY-MM-DD`. |
+| [toLocalInstant](Function.toLocalInstant) | Formats an instant as an RFC 3339 date-time with the browser's local offset, e.g. `2026-09-15T00:00:00.000+02:00`. |
 | [unwrapApiResultOrThrow](Function.unwrapApiResultOrThrow) | Emits the data of a successful API result and turns a failure into an [ApiResultError](Class.ApiResultError). |
 | [validateFeatures](Function.validateFeatures) | Validates a set of features: 1) Non-multi kinds may appear at most once. 2) IDs must be unique within the same kind. 3) Optional incompatibility rules must not be violated. |
 | [withApiOrigin](Function.withApiOrigin) | Contributes the API origin root-relative media paths are resolved against. |

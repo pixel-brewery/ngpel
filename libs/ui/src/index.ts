@@ -179,8 +179,10 @@ export type { FilterTypeValue } from './components/filter-bar/IFilterDefinition'
 export type { FilterValues } from './components/filter-bar/IFilterDefinition';
 export { flattenAdvancedFilterTree } from './components/filter-bar/filterConditions';
 export { getBooleanFilterValue } from './components/filter-bar/filterValues';
+export { getCalendarDateFilterRange } from './components/filter-bar/getCalendarDateFilterRange';
 export { getDateFilterRange } from './components/filter-bar/filterValues';
 export { getDateFilterValue } from './components/filter-bar/filterValues';
+export { getLocalDayFilterRange } from './components/filter-bar/getLocalDayFilterRange';
 export { getNumberFilterValue } from './components/filter-bar/filterValues';
 export { getOptionFilterValue } from './components/filter-bar/filterValues';
 export { getTextFilterValue } from './components/filter-bar/filterValues';
@@ -338,6 +340,7 @@ export { EyeDropperDirective } from './directives/eye-dropper/EyeDropperDirectiv
 export type { IEyeDropperColorChange } from './directives/eye-dropper/EyeDropperDirective';
 export type { IEyeDropperError } from './directives/eye-dropper/EyeDropperDirective';
 export { FocusTargetDirective } from './directives/focus-target/FocusTargetDirective';
+export type { IFocusTargetMarker } from './directives/focus-target/IFocusTargetMarker';
 export { HoverRevealForDirective } from './directives/hover-reveal-for/HoverRevealForDirective';
 export type { HoverRevealTarget } from './directives/hover-reveal-for/HoverRevealTarget';
 export type { IHasElementRef } from './directives/hover-reveal-for/IHasElementRef';
@@ -355,6 +358,7 @@ export { ScrollToErrorTriggerDirective } from './directives/scroll-to-error/Scro
 export { StopEventPropagationDirective } from './directives/stop-event-propagation/StopEventPropagationDirective';
 export type { StopEventPropagationEventName } from './directives/stop-event-propagation/StopEventPropagationEventName';
 export { toStopEventPropagationEvents } from './directives/stop-event-propagation/toStopEventPropagationEvents';
+export { SubmitOnEnterDirective } from './directives/submit-on-enter/SubmitOnEnterDirective';
 export { TypewriterDirective } from './directives/typewriter/TypewriterDirective';
 export { ValueMagnitudeDirective } from './directives/value-magnitude/ValueMagnitudeDirective';
 export { ViewSlotAnchorTargetDirective } from './directives/view-slot-anchor-target/ViewSlotAnchorTargetDirective';

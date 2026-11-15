@@ -1,6 +1,8 @@
 // #region Imports
 
 import { DOCUMENT, inject, Injectable } from '@angular/core';
+import type { IDictationOptions } from './IDictationOptions';
+import type { IDictationResult } from './IDictationResult';
 import type { ILiveVoiceTranscriber } from './ILiveVoiceTranscriber';
 import type { ILocalVoiceTranscriberOptions } from './ILocalVoiceTranscriberOptions';
 import type { ITranscriptionInput } from './ITranscriptionInput';
@@ -9,10 +11,15 @@ import { LOCAL_VOICE_TRANSCRIBER_OPTIONS } from './LOCAL_VOICE_TRANSCRIBER_OPTIO
 // #endregion
 
 /**
- * How a recognition session ends: `manual` sessions run until the user stops them, `single`
- * sessions end with the first result.
+ * How a recognition session ends. Manual sessions restart after pauses, single sessions end
+ * with the first result, and dictations finish when the browser ends the session.
  */
-type RecognitionMode = 'manual' | 'single';
+type RecognitionMode = 'manual' | 'single' | 'dictation';
+
+interface IRecognitionOutcome {
+    readonly transcript: string;
+    readonly error?: Error;
+}
 
 /**
  * Availability of an on-device dictation language pack.
@@ -91,8 +98,9 @@ export class LocalVoiceTranscriber implements ILiveVoiceTranscriber {
     private _interimTranscript = '';
     private _mode: RecognitionMode = 'single';
     private _recognition: ISpeechRecognition | null = null;
-    private _resolveSession: ((transcript: string) => void) | null = null;
-    private _sessionPromise: Promise<string> | null = null;
+    private _resolveSession: ((outcome: IRecognitionOutcome) => void) | null = null;
+    private _sessionPromise: Promise<IRecognitionOutcome> | null = null;
+    private _onTranscript: IDictationOptions['onTranscript'];
     private _stopRequested = false;
 
     // #endregion
@@ -123,6 +131,11 @@ export class LocalVoiceTranscriber implements ILiveVoiceTranscriber {
      */
     public readonly supportsLiveSessions = true as const;
 
+    /** Whether the current browser exposes its speech recognition API. */
+    public get isSupported(): boolean {
+        return this.findRecognitionConstructor() !== undefined;
+    }
+
     // #endregion
 
     // #region Methods
@@ -136,8 +149,8 @@ export class LocalVoiceTranscriber implements ILiveVoiceTranscriber {
      * @returns A promise that resolves once recognition runs.
      * @throws Error when the browser has no speech recognition or a session is already active.
      */
-    public startSession(audioTrack?: MediaStreamTrack): Promise<void> {
-        return this.beginRecognition('manual', audioTrack);
+    public async startSession(audioTrack?: MediaStreamTrack): Promise<void> {
+        await this.beginRecognition('manual', audioTrack);
     }
 
     /**
@@ -166,9 +179,7 @@ export class LocalVoiceTranscriber implements ILiveVoiceTranscriber {
             this.completeSession();
         }
 
-        await sessionPromise;
-
-        return this.readCompletedTranscript();
+        return this.readOutcome(await sessionPromise);
     }
 
     /**
@@ -183,7 +194,7 @@ export class LocalVoiceTranscriber implements ILiveVoiceTranscriber {
         this._completedTranscript = '';
         this._finalTranscript = '';
         this._interimTranscript = '';
-        this._stopRequested = true;
+        this.completeSession();
 
         if (recognition) {
             try {
@@ -192,9 +203,6 @@ export class LocalVoiceTranscriber implements ILiveVoiceTranscriber {
                 /** The recognition engine already ended and is cleaned up below. */
             }
         }
-
-        this.completeSession();
-        this._completedTranscript = '';
     }
 
     /**
@@ -208,10 +216,31 @@ export class LocalVoiceTranscriber implements ILiveVoiceTranscriber {
      * @throws Error when the browser has no speech recognition or recognition failed.
      */
     public async transcribe(_input: ITranscriptionInput): Promise<string> {
-        await this.beginRecognition('single');
-        await this._sessionPromise;
+        const { completion } = await this.beginRecognition('single');
+        return this.readOutcome(await completion);
+    }
 
-        return this.readCompletedTranscript();
+    /**
+     * Starts dictation with the browser's default recognition engine. Delivers interim updates until
+     * the browser ends the session, or the caller stops it with {@link stopSession}.
+     *
+     * @public
+     * @param options Dictation configuration and transcript callback.
+     * @returns The final transcript or the error code.
+     */
+    public async dictate(options: IDictationOptions = {}): Promise<IDictationResult> {
+        if (!this.isSupported) {
+            return { transcript: '', errorCode: 'unsupported' };
+        }
+
+        try {
+            const { completion } = await this.beginRecognition('dictation', undefined, options);
+            const result = await completion;
+
+            return result.error ? { transcript: '', errorCode: result.error.message } : { transcript: result.transcript };
+        } catch {
+            return { transcript: '', errorCode: 'start-failed' };
+        }
     }
 
     /**
@@ -219,13 +248,21 @@ export class LocalVoiceTranscriber implements ILiveVoiceTranscriber {
      *
      * @param mode Session lifetime.
      * @param audioTrack Already authorized live microphone track.
+     * @param dictation Optional dictation configuration.
      */
-    private async beginRecognition(mode: RecognitionMode, audioTrack?: MediaStreamTrack): Promise<void> {
+    private async beginRecognition(
+        mode: RecognitionMode,
+        audioTrack?: MediaStreamTrack,
+        dictation?: IDictationOptions,
+    ): Promise<{ readonly completion: Promise<IRecognitionOutcome> }> {
         if (this._sessionPromise) {
             throw new Error('A speech recognition session is already active.');
         }
 
-        const recognitionConstructor = this.resolveRecognitionConstructor();
+        const recognitionConstructor = this.findRecognitionConstructor();
+        if (!recognitionConstructor) {
+            throw new Error('SpeechRecognition API not supported in this browser.');
+        }
 
         this._completedError = null;
         this._completedTranscript = '';
@@ -235,22 +272,29 @@ export class LocalVoiceTranscriber implements ILiveVoiceTranscriber {
         this._audioTrack = audioTrack ?? null;
         this._recognition = null;
         this._stopRequested = false;
-        this._sessionPromise = new Promise<string>((resolve) => {
+        this._onTranscript = dictation?.onTranscript;
+        const completion = new Promise<IRecognitionOutcome>((resolve) => {
             this._resolveSession = resolve;
         });
+        this._sessionPromise = completion;
 
-        const sessionPromise = this._sessionPromise;
-        const processLocally = await this.prepareLocalDictation(recognitionConstructor);
+        const processLocally = mode === 'dictation' ? false : await this.prepareLocalDictation(recognitionConstructor);
 
-        if (sessionPromise !== this._sessionPromise) {
-            return;
+        if (completion !== this._sessionPromise) {
+            return { completion };
         }
 
-        const recognition = new recognitionConstructor();
+        let recognition: ISpeechRecognition;
+        try {
+            recognition = new recognitionConstructor();
+        } catch (error) {
+            this.completeSession(this.toError(error));
+            throw error;
+        }
 
-        recognition.continuous = mode === 'manual';
-        recognition.interimResults = mode === 'manual' ? true : this._interimResults;
-        recognition.lang = this._language;
+        recognition.continuous = mode === 'manual' || dictation?.continuous === true;
+        recognition.interimResults = mode !== 'single' || this._interimResults;
+        recognition.lang = dictation?.language ?? this._language;
         recognition.maxAlternatives = this._maxAlternatives;
         recognition.processLocally = processLocally;
         recognition.onend = (): void => this.onRecognitionEnd(recognition);
@@ -263,6 +307,8 @@ export class LocalVoiceTranscriber implements ILiveVoiceTranscriber {
         if (startError) {
             throw startError;
         }
+
+        return { completion };
     }
 
     /**
@@ -302,8 +348,9 @@ export class LocalVoiceTranscriber implements ILiveVoiceTranscriber {
         this._recognition = null;
         this._resolveSession = null;
         this._sessionPromise = null;
+        this._onTranscript = undefined;
         this._stopRequested = false;
-        resolve?.(this._completedTranscript);
+        resolve?.({ transcript: this._completedTranscript, error });
     }
 
     /**
@@ -338,7 +385,7 @@ export class LocalVoiceTranscriber implements ILiveVoiceTranscriber {
             return;
         }
 
-        if (this._mode === 'single' || this._stopRequested) {
+        if (this._mode !== 'manual' || this._stopRequested) {
             this.completeSession();
 
             return;
@@ -384,6 +431,7 @@ export class LocalVoiceTranscriber implements ILiveVoiceTranscriber {
         }
 
         this.collectTranscript(event);
+        this._onTranscript?.(this.joinText(this._finalTranscript, this._interimTranscript));
 
         if (this._mode === 'single') {
             this._stopRequested = true;
@@ -449,21 +497,26 @@ export class LocalVoiceTranscriber implements ILiveVoiceTranscriber {
         return this._completedTranscript;
     }
 
+    private readOutcome(outcome: IRecognitionOutcome): string {
+        if (outcome.error) {
+            if (this._completedError === outcome.error) {
+                this._completedError = null;
+            }
+
+            throw outcome.error;
+        }
+
+        return outcome.transcript;
+    }
+
     /**
      * Resolves the recognition constructor of the injected document.
      *
-     * @returns The recognition constructor.
-     * @throws Error when the browser has no speech recognition.
+     * @returns The recognition constructor, if supported.
      */
-    private resolveRecognitionConstructor(): ISpeechRecognitionConstructor {
+    private findRecognitionConstructor(): ISpeechRecognitionConstructor | undefined {
         const view = this._document.defaultView as ISpeechRecognitionWindow | null;
-        const recognitionConstructor = view?.SpeechRecognition ?? view?.webkitSpeechRecognition;
-
-        if (!recognitionConstructor) {
-            throw new Error('SpeechRecognition API not supported in this browser.');
-        }
-
-        return recognitionConstructor;
+        return view?.SpeechRecognition ?? view?.webkitSpeechRecognition;
     }
 
     /**

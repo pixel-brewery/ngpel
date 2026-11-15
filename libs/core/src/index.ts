@@ -1,9 +1,12 @@
 export type { ISignalCacheChange } from './cache/ISignalCacheChange';
 export { SignalCacheChangedReason } from './cache/SignalCacheChangedReason';
 export { SignalCacheRegistrar } from './cache/SignalCacheRegistrar';
+export { endOfLocalDay } from './date/endOfLocalDay';
 export { fromCalendarDate } from './date/fromCalendarDate';
 export { normalizeCalendarDate } from './date/normalizeCalendarDate';
+export { startOfLocalDay } from './date/startOfLocalDay';
 export { toCalendarDate } from './date/toCalendarDate';
+export { toLocalInstant } from './date/toLocalInstant';
 export { ENV } from './env/ENV';
 export type { EnvExport } from './env/EnvExport';
 export { EventHub } from './events/EventHub';

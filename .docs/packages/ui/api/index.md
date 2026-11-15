@@ -173,6 +173,7 @@ editUrl: false
 | [SheetAutoOpenDirective](Class.SheetAutoOpenDirective) | Opens a declaratively rendered sheet as soon as its Mosaik element has connected. |
 | [SignalPipe](Class.SignalPipe) | Wraps a template expression in a signal, so a plain value can be handed to an input, a directive or a helper that expects one: `<ngp-chart [series]="rows() \| ngpSignal" />`. |
 | [StopEventPropagationDirective](Class.StopEventPropagationDirective) | Stops the propagation of pointer, mouse and keyboard events at the host element, so nested interactive controls (a delete button inside a clickable row, for instance) do not trigger the surrounding handlers. |
+| [SubmitOnEnterDirective](Class.SubmitOnEnterDirective) | Submits the containing form when Enter is pressed on a marked input. |
 | [TelPipe](Class.TelPipe) | Turns a phone number into a `tel:` link target: `[href]="contact.phone \| ngpTel"`. |
 | [TextOnlyHtmlTokenizer](Class.TextOnlyHtmlTokenizer) | Drops raw HTML tokens so embedded markup falls back to plain text. The pipeline renders content that nobody in the consuming application authored, and the elements the default renderer emits put their `text` on screen through `unsafeHTML`. Refusing the tokens is what keeps that path inert; escaping the Markdown source instead would corrupt code fences, where the escapes are literal content. |
 | [TicktackPanelComponent](Class.TicktackPanelComponent) | Horizontally switches between a primary and secondary content surface. |
@@ -285,6 +286,7 @@ editUrl: false
 | [IFilterOption](Interface.IFilterOption) | Option for select-type filters. |
 | [IFloatingHostPosition](Interface.IFloatingHostPosition) | Position and size configuration for the floating host. |
 | [IFlowColumnExpansionPreference](Interface.IFlowColumnExpansionPreference) | Persistent expanded state for the columns of one flow board. |
+| [IFocusTargetMarker](Interface.IFocusTargetMarker) | Identifies a marked element in a focus target host. |
 | [IHasElementRef](Interface.IHasElementRef) | Represents any object that exposes a native element reference, which lets the hover-reveal directive accept Angular components that inject and expose their `ElementRef`. |
 | [IImageAddedEvent](Interface.IImageAddedEvent) | Event emitted when a file is selected via the file picker. |
 | [IImageCropConfig](Interface.IImageCropConfig) | Optional behavior and presentation overrides for an image crop dialog. |
@@ -529,9 +531,11 @@ editUrl: false
 | [escapeMarkdownText](Function.escapeMarkdownText) | Escapes untrusted Markdown source for a `text` attribute that the receiving element renders as HTML (Mosaik elements put such values on screen through `unsafeHTML`). The HTML parser already consumes one level of escaping while parsing the attribute, so a single pass would hand live markup to the element. Escaping twice makes embedded HTML arrive as the literal characters a reader is supposed to see. |
 | [flattenAdvancedFilterTree](Function.flattenAdvancedFilterTree) | Flattens a filter tree for list-like rendering. |
 | [getBooleanFilterValue](Function.getBooleanFilterValue) | Resolves a boolean filter value. |
+| [getCalendarDateFilterRange](Function.getCalendarDateFilterRange) | Resolves a calendar-day filter to the selected `YYYY-MM-DD` value at both bounds. |
 | [getContrastingTextColor](Function.getContrastingTextColor) | Picks the text colour that stays readable on a background colour, using the YIQ brightness of the background: dark text on a light ground, light text on a dark one. |
 | [getDateFilterRange](Function.getDateFilterRange) | Resolves a date filter to a full-day UTC range. |
 | [getDateFilterValue](Function.getDateFilterValue) | Reads the raw selected value of a date filter from a simple filter or the first matching equality or on-date rule in an advanced filter. Callers choose how to interpret the stored date. |
+| [getLocalDayFilterRange](Function.getLocalDayFilterRange) | Resolves a filter on an instant to the inclusive boundaries of the selected browser-local day. Each boundary is an RFC 3339 date-time with its own local offset. |
 | [getNumberFilterValue](Function.getNumberFilterValue) | Resolves a finite number filter value. |
 | [getOptionFilterValue](Function.getOptionFilterValue) | Resolves an option value when it is part of the allowed backend enum values. |
 | [getTextFilterValue](Function.getTextFilterValue) | Resolves a trimmed string filter value. |
