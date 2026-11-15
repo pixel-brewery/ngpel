@@ -21,7 +21,7 @@ Application foundation: the composition kernel every other package builds on, th
 ## Import Options
 
 ```typescript
-// @pixel-brewery/ngpel-core — 37 exports
+// @pixel-brewery/ngpel-core — 40 exports
 import { ApiResultError, BusyScope, BusyScopeService, composeProviders, composeWithBase, createFeature /* … */ } from '@pixel-brewery/ngpel-core';
 
 // @pixel-brewery/ngpel-core/rx — 13 exports
@@ -74,7 +74,7 @@ import {
     IUpdateIntl /* … */,
 } from '@pixel-brewery/ngpel-core/update';
 
-// @pixel-brewery/ngpel-core/audio — 50 exports
+// @pixel-brewery/ngpel-core/audio — 52 exports
 import {
     AUDIO_INPUT_DEVICE_PREFERENCE_KEY,
     AUDIO_LEVEL_WORKLET_SOURCE,

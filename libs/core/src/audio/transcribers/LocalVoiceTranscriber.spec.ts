@@ -137,7 +137,7 @@ describe('LocalVoiceTranscriber', () => {
         const transcriber = createTranscriber({ SpeechRecognition: harness.constructor });
         const result = transcriber.dictate();
         const recognition = harness.instance()!;
-        recognition.onresult?.(createResultEvent('Entwurf', false));
+        recognition.onresult?.(createResultEvent('Draft', false));
         recognition.abort.mockImplementation(() => recognition.onerror?.(createErrorEvent('aborted')));
 
         transcriber.cancelSession();
