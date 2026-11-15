@@ -23,15 +23,17 @@ const packagesData = loadPackagesAtBuildTime(docsRoot, __dirname);
 const virtualModuleId = 'virtual:packages-data';
 const resolvedVirtualModuleId = '\0' + virtualModuleId;
 
+const base = '/ngpel/';
+
 export default defineConfig({
     title: 'ngpel',
     description: 'Shared Angular frontend companion libraries — the frontend sister of Archipel.',
 
-    base: '/ngpel/',
+    base,
     srcDir: docsRoot,
     cleanUrls: true,
     lastUpdated: false,
-    appearance: 'dark',
+    appearance: true,
 
     // Vite plugin to provide packages data as a virtual module
     vite: {
@@ -56,7 +58,8 @@ export default defineConfig({
     },
 
     head: [
-        ['meta', { name: 'theme-color', content: '#ff2975' }],
+        ['meta', { name: 'theme-color', content: '#fdf9f6' }],
+        ['link', { rel: 'icon', type: 'image/png', sizes: '160x160', href: base + 'brand/mark.png' }],
         ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
         ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
         [
@@ -69,7 +72,7 @@ export default defineConfig({
     ],
 
     themeConfig: {
-        logo: undefined,
+        logo: { src: '/brand/mark.png', alt: '' },
         siteTitle: 'ngpel',
 
         nav,
