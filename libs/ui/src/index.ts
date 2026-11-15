@@ -338,6 +338,7 @@ export { EyeDropperDirective } from './directives/eye-dropper/EyeDropperDirectiv
 export type { IEyeDropperColorChange } from './directives/eye-dropper/EyeDropperDirective';
 export type { IEyeDropperError } from './directives/eye-dropper/EyeDropperDirective';
 export { FocusTargetDirective } from './directives/focus-target/FocusTargetDirective';
+export type { IFocusTargetMarker } from './directives/focus-target/IFocusTargetMarker';
 export { HoverRevealForDirective } from './directives/hover-reveal-for/HoverRevealForDirective';
 export type { HoverRevealTarget } from './directives/hover-reveal-for/HoverRevealTarget';
 export type { IHasElementRef } from './directives/hover-reveal-for/IHasElementRef';

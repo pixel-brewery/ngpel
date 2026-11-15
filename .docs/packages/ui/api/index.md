@@ -285,6 +285,7 @@ editUrl: false
 | [IFilterOption](Interface.IFilterOption) | Option for select-type filters. |
 | [IFloatingHostPosition](Interface.IFloatingHostPosition) | Position and size configuration for the floating host. |
 | [IFlowColumnExpansionPreference](Interface.IFlowColumnExpansionPreference) | Persistent expanded state for the columns of one flow board. |
+| [IFocusTargetMarker](Interface.IFocusTargetMarker) | Identifies a marked element in a focus target host. |
 | [IHasElementRef](Interface.IHasElementRef) | Represents any object that exposes a native element reference, which lets the hover-reveal directive accept Angular components that inject and expose their `ElementRef`. |
 | [IImageAddedEvent](Interface.IImageAddedEvent) | Event emitted when a file is selected via the file picker. |
 | [IImageCropConfig](Interface.IImageCropConfig) | Optional behavior and presentation overrides for an image crop dialog. |

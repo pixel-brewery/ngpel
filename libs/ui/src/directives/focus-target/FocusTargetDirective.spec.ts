@@ -5,6 +5,7 @@ import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { FocusTargetDirective } from './FocusTargetDirective';
+import type { IFocusTargetMarker } from './IFocusTargetMarker';
 
 // #endregion
 
@@ -104,6 +105,7 @@ function installFakeAnimationFrames(scope: object = globalThis): IFakeAnimationF
         <section id="host" data-focus-target="host" tabindex="-1" ngpFocusTarget>
             <div data-focus-target="name"><span>Name</span><input id="name-input" /></div>
             <div data-focus-target="mixed"><input id="mixed-input" /><button id="mixed-button" type="button">Mixed</button></div>
+            <section data-focus-target="tabbed" tabindex="-1"><button id="tabbed-button" type="button">Tabbed</button></section>
             <div data-focus-target="note"><span>No focusable child</span></div>
             <h2 id="summary" data-focus-target="summary" tabindex="-1">Summary</h2>
             <div data-key="alternate"><button id="alternate-button" type="button">Alternate</button></div>
@@ -116,6 +118,7 @@ class HostComponent {}
 describe('FocusTargetDirective', () => {
     let animationFrames: IFakeAnimationFrameInstallation;
     let attribute: WritableSignal<string>;
+    let fallbacks: WritableSignal<ReadonlyArray<IFocusTargetMarker>>;
     let fixture: ComponentFixture<HostComponent>;
     let focusableSelector: WritableSignal<string>;
     let key: WritableSignal<string | null>;
@@ -123,6 +126,7 @@ describe('FocusTargetDirective', () => {
     let request: WritableSignal<number>;
     let scrollBlock: WritableSignal<ScrollLogicalPosition | null>;
     let scrollIntoView: ReturnType<typeof vi.fn>;
+    let selfFocusableSelector: WritableSignal<string | null>;
 
     beforeEach(() => {
         animationFrames = installFakeAnimationFrames();
@@ -132,11 +136,13 @@ describe('FocusTargetDirective', () => {
         fixture = TestBed.configureTestingModule({ imports: [HostComponent] }).createComponent(HostComponent);
         const directive = fixture.debugElement.query(By.directive(FocusTargetDirective)).injector.get(FocusTargetDirective);
         attribute = signal(directive.attribute());
+        fallbacks = signal(directive.fallbacks());
         focusableSelector = signal(directive.focusableSelector());
         key = signal(directive.key());
         request = signal(directive.request());
         scrollBlock = signal(directive.scrollBlock());
-        applySignalInputs(directive, { attribute, focusableSelector, key, request, scrollBlock });
+        selfFocusableSelector = signal(directive.selfFocusableSelector());
+        applySignalInputs(directive, { attribute, fallbacks, focusableSelector, key, request, scrollBlock, selfFocusableSelector });
         fixture.detectChanges();
     });
 
@@ -329,6 +335,23 @@ describe('FocusTargetDirective', () => {
         expect(document.activeElement?.id).toBe('alternate-button');
     });
 
+    it.each([
+        ['name', 'name-input'],
+        ['missing', 'alternate-button'],
+    ])('selects the first rendered marker for %s', (primaryKey, expectedFocusedId) => {
+        fallbacks.set([
+            { attribute: 'data-key', key: 'not-rendered' },
+            { attribute: 'data-key', key: 'alternate' },
+            { attribute: 'data-focus-target', key: 'summary' },
+        ]);
+        key.set(primaryKey);
+        fixture.detectChanges();
+
+        animationFrames.flush();
+
+        expect(document.activeElement?.id).toBe(expectedFocusedId);
+    });
+
     it('focuses the first match of the default focusable selector', () => {
         // Arrange
         key.set('mixed');
@@ -354,6 +377,17 @@ describe('FocusTargetDirective', () => {
         expect(document.activeElement?.id).toBe('mixed-button');
     });
 
+    it('uses the descendant selector when the marker fails the separate self selector', () => {
+        selfFocusableSelector.set('input');
+        focusableSelector.set('[tabindex], button');
+        key.set('tabbed');
+        fixture.detectChanges();
+
+        animationFrames.flush();
+
+        expect(document.activeElement?.id).toBe('tabbed-button');
+    });
+
     it('scrolls without focusing when the focusable selector matches nothing', () => {
         // Arrange
         const previous = document.activeElement;
@@ -369,9 +403,12 @@ describe('FocusTargetDirective', () => {
         expect(document.activeElement).toBe(previous);
     });
 
-    it('escapes quotes in the key', () => {
+    it('matches quotes and line breaks in the key literally', () => {
         // Arrange
-        key.set('quo"te');
+        const markedElement = document.getElementById('quoted-button')!.parentElement!;
+        const literalKey = 'quo"te\nline';
+        markedElement.setAttribute('data-focus-target', literalKey);
+        key.set(literalKey);
         fixture.detectChanges();
 
         // Act
