@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { provideRouter, Router, type Routes } from '@angular/router';
+import { provideRouter, Router, RouterOutlet, type Routes } from '@angular/router';
+import { RouterTestingHarness } from '@angular/router/testing';
 import { BROWSER_STORAGE } from '@pixel-brewery/ngpel-core/storage';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { createSideNavigationController } from './createSideNavigationController';
@@ -133,6 +134,28 @@ const DESKTOP_QUERY = '(min-width: 960px)';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class PageHostView {}
+
+/** A routed shell that creates its controller while the router is still activating its child. */
+@Component({
+    selector: 'ngp-shell-host',
+    template: '<router-outlet />',
+    imports: [RouterOutlet],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class ShellHostView {
+    public readonly controller: ISideNavigationController = createSideNavigationController();
+}
+
+const shellRoutes: Routes = [
+    {
+        path: 'shell',
+        component: ShellHostView,
+        children: [
+            { path: 'explore', component: PageHostView },
+            { path: 'editor', component: PageHostView, data: { hasNav: false } },
+        ],
+    },
+];
 
 const routes: Routes = [
     { path: 'explore', component: PageHostView },
@@ -324,6 +347,36 @@ describe('createSideNavigationController', () => {
 
         // Assert
         expect(controller.isMobile()).toBe(true);
+    });
+
+    it('starts inside a routed shell whose child route is still activating', async () => {
+        // Arrange
+        media = installFakeMatchMedia([DESKTOP_QUERY], document.defaultView ?? globalThis);
+        TestBed.configureTestingModule({
+            providers: [provideRouter(shellRoutes), { provide: BROWSER_STORAGE, useValue: storage }],
+        });
+        const harness = await RouterTestingHarness.create();
+
+        // Act
+        const shell = await harness.navigateByUrl('/shell/explore', ShellHostView);
+
+        // Assert
+        expect(shell.controller.isNavigationOpen()).toBe(true);
+    });
+
+    it('reads the activated child route of a routed shell once its navigation ends', async () => {
+        // Arrange
+        media = installFakeMatchMedia([DESKTOP_QUERY], document.defaultView ?? globalThis);
+        TestBed.configureTestingModule({
+            providers: [provideRouter(shellRoutes), { provide: BROWSER_STORAGE, useValue: storage }],
+        });
+        const harness = await RouterTestingHarness.create();
+
+        // Act
+        const shell = await harness.navigateByUrl('/shell/editor', ShellHostView);
+
+        // Assert
+        expect(shell.controller.isNavigationOpen()).toBe(false);
     });
 
     it('refuses to be created outside an injection context', () => {
