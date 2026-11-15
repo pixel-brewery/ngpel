@@ -80,6 +80,8 @@ editUrl: false
 | [ICommandItem](Interface.ICommandItem) | A single executable action offered by the command palette. Features contribute command items either statically through `withSearchCommands({ commands })` or dynamically through a command source, and the surface renders them without knowing the feature that owns them. |
 | [ICommandSource](Interface.ICommandSource) | A dynamic contributor of command items. Sources are injectable classes and are asked on every query, so labels and permissions that resolve late (translations, session state) stay current. |
 | [IConsoleNotificationInterceptorConfig](Interface.IConsoleNotificationInterceptorConfig) | Options of the [ConsoleNotificationInterceptor](Class.ConsoleNotificationInterceptor). |
+| [IDictationOptions](Interface.IDictationOptions) | Options for a dictation that completes when the browser ends recognition. |
+| [IDictationResult](Interface.IDictationResult) | The final result of a browser dictation. |
 | [IExternalLinkOpener](Interface.IExternalLinkOpener) | Port for handing a URL to a new, isolated browsing context from a command context (menus, shortcuts) where no rendered link exists. Rendered links keep using anchors with `target="_blank"`; this port only owns the raw open primitive. |
 | [IFeature](Interface.IFeature) | A generic, DI-provider contributing feature. |
 | [IFeatureIncompatibilityRule](Interface.IFeatureIncompatibilityRule) | Describes an incompatibility rule between features. If `isViolated()` returns true, composition must fail fast with `message`. |

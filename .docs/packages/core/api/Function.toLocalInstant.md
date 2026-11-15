@@ -9,7 +9,7 @@ editUrl: false
 function toLocalInstant(value): string | undefined;
 ```
 
-Defined in: date/toLocalInstant.ts:16
+Defined in: [date/toLocalInstant.ts:16](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/date/toLocalInstant.ts#L16)
 
 Formats an instant as an RFC 3339 date-time with the browser's local offset, e.g.
 `2026-09-15T00:00:00.000+02:00`.

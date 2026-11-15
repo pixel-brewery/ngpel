@@ -9,7 +9,7 @@ editUrl: false
 function startOfLocalDay(day): string | undefined;
 ```
 
-Defined in: date/startOfLocalDay.ts:14
+Defined in: [date/startOfLocalDay.ts:14](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/date/startOfLocalDay.ts#L14)
 
 Resolves the first instant of a local calendar day as an RFC 3339 date-time with the local offset.
 

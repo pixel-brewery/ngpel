@@ -9,7 +9,7 @@ editUrl: false
 function endOfLocalDay(day): string | undefined;
 ```
 
-Defined in: date/endOfLocalDay.ts:14
+Defined in: [date/endOfLocalDay.ts:14](https://github.com/pixel-brewery/ngpel/blob/main/libs/core/src/date/endOfLocalDay.ts#L14)
 
 Resolves the last millisecond of a local calendar day as an RFC 3339 date-time with the local offset.
 

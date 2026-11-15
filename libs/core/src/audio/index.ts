@@ -40,6 +40,8 @@ export type { IAudioRecordingResult } from './recorder/IAudioRecordingResult';
 export type { ITextToSpeechOptions } from './speech/ITextToSpeechOptions';
 export { provideTextToSpeech } from './speech/provideTextToSpeech';
 export { TextToSpeechService } from './speech/TextToSpeechService';
+export type { IDictationOptions } from './transcribers/IDictationOptions';
+export type { IDictationResult } from './transcribers/IDictationResult';
 export type { ILiveVoiceTranscriber } from './transcribers/ILiveVoiceTranscriber';
 export type { ILocalVoiceTranscriberOptions } from './transcribers/ILocalVoiceTranscriberOptions';
 export { isLiveVoiceTranscriber } from './transcribers/isLiveVoiceTranscriber';

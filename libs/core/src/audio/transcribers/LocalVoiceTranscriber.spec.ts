@@ -103,6 +103,48 @@ describe('LocalVoiceTranscriber', () => {
         vi.restoreAllMocks();
     });
 
+    it('reports interim updates during dictation and completes without restarting the engine', async () => {
+        const available = vi.fn();
+        const harness = createRecognitionHarness({ available });
+        const transcriber = createTranscriber({ SpeechRecognition: harness.constructor });
+        const onTranscript = vi.fn();
+
+        const result = transcriber.dictate({ continuous: true, language: 'de-DE', onTranscript });
+        const recognition = harness.instance()!;
+        recognition.onresult?.(createResultEvent('An', false));
+        recognition.onresult?.(createResultEvent('Angebot', true));
+        recognition.onend?.(new Event('end'));
+
+        expect(onTranscript.mock.calls).toEqual([['An'], ['Angebot']]);
+        expect(await result).toEqual({ transcript: 'Angebot' });
+        expect(recognition).toMatchObject({ continuous: true, interimResults: true, lang: 'de-DE' });
+        expect(recognition.start).toHaveBeenCalledOnce();
+        expect(available).not.toHaveBeenCalled();
+    });
+
+    it('reports the browser error code when dictation fails', async () => {
+        const harness = createRecognitionHarness();
+        const transcriber = createTranscriber({ SpeechRecognition: harness.constructor });
+
+        const result = transcriber.dictate();
+        harness.instance()!.onerror?.(createErrorEvent('not-allowed'));
+
+        expect(await result).toEqual({ transcript: '', errorCode: 'not-allowed' });
+    });
+
+    it('discards a canceled dictation even when abort immediately raises an error', async () => {
+        const harness = createRecognitionHarness();
+        const transcriber = createTranscriber({ SpeechRecognition: harness.constructor });
+        const result = transcriber.dictate();
+        const recognition = harness.instance()!;
+        recognition.onresult?.(createResultEvent('Entwurf', false));
+        recognition.abort.mockImplementation(() => recognition.onerror?.(createErrorEvent('aborted')));
+
+        transcriber.cancelSession();
+
+        expect(await result).toEqual({ transcript: '' });
+    });
+
     it('recognizes one utterance and reports it as the transcript', async () => {
         // Arrange
         const harness = createRecognitionHarness({
