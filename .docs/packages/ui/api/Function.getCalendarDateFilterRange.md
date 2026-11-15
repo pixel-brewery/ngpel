@@ -9,7 +9,7 @@ editUrl: false
 function getCalendarDateFilterRange(values, key): IDateFilterRange;
 ```
 
-Defined in: libs/ui/src/components/filter-bar/getCalendarDateFilterRange.ts:14
+Defined in: [libs/ui/src/components/filter-bar/getCalendarDateFilterRange.ts:14](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/getCalendarDateFilterRange.ts#L14)
 
 Resolves a calendar-day filter to the selected `YYYY-MM-DD` value at both bounds.
 

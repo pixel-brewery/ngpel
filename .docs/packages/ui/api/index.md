@@ -173,6 +173,7 @@ editUrl: false
 | [SheetAutoOpenDirective](Class.SheetAutoOpenDirective) | Opens a declaratively rendered sheet as soon as its Mosaik element has connected. |
 | [SignalPipe](Class.SignalPipe) | Wraps a template expression in a signal, so a plain value can be handed to an input, a directive or a helper that expects one: `<ngp-chart [series]="rows() \| ngpSignal" />`. |
 | [StopEventPropagationDirective](Class.StopEventPropagationDirective) | Stops the propagation of pointer, mouse and keyboard events at the host element, so nested interactive controls (a delete button inside a clickable row, for instance) do not trigger the surrounding handlers. |
+| [SubmitOnEnterDirective](Class.SubmitOnEnterDirective) | Submits the containing form when Enter is pressed on a marked input. |
 | [TelPipe](Class.TelPipe) | Turns a phone number into a `tel:` link target: `[href]="contact.phone \| ngpTel"`. |
 | [TextOnlyHtmlTokenizer](Class.TextOnlyHtmlTokenizer) | Drops raw HTML tokens so embedded markup falls back to plain text. The pipeline renders content that nobody in the consuming application authored, and the elements the default renderer emits put their `text` on screen through `unsafeHTML`. Refusing the tokens is what keeps that path inert; escaping the Markdown source instead would corrupt code fences, where the escapes are literal content. |
 | [TicktackPanelComponent](Class.TicktackPanelComponent) | Horizontally switches between a primary and secondary content surface. |

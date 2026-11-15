@@ -358,6 +358,7 @@ export { ScrollToErrorTriggerDirective } from './directives/scroll-to-error/Scro
 export { StopEventPropagationDirective } from './directives/stop-event-propagation/StopEventPropagationDirective';
 export type { StopEventPropagationEventName } from './directives/stop-event-propagation/StopEventPropagationEventName';
 export { toStopEventPropagationEvents } from './directives/stop-event-propagation/toStopEventPropagationEvents';
+export { SubmitOnEnterDirective } from './directives/submit-on-enter/SubmitOnEnterDirective';
 export { TypewriterDirective } from './directives/typewriter/TypewriterDirective';
 export { ValueMagnitudeDirective } from './directives/value-magnitude/ValueMagnitudeDirective';
 export { ViewSlotAnchorTargetDirective } from './directives/view-slot-anchor-target/ViewSlotAnchorTargetDirective';
