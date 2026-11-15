@@ -179,8 +179,10 @@ export type { FilterTypeValue } from './components/filter-bar/IFilterDefinition'
 export type { FilterValues } from './components/filter-bar/IFilterDefinition';
 export { flattenAdvancedFilterTree } from './components/filter-bar/filterConditions';
 export { getBooleanFilterValue } from './components/filter-bar/filterValues';
+export { getCalendarDateFilterRange } from './components/filter-bar/getCalendarDateFilterRange';
 export { getDateFilterRange } from './components/filter-bar/filterValues';
 export { getDateFilterValue } from './components/filter-bar/filterValues';
+export { getLocalDayFilterRange } from './components/filter-bar/getLocalDayFilterRange';
 export { getNumberFilterValue } from './components/filter-bar/filterValues';
 export { getOptionFilterValue } from './components/filter-bar/filterValues';
 export { getTextFilterValue } from './components/filter-bar/filterValues';

@@ -530,9 +530,11 @@ editUrl: false
 | [escapeMarkdownText](Function.escapeMarkdownText) | Escapes untrusted Markdown source for a `text` attribute that the receiving element renders as HTML (Mosaik elements put such values on screen through `unsafeHTML`). The HTML parser already consumes one level of escaping while parsing the attribute, so a single pass would hand live markup to the element. Escaping twice makes embedded HTML arrive as the literal characters a reader is supposed to see. |
 | [flattenAdvancedFilterTree](Function.flattenAdvancedFilterTree) | Flattens a filter tree for list-like rendering. |
 | [getBooleanFilterValue](Function.getBooleanFilterValue) | Resolves a boolean filter value. |
+| [getCalendarDateFilterRange](Function.getCalendarDateFilterRange) | Resolves a calendar-day filter to the selected `YYYY-MM-DD` value at both bounds. |
 | [getContrastingTextColor](Function.getContrastingTextColor) | Picks the text colour that stays readable on a background colour, using the YIQ brightness of the background: dark text on a light ground, light text on a dark one. |
 | [getDateFilterRange](Function.getDateFilterRange) | Resolves a date filter to a full-day UTC range. |
 | [getDateFilterValue](Function.getDateFilterValue) | Reads the raw selected value of a date filter from a simple filter or the first matching equality or on-date rule in an advanced filter. Callers choose how to interpret the stored date. |
+| [getLocalDayFilterRange](Function.getLocalDayFilterRange) | Resolves a filter on an instant to the inclusive boundaries of the selected browser-local day. Each boundary is an RFC 3339 date-time with its own local offset. |
 | [getNumberFilterValue](Function.getNumberFilterValue) | Resolves a finite number filter value. |
 | [getOptionFilterValue](Function.getOptionFilterValue) | Resolves an option value when it is part of the allowed backend enum values. |
 | [getTextFilterValue](Function.getTextFilterValue) | Resolves a trimmed string filter value. |

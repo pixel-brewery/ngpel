@@ -251,6 +251,7 @@ editUrl: false
 | [composeWithBase](Function.composeWithBase) | Convenience to compose a **single** base provider with features. |
 | [createFeature](Function.createFeature) | Factory to create a typed feature from metadata and static providers. |
 | [destroyBag](Function.destroyBag) | Creates a new destroy bag tied to a `DestroyRef`. Co-located with the [DestroyBag](TypeAlias.DestroyBag) type because a separate `destroyBag.ts` would collide with `DestroyBag.ts` on case-insensitive file systems. |
+| [endOfLocalDay](Function.endOfLocalDay) | Resolves the last millisecond of a local calendar day as an RFC 3339 date-time with the local offset. |
 | [enumCodec](Function.enumCodec) | Creates a codec that restricts a persisted string to a compile-time union of allowed values. |
 | [featureKind](Function.featureKind) | Brands a plain string literal as a [FeatureKind](TypeAlias.FeatureKind). Co-located with the type because a separate `featureKind.ts` would collide with `FeatureKind.ts` on case-insensitive file systems. |
 | [fromCalendarDate](Function.fromCalendarDate) | Creates the local date shown by a date control for a stored calendar day. |
@@ -288,9 +289,11 @@ editUrl: false
 | [readStorageValue](Function.readStorageValue) | Reads and parses one value from a storage area. This is the framework-free read path for call sites outside an injection context, such as bootstrap configuration. |
 | [resolveBrowserStorage](Function.resolveBrowserStorage) | Resolves a Web Storage area of a window when the accessor is usable. The accessor can throw (for example under a restrictive storage policy) and the window itself is absent outside a browser, so both cases degrade to `null` — the marker this entry point uses for "storage is unavailable", never `undefined`, which always means "not specified, resolve the default". |
 | [resolveMediaUrl](Function.resolveMediaUrl) | Resolves a root-relative backend media path against an API origin while preserving browser-local and absolute URLs. Only single-leading-slash paths are prefixed: absolute (`https://`), protocol-relative (`//cdn`), `data:` and `blob:` URLs and empty values pass through unchanged, and an empty origin keeps the path relative (local proxies). |
+| [startOfLocalDay](Function.startOfLocalDay) | Resolves the first instant of a local calendar day as an RFC 3339 date-time with the local offset. |
 | [toApiFailure](Function.toApiFailure) | Creates a failed API result envelope from a transport-agnostic failure source. When the body is a problem detail it is carried over (missing `title`/`status` members are backfilled from the response); otherwise a synthetic problem is built from the status text and message. |
 | [toApiSuccess](Function.toApiSuccess) | Creates a successful API result envelope. |
 | [toCalendarDate](Function.toCalendarDate) | Formats the local calendar day shown by a date control as `YYYY-MM-DD`. |
+| [toLocalInstant](Function.toLocalInstant) | Formats an instant as an RFC 3339 date-time with the browser's local offset, e.g. `2026-09-15T00:00:00.000+02:00`. |
 | [unwrapApiResultOrThrow](Function.unwrapApiResultOrThrow) | Emits the data of a successful API result and turns a failure into an [ApiResultError](Class.ApiResultError). |
 | [validateFeatures](Function.validateFeatures) | Validates a set of features: 1) Non-multi kinds may appear at most once. 2) IDs must be unique within the same kind. 3) Optional incompatibility rules must not be violated. |
 | [withApiOrigin](Function.withApiOrigin) | Contributes the API origin root-relative media paths are resolved against. |
