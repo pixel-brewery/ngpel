@@ -1,3 +1,9 @@
+## 0.0.21 (2026-11-15)
+
+### 🩹 Fixes
+
+- **router:** tolerate an activating child route in the side navigation controller ([#15](https://github.com/pixel-brewery/ngpel/pull/15))
+
 ## 0.0.20 (2026-11-14)
 
 This was a version bump only for router to align it with other projects, there were no code changes.

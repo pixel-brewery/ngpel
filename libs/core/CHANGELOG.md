@@ -1,3 +1,10 @@
+## 0.0.21 (2026-11-15)
+
+### 🚀 Features
+
+- **audio:** share live dictation updates ([6e2a194](https://github.com/pixel-brewery/ngpel/commit/6e2a194))
+- **ui:** add local and calendar day filters ([51612c8](https://github.com/pixel-brewery/ngpel/commit/51612c8))
+
 ## 0.0.20 (2026-11-14)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
