@@ -9,7 +9,7 @@ editUrl: false
 function resolveDynamicFormLayoutClasses(layout?): string;
 ```
 
-Defined in: libs/ui/src/layout/resolveDynamicFormLayoutClasses.ts:139
+Defined in: [libs/ui/src/layout/resolveDynamicFormLayoutClasses.ts:134](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/layout/resolveDynamicFormLayoutClasses.ts#L134)
 
 Resolves semantic grid placement into statically discoverable Tailwind classes.
 

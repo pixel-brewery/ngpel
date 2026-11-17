@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: FilePreviewPipe
 
-Defined in: libs/ui/src/pipes/files/FilePreviewPipe.ts:19
+Defined in: [libs/ui/src/pipes/files/FilePreviewPipe.ts:23](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/pipes/files/FilePreviewPipe.ts#L23)
 
 Creates a lifecycle-safe Mosaik thumbnail preview for a browser file.
 
@@ -34,7 +34,7 @@ new FilePreviewPipe(): FilePreviewPipe;
 ngOnDestroy(): void;
 ```
 
-Defined in: libs/ui/src/pipes/files/FilePreviewPipe.ts:77
+Defined in: [libs/ui/src/pipes/files/FilePreviewPipe.ts:81](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/pipes/files/FilePreviewPipe.ts#L81)
 
 Releases the current browser object URL.
 
@@ -54,7 +54,7 @@ Releases the current browser object URL.
 transform(value): ThumbnailPreview;
 ```
 
-Defined in: libs/ui/src/pipes/files/FilePreviewPipe.ts:43
+Defined in: [libs/ui/src/pipes/files/FilePreviewPipe.ts:47](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/pipes/files/FilePreviewPipe.ts#L47)
 
 Converts a browser file into the Mosaik thumbnail contract.
 
