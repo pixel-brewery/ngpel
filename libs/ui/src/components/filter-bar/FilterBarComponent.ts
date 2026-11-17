@@ -28,6 +28,7 @@ import {
     CardHeaderComponent,
     CardTitleComponent,
     CheckboxComponent,
+    ConditionGroupComponent,
     DateBoxComponent,
     DialogService,
     LocaleDirective,
@@ -51,7 +52,6 @@ import {
 } from '@pixel-brewery/mosaik-elements-angular';
 import { JsonUserPreferenceCodec, USER_PREFERENCE_STORAGE, type IUserPreferenceStorage } from '@pixel-brewery/ngpel-core/storage';
 import { onceOn } from '@pixel-brewery/ngpel-core/rx';
-import { ConditionGroupComponent } from '../condition-group/ConditionGroupComponent';
 import { FilterBarComponentIntl, provideFilterBarComponentIntl } from './FilterBarComponentIntl';
 import {
     addAdvancedFilterNode,
@@ -324,7 +324,7 @@ const NO_VALUE_OPERATORS: ReadonlySet<FilterOperatorValue> = new Set<FilterOpera
                                         [class.advanced-filter-row-root]="row.depth === 0"
                                         [style.margin-left.rem]="row.depth * 0.45"
                                     >
-                                        <ngp-condition-group
+                                        <mosaik-condition-group
                                             [condition]="group.condition"
                                             [andLabel]="intl.andConditionLabel"
                                             [orLabel]="intl.orConditionLabel"
@@ -333,11 +333,12 @@ const NO_VALUE_OPERATORS: ReadonlySet<FilterOperatorValue> = new Set<FilterOpera
                                             [removeLabel]="intl.removeGroupLabel"
                                             [canRemove]="canRemoveAdvancedRow(row)"
                                             [removeVariant]="'primary'"
-                                            [testIdPrefix]="'filter-group-' + group.id"
+                                            [showLeadingLine]="false"
+                                            [attr.test-id]="'filter-group-' + group.id"
                                             (conditionChanged)="onSetAdvancedGroupCondition(group.id, $event)"
                                             (addRuleRequested)="onAddAdvancedRule(group.id)"
                                             (addGroupRequested)="onAddAdvancedGroup(group.id)"
-                                            (removeRequested)="onRemoveAdvancedNode(group.id)"
+                                            (removeGroupRequested)="onRemoveAdvancedNode(group.id)"
                                         />
                                     </div>
                                 } @else if (advancedRule(row.node); as rule) {

@@ -62,15 +62,15 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', async () => {
     ];
     const outputs = ['changed', 'checked', 'click', 'input', 'cleared', 'connected'];
 
-    function createComponent(selector: string): unknown {
+    function createComponent(selector: string, componentInputs = inputs, componentOutputs = outputs): unknown {
         class StubComponent {}
 
         angular.Component({
             selector,
             standalone: true,
             template: '<ng-content />',
-            inputs,
-            outputs,
+            inputs: componentInputs,
+            outputs: componentOutputs,
         })(StubComponent);
 
         return StubComponent;
@@ -98,6 +98,11 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', async () => {
         CardHeaderComponent: createComponent('mosaik-card-header'),
         CardTitleComponent: createComponent('mosaik-card-title'),
         CheckboxComponent: createComponent('mosaik-checkbox'),
+        ConditionGroupComponent: createComponent(
+            'mosaik-condition-group',
+            ['condition', 'andLabel', 'orLabel', 'addRuleLabel', 'addGroupLabel', 'removeLabel', 'canRemove', 'removeVariant', 'showLeadingLine'],
+            ['conditionChanged', 'addRuleRequested', 'addGroupRequested', 'removeGroupRequested'],
+        ),
         DateBoxComponent: createComponent('mosaik-datebox'),
         Cancel: {
             positive: (result?: unknown) => ({ reason: 'positive', result }),
@@ -110,7 +115,6 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', async () => {
         DialogHeaderComponent: createComponent('mosaik-dialog-header'),
         DialogHeaderDirective: createDirective('ng-template[mosaikDialogHeader]'),
         DialogService: class DialogService {},
-        LeadingLineComponent: createComponent('mosaik-leading-line'),
         NumberBoxDecimalDirective: createDirective('[mosaikDecimal]'),
         DRAWER_REF: new angular.InjectionToken('DRAWER_REF'),
         DRAWER_REF_DATA: new angular.InjectionToken('DRAWER_REF_DATA'),

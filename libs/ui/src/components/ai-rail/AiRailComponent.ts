@@ -22,6 +22,9 @@ import {
     IconNameDirective,
     PromptBoxComponent,
     PromptBoxVoiceRecorderToolComponent,
+    SectionComponent,
+    SectionContentComponent,
+    SectionHeaderComponent,
     SelectComponent,
     SelectItemComponent,
     SkeletonComponent,
@@ -33,9 +36,6 @@ import { AiRailComponentIntl, provideAiRailComponentIntl } from './AiRailCompone
 import { TypewriterDirective } from '../../directives/typewriter/TypewriterDirective';
 import { VoiceRecorderDirective } from '../../directives/voice-recorder/VoiceRecorderDirective';
 import { resolveMosaikSelectionValue } from '../../events/resolveMosaikSelectionValue';
-import { SectionComponent } from '../section/SectionComponent';
-import { SectionContentComponent } from '../section/SectionContentComponent';
-import { SectionHeaderComponent } from '../section/SectionHeaderComponent';
 import { AiRailChoiceComponent } from './AiRailChoiceComponent';
 import type { AiRailBadgeVariant } from './AiRailBadgeVariant';
 import { AiRailChoiceType } from './AiRailChoiceType';
@@ -75,9 +75,9 @@ import { mapAiRailPromptSubmittedEvent } from './mapAiRailPromptSubmittedEvent';
         <div class="flex min-h-0 flex-col gap-4">
             @if (section() === sections.CHOICES) {
                 <div class="flex flex-col gap-4" [mosaikAnimate]="'fadeSlideInRight'" [mosaikAnimateOptions]="{ duration: 240 }">
-                    <ngp-section>
-                        <ngp-section-header [header]="header()" [description]="description()" />
-                        <ngp-section-content>
+                    <mosaik-section>
+                        <mosaik-section-header [header]="header()" [description]="description()" />
+                        <mosaik-section-content>
                             <div class="flex flex-col gap-3">
                                 @for (choice of choices(); track choice.key()) {
                                     <mosaik-compound-button
@@ -105,13 +105,13 @@ import { mapAiRailPromptSubmittedEvent } from './mapAiRailPromptSubmittedEvent';
                                     }
                                 </ul>
                             </section>
-                        </ngp-section-content>
-                    </ngp-section>
+                        </mosaik-section-content>
+                    </mosaik-section>
                 </div>
             } @else if (section() === sections.CONFIGURATION) {
                 @if (activeChoice(); as choice) {
                     <div class="flex flex-col gap-4" [mosaikAnimate]="'fadeSlideInRight'" [mosaikAnimateOptions]="{ duration: 240 }">
-                        <ngp-section>
+                        <mosaik-section>
                             <mosaik-button
                                 class="self-start"
                                 [label]="backLabel()"
@@ -119,8 +119,8 @@ import { mapAiRailPromptSubmittedEvent } from './mapAiRailPromptSubmittedEvent';
                                 [appearance]="'plain'"
                                 [ngpCommand]="{ click: backCommand }"
                             />
-                            <ngp-section-header [header]="choice.label()" [description]="choice.description()" />
-                            <ngp-section-content>
+                            <mosaik-section-header [header]="choice.label()" [description]="choice.description()" />
+                            <mosaik-section-content>
                                 <div class="flex flex-col gap-3">
                                     @for (field of choice.configurationFields(); track field.key) {
                                         <mosaik-select
@@ -158,14 +158,14 @@ import { mapAiRailPromptSubmittedEvent } from './mapAiRailPromptSubmittedEvent';
                                     [disabled]="!submitConfigurationCommand.canExecute()"
                                     [ngpCommand]="{ click: submitConfigurationCommand }"
                                 />
-                            </ngp-section-content>
-                        </ngp-section>
+                            </mosaik-section-content>
+                        </mosaik-section>
                     </div>
                 }
             } @else if (section() === sections.PROMPT) {
                 @if (activeChoice(); as choice) {
                     <div class="flex flex-col gap-4" [mosaikAnimate]="'fadeSlideInRight'" [mosaikAnimateOptions]="{ duration: 240 }">
-                        <ngp-section>
+                        <mosaik-section>
                             <mosaik-button
                                 class="self-start"
                                 [label]="backLabel()"
@@ -173,8 +173,8 @@ import { mapAiRailPromptSubmittedEvent } from './mapAiRailPromptSubmittedEvent';
                                 [appearance]="'plain'"
                                 [ngpCommand]="{ click: backCommand }"
                             />
-                            <ngp-section-header [header]="choice.label()" [description]="choice.description()" />
-                            <ngp-section-content>
+                            <mosaik-section-header [header]="choice.label()" [description]="choice.description()" />
+                            <mosaik-section-content>
                                 <mosaik-prompt-box
                                     [attr.test-id]="choice.testId() ? choice.testId() + '-prompt' : null"
                                     [appearance]="'outline'"
@@ -193,15 +193,15 @@ import { mapAiRailPromptSubmittedEvent } from './mapAiRailPromptSubmittedEvent';
                                 >
                                     <mosaik-prompt-box-voice-recorder-tool ngpVoiceRecorder />
                                 </mosaik-prompt-box>
-                            </ngp-section-content>
-                        </ngp-section>
+                            </mosaik-section-content>
+                        </mosaik-section>
                     </div>
                 }
             } @else if (section() === sections.BUSY) {
                 <div class="flex flex-col gap-4" [mosaikAnimate]="'fadeSlideInRight'" [mosaikAnimateOptions]="{ duration: 240 }">
-                    <ngp-section>
-                        <ngp-section-header [header]="activeChoice()?.label() ?? header()" [description]="activeChoice()?.description() ?? description()" />
-                        <ngp-section-content>
+                    <mosaik-section>
+                        <mosaik-section-header [header]="activeChoice()?.label() ?? header()" [description]="activeChoice()?.description() ?? description()" />
+                        <mosaik-section-content>
                             <div class="flex flex-col gap-4" role="status" aria-busy="true" [attr.aria-label]="loadingLabel() || null">
                                 <div class="flex flex-col gap-2">
                                     <mosaik-skeleton [height]="'20px'" [width]="'42%'" [shimmer]="true" />
@@ -217,12 +217,12 @@ import { mapAiRailPromptSubmittedEvent } from './mapAiRailPromptSubmittedEvent';
                                     [readonly]="true"
                                 />
                             </div>
-                        </ngp-section-content>
-                    </ngp-section>
+                        </mosaik-section-content>
+                    </mosaik-section>
                 </div>
             } @else {
                 <div class="flex flex-col gap-4" [mosaikAnimate]="'fadeSlideInRight'" [mosaikAnimateOptions]="{ duration: 240 }">
-                    <ngp-section>
+                    <mosaik-section>
                         <mosaik-button
                             class="self-start"
                             [label]="backLabel()"
@@ -231,8 +231,8 @@ import { mapAiRailPromptSubmittedEvent } from './mapAiRailPromptSubmittedEvent';
                             [size]="'small'"
                             [ngpCommand]="{ click: backCommand }"
                         />
-                        <ngp-section-header [header]="activeChoice()?.label() ?? header()" [description]="activeChoice()?.description() ?? description()" />
-                        <ngp-section-content>
+                        <mosaik-section-header [header]="activeChoice()?.label() ?? header()" [description]="activeChoice()?.description() ?? description()" />
+                        <mosaik-section-content>
                             @if (hasResult()) {
                                 <div class="flex flex-col gap-4">
                                     <div class="flex flex-wrap items-center gap-2">
@@ -284,8 +284,8 @@ import { mapAiRailPromptSubmittedEvent } from './mapAiRailPromptSubmittedEvent';
                                     <mosaik-text class="text-sm" [wrap]="true" [readonly]="true" [text]="emptyText()" />
                                 </div>
                             }
-                        </ngp-section-content>
-                    </ngp-section>
+                        </mosaik-section-content>
+                    </mosaik-section>
                 </div>
             }
 

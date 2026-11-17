@@ -80,13 +80,13 @@ export class OrderListView extends View<OrderListViewPresenter> {}`,
     },
     ui: {
         tagline:
-            'The presentation layer: every component, directive and pipe the products share — the AI surfaces, the media and file components, the collection view, the guided tour and the dashboard widget grid — plus a safe markdown pipeline.',
+            'The presentation layer: every component, directive and pipe the products share — the AI surfaces, the media tools, the collection view, the guided tour and the dashboard widget grid — plus a safe markdown pipeline.',
         features: [
             '**AI surfaces** — the AI beam that marks AI-produced content (one shared frame-rate-capped loop for the whole page), the AI rail with its choice, configuration and result sections, the AI presentation directive and the typewriter.',
             '**Voice and audio** — a live waveform, an activity orb, a signal-quality indicator, the session controls, the immersive session shell with separate preparation and session content and optional idle controls, and the voice-recorder bridge onto the recorder of `ngpel-core`.',
             '**Collections** — table, flow, gallery and calendar views, persisted table column widths and visibility, managed list rows with loading and contextual actions, numeric and named filters, and CSV/Excel export.',
-            '**Forms and decisions** — configurable entity and color pickers, asynchronous input suggestions, dynamic radio and multiple-choice fields, nested condition groups, stacked compound editors, URL lists, agreement prompts and recurrence editing.',
-            '**Media and files** — file cards, lists and inline chips, image crop, markup and preview, an image editor, and a document drawer with retry, download and optional PDF rendering supplied by the host.',
+            '**Forms and decisions** — configurable entity and color pickers, asynchronous input suggestions, dynamic radio and multiple-choice fields, URL lists, agreement prompts and recurrence editing.',
+            '**Media and files** — an Angular file preview pipe, image crop, markup and preview, an image editor, and a document drawer with retry, download and optional PDF rendering supplied by the host.',
             '**Shell and navigation** — a composable navigation bar with an accessible collapse control, a separate collapsible navigation panel with a narrow-screen overlay, responsive toolbar actions, registered page paths, rails, content navigation and the floating host. Connect `NavigationCollapseToggleComponent` to `createSideNavigationController` from `ngpel-router/shell` for a persisted desktop preference.',
             '**Context drawers** — compose `provideContextOverlayRouting` with `provideContextDrawerTarget` and the application’s Mosaik drawer provider. The feature supplies its allowed modes, lazy content and how to turn the ID and context into drawer data. `resolveDetailData` can restore that data from a direct link.',
             '**Server-backed tables** — `CollectionTableRows` connects a feature-owned paged query to the Mosaik row provider. It coordinates the responsive view, refresh and stale requests. The source returns counts for every group path and receives the complete path when loading a leaf page. Bind `ngpDataTableSingleGroup` with `ngpDataTablePreferences` when the source supports grouping by one field.',
@@ -111,8 +111,15 @@ import { BytesPipe, InitialsPipe, PseudoLinkDirective } from '@pixel-brewery/ngp
     \`,
 })
 export class FileRowComponent {}`,
-        productSide:
-            'Theme tokens, translation catalogues, product-specific layouts and domain views stay in the application. For Mosaik controls, use Mosaik Angular 0.1.204 or later and import the providers from their Angular component entry points, for example `provideCalendarIntl` from `@pixel-brewery/mosaik-elements-angular/components/calendar`. Import Signal Forms validators and status classes from `@pixel-brewery/mosaik-elements-angular`. Import the providers for ngPEL components from ngPEL. Mosaik and CodeMirror are optional peers: install them only for the components that render through them.',
+        productSide: `Theme tokens, translation catalogues, product-specific layouts and domain views stay in the application. For Mosaik controls, use Mosaik Angular and Foundation 0.1.208 or later and import the providers from their Angular component entry points, for example \`provideCalendarIntl\` from \`@pixel-brewery/mosaik-elements-angular/components/calendar\`. Import Signal Forms validators and status classes from \`@pixel-brewery/mosaik-elements-angular\`. Import the providers for ngPEL components from ngPEL. Mosaik and CodeMirror are optional peers: install them only for the components that render through them.
+
+## Migrating to Mosaik controls
+
+- Import the Section, Compound, Dynamic Form, Condition Group and File families from \`@pixel-brewery/mosaik-elements-angular\`. Use their \`mosaik-*\` selectors. Import their schema types, constants and file preview functions from \`@pixel-brewery/mosaik-elements-foundation\`.
+- Compose the compound editor with \`mosaik-compound-item\` children. Use \`mosaik-data-compound\` for a collection with registered item templates. Use the published shadow parts for styling and automation. Use a vertical \`mosaik-divider\` in place of \`ngp-leading-line\`.
+- Compose \`mosaik-files\` with keyed \`mosaik-file\` children and put each \`mosaik-file-source\` in the \`sources\` slot. File actions expose the file key as \`$event.key\`; selected and rejected source events expose \`$event.files\`.
+- Bind Dynamic Form with \`[definition]\`, \`[value]\` and \`(valueChanged)\`. Read \`valid\` and \`canSubmit\` as booleans on the native element. Provide initial answers in the model if the caller needs them before the first edit. Use the field template API when a field needs a custom editor.
+- Condition Group reports \`(removeGroupRequested)\` for removal. \`FilePreviewPipe\` remains available from ngPEL for converting browser files into thumbnail previews with automatic object URL cleanup. \`resolveDynamicFormLayoutClasses\` remains available for caller-owned Tailwind layouts.`,
     },
     router: {
         tagline:

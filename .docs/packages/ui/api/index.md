@@ -53,15 +53,6 @@ editUrl: false
 | [ColorSelectorComponent](Class.ColorSelectorComponent) | A reusable color selector component with palette selection and eye dropper support. Implements ControlValueAccessor for Reactive Forms integration. |
 | [ColorSelectorComponentIntl](Class.ColorSelectorComponentIntl) | Internationalization labels for the color selector component. |
 | [CompactTextPipe](Class.CompactTextPipe) | Condenses a markdown block into a single plain-text line for list rows, tooltips and card subtitles: <code v-pre>{{ note.body \&#124; ngpCompactText }}</code>. |
-| [CompoundActionsDirective](Class.CompoundActionsDirective) | Marks a consumer-owned action template rendered beside the compound navigation. |
-| [CompoundComponent](Class.CompoundComponent) | Renders a collection with single-item, list or stacked editing and consumer-owned actions. |
-| [CompoundEmptyDirective](Class.CompoundEmptyDirective) | Marks a consumer-owned template rendered when a compound collection is empty. |
-| [CompoundItemDirective](Class.CompoundItemDirective) | Marks the template used to render the active item of a compound collection. |
-| [CompoundItemStatusDirective](Class.CompoundItemStatusDirective) | Projects status alongside a stacked compound item's heading. |
-| [CompoundItemSummaryDirective](Class.CompoundItemSummaryDirective) | Projects the heading of each stacked compound item. |
-| [CompoundListHeaderDirective](Class.CompoundListHeaderDirective) | Marks an optional consumer-owned header template for the compound list view. |
-| [CompoundListItemDirective](Class.CompoundListItemDirective) | Marks the template used to render each item in the compound list view. |
-| [ConditionGroupComponent](Class.ConditionGroupComponent) | Composes the shared And/Or group toolbar from the advanced list filters with projected domain conditions. The consumer owns its rule model, allowed operations and evaluation; nested groups reuse the common leading line. |
 | [ContentAnchorDirective](Class.ContentAnchorDirective) | Registers a semantic heading or section as an in-page navigation destination. |
 | [ContentFragmentLinkDirective](Class.ContentFragmentLinkDirective) | Builds a same-document fragment link without losing the active application route. |
 | [ContentIndicatorNavigationComponent](Class.ContentIndicatorNavigationComponent) | Renders registered content destinations as a compact Mosaik position indicator. |
@@ -79,7 +70,6 @@ editUrl: false
 | [DocumentPreviewIntl](Class.DocumentPreviewIntl) | Generic preview feedback; document names and business context come from the caller. |
 | [DocumentPreviewService](Class.DocumentPreviewService) | Opens a document in its own drawer without navigating or replacing the caller. |
 | [DrawerExteriorPlacementDirective](Class.DrawerExteriorPlacementDirective) | Places contextual drawer content outside the drawer on its leading backdrop edge. |
-| [DynamicFormComponent](Class.DynamicFormComponent) | Renders a versioned UI-owned form definition with Mosaik controls and Signal Forms. |
 | [DynamicSizeVirtualScrollDirective](Class.DynamicSizeVirtualScrollDirective) | Provides dynamic-size virtualization to a CDK viewport. |
 | [DynamicSizeVirtualScrollItemDirective](Class.DynamicSizeVirtualScrollItemDirective) | Marks one rendered item so the dynamic virtual-scroll strategy can measure it by stable key. |
 | [DynamicSizeVirtualScrollStrategy](Class.DynamicSizeVirtualScrollStrategy) | Virtual-scroll strategy for lists whose rendered items have different and changing block sizes. |
@@ -87,10 +77,7 @@ editUrl: false
 | [EntityPickerFieldComponent](Class.EntityPickerFieldComponent) | Presents the label of a selected entity and delegates choosing or clearing it to caller commands. The value of a surrounding form field can remain an identifier independent of the display text. |
 | [ExpandableMultilineDirective](Class.ExpandableMultilineDirective) | - |
 | [EyeDropperDirective](Class.EyeDropperDirective) | - |
-| [FileComponent](Class.FileComponent) | Displays one file as a Mosaik-based list row, gallery tile, full-width preview or inline chip. |
 | [FilePreviewPipe](Class.FilePreviewPipe) | Creates a lifecycle-safe Mosaik thumbnail preview for a browser file. |
-| [FilesComponent](Class.FilesComponent) | Frames a file collection, its semantic layout, and declaratively projected acquisition sources. |
-| [FileSourceComponent](Class.FileSourceComponent) | Declares one headless acquisition source rendered by a parent [FilesComponent](Class.FilesComponent). |
 | [FilterBarComponent](Class.FilterBarComponent) | A configurable, reusable filter bar for list views. Renders filter controls from [IFilterDefinition](Interface.IFilterDefinition) items and emits active filter values whenever the Signal Form changes. |
 | [FilterBarComponentIntl](Class.FilterBarComponentIntl) | Internationalization labels for the filter bar component. |
 | [FlameBackgroundComponent](Class.FlameBackgroundComponent) | Renders the decorative flame with its animated heat-haze effect. |
@@ -121,7 +108,6 @@ editUrl: false
 | [InitialsPipe](Class.InitialsPipe) | Reduces a display name to at most two upper-case initials for avatar fallbacks: <code v-pre>{{ user.displayName \&#124; ngpInitials }}</code> renders `AW` for `Andre Wehlert`. |
 | [InputHistoryNavigationDirective](Class.InputHistoryNavigationDirective) | Adds shell-like submitted-value history navigation to `mosaik-chat-prompt-box` elements. |
 | [InputSuggestionsDirective](Class.InputSuggestionsDirective) | Adds whole-field suggestions to an editable input. Selection emits the original option; the caller owns writing the selected value to its form. |
-| [LeadingLineComponent](Class.LeadingLineComponent) | Marks nested content with a narrow vertical line instead of a frame. |
 | [LegalLinksComponent](Class.LegalLinksComponent) | Renders trusted website-level legal navigation without accepting HTML content. |
 | [LiveAudioWaveformComponent](Class.LiveAudioWaveformComponent) | Renders a reusable live audio spectrum without taking ownership of its media stream. |
 | [LogoComponent](Class.LogoComponent) | The `logo` component. |
@@ -167,9 +153,6 @@ editUrl: false
 | [SavedFilterDrawerComponent](Class.SavedFilterDrawerComponent) | Drawer used to name and review a saved filter. |
 | [ScrollToErrorDirective](Class.ScrollToErrorDirective) | Defines a generic validation scope and reveals its first visible invalid control. |
 | [ScrollToErrorTriggerDirective](Class.ScrollToErrorTriggerDirective) | Triggers error navigation for a validation scope associated through the same Signal Forms state. |
-| [SectionComponent](Class.SectionComponent) | Groups a section header and its projected content while consumers configure the host as the section boundary. |
-| [SectionContentComponent](Class.SectionContentComponent) | Projects the content that belongs to a section without adding a layout box. |
-| [SectionHeaderComponent](Class.SectionHeaderComponent) | Displays a section heading with its explanatory description. |
 | [SheetAutoOpenDirective](Class.SheetAutoOpenDirective) | Opens a declaratively rendered sheet as soon as its Mosaik element has connected. |
 | [SignalPipe](Class.SignalPipe) | Wraps a template expression in a signal, so a plain value can be handed to an input, a directive or a helper that expects one: `<ngp-chart [series]="rows() \| ngpSignal" />`. |
 | [StopEventPropagationDirective](Class.StopEventPropagationDirective) | Stops the propagation of pointer, mouse and keyboard events at the host element, so nested interactive controls (a delete button inside a clickable row, for instance) do not trigger the surrounding handlers. |
@@ -253,7 +236,6 @@ editUrl: false
 | [ICollectionViewConfig](Interface.ICollectionViewConfig) | Complete collection-view configuration for a feature collection. |
 | [ICollectionViewDefinition](Interface.ICollectionViewDefinition) | Describes a view option that can be activated for a collection surface. |
 | [IColorSelectedEvent](Interface.IColorSelectedEvent) | Event emitted when a color is selected. |
-| [ICompoundItemContext](Interface.ICompoundItemContext) | Context exposed to a compound item's dynamic template. |
 | [IContentNavigationItem](Interface.IContentNavigationItem) | Describes a stable in-page destination exposed by a content navigation. |
 | [IContentNavigationViewportState](Interface.IContentNavigationViewportState) | - |
 | [IContextDrawerTarget](Interface.IContextDrawerTarget) | A feature-owned contextual overlay presented through Mosaik drawers. |
@@ -265,19 +247,10 @@ editUrl: false
 | [IDetailPanelChange](Interface.IDetailPanelChange) | - |
 | [IDocumentLayoutSymbolAppearance](Interface.IDocumentLayoutSymbolAppearance) | Presentation-only appearance contract for the compact document-layout symbol. |
 | [IDocumentPreviewRequest](Interface.IDocumentPreviewRequest) | Captures one document and the caller-owned operation that loads its bytes. Authentication, document identity and permission checks remain with the caller. |
-| [IDynamicFormDefinition](Interface.IDynamicFormDefinition) | Versioned, UI-owned definition of a dynamic form. |
-| [IDynamicFormFieldDefinition](Interface.IDynamicFormFieldDefinition) | UI-owned definition of one dynamically rendered form field. |
-| [IDynamicFormFieldLayout](Interface.IDynamicFormFieldLayout) | Responsive semantic layout for a dynamic form field. |
-| [IDynamicFormGridPlacement](Interface.IDynamicFormGridPlacement) | Semantic placement of a field in a twelve-column grid. |
-| [IDynamicFormLinkConfiguration](Interface.IDynamicFormLinkConfiguration) | UI-owned labels for a read-only dynamic link control. |
-| [IDynamicFormOption](Interface.IDynamicFormOption) | Selectable option owned by the frontend dynamic form contract. |
-| [IDynamicFormSectionDefinition](Interface.IDynamicFormSectionDefinition) | Visual section containing related dynamic form fields. |
-| [IDynamicFormValidationRule](Interface.IDynamicFormValidationRule) | UI-owned declarative validation rule for a dynamic form field. |
 | [IEmailLayoutSymbolAppearance](Interface.IEmailLayoutSymbolAppearance) | Presentation-only appearance contract for the compact email-layout symbol. |
 | [IExpandableMultilineConfiguration](Interface.IExpandableMultilineConfiguration) | Configuration supplied by the consuming view. |
 | [IEyeDropperColorChange](Interface.IEyeDropperColorChange) | - |
 | [IEyeDropperError](Interface.IEyeDropperError) | - |
-| [IFileItem](Interface.IFileItem) | Framework-independent view model rendered by the generic files container. |
 | [IFilterBarConfig](Interface.IFilterBarConfig) | Configuration for the FilterBarComponent. |
 | [IFilterColumnBinding](Interface.IFilterColumnBinding) | Binds a column key to its filter metadata. Used by [buildFilterDefinitions](Function.buildFilterDefinitions) to resolve labels from column definitions and produce [IFilterDefinition](Interface.IFilterDefinition) entries. |
 | [IFilterController](Interface.IFilterController) | Controller for list filter visibility, application and saved filters. |
@@ -390,24 +363,10 @@ editUrl: false
 | [CollectionExportFormat](TypeAlias.CollectionExportFormat) | Supported export document formats. |
 | [CollectionViewKindValue](TypeAlias.CollectionViewKindValue) | Union of all collection-view projection kinds. |
 | [CollectionViewTypeValue](TypeAlias.CollectionViewTypeValue) | Union of all built-in collection view types. |
-| [CompoundLayoutValue](TypeAlias.CompoundLayoutValue) | A supported compound layout. |
-| [CompoundViewModeValue](TypeAlias.CompoundViewModeValue) | Supported view mode value of a compound collection. |
 | [ContentNavigationScrollDirection](TypeAlias.ContentNavigationScrollDirection) | - |
 | [DetailPanelCloseReason](TypeAlias.DetailPanelCloseReason) | - |
 | [DetailPanelHandleVariant](TypeAlias.DetailPanelHandleVariant) | - |
 | [DocumentPreviewMimeType](TypeAlias.DocumentPreviewMimeType) | Media type required from a document loader before its content can be rendered. |
-| [DynamicFormControlTypeValue](TypeAlias.DynamicFormControlTypeValue) | Union of supported dynamic form renderer kinds. |
-| [DynamicFormGridSpan](TypeAlias.DynamicFormGridSpan) | Number of columns occupied in the semantic twelve-column grid. |
-| [DynamicFormGridStart](TypeAlias.DynamicFormGridStart) | One-based start column in the semantic twelve-column grid. |
-| [DynamicFormOptionValue](TypeAlias.DynamicFormOptionValue) | Scalar value supported by a dynamic select option. |
-| [DynamicFormValidationRuleKeyValue](TypeAlias.DynamicFormValidationRuleKeyValue) | Supported declarative dynamic-form validation rule key. |
-| [DynamicFormValue](TypeAlias.DynamicFormValue) | Value supported by the dynamic form renderer. |
-| [DynamicFormValues](TypeAlias.DynamicFormValues) | Values indexed by stable dynamic form field keys. |
-| [FilePresentationValue](TypeAlias.FilePresentationValue) | Union of semantic file presentation values. |
-| [FilePreviewMediaKind](TypeAlias.FilePreviewMediaKind) | Media families supported by a Mosaik file thumbnail. |
-| [FilesLayoutValue](TypeAlias.FilesLayoutValue) | Value represented by [FilesLayout](Variable.FilesLayout). |
-| [FileSourceTypeValue](TypeAlias.FileSourceTypeValue) | Value represented by [FileSourceType](Variable.FileSourceType). |
-| [FileStateValue](TypeAlias.FileStateValue) | Union of visual states supported by the file component. |
 | [FilterBarModeValue](TypeAlias.FilterBarModeValue) | Union type of all supported filter bar modes. |
 | [FilterConditionValue](TypeAlias.FilterConditionValue) | Union type of all supported advanced filter conditions. |
 | [FilterOperatorValue](TypeAlias.FilterOperatorValue) | Union type of all supported advanced filter operators. |
@@ -454,18 +413,9 @@ editUrl: false
 | [BYTES\_FALLBACK\_TEXT](Variable.BYTES_FALLBACK_TEXT) | The text [BytesPipe](Class.BytesPipe) renders for an unknown size, that is `null`, `undefined` or a non-finite number. Defaults to `0 B`; provide a translated string such as "measuring…" where a size is still being determined. |
 | [CollectionViewKind](Variable.CollectionViewKind) | Internal projection kinds supported by the collection-view factory. |
 | [CollectionViewType](Variable.CollectionViewType) | Built-in collection view types supported by ngpel. |
-| [COMPOUND\_TOUR\_TARGETS](Variable.COMPOUND_TOUR_TARGETS) | Stable signal-accessor targets exposed by every compound component. |
-| [CompoundLayout](Variable.CompoundLayout) | Layouts available to a compound collection. |
-| [CompoundViewMode](Variable.CompoundViewMode) | View modes supported by a compound collection. |
 | [DEFAULT\_CAPTCHA\_OPERATORS](Variable.DEFAULT_CAPTCHA_OPERATORS) | Default operators used when none specified. |
 | [DEFAULT\_MARKDOWN\_RENDERER](Variable.DEFAULT_MARKDOWN_RENDERER) | Default renderer instance. |
 | [DOCUMENT\_PREVIEW\_MIME\_TYPES](Variable.DOCUMENT_PREVIEW_MIME_TYPES) | Browser-renderable document media types accepted by the shared preview. Active HTML and SVG documents are deliberately excluded. |
-| [DynamicFormControlType](Variable.DynamicFormControlType) | Supported renderer kinds for a dynamic form field. |
-| [DynamicFormValidationRuleKey](Variable.DynamicFormValidationRuleKey) | Supported declarative validation rules for UI-owned dynamic forms. |
-| [FilePresentation](Variable.FilePresentation) | Semantic presentations supported by a file component. |
-| [FilesLayout](Variable.FilesLayout) | Layouts supported by the generic files container. |
-| [FileSourceType](Variable.FileSourceType) | Supported acquisition mechanisms for a declarative file source. |
-| [FileState](Variable.FileState) | Visual states supported by the file component. |
 | [FilterBarMode](Variable.FilterBarMode) | Supported filter bar modes. |
 | [FilterCondition](Variable.FilterCondition) | Logical conditions for advanced filter groups. |
 | [FilterOperator](Variable.FilterOperator) | Operators for advanced filter rules. |
@@ -507,8 +457,6 @@ editUrl: false
 | [createAdvancedFilterRule](Function.createAdvancedFilterRule) | Creates an advanced filter rule. |
 | [createCollectionView](Function.createCollectionView) | Creates a signal-based collection-view model from a declarative configuration. |
 | [createDefaultWidgetGridLayout](Function.createDefaultWidgetGridLayout) | Creates the layout a user starts with, purely from what the zones and items contribute. |
-| [createFilePreview](Function.createFilePreview) | Creates a thumbnail for a URL whose lifecycle is owned by the caller. |
-| [createFilePreviewFallback](Function.createFilePreviewFallback) | Returns a generic document thumbnail for files without a media preview. |
 | [createFilterController](Function.createFilterController) | Creates the shared controller for list filter interactions. |
 | [createFlowColumnExpansionPreference](Function.createFlowColumnExpansionPreference) | Creates a local-storage-backed flow-column expansion preference. |
 | [createImageCropSelection](Function.createImageCropSelection) | Creates a normalized rectangle independent of drag direction. |
@@ -570,7 +518,6 @@ editUrl: false
 | [resizeWidgetGridItem](Function.resizeWidgetGridItem) | Grows or shrinks one widget by a number of grid cells, clamped to the constraints the widget itself declares. A resize gesture therefore never has to be validated by the pointer code: an over-long drag simply stops at the widget's own maximum. |
 | [resolveDeclarativeTourTargetElements](Function.resolveDeclarativeTourTargetElements) | Collects the first rendered element for every declarative tour target value. |
 | [resolveDynamicFormLayoutClasses](Function.resolveDynamicFormLayoutClasses) | Resolves semantic grid placement into statically discoverable Tailwind classes. |
-| [resolveFilePreviewMediaKind](Function.resolveFilePreviewMediaKind) | Determines the thumbnail media family from MIME type, then from the file extension. |
 | [resolveMosaikSelectionValue](Function.resolveMosaikSelectionValue) | Resolves the string value selected by a Mosaik selector. |
 | [setWidgetGridItemEnabled](Function.setWidgetGridItemEnabled) | Shows or hides one widget while keeping its placement, so bringing it back puts it exactly where the user last had it. |
 | [toPositiveInteger](Function.toPositiveInteger) | - |

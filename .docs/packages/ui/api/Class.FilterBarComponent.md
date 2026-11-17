@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: FilterBarComponent
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:701](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L701)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:702](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L702)
 
 A configurable, reusable filter bar for list views.
 Renders filter controls from [IFilterDefinition](Interface.IFilterDefinition) items and emits active filter values whenever the Signal Form changes.
@@ -32,7 +32,7 @@ Renders filter controls from [IFilterDefinition](Interface.IFilterDefinition) it
 new FilterBarComponent(): FilterBarComponent;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:730](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L730)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:731](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L731)
 
 #### Returns
 
@@ -46,7 +46,7 @@ Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:730](https:
 protected readonly advancedRows: Signal<readonly IAdvancedFilterRow[]>;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:838](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L838)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:839](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L839)
 
 Rows used by the advanced condition builder.
 
@@ -58,7 +58,7 @@ Rows used by the advanced condition builder.
 readonly filterChange: OutputEmitterRef<FilterValues>;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:788](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L788)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:789](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L789)
 
 Emitted whenever any active filter value changes.
 
@@ -70,7 +70,7 @@ Emitted whenever any active filter value changes.
 readonly filters: InputSignal<readonly IFilterDefinition[]>;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:761](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L761)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:762](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L762)
 
 The filter definitions to render.
 
@@ -82,7 +82,7 @@ The filter definitions to render.
 readonly hasActiveFilters: Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:812](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L812)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:813](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L813)
 
 Whether the filter bar has any active values.
 
@@ -94,7 +94,7 @@ Whether the filter bar has any active values.
 readonly isFilterActive: Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:804](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L804)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:805](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L805)
 
 Whether the filter bar has any active values.
 
@@ -106,7 +106,7 @@ Whether the filter bar has any active values.
 protected readonly mode: Signal<FilterBarModeValue>;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:830](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L830)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:831](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L831)
 
 The currently selected filter mode.
 
@@ -118,7 +118,7 @@ The currently selected filter mode.
 readonly persistenceKey: InputSignal<string | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:769](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L769)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:770](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L770)
 
 Stable preference key used to persist active filter values.
 
@@ -130,7 +130,7 @@ Stable preference key used to persist active filter values.
 readonly savedFilterCreate: OutputEmitterRef<ISavedFilterCreateRequest>;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:796](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L796)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:797](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L797)
 
 Emitted after the save-filter drawer was confirmed.
 
@@ -142,7 +142,7 @@ Emitted after the save-filter drawer was confirmed.
 readonly saveFilterPresentation: InputSignal<"drawer" | "dialog">;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:772](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L772)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:773](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L773)
 
 Chooses the overlay used to name a saved filter.
 
@@ -154,7 +154,7 @@ Chooses the overlay used to name a saved filter.
 protected readonly sheetHeight: WritableSignal<string | null>;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:709](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L709)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:710](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L710)
 
 ***
 
@@ -164,7 +164,7 @@ Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:709](https:
 readonly value: InputSignal<FilterValues | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:780](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L780)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:781](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L781)
 
 Externally controlled filter values, for example when applying a saved filter.
 
@@ -181,7 +181,7 @@ get protected filterBarMode(): {
 };
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1227](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1227)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1228](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1228)
 
 Returns the current filter bar mode enum for template usage.
 
@@ -217,7 +217,7 @@ get protected filterType(): {
 };
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1217](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1217)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1218](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1218)
 
 Returns the current filter type enum for template usage.
 
@@ -255,7 +255,7 @@ Returns the current filter type enum for template usage.
 get intl(): FilterBarComponentIntl;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:820](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L820)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:821](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L821)
 
 Internationalized labels used by the filter bar.
 
@@ -271,7 +271,7 @@ Internationalized labels used by the filter bar.
 protected advancedField(key): () => FieldState<unknown>;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:964](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L964)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:965](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L965)
 
 Returns the advanced form field accessor for a dynamic control key.
 
@@ -293,7 +293,7 @@ Returns the advanced form field accessor for a dynamic control key.
 protected advancedGroup(node): IAdvancedFilterGroup | undefined;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1154](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1154)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1155](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1155)
 
 Returns a typed group node when applicable.
 
@@ -315,7 +315,7 @@ Returns a typed group node when applicable.
 protected advancedRule(node): IAdvancedFilterRule | undefined;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1164](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1164)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1165](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1165)
 
 Returns a typed rule node when applicable.
 
@@ -337,7 +337,7 @@ Returns a typed rule node when applicable.
 protected advancedRuleControlKey(rule, kind): string;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1175](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1175)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1176](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1176)
 
 Returns an advanced rule control key.
 
@@ -360,7 +360,7 @@ Returns an advanced rule control key.
 protected advancedRuleFilter(rule): IFilterDefinition | undefined;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1197](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1197)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1198](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1198)
 
 Returns the selected filter definition for a rule.
 
@@ -382,7 +382,7 @@ Returns the selected filter definition for a rule.
 protected advancedRuleOperatorOptions(rule): readonly IFilterOperatorOption[];
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1185](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1185)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1186](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1186)
 
 Returns available operator options for a rule.
 
@@ -404,7 +404,7 @@ readonly `IFilterOperatorOption`[]
 protected advancedRuleRequiresValue(rule): boolean;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1207](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1207)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1208](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1208)
 
 Returns whether a rule needs a value control.
 
@@ -426,7 +426,7 @@ Returns whether a rule needs a value control.
 protected canRemoveAdvancedRow(row): boolean;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1144](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1144)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1145](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1145)
 
 Returns whether a flattened advanced row can be removed.
 
@@ -448,7 +448,7 @@ Returns whether a flattened advanced row can be removed.
 protected field(key): () => FieldState<unknown>;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:912](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L912)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:913](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L913)
 
 Returns the field accessor for a dynamic filter key.
 
@@ -470,7 +470,7 @@ Returns the field accessor for a dynamic filter key.
 ngAfterViewInit(): void;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:844](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L844)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:845](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L845)
 
 A callback method that is invoked immediately after
 Angular has completed initialization of a component's view.
@@ -492,7 +492,7 @@ It is invoked only once when the view is instantiated.
 ngOnChanges(): void;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:883](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L883)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:884](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L884)
 
 Synchronizes dynamic form fields after input changes.
 
@@ -512,7 +512,7 @@ Synchronizes dynamic form fields after input changes.
 ngOnInit(): void;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:897](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L897)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:898](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L898)
 
 Synchronizes dynamic form fields before the first view render.
 
@@ -532,7 +532,7 @@ Synchronizes dynamic form fields before the first view render.
 protected numberValue(field): number | null;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:934](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L934)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:935](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L935)
 
 Reads a controlled numeric field without treating an empty value as zero.
 
@@ -554,7 +554,7 @@ Reads a controlled numeric field without treating an empty value as zero.
 protected onAddAdvancedGroup(groupId): void;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1084](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1084)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1085](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1085)
 
 Adds a nested group to an advanced group.
 
@@ -576,7 +576,7 @@ Adds a nested group to an advanced group.
 protected onAddAdvancedRule(groupId): void;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1067](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1067)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1068](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1068)
 
 Adds a rule to an advanced group.
 
@@ -598,7 +598,7 @@ Adds a rule to an advanced group.
 protected onAdvancedRuleFieldChanged(rule): void;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1124](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1124)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1125](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1125)
 
 Normalizes rule operator/value after the field select changes.
 
@@ -620,7 +620,7 @@ Normalizes rule operator/value after the field select changes.
 protected onModeChanged(mode): void;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1052](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1052)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1053](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1053)
 
 Switches between standard and advanced mode.
 
@@ -646,7 +646,7 @@ protected onNumberInput(
 ): void;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:952](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L952)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:953](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L953)
 
 Updates the controlled value only for a valid number or explicit clear.
 
@@ -670,7 +670,7 @@ Updates the controlled value only for a valid number or explicit clear.
 protected onRemoveAdvancedNode(nodeId): void;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1098](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1098)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1099](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1099)
 
 Removes a rule or group.
 
@@ -692,7 +692,7 @@ Removes a rule or group.
 protected onReset(): void;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:984](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L984)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:985](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L985)
 
 Resets all filter values.
 
@@ -708,7 +708,7 @@ Resets all filter values.
 protected onSaveFilter(): void;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1007](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1007)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1008](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1008)
 
 Opens the overlay used to save the current filter values.
 
@@ -724,7 +724,7 @@ Opens the overlay used to save the current filter values.
 protected onSetAdvancedGroupCondition(groupId, condition): void;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1114](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1114)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1115](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1115)
 
 Updates a group condition.
 
@@ -747,7 +747,7 @@ Updates a group condition.
 protected restoreEmptyNumber(numberBox, field): void;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:940](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L940)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:941](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L941)
 
 Restores an empty display after the initial Mosaik update.
 
@@ -770,7 +770,7 @@ Restores an empty display after the initial Mosaik update.
 protected selectionValue(key): string | null;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:928](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L928)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:929](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L929)
 
 Reads the controlled select value, keeping an empty selection separate from a filter option.
 
@@ -792,7 +792,7 @@ Reads the controlled select value, keeping an empty selection separate from a fi
 protected standardFilterTrackKey(filter): string;
 ```
 
-Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1134](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1134)
+Defined in: [libs/ui/src/components/filter-bar/FilterBarComponent.ts:1135](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/filter-bar/FilterBarComponent.ts#L1135)
 
 Returns a standard filter track key.
 

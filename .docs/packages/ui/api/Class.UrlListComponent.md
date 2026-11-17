@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: UrlListComponent\<TCategory\>
 
-Defined in: [libs/ui/src/components/url-list/UrlListComponent.ts:146](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/UrlListComponent.ts#L146)
+Defined in: [libs/ui/src/components/url-list/UrlListComponent.ts:150](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/UrlListComponent.ts#L150)
 
 Edits categorized web links with caller-owned Signal Forms state, choices and mutations.
 
@@ -29,13 +29,25 @@ new UrlListComponent<TCategory>(): UrlListComponent<TCategory>;
 
 ## Properties
 
+### activeIndex
+
+```ts
+protected readonly activeIndex: WritableSignal<number>;
+```
+
+Defined in: [libs/ui/src/components/url-list/UrlListComponent.ts:173](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/UrlListComponent.ts#L173)
+
+Keeps category option automation hooks on the active editor.
+
+***
+
 ### addRequested
 
 ```ts
 readonly addRequested: OutputEmitterRef<void>;
 ```
 
-Defined in: [libs/ui/src/components/url-list/UrlListComponent.ts:164](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/UrlListComponent.ts#L164)
+Defined in: [libs/ui/src/components/url-list/UrlListComponent.ts:168](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/UrlListComponent.ts#L168)
 
 Requests an additional row from the caller.
 
@@ -47,7 +59,7 @@ Requests an additional row from the caller.
 protected readonly canAdd: Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/url-list/UrlListComponent.ts:168](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/UrlListComponent.ts#L168)
+Defined in: [libs/ui/src/components/url-list/UrlListComponent.ts:175](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/UrlListComponent.ts#L175)
 
 ***
 
@@ -57,7 +69,7 @@ Defined in: [libs/ui/src/components/url-list/UrlListComponent.ts:168](https://gi
 readonly controlsInHeader: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/url-list/UrlListComponent.ts:156](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/UrlListComponent.ts#L156)
+Defined in: [libs/ui/src/components/url-list/UrlListComponent.ts:160](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/UrlListComponent.ts#L160)
 
 Places collection actions in the heading instead of beneath the active URL.
 
@@ -69,7 +81,7 @@ Places collection actions in the heading instead of beneath the active URL.
 readonly disabled: InputSignal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/url-list/UrlListComponent.ts:158](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/UrlListComponent.ts#L158)
+Defined in: [libs/ui/src/components/url-list/UrlListComponent.ts:162](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/UrlListComponent.ts#L162)
 
 Disables editing and collection mutations. Valid links can still be opened.
 
@@ -81,7 +93,7 @@ Disables editing and collection mutations. Valid links can still be opened.
 readonly fields: InputSignal<FieldTree<IUrlFormData<TCategory>[]>>;
 ```
 
-Defined in: [libs/ui/src/components/url-list/UrlListComponent.ts:150](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/UrlListComponent.ts#L150)
+Defined in: [libs/ui/src/components/url-list/UrlListComponent.ts:154](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/UrlListComponent.ts#L154)
 
 The editable collection owned by the calling feature.
 
@@ -93,7 +105,7 @@ The editable collection owned by the calling feature.
 readonly labels: InputSignal<IUrlListLabels>;
 ```
 
-Defined in: [libs/ui/src/components/url-list/UrlListComponent.ts:154](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/UrlListComponent.ts#L154)
+Defined in: [libs/ui/src/components/url-list/UrlListComponent.ts:158](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/UrlListComponent.ts#L158)
 
 Translated presentation text supplied by the caller.
 
@@ -105,7 +117,7 @@ Translated presentation text supplied by the caller.
 readonly maximumItems: InputSignal<number | null>;
 ```
 
-Defined in: [libs/ui/src/components/url-list/UrlListComponent.ts:160](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/UrlListComponent.ts#L160)
+Defined in: [libs/ui/src/components/url-list/UrlListComponent.ts:164](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/UrlListComponent.ts#L164)
 
 Optional collection limit for the add action.
 
@@ -120,7 +132,7 @@ readonly options: InputSignal<readonly {
 }[]>;
 ```
 
-Defined in: [libs/ui/src/components/url-list/UrlListComponent.ts:152](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/UrlListComponent.ts#L152)
+Defined in: [libs/ui/src/components/url-list/UrlListComponent.ts:156](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/UrlListComponent.ts#L156)
 
 Categories available for each URL.
 
@@ -132,7 +144,7 @@ Categories available for each URL.
 readonly removeRequested: OutputEmitterRef<number>;
 ```
 
-Defined in: [libs/ui/src/components/url-list/UrlListComponent.ts:166](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/UrlListComponent.ts#L166)
+Defined in: [libs/ui/src/components/url-list/UrlListComponent.ts:170](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/UrlListComponent.ts#L170)
 
 Requests removal of one row by index.
 
@@ -144,7 +156,7 @@ Requests removal of one row by index.
 readonly testIdPrefix: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/url-list/UrlListComponent.ts:162](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/UrlListComponent.ts#L162)
+Defined in: [libs/ui/src/components/url-list/UrlListComponent.ts:166](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/UrlListComponent.ts#L166)
 
 Prefix for automation hooks.
 
@@ -161,7 +173,7 @@ protected row(index):
   | undefined;
 ```
 
-Defined in: [libs/ui/src/components/url-list/UrlListComponent.ts:177](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/UrlListComponent.ts#L177)
+Defined in: [libs/ui/src/components/url-list/UrlListComponent.ts:184](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/UrlListComponent.ts#L184)
 
 #### Parameters
 
@@ -185,7 +197,7 @@ Defined in: [libs/ui/src/components/url-list/UrlListComponent.ts:177](https://gi
 protected webLink(value): string | null;
 ```
 
-Defined in: [libs/ui/src/components/url-list/UrlListComponent.ts:183](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/UrlListComponent.ts#L183)
+Defined in: [libs/ui/src/components/url-list/UrlListComponent.ts:190](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/url-list/UrlListComponent.ts#L190)
 
 #### Parameters
 

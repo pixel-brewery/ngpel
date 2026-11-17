@@ -1,7 +1,11 @@
-import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
+// #region Imports
+
+import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core';
 import type { FieldTree } from '@angular/forms/signals';
 import {
     AnchorComponent,
+    CompoundComponent,
+    CompoundItemComponent,
     FormFieldComponent,
     FormFieldDirective,
     FormFieldStateDirective,
@@ -10,10 +14,10 @@ import {
     TextBoxComponent,
     ToggleSwitchComponent,
 } from '@pixel-brewery/mosaik-elements-angular';
-import { CompoundComponent } from '../compound/CompoundComponent';
-import { CompoundItemDirective } from '../compound/CompoundItemDirective';
 import type { IUrlFormData } from './IUrlFormData';
 import type { IUrlListLabels } from './IUrlListLabels';
+
+// #endregion
 
 /**
  * Edits categorized web links with caller-owned Signal Forms state, choices and mutations.
@@ -25,7 +29,7 @@ import type { IUrlListLabels } from './IUrlListLabels';
     imports: [
         AnchorComponent,
         CompoundComponent,
-        CompoundItemDirective,
+        CompoundItemComponent,
         FormFieldComponent,
         FormFieldDirective,
         FormFieldStateDirective,
@@ -35,11 +39,12 @@ import type { IUrlListLabels } from './IUrlListLabels';
         ToggleSwitchComponent,
     ],
     template: `
-        <ngp-compound
-            [title]="labels().title"
+        <mosaik-compound
+            layout="paged"
+            viewMode="single"
+            [header]="labels().title"
             [description]="labels().description"
             [controlsInHeader]="controlsInHeader()"
-            [items]="fields()().value()"
             [addLabel]="labels().add"
             [deleteLabel]="labels().remove"
             [previousLabel]="labels().previous"
@@ -47,84 +52,83 @@ import type { IUrlListLabels } from './IUrlListLabels';
             [canAdd]="canAdd()"
             [canDelete]="!disabled()"
             [selectLastOnCollectionGrowth]="true"
-            [addTestId]="testIdPrefix() + '-add'"
-            [deleteTestId]="testIdPrefix() + '-delete'"
-            [previousTestId]="testIdPrefix() + '-previous'"
-            [nextTestId]="testIdPrefix() + '-next'"
-            [itemsTestId]="testIdPrefix() + '-items'"
             (addRequested)="addRequested.emit()"
             (deleteRequested)="removeRequested.emit($event.index)"
+            (selectedIndexChanged)="activeIndex.set($event)"
         >
-            <ng-template ngpCompoundItem let-index="index">
+            <span slot="empty" hidden></span>
+            @for (item of fields()().value(); track $index; let index = $index) {
                 @if (row(index); as field) {
-                    <div part="fields">
-                        <div part="identity">
-                            <mosaik-form-field [fieldState]="field.type()">
-                                <mosaik-select
-                                    [formField]="field.type"
-                                    [label]="labels().type"
+                    <mosaik-compound-item>
+                        <div part="fields">
+                            <div part="identity">
+                                <mosaik-form-field [fieldState]="field.type()">
+                                    <mosaik-select
+                                        [formField]="field.type"
+                                        [label]="labels().type"
+                                        [required]="true"
+                                        [disabled]="disabled()"
+                                        [attr.test-id]="testIdPrefix() + '-type-' + index"
+                                    >
+                                        @for (option of options(); track option.value) {
+                                            <mosaik-select-item
+                                                [value]="option.value"
+                                                [label]="option.label"
+                                                [attr.test-id]="activeIndex() === index ? testIdPrefix() + '-option-' + option.value : null"
+                                            />
+                                        }
+                                    </mosaik-select>
+                                </mosaik-form-field>
+                                <mosaik-form-field [fieldState]="field.label()">
+                                    <mosaik-textbox
+                                        [formField]="field.label"
+                                        [label]="labels().label"
+                                        [disabled]="disabled()"
+                                        [attr.test-id]="testIdPrefix() + '-label-' + index"
+                                    />
+                                </mosaik-form-field>
+                            </div>
+                            <mosaik-form-field [fieldState]="field.url()">
+                                <mosaik-textbox
+                                    [formField]="field.url"
+                                    [label]="labels().url"
                                     [required]="true"
                                     [disabled]="disabled()"
-                                    [attr.test-id]="testIdPrefix() + '-type-' + index"
-                                >
-                                    @for (option of options(); track option.value) {
-                                        <mosaik-select-item
-                                            [value]="option.value"
-                                            [label]="option.label"
-                                            [attr.test-id]="testIdPrefix() + '-option-' + option.value"
-                                        />
-                                    }
-                                </mosaik-select>
+                                    [attr.test-id]="testIdPrefix() + '-value-' + index"
+                                />
                             </mosaik-form-field>
-                            <mosaik-form-field [fieldState]="field.label()">
-                                <mosaik-textbox
-                                    [formField]="field.label"
-                                    [label]="labels().label"
+                            @if (field.url().valid()) {
+                                @if (webLink(field.url().value()); as href) {
+                                    <mosaik-anchor
+                                        [href]="href"
+                                        [label]="labels().open"
+                                        [target]="'_blank'"
+                                        [rel]="'noopener noreferrer'"
+                                        [attr.test-id]="testIdPrefix() + '-open-' + index"
+                                    />
+                                }
+                            }
+                            <mosaik-form-field [fieldState]="field.isPrimary()">
+                                <mosaik-toggle-switch
+                                    [formField]="field.isPrimary"
+                                    [label]="labels().primary"
                                     [disabled]="disabled()"
-                                    [attr.test-id]="testIdPrefix() + '-label-' + index"
+                                    [attr.test-id]="testIdPrefix() + '-primary-' + index"
+                                />
+                            </mosaik-form-field>
+                            <mosaik-form-field [fieldState]="field.isActive()">
+                                <mosaik-toggle-switch
+                                    [formField]="field.isActive"
+                                    [label]="labels().active"
+                                    [disabled]="disabled()"
+                                    [attr.test-id]="testIdPrefix() + '-active-' + index"
                                 />
                             </mosaik-form-field>
                         </div>
-                        <mosaik-form-field [fieldState]="field.url()">
-                            <mosaik-textbox
-                                [formField]="field.url"
-                                [label]="labels().url"
-                                [required]="true"
-                                [disabled]="disabled()"
-                                [attr.test-id]="testIdPrefix() + '-value-' + index"
-                            />
-                        </mosaik-form-field>
-                        @if (field.url().valid()) {
-                            @if (webLink(field.url().value()); as href) {
-                                <mosaik-anchor
-                                    [href]="href"
-                                    [label]="labels().open"
-                                    [target]="'_blank'"
-                                    [rel]="'noopener noreferrer'"
-                                    [attr.test-id]="testIdPrefix() + '-open-' + index"
-                                />
-                            }
-                        }
-                        <mosaik-form-field [fieldState]="field.isPrimary()">
-                            <mosaik-toggle-switch
-                                [formField]="field.isPrimary"
-                                [label]="labels().primary"
-                                [disabled]="disabled()"
-                                [attr.test-id]="testIdPrefix() + '-primary-' + index"
-                            />
-                        </mosaik-form-field>
-                        <mosaik-form-field [fieldState]="field.isActive()">
-                            <mosaik-toggle-switch
-                                [formField]="field.isActive"
-                                [label]="labels().active"
-                                [disabled]="disabled()"
-                                [attr.test-id]="testIdPrefix() + '-active-' + index"
-                            />
-                        </mosaik-form-field>
-                    </div>
+                    </mosaik-compound-item>
                 }
-            </ng-template>
-        </ngp-compound>
+            }
+        </mosaik-compound>
     `,
     styles: `
         :host {
@@ -164,6 +168,9 @@ export class UrlListComponent<TCategory extends string = string> {
     public readonly addRequested = output<void>();
     /** Requests removal of one row by index. */
     public readonly removeRequested = output<number>();
+
+    /** Keeps category option automation hooks on the active editor. */
+    protected readonly activeIndex = signal(0);
 
     protected readonly canAdd = computed(() => {
         const limit = this.maximumItems();

@@ -9,7 +9,7 @@ editUrl: false
 function resolveDynamicFormLayoutClasses(layout?): string;
 ```
 
-Defined in: [libs/ui/src/components/dynamic-form/resolveDynamicFormLayoutClasses.ts:137](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/dynamic-form/resolveDynamicFormLayoutClasses.ts#L137)
+Defined in: libs/ui/src/layout/resolveDynamicFormLayoutClasses.ts:139
 
 Resolves semantic grid placement into statically discoverable Tailwind classes.
 
@@ -17,7 +17,7 @@ Resolves semantic grid placement into statically discoverable Tailwind classes.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `layout?` | [`IDynamicFormFieldLayout`](Interface.IDynamicFormFieldLayout) | Responsive field layout. |
+| `layout?` | `IDynamicFormFieldLayout` | Responsive field layout. |
 
 ## Returns
 

@@ -3,7 +3,11 @@
 import { DOCUMENT } from '@angular/common';
 import { inject, type OnDestroy, Pipe, type PipeTransform } from '@angular/core';
 import type { ThumbnailPreview } from '@pixel-brewery/mosaik-elements-foundation';
-import { createFilePreview, createFilePreviewFallback, resolveFilePreviewMediaKind } from './FilePreview';
+import {
+    createFilePreview,
+    createFilePreviewFallback,
+    resolveFilePreviewMediaKind,
+} from '@pixel-brewery/mosaik-elements-foundation/dist/controls/components/inputs/files/FilePreview';
 
 // #endregion
 

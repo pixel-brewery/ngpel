@@ -194,7 +194,7 @@ Disables every control except while an end request is already busy.
 ### endActivation
 
 ```ts
-readonly endActivation: InputSignal<"click" | "hold">;
+readonly endActivation: InputSignal<"hold" | "click">;
 ```
 
 Defined in: [libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts:340](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/voice-session-controls/VoiceSessionControlsComponent.ts#L340)

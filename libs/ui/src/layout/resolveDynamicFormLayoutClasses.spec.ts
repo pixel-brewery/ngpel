@@ -1,7 +1,7 @@
 // #region Imports
 
 import { describe, expect, it } from 'vitest';
-import type { IDynamicFormFieldLayout } from './IDynamicFormFieldLayout';
+import type { IDynamicFormFieldLayout } from '@pixel-brewery/mosaik-elements-foundation';
 import { resolveDynamicFormLayoutClasses } from './resolveDynamicFormLayoutClasses';
 
 // #endregion

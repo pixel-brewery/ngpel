@@ -62,7 +62,7 @@ Optionally maps safe Markdown destinations to application routes.
 ### mode
 
 ```ts
-readonly mode: InputSignal<"inline" | "document">;
+readonly mode: InputSignal<"document" | "inline">;
 ```
 
 Defined in: [libs/ui/src/components/markdown/MarkdownComponent.ts:626](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/markdown/MarkdownComponent.ts#L626)

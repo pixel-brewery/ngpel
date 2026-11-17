@@ -1,9 +1,6 @@
 // #region Imports
 
-import type { DynamicFormGridSpan } from './DynamicFormGridSpan';
-import type { DynamicFormGridStart } from './DynamicFormGridStart';
-import type { IDynamicFormFieldLayout } from './IDynamicFormFieldLayout';
-import type { IDynamicFormGridPlacement } from './IDynamicFormGridPlacement';
+import type { DynamicFormGridSpan, DynamicFormGridStart, IDynamicFormFieldLayout, IDynamicFormGridPlacement } from '@pixel-brewery/mosaik-elements-foundation';
 
 // #endregion
 
