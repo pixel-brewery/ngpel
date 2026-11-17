@@ -65,7 +65,9 @@ import type { ILegalLink } from './ILegalLink';
             display: block;
         }
 
-        [part='navigation'][data-tone='inverse'] [part='link'] {
+        // The text declares its own foreground token on its host, so the inverse colour is set on the text itself:
+        // a value inherited from the surrounding link never reaches it.
+        [part='navigation'][data-tone='inverse'] [part='link'] mosaik-text {
             --text-foreground-color: var(--ngp-legal-links-inverse-foreground, var(--mosaik-color-neutral-0));
         }
 
