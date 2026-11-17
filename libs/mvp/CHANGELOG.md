@@ -1,3 +1,16 @@
+## 0.0.24 (2026-11-17)
+
+### 🚀 Features
+
+- ⚠️  **ui:** adopt Mosaik 0.1.208 controls ([ae0038d](https://github.com/pixel-brewery/ngpel/commit/ae0038d))
+
+### ⚠️  Breaking Changes
+
+- **ui:** adopt Mosaik 0.1.208 controls  ([ae0038d](https://github.com/pixel-brewery/ngpel/commit/ae0038d))
+  Import Section, Compound, Dynamic Form, Condition Group
+  and the File controls and their types from Mosaik. Replace LeadingLine
+  with a vertical Mosaik Divider.
+
 ## 0.0.23 (2026-11-15)
 
 This was a version bump only for mvp to align it with other projects, there were no code changes.
