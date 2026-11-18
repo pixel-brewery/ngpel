@@ -15,6 +15,7 @@ describe('CommandDirective', () => {
     let bindings: WritableSignal<Readonly<Record<string, Command<unknown>>>>;
     let commandParameter: WritableSignal<unknown>;
     let commandParameterFromEvent: WritableSignal<((event: unknown) => unknown) | undefined>;
+    let disabled: WritableSignal<boolean | null | undefined>;
 
     beforeEach(() => {
         element = document.createElement('button');
@@ -23,6 +24,7 @@ describe('CommandDirective', () => {
         bindings = signal<Readonly<Record<string, Command<unknown>>>>({});
         commandParameter = signal<unknown>(undefined);
         commandParameterFromEvent = signal<((event: unknown) => unknown) | undefined>(undefined);
+        disabled = signal<boolean | null | undefined>(undefined);
 
         TestBed.configureTestingModule({
             providers: [CommandDirective, { provide: ElementRef, useValue: new ElementRef(element) }],
@@ -35,6 +37,7 @@ describe('CommandDirective', () => {
         Object.defineProperty(directive, 'commandParameterFromEvent', { value: commandParameterFromEvent });
         Object.defineProperty(directive, 'preventDefault', { value: signal(true) });
         Object.defineProperty(directive, 'stopPropagation', { value: signal(true) });
+        Object.defineProperty(directive, 'disabled', { value: disabled });
         TestBed.tick();
     });
 
@@ -148,5 +151,46 @@ describe('CommandDirective', () => {
 
         // Assert
         expect(bindModifierEvent).toThrowError(/modifier events are not supported/);
+    });
+
+    it('disables the host while its click command cannot execute and enables it again once it can', () => {
+        // Arrange
+        const available = signal(false);
+        bindings.set({ click: command(() => undefined, available) });
+
+        // Act
+        TestBed.tick();
+        const whileUnavailable = (element as HTMLButtonElement).disabled;
+        available.set(true);
+        TestBed.tick();
+
+        // Assert
+        expect(whileUnavailable).toBe(true);
+        expect((element as HTMLButtonElement).disabled).toBe(false);
+    });
+
+    it('keeps the host disabled by its own binding even when the command can execute', () => {
+        // Arrange
+        bindings.set({ click: save });
+        disabled.set(true);
+
+        // Act
+        TestBed.tick();
+
+        // Assert
+        expect((element as HTMLButtonElement).disabled).toBe(true);
+    });
+
+    it('leaves the host enabled for bindings without a click command', () => {
+        // Arrange
+        bindings.set({
+            revealed: command(() => undefined, signal(false)),
+        });
+
+        // Act
+        TestBed.tick();
+
+        // Assert
+        expect((element as HTMLButtonElement).disabled).toBe(false);
     });
 });

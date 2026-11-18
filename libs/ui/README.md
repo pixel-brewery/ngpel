@@ -7,8 +7,8 @@ The presentation layer: every component, directive and pipe the products share �
 - **AI surfaces** — the AI beam that marks AI-produced content (one shared frame-rate-capped loop for the whole page), the AI rail with its choice, configuration and result sections, the AI presentation directive and the typewriter.
 - **Voice and audio** — a live waveform, an activity orb, a signal-quality indicator, the session controls, the immersive session shell with separate preparation and session content and optional idle controls, and the voice-recorder bridge onto the recorder of `ngpel-core`.
 - **Collections** — table, flow, gallery and calendar views, persisted table column widths and visibility, managed list rows with loading and contextual actions, numeric and named filters, and CSV/Excel export.
-- **Forms and decisions** — configurable entity and color pickers, asynchronous input suggestions, dynamic radio and multiple-choice fields, URL lists, agreement prompts and recurrence editing.
-- **Media and files** — an Angular file preview pipe, image crop, markup and preview, an image editor, and a document drawer with retry, download and optional PDF rendering supplied by the host.
+- **Forms and decisions** — configurable entity and color pickers, asynchronous input suggestions and dynamic radio and multiple-choice fields.
+- **Media and files** — an Angular file preview pipe, image crop, markup and preview, and an image editor.
 - **Shell and navigation** — a composable navigation bar with an accessible collapse control, a separate collapsible navigation panel with a narrow-screen overlay, responsive toolbar actions, registered page paths, rails, content navigation and the floating host. Connect `NavigationCollapseToggleComponent` to `createSideNavigationController` from `ngpel-router/shell` for a persisted desktop preference.
 - **Context drawers** — compose `provideContextOverlayRouting` with `provideContextDrawerTarget` and the application’s Mosaik drawer provider. The feature supplies its allowed modes, lazy content and how to turn the ID and context into drawer data. `resolveDetailData` can restore that data from a direct link.
 - **Server-backed tables** — `CollectionTableRows` connects a feature-owned paged query to the Mosaik row provider. It coordinates the responsive view, refresh and stale requests. The source returns counts for every group path and receives the complete path when loading a leaf page. Bind `ngpDataTableSingleGroup` with `ngpDataTablePreferences` when the source supports grouping by one field.
@@ -23,7 +23,7 @@ The presentation layer: every component, directive and pipe the products share �
 ## Import Options
 
 ```typescript
-// @pixel-brewery/ngpel-ui — 431 exports
+// @pixel-brewery/ngpel-ui — 382 exports
 import {
     ActionStripComponent,
     ActionStripContentDirective,

@@ -1,6 +1,6 @@
 // #region Imports
 
-import { DestroyRef, Directive, effect, ElementRef, inject, input, model, type InputSignal, type ModelSignal } from '@angular/core';
+import { afterRenderEffect, DestroyRef, Directive, effect, ElementRef, inject, input, model, type InputSignal, type ModelSignal } from '@angular/core';
 import type { Command } from './Command';
 
 // #endregion
@@ -17,6 +17,11 @@ import type { Command } from './Command';
  * The command parameter is resolved in three steps: an explicit `ngpCommandParameter` wins, then a
  * mapper supplied through `ngpCommandParameterFromEvent`, then the `detail` of a `CustomEvent`, and
  * finally the event itself.
+ *
+ * A `click` command that cannot execute disables its host, so a click is never swallowed silently. A
+ * `[disabled]` binding on the same element still applies: the host is disabled while either is true.
+ * Commands that must stay clickable — for example to report why an action is not possible — keep
+ * `canExecute` true and explain the reason when they run.
  *
  * @public
  *
@@ -57,6 +62,11 @@ export class CommandDirective {
             this.validateBindings(bindings);
             this.detachAll();
             this.attachAll(bindings);
+        });
+
+        // Runs after the host's own input bindings were written, so the combined state wins over them.
+        afterRenderEffect({
+            write: () => this.reflectDisabledState(),
         });
 
         this._destroyRef.onDestroy(() => this.detachAll());
@@ -111,6 +121,14 @@ export class CommandDirective {
      * @readonly
      */
     public readonly stopPropagation = input(true, { alias: 'ngpCommandStopPropagation' });
+
+    /**
+     * The element's own `[disabled]` binding; the host is disabled while it is set or the `click` command cannot execute.
+     *
+     * @public
+     * @readonly
+     */
+    public readonly disabled: InputSignal<boolean | null | undefined> = input<boolean | null | undefined>(undefined);
 
     // #endregion
 
@@ -181,6 +199,25 @@ export class CommandDirective {
         }
 
         return event instanceof CustomEvent ? event.detail : event;
+    }
+
+    /**
+     * Disables a host whose `click` command cannot execute, combined with its own `[disabled]` binding.
+     * Hosts without a `disabled` property and bindings without `click` are left untouched.
+     */
+    private reflectDisabledState(): void {
+        const clickCommand = this.command()['click'];
+        const element = this._elementRef.nativeElement as HTMLElement & { disabled?: boolean };
+
+        if (!clickCommand || !('disabled' in element)) {
+            return;
+        }
+
+        const disabled = this.disabled() === true || !clickCommand.canExecute();
+
+        if (element.disabled !== disabled) {
+            element.disabled = disabled;
+        }
     }
 
     /**

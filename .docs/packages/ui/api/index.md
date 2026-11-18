@@ -15,7 +15,6 @@ editUrl: false
 | [ActivityLogComponent](Class.ActivityLogComponent) | Renders caller-projected entries with paging, load feedback and an optional unread boundary. |
 | [ActivityLogEntryDirective](Class.ActivityLogEntryDirective) | Marks a projected entry template. Bind the controller's entries to infer the item type. |
 | [ActivityTextChangeComponent](Class.ActivityTextChangeComponent) | Renders a word comparison and lets the reader reveal runs of unchanged paragraphs. |
-| [AgreementGateComponent](Class.AgreementGateComponent) | Requests an explicit agreement without owning its content, persistence or protected action. |
 | [AiBeamComponent](Class.AiBeamComponent) | Renders an animated border around arbitrary projected content, the visual language products use to mark that something is being produced by an AI. |
 | [AiBeamDirective](Class.AiBeamDirective) | Structural shorthand that wraps its template in an [AiBeamComponent](Class.AiBeamComponent), so a single element gains an AI beam without an extra wrapper in the template. |
 | [AiDirective](Class.AiDirective) | Marks an element as AI-enhanced and applies the configured presentation to it. |
@@ -66,21 +65,16 @@ editUrl: false
 | [DayStripComponent](Class.DayStripComponent) | Displays a horizontally scrollable day selector. |
 | [DetailPanelComponent](Class.DetailPanelComponent) | - |
 | [DetailPanelComponentIntl](Class.DetailPanelComponentIntl) | Internationalization labels for the detail panel component. |
-| [DocumentLayoutSymbolComponent](Class.DocumentLayoutSymbolComponent) | Renders a compact, inert representation of a configurable document layout. |
-| [DocumentPreviewIntl](Class.DocumentPreviewIntl) | Generic preview feedback; document names and business context come from the caller. |
-| [DocumentPreviewService](Class.DocumentPreviewService) | Opens a document in its own drawer without navigating or replacing the caller. |
 | [DrawerExteriorPlacementDirective](Class.DrawerExteriorPlacementDirective) | Places contextual drawer content outside the drawer on its leading backdrop edge. |
 | [DynamicSizeVirtualScrollDirective](Class.DynamicSizeVirtualScrollDirective) | Provides dynamic-size virtualization to a CDK viewport. |
 | [DynamicSizeVirtualScrollItemDirective](Class.DynamicSizeVirtualScrollItemDirective) | Marks one rendered item so the dynamic virtual-scroll strategy can measure it by stable key. |
 | [DynamicSizeVirtualScrollStrategy](Class.DynamicSizeVirtualScrollStrategy) | Virtual-scroll strategy for lists whose rendered items have different and changing block sizes. |
-| [EmailLayoutSymbolComponent](Class.EmailLayoutSymbolComponent) | Renders a compact, inert representation of a configurable email layout. |
 | [EntityPickerFieldComponent](Class.EntityPickerFieldComponent) | Presents the label of a selected entity and delegates choosing or clearing it to caller commands. The value of a surrounding form field can remain an identifier independent of the display text. |
 | [ExpandableMultilineDirective](Class.ExpandableMultilineDirective) | - |
 | [EyeDropperDirective](Class.EyeDropperDirective) | - |
 | [FilePreviewPipe](Class.FilePreviewPipe) | Creates a lifecycle-safe Mosaik thumbnail preview for a browser file. |
 | [FilterBarComponent](Class.FilterBarComponent) | A configurable, reusable filter bar for list views. Renders filter controls from [IFilterDefinition](Interface.IFilterDefinition) items and emits active filter values whenever the Signal Form changes. |
 | [FilterBarComponentIntl](Class.FilterBarComponentIntl) | Internationalization labels for the filter bar component. |
-| [FlameBackgroundComponent](Class.FlameBackgroundComponent) | Renders the decorative flame with its animated heat-haze effect. |
 | [FloatingHostComponent](Class.FloatingHostComponent) | Generic floating host container that can be positioned anywhere on screen. Supports drag-to-move and resize functionality. Use content projection for header and body content. |
 | [FocusTargetDirective](Class.FocusTargetDirective) | Scrolls to and focuses a descendant of the host whenever a focus key is requested. |
 | [HashBrushBackgroundPipe](Class.HashBrushBackgroundPipe) | Derives a stable background colour from a value, which gives avatars, tags and legend swatches a recognisable tint without storing one: `[style.background-color]="tag.name \| ngpHashBrushBackground"`. |
@@ -108,9 +102,7 @@ editUrl: false
 | [InitialsPipe](Class.InitialsPipe) | Reduces a display name to at most two upper-case initials for avatar fallbacks: <code v-pre>{{ user.displayName \&#124; ngpInitials }}</code> renders `AW` for `Andre Wehlert`. |
 | [InputHistoryNavigationDirective](Class.InputHistoryNavigationDirective) | Adds shell-like submitted-value history navigation to `mosaik-chat-prompt-box` elements. |
 | [InputSuggestionsDirective](Class.InputSuggestionsDirective) | Adds whole-field suggestions to an editable input. Selection emits the original option; the caller owns writing the selected value to its form. |
-| [LegalLinksComponent](Class.LegalLinksComponent) | Renders trusted website-level legal navigation without accepting HTML content. |
 | [LiveAudioWaveformComponent](Class.LiveAudioWaveformComponent) | Renders a reusable live audio spectrum without taking ownership of its media stream. |
-| [LogoComponent](Class.LogoComponent) | The `logo` component. |
 | [LookupPipe](Class.LookupPipe) | Resolves a key through a lookup table, which replaces the `@switch` ladders a template grows once a status, a severity or a kind has more than two branches: `[icon]="ticket.status \| ngpLookup: statusIcons : 'help'"`. |
 | [MailPipe](Class.MailPipe) | Turns an email address into a `mailto:` link target: `[href]="contact.email \| ngpMail"`. |
 | [MapComponent](Class.MapComponent) | Composes Angular Google Maps with lazy SDK loading and deferred native overlays. |
@@ -139,7 +131,6 @@ editUrl: false
 | [PickerCreateActionComponent](Class.PickerCreateActionComponent) | Sticky primary action rendered above an entity picker list. |
 | [PickerLoadingSkeletonComponent](Class.PickerLoadingSkeletonComponent) | Shared layout-preserving loading state for picker result lists. |
 | [PointerIdleDirective](Class.PointerIdleDirective) | Reports pointer inactivity on its host. |
-| [PrimaryLegalActionContext](Class.PrimaryLegalActionContext) | Route-scoped bridge through which routed content can expose one prominent legal action without depending on its surrounding shell. |
 | [PseudoLinkDirective](Class.PseudoLinkDirective) | Removes the user-agent link styling from an anchor element while preserving every link capability: routing, `href`, context menu, middle-click and keyboard activation. Use it when an anchor wraps composed content such as cards, brand marks or table cells; text-only hyperlinks keep the regular anchor styling. |
 | [RailActionComponent](Class.RailActionComponent) | Renders one compact action that either activates independently declared rail content or hosts another action directive when no target is supplied. |
 | [RailActionsComponent](Class.RailActionsComponent) | Groups the compact actions displayed in a rail's initial state. |
@@ -147,9 +138,6 @@ editUrl: false
 | [RailComponentIntl](Class.RailComponentIntl) | Internationalization labels for the rail component. |
 | [RailContentDirective](Class.RailContentDirective) | Registers independently declared content with its nearest generic rail coordinator. |
 | [RailDrawerController](Class.RailDrawerController) | Coordinates a generic rail with its host drawer: the docked rail expands the drawer for its content, the floating rail gives its column back to the drawer body and anchors the floating actions above the drawer footer. |
-| [RecurrenceEditorComponent](Class.RecurrenceEditorComponent) | Reusable RFC 5545 recurrence editor for Signal Forms. |
-| [RecurrenceEditorService](Class.RecurrenceEditorService) | Opens the recurrence editor in the application's Mosaik drawer. |
-| [RecurrenceSummaryPipe](Class.RecurrenceSummaryPipe) | Renders a localized description of the recurrence in a read-only view. |
 | [SavedFilterDrawerComponent](Class.SavedFilterDrawerComponent) | Drawer used to name and review a saved filter. |
 | [ScrollToErrorDirective](Class.ScrollToErrorDirective) | Defines a generic validation scope and reveals its first visible invalid control. |
 | [ScrollToErrorTriggerDirective](Class.ScrollToErrorTriggerDirective) | Triggers error navigation for a validation scope associated through the same Signal Forms state. |
@@ -163,7 +151,6 @@ editUrl: false
 | [TicktackPanelComponentIntl](Class.TicktackPanelComponentIntl) | Internationalization labels for the ticktack panel component. |
 | [TruncateStartPipe](Class.TruncateStartPipe) | Shortens text from the front, keeping its end readable: <code v-pre>{{ path \&#124; ngpTruncateStart: 30 }}</code>. |
 | [TypewriterDirective](Class.TypewriterDirective) | Types one or more text values into its host, character by character, and optionally rotates through them. |
-| [UrlListComponent](Class.UrlListComponent) | Edits categorized web links with caller-owned Signal Forms state, choices and mutations. |
 | [UserSelectDirective](Class.UserSelectDirective) | Ignores initial and bound-value selections emitted while Mosaik reconciles items. |
 | [ValueMagnitudeDirective](Class.ValueMagnitudeDirective) | Scales a Mosaik text element by the magnitude of a numeric value. |
 | [ViewportClearanceDirective](Class.ViewportClearanceDirective) | Keeps the floating surface clear of the host element, for example an open side panel or a session dock. The host reserves the distance from its leading edge to the given viewport edge while it is visible. |
@@ -245,9 +232,6 @@ editUrl: false
 | [IDataTablePreferenceState](Interface.IDataTablePreferenceState) | Persisted state for a Mosaik data-table. |
 | [IDateFilterRange](Interface.IDateFilterRange) | Date range resolved from a filter value. |
 | [IDetailPanelChange](Interface.IDetailPanelChange) | - |
-| [IDocumentLayoutSymbolAppearance](Interface.IDocumentLayoutSymbolAppearance) | Presentation-only appearance contract for the compact document-layout symbol. |
-| [IDocumentPreviewRequest](Interface.IDocumentPreviewRequest) | Captures one document and the caller-owned operation that loads its bytes. Authentication, document identity and permission checks remain with the caller. |
-| [IEmailLayoutSymbolAppearance](Interface.IEmailLayoutSymbolAppearance) | Presentation-only appearance contract for the compact email-layout symbol. |
 | [IExpandableMultilineConfiguration](Interface.IExpandableMultilineConfiguration) | Configuration supplied by the consuming view. |
 | [IEyeDropperColorChange](Interface.IEyeDropperColorChange) | - |
 | [IEyeDropperError](Interface.IEyeDropperError) | - |
@@ -278,22 +262,13 @@ editUrl: false
 | [IImagePreviewLabels](Interface.IImagePreviewLabels) | Accessible labels used by image preview controls. |
 | [IImageRemovedEvent](Interface.IImageRemovedEvent) | Event emitted when the image is removed. |
 | [IInputHistoryNavigationEvent](Interface.IInputHistoryNavigationEvent) | Describes a value recalled through input history navigation. |
-| [ILegalLink](Interface.ILegalLink) | Describes a trusted website-level legal or company link. |
 | [ILiveFilterPreference](Interface.ILiveFilterPreference) | Stores an active filter so the presenter can restore it before the first list load. |
 | [IMapConfiguration](Interface.IMapConfiguration) | Application-owned browser credentials and localization for Google Maps. |
 | [IMapsAddress](Interface.IMapsAddress) | A postal address as [MapsPipe](Class.MapsPipe) reads it. Every part is optional, because the shape mirrors what an API actually returns rather than what a complete address would hold. |
 | [IMarkdownRendererOptions](Interface.IMarkdownRendererOptions) | Options for the markdown renderer. |
 | [IPagePathLevel](Interface.IPagePathLevel) | One level of a page path. The last level names the current page. |
 | [IPageToolbarDefaults](Interface.IPageToolbarDefaults) | Application defaults for the page toolbar. Label getters can read translation signals. |
-| [IParseRecurrenceRuleOptions](Interface.IParseRecurrenceRuleOptions) | - |
-| [IPdfPreviewOptions](Interface.IPdfPreviewOptions) | Host configuration for the optional PDF.js preview. The host owns the matching SDK, worker, viewer styles and any assets it chooses to serve. |
-| [IPrimaryLegalAction](Interface.IPrimaryLegalAction) | One prominent route-scoped legal action rendered by a public shell. |
 | [IRailHost](Interface.IRailHost) | Coordinates declarative rail actions with independently declared rail content. |
-| [IRecurrenceEditorLabels](Interface.IRecurrenceEditorLabels) | - |
-| [IRecurrenceEditorOptions](Interface.IRecurrenceEditorOptions) | Initial value, available options and labels for the recurrence drawer. |
-| [IRecurrenceOption](Interface.IRecurrenceOption) | - |
-| [IRecurrenceSummaryLabels](Interface.IRecurrenceSummaryLabels) | Translated sentence fragments used to describe a recurrence. |
-| [IRecurrenceValue](Interface.IRecurrenceValue) | - |
 | [ISavedFilter](Interface.ISavedFilter) | Named filter definition persisted for one list view. |
 | [ISavedFilterController](Interface.ISavedFilterController) | Controller for persisted named filters. |
 | [ISavedFilterControllerConfig](Interface.ISavedFilterControllerConfig) | Configuration for [createSavedFilterController](Function.createSavedFilterController). |
@@ -307,8 +282,6 @@ editUrl: false
 | [ITicktackPanelChange](Interface.ITicktackPanelChange) | State change emitted by a ticktack panel. |
 | [ITourContribution](Interface.ITourContribution) | Describes a feature-owned set of steps that can be composed into a larger tour. |
 | [ITourContributionStep](Interface.ITourContributionStep) | Describes one feature-owned step before its final tour anchor is namespaced. |
-| [IUrlFormData](Interface.IUrlFormData) | Editable web-link fields shared by feature forms. |
-| [IUrlListLabels](Interface.IUrlListLabels) | Localized labels of a categorized web-link editor. |
 | [IViewportClearanceReservation](Interface.IViewportClearanceReservation) | A live reservation that can be resized and released. |
 | [IVoiceSessionControlLabels](Interface.IVoiceSessionControlLabels) | Localized copy required by the voice-session control surface. |
 | [IWidget](Interface.IWidget) | One dashboard widget, contributed as plain data so any host can render the same registry: its identity and order, its reactive display text, the default placement and resize constraints it asks for, and the lazily loaded components that make up its faces. |
@@ -366,7 +339,6 @@ editUrl: false
 | [ContentNavigationScrollDirection](TypeAlias.ContentNavigationScrollDirection) | - |
 | [DetailPanelCloseReason](TypeAlias.DetailPanelCloseReason) | - |
 | [DetailPanelHandleVariant](TypeAlias.DetailPanelHandleVariant) | - |
-| [DocumentPreviewMimeType](TypeAlias.DocumentPreviewMimeType) | Media type required from a document loader before its content can be rendered. |
 | [FilterBarModeValue](TypeAlias.FilterBarModeValue) | Union type of all supported filter bar modes. |
 | [FilterConditionValue](TypeAlias.FilterConditionValue) | Union type of all supported advanced filter conditions. |
 | [FilterOperatorValue](TypeAlias.FilterOperatorValue) | Union type of all supported advanced filter operators. |
@@ -374,7 +346,6 @@ editUrl: false
 | [FilterValues](TypeAlias.FilterValues) | Emitted filter values as a key-value record. |
 | [HoverRevealTarget](TypeAlias.HoverRevealTarget) | Union of every value the hover-reveal directive can observe: an Angular `ElementRef`, a raw `HTMLElement`, a component exposing an `elementRef`, or `null` to detach. |
 | [ICollectionTableFieldConfig](TypeAlias.ICollectionTableFieldConfig) | Data-table behavior for a collection field. |
-| [IDocumentPreviewRef](TypeAlias.IDocumentPreviewRef) | Existing Mosaik drawer reference for dismissing or observing a document preview. |
 | [ImageMarkupSymbolValue](TypeAlias.ImageMarkupSymbolValue) | Value accepted as an image markup symbol. |
 | [ImageMarkupToolValue](TypeAlias.ImageMarkupToolValue) | Value accepted as an image markup tool. |
 | [ImmersiveSessionPhase](TypeAlias.ImmersiveSessionPhase) | The caller-controlled preparation, connection, live or completion phase of a session. |
@@ -385,15 +356,10 @@ editUrl: false
 | [IntlTranslationMap](TypeAlias.IntlTranslationMap) | Maps the labels of an internationalization class onto the application's own translation keys. Every key must name an existing string property of the class, so a renamed label breaks the build instead of silently falling back to English. |
 | [LiveAudioWaveformMode](TypeAlias.LiveAudioWaveformMode) | Available waveform layout modes. |
 | [LiveAudioWaveformState](TypeAlias.LiveAudioWaveformState) | Visual and analysis states supported by the live audio waveform. |
-| [LogoType](TypeAlias.LogoType) | - |
 | [MapsSearchUrlFactory](TypeAlias.MapsSearchUrlFactory) | Builds the URL of a map search for an already assembled address query. |
 | [MapsValue](TypeAlias.MapsValue) | Everything [MapsPipe](Class.MapsPipe) can turn into a map query: a structured address or a single line of address text. |
 | [MarkdownRenderer](TypeAlias.MarkdownRenderer) | Partial renderer type for `marked`. |
 | [MatchWidthSource](TypeAlias.MatchWidthSource) | Sources supported by [MatchWidthDirective](Class.MatchWidthDirective). |
-| [RecurrenceEndMode](TypeAlias.RecurrenceEndMode) | - |
-| [RecurrenceFrequency](TypeAlias.RecurrenceFrequency) | - |
-| [RecurrenceMonthlyMode](TypeAlias.RecurrenceMonthlyMode) | - |
-| [RecurrenceWeekday](TypeAlias.RecurrenceWeekday) | - |
 | [ScrollToErrorState](TypeAlias.ScrollToErrorState) | Minimal Signal Forms state used to associate a validation scope with its triggers. |
 | [StopEventPropagationEventName](TypeAlias.StopEventPropagationEventName) | The DOM events the stop-propagation directive can intercept. |
 | [TicktackPanelChangeReason](TypeAlias.TicktackPanelChangeReason) | Describes why a ticktack panel changed sides. |
@@ -415,7 +381,6 @@ editUrl: false
 | [CollectionViewType](Variable.CollectionViewType) | Built-in collection view types supported by ngpel. |
 | [DEFAULT\_CAPTCHA\_OPERATORS](Variable.DEFAULT_CAPTCHA_OPERATORS) | Default operators used when none specified. |
 | [DEFAULT\_MARKDOWN\_RENDERER](Variable.DEFAULT_MARKDOWN_RENDERER) | Default renderer instance. |
-| [DOCUMENT\_PREVIEW\_MIME\_TYPES](Variable.DOCUMENT_PREVIEW_MIME_TYPES) | Browser-renderable document media types accepted by the shared preview. Active HTML and SVG documents are deliberately excluded. |
 | [FilterBarMode](Variable.FilterBarMode) | Supported filter bar modes. |
 | [FilterCondition](Variable.FilterCondition) | Logical conditions for advanced filter groups. |
 | [FilterOperator](Variable.FilterOperator) | Operators for advanced filter rules. |
@@ -426,13 +391,6 @@ editUrl: false
 | [MAPS\_SEARCH\_URL\_FACTORY](Variable.MAPS_SEARCH_URL_FACTORY) | The map service [MapsPipe](Class.MapsPipe) links to. Defaults to the Google Maps search URL; provide a different factory to link to another map provider or to an in-house map view. |
 | [NOT\_AVAILABLE\_TEXT](Variable.NOT_AVAILABLE_TEXT) | The text [NotAvailablePipe](Class.NotAvailablePipe) renders for a missing value. Defaults to the locale-neutral `n/a`; provide a translated string once the application knows its locale. |
 | [RAIL\_HOST](Variable.RAIL_HOST) | Resolves the generic coordinator shared by rail actions and rail content. |
-| [RECURRENCE\_DEFAULT\_VALUE](Variable.RECURRENCE_DEFAULT_VALUE) | - |
-| [RECURRENCE\_EDITOR\_TOUR\_TARGETS](Variable.RECURRENCE_EDITOR_TOUR_TARGETS) | Stable signal-accessor targets exposed by every recurrence editor. |
-| [RECURRENCE\_END\_MODE\_OPTIONS](Variable.RECURRENCE_END_MODE_OPTIONS) | - |
-| [RECURRENCE\_INTERVAL\_OPTIONS](Variable.RECURRENCE_INTERVAL_OPTIONS) | - |
-| [RECURRENCE\_MONTHLY\_MODE\_OPTIONS](Variable.RECURRENCE_MONTHLY_MODE_OPTIONS) | - |
-| [RECURRENCE\_WEEKDAY\_OPTIONS](Variable.RECURRENCE_WEEKDAY_OPTIONS) | - |
-| [RECURRENCE\_WEEKDAY\_ORDINAL\_OPTIONS](Variable.RECURRENCE_WEEKDAY_ORDINAL_OPTIONS) | - |
 | [TourFeatureKinds](Variable.TourFeatureKinds) | Branded feature kinds supported by the root tour composition. |
 | [WIDGET](Variable.WIDGET) | The multi-provider token every feature library contributes its widgets to. `provideWidget(...)` collects the contributions and hands them to the [WidgetManager](Class.WidgetManager); contribute through `withWidgetItems(...)` rather than binding the token by hand. |
 | [WIDGET\_DATA](Variable.WIDGET_DATA) | The token a widget shell binds in the child injector of a rendered widget view, so the view can read the payload its widget was registered with. |
@@ -463,7 +421,6 @@ editUrl: false
 | [createMarkdownExtensions](Function.createMarkdownExtensions) | The authored Markdown dialect that `@pixel-brewery/markdowner-core` adds on top of GitHub-flavored Markdown, rendered as Mosaik element compositions: `::: splits`, `::: callout`, `> [!TYPE]`, fenced code, `::: tabs`, `::: steps`, `::: details`, `::: button` and `::: card`. |
 | [createMarkedRenderer](Function.createMarkedRenderer) | Creates a `marked` renderer that outputs Mosaik web component HTML. |
 | [createPlaceholderCompletions](Function.createPlaceholderCompletions) | Creates a CodeMirror `CompletionSource` that suggests <code v-pre>{{placeholder}}</code> tokens. The completions trigger when the user types <code v-pre>{{</code> or when invoked explicitly. |
-| [createRecurrenceRule](Function.createRecurrenceRule) | Serializes the editable recurrence. Applications that store the end separately can keep the default behavior. Set `includeUntil` for a self-contained RFC 5545 rule. |
 | [createSavedFilterController](Function.createSavedFilterController) | Creates a local-storage backed saved filter controller. |
 | [createSavedFilterSummary](Function.createSavedFilterSummary) | Creates display-ready summary rows for standard and advanced filter values. |
 | [createTourContributionAnchorMap](Function.createTourContributionAnchorMap) | Creates the accessor mapping for a contribution within a composed tour. |
@@ -473,7 +430,6 @@ editUrl: false
 | [defineFlowCollectionView](Function.defineFlowCollectionView) | Defines a flow collection view with full type inference. |
 | [defineGalleryCollectionView](Function.defineGalleryCollectionView) | Defines a gallery collection view with full type inference. |
 | [defineTableCollectionView](Function.defineTableCollectionView) | Defines a table collection view with full type inference. |
-| [describeRecurrence](Function.describeRecurrence) | Describes the frequency and end condition for read-only recurrence fields. |
 | [diffActivityText](Function.diffActivityText) | Compares two versions of a long text paragraph by paragraph and, within changed paragraphs, word by word. |
 | [escapeMarkdownAttribute](Function.escapeMarkdownAttribute) | Escapes an untrusted value for one HTML attribute of the generated markup. The ampersand is escaped first so the entities produced by the later replacements are not escaped a second time. Elements that treat their `text` attribute as plain content need exactly this single pass, because the HTML parser decodes the attribute once before the element ever sees it. |
 | [escapeMarkdownText](Function.escapeMarkdownText) | Escapes untrusted Markdown source for a `text` attribute that the receiving element renders as HTML (Mosaik elements put such values on screen through `unsafeHTML`). The HTML parser already consumes one level of escaping while parsing the attribute, so a single pass would hand live markup to the element. Escaping twice makes embedded HTML arrive as the literal characters a reader is supposed to see. |
@@ -493,8 +449,6 @@ editUrl: false
 | [matchesWidgetSize](Function.matchesWidgetSize) | Evaluates whether a logical widget size satisfies an exact or ranged template condition. Both axes must match; an axis the condition omits is unconstrained. |
 | [moveWidgetGridItem](Function.moveWidgetGridItem) | Moves one widget into a zone at a position and renumbers both the zone it left and the zone it joined. Dropping a widget always shows it, which is what makes dragging one out of the toolbox the same gesture as moving one between zones. |
 | [moveWidgetGridZone](Function.moveWidgetGridZone) | Moves one zone to another position and renumbers the zone order. |
-| [normalizeRecurrenceByDays](Function.normalizeRecurrenceByDays) | - |
-| [parseRecurrenceRule](Function.parseRecurrenceRule) | - |
 | [provideAiRailComponentIntl](Function.provideAiRailComponentIntl) | Provides application-specific internationalization labels for the AI rail component. |
 | [provideCaptchaComponentIntl](Function.provideCaptchaComponentIntl) | Provides application-specific internationalization labels for the captcha component. |
 | [provideCodeEditorComponentIntl](Function.provideCodeEditorComponentIntl) | Provides application-specific internationalization labels for the code editor component. |
@@ -502,11 +456,9 @@ editUrl: false
 | [provideColorSelectorComponentIntl](Function.provideColorSelectorComponentIntl) | Provides application-specific internationalization labels for the color selector component. |
 | [provideContextDrawerTarget](Function.provideContextDrawerTarget) | Registers a contextual target using the application's existing Mosaik drawer provider. The router owns URL-driven closing, while Mosaik retains the shell's presentation defaults. |
 | [provideDetailPanelComponentIntl](Function.provideDetailPanelComponentIntl) | Provides application-specific internationalization labels for the detail panel component. |
-| [provideDocumentPreviewIntl](Function.provideDocumentPreviewIntl) | Maps the preview labels to application translation keys. Unmapped labels retain their defaults. |
 | [provideFilterBarComponentIntl](Function.provideFilterBarComponentIntl) | Provides application-specific internationalization labels for the filter bar component. |
 | [provideMap](Function.provideMap) | Registers application-owned Maps configuration without loading Google's SDK. |
 | [providePageToolbarDefaults](Function.providePageToolbarDefaults) | Supplies application defaults for page toolbars. Individual toolbar inputs take precedence. |
-| [providePdfPreview](Function.providePdfPreview) | Enables lazy PDF.js rendering for document previews opened by the host application. |
 | [provideRailComponentIntl](Function.provideRailComponentIntl) | Provides application-specific internationalization labels for the rail component. |
 | [provideTicktackPanelComponentIntl](Function.provideTicktackPanelComponentIntl) | Provides application-specific internationalization labels for the ticktack panel component. |
 | [provideTour](Function.provideTour) | Provides the native tour runtime and composes feature-owned tour definitions. |
@@ -520,7 +472,6 @@ editUrl: false
 | [resolveDynamicFormLayoutClasses](Function.resolveDynamicFormLayoutClasses) | Resolves semantic grid placement into statically discoverable Tailwind classes. |
 | [resolveMosaikSelectionValue](Function.resolveMosaikSelectionValue) | Resolves the string value selected by a Mosaik selector. |
 | [setWidgetGridItemEnabled](Function.setWidgetGridItemEnabled) | Shows or hides one widget while keeping its placement, so bringing it back puts it exactly where the user last had it. |
-| [toPositiveInteger](Function.toPositiveInteger) | - |
 | [toStopEventPropagationEvents](Function.toStopEventPropagationEvents) | Normalises the value bound to `ngpStopEventPropagation` into the shape the directive evaluates. |
 | [toWidgetGridItemDefinition](Function.toWidgetGridItemDefinition) | Projects a registered widget onto the framework-free item contract the layout algebra works with, resolving the widget's reactive text on the way. Calling it inside a `computed(...)` keeps the derived definitions in step with a title that arrives with a late translation. |
 | [translateIntl](Function.translateIntl) | Replaces the labels of an internationalization instance with the application's translations, resolved through Mosaik's translate service. |
