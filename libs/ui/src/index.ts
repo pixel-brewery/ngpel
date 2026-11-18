@@ -253,9 +253,6 @@ export type { IContextDrawerTarget } from '@pixel-brewery/ngpel-ui/context-overl
 export { provideContextDrawerTarget } from '@pixel-brewery/ngpel-ui/context-overlay';
 export type { AiAttention } from './directives/ai/AiAttention';
 export { AiDirective } from './directives/ai/AiDirective';
-export { DataTablePreferencesDirective } from './directives/data-table-preferences/DataTablePreferencesDirective';
-export type { IDataTableColumnPreference } from './directives/data-table-preferences/IDataTableColumnPreference';
-export type { IDataTablePreferenceState } from './directives/data-table-preferences/IDataTablePreferenceState';
 export { DrawerExteriorPlacementDirective } from './directives/drawer-exterior-placement/DrawerExteriorPlacementDirective';
 export { DynamicSizeVirtualScrollDirective } from './directives/dynamic-size-virtual-scroll/DynamicSizeVirtualScrollDirective';
 export { DynamicSizeVirtualScrollItemDirective } from './directives/dynamic-size-virtual-scroll/DynamicSizeVirtualScrollItemDirective';
@@ -340,14 +337,10 @@ export { CloseDescendantMenusDirective } from './directives/close-descendant-men
 export type { MatchWidthSource } from './directives/match-width/MatchWidthDirective';
 export { MatchWidthDirective } from './directives/match-width/MatchWidthDirective';
 export { PointerIdleDirective } from './directives/pointer-idle/PointerIdleDirective';
-export type { IAnchoredPopupEvent } from './directives/anchored-popup/IAnchoredPopupEvent';
-export { AnchoredPopupDirective } from './directives/anchored-popup/AnchoredPopupDirective';
-export { SheetAutoOpenDirective } from './directives/sheet-auto-open/SheetAutoOpenDirective';
 export type { IExpandableMultilineConfiguration } from './directives/expandable-multiline/IExpandableMultilineConfiguration';
 export { ExpandableMultilineDirective } from './directives/expandable-multiline/ExpandableMultilineDirective';
 export { MultilineExpansionBoundaryDirective } from './directives/expandable-multiline/MultilineExpansionBoundaryDirective';
 export { OverlayScrollBoundaryDirective } from './directives/overlay-scroll-boundary/OverlayScrollBoundaryDirective';
-export { DataTableLoadingDirective } from './directives/data-table-loading/DataTableLoadingDirective';
 export { MarkdownPreviewDirective } from './components/markdown/MarkdownPreviewDirective';
 export { ActivityLogComponent } from './components/activity-log/ActivityLogComponent';
 export { ActivityLogEntryDirective } from './components/activity-log/ActivityLogEntryDirective';
@@ -362,7 +355,6 @@ export type { IActivityLogEntryContext } from './components/activity-log/IActivi
 export type { IActivityLogLabels } from './components/activity-log/IActivityLogLabels';
 export type { IActivityLogPage } from './components/activity-log/IActivityLogPage';
 export type { IActivityTextPart } from './components/activity-log/IActivityTextPart';
-export { EntityPickerFieldComponent } from './components/entity-picker-field/EntityPickerFieldComponent';
 export { NavigationCollapseToggleComponent } from './components/navigation/NavigationCollapseToggleComponent';
 export { CollapsibleNavigationPanelComponent } from './components/navigation/CollapsibleNavigationPanelComponent';
 export type { IPagePathLevel } from './components/page-path/IPagePathLevel';

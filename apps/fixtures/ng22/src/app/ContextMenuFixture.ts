@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { ButtonComponent, DataTableComponent, MenuComponent, MenuItemComponent } from '@pixel-brewery/mosaik-elements-angular';
-import { ContextMenuComponent, ContextMenuContentDirective, ContextMenuTriggerDirective, DataTablePreferencesDirective } from '@pixel-brewery/ngpel-ui';
+import { ContextMenuComponent, ContextMenuContentDirective, ContextMenuTriggerDirective } from '@pixel-brewery/ngpel-ui';
 
 @Component({
     selector: 'app-context-menu-fixture',
@@ -13,20 +13,13 @@ import { ContextMenuComponent, ContextMenuContentDirective, ContextMenuTriggerDi
         ContextMenuComponent,
         ContextMenuContentDirective,
         ContextMenuTriggerDirective,
-        DataTablePreferencesDirective,
     ],
     template: `
         <h2>Context menu</h2>
         @for (item of items; track item.name) {
             <mosaik-button [label]="item.name" [ngpContextMenuTriggerFor]="menu" [ngpContextMenuValue]="item" [ngpContextMenuOpenOnClick]="true" />
         }
-        <mosaik-data-table
-            [source]="items"
-            [autoGenerateColumns]="true"
-            [resizable]="true"
-            [ngpContextMenuTriggerFor]="menu"
-            ngpDataTablePreferences="ngpel-fixture-table"
-        />
+        <mosaik-data-table [source]="items" [autoGenerateColumns]="true" [resizable]="true" [ngpContextMenuTriggerFor]="menu" />
         <ngp-context-menu #menu>
             <ng-template [ngpContextMenuContent]="items" let-item>
                 <mosaik-menu>
