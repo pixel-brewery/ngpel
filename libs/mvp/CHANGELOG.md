@@ -1,3 +1,7 @@
+## 0.0.26 (2026-11-18)
+
+This was a version bump only for mvp to align it with other projects, there were no code changes.
+
 ## 0.0.25 (2026-11-17)
 
 This was a version bump only for mvp to align it with other projects, there were no code changes.
