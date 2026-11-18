@@ -22,7 +22,6 @@ editUrl: false
 | [AiRailChoiceComponent](Class.AiRailChoiceComponent) | Declares one headless interaction choice consumed and rendered by an AI rail. |
 | [AiRailComponent](Class.AiRailComponent) | Renders a declaratively configured, inline AI interaction inside a drawer rail. |
 | [AiRailComponentIntl](Class.AiRailComponentIntl) | Internationalization labels for the AI rail component. |
-| [AnchoredPopupDirective](Class.AnchoredPopupDirective) | Coordinates one popup across changing anchors and asynchronous content. |
 | [AppointmentItemComponent](Class.AppointmentItemComponent) | The `AppointmentItemComponent` component. |
 | [AudioActivityOrbComponent](Class.AudioActivityOrbComponent) | Renders the central audio activity surface for listening and speaking experiences. |
 | [AudioSignalQualityIndicatorComponent](Class.AudioSignalQualityIndicatorComponent) | Displays an accessible, business-agnostic audio signal quality state. |
@@ -60,8 +59,6 @@ editUrl: false
 | [ContextMenuComponent](Class.ContextMenuComponent) | Displays caller-provided Mosaik menu actions for the item that opened it. Place one host beside a list or table and connect it using `ngpContextMenuTriggerFor`. |
 | [ContextMenuContentDirective](Class.ContextMenuContentDirective) | Marks the declarative HTML template rendered inside a context menu. |
 | [ContextMenuTriggerDirective](Class.ContextMenuTriggerDirective) | Connects a host to a context menu. Supply a value for explicit triggers, or omit it on a Mosaik data table to read the row value from the event's composed path. |
-| [DataTableLoadingDirective](Class.DataTableLoadingDirective) | Keeps a Mosaik data table in place while replacing its body with five loading rows. |
-| [DataTablePreferencesDirective](Class.DataTablePreferencesDirective) | Persists column visibility and widths for a Mosaik data-table, with optional grouping and column pinning. |
 | [DayStripComponent](Class.DayStripComponent) | Displays a horizontally scrollable day selector. |
 | [DetailPanelComponent](Class.DetailPanelComponent) | - |
 | [DetailPanelComponentIntl](Class.DetailPanelComponentIntl) | Internationalization labels for the detail panel component. |
@@ -69,7 +66,6 @@ editUrl: false
 | [DynamicSizeVirtualScrollDirective](Class.DynamicSizeVirtualScrollDirective) | Provides dynamic-size virtualization to a CDK viewport. |
 | [DynamicSizeVirtualScrollItemDirective](Class.DynamicSizeVirtualScrollItemDirective) | Marks one rendered item so the dynamic virtual-scroll strategy can measure it by stable key. |
 | [DynamicSizeVirtualScrollStrategy](Class.DynamicSizeVirtualScrollStrategy) | Virtual-scroll strategy for lists whose rendered items have different and changing block sizes. |
-| [EntityPickerFieldComponent](Class.EntityPickerFieldComponent) | Presents the label of a selected entity and delegates choosing or clearing it to caller commands. The value of a surrounding form field can remain an identifier independent of the display text. |
 | [ExpandableMultilineDirective](Class.ExpandableMultilineDirective) | - |
 | [EyeDropperDirective](Class.EyeDropperDirective) | - |
 | [FilePreviewPipe](Class.FilePreviewPipe) | Creates a lifecycle-safe Mosaik thumbnail preview for a browser file. |
@@ -141,7 +137,6 @@ editUrl: false
 | [SavedFilterDrawerComponent](Class.SavedFilterDrawerComponent) | Drawer used to name and review a saved filter. |
 | [ScrollToErrorDirective](Class.ScrollToErrorDirective) | Defines a generic validation scope and reveals its first visible invalid control. |
 | [ScrollToErrorTriggerDirective](Class.ScrollToErrorTriggerDirective) | Triggers error navigation for a validation scope associated through the same Signal Forms state. |
-| [SheetAutoOpenDirective](Class.SheetAutoOpenDirective) | Opens a declaratively rendered sheet as soon as its Mosaik element has connected. |
 | [SignalPipe](Class.SignalPipe) | Wraps a template expression in a signal, so a plain value can be handed to an input, a directive or a helper that expects one: `<ngp-chart [series]="rows() \| ngpSignal" />`. |
 | [StopEventPropagationDirective](Class.StopEventPropagationDirective) | Stops the propagation of pointer, mouse and keyboard events at the host element, so nested interactive controls (a delete button inside a clickable row, for instance) do not trigger the surrounding handlers. |
 | [SubmitOnEnterDirective](Class.SubmitOnEnterDirective) | Submits the containing form when Enter is pressed on a marked input. |
@@ -191,7 +186,6 @@ editUrl: false
 | [IAdvancedFilterRule](Interface.IAdvancedFilterRule) | A single advanced filter rule. |
 | [IAdvancedFilterValues](Interface.IAdvancedFilterValues) | Emitted values for advanced filter mode. |
 | [IAiRailChoiceConfigurationField](Interface.IAiRailChoiceConfigurationField) | One reusable select field shown before a configurable AI rail action executes. |
-| [IAnchoredPopupEvent](Interface.IAnchoredPopupEvent) | Configuration supplied by the consuming view. |
 | [IAuditLogChange](Interface.IAuditLogChange) | Field-level change rendered by the audit log component. |
 | [IAuditLogChangeGroup](Interface.IAuditLogChangeGroup) | Named set of field changes rendered as one audit comparison card. |
 | [ICaptchaChallenge](Interface.ICaptchaChallenge) | Represents a generated captcha challenge. |
@@ -228,8 +222,6 @@ editUrl: false
 | [IContextDrawerTarget](Interface.IContextDrawerTarget) | A feature-owned contextual overlay presented through Mosaik drawers. |
 | [IContextMenuContentContext](Interface.IContextMenuContentContext) | Template context supplied to declarative context-menu content. |
 | [IContextMenuOpenRequest](Interface.IContextMenuOpenRequest) | Describes one request to open a context menu at a viewport position. |
-| [IDataTableColumnPreference](Interface.IDataTableColumnPreference) | Persisted visibility, width and pinning of one data-table column. |
-| [IDataTablePreferenceState](Interface.IDataTablePreferenceState) | Persisted state for a Mosaik data-table. |
 | [IDateFilterRange](Interface.IDateFilterRange) | Date range resolved from a filter value. |
 | [IDetailPanelChange](Interface.IDetailPanelChange) | - |
 | [IExpandableMultilineConfiguration](Interface.IExpandableMultilineConfiguration) | Configuration supplied by the consuming view. |
