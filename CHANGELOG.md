@@ -1,3 +1,7 @@
+## 0.0.28 (2026-11-23)
+
+This was a version bump only, there were no code changes.
+
 ## 0.0.27 (2026-11-18)
 
 This was a version bump only, there were no code changes.
