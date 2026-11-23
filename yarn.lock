@@ -7320,13 +7320,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tiptap/extensions@npm:3.34.0":
-  version: 3.34.0
-  resolution: "@tiptap/extensions@npm:3.34.0"
+"@tiptap/extensions@npm:3.35.0":
+  version: 3.35.0
+  resolution: "@tiptap/extensions@npm:3.35.0"
   peerDependencies:
-    "@tiptap/core": 3.34.0
-    "@tiptap/pm": 3.34.0
-  checksum: 10c0/e7ad729017da753f3eb203b5914aa459d7aeef39867a641a72e744367e98f1219508682c00349683c3c565eaf769b323460bc892ac4ad4e38b572f559fdb2708
+    "@tiptap/core": 3.35.0
+    "@tiptap/pm": 3.35.0
+  checksum: 10c0/4bb897b9686f02390b119235a113fdd341c7189b3134b46fd61d2a431cc2e9e49051df42b87b44c309cd0dfbfa1402389a0ed09bf9d26cdac7b67ff7cc6e944c
   languageName: node
   linkType: hard
 
@@ -13523,7 +13523,7 @@ __metadata:
     "@tiptap/extension-strike": "npm:3.34.0"
     "@tiptap/extension-text": "npm:3.34.0"
     "@tiptap/extension-underline": "npm:3.34.0"
-    "@tiptap/extensions": "npm:3.34.0"
+    "@tiptap/extensions": "npm:3.35.0"
     "@tiptap/pm": "npm:3.34.0"
     "@tiptap/suggestion": "npm:3.34.0"
     "@types/chroma-js": "npm:^3.1.3"
