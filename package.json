@@ -162,7 +162,7 @@
         "@vitest/coverage-v8": "5.1.0",
         "angular-eslint": "22.8.0",
         "chroma-js": "^3.3.0",
-        "cspell": "10.5.1",
+        "cspell": "10.5.2",
         "eslint": "10.15.0",
         "eslint-config-prettier": "10.1.8",
         "gray-matter": "4.0.3",
