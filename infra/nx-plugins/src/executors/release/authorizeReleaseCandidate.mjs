@@ -34,7 +34,17 @@ export async function authorizeReleaseCandidate(context, dependencies) {
     if (!Number.isSafeInteger(polls) || polls < 1 || polls > 90) throw new Error('Invalid bounded metadata authorization wait.');
     const wait = dependencies.wait ?? ((milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds)));
     for (let index = 0; index < polls; index++) {
-        const values = await request('GET', `${prefix}/commits/${candidate.commit}/pulls?per_page=100`);
+        const associationEndpoint = `${prefix}/commits/${candidate.commit}/pulls?per_page=100`;
+        let values;
+        try {
+            values = await request('GET', associationEndpoint);
+        } catch (error) {
+            if (error?.code !== 'NGPEL_RELEASE_CANDIDATE_NOT_CREATED' || error.endpoint !== associationEndpoint || error.candidate !== candidate.commit)
+                throw error;
+            const current = await request('GET', `${prefix}/branches/main`);
+            if (current?.name !== 'main' || current.commit?.sha !== record.source) return { status: 'superseded' };
+            values = [];
+        }
         if (!Array.isArray(values) || values.length >= 100) throw new Error('The metadata authorization association is incomplete.');
         const matching = values.filter(
             (pull) =>

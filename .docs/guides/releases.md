@@ -73,6 +73,15 @@ does not modify either of them or grant new registry credentials.
    integrity are resumed; different bytes stop publication. Downloaded registry
    tarballs must match the tested archives before the GitHub Release is announced.
 
+The isolated authorization job can start before the parallel metadata owner uploads
+its prepared candidate. It waits only for the exact own-candidate association endpoint
+returning `404 Not Found`, or `422` with `No commit found for SHA: <verified-candidate>`.
+The original verified artifact supplies that candidate and current main must still be
+its source. This consumes the existing bounded ninety polls at thirty seconds; the
+deadline is never restarted. Other endpoints, commit IDs, permission errors, malformed
+responses and all subsequent provenance/source/run checks retain their failure rules.
+Nothing is approved until the complete original-candidate and native-CI proof succeeds.
+
 A superseding source, changed record/head, metadata containing runtime changes,
 missing protection, failed real CI, ambiguous association or unequal publication
 tree stops the affected candidate without bypassing rules or preparing a hidden

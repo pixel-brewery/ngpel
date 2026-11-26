@@ -46,9 +46,9 @@ export async function requestDependabotGitHub(method, endpoint, body) {
                     killSignal: 'SIGKILL',
                     windowsHide: true,
                 },
-                (error, stdout) => {
+                (error, stdout, stderr) => {
                     if (error) {
-                        reject(new Error(requestFailure));
+                        reject(unavailableCandidateFailure(method, endpoint, stdout, stderr) ?? new Error(requestFailure));
 
                         return;
                     }
@@ -75,7 +75,34 @@ export async function requestDependabotGitHub(method, endpoint, body) {
             child.stdin?.on('error', () => reject(new Error(requestFailure)));
             child.stdin?.end(body === undefined ? undefined : JSON.stringify(body));
         });
-    } catch {
+    } catch (error) {
+        if (error?.code === 'NGPEL_RELEASE_CANDIDATE_NOT_CREATED' && error.endpoint === endpoint) throw error;
         throw new Error(requestFailure);
     }
+}
+
+/**
+ * Classifies only the exact provider response for an own release candidate that is not uploaded yet.
+ *
+ * @remarks The caller still binds this candidate to its verified original artifact and current main; no other endpoint, permission failure or malformed response is admitted for waiting.
+ * @internal
+ */
+function unavailableCandidateFailure(method, endpoint, stdout, stderr) {
+    const candidate = /^repos\/pixel-brewery\/ngpel\/commits\/([a-f0-9]{40})\/pulls\?per_page=100$/u.exec(endpoint ?? '')?.[1];
+    const status = /\(HTTP (404|422)\)\s*$/u.exec(typeof stderr === 'string' ? stderr : '')?.[1];
+    if (method !== 'GET' || !candidate || !status) return;
+    let body;
+    try {
+        body = JSON.parse(stdout);
+    } catch {
+        return;
+    }
+    if (
+        !body ||
+        Array.isArray(body) ||
+        body.status !== status ||
+        (status === '404' ? body.message !== 'Not Found' : body.message !== `No commit found for SHA: ${candidate}`)
+    )
+        return;
+    return Object.assign(new Error(requestFailure), { code: 'NGPEL_RELEASE_CANDIDATE_NOT_CREATED', endpoint, candidate });
 }
