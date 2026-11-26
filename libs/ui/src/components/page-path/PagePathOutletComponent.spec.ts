@@ -1,7 +1,7 @@
 import { ElementRef, getDebugNode, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { AnimationPlayer } from '@pixel-brewery/mosaik-elements-foundation/dist/animations/AnimationPlayer';
-import { AnimationPreset } from '@pixel-brewery/mosaik-elements-foundation/dist/animations/presets/AnimationPresets';
+import { AnimationPreset } from '@pixel-brewery/mosaik-elements';
 import { command } from '@pixel-brewery/ngpel-mvp';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { IPagePathLevel } from './IPagePathLevel';
@@ -31,13 +31,6 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', async () => {
 
 vi.mock('@pixel-brewery/mosaik-elements-foundation/dist/animations/AnimationPlayer', () => ({
     AnimationPlayer: class AnimationPlayer {},
-}));
-
-vi.mock('@pixel-brewery/mosaik-elements-foundation/dist/animations/presets/AnimationPresets', () => ({
-    AnimationPreset: {
-        fadeSlideIn: { steps: [{ opacity: 0 }, { opacity: 1 }] },
-        fadeSlideOut: { steps: [{ opacity: 1 }, { opacity: 0 }] },
-    },
 }));
 
 describe('PagePathOutletComponent', () => {

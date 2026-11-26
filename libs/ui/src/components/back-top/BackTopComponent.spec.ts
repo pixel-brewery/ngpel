@@ -29,10 +29,6 @@ vi.mock('@pixel-brewery/mosaik-elements-foundation/dist/animations/AnimationPlay
     },
 }));
 
-vi.mock('@pixel-brewery/mosaik-elements-foundation/dist/animations/presets/AnimationPresets', () => ({
-    AnimationPreset: { fadeOut: { steps: [{ opacity: 1 }, { opacity: 0 }] } },
-}));
-
 import { BackTopComponent } from './BackTopComponent';
 
 // #endregion

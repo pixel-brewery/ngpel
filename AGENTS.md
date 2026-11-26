@@ -52,7 +52,7 @@ ngpel is an Nx monorepo of published Angular libraries `@pixel-brewery/ngpel-<na
 
 - Sibling product and library repositories are read-only references. Never modify them from this workspace.
 - Layering: a package imports only packages of a strictly lower layer (`layer:N` tags, enforced by ESLint). `core` and `mvp` import nothing from ngpel; `ui` sits above the platform services because its navigation components use `router`.
-- Mosaik (`@pixel-brewery/mosaik-elements-angular`, `-foundation`) and CodeMirror are optional peers of `ui` only; no other package may import them. `tools/postbuild-package.mjs` enforces it.
+- Mosaik (`@pixel-brewery/mosaik-elements`, `-angular`, `-foundation`) and CodeMirror are optional peers of `ui` only; no other package may import them. `tools/postbuild-package.mjs` enforces it.
 - `@pixel-brewery/mosaik-themes` supplies SCSS only. It is a devDependency: `ui` sets `inlineStyleLanguage: 'scss'`, so the theme mixins are compiled into the published stylesheet.
 - A secondary entry point earns its place only when a consumer would import it on its own and would otherwise pay for code it never uses. Everything else lives in the package's primary entry point.
 - All code lives in `libs/<pkg>/src/`. A secondary entry point is a marker directory `libs/<pkg>/<entry>/` holding only an `ng-package.json` whose `entryFile` points at `../src/<entry>/index.ts`.

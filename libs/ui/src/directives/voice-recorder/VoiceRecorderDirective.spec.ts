@@ -2,7 +2,7 @@
 
 import { ElementRef, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import type { IMentionDocument } from '@pixel-brewery/mosaik-elements-foundation';
+import type { IMentionDocument } from '@pixel-brewery/mosaik-elements';
 import { AudioInputDevicePreferenceService, AudioRecorder, VOICE_TRANSCRIBER, type AudioRecorderState } from '@pixel-brewery/ngpel-core/audio';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { VoiceRecorderDirective } from './VoiceRecorderDirective';
