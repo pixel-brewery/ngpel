@@ -1,66 +1,138 @@
 ---
 title: Releases and public handover
-description: How to version, publish and verify the ngpel packages and documentation.
+description: Protected dependency updates, immutable package releases and documentation continuation.
 ---
 
 # Releases and public handover
 
-The four libraries share one Nx release group. Package names and published versions stay in
-the `@pixel-brewery` scope on GitHub Packages. The workspace manifest is private; only the
-library distributions are released.
+The four libraries share one Nx release group. Public package names remain in the
+`@pixel-brewery` scope on GitHub Packages; the workspace and repository tooling stay
+private packages. A normal authorized source merge starts the existing automatic
+release. Manual release dispatch, package publication and visibility changes retain
+the owner's separate authorization.
 
-## Prepare the private repository
+## Protection and installation prerequisites
 
-1. Seed a new private `pixel-brewery/ngpel` repository from the reviewed source snapshot.
-   Push only its root commit to `main`. Do not import old tags, pull request refs or
-   releases. Verify the new repository's refs and CI before enabling public visibility.
-2. In [GitHub Packages](https://github.com/orgs/pixel-brewery/packages), inventory the four
-   `ngpel-*` packages. Under **Manage Actions access**, grant `pixel-brewery/ngpel`
-   **Write** on each existing package in the release group. The first release creates the
-   missing packages. The publication workflow uses the repository's scoped `GITHUB_TOKEN`.
-3. Restrict the `release-main` and `github-pages` environments to `main`.
+The checked-in [main ruleset](../../.github/repository-rules/main-protection.json)
+requires pull requests, resolved review conversations, preserved history and the
+strict current `Lint, Typecheck, Test & Build` check from GitHub Actions integration 15368. It has no bypass actors. The automation reads the effective rules and refuses
+an automatic merge if the PR rule or this actual strict CI requirement is absent.
+The repository's public identity is also checked by immutable ID 1447827206, name,
+default branch and visibility; matching a repository name alone grants nothing.
 
-## Finish the public handover
+Keep workflow-default token permissions restricted to read. GitHub's combined
+**Allow GitHub Actions to create and approve pull requests** repository setting is
+needed for the metadata PR to be created with the existing `GITHUB_TOKEN`. The
+implementation never requests or submits a review, and this setting does not
+replace required reviews, status checks or branch rules. No release App, PAT or new
+secret is required by the protected metadata path. The existing main-only
+`release-main` and `github-pages` environments remain in use.
 
-The repository owner changes the repository visibility to **Public**.
+Installations retain the repository's package-read access. Existing ngpel package
+publication uses the same workflow token and existing package Actions grants.
+Package visibility and repository visibility are separate settings; this migration
+does not modify either of them or grant new registry credentials.
 
-1. Apply the [main ruleset](https://github.com/pixel-brewery/ngpel/blob/main/.github/repository-rules/main-protection.json).
-2. On each existing package's landing page, connect `pixel-brewery/ngpel` as the source
-   repository if it is still unlinked. Preserve existing versions and download permissions.
-3. For the [documentation site](https://pixel-brewery.github.io/ngpel/), set Pages source to
-   **GitHub Actions**, set `NGPEL_PAGES_ENABLED=true` as a repository Actions variable and run
-   **Publish documentation** on `main`. After that, pushes to public `main` refresh the site.
+## One verified artifact and a protected metadata PR
 
-GitHub manages npm package visibility separately from repository visibility. New packages
-default to **Private**. Check that all listed packages are **Public** before announcing the
-release. Public GitHub npm packages still require an authenticated registry client.
+1. A public `main` push or an explicitly authorized release dispatch selects one
+   exact source. An automatic request supplies `source_sha`; a different selected
+   or superseding main revision stops preparation. A verified release-metadata
+   merge is recognized and does not recursively increment another patch version.
+2. The read-only preparation job resolves the next version once through Nx,
+   updates internal peer ranges, changelogs and the lockfile, and runs full
+   `verify:ci`. Its Angular consumer exercises the actual package tarballs.
+3. The release owner permits only the existing metadata paths: root changelog and
+   lockfile, plus package manifests, changelogs and READMEs. It creates one candidate
+   whose sole parent is the source and records that source, candidate, version and
+   exact archive checksums in an immutable artifact named for the original run ID.
+   The upload is not overwritten by a later preparation attempt.
+4. A trusted native-Node metadata job imports and verifies that artifact without
+   installing dependencies. It pushes only the source-bound
+   `release/ngpel/<source-sha>` branch and creates one GitHub Actions metadata PR.
+   Its complete JSON body contains exactly `source`, `candidate`, `version` and
+   `runId`; the actor ID, same-repository head/base, branch and record are checked.
+5. The native token's branch/PR writes do not start ordinary push/PR workflows.
+   The job explicitly dispatches full read-only CI with `expected_head_sha` for
+   that candidate. CI rejects another selected revision before checkout. Existing
+   genuine queued, running or failed exact-head attempts are retained.
+6. Only the current successful CI attempt, its actual complete job, effective
+   protection and unchanged source/head permit a normal SHA-guarded squash merge.
+   The final closed/merged PR state is confirmed. The actual main commit must have
+   the same tree as the prepared candidate and the original source as its parent;
+   a human merge may additionally retain the candidate as its second parent.
+7. The existing `release-main` publisher verifies the artifact again and binds it
+   to that actual merged main commit. It pushes only the version tag, never a
+   metadata commit directly to protected `main`. Registry versions with identical
+   integrity are resumed; different bytes stop publication. Downloaded registry
+   tarballs must match the tested archives before the GitHub Release is announced.
 
-## Continuous package releases
+A superseding source, changed record/head, metadata containing runtime changes,
+missing protection, failed real CI, ambiguous association or unequal publication
+tree stops the affected candidate without bypassing rules or preparing a hidden
+replacement. Its original run/artifact remain available for diagnosis. A newer
+ordinary source has its own normal release request.
 
-A push to `main`, including a pull request merge, starts **Release ngpel packages** in the public
-`pixel-brewery/ngpel` repository. The workflow prepares the next patch version with Nx, updates the
-internal peer ranges and lockfile, and verifies the versioned sources. An Angular consumer builds
-against the same four tarballs that the workflow later uploads to GitHub Packages.
+The canonical private Nx plugin is the existing `infra/nx-plugins` owner. Its
+`dependabot` and `release` executors have typed options, schemas and external
+operations with caching disabled. Privileged jobs bootstrap the same owned implementations
+through native Node so no workspace dependency or PR artifact executes with write
+permissions. This preserves the existing plugin layout while mapping to the shared
+repository-tooling convention.
 
-The publisher checks that `main` still points to the triggering commit before pushing the verified
-metadata commit and tag together. It checks each registry version, downloads the published archives
-and compares their bytes with the tested tarballs before creating the GitHub Release.
+## Dependency and documentation continuation
 
-The publication job runs in the main-only `release-main` environment. The repository token can push
-the metadata commit when branch rules permit it. For protected `main`, configure the approved
-release GitHub App using `RELEASE_APP_ID` and the `RELEASE_APP_PRIVATE_KEY` environment secret.
-Package publication continues to use the workflow token.
+All npm and GitHub Actions update types, including majors, TypeScript and published
+Pixel Brewery packages, use the complete real CI and ordinary protected merge.
+Related package families are grouped rather than ignored. A bounded reconciler
+refreshes stale same-repository Dependabot branches with `expected_head_sha`, waits
+for the replacement and explicitly verifies its exact new head. Conflicts block one
+candidate while the remaining inventory continues. Approval-pending PR runs do not
+suppress explicit verification; genuine failed attempts remain visible.
 
-Dependabot refreshes its pull request branches. After CI verifies a current Dependabot commit,
-the merge workflow squash-merges that commit and requests a release for the resulting revision.
+A manually dispatched verification must map uniquely to the actual current
+same-repository bot PR. The merger re-reads its run, attempt, PR, tested head and
+current main before asking GitHub to merge. The final merged state is confirmed.
+Strict branch protection remains the atomic guard if main moves during that request.
 
-## Recover a release
+A native-token merge explicitly continues main CI with `expected_head_sha`, the
+existing patch release with `source_sha`, and the existing documentation workflow
+with `expected_head_sha`. Workflow IDs, positive run IDs/attempts, repository, branch,
+path and exact source are checked before treating a run as an existing request.
+Existing successful, failed and cancelled runs are not replaced by duplicate
+publication requests. A superseding main revision stops a new dispatch.
+Documentation keeps its original all-main-push behavior and the existing
+`NGPEL_PAGES_ENABLED` gate; it checks the selected revision and current main before
+deployment. The actual metadata merge also continues main CI/documentation, so
+native token suppression does not leave the published version without those hooks.
+Release completion and an hourly fallback reconcile dependency PRs after release
+metadata advances the base.
 
-If publication is interrupted, rerun the failed job from the same run while its verified artifact
-is available and `main` still points to the release commit. The publisher reuses matching registry
-uploads and stops if a published version has different bytes.
+## Recover the retained run
 
-An owner can dispatch the workflow for a specific increment or exact next version. Use
-`yarn release:first:dry-run` before the first tag or `yarn release:dry-run` afterwards to preview local
-version changes. Use `yarn release:verify` to verify the published versions from an authenticated
-registry client.
+The metadata job waits for at most 90 polls separated by 30 seconds. If real CI is
+still pending, the specifically named pending step fails and preserves the PR,
+artifact and source. When that exact canonical CI attempt subsequently succeeds,
+the trusted continuation checks its complete job, metadata provenance, current
+protection, original source, original pending failure and unexpired source-bound
+artifact. It reruns only failed jobs and their dependents in the original release
+run. It never dispatches another release or repeats successful version preparation.
+Release completion and the hourly fallback also inspect the single current-source
+metadata branch and the current main commit association. This covers CI completing
+just before the pending job becomes failed, and a later human metadata merge.
+Recovery and direct CI notifications share one serialization group; only the
+latest actual candidate CI attempt is considered. A previously merged candidate
+is resolved through its verified closed PR even when GitHub has automatically
+deleted its branch; recovery never recreates that branch.
+[GitHub preserves the original source/ref and successful job outputs for these retries](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/re-run-workflows-and-jobs).
+
+Cancelled runs, preparation failures, publication failures, real failed checks,
+expired artifacts, changed candidates and superseding sources are retained for
+inspection. They are not blindly retried or approved. An owner can recover the
+original failed publication job while its verified artifact is available and main
+still points to the actual publication commit; matching registry uploads are reused.
+
+An explicitly authorized owner may dispatch a specific increment or exact next
+version. `yarn release:dry-run` previews versioning and `yarn release:verify` checks
+the served package versions with an authenticated registry client. Neither command
+is substituted for the protected automatic source path.

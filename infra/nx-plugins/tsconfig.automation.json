@@ -1,0 +1,14 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "noEmit": true
+    },
+    "include": [
+        "src/executors/dependabot/executor.ts",
+        "src/executors/dependabot/interfaces/**/*.ts",
+        "src/executors/dependabot/*.d.mts",
+        "src/executors/release/executor.ts",
+        "src/executors/release/interfaces/**/*.ts",
+        "src/executors/release/*.d.mts"
+    ]
+}

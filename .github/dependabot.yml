@@ -1,3 +1,4 @@
+# cspell:ignore wortlaut
 version: 2
 updates:
   - package-ecosystem: npm
@@ -6,21 +7,6 @@ updates:
     schedule:
       interval: weekly
       day: monday
-    ignore:
-      - dependency-name: typescript
-      - dependency-name: '@pixel-brewery/*'
-      - dependency-name: '@angular/*'
-        update-types: [version-update:semver-major]
-      - dependency-name: '@angular-devkit/*'
-        update-types: [version-update:semver-major]
-      - dependency-name: '@schematics/angular'
-        update-types: [version-update:semver-major]
-      - dependency-name: angular-eslint
-        update-types: [version-update:semver-major]
-      - dependency-name: '@nx/*'
-        update-types: [version-update:semver-major]
-      - dependency-name: nx
-        update-types: [version-update:semver-major]
     groups:
       angular-updates:
         patterns: ['@angular/*', '@angular-devkit/*', '@schematics/angular', angular-eslint]
@@ -28,6 +14,14 @@ updates:
         patterns: ['@nx/*', nx]
       vitest-updates:
         patterns: [vitest, '@vitest/*']
+      pixel-brewery-mosaik:
+        patterns: ['@pixel-brewery/mosaik-*', '@pixel-brewery/markdowner-core']
+      pixel-brewery-platform:
+        patterns: ['@pixel-brewery/archipel-*']
+      pixel-brewery-synapse:
+        patterns: ['@pixel-brewery/synapse-*']
+      pixel-brewery-wortlaut:
+        patterns: ['@pixel-brewery/wortlaut-*']
 
   - package-ecosystem: github-actions
     directory: /

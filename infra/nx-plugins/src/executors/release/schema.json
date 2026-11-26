@@ -1,0 +1,13 @@
+{
+    "$schema": "https://json-schema.org/schema",
+    "version": 2,
+    "title": "ngpel source-bound release lifecycle",
+    "type": "object",
+    "properties": {
+        "mode": { "type": "string", "enum": ["classify", "prepare", "verify", "integrate", "resume", "recover"] },
+        "artifactDirectory": { "type": "string", "minLength": 1 },
+        "sourceSha": { "type": "string", "pattern": "^[a-f0-9]{40}$" }
+    },
+    "required": ["mode"],
+    "additionalProperties": false
+}
