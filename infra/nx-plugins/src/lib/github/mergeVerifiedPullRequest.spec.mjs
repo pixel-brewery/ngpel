@@ -168,7 +168,7 @@ afterEach(() => {
 describe('Dependabot pull request merge', () => {
     it.each([
         { id: 41898282, login: 'github-actions[bot]', type: 'Bot' },
-        { id: 7523247, login: 'RueDeRennes', type: 'User' },
+        { id: 12345, login: 'maintainer', type: 'User' },
     ])('accepts a fully verified actual PR run from %j', async (actor) => {
         // Arrange
         const fixture = controlled();
