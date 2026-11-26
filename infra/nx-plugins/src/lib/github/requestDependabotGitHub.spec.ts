@@ -143,6 +143,7 @@ describe('original release candidate visibility', () => {
         const error = await requestDependabotGitHub('GET', endpoint).catch((failure) => failure);
         // Assert
         expect(error).toBeInstanceOf(Error);
+        expect(error).not.toHaveProperty('cause');
         expect(error).toMatchObject({ code: 'NGPEL_RELEASE_CANDIDATE_NOT_CREATED', endpoint, candidate });
         expect(error.message).toContain('GitHub API request failed');
         expect(error.message).not.toContain('sensitive-upstream-output');
@@ -193,6 +194,7 @@ describe('original release candidate visibility', () => {
         const error = await requestDependabotGitHub(method, path).catch((failure) => failure);
         // Assert
         expect(error).toBeInstanceOf(Error);
+        expect(error).not.toHaveProperty('cause');
         expect(error).not.toHaveProperty('code');
         expect(error.message).not.toContain('sensitive-upstream-output');
         expect(system.execFile).toHaveBeenCalledTimes(1);

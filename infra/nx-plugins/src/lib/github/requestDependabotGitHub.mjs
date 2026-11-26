@@ -19,10 +19,11 @@ const requestFailure = 'Dependabot GitHub API request failed; inspect the workfl
  * @internal
  */
 export async function requestDependabotGitHub(method, endpoint, body) {
+    let response;
     try {
         if (!process.env.GH_TOKEN) throw new Error(requestFailure);
 
-        return await new Promise((resolveRequest, reject) => {
+        response = await new Promise((resolveRequest, reject) => {
             const child = execFile(
                 'gh',
                 [
@@ -48,8 +49,12 @@ export async function requestDependabotGitHub(method, endpoint, body) {
                 },
                 (error, stdout, stderr) => {
                     if (error) {
-                        reject(unavailableCandidateFailure(method, endpoint, stdout, stderr) ?? new Error(requestFailure));
-
+                        const unavailable = unavailableCandidateFailure(method, endpoint, stdout, stderr);
+                        if (unavailable) {
+                            resolveRequest(unavailable);
+                            return;
+                        }
+                        reject(new Error(requestFailure));
                         return;
                     }
 
@@ -75,10 +80,12 @@ export async function requestDependabotGitHub(method, endpoint, body) {
             child.stdin?.on('error', () => reject(new Error(requestFailure)));
             child.stdin?.end(body === undefined ? undefined : JSON.stringify(body));
         });
-    } catch (error) {
-        if (error?.code === 'NGPEL_RELEASE_CANDIDATE_NOT_CREATED' && error.endpoint === endpoint) throw error;
+    } catch {
         throw new Error(requestFailure);
     }
+    // Only the controlled local classifier can fulfill with an Error; JSON responses cannot construct one.
+    if (response instanceof Error) throw response;
+    return response;
 }
 
 /**
