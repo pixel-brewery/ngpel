@@ -1,7 +1,7 @@
 {
     "name": "ngpel",
     "version": "0.0.0",
-    "description": "ngpel — shared Angular frontend companion libraries (the frontend sister of Archipel)",
+    "description": "ngpel \u2014 shared Angular frontend companion libraries (the frontend sister of Archipel)",
     "keywords": [
         "angular",
         "typescript",
@@ -75,7 +75,7 @@
         "verify:checks": "yarn agents:check && yarn public:check && yarn ci:check && yarn lint && yarn test && yarn spell && yarn build && yarn verify:esm && yarn typecheck && yarn nx run fixture-ng22:build",
         "public:check": "node .github/scripts/findPrivateReferences.mjs",
         "release:major": "gh workflow run release.yml --ref main -f specifier=major",
-        "ci:check": "vitest run --config=.github/scripts/vitest.config.mjs",
+        "ci:check": "nx run nx-plugins:ci-check",
         "packaging:test": "vitest run --config=.github/scripts/vitest.config.mjs tools/verify-esm-packages.spec.mjs tools/verify-published-packages.spec.mjs"
     },
     "devDependencies": {
