@@ -22,7 +22,7 @@ function pinInvariant(text) {
  * @param pullRequestSource - The immutable exact pull-request workflow content.
  * @param reviewedCiSha256 - The fixed digest reviewed and stored in trusted main policy.
  * @returns Whether the main digest is reviewed and the proposed normalized source is identical.
- * @remarks This is a positive review boundary, not a YAML parser. Never derive the review digest from a PR or from unreviewed runtime content.
+ * @remarks This is a positive review boundary, not a YAML parser. Never derive the review digest from a PR or from not reviewed runtime content.
  * @internal
  */
 export function isReadonlyPullRequestWorkflow(mainSource, pullRequestSource, reviewedCiSha256) {

@@ -21,7 +21,7 @@ jobs:
 `;
 
 describe('Positively reviewed pull-request workflow identity', () => {
-    it.each([undefined, '', 'unreviewed', 'a'.repeat(63)])('rejects an absent or malformed fixed digest: %s', (digest) => {
+    it.each([undefined, '', 'not reviewed', 'a'.repeat(63)])('rejects an absent or malformed fixed digest: %s', (digest) => {
         // Arrange
         const source = main;
         // Act
@@ -80,7 +80,7 @@ describe('Positively reviewed pull-request workflow identity', () => {
         ['mutable action tag', main.replace('a'.repeat(40), 'v8')],
         ['runtime edit', main.replace('yarn verify', 'echo skipped')],
         ['non-version action comment', main.replace('# v7', '# changed behavior')],
-    ])('rejects unreviewed %s', (_name, changed) => {
+    ])('rejects not reviewed %s', (_name, changed) => {
         // Arrange
         const unsafeBaseline = [
             'workflow write',
