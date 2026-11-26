@@ -1,3 +1,7 @@
+## 0.0.33 (2026-11-26)
+
+This was a version bump only for ui to align it with other projects, there were no code changes.
+
 ## 0.0.32 (2026-11-26)
 
 ### 🩹 Fixes

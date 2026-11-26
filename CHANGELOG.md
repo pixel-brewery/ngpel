@@ -1,3 +1,9 @@
+## 0.0.33 (2026-11-26)
+
+### 🩹 Fixes
+
+- **ci:** wait for the original release candidate to become visible ([#32](https://github.com/pixel-brewery/ngpel/pull/32))
+
 ## 0.0.32 (2026-11-26)
 
 ### 🩹 Fixes
