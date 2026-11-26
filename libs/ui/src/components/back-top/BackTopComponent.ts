@@ -18,7 +18,8 @@ import {
     signal,
 } from '@angular/core';
 import { FloatingActionButtonComponent, IconNameDirective } from '@pixel-brewery/mosaik-elements-angular';
-import { AnimationPlayer, AnimationPreset } from '@pixel-brewery/mosaik-elements-foundation';
+import { AnimationPlayer } from '@pixel-brewery/mosaik-elements-foundation/dist/animations/AnimationPlayer';
+import { AnimationPreset } from '@pixel-brewery/mosaik-elements-foundation/dist/animations/presets/AnimationPresets';
 
 // #endregion
 

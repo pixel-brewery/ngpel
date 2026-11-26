@@ -5,7 +5,7 @@ editUrl: false
 ---
 # Class: BackTopComponent
 
-Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:55](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L55)
+Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:56](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L56)
 
 Displays a floating back-to-top button that scrolls the nearest scroll container to the top.
 
@@ -21,7 +21,7 @@ Displays a floating back-to-top button that scrolls the nearest scroll container
 new BackTopComponent(): BackTopComponent;
 ```
 
-Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:75](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L75)
+Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:76](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L76)
 
 Constructs a new instance of the `BackTopComponent` class.
 
@@ -37,7 +37,7 @@ Constructs a new instance of the `BackTopComponent` class.
 readonly animate: InputSignalWithTransform<boolean, unknown>;
 ```
 
-Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:151](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L151)
+Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:152](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L152)
 
 Whether the floating action button fades in and out.
 
@@ -49,7 +49,7 @@ Whether the floating action button fades in and out.
 readonly label: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:145](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L145)
+Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:146](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L146)
 
 Accessible label for the action.
 
@@ -61,7 +61,7 @@ Accessible label for the action.
 readonly offset: InputSignal<number>;
 ```
 
-Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:136](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L136)
+Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:137](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L137)
 
 The scroll offset before the button becomes visible.
 
@@ -73,7 +73,7 @@ The scroll offset before the button becomes visible.
 readonly options: InputSignal<ExtendedScrollToOptions | null | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:162](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L162)
+Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:163](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L163)
 
 The scroll options applied when the button is clicked.
 
@@ -85,7 +85,7 @@ The scroll options applied when the button is clicked.
 readonly position: Signal<number>;
 ```
 
-Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:186](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L186)
+Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:187](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L187)
 
 Indicates the current scroll progress of the active container.
 
@@ -100,7 +100,7 @@ readonly restored: OutputEmitterRef<{
 }>;
 ```
 
-Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:170](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L170)
+Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:171](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L171)
 
 Emits when the scroll-to-top action completes.
 
@@ -112,7 +112,7 @@ Emits when the scroll-to-top action completes.
 readonly revealAfter: InputSignal<HTMLElement | null>;
 ```
 
-Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:139](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L139)
+Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:140](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L140)
 
 Shows the control after this element has fully scrolled above the container.
 
@@ -124,7 +124,7 @@ Shows the control after this element has fully scrolled above the container.
 readonly scrollable: InputSignal<HTMLElement | null>;
 ```
 
-Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:142](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L142)
+Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:143](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L143)
 
 Explicit scroll target when the component is outside the scrolling subtree.
 
@@ -136,7 +136,7 @@ Explicit scroll target when the component is outside the scrolling subtree.
 readonly size: InputSignal<Size | undefined>;
 ```
 
-Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:154](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L154)
+Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:155](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L155)
 
 Size of the floating action button. Pass `undefined` to use the host theme default.
 
@@ -148,7 +148,7 @@ Size of the floating action button. Pass `undefined` to use the host theme defau
 readonly testId: InputSignal<string>;
 ```
 
-Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:148](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L148)
+Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:149](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L149)
 
 Stable automation identifier for the action.
 
@@ -160,7 +160,7 @@ Stable automation identifier for the action.
 readonly visible: Signal<boolean>;
 ```
 
-Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:178](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L178)
+Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:179](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L179)
 
 Indicates whether the button is currently visible.
 
@@ -174,7 +174,7 @@ Indicates whether the button is currently visible.
 get protected active(): boolean;
 ```
 
-Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:195](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L195)
+Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:196](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L196)
 
 Applies an active class when the button is visible.
 
@@ -190,7 +190,7 @@ Applies an active class when the button is visible.
 ngAfterViewInit(): void;
 ```
 
-Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:122](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L122)
+Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:123](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L123)
 
 Starts observing the scroll container once the view is mounted.
 
@@ -210,7 +210,7 @@ Starts observing the scroll container once the view is mounted.
 protected onClick(): void;
 ```
 
-Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:208](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L208)
+Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:209](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L209)
 
 Scrolls the nearest scroll container back to the top.
 
@@ -226,7 +226,7 @@ Scrolls the nearest scroll container back to the top.
 protected onEnter(event): void;
 ```
 
-Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:221](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L221)
+Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:222](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L222)
 
 Fades in the button using the Mosaik preset.
 
@@ -248,7 +248,7 @@ Fades in the button using the Mosaik preset.
 protected onLeave(event): void;
 ```
 
-Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:233](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L233)
+Defined in: [libs/ui/src/components/back-top/BackTopComponent.ts:234](https://github.com/pixel-brewery/ngpel/blob/main/libs/ui/src/components/back-top/BackTopComponent.ts#L234)
 
 Keeps the button mounted until Mosaik's fade-out has finished.
 

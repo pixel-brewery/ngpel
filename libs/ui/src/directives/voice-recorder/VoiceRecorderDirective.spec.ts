@@ -10,10 +10,6 @@ import { VoiceRecorderDirective } from './VoiceRecorderDirective';
 // #endregion
 
 // Load the real mention utility without evaluating unrelated browser controls in the Mosaik barrel.
-vi.mock('@pixel-brewery/mosaik-elements-foundation', async () => ({
-    trimMentionDocument: (await import('@pixel-brewery/mosaik-elements-foundation/dist/controls/components/inputs/text-suggestions/trimMentionDocument'))
-        .trimMentionDocument,
-}));
 
 type RecorderState = 'idle' | 'paused' | 'recording' | 'stopped';
 

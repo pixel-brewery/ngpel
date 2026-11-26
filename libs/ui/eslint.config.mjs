@@ -3,6 +3,27 @@ import baseConfig from '../../eslint.config.mjs';
 export default [
     ...baseConfig,
     {
+        // The root of Mosaik Foundation registers every Mosaik element when it is evaluated, so a value import from it
+        // puts the whole component library into each consumer's bundle. Import values from their own module.
+        files: ['src/**/*.ts'],
+        ignores: ['src/**/*.spec.ts'],
+        rules: {
+            '@typescript-eslint/no-restricted-imports': [
+                'error',
+                {
+                    paths: [
+                        {
+                            name: '@pixel-brewery/mosaik-elements-foundation',
+                            message:
+                                'Import values from their module under @pixel-brewery/mosaik-elements-foundation/dist/…; the root registers every Mosaik element.',
+                            allowTypeImports: true,
+                        },
+                    ],
+                },
+            ],
+        },
+    },
+    {
         files: ['**/*.json'],
         rules: {
             '@nx/dependency-checks': [
