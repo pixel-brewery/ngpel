@@ -1,3 +1,9 @@
+## 0.0.32 (2026-11-26)
+
+### 🩹 Fixes
+
+- **ci:** authorize native checks and original metadata CI ([#30](https://github.com/pixel-brewery/ngpel/pull/30))
+
 ## 0.0.31 (2026-11-26)
 
 This was a version bump only, there were no code changes.
