@@ -1,3 +1,9 @@
+## 0.0.30 (2026-11-26)
+
+### 🩹 Fixes
+
+- **ui:** import Mosaik values from the core package ([#26](https://github.com/pixel-brewery/ngpel/pull/26))
+
 ## 0.0.29 (2026-11-23)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
