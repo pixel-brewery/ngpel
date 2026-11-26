@@ -52,6 +52,9 @@ jobs:
           NODE_AUTH_TOKEN: ${{ github.token }}
         run: yarn install --immutable
 
+      - name: Verify the private automation executor loads through Nx
+        run: yarn nx run nx-plugins:dependabot
+
       - name: Verify source, tooling, documentation and package output
         env:
           NGPEL_TEST_JOBS: '2'
