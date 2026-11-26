@@ -1,7 +1,7 @@
 {
     "name": "ngpel",
     "version": "0.0.0",
-    "description": "ngpel \u2014 shared Angular frontend companion libraries (the frontend sister of Archipel)",
+    "description": "ngpel — shared Angular frontend companion libraries (the frontend sister of Archipel)",
     "keywords": [
         "angular",
         "typescript",
