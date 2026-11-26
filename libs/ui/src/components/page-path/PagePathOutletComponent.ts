@@ -24,7 +24,8 @@ import {
     IconNameDirective,
     SkeletonComponent,
 } from '@pixel-brewery/mosaik-elements-angular';
-import { AnimationPlayer, AnimationPreset } from '@pixel-brewery/mosaik-elements-foundation';
+import { AnimationPlayer } from '@pixel-brewery/mosaik-elements-foundation/dist/animations/AnimationPlayer';
+import { AnimationPreset } from '@pixel-brewery/mosaik-elements';
 import type { IPagePathLevel } from './IPagePathLevel';
 import { PagePathRegistry } from './PagePathRegistry';
 

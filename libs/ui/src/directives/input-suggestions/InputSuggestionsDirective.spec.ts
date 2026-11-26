@@ -14,12 +14,6 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', () => ({
     TextComponent: class TextComponent {},
 }));
 
-vi.mock('@pixel-brewery/mosaik-elements-foundation', async () => ({
-    groupTextSuggestionOptions: (
-        await import('@pixel-brewery/mosaik-elements-foundation/dist/controls/components/inputs/text-suggestions/groupTextSuggestionOptions')
-    ).groupTextSuggestionOptions,
-}));
-
 interface ISuggestionLifecycle {
     onCompositionStart(): void;
 

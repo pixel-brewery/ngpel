@@ -3,7 +3,7 @@
 import { type Signal, ɵresolveComponentResources as resolveComponentResources } from '@angular/core';
 import { SIGNAL } from '@angular/core/primitives/signals';
 import { TestBed } from '@angular/core/testing';
-import { AnimationPlayer } from '@pixel-brewery/mosaik-elements-foundation';
+import { AnimationPlayer } from '@pixel-brewery/mosaik-elements-foundation/dist/animations/AnimationPlayer';
 import { readFile } from 'node:fs/promises';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -19,7 +19,7 @@ vi.mock('@pixel-brewery/mosaik-elements-angular', async () => {
     return { FloatingActionButtonComponent, IconNameDirective };
 });
 
-vi.mock('@pixel-brewery/mosaik-elements-foundation', () => ({
+vi.mock('@pixel-brewery/mosaik-elements-foundation/dist/animations/AnimationPlayer', () => ({
     AnimationPlayer: class {
         public stopAll = vi.fn(async () => []);
         public playToFinal = vi.fn(async (element: HTMLElement) => {
@@ -27,7 +27,6 @@ vi.mock('@pixel-brewery/mosaik-elements-foundation', () => ({
             return new Event('finish');
         });
     },
-    AnimationPreset: { fadeOut: { steps: [{ opacity: 1 }, { opacity: 0 }] } },
 }));
 
 import { BackTopComponent } from './BackTopComponent';

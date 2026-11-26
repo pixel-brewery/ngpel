@@ -14,7 +14,7 @@ import {
     type OutputEmitterRef,
     type WritableSignal,
 } from '@angular/core';
-import { trimMentionDocument, type IMentionDocument } from '@pixel-brewery/mosaik-elements-foundation';
+import { trimMentionDocument, type IMentionDocument } from '@pixel-brewery/mosaik-elements';
 import {
     AudioInputDevicePreferenceService,
     AudioRecorder,

@@ -89,8 +89,9 @@ import {
 | `@googlemaps/markerclusterer`               | `>=2.6.2 <3` _(optional)_       |
 | `@lezer/highlight`                          | `>=1.2.0` _(optional)_          |
 | `@pixel-brewery/markdowner-core`            | `>=0.1.204`                     |
-| `@pixel-brewery/mosaik-elements-angular`    | `>=0.1.208` _(optional)_        |
-| `@pixel-brewery/mosaik-elements-foundation` | `>=0.1.208` _(optional)_        |
+| `@pixel-brewery/mosaik-elements`            | `>=0.1.217` _(optional)_        |
+| `@pixel-brewery/mosaik-elements-angular`    | `>=0.1.217` _(optional)_        |
+| `@pixel-brewery/mosaik-elements-foundation` | `>=0.1.217` _(optional)_        |
 | `@pixel-brewery/ngpel-core`                 | `0.0.29`                        |
 | `@pixel-brewery/ngpel-mvp`                  | `0.0.29`                        |
 | `@pixel-brewery/ngpel-router`               | `0.0.29`                        |

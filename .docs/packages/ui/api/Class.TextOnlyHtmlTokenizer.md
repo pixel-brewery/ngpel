@@ -25,7 +25,7 @@ literal content.
 new TextOnlyHtmlTokenizer(options?): TextOnlyHtmlTokenizer;
 ```
 
-Defined in: node\_modules/marked/lib/marked.d.ts:367
+Defined in: node\_modules/marked/lib/marked.d.ts:373
 
 #### Parameters
 

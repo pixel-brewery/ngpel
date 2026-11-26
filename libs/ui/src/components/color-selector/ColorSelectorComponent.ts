@@ -12,7 +12,7 @@ import {
     IconNameDirective,
     TextComponent,
 } from '@pixel-brewery/mosaik-elements-angular';
-import { IColorPalette } from '@pixel-brewery/mosaik-elements-foundation';
+import { IColorPalette } from '@pixel-brewery/mosaik-elements';
 import { ColorSelectorComponentIntl, provideColorSelectorComponentIntl } from './ColorSelectorComponentIntl';
 import { EyeDropperDirective, type IEyeDropperColorChange } from '../../directives/eye-dropper/EyeDropperDirective';
 

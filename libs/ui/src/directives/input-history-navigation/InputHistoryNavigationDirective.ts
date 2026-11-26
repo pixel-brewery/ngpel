@@ -1,5 +1,5 @@
 import { booleanAttribute, Directive, ElementRef, inject, input, output } from '@angular/core';
-import { ChatPromptBoxElement } from '@pixel-brewery/mosaik-elements-foundation';
+import type { ChatPromptBoxElement } from '@pixel-brewery/mosaik-elements-foundation';
 
 /**
  * Describes the navigation operation that changed the control value.

@@ -1,7 +1,7 @@
 // #region Imports
 
 import { type ComponentRef, computed, DestroyRef, Directive, ElementRef, ErrorHandler, inject, input, output, signal, ViewContainerRef } from '@angular/core';
-import { groupTextSuggestionOptions } from '@pixel-brewery/mosaik-elements-foundation';
+import { groupTextSuggestionOptions } from '@pixel-brewery/mosaik-elements';
 import type { ITextSuggestionMenuState } from '../../components/text-suggestions/ITextSuggestionMenuState';
 import { TextSuggestionMenuComponent } from '../../components/text-suggestions/TextSuggestionMenuComponent';
 import type { InputSuggestionSource } from './InputSuggestionSource';
