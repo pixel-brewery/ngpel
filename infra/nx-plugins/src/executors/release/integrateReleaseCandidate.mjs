@@ -2,6 +2,7 @@
 import { execFileSync } from 'node:child_process';
 import { mergeVerifiedPullRequest } from '../../lib/github/mergeVerifiedPullRequest.mjs';
 import { requireMergeProtection } from '../../lib/github/requireMergeProtection.mjs';
+import { readLatestPullRequestRun } from '../../lib/github/readLatestPullRequestRun.mjs';
 import { readReleaseMetadata } from './readReleaseMetadata.mjs';
 import { verifyReleaseMetadata } from './verifyReleaseMetadata.mjs';
 // #endregion
@@ -78,7 +79,6 @@ export async function integrateReleaseCandidate(context, dependencies) {
     const initialPull = await request('GET', `${prefix}/pulls/${number}`);
     const initialProof = await verifyReleaseMetadata(initialPull, request);
     if (Object.keys(record).some((key) => initialProof.record[key] !== record[key])) throw new Error('The metadata record changed.');
-    let requested = false;
     for (let poll = 0; poll < polls; poll++) {
         const pull = poll === 0 ? initialPull : await request('GET', `${prefix}/pulls/${number}`);
         const currentRecord = readReleaseMetadata(pull?.body);
@@ -117,28 +117,15 @@ export async function integrateReleaseCandidate(context, dependencies) {
         ) {
             throw new Error('The metadata verification inventory is incomplete.');
         }
-        const runs = response.workflow_runs
-            .filter(
-                (run) =>
-                    Number.isSafeInteger(run?.id) &&
-                    run.id > 0 &&
-                    run.workflow_id === workflow.id &&
-                    run.name === 'CI' &&
-                    run.head_sha === record.candidate &&
-                    run.head_branch === branch &&
-                    canonical(run.repository) &&
-                    canonical(run.head_repository) &&
-                    ['pull_request', 'workflow_dispatch'].includes(run.event) &&
-                    (run.path === workflow.path || run.path?.startsWith(`${workflow.path}@`)) &&
-                    !['action_required', 'waiting'].includes(run.conclusion) &&
-                    !['action_required', 'waiting'].includes(run.status),
-            )
-            .sort((left, right) => right.id - left.id);
-        const run = runs[0];
-        if (!run && !requested) {
-            await request('POST', `${prefix}/actions/workflows/${workflow.id}/dispatches`, { ref: branch, inputs: { expected_head_sha: record.candidate } });
-            requested = true;
-        } else if (run?.status === 'completed') {
+        const identity = { id: 1447827206, fullName: 'pixel-brewery/ngpel', defaultBranch: 'main', path: prefix };
+        const selected = readLatestPullRequestRun(response, identity, workflow, pull);
+        let run;
+        if (selected) {
+            const current = await request('GET', `${prefix}/actions/runs/${selected.id}`);
+            run = readLatestPullRequestRun({ total_count: 1, workflow_runs: [current] }, identity, workflow, pull);
+            if (run?.id !== selected.id || run.run_attempt < selected.run_attempt) run = undefined;
+        }
+        if (run?.status === 'completed' && run.conclusion !== 'action_required') {
             if (run.conclusion !== 'success') return { status: 'blocked', reason: 'verification-failed', number };
             const result = await mergeVerifiedPullRequest(
                 { ...context, kind: 'release-metadata', eventName: 'workflow_run', runId: run.id, runAttempt: run.run_attempt },
@@ -157,7 +144,8 @@ export async function integrateReleaseCandidate(context, dependencies) {
                     throw new Error('The confirmed publication source changed.');
                 return { status: 'integrated', publicationSha: result.sha, number, version: record.version };
             }
-            if (!['incomplete-verification', 'workflow-run-changed'].includes(result.reason)) return { status: 'blocked', reason: result.reason, number };
+            if (!['incomplete-verification', 'workflow-run-changed', 'pull-request-or-main-changed', 'unproven-readonly-source'].includes(result.reason))
+                return { status: 'blocked', reason: result.reason, number };
         }
         if (poll + 1 < polls) await wait(30_000);
     }

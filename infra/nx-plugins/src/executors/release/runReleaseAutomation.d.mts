@@ -7,6 +7,6 @@
  * @internal
  */
 export function runReleaseAutomation(
-    mode: 'classify' | 'prepare' | 'verify' | 'integrate' | 'resume' | 'recover',
+    mode: 'classify' | 'prepare' | 'verify' | 'integrate' | 'resume' | 'recover' | 'authorize' | 'continue',
     options?: { readonly directory?: string; readonly sourceSha?: string },
 ): Promise<unknown>;

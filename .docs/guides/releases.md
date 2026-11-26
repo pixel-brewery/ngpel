@@ -52,16 +52,22 @@ does not modify either of them or grant new registry credentials.
    `release/ngpel/<source-sha>` branch and creates one GitHub Actions metadata PR.
    Its complete JSON body contains exactly `source`, `candidate`, `version` and
    `runId`; the actor ID, same-repository head/base, branch and record are checked.
-5. The native token's branch/PR writes do not start ordinary push/PR workflows.
-   The job explicitly dispatches full read-only CI with `expected_head_sha` for
-   that candidate. CI rejects another selected revision before checkout. Existing
-   genuine queued, running or failed exact-head attempts are retained.
+5. GitHub creates an approval-pending native PR CI for native-token metadata.
+   A separate original-artifact-bound authorization job verifies the same bundle
+   and archive hashes, all four record fields and M/B/C against the reviewed CI
+   policy. Its token has Contents/PR read and Actions write only. It authorizes
+   the actual service-run CI through GitHub's approval endpoint, without a PR
+   review, replacement check or diagnostic dispatch. The metadata integration job
+   has Actions read and retains its source/PR writes; only it can request a merge.
 6. Only the current successful CI attempt, its actual complete job, effective
    protection and unchanged source/head permit a normal SHA-guarded squash merge.
    The final closed/merged PR state is confirmed. The actual main commit must have
    the same tree as the prepared candidate and the original source as its parent;
    a human merge may additionally retain the candidate as its second parent.
-7. The existing `release-main` publisher verifies the artifact again and binds it
+7. A separate read-only-source publication-continuation job re-verifies the same
+   original artifact and actual merged PR/tree before requesting main CI and
+   documentation. The existing `release-main` publisher waits for that accepted
+   continuation, verifies the artifact again and binds it
    to that actual merged main commit. It pushes only the version tag, never a
    metadata commit directly to protected `main`. Registry versions with identical
    integrity are resumed; different bytes stop publication. Downloaded registry
@@ -84,29 +90,65 @@ repository-tooling convention.
 
 All npm and GitHub Actions update types, including majors, TypeScript and published
 Pixel Brewery packages, use the complete real CI and ordinary protected merge.
-Related package families are grouped rather than ignored. A bounded reconciler
-refreshes stale same-repository Dependabot branches with `expected_head_sha`, waits
-for the replacement and explicitly verifies its exact new head. Conflicts block one
-candidate while the remaining inventory continues. Approval-pending PR runs do not
-suppress explicit verification; genuine failed attempts remain visible.
+Related package families are grouped rather than ignored. The private
+`infra/nx-plugins` owner shares this proof for dependency PRs and source-bound
+release metadata PRs. The latter additionally require the verified original
+artifact's exact source/candidate/version/runId record, fixed metadata paths,
+sole-parent prepared commit and equivalent actual publication tree.
 
-A manually dispatched verification must map uniquely to the actual current
-same-repository bot PR. The merger re-reads its run, attempt, PR, tested head and
-current main before asking GitHub to merge. The final merged state is confirmed.
-Strict branch protection remains the atomic guard if main moves during that request.
+The privileged controller executes only the trusted default-branch Nx owner,
+without installing workspace dependencies or executing PR code or PR artifacts.
+Its `merge`, `reconcile`, `authorize` and `continue` operations are non-cacheable.
+Branch refresh and merge have Contents/PR write with Actions read. A separate
+`authorize` job has only Contents read, PR read and Actions write. It approves
+workflow execution through GitHub's native run-approval endpoint; it creates no
+PR review, status, check or branch-rule exemption.
 
-A native-token merge explicitly continues main CI with `expected_head_sha`, the
-existing patch release with `source_sha`, and the existing documentation workflow
-with `expected_head_sha`. Workflow IDs, positive run IDs/attempts, repository, branch,
-path and exact source are checked before treating a run as an existing request.
-Existing successful, failed and cancelled runs are not replaced by duplicate
-publication requests. A superseding main revision stops a new dispatch.
-Documentation keeps its original all-main-push behavior and the existing
-`NGPEL_PAGES_ENABLED` gate; it checks the selected revision and current main before
-deployment. The actual metadata merge also continues main CI/documentation, so
-native token suppression does not leave the published version without those hooks.
-Release completion and an hourly fallback reconcile dependency PRs after release
-metadata advances the base.
+Reconciliation after verification/release completion and hourly checks bounded
+same-repository bot inventories. A stale branch uses `expected_head_sha` and waits
+for the replacement. Only real `pull_request` CI is merge proof. If it is waiting
+for execution approval, the isolated authorizer verifies the exact Dependabot or
+GitHub Actions service identity of both run actors before one approval request.
+A missing native run remains pending. Manual diagnostic `workflow_dispatch` runs
+remain available but cannot satisfy protected PR checks or shadow a native run.
+Conflicts, real failures and rejected approvals retain the affected PR and attempt.
+
+For every approval and merge, M is current protected main, B the unchanged bot
+head, and C GitHub's actual `refs/pull/<number>/merge` commit. The owner checks
+unique own-repository PR association, M as ancestor of B, C's ordered parents
+[M, B] and C's tree equal to B. Source blobs are verified by Git object digest.
+Only the fixed reviewed read-only CI baseline in trusted-main
+`verificationPolicy.reviewedCiSha256` authorizes execution: its normalized main
+SHA-256 must match that constant, and normalized PR CI must equal normalized main.
+Normalization changes only full 40-character action pins with the same action
+owner/path and optional SemVer comments. CI logic, scopes, secrets or syntax edits
+require a conscious read-only review and explicit policy-digest update; no runtime
+or PR input learns a new baseline. This positive review proof does not rely on a
+partial YAML parser.
+
+The latest eligible native run is selected independently of diagnostics and its
+actual current `run_attempt` is reloaded. All actual jobs must succeed. Ordinary
+maintainer-triggered native CI on the bot PR is valid after the same complete
+source proof. A later reconciliation re-enters the full merger after a transient
+skip, never a reduced path. Workflow/run/PR/M/B/C/protection are re-read immediately
+before the ordinary SHA-guarded squash request. GitHub's strict required checks
+remain the final merge authority; the actual closed, merged PR is then confirmed.
+
+Confirmed merge outputs from either reconciliation or the CI event reach a
+separate continuation job. Recovery resolves the current main commit association
+and reads the full PR with `merged: true`; missing confirmation starts nothing.
+Main verification receives `expected_head_sha`, and the existing patch release
+retains `source_sha`. Existing exact-source main `push` or `workflow_dispatch` runs
+are retained in every state, including queued, failed and cancelled. Diagnostic
+branch runs do not suppress them. Every new request rechecks current main; a
+superseding revision stops it. Interrupted requests can therefore be retried
+without merging twice or preparing a duplicate release. Failed releases retain
+their original source and artifact instead of receiving a blind new dispatch.
+
+Documentation preserves its all-main-push trigger and `NGPEL_PAGES_ENABLED` gate.
+The publication continuation uses a separate minimal-scope job, not the metadata
+mutator. Both the metadata authorizer and continuation download the exact original
+run's artifact; neither installs dependencies, prepares versions or publishes.
 
 ## Recover the retained run
 

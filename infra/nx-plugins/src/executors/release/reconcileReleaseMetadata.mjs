@@ -1,5 +1,6 @@
 // #region Imports
 import { resolveDependabotRepository } from '../../lib/github/resolveDependabotRepository.mjs';
+import { readLatestPullRequestRun } from '../../lib/github/readLatestPullRequestRun.mjs';
 import { resumeReleaseMetadata } from './resumeReleaseMetadata.mjs';
 import { verifyReleaseMetadata } from './verifyReleaseMetadata.mjs';
 // #endregion
@@ -72,25 +73,14 @@ export async function reconcileReleaseMetadata(context, request) {
                 inventory.workflow_runs.length !== inventory.total_count
             )
                 throw new Error('Incomplete recovery verification inventory.');
-            const latest = inventory.workflow_runs
-                .filter(
-                    (run) =>
-                        Number.isSafeInteger(run?.id) &&
-                        run.id > 0 &&
-                        Number.isSafeInteger(run.run_attempt) &&
-                        run.run_attempt > 0 &&
-                        run.workflow_id === workflow.id &&
-                        run.name === 'CI' &&
-                        run.head_sha === proof.record.candidate &&
-                        run.head_branch === pull.head.ref &&
-                        canonical(run.repository) &&
-                        canonical(run.head_repository) &&
-                        ['pull_request', 'workflow_dispatch'].includes(run.event) &&
-                        (run.path === workflow.path || run.path?.startsWith(`${workflow.path}@`)) &&
-                        !['action_required', 'waiting'].includes(run.status) &&
-                        !['action_required', 'waiting'].includes(run.conclusion),
-                )
-                .sort((left, right) => right.id - left.id)[0];
+            const identity = { id: 1447827206, fullName: 'pixel-brewery/ngpel', defaultBranch: 'main', path: prefix };
+            const selected = readLatestPullRequestRun(inventory, identity, workflow, pull);
+            let latest;
+            if (selected) {
+                const current = await request('GET', `${prefix}/actions/runs/${selected.id}`);
+                latest = readLatestPullRequestRun({ total_count: 1, workflow_runs: [current] }, identity, workflow, pull);
+                if (latest?.id !== selected.id || latest.run_attempt < selected.run_attempt) latest = undefined;
+            }
             if (latest?.status !== 'completed' || latest.conclusion !== 'success') {
                 results.push({ number, status: 'verification-pending' });
                 continue;

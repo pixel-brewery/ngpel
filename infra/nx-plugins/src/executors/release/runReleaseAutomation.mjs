@@ -5,6 +5,7 @@ import { pathToFileURL } from 'node:url';
 import { requestDependabotGitHub } from '../../lib/github/requestDependabotGitHub.mjs';
 import { requestMergedWorkflow } from '../../lib/github/requestMergedWorkflow.mjs';
 import { resolveDependabotRepository } from '../../lib/github/resolveDependabotRepository.mjs';
+import { authorizeReleaseCandidate } from './authorizeReleaseCandidate.mjs';
 import { classifyReleaseSource } from './classifyReleaseSource.mjs';
 import { integrateReleaseCandidate } from './integrateReleaseCandidate.mjs';
 import { reconcileReleaseMetadata } from './reconcileReleaseMetadata.mjs';
@@ -40,6 +41,14 @@ export async function runReleaseAutomation(mode, options = {}) {
             if (process.env.EXPECTED_SOURCE_SHA && process.env.EXPECTED_SOURCE_SHA !== sourceSha) throw new Error('The requested release source changed.');
             result = await classifyReleaseSource(context, requestDependabotGitHub);
             break;
+        case 'authorize':
+            result = await authorizeReleaseCandidate(context, {
+                request: requestDependabotGitHub,
+                candidate: releaseCandidate('verify', directory, sourceSha),
+            });
+            if (['waiting', 'blocked', 'superseded'].includes(result.status))
+                throw new Error('Original metadata authorization did not complete; inspect the retained source and CI.');
+            break;
         case 'prepare':
             result = releaseCandidate('prepare', directory, sourceSha);
             break;
@@ -51,27 +60,7 @@ export async function runReleaseAutomation(mode, options = {}) {
                 break;
             }
             if (!/^[a-f0-9]{40}$/u.test(publicationSha)) throw new Error('Invalid publication revision.');
-            const prefix = 'repos/pixel-brewery/ngpel';
-            const associations = await requestDependabotGitHub('GET', `${prefix}/commits/${publicationSha}/pulls?per_page=100`);
-            if (!Array.isArray(associations) || associations.length >= 100) throw new Error('Incomplete publication association.');
-            const matches = associations.filter(
-                (pull) => pull.head?.sha === candidate.commit && pull.user?.id === 41898282 && pull.head.ref === `release/ngpel/${sourceSha}`,
-            );
-            if (matches.length !== 1 || !Number.isSafeInteger(matches[0]?.number)) throw new Error('Ambiguous publication association.');
-            const proof = await verifyReleaseMetadata(await requestDependabotGitHub('GET', `${prefix}/pulls/${matches[0].number}`), requestDependabotGitHub);
-            const main = await requestDependabotGitHub('GET', `${prefix}/branches/main`);
-            if (
-                proof.publicationSha !== publicationSha ||
-                proof.record.source !== sourceSha ||
-                proof.record.candidate !== candidate.commit ||
-                proof.record.version !== candidate.version ||
-                proof.record.runId !== context.runId ||
-                main?.name !== 'main' ||
-                main.commit?.sha !== publicationSha
-            ) {
-                throw new Error('Publication does not match the original verified artifact and current main.');
-            }
-            result = { ...candidate, candidate: candidate.commit, commit: publicationSha };
+            result = await verifiedPublication(candidate, publicationSha);
             break;
         }
         case 'integrate':
@@ -79,12 +68,17 @@ export async function runReleaseAutomation(mode, options = {}) {
                 request: requestDependabotGitHub,
                 candidate: releaseCandidate('verify', directory, sourceSha),
             });
-            if (result.status === 'integrated') {
-                const publicationContext = { ...context, eventName: 'workflow_run', sourceSha: result.publicationSha };
-                result.verification = await requestMergedWorkflow(publicationContext);
-                result.documentation = await requestMergedWorkflow({ ...publicationContext, workflow: 'documentation' });
-            }
             break;
+        case 'continue': {
+            const publication = await verifiedPublication(releaseCandidate('verify', directory, sourceSha), process.env.PUBLICATION_SHA);
+            const publicationContext = { ...context, eventName: 'workflow_run', sourceSha: publication.commit };
+            result = {
+                status: 'continued',
+                verification: await requestMergedWorkflow(publicationContext),
+                documentation: await requestMergedWorkflow({ ...publicationContext, workflow: 'documentation' }),
+            };
+            break;
+        }
         case 'recover':
             result = { status: 'reconciled', results: await reconcileReleaseMetadata(context, requestDependabotGitHub) };
             break;
@@ -96,6 +90,30 @@ export async function runReleaseAutomation(mode, options = {}) {
             break;
         default:
             throw new Error('Unsupported release workflow operation.');
+    }
+    async function verifiedPublication(candidate, publicationSha) {
+        if (!/^[a-f0-9]{40}$/u.test(publicationSha ?? '')) throw new Error('Invalid publication revision.');
+        const prefix = 'repos/pixel-brewery/ngpel';
+        const associations = await requestDependabotGitHub('GET', `${prefix}/commits/${publicationSha}/pulls?per_page=100`);
+        if (!Array.isArray(associations) || associations.length >= 100) throw new Error('Incomplete publication association.');
+        const matches = associations.filter(
+            (pull) => pull.head?.sha === candidate.commit && pull.user?.id === 41898282 && pull.head.ref === `release/ngpel/${sourceSha}`,
+        );
+        if (matches.length !== 1 || !Number.isSafeInteger(matches[0]?.number)) throw new Error('Ambiguous publication association.');
+        const proof = await verifyReleaseMetadata(await requestDependabotGitHub('GET', `${prefix}/pulls/${matches[0].number}`), requestDependabotGitHub);
+        const main = await requestDependabotGitHub('GET', `${prefix}/branches/main`);
+        if (
+            proof.publicationSha !== publicationSha ||
+            proof.record.source !== sourceSha ||
+            proof.record.candidate !== candidate.commit ||
+            proof.record.version !== candidate.version ||
+            proof.record.runId !== context.runId ||
+            main?.name !== 'main' ||
+            main.commit?.sha !== publicationSha
+        ) {
+            throw new Error('Publication does not match the original verified artifact and current main.');
+        }
+        return { ...candidate, candidate: candidate.commit, commit: publicationSha };
     }
     if (process.env.GITHUB_OUTPUT) {
         for (const [key, value] of Object.entries(result)) {

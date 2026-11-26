@@ -1,22 +1,27 @@
+// #region Imports
+import { verificationPolicy } from './verificationPolicy.mjs';
+// #endregion
+
 /**
- * Requires effective pull-request protection and the real strict GitHub Actions gate.
+ * Verifies actual enforced PR and strict native CI requirements without changing rules.
  *
- * @param request - The bounded GitHub REST boundary.
- * @param repositoryPath - The canonical repository REST prefix.
- * @returns Whether the current default branch has the required enforced rules.
+ * @param request - The bounded GitHub metadata boundary.
+ * @param repositoryPath - The independently resolved repository REST prefix.
+ * @returns Whether every maintained required native check is enforced on main.
  * @internal
  */
 export async function requireMergeProtection(request, repositoryPath) {
     const rules = await request('GET', `${repositoryPath}/rules/branches/main`);
-    if (!Array.isArray(rules) || rules.length > 100) return false;
     return (
-        rules.some((rule) => rule?.type === 'pull_request') &&
+        Array.isArray(rules) &&
+        rules.some((rule) => rule.type === 'pull_request') &&
         rules.some(
             (rule) =>
-                rule?.type === 'required_status_checks' &&
+                rule.type === 'required_status_checks' &&
                 rule.parameters?.strict_required_status_checks_policy === true &&
-                Array.isArray(rule.parameters.required_status_checks) &&
-                rule.parameters.required_status_checks.some((check) => check?.context === 'Lint, Typecheck, Test & Build' && check.integration_id === 15368),
+                verificationPolicy.requiredChecks.every((name) =>
+                    rule.parameters.required_status_checks?.some((check) => check.context === name && check.integration_id === 15368),
+                ),
         )
     );
 }

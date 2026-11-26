@@ -4,4 +4,4 @@
  * @returns The credential-free operation outcome.
  * @internal
  */
-export function runDependabotAutomation(mode: 'merge' | 'reconcile' | 'continue'): Promise<unknown>;
+export function runDependabotAutomation(mode: 'merge' | 'reconcile' | 'continue' | 'authorize'): Promise<unknown>;
