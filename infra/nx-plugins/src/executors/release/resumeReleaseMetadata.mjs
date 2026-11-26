@@ -1,4 +1,5 @@
 // #region Imports
+import { readLatestPullRequestRun } from '../../lib/github/readLatestPullRequestRun.mjs';
 import { requireMergeProtection } from '../../lib/github/requireMergeProtection.mjs';
 import { resolveDependabotRepository } from '../../lib/github/resolveDependabotRepository.mjs';
 import { verifyReleaseMetadata } from './verifyReleaseMetadata.mjs';
@@ -36,7 +37,7 @@ export async function resumeReleaseMetadata(context, request) {
         value.name === 'CI' &&
         value.status === 'completed' &&
         value.conclusion === 'success' &&
-        ['pull_request', 'workflow_dispatch'].includes(value.event) &&
+        value.event === 'pull_request' &&
         canonical(value.repository) &&
         canonical(value.head_repository) &&
         /^release\/ngpel\/[a-f0-9]{40}$/u.test(value.head_branch ?? '') &&
@@ -65,7 +66,15 @@ export async function resumeReleaseMetadata(context, request) {
     );
     if (candidates.length !== 1 || !Number.isSafeInteger(candidates[0]?.number)) return { status: 'ambiguous-pull-request' };
     const pullPath = `${prefix}/pulls/${candidates[0].number}`;
-    const proof = await verifyReleaseMetadata(await request('GET', pullPath), request);
+    const pull = await request('GET', pullPath);
+    const proof = await verifyReleaseMetadata(pull, request);
+    const identity = { id: 1447827206, fullName: 'pixel-brewery/ngpel', defaultBranch: 'main', path: prefix };
+    async function isLatest() {
+        const inventory = await request('GET', `${prefix}/actions/workflows/ci.yml/runs?head_sha=${run.head_sha}&per_page=100`);
+        const latest = readLatestPullRequestRun(inventory, identity, workflow, pull);
+        return latest?.id === run.id && latest.run_attempt <= run.run_attempt;
+    }
+    if (!(await isLatest())) return { status: 'superseded-ci' };
     if (proof.record.candidate !== run.head_sha) return { status: 'candidate-changed' };
     if (proof.run.status !== 'completed' || proof.run.conclusion !== 'failure') return { status: 'retained', runId: proof.run.id };
     const jobs = await request('GET', `${prefix}/actions/runs/${run.id}/attempts/${run.run_attempt}/jobs?per_page=100`);
@@ -131,6 +140,7 @@ export async function resumeReleaseMetadata(context, request) {
     const currentRun = await request('GET', runPath);
     if (
         !eligible(currentRun) ||
+        !(await isLatest()) ||
         currentProof.record.candidate !== proof.record.candidate ||
         currentProof.record.runId !== proof.record.runId ||
         currentProof.run.run_attempt !== proof.run.run_attempt ||

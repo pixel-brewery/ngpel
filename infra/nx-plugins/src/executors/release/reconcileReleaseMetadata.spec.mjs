@@ -17,7 +17,7 @@ function fixture() {
         merged: false,
         body: JSON.stringify(record),
         user: { id: 41898282, login: 'github-actions[bot]', type: 'Bot' },
-        base: { ref: 'main', repo: identity },
+        base: { ref: 'main', sha: source, repo: identity },
         head: { ref: branch, sha: candidate, repo: identity },
     };
     const ci = {
@@ -30,7 +30,10 @@ function fixture() {
         head_repository: identity,
         head_branch: branch,
         head_sha: candidate,
-        event: 'workflow_dispatch',
+        event: 'pull_request',
+        actor: { id: 41898282, login: 'github-actions[bot]', type: 'Bot' },
+        triggering_actor: { id: 41898282, login: 'github-actions[bot]', type: 'Bot' },
+        pull_requests: [{ number: 7, head: structuredClone(pull.head), base: structuredClone(pull.base) }],
         status: 'completed',
         conclusion: 'success',
     };
@@ -93,7 +96,9 @@ function fixture() {
         if (endpoint.endsWith('/actions/workflows/ci.yml')) return { id: 8, path: '.github/workflows/ci.yml', name: 'CI', state: 'active' };
         if (endpoint.endsWith('/actions/workflows/release.yml'))
             return { id: 9, path: '.github/workflows/release.yml', name: 'Release ngpel packages', state: 'active' };
-        if (endpoint.endsWith('/actions/runs/202')) return ci;
+        if (endpoint.endsWith('/actions/runs/202')) return data.currentCi ?? ci;
+        if (endpoint.endsWith('/actions/runs/203')) return data.inventory?.workflow_runs.find((run) => run.id === 203);
+        if (endpoint.includes('/actions/workflows/ci.yml/runs?')) return data.inventory ?? { total_count: 1, workflow_runs: [ci] };
         if (endpoint.endsWith('/actions/runs/301')) return release;
         if (endpoint.endsWith('/pulls?per_page=100')) return data.associations;
         if (endpoint.endsWith('/pulls/7')) return pull;
@@ -176,4 +181,15 @@ test('fails a malformed candidate inventory without writing workflow state', asy
     // Assert
     expect(results).toMatchObject([{ number: 7, status: 'blocked' }]);
     expect(f.writes).toEqual([]);
+});
+
+test('recovers the current native attempt despite a newer successful diagnostic run', async () => {
+    // Arrange
+    const f = fixture();
+    f.data.inventory = { total_count: 2, workflow_runs: [f.ci, { ...f.ci, id: 203, event: 'workflow_dispatch', pull_requests: [] }] };
+    // Act
+    const result = await reconcileReleaseMetadata(scheduled(f.context), f.request);
+    // Assert
+    expect(result[0].status).toBe('resumed');
+    expect(f.writes).toEqual(['repos/pixel-brewery/ngpel/actions/runs/301/rerun-failed-jobs']);
 });

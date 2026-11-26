@@ -9,7 +9,7 @@ export interface IReleaseExecutorOptions {
      *
      * @internal
      */
-    readonly mode: 'classify' | 'prepare' | 'verify' | 'integrate' | 'resume' | 'recover';
+    readonly mode: 'classify' | 'prepare' | 'verify' | 'integrate' | 'resume' | 'recover' | 'authorize' | 'continue';
     /**
      * Locates the workflow-owned immutable artifact directory when required.
      *

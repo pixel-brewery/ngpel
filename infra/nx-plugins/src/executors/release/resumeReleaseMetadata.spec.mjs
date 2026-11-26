@@ -17,7 +17,7 @@ function fixture() {
         merged: false,
         body: JSON.stringify(record),
         user: { id: 41898282, login: 'github-actions[bot]', type: 'Bot' },
-        base: { ref: 'main', repo: identity },
+        base: { ref: 'main', sha: source, repo: identity },
         head: { ref: branch, sha: candidate, repo: identity },
     };
     const ci = {
@@ -30,7 +30,10 @@ function fixture() {
         head_repository: identity,
         head_branch: branch,
         head_sha: candidate,
-        event: 'workflow_dispatch',
+        event: 'pull_request',
+        actor: { id: 41898282, login: 'github-actions[bot]', type: 'Bot' },
+        triggering_actor: { id: 41898282, login: 'github-actions[bot]', type: 'Bot' },
+        pull_requests: [{ number: 7, head: structuredClone(pull.head), base: structuredClone(pull.base) }],
         status: 'completed',
         conclusion: 'success',
     };
@@ -90,7 +93,9 @@ function fixture() {
         if (endpoint.endsWith('/actions/workflows/ci.yml')) return { id: 8, path: '.github/workflows/ci.yml', name: 'CI', state: 'active' };
         if (endpoint.endsWith('/actions/workflows/release.yml'))
             return { id: 9, path: '.github/workflows/release.yml', name: 'Release ngpel packages', state: 'active' };
-        if (endpoint.endsWith('/actions/runs/202')) return ci;
+        if (endpoint.endsWith('/actions/runs/202')) return data.currentCi ?? ci;
+        if (endpoint.endsWith('/actions/runs/203')) return data.inventory?.workflow_runs.find((run) => run.id === 203);
+        if (endpoint.includes('/actions/workflows/ci.yml/runs?')) return data.inventory ?? { total_count: 1, workflow_runs: [ci] };
         if (endpoint.endsWith('/actions/runs/301')) return release;
         if (endpoint.endsWith('/pulls?per_page=100')) return data.associations;
         if (endpoint.endsWith('/pulls/7')) return pull;
@@ -151,6 +156,22 @@ for (const failure of [
         if (failure === 'missing-protection') f.data.rules = [];
         if (failure === 'superseded-source') f.data.main = 'e'.repeat(40);
         if (failure === 'ambiguous-pr') f.data.associations.push({ ...f.pull, number: 8 });
+        // Act
+        const result = await resumeReleaseMetadata(f.context, f.request);
+        // Assert
+        expect(result.status).not.toBe('resumed');
+        expect(f.writes).toEqual([]);
+    });
+}
+
+for (const problem of ['newer-failed-native', 'diagnostic-only', 'malformed-actor', 'stale-attempt']) {
+    test(`does not resume retained publication from invalid native CI: ${problem}`, async () => {
+        // Arrange
+        const f = fixture();
+        if (problem === 'newer-failed-native') f.data.inventory = { total_count: 2, workflow_runs: [f.ci, { ...f.ci, id: 203, conclusion: 'failure' }] };
+        if (problem === 'diagnostic-only') f.ci.event = 'workflow_dispatch';
+        if (problem === 'malformed-actor') f.ci.actor = { id: 0, login: 'forged', type: 'Bot' };
+        if (problem === 'stale-attempt') f.data.currentCi = { ...f.ci, run_attempt: 2 };
         // Act
         const result = await resumeReleaseMetadata(f.context, f.request);
         // Assert
