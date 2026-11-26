@@ -5829,24 +5829,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pixel-brewery/markdowner-core@npm:0.1.217":
-  version: 0.1.217
-  resolution: "@pixel-brewery/markdowner-core@npm:0.1.217::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40pixel-brewery%2Fmarkdowner-core%2F0.1.217%2F7b8070bb0b803858c7c84a830c6eb6507625d5a6"
+"@pixel-brewery/markdowner-core@npm:0.1.218":
+  version: 0.1.218
+  resolution: "@pixel-brewery/markdowner-core@npm:0.1.218::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40pixel-brewery%2Fmarkdowner-core%2F0.1.218%2F491727ae884915b202d805445ee629b04034c1d6"
   dependencies:
     tslib: "npm:2.9.1"
   peerDependencies:
     marked: ">=18.0.0"
-  checksum: 10c0/dff391dde656bfbc9bf5436a8059fccefc3b3369ea27907ef76d7782cbc47a61509fcfc9368db538ebaf0f43c6a35b3e095311df4e16ddc995f08a039deb25d3
+  checksum: 10c0/8204eb2e6e033a8b8f1f620b6e5902f336fa0220625319b97dcbd5cea3638de97cbad421a5d1d71ad1ddbe89e686e9c1d921227d81d9974554e9b41c21d68a83
   languageName: node
   linkType: hard
 
-"@pixel-brewery/mosaik-elements-angular@npm:0.1.217":
-  version: 0.1.217
-  resolution: "@pixel-brewery/mosaik-elements-angular@npm:0.1.217::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40pixel-brewery%2Fmosaik-elements-angular%2F0.1.217%2Fce533c56daea87b14e5306a5a8bb7d3caa74cece"
+"@pixel-brewery/mosaik-elements-angular@npm:0.1.218":
+  version: 0.1.218
+  resolution: "@pixel-brewery/mosaik-elements-angular@npm:0.1.218::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40pixel-brewery%2Fmosaik-elements-angular%2F0.1.218%2F05ea2654c0d91ab748d37c3e75e05064a3d599ae"
   dependencies:
-    "@pixel-brewery/mosaik-elements": "npm:0.1.217"
-    "@pixel-brewery/mosaik-elements-foundation": "npm:0.1.217"
-    "@pixel-brewery/mosaik-icons": "npm:0.1.217"
+    "@pixel-brewery/mosaik-elements": "npm:0.1.218"
+    "@pixel-brewery/mosaik-elements-foundation": "npm:0.1.218"
+    "@pixel-brewery/mosaik-icons": "npm:0.1.218"
     tslib: "npm:2.9.1"
   peerDependencies:
     "@angular/cdk": ">=18.0.0"
@@ -5903,18 +5903,18 @@ __metadata:
     rxjs: ">=7.0.0"
     signature_pad: ">=5.0.0"
     three: ^0.187.0
-  checksum: 10c0/091d7e8ae29fbc068709637eb8952b077803fba4f488ffd0421db0720b473a79225dd2ddf31046373e97a61d08249558ac8033bb9b20845ff682b517e9d588f0
+  checksum: 10c0/318f8a20d7e95f194000c89838dda5eff8361d4108a78994237ad36b8741c45199aefff255ab44338e799e29dde1afed283f0b33980ecfdba92f0ce334000ad4
   languageName: node
   linkType: hard
 
-"@pixel-brewery/mosaik-elements-foundation@npm:0.1.217":
-  version: 0.1.217
-  resolution: "@pixel-brewery/mosaik-elements-foundation@npm:0.1.217::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40pixel-brewery%2Fmosaik-elements-foundation%2F0.1.217%2F537014e1337ceb377380c83d9f9d13279d242eb0"
+"@pixel-brewery/mosaik-elements-foundation@npm:0.1.218":
+  version: 0.1.218
+  resolution: "@pixel-brewery/mosaik-elements-foundation@npm:0.1.218::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40pixel-brewery%2Fmosaik-elements-foundation%2F0.1.218%2F4adb1eab87f17ed681fcfe4a9da5d733e8b22dea"
   dependencies:
     "@dagrejs/dagre": "npm:3.1.3"
-    "@pixel-brewery/mosaik-elements": "npm:0.1.217"
-    "@pixel-brewery/mosaik-icons": "npm:0.1.217"
-    "@pixel-brewery/mosaik-themes": "npm:0.1.217"
+    "@pixel-brewery/mosaik-elements": "npm:0.1.218"
+    "@pixel-brewery/mosaik-icons": "npm:0.1.218"
+    "@pixel-brewery/mosaik-themes": "npm:0.1.218"
     elkjs: "npm:0.12.1"
     reflect-metadata: "npm:^0.2.2"
     tslib: "npm:2.9.1"
@@ -5975,34 +5975,34 @@ __metadata:
     rxjs: ">=7.0.0"
     signature_pad: ">=5.0.0"
     three: ^0.187.0
-  checksum: 10c0/d665b43cf3e59845b190669ccfa3011c26252da9fd6582a8d245fb0cc29426488837145dd7546c1205d93a438744116f3c169ed5b3f6fd5e7d41123e0817a811
+  checksum: 10c0/c837fa7b5fb5866d7b8ac582aaa7607ec478da83fd562a4496b2ee7a143e52211cef205b1469acdc153c2cd4c36197ac25302bc91b7a33bb97a2aa0304c54db7
   languageName: node
   linkType: hard
 
-"@pixel-brewery/mosaik-elements@npm:0.1.217":
-  version: 0.1.217
-  resolution: "@pixel-brewery/mosaik-elements@npm:0.1.217::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40pixel-brewery%2Fmosaik-elements%2F0.1.217%2Ff5163ad43eb0a4469c66e97b3e76241b84ecd903"
+"@pixel-brewery/mosaik-elements@npm:0.1.218":
+  version: 0.1.218
+  resolution: "@pixel-brewery/mosaik-elements@npm:0.1.218::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40pixel-brewery%2Fmosaik-elements%2F0.1.218%2Fe823608f853d4a168ff7ff4a360a042356e4150f"
   dependencies:
     tslib: "npm:2.9.1"
     type-fest: "npm:5.10.0"
-  checksum: 10c0/cc30335694e36d9d04a169253505f2e738832efca845984109f568c8bbd2da29790156adf4d04b9175d6972ba27ee2c6457d1c5bbbbf215aaa289cd561217a42
+  checksum: 10c0/5141daf8a643fde4701f2170245edbaaf67b6a8b5aa894790f4c5579608f9db9432e264549e60d86f29be92cce197626972d392538e8a2ea125daa5926997d4c
   languageName: node
   linkType: hard
 
-"@pixel-brewery/mosaik-icons@npm:0.1.217":
-  version: 0.1.217
-  resolution: "@pixel-brewery/mosaik-icons@npm:0.1.217::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40pixel-brewery%2Fmosaik-icons%2F0.1.217%2F99e6eb790e98abf27adb932bc11acac4a7bedc55"
+"@pixel-brewery/mosaik-icons@npm:0.1.218":
+  version: 0.1.218
+  resolution: "@pixel-brewery/mosaik-icons@npm:0.1.218::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40pixel-brewery%2Fmosaik-icons%2F0.1.218%2Fc6ee40a0a7856b2b8543386abcf0d380b192468c"
   dependencies:
     tslib: "npm:2.9.1"
-  checksum: 10c0/97d7763fe7c80c2aac56b90b89844585e28aae0efbf2cee1dde1ae7e1b12b76298afc6c09229c891f07cafe31b442ac6949b542eeaf90001155aaa80ce45aa0e
+  checksum: 10c0/6a6f2b1c193fa717395abac156d8686d5dd3aac37e8a9cc82a8cc8e45fd113a6a75ede25d2befe88b88c0d4decefc08a18e5b2458b6ce50a3c65db3c84030bd4
   languageName: node
   linkType: hard
 
-"@pixel-brewery/mosaik-themes@npm:0.1.217":
-  version: 0.1.217
-  resolution: "@pixel-brewery/mosaik-themes@npm:0.1.217::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40pixel-brewery%2Fmosaik-themes%2F0.1.217%2F703061ab20a91c3957b06b27fa5c20f60925a8c3"
+"@pixel-brewery/mosaik-themes@npm:0.1.218":
+  version: 0.1.218
+  resolution: "@pixel-brewery/mosaik-themes@npm:0.1.218::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40pixel-brewery%2Fmosaik-themes%2F0.1.218%2F66d233737bfa138b41832d225d565dc700f2b19f"
   dependencies:
-    "@pixel-brewery/mosaik-elements": "npm:0.1.217"
+    "@pixel-brewery/mosaik-elements": "npm:0.1.218"
     tslib: "npm:2.9.1"
   peerDependencies:
     "@google/design.md": ">=0.4.0"
@@ -6010,7 +6010,7 @@ __metadata:
     typescript: ">=5.0.0"
   bin:
     mosaik-design-md: bin/design-md.mjs
-  checksum: 10c0/50c10641baf58fabfcd75999459c0898378c1834fcf6530c13925c48e1c6350aa74da24a8e04af86d567eaae4e1df49bf16c09a35126031f87458bd5c929af2e
+  checksum: 10c0/5981170d46019655c29f54899f5e93972aad2bff945d0ce9ee5ce9ba311337fb973a5eb5e75fb73d6a7d93daf879bc0503061b5933f2cf90798bae64d1188ca4
   languageName: node
   linkType: hard
 
@@ -6060,11 +6060,11 @@ __metadata:
     "@lit-labs/virtualizer": "npm:^2.1.1"
     "@lit/context": "npm:^1.1.6"
     "@lit/task": "npm:^1.0.3"
-    "@pixel-brewery/mosaik-elements": "npm:0.1.217"
-    "@pixel-brewery/mosaik-elements-angular": "npm:0.1.217"
-    "@pixel-brewery/mosaik-elements-foundation": "npm:0.1.217"
-    "@pixel-brewery/mosaik-icons": "npm:0.1.217"
-    "@pixel-brewery/mosaik-themes": "npm:0.1.217"
+    "@pixel-brewery/mosaik-elements": "npm:0.1.218"
+    "@pixel-brewery/mosaik-elements-angular": "npm:0.1.218"
+    "@pixel-brewery/mosaik-elements-foundation": "npm:0.1.218"
+    "@pixel-brewery/mosaik-icons": "npm:0.1.218"
+    "@pixel-brewery/mosaik-themes": "npm:0.1.218"
     "@types/chroma-js": "npm:^3.1.3"
     chroma-js: "npm:^3.3.0"
     lit: "npm:^3.3.3"
@@ -13448,11 +13448,11 @@ __metadata:
     "@nx/vite": "npm:23.3.2"
     "@nx/vitest": "npm:23.3.2"
     "@nx/web": "npm:23.3.2"
-    "@pixel-brewery/markdowner-core": "npm:0.1.217"
-    "@pixel-brewery/mosaik-elements": "npm:0.1.217"
-    "@pixel-brewery/mosaik-elements-angular": "npm:0.1.217"
-    "@pixel-brewery/mosaik-elements-foundation": "npm:0.1.217"
-    "@pixel-brewery/mosaik-themes": "npm:0.1.217"
+    "@pixel-brewery/markdowner-core": "npm:0.1.218"
+    "@pixel-brewery/mosaik-elements": "npm:0.1.218"
+    "@pixel-brewery/mosaik-elements-angular": "npm:0.1.218"
+    "@pixel-brewery/mosaik-elements-foundation": "npm:0.1.218"
+    "@pixel-brewery/mosaik-themes": "npm:0.1.218"
     "@replit/codemirror-lang-svelte": "npm:^6.0.0"
     "@schematics/angular": "npm:22.3.0"
     "@simplewebauthn/browser": "npm:14.0.0"
