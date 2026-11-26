@@ -19,10 +19,11 @@ const requestFailure = 'Dependabot GitHub API request failed; inspect the workfl
  * @internal
  */
 export async function requestDependabotGitHub(method, endpoint, body) {
+    let response;
     try {
         if (!process.env.GH_TOKEN) throw new Error(requestFailure);
 
-        return await new Promise((resolveRequest, reject) => {
+        response = await new Promise((resolveRequest, reject) => {
             const child = execFile(
                 'gh',
                 [
@@ -46,10 +47,14 @@ export async function requestDependabotGitHub(method, endpoint, body) {
                     killSignal: 'SIGKILL',
                     windowsHide: true,
                 },
-                (error, stdout) => {
+                (error, stdout, stderr) => {
                     if (error) {
+                        const unavailable = unavailableCandidateFailure(method, endpoint, stdout, stderr);
+                        if (unavailable) {
+                            resolveRequest(unavailable);
+                            return;
+                        }
                         reject(new Error(requestFailure));
-
                         return;
                     }
 
@@ -78,4 +83,33 @@ export async function requestDependabotGitHub(method, endpoint, body) {
     } catch {
         throw new Error(requestFailure);
     }
+    // Only the controlled local classifier can fulfill with an Error; JSON responses cannot construct one.
+    if (response instanceof Error) throw response;
+    return response;
+}
+
+/**
+ * Classifies only the exact provider response for an own release candidate that is not uploaded yet.
+ *
+ * @remarks The caller still binds this candidate to its verified original artifact and current main; no other endpoint, permission failure or malformed response is admitted for waiting.
+ * @internal
+ */
+function unavailableCandidateFailure(method, endpoint, stdout, stderr) {
+    const candidate = /^repos\/pixel-brewery\/ngpel\/commits\/([a-f0-9]{40})\/pulls\?per_page=100$/u.exec(endpoint ?? '')?.[1];
+    const status = /\(HTTP (404|422)\)\s*$/u.exec(typeof stderr === 'string' ? stderr : '')?.[1];
+    if (method !== 'GET' || !candidate || !status) return;
+    let body;
+    try {
+        body = JSON.parse(stdout);
+    } catch {
+        return;
+    }
+    if (
+        !body ||
+        Array.isArray(body) ||
+        body.status !== status ||
+        (status === '404' ? body.message !== 'Not Found' : body.message !== `No commit found for SHA: ${candidate}`)
+    )
+        return;
+    return Object.assign(new Error(requestFailure), { code: 'NGPEL_RELEASE_CANDIDATE_NOT_CREATED', endpoint, candidate });
 }

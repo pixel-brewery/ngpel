@@ -124,3 +124,79 @@ describe('Dependabot GitHub request boundary', () => {
         expect(system.execFile).toHaveBeenCalledTimes(1);
     });
 });
+
+describe('original release candidate visibility', () => {
+    const candidate = 'a'.repeat(40);
+    const endpoint = `repos/pixel-brewery/ngpel/commits/${candidate}/pulls?per_page=100`;
+
+    it.each(['404', '422'])('preserves only the exact own-candidate HTTP %s response as a controlled unavailable result', async (status) => {
+        // Arrange
+        vi.stubEnv('GH_TOKEN', 'synthetic-workflow-token');
+        const message = status === '404' ? 'Not Found' : `No commit found for SHA: ${candidate}`;
+        system.execFile.mockImplementation((_command, _arguments, _options, callback) => ({
+            stdin: {
+                on: vi.fn(),
+                end: () => callback(new Error('sensitive-upstream-output'), JSON.stringify({ status, message }), `gh: ${message} (HTTP ${status})\n`),
+            },
+        }));
+        // Act
+        const error = await requestDependabotGitHub('GET', endpoint).catch((failure) => failure);
+        // Assert
+        expect(error).toBeInstanceOf(Error);
+        expect(error).not.toHaveProperty('cause');
+        expect(error).toMatchObject({ code: 'NGPEL_RELEASE_CANDIDATE_NOT_CREATED', endpoint, candidate });
+        expect(error.message).toContain('GitHub API request failed');
+        expect(error.message).not.toContain('sensitive-upstream-output');
+        expect(system.execFile).toHaveBeenCalledTimes(1);
+    });
+
+    it.each([
+        'permission',
+        'other-validation',
+        'other-sha',
+        'other-repository',
+        'other-endpoint',
+        'other-method',
+        'malformed-json',
+        'wrong-body-status',
+        'numeric-body-status',
+        'wrong-404-message',
+    ])('retains the sanitized fatal boundary for %s', async (change) => {
+        // Arrange
+        vi.stubEnv('GH_TOKEN', 'synthetic-workflow-token');
+        let status = '422';
+        let bodyStatus: string | number = status;
+        let message = `No commit found for SHA: ${candidate}`;
+        let path = endpoint;
+        let method = 'GET';
+        if (change === 'permission') {
+            status = '403';
+            bodyStatus = status;
+            message = 'Resource not accessible by integration';
+        }
+        if (change === 'other-validation') message = 'Validation Failed';
+        if (change === 'other-sha') message = `No commit found for SHA: ${'b'.repeat(40)}`;
+        if (change === 'other-repository') path = path.replace('pixel-brewery/ngpel', 'example/other');
+        if (change === 'other-endpoint') path = path.replace('/pulls?per_page=100', '');
+        if (change === 'other-method') method = 'POST';
+        if (change === 'wrong-body-status') bodyStatus = '404';
+        if (change === 'numeric-body-status') bodyStatus = 422;
+        if (change === 'wrong-404-message') {
+            status = '404';
+            bodyStatus = status;
+            message = 'A different resource was not found';
+        }
+        const stdout = change === 'malformed-json' ? 'sensitive-upstream-output' : JSON.stringify({ status: bodyStatus, message });
+        system.execFile.mockImplementation((_command, _arguments, _options, callback) => ({
+            stdin: { on: vi.fn(), end: () => callback(new Error('sensitive-upstream-output'), stdout, `gh: ${message} (HTTP ${status})\n`) },
+        }));
+        // Act
+        const error = await requestDependabotGitHub(method, path).catch((failure) => failure);
+        // Assert
+        expect(error).toBeInstanceOf(Error);
+        expect(error).not.toHaveProperty('cause');
+        expect(error).not.toHaveProperty('code');
+        expect(error.message).not.toContain('sensitive-upstream-output');
+        expect(system.execFile).toHaveBeenCalledTimes(1);
+    });
+});

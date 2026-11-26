@@ -215,3 +215,139 @@ test('ignores a newer successful diagnostic dispatch and authorizes the actual n
     expect(result.status).toBe('verification-approved');
     expect(f.writes.map((write) => write.endpoint)).toEqual(['repos/pixel-brewery/ngpel/actions/runs/202/approve']);
 });
+
+function missingCandidate(candidate, endpoint = `repos/pixel-brewery/ngpel/commits/${candidate}/pulls?per_page=100`) {
+    return Object.assign(new Error('Controlled candidate response.'), { code: 'NGPEL_RELEASE_CANDIDATE_NOT_CREATED', candidate, endpoint });
+}
+
+test('waits within the existing deadline when the verified candidate has not yet been uploaded, then applies the full native proof', async () => {
+    // Arrange
+    const f = fixture();
+    const request = f.dependencies.request;
+    let associations = 0;
+    let waits = 0;
+    f.dependencies.wait = async (milliseconds) => {
+        expect(milliseconds).toBe(30_000);
+        waits++;
+    };
+    f.dependencies.request = async (method, endpoint, body) => {
+        if (method === 'GET' && endpoint.endsWith(`/commits/${f.candidate}/pulls?per_page=100`) && associations++ === 0) throw missingCandidate(f.candidate);
+        return request(method, endpoint, body);
+    };
+    // Act
+    const result = await authorizeReleaseCandidate(f.context, f.dependencies);
+    // Assert
+    expect(result.status).toBe('verification-approved');
+    expect(waits).toBe(1);
+    expect(f.writes).toEqual([{ method: 'POST', endpoint: 'repos/pixel-brewery/ngpel/actions/runs/202/approve', body: undefined }]);
+});
+
+test('retains a missing original candidate after the same bounded deadline without creating or approving anything', async () => {
+    // Arrange
+    const f = fixture();
+    const request = f.dependencies.request;
+    let associations = 0;
+    let waits = 0;
+    f.dependencies.wait = async () => {
+        waits++;
+    };
+    f.dependencies.request = async (method, endpoint, body) => {
+        if (method === 'GET' && endpoint.endsWith(`/commits/${f.candidate}/pulls?per_page=100`)) {
+            associations++;
+            throw missingCandidate(f.candidate);
+        }
+        return request(method, endpoint, body);
+    };
+    // Act
+    const result = await authorizeReleaseCandidate(f.context, f.dependencies);
+    // Assert
+    expect(result).toEqual({ status: 'waiting', reason: 'metadata-native-ci-not-observed' });
+    expect(associations).toBe(2);
+    expect(waits).toBe(1);
+    expect(f.writes).toEqual([]);
+});
+
+for (const change of ['permission', 'malformed', 'other-endpoint', 'other-candidate']) {
+    test(`does not wait for an unrelated visibility failure: ${change}`, async () => {
+        // Arrange
+        const f = fixture();
+        const request = f.dependencies.request;
+        let waits = 0;
+        f.dependencies.wait = async () => {
+            waits++;
+        };
+        f.dependencies.request = async (method, endpoint, body) => {
+            if (method === 'GET' && endpoint.endsWith(`/commits/${f.candidate}/pulls?per_page=100`)) {
+                if (change === 'permission' || change === 'malformed') throw new Error('Provider request failed.');
+                if (change === 'other-endpoint') throw missingCandidate(f.candidate, 'repos/example/other/commits/' + f.candidate + '/pulls?per_page=100');
+                throw missingCandidate('f'.repeat(40), endpoint);
+            }
+            return request(method, endpoint, body);
+        };
+        // Act
+        const result = authorizeReleaseCandidate(f.context, f.dependencies);
+        // Assert
+        await expect(result).rejects.toThrow();
+        expect(waits).toBe(0);
+        expect(f.writes).toEqual([]);
+    });
+}
+
+test('stops missing-candidate waiting as soon as the original main source changes', async () => {
+    // Arrange
+    const f = fixture();
+    const request = f.dependencies.request;
+    let waits = 0;
+    f.dependencies.wait = async () => {
+        waits++;
+    };
+    f.data.main = 'f'.repeat(40);
+    f.dependencies.request = async (method, endpoint, body) => {
+        if (method === 'GET' && endpoint.endsWith(`/commits/${f.candidate}/pulls?per_page=100`)) throw missingCandidate(f.candidate);
+        return request(method, endpoint, body);
+    };
+    // Act
+    const result = await authorizeReleaseCandidate(f.context, f.dependencies);
+    // Assert
+    expect(result).toEqual({ status: 'superseded' });
+    expect(waits).toBe(0);
+    expect(f.writes).toEqual([]);
+});
+
+test('still rejects a different original run after the candidate becomes visible', async () => {
+    // Arrange
+    const f = fixture();
+    const request = f.dependencies.request;
+    let associations = 0;
+    f.dependencies.wait = async () => {
+        f.pull.body = JSON.stringify({ ...f.record, runId: 302 });
+    };
+    f.dependencies.request = async (method, endpoint, body) => {
+        if (method === 'GET' && endpoint.endsWith(`/commits/${f.candidate}/pulls?per_page=100`) && associations++ === 0) throw missingCandidate(f.candidate);
+        return request(method, endpoint, body);
+    };
+    // Act
+    const result = authorizeReleaseCandidate(f.context, f.dependencies);
+    // Assert
+    await expect(result).rejects.toThrow();
+    expect(f.writes).toEqual([]);
+});
+
+test('does not approve a foreign actor after candidate visibility is restored', async () => {
+    // Arrange
+    const f = fixture();
+    const request = f.dependencies.request;
+    let associations = 0;
+    f.dependencies.wait = async () => {
+        f.ciRun.actor = { id: 12345, login: 'maintainer', type: 'User' };
+    };
+    f.dependencies.request = async (method, endpoint, body) => {
+        if (method === 'GET' && endpoint.endsWith(`/commits/${f.candidate}/pulls?per_page=100`) && associations++ === 0) throw missingCandidate(f.candidate);
+        return request(method, endpoint, body);
+    };
+    // Act
+    const result = await authorizeReleaseCandidate(f.context, f.dependencies);
+    // Assert
+    expect(result.status).not.toBe('verification-approved');
+    expect(f.writes).toEqual([]);
+});
