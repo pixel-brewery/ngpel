@@ -92,9 +92,9 @@ import {
 | `@pixel-brewery/mosaik-elements`            | `>=0.1.217` _(optional)_        |
 | `@pixel-brewery/mosaik-elements-angular`    | `>=0.1.217` _(optional)_        |
 | `@pixel-brewery/mosaik-elements-foundation` | `>=0.1.217` _(optional)_        |
-| `@pixel-brewery/ngpel-core`                 | `0.0.35`                        |
-| `@pixel-brewery/ngpel-mvp`                  | `0.0.35`                        |
-| `@pixel-brewery/ngpel-router`               | `0.0.35`                        |
+| `@pixel-brewery/ngpel-core`                 | `0.0.36`                        |
+| `@pixel-brewery/ngpel-mvp`                  | `0.0.36`                        |
+| `@pixel-brewery/ngpel-router`               | `0.0.36`                        |
 | `marked`                                    | `>=18.0.0`                      |
 | `rxjs`                                      | `>=7.8.0 <8.0.0`                |
 
