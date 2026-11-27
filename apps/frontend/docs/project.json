@@ -7,12 +7,7 @@
     "targets": {
         "generate-api-overview": {
             "executor": "nx-plugins:generate-api-overview",
-            "dependsOn": [
-                {
-                    "projects": "dependencies",
-                    "target": "docs"
-                }
-            ],
+            "dependsOn": ["^docs"],
             "inputs": ["{workspaceRoot}/.docs/packages/*/api/**/*"],
             "outputs": ["{workspaceRoot}/.docs/public/api/api-index.json"],
             "options": {
@@ -22,13 +17,7 @@
         },
         "dev": {
             "executor": "nx:run-commands",
-            "dependsOn": [
-                "generate-api-overview",
-                {
-                    "projects": "dependencies",
-                    "target": "docs"
-                }
-            ],
+            "dependsOn": ["generate-api-overview", "^docs"],
             "options": {
                 "command": "npx vitepress dev apps/frontend/docs",
                 "cwd": "{workspaceRoot}"
@@ -36,13 +25,7 @@
         },
         "build": {
             "executor": "nx:run-commands",
-            "dependsOn": [
-                "generate-api-overview",
-                {
-                    "projects": "dependencies",
-                    "target": "docs"
-                }
-            ],
+            "dependsOn": ["generate-api-overview", "^docs"],
             "options": {
                 "command": "npx vitepress build apps/frontend/docs",
                 "cwd": "{workspaceRoot}"
@@ -58,12 +41,7 @@
         },
         "docs-build-llm": {
             "executor": "nx-plugins:build-llm-artifacts",
-            "dependsOn": [
-                {
-                    "projects": "dependencies",
-                    "target": "docs"
-                }
-            ],
+            "dependsOn": ["^docs"],
             "inputs": ["{workspaceRoot}/.docs/**/*"],
             "outputs": ["{workspaceRoot}/.generated/llm"],
             "options": {
