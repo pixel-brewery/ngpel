@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       expected_head_sha:
-        description: Exact main source requested by trusted dependency automation
+        description: Exact main source requested by release or Dependabot automation
         required: false
         default: ''
         type: string
