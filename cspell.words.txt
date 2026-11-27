@@ -48,6 +48,7 @@ fac
 gebruiken
 groupable
 grüße
+gsub
 guten
 hideable
 hrefs
@@ -73,6 +74,7 @@ markerclusterer
 microsyntax
 microtask
 middlelight
+mktemp
 mononym
 mosaik
 navigations
@@ -100,10 +102,12 @@ passkeys
 passwordbox
 persistable
 pinable
+pipefail
 postbuild
 presenters
 previewable
 Produktbeschreibung
+rawfile
 recognisable
 recognised
 refreshable

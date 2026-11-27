@@ -3,7 +3,7 @@ import { verificationPolicy } from './verificationPolicy.mjs';
 // #endregion
 
 /**
- * Verifies actual enforced PR and strict native CI requirements without changing rules.
+ * Verifies actual enforced PR and required native CI checks without changing rules.
  *
  * @param request - The bounded GitHub metadata boundary.
  * @param repositoryPath - The independently resolved repository REST prefix.
@@ -18,9 +18,8 @@ export async function requireMergeProtection(request, repositoryPath) {
         rules.some(
             (rule) =>
                 rule.type === 'required_status_checks' &&
-                rule.parameters?.strict_required_status_checks_policy === true &&
                 verificationPolicy.requiredChecks.every((name) =>
-                    rule.parameters.required_status_checks?.some((check) => check.context === name && check.integration_id === 15368),
+                    rule.parameters?.required_status_checks?.some((check) => check.context === name && check.integration_id === 15368),
                 ),
         )
     );

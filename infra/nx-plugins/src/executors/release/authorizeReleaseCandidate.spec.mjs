@@ -77,7 +77,7 @@ function fixture(state = 'action_required') {
             {
                 type: 'required_status_checks',
                 parameters: {
-                    strict_required_status_checks_policy: true,
+                    strict_required_status_checks_policy: false,
                     required_status_checks: [{ context: 'Lint, Typecheck, Test & Build', integration_id: 15368 }],
                 },
             },

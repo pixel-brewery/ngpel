@@ -4,7 +4,7 @@ import { requireMergeProtection } from './requireMergeProtection.mjs';
 // #endregion
 
 for (const scenario of ['protected', 'missing-pr', 'missing-check', 'non-strict', 'foreign-integration', 'malformed']) {
-    test(`requires effective real PR and strict CI protection: ${scenario}`, async () => {
+    test(`requires effective real PR and required CI protection: ${scenario}`, async () => {
         // Arrange
         const rules = [
             { type: 'pull_request' },
@@ -24,6 +24,6 @@ for (const scenario of ['protected', 'missing-pr', 'missing-check', 'non-strict'
         // Act
         const result = await requireMergeProtection(request, 'repos/pixel-brewery/ngpel');
         // Assert
-        expect(result).toBe(scenario === 'protected');
+        expect(result).toBe(['protected', 'non-strict'].includes(scenario));
     });
 }

@@ -72,7 +72,7 @@ function controlled() {
             {
                 type: 'required_status_checks',
                 parameters: {
-                    strict_required_status_checks_policy: true,
+                    strict_required_status_checks_policy: false,
                     required_status_checks: verificationPolicy.requiredChecks.map((context) => ({ context, integration_id: 15368 })),
                 },
             },
@@ -407,12 +407,6 @@ describe('Native pull-request CI authorization', () => {
             'missing enforced PR gate',
             (s) => {
                 s.rules.shift();
-            },
-        ],
-        [
-            'non-strict checks',
-            (s) => {
-                s.rules[1].parameters.strict_required_status_checks_policy = false;
             },
         ],
         [

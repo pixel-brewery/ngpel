@@ -4,13 +4,6 @@
     "projectType": "library",
     "tags": ["type:tooling"],
     "targets": {
-        "dependabot": {
-            "executor": "nx-plugins:dependabot",
-            "cache": false,
-            "options": {
-                "mode": "merge"
-            }
-        },
         "release": {
             "executor": "nx-plugins:release",
             "cache": false,
