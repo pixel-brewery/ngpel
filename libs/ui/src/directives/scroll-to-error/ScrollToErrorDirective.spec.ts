@@ -193,6 +193,124 @@ describe('ScrollToErrorDirective', () => {
         expect(control.focus).toHaveBeenCalledWith({ preventScroll: true });
     });
 
+    it('should reveal a control inside an open shadow root on the validation scope', async () => {
+        const host = document.createElement('div');
+        control.classList.remove('ng-invalid');
+        Object.defineProperty(control, 'invalid', { value: true });
+        host.attachShadow({ mode: 'open' }).append(control);
+        form.replaceWith(host);
+        directive.ngOnDestroy();
+        directive = TestBed.runInInjectionContext(() => new ScrollToErrorDirective(new ElementRef(host)));
+        setState(directive, invalidState);
+        directive.ngOnInit();
+
+        directive.revealFirstInvalidControl();
+
+        expect(container.scrollTo).toHaveBeenCalledWith({ top: 884, left: 0, behavior: 'smooth' });
+        container.dispatchEvent(new Event('scrollend'));
+        await new Promise((resolve) => setTimeout(resolve, 110));
+        expect(control.focus).toHaveBeenCalledWith({ preventScroll: true });
+    });
+
+    it('should choose the first deepest invalid control across nested open shadow roots', async () => {
+        const firstHost = document.createElement('div');
+        firstHost.setAttribute('aria-invalid', 'true');
+        makeVisible(firstHost, 700);
+        const nestedHost = document.createElement('div');
+        nestedHost.attachShadow({ mode: 'open' }).append(control);
+        firstHost.attachShadow({ mode: 'open' }).append(nestedHost);
+        const laterControl = document.createElement('input');
+        laterControl.setAttribute('aria-invalid', 'true');
+        makeVisible(laterControl, 1100);
+        const laterHost = document.createElement('div');
+        laterHost.attachShadow({ mode: 'open' }).append(laterControl);
+        form.append(firstHost, laterHost);
+
+        directive.revealFirstInvalidControl();
+
+        expect(container.scrollTo).toHaveBeenCalledWith({ top: 884, left: 0, behavior: 'smooth' });
+        container.dispatchEvent(new Event('scrollend'));
+        await new Promise((resolve) => setTimeout(resolve, 110));
+        expect(control.focus).toHaveBeenCalledWith({ preventScroll: true });
+        expect(firstHost.focus).not.toHaveBeenCalled();
+        expect(laterControl.focus).not.toHaveBeenCalled();
+    });
+
+    it('should focus a native descendant behind non-focusable shadow hosts of an invalid wrapper', async () => {
+        const wrapper = document.createElement('div');
+        wrapper.setAttribute('aria-invalid', 'true');
+        makeVisible(wrapper, 700);
+        const nestedHost = document.createElement('div');
+        control.classList.remove('ng-invalid');
+        nestedHost.attachShadow({ mode: 'open' }).append(control);
+        wrapper.attachShadow({ mode: 'open' }).append(nestedHost);
+        form.append(wrapper);
+
+        directive.revealFirstInvalidControl();
+
+        expect(container.scrollTo).toHaveBeenCalledWith({ top: 884, left: 0, behavior: 'smooth' });
+        container.dispatchEvent(new Event('scrollend'));
+        await new Promise((resolve) => setTimeout(resolve, 110));
+        expect(control.focus).toHaveBeenCalledWith({ preventScroll: true });
+        expect(wrapper.focus).not.toHaveBeenCalled();
+    });
+
+    it('should scroll the nearest composed ancestor of a slotted invalid control', () => {
+        const host = document.createElement('div');
+        const shadow = host.attachShadow({ mode: 'open' });
+        const innerContainer = document.createElement('section');
+        innerContainer.style.overflowY = 'auto';
+        Object.defineProperties(innerContainer, {
+            scrollHeight: { value: 1000 },
+            clientHeight: { value: 400 },
+            getBoundingClientRect: { value: () => new DOMRect(0, 0, 600, 400) },
+            scrollTo: { value: vi.fn() },
+        });
+        innerContainer.append(document.createElement('slot'));
+        shadow.append(innerContainer);
+        host.append(control);
+        form.append(host);
+
+        directive.revealFirstInvalidControl();
+
+        expect(innerContainer.scrollTo).toHaveBeenCalledWith({ top: 884, left: 0, behavior: 'smooth' });
+        expect(container.scrollTo).not.toHaveBeenCalled();
+    });
+
+    it('should keep invalid discovery inside its own scope when unrelated shadow roots contain errors', () => {
+        const unrelatedHost = document.createElement('div');
+        const unrelatedControl = document.createElement('input');
+        unrelatedControl.setAttribute('aria-invalid', 'true');
+        makeVisible(unrelatedControl, 900);
+        unrelatedHost.attachShadow({ mode: 'open' }).append(unrelatedControl);
+        container.before(unrelatedHost);
+        control.classList.remove('ng-invalid');
+
+        try {
+            directive.revealFirstInvalidControl();
+
+            expect(container.scrollTo).not.toHaveBeenCalled();
+            expect(control.focus).not.toHaveBeenCalled();
+            expect(unrelatedControl.focus).not.toHaveBeenCalled();
+        } finally {
+            unrelatedHost.remove();
+        }
+    });
+
+    it('should not focus a shadow control disconnected while its reveal scroll is pending', async () => {
+        const host = document.createElement('div');
+        host.attachShadow({ mode: 'open' }).append(control);
+        form.append(host);
+
+        directive.revealFirstInvalidControl();
+        control.remove();
+        container.dispatchEvent(new Event('scrollend'));
+        await new Promise((resolve) => setTimeout(resolve, 110));
+
+        expect(container.scrollTo).toHaveBeenCalledOnce();
+        expect(control.focus).not.toHaveBeenCalled();
+    });
+
     it('should fall back to the nearest native overflow container', () => {
         scrollDispatcher.getAncestorScrollContainers.mockReturnValue([]);
         form.style.overflowY = 'auto';
@@ -269,6 +387,14 @@ function setState(directive: ScrollToErrorDirective, state: ScrollToErrorState):
     Object.defineProperty(directive, 'state', {
         configurable: true,
         value: () => state,
+    });
+}
+
+function makeVisible(element: HTMLElement, top: number): void {
+    Object.defineProperties(element, {
+        getClientRects: { value: () => [new DOMRect(0, top, 300, 40)] },
+        getBoundingClientRect: { value: () => new DOMRect(0, top, 300, 40) },
+        focus: { value: vi.fn() },
     });
 }
 

@@ -23,7 +23,7 @@ interface IScrollContainer {
  *
  * Apply the directive to a form or any container that owns the relevant controls. Triggers outside
  * the scope can associate with it through `{@link ScrollToErrorTriggerDirective}` by binding the
- * same root Signal Forms state.
+ * same root Signal Forms state. Control discovery follows open shadow roots and assigned slots.
  *
  * @public
  */
@@ -139,17 +139,66 @@ export class ScrollToErrorDirective implements IScrollToErrorTarget, OnDestroy, 
     }
 
     private findFirstInvalidControl(): HTMLElement | undefined {
-        const invalidElements = Array.from(this._elementRef.nativeElement.querySelectorAll<HTMLElement>('*')).filter(
-            (element) => this.isVisible(element) && this.isInvalid(element),
-        );
-
-        const invalidElement = invalidElements.find((element) => !invalidElements.some((candidate) => candidate !== element && element.contains(candidate)));
+        const invalidElement = this.findInvalidDescendant(this._elementRef.nativeElement);
 
         return invalidElement ? (this.findFocusableDescendant(invalidElement) ?? invalidElement) : undefined;
     }
 
     private findFocusableDescendant(element: HTMLElement): HTMLElement | undefined {
-        return Array.from(element.querySelectorAll<HTMLElement>('*')).find((candidate) => this.isVisible(candidate) && candidate.tabIndex >= 0);
+        for (const candidate of this.descendants(element)) {
+            if (this.isVisible(candidate) && candidate.tabIndex >= 0) {
+                return candidate;
+            }
+        }
+
+        return undefined;
+    }
+
+    private findInvalidDescendant(element: Element): HTMLElement | undefined {
+        for (const child of this.getComposedChildren(element)) {
+            // A field or form wrapper must not hide its invalid control.
+            const invalidDescendant = this.findInvalidDescendant(child);
+            if (invalidDescendant) {
+                return invalidDescendant;
+            }
+            if (child instanceof HTMLElement && this.isVisible(child) && this.isInvalid(child)) {
+                return child;
+            }
+        }
+
+        return undefined;
+    }
+
+    private *descendants(element: Element): IterableIterator<HTMLElement> {
+        for (const child of this.getComposedChildren(element)) {
+            if (child instanceof HTMLElement) {
+                yield child;
+            }
+            yield* this.descendants(child);
+        }
+    }
+
+    private getComposedChildren(element: Element): Element[] {
+        if (element instanceof HTMLSlotElement) {
+            const assigned = element.assignedElements({ flatten: true });
+            if (assigned.length > 0) {
+                return assigned;
+            }
+        }
+
+        return Array.from((element.shadowRoot ?? element).children);
+    }
+
+    private getComposedParent(element: Element): Element | null {
+        if (element.assignedSlot) {
+            return element.assignedSlot;
+        }
+        if (element.parentElement) {
+            return element.parentElement;
+        }
+
+        const root = element.getRootNode();
+        return root instanceof ShadowRoot ? root.host : null;
     }
 
     private findScrollContainer(invalidControl: HTMLElement): IScrollContainer | undefined {
@@ -157,9 +206,9 @@ export class ScrollToErrorDirective implements IScrollToErrorTarget, OnDestroy, 
             this._scrollDispatcher.getAncestorScrollContainers(this._elementRef).map((scrollable) => scrollable.getElementRef().nativeElement),
         );
 
-        let candidate: HTMLElement | null = invalidControl.parentElement;
+        let candidate = this.getComposedParent(invalidControl);
         while (candidate) {
-            if (registeredElements.has(candidate) || this.isNativeScrollContainer(candidate)) {
+            if (candidate instanceof HTMLElement && (registeredElements.has(candidate) || this.isNativeScrollContainer(candidate))) {
                 const element = candidate;
 
                 return {
@@ -167,7 +216,7 @@ export class ScrollToErrorDirective implements IScrollToErrorTarget, OnDestroy, 
                     scrollTo: (options) => element.scrollTo(options),
                 };
             }
-            candidate = candidate.parentElement;
+            candidate = this.getComposedParent(candidate);
         }
 
         return undefined;
@@ -233,8 +282,7 @@ export class ScrollToErrorDirective implements IScrollToErrorTarget, OnDestroy, 
     private resolveFocusTarget(element: HTMLElement): HTMLElement {
         let target = element;
         while (true) {
-            const root: HTMLElement | ShadowRoot = target.shadowRoot ?? target;
-            const descendant = Array.from(root.querySelectorAll<HTMLElement>('*')).find((candidate) => this.isVisible(candidate) && candidate.tabIndex >= 0);
+            const descendant = this.findFocusableDescendant(target);
             if (!descendant) {
                 return target;
             }
