@@ -1,3 +1,9 @@
+## 0.0.36 (2026-11-27)
+
+### 🩹 Fixes
+
+- **ui:** reveal errors across shadow roots ([#39](https://github.com/pixel-brewery/ngpel/pull/39), [#38](https://github.com/pixel-brewery/ngpel/issues/38))
+
 ## 0.0.35 (2026-11-27)
 
 This was a version bump only, there were no code changes.
