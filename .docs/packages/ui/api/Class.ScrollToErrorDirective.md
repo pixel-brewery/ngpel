@@ -11,7 +11,7 @@ Defines a generic validation scope and reveals its first visible invalid control
 
 Apply the directive to a form or any container that owns the relevant controls. Triggers outside
 the scope can associate with it through `ScrollToErrorTriggerDirective` by binding the
-same root Signal Forms state.
+same root Signal Forms state. Control discovery follows open shadow roots and assigned slots.
 
 ## Implements
 
