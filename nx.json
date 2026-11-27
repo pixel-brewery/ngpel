@@ -41,10 +41,6 @@
             "inputs": ["production", "^production"],
             "outputs": ["{projectRoot}/dist"]
         },
-        "@nx/eslint:lint": {
-            "cache": true,
-            "inputs": ["default", "{workspaceRoot}/eslint.config.mjs"]
-        },
         "typecheck": {
             "cache": true,
             "inputs": ["default", "^production"]
@@ -130,5 +126,8 @@
             "typeSeparator": "."
         }
     },
-    "analytics": false
+    "analytics": false,
+    "affected": {
+        "legacy": true
+    }
 }
